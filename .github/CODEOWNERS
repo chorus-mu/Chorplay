@@ -1,0 +1,17 @@
+# Default owner for everything in the repository.
+* @Pushkar @pushkarverse
+
+# Release, signing, and CI paths. Changes here can break the published
+# IzzyOnDroid/F-Droid artifacts, so they always need an explicit review.
+/.github/workflows/    @Pushkar @pushkarverse
+/.github/dependabot.yml @Pushkar @pushkarverse
+/app/build.gradle.kts  @Pushkar @pushkarverse
+/build.gradle.kts      @Pushkar @pushkarverse
+/gradle/               @Pushkar @pushkarverse
+/fastlane/             @Pushkar @pushkarverse
+
+# Project policy documents.
+/CLAUDE.md             @Pushkar @pushkarverse
+/AGENTS.md             @Pushkar @pushkarverse
+/CONTRIBUTING.md       @Pushkar @pushkarverse
+/SECURITY.md           @Pushkar @pushkarverse

@@ -46,7 +46,7 @@ import io.github.pushkar.chorplay.ui.components.settings.info
 import io.github.pushkar.chorplay.ui.components.settings.notice
 import io.github.pushkar.chorplay.ui.components.settings.switch
 import io.github.pushkar.chorplay.ui.components.settings.toggleGroup
-import io.github.pushkar.chorplay.ui.components.shared.FlowToggleOption
+import io.github.pushkar.chorplay.ui.components.shared.ChorToggleOption
 import io.github.pushkar.chorplay.ui.screens.settings.index.NetworkIndex
 import kotlinx.coroutines.launch
 
@@ -68,8 +68,8 @@ internal fun NetworkSettingsScreen(
     var passwordVisible by rememberSaveable { mutableStateOf(false) }
     val types =
         listOf(
-            FlowToggleOption(AppProxyType.HTTP, stringResource(R.string.proxy_type_http)),
-            FlowToggleOption(AppProxyType.SOCKS5, stringResource(R.string.proxy_type_socks5)),
+            ChorToggleOption(AppProxyType.HTTP, stringResource(R.string.proxy_type_http)),
+            ChorToggleOption(AppProxyType.SOCKS5, stringResource(R.string.proxy_type_socks5)),
         )
     val hostError = stringResource(R.string.proxy_settings_invalid_host)
     val portError = stringResource(R.string.proxy_settings_invalid_port)

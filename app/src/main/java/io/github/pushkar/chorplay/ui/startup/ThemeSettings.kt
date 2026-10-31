@@ -6,7 +6,7 @@ import androidx.compose.ui.text.font.FontFamily
 import io.github.pushkar.chorplay.data.local.AppFontPreferences
 import io.github.pushkar.chorplay.data.local.LocalDataManager
 import io.github.pushkar.chorplay.ui.theme.CustomTheme
-import io.github.pushkar.chorplay.ui.theme.FlowFontFamily
+import io.github.pushkar.chorplay.ui.theme.ChorFontFamily
 import io.github.pushkar.chorplay.ui.theme.ChorplayTheme
 import io.github.pushkar.chorplay.ui.theme.ThemeMode
 import io.github.pushkar.chorplay.ui.theme.ThemeVariant
@@ -22,7 +22,7 @@ data class ThemeSettings(
     val systemLightThemeMode: ThemeMode = ThemeMode.DARK,
     val systemDarkThemeMode: ThemeMode = ThemeMode.DARK,
     val systemDarkThemeVariant: ThemeVariant = ThemeVariant.DARK,
-    val fontFamily: FontFamily = FlowFontFamily,
+    val fontFamily: FontFamily = ChorFontFamily,
 )
 
 fun LocalDataManager.themeSettings(fonts: AppFontPreferences): Flow<ThemeSettings> =

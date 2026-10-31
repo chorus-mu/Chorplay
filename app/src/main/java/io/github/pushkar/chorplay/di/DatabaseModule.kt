@@ -13,12 +13,10 @@ import io.github.pushkar.chorplay.data.local.dao.VideoDao
 import javax.inject.Qualifier
 import javax.inject.Singleton
 
-/** The running profile's database. With Default running it is the same instance as [DeviceDb]. */
 @Qualifier
 @Retention(AnnotationRetention.BINARY)
 annotation class ProfileDb
 
-/** Default's database, which holds the download tables every profile shares. */
 @Qualifier
 @Retention(AnnotationRetention.BINARY)
 annotation class DeviceDb
@@ -81,11 +79,6 @@ object DatabaseModule {
     ): io.github.pushkar.chorplay.data.local.dao.DownloadCollectionDao = database.downloadCollectionDao()
 
     @Provides
-    fun provideRecognitionHistoryDao(
-        @ProfileDb database: AppDatabase,
-    ): io.github.pushkar.chorplay.data.local.dao.RecognitionHistoryDao = database.recognitionHistoryDao()
-
-    @Provides
     fun provideSubscriptionGroupDao(
         @ProfileDb database: AppDatabase,
     ): io.github.pushkar.chorplay.data.local.dao.SubscriptionGroupDao = database.subscriptionGroupDao()
@@ -105,8 +98,4 @@ object DatabaseModule {
         @ProfileDb database: AppDatabase,
     ): io.github.pushkar.chorplay.data.local.dao.SyncPeerDao = database.syncPeerDao()
 
-    @Provides
-    fun provideMusicGraphDao(
-        @ProfileDb database: AppDatabase,
-    ): io.github.pushkar.chorplay.data.local.dao.MusicGraphDao = database.musicGraphDao()
 }

@@ -10,14 +10,11 @@ import io.github.pushkar.chorplay.data.engagement.VideoFeedbackUseCase
 import io.github.pushkar.chorplay.data.local.PlaylistRepository
 import io.github.pushkar.chorplay.data.local.entity.DownloadItemStatus
 import io.github.pushkar.chorplay.data.model.Video
-import io.github.pushkar.chorplay.data.music.model.MusicTrack
-import io.github.pushkar.chorplay.data.music.video.MusicVideoVersions
 import io.github.pushkar.chorplay.data.repository.YouTubeRepository
 import io.github.pushkar.chorplay.data.video.AutoDownloadTrigger
 import io.github.pushkar.chorplay.data.video.VideoDownloadManager
 import io.github.pushkar.chorplay.data.video.VideoDownloadOptions
 import io.github.pushkar.chorplay.data.video.VideoDownloadOptionsLoader
-import io.github.pushkar.chorplay.player.EnhancedMusicPlayerManager
 import io.github.pushkar.chorplay.player.EnhancedPlayerManager
 import io.github.pushkar.chorplay.utils.ThumbnailUrlResolver
 import kotlinx.coroutines.CancellationException
@@ -61,7 +58,6 @@ class QuickActionsViewModel
         private val downloadOptions: VideoDownloadOptionsLoader,
         private val likedMedia: LikedMediaUseCase,
         private val playerManager: Provider<EnhancedPlayerManager>,
-        private val musicVideos: MusicVideoVersions,
         private val autoDownload: AutoDownloadTrigger,
     ) : ViewModel() {
         val watchLaterIds: StateFlow<Set<String>> =
@@ -302,9 +298,6 @@ class QuickActionsViewModel
                             playerManager.get().restoreRemovedVideo(undo.entry)
                         }
 
-                        is QuickActionUndo.MusicQueueRemoval -> {
-                            EnhancedMusicPlayerManager.restoreToQueue(undo.removed)
-                        }
 
                         is QuickActionUndo.AutoDownload -> {
                             autoDownload.undo(undo.videoId)
@@ -333,21 +326,6 @@ class QuickActionsViewModel
             }
         }
 
-        /** Opens [track] as a video: itself when it is one, its official music video otherwise. */
-        fun watchVideo(
-            track: MusicTrack,
-            open: (videoId: String) -> Unit,
-        ) {
-            viewModelScope.launch {
-                try {
-                    musicVideos.videoFor(track)?.let { open(it.videoId) } ?: emit(R.string.music_video_unavailable)
-                } catch (e: CancellationException) {
-                    throw e
-                } catch (e: Exception) {
-                    emit(R.string.music_video_failed)
-                }
-            }
-        }
 
         private fun emit(
             text: Int,

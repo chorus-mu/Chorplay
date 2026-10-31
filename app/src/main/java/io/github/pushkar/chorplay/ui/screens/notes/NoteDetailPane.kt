@@ -52,16 +52,16 @@ import io.github.pushkar.chorplay.R
 import io.github.pushkar.chorplay.data.notes.Note
 import io.github.pushkar.chorplay.data.notes.NoteKind
 import io.github.pushkar.chorplay.data.notes.NoteMoments
-import io.github.pushkar.chorplay.ui.components.layout.flowBottomContentPadding
+import io.github.pushkar.chorplay.ui.components.layout.chorBottomContentPadding
 import io.github.pushkar.chorplay.ui.components.shared.ChannelAvatarImage
 import io.github.pushkar.chorplay.ui.components.shared.DurationBadge
 import io.github.pushkar.chorplay.ui.components.shared.ChorplayActionButtonPair
-import io.github.pushkar.chorplay.ui.components.shared.FlowNavRow
-import io.github.pushkar.chorplay.ui.components.shared.FlowPairAction
-import io.github.pushkar.chorplay.ui.components.shared.FlowRowGroup
-import io.github.pushkar.chorplay.ui.components.shared.FlowSectionHeader
+import io.github.pushkar.chorplay.ui.components.shared.ChorNavRow
+import io.github.pushkar.chorplay.ui.components.shared.ChorPairAction
+import io.github.pushkar.chorplay.ui.components.shared.ChorRowGroup
+import io.github.pushkar.chorplay.ui.components.shared.ChorSectionHeader
 import io.github.pushkar.chorplay.ui.components.shared.VideoThumbnailImage
-import io.github.pushkar.chorplay.ui.components.shared.flowRowGroupShape
+import io.github.pushkar.chorplay.ui.components.shared.chorRowGroupShape
 import io.github.pushkar.chorplay.ui.components.shared.rememberNoteText
 import io.github.pushkar.chorplay.utils.formatDurationMillis
 
@@ -69,7 +69,7 @@ private val TwoColumnMinWidth = 720.dp
 private val ChannelAvatarLarge = 96.dp
 private val ChannelAvatarSmall = 36.dp
 
-/** [FlowRowGroup] insets its rows by this much, so everything else in the pane does too. */
+/** [ChorRowGroup] insets its rows by this much, so everything else in the pane does too. */
 private val ContentInset = 12.dp
 
 /**
@@ -93,7 +93,7 @@ internal fun NoteDetailPane(
         val padded =
             Modifier
                 .verticalScroll(scroll)
-                .padding(start = 4.dp, end = 4.dp, top = 8.dp, bottom = flowBottomContentPadding())
+                .padding(start = 4.dp, end = 4.dp, top = 8.dp, bottom = chorBottomContentPadding())
         if (twoColumns) {
             Row(modifier = padded, horizontalArrangement = Arrangement.spacedBy(24.dp)) {
                 Column(modifier = Modifier.weight(1f)) {
@@ -123,15 +123,15 @@ private fun NoteSubjectHeader(
     val channelId = if (isVideo) note.subject?.channelId?.takeIf { it.isNotBlank() } else note.targetId
     Column(modifier = Modifier.padding(horizontal = ContentInset), verticalArrangement = Arrangement.spacedBy(16.dp)) {
         if (isVideo) VideoHero(note, onPlay, onOpenChannel) else ChannelHero(note)
-        val edit = FlowPairAction(Icons.Outlined.EditNote, stringResource(R.string.note_edit), onEdit)
+        val edit = ChorPairAction(Icons.Outlined.EditNote, stringResource(R.string.note_edit), onEdit)
         when {
             isVideo -> {
-                ChorplayActionButtonPair(FlowPairAction(Icons.Rounded.PlayArrow, stringResource(R.string.resume)) { onPlay(null) }, edit)
+                ChorplayActionButtonPair(ChorPairAction(Icons.Rounded.PlayArrow, stringResource(R.string.resume)) { onPlay(null) }, edit)
             }
 
             channelId != null -> {
                 ChorplayActionButtonPair(
-                    FlowPairAction(Icons.Rounded.AccountCircle, stringResource(R.string.note_open_channel)) { onOpenChannel(channelId) },
+                    ChorPairAction(Icons.Rounded.AccountCircle, stringResource(R.string.note_open_channel)) { onOpenChannel(channelId) },
                     edit,
                 )
             }
@@ -275,14 +275,14 @@ private fun ColumnScope.NoteBody(
     onPlay: (Long?) -> Unit,
 ) {
     if (moments.isNotEmpty()) {
-        FlowSectionHeader(stringResource(R.string.note_timestamps))
-        FlowRowGroup {
+        ChorSectionHeader(stringResource(R.string.note_timestamps))
+        ChorRowGroup {
             moments.forEachIndexed { index, moment ->
                 val time = formatDurationMillis(moment.positionMs)
-                FlowNavRow(
+                ChorNavRow(
                     title = moment.label.ifBlank { time },
                     onClick = { onPlay(moment.positionMs) },
-                    shape = flowRowGroupShape(index, moments.size),
+                    shape = chorRowGroupShape(index, moments.size),
                     leadingContent = { MomentTime(time) },
                     trailingContent = {
                         Icon(
@@ -294,7 +294,7 @@ private fun ColumnScope.NoteBody(
             }
         }
     }
-    FlowSectionHeader(stringResource(R.string.note_title))
+    ChorSectionHeader(stringResource(R.string.note_title))
     Surface(
         shape = MaterialTheme.shapes.large,
         color = MaterialTheme.colorScheme.surfaceContainerHigh,

@@ -29,9 +29,9 @@ import io.github.pushkar.chorplay.notification.BackgroundWorkPolicy
 import io.github.pushkar.chorplay.ui.components.settings.SettingsPage
 import io.github.pushkar.chorplay.ui.components.settings.nav
 import io.github.pushkar.chorplay.ui.components.settings.switch
-import io.github.pushkar.chorplay.ui.components.shared.FlowChoice
+import io.github.pushkar.chorplay.ui.components.shared.ChorChoice
 import io.github.pushkar.chorplay.ui.components.shared.ChorplayChoiceDialog
-import io.github.pushkar.chorplay.ui.components.shared.FlowNavRow
+import io.github.pushkar.chorplay.ui.components.shared.ChorNavRow
 import io.github.pushkar.chorplay.ui.screens.settings.index.NotificationsIndex
 
 private val IntervalOptions =
@@ -93,7 +93,7 @@ internal fun NotificationSettingsScreen(
             )
             if (enabled && !backgroundAllowed) {
                 row("notifications.restricted") { shape ->
-                    FlowNavRow(
+                    ChorNavRow(
                         title = restrictedTitle,
                         supportingText = restrictedBody,
                         leadingIcon = Icons.Outlined.BatteryAlert,
@@ -176,7 +176,7 @@ internal fun NotificationSettingsScreen(
         ChorplayChoiceDialog(
             title = stringResource(R.string.notif_check_interval_dialog_title),
             description = stringResource(R.string.notif_check_interval_dialog_body),
-            options = IntervalOptions.map { (minutes, label) -> FlowChoice(minutes, stringResource(label)) },
+            options = IntervalOptions.map { (minutes, label) -> ChorChoice(minutes, stringResource(label)) },
             selected = interval,
             onSelect = viewModel::setInterval,
             onDismiss = { showIntervalDialog = false },

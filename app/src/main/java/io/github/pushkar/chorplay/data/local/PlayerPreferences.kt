@@ -43,7 +43,7 @@ internal val Context.playerPreferencesDataStore: DataStore<Preferences> by safeP
     scope = StoreScope.PROFILE_SETTINGS,
 )
 
-const val DEEP_FLOW_NEVER_EXPIRES_HOURS = 0
+const val DEEP_CHOR_NEVER_EXPIRES_HOURS = 0
 private const val PLAYLIST_SORT_SEPARATOR = "|"
 private const val CHANNEL_SPEED_SEPARATOR = "|"
 const val CONTENT_LANGUAGE_FOLLOW_APP = "app"
@@ -54,20 +54,13 @@ const val MAX_FULLSCREEN_SEEKBAR_PADDING_DP = 120
 const val DEFAULT_CONCURRENT_DOWNLOADS = 3
 const val MAX_CONCURRENT_DOWNLOADS = 5
 
-/** On until turned off, matching NewPipe's default and the Background button (#1298). */
 const val DEFAULT_BACKGROUND_PLAY_ENABLED = true
-
-/** On until turned off: a swipe from recents has kept playback going since #1321. */
 const val DEFAULT_KEEP_PLAYING_AFTER_SWIPE = true
 
-val DEFAULT_NAV_TAB_ORDER = listOf(0, 1, 2, 3, 4, 5, 6, 7)
+val DEFAULT_NAV_TAB_ORDER = listOf(0, 1, 3, 4, 5, 6, 7)
 
 private const val MAX_UNPLAYABLE_VIDEO_IDS = 1_000
 
-/**
- * Preferences that never leave the device in a backup: the proxy password, and SponsorBlock's
- * submission id, which is a private identity for the user's votes and segments.
- */
 private val BackupExcludedKeys = setOf("proxy_password", "sb_user_id")
 
 private val ReminderJson = Json { ignoreUnknownKeys = true }
@@ -87,7 +80,6 @@ class PlayerPreferences(
         val QUEUE_AUTOPLAY_ENABLED = booleanPreferencesKey("queue_autoplay_enabled")
         val START_VIDEOS_PAUSED = booleanPreferencesKey("start_videos_paused")
         val OPEN_VIDEOS_FULLSCREEN = booleanPreferencesKey("open_videos_fullscreen")
-        val MUSIC_ENDLESS_RADIO_ENABLED = booleanPreferencesKey("music_endless_radio_enabled")
         val AUTOPLAY_COUNTDOWN_SECONDS = intPreferencesKey("autoplay_countdown_seconds")
         val VIDEO_LOOP_ENABLED = booleanPreferencesKey("video_loop_enabled")
         val VIDEO_AMBIENT_MODE_ENABLED = booleanPreferencesKey("video_ambient_mode_enabled")
@@ -101,32 +93,20 @@ class PlayerPreferences(
         val SUBTITLE_EDGE_COLOR = intPreferencesKey("subtitle_edge_color")
         val SUBTITLE_BOTTOM_PADDING = floatPreferencesKey("subtitle_bottom_padding")
         val SUBTITLE_FULLSCREEN_BOTTOM_PADDING = floatPreferencesKey("subtitle_fullscreen_bottom_padding")
-        val SUBTITLE_VERTICAL_FULLSCREEN_BOTTOM_PADDING = floatPreferencesKey("subtitle_vertical_fullscreen_bottom_padding")
+        val SUBTITLE_VERTICAL_FULLSCREEN_BOTTOM_PADDING =
+            floatPreferencesKey("subtitle_vertical_fullscreen_bottom_padding")
         val PLAYBACK_SPEED = floatPreferencesKey("playback_speed")
         val SLEEP_TIMER_CLOSE_APP_ON_EXPIRY = booleanPreferencesKey("sleep_timer_close_app_on_expiry")
         val ORIGINAL_TITLES = booleanPreferencesKey("original_titles")
-        val MUSIC_LOUDNESS_NORMALIZATION_ENABLED = booleanPreferencesKey("music_loudness_normalization_enabled")
         val SKIP_SILENCE_ENABLED = booleanPreferencesKey("skip_silence_enabled")
         val SPONSOR_BLOCK_ENABLED = booleanPreferencesKey("sponsor_block_enabled")
         val AUTO_PIP_ENABLED = booleanPreferencesKey("auto_pip_enabled")
         val MANUAL_PIP_BUTTON_ENABLED = booleanPreferencesKey("manual_pip_button_enabled")
         val VIDEO_VOLUME_NORMALIZATION = booleanPreferencesKey("video_volume_normalization")
-
-        // Audio track preference
         val PREFERRED_AUDIO_LANGUAGE = stringPreferencesKey("preferred_audio_language")
-
-        // Subtitle preferences
         val AUTO_ENABLE_SUBTITLES = booleanPreferencesKey("auto_enable_subtitles")
-
-        // UI preferences
         val GRID_ITEM_SIZE = stringPreferencesKey("grid_item_size")
         val SLIDER_STYLE = stringPreferencesKey("slider_style")
-        val MUSIC_PLAYER_BACKGROUND_STYLE = stringPreferencesKey("music_player_background_style")
-        val HIDE_MUSIC_PLAYER_ARTWORK = booleanPreferencesKey("hide_music_player_artwork")
-        val MUSIC_ARTWORK_CONTROL_COLORS = booleanPreferencesKey("music_artwork_control_colors")
-        val MUSIC_PLAIN_CONTROL_COLORS = stringPreferencesKey("music_plain_control_colors")
-        val MUSIC_SLEEP_TIMER_BUTTON = booleanPreferencesKey("music_sleep_timer_button")
-        val MUSIC_PLAYER_FOLLOW_LIGHT_THEME = booleanPreferencesKey("music_player_follow_light_theme")
         val SHORTS_PLAYER_UI_MODE = stringPreferencesKey("shorts_player_ui_mode")
         val GESTURE_OVERLAY_STYLE = stringPreferencesKey("gesture_overlay_style")
         val GROUPED_QUALITY_SELECTOR_ENABLED = booleanPreferencesKey("grouped_quality_selector_enabled")
@@ -140,7 +120,6 @@ class PlayerPreferences(
         val SEPARATE_PLAYLIST_KINDS = booleanPreferencesKey("separate_playlist_kinds")
         val PLAYLIST_LIST_ORDER = stringPreferencesKey("playlist_list_order")
         val PLAYLISTS_COMPACT_LAYOUT = booleanPreferencesKey("playlists_compact_layout")
-        val PLAYLISTS_SHOW_MUSIC = booleanPreferencesKey("playlists_show_music")
         val HOME_SHORTS_SHELF_ENABLED = booleanPreferencesKey("home_shorts_shelf_enabled")
         val HOME_SUBSCRIPTIONS_ENABLED = booleanPreferencesKey("home_subscriptions_enabled")
         val HOME_SNAPSHOT_RECORDING = booleanPreferencesKey("home_snapshot_recording")
@@ -152,27 +131,9 @@ class PlayerPreferences(
         val HOME_NAVIGATION_ENABLED = booleanPreferencesKey("home_navigation_enabled")
         val SHORTS_NAVIGATION_ENABLED = booleanPreferencesKey("shorts_navigation_enabled")
         val BOTTOM_NAV_HIDE_ON_SCROLL = booleanPreferencesKey("bottom_nav_hide_on_scroll")
-        val MUSIC_NAVIGATION_ENABLED = booleanPreferencesKey("music_navigation_enabled")
         val SEARCH_NAV_TAB_ENABLED = booleanPreferencesKey("search_nav_tab_enabled")
         val CATEGORIES_NAV_TAB_ENABLED = booleanPreferencesKey("categories_nav_tab_enabled")
         val DOWNLOADS_NAV_TAB_ENABLED = booleanPreferencesKey("downloads_nav_tab_enabled")
-        val PREFERRED_LYRICS_PROVIDER = stringPreferencesKey("preferred_lyrics_provider")
-        val LYRICS_PROVIDER_ORDER = stringPreferencesKey("lyrics_provider_order")
-        val LYRICS_TEXT_ALIGN = stringPreferencesKey("lyrics_text_align")
-        val LYRICS_SHOW_TRANSLATION = booleanPreferencesKey("lyrics_show_translation")
-        val LYRICS_SHOW_ROMANIZATION = booleanPreferencesKey("lyrics_show_romanization")
-        val LYRICS_AUTO_ROMANIZE = booleanPreferencesKey("lyrics_auto_romanize")
-        val LYRICS_KEEP_SCREEN_ON = booleanPreferencesKey("lyrics_keep_screen_on")
-        val LYRICS_PROVIDER_ENABLED_BETTERLYRICS = booleanPreferencesKey("lyrics_provider_enabled_betterlyrics")
-        val LYRICS_PROVIDER_ENABLED_SIMPMUSIC = booleanPreferencesKey("lyrics_provider_enabled_simpmusic")
-        val LYRICS_PROVIDER_ENABLED_LYRICSPLUS = booleanPreferencesKey("lyrics_provider_enabled_lyricsplus")
-        val LYRICS_PROVIDER_ENABLED_LRCLIB = booleanPreferencesKey("lyrics_provider_enabled_lrclib")
-        val LYRICS_PROVIDER_ENABLED_YOUTUBE = booleanPreferencesKey("lyrics_provider_enabled_youtube")
-        val LYRICS_PROVIDER_ENABLED_KUGOU = booleanPreferencesKey("lyrics_provider_enabled_kugou")
-        val LYRICS_PROVIDER_ENABLED_PAXSENIX = booleanPreferencesKey("lyrics_provider_enabled_paxsenix")
-        val LYRICS_PROVIDER_ENABLED_YOUTUBESUBTITLE = booleanPreferencesKey("lyrics_provider_enabled_youtubesubtitle")
-        val LYRICS_PROVIDER_ENABLED_LRCRED = booleanPreferencesKey("lyrics_provider_enabled_lrcred")
-        val LYRICS_PROVIDER_ENABLED_UNISON = booleanPreferencesKey("lyrics_provider_enabled_unison")
         val CONTINUE_WATCHING_ENABLED = booleanPreferencesKey("continue_watching_enabled")
         val SHOW_RELATED_VIDEOS = booleanPreferencesKey("show_related_videos")
         val HOME_VIEW_MODE = stringPreferencesKey("home_view_mode")
@@ -181,7 +142,6 @@ class PlayerPreferences(
         val REFRESH_HOME_ON_RESELECT = booleanPreferencesKey("refresh_home_on_reselect")
         val RELATED_CARD_STYLE = stringPreferencesKey("related_card_style")
 
-        // SponsorBlock per-category action keys
         val SB_ACTION_SPONSOR = stringPreferencesKey("sb_action_sponsor")
         val SB_ACTION_INTRO = stringPreferencesKey("sb_action_intro")
         val SB_ACTION_OUTRO = stringPreferencesKey("sb_action_outro")
@@ -192,7 +152,6 @@ class PlayerPreferences(
         val SB_ACTION_PREVIEW = stringPreferencesKey("sb_action_preview")
         val SB_ACTION_EXCLUSIVE_ACCESS = stringPreferencesKey("sb_action_exclusive_access")
 
-        // SponsorBlock per-category color keys
         val SB_COLOR_SPONSOR = intPreferencesKey("sb_color_sponsor")
         val SB_COLOR_INTRO = intPreferencesKey("sb_color_intro")
         val SB_COLOR_OUTRO = intPreferencesKey("sb_color_outro")
@@ -203,35 +162,27 @@ class PlayerPreferences(
         val SB_COLOR_PREVIEW = intPreferencesKey("sb_color_preview")
         val SB_COLOR_EXCLUSIVE_ACCESS = intPreferencesKey("sb_color_exclusive_access")
 
-        // SponsorBlock submit
         val SB_SUBMIT_ENABLED = booleanPreferencesKey("sb_submit_enabled")
         val SB_USER_ID = stringPreferencesKey("sb_user_id")
 
-        // DeArrow
         val DEARROW_ENABLED = booleanPreferencesKey("dearrow_enabled")
         val DEARROW_BADGE_ENABLED = booleanPreferencesKey("dearrow_badge_enabled")
         val DEARROW_RANDOM_FRAME = booleanPreferencesKey("dearrow_random_frame")
 
-        // Notification preferences
         val NOTIFICATIONS_ENABLED = booleanPreferencesKey("notifications_enabled")
         val NOTIF_NEW_VIDEOS_ENABLED = booleanPreferencesKey("notif_new_videos_enabled")
         val NOTIF_SHORTS_ENABLED = booleanPreferencesKey("notif_shorts_enabled")
         val NOTIF_REMINDERS_ENABLED = booleanPreferencesKey("notif_reminders_enabled")
         val NOTIF_GENERAL_ENABLED = booleanPreferencesKey("notif_general_enabled")
 
-        // Fullscreen Player
         val ADAPTIVE_PLAYER_SIZE_ENABLED = booleanPreferencesKey("adaptive_player_size_enabled")
         val SCRUB_PREVIEW_STYLE = stringPreferencesKey("scrub_preview_style")
 
-        // Mini Player Customizations
         val MINI_PLAYER_SCALE = floatPreferencesKey("mini_player_scale")
         val MINI_PLAYER_SHOW_SKIP_CONTROLS = booleanPreferencesKey("mini_player_show_skip_controls")
         val MINI_PLAYER_SHOW_NEXT_PREV_CONTROLS = booleanPreferencesKey("mini_player_show_next_prev_controls")
         val MINI_PLAYER_CONTINUE_WATCHING_ENABLED = booleanPreferencesKey("mini_player_continue_watching_enabled")
-        val SHOW_RESTORED_MUSIC_MINI_PLAYER = booleanPreferencesKey("show_restored_music_mini_player")
-        val OPEN_MUSIC_PLAYER_ON_PLAY = booleanPreferencesKey("open_music_player_on_play")
 
-        // Subscriptions feed view mode
         val SUBS_FULL_WIDTH_VIEW = booleanPreferencesKey("subs_full_width_view")
         val SUBS_SORT_MODE = stringPreferencesKey("subs_sort_mode")
         val SUBS_SELECTED_GROUP = stringPreferencesKey("subs_selected_group")
@@ -241,32 +192,22 @@ class PlayerPreferences(
         val SUBS_SHOW_CHECKED_VIDEO_COUNT = booleanPreferencesKey("subs_show_checked_video_count")
         val SHOW_CHANNEL_GROUP_BADGES = booleanPreferencesKey("show_channel_group_badges")
 
-        // Navigation tab preferences
         val NAV_TAB_ORDER = stringPreferencesKey("nav_tab_order")
         val DEFAULT_NAV_TAB_INDEX = intPreferencesKey("default_nav_tab_index")
 
-        // Remember playback speed
         val REMEMBER_PLAYBACK_SPEED = booleanPreferencesKey("remember_playback_speed")
-        val MUSIC_AT_NORMAL_SPEED = booleanPreferencesKey("music_at_normal_speed")
-        val MUSIC_VIDEO_SWITCH = booleanPreferencesKey("music_video_switch")
         val ANIMATED_ARTWORK = booleanPreferencesKey("animated_artwork")
-        val MUSIC_REPEAT_MODE = intPreferencesKey("music_repeat_mode")
-        val MUSIC_RESUME_LONG_TRACKS = booleanPreferencesKey("music_resume_long_tracks")
         val RECAP_SOURCE = stringPreferencesKey("recap_source")
-        val HIDDEN_MUSIC_HOME_SHELVES = stringSetPreferencesKey("hidden_music_home_shelves")
         val HIDDEN_LIBRARY_SECTIONS = stringSetPreferencesKey("hidden_library_sections")
         val SPEED_PER_CHANNEL = booleanPreferencesKey("speed_per_channel")
         val CHANNEL_PLAYBACK_SPEEDS = stringSetPreferencesKey("channel_playback_speeds")
 
-        // Subscription check interval
         val SUBSCRIPTION_CHECK_INTERVAL_MINUTES = intPreferencesKey("subscription_check_interval_minutes")
 
-        // Custom playback speeds
         val CUSTOM_SPEEDS_ENABLED = booleanPreferencesKey("custom_speeds_enabled")
         val CUSTOM_SPEED_PRESETS = stringPreferencesKey("custom_speed_presets")
         val SPEED_SLIDER_ENABLED = booleanPreferencesKey("speed_slider_enabled")
 
-        // Content filtering
         val HIDE_WATCHED_VIDEOS = booleanPreferencesKey("hide_watched_videos")
         val HIDE_WATCHED_HOME_FEED = booleanPreferencesKey("hide_watched_home_feed")
         val HIDE_WATCHED_SUBSCRIPTIONS = booleanPreferencesKey("hide_watched_subscriptions")
@@ -280,36 +221,27 @@ class PlayerPreferences(
 
         val SHORTS_PIP_ENABLED = booleanPreferencesKey("shorts_pip_enabled")
 
-        // Shorts background playback
         val SHORTS_BACKGROUND_PLAY = booleanPreferencesKey("shorts_background_play")
 
-        // Shorts playback mode: "loop" (default), "auto_next", or "auto_interval"
         val SHORTS_PLAYBACK_MODE = stringPreferencesKey("shorts_playback_mode")
         val SHORTS_AUTO_SCROLL_SECONDS = intPreferencesKey("shorts_auto_scroll_seconds")
         val SHORTS_QUEUE_CONTINUE_INTO_FEED = booleanPreferencesKey("shorts_queue_continue_into_feed")
 
-        // App icon — stores the component suffix of the currently selected launcher icon
         val PLAYLIST_SORT_ORDER = stringPreferencesKey("playlist_sort_order")
         val PLAYLIST_SORT_ORDERS = stringSetPreferencesKey("playlist_sort_orders")
 
-        // Video title display — max lines in the player info section (0 = no limit)
         val VIDEO_TITLE_MAX_LINES = intPreferencesKey("video_title_max_lines")
 
-        // Screen-level view mode toggles
         val SEARCH_IS_GRID_MODE = booleanPreferencesKey("search_is_grid_mode")
         val CHANNEL_IS_GRID_VIEW = booleanPreferencesKey("channel_is_grid_view")
         val CATEGORIES_IS_LIST_VIEW = booleanPreferencesKey("categories_is_list_view")
 
-        // Video card inline like/dislike action buttons
         val VIDEO_CARD_ACTIONS_ENABLED = booleanPreferencesKey("video_card_actions_enabled")
 
-        // Video card mark-as-watched quick actions
         val VIDEO_CARD_MARK_WATCHED_ENABLED = booleanPreferencesKey("video_card_mark_watched_enabled")
 
-        // Show app logo icon in home screen top bar
         val SHOW_APP_LOGO_ICON = booleanPreferencesKey("show_app_logo_icon")
 
-        // Player comments preview
         val COMMENTS_ENABLED = booleanPreferencesKey("comments_enabled")
         val LIVE_CHAT_ENABLED = booleanPreferencesKey("live_chat_enabled")
         val COMMENTS_PREVIEW_ENABLED = booleanPreferencesKey("comments_preview_enabled")
@@ -321,27 +253,20 @@ class PlayerPreferences(
         val UPCOMING_VIDEO_REMINDER_IDS = stringSetPreferencesKey("upcoming_video_reminder_ids")
         val UPCOMING_VIDEO_REMINDERS = stringPreferencesKey("upcoming_video_reminders")
 
-        // Newest-first, newline-delimited so the list can be trimmed to a bounded size.
         val HIDE_UNPLAYABLE_SUBSCRIPTIONS = booleanPreferencesKey("hide_unplayable_subscriptions")
 
-        // Deep Chorplay (Incognito / No-Engine) mode
-        val DEEP_FLOW_ACTIVE = booleanPreferencesKey("deep_flow_active")
-        val DEEP_FLOW_ACTIVATED_AT = longPreferencesKey("deep_flow_activated_at")
-        val DEEP_FLOW_EXPIRE_HOURS = intPreferencesKey("deep_flow_expire_hours")
-        val DEEP_FLOW_SAVE_HISTORY = booleanPreferencesKey("deep_flow_save_history")
-        val DEEP_FLOW_SCROBBLE = booleanPreferencesKey("deep_flow_scrobble")
-        val DEEP_FLOW_ON_SEARCH = booleanPreferencesKey("deep_flow_on_search")
+        val DEEP_CHOR_ACTIVE = booleanPreferencesKey("deep_chor_active")
+        val DEEP_CHOR_ACTIVATED_AT = longPreferencesKey("deep_chor_activated_at")
+        val DEEP_CHOR_EXPIRE_HOURS = intPreferencesKey("deep_chor_expire_hours")
+        val DEEP_CHOR_SAVE_HISTORY = booleanPreferencesKey("deep_chor_save_history")
+        val DEEP_CHOR_ON_SEARCH = booleanPreferencesKey("deep_chor_on_search")
 
-        // Home subscription feed rotation cursor
         val HOME_SUBS_ROTATION_CURSOR = intPreferencesKey("home_subs_rotation_cursor")
 
-        // Return YouTube Dislikes
         val RYTD_ENABLED = booleanPreferencesKey("rytd_enabled")
 
-        // Shorts playback speed: remembered across sessions
         val SHORTS_PLAYBACK_SPEED = floatPreferencesKey("shorts_playback_speed")
 
-        // Date & time display
         val DATE_DISPLAY_MODE = stringPreferencesKey("date_display_mode")
         val DATE_FORMAT_STYLE = stringPreferencesKey("date_format_style")
         val DATE_MODE_LISTS = stringPreferencesKey("date_mode_lists")
@@ -349,7 +274,6 @@ class PlayerPreferences(
         val DATE_MODE_DESCRIPTION = stringPreferencesKey("date_mode_description")
     }
 
-    /** Keys kept in the device store and shared by every profile; see DevicePreferencesStore.kt. */
     private object DeviceKeys {
         private val names = mutableSetOf<String>()
 
@@ -365,31 +289,24 @@ class PlayerPreferences(
         val TRENDING_REGION = device(stringPreferencesKey("trending_region"))
         val APP_LANGUAGE = device(stringPreferencesKey("app_language"))
         val CONTENT_LANGUAGE = device(stringPreferencesKey("content_language"))
-        val MUSIC_AUDIO_OFFLOAD_ENABLED = device(booleanPreferencesKey("music_audio_offload_enabled"))
 
-        // Buffer settings
         val MIN_BUFFER_MS = device(intPreferencesKey("min_buffer_ms"))
         val MAX_BUFFER_MS = device(intPreferencesKey("max_buffer_ms"))
         val BUFFER_FOR_PLAYBACK_MS = device(intPreferencesKey("buffer_for_playback_ms"))
         val BUFFER_FOR_PLAYBACK_AFTER_REBUFFER_MS = device(intPreferencesKey("buffer_for_playback_after_rebuffer_ms"))
 
-        // Buffer profiles
         val BUFFER_PROFILE = device(stringPreferencesKey("buffer_profile"))
 
-        // Download settings
         val DOWNLOAD_THREADS = device(intPreferencesKey("download_threads"))
         val CONCURRENT_DOWNLOADS = device(intPreferencesKey("concurrent_downloads"))
         val DOWNLOAD_OVER_WIFI_ONLY = device(booleanPreferencesKey("download_over_wifi_only"))
         val DEFAULT_DOWNLOAD_QUALITY = device(stringPreferencesKey("default_download_quality"))
         val DEFAULT_DOWNLOAD_CODEC = device(stringPreferencesKey("default_download_codec"))
-        val MUSIC_DOWNLOAD_QUALITY = device(stringPreferencesKey("music_download_quality"))
+        val AUDIO_DOWNLOAD_QUALITY = device(stringPreferencesKey("audio_download_quality"))
         val DOWNLOAD_RETAG_RESULT = device(stringPreferencesKey("download_retag_result"))
         val DOWNLOAD_LOCATION = device(stringPreferencesKey("download_location"))
-        val MUSIC_DOWNLOAD_LOCATION = device(stringPreferencesKey("music_download_location"))
         val DOWNLOAD_LOCATION_TREE = device(stringPreferencesKey("download_location_tree"))
-        val MUSIC_DOWNLOAD_LOCATION_TREE = device(stringPreferencesKey("music_download_location_tree"))
 
-        // Download dialog style + remembered last-used download options (compact dialog)
         val DOWNLOAD_DIALOG_STYLE = device(stringPreferencesKey("download_dialog_style"))
         val DOWNLOAD_ASK_EVERY_TIME = device(booleanPreferencesKey("download_ask_every_time"))
         val DOWNLOADS_STORAGE_CARD = device(booleanPreferencesKey("downloads_storage_card"))
@@ -410,16 +327,12 @@ class PlayerPreferences(
         val PROXY_BYPASS_ON_VPN = device(booleanPreferencesKey("proxy_bypass_on_vpn"))
         val SURFACE_READY_TIMEOUT_MS = device(longPreferencesKey("surface_ready_timeout_ms"))
 
-        // Audio track preference
-        val MUSIC_AUDIO_QUALITY = device(stringPreferencesKey("music_audio_quality"))
 
-        // Shorts quality preferences
         val SHORTS_QUALITY_WIFI = device(stringPreferencesKey("shorts_quality_wifi"))
         val SHORTS_QUALITY_CELLULAR = device(stringPreferencesKey("shorts_quality_cellular"))
         val THUMBNAIL_QUALITY_WIFI = device(stringPreferencesKey("thumbnail_quality_wifi"))
         val THUMBNAIL_QUALITY_CELLULAR = device(stringPreferencesKey("thumbnail_quality_cellular"))
 
-        // UI preferences
         val PLAYER_HAPTICS_ENABLED = device(booleanPreferencesKey("player_haptics_enabled"))
         val SWIPE_GESTURES_ENABLED = device(booleanPreferencesKey("swipe_gestures_enabled"))
         val BRIGHTNESS_SWIPE_GESTURES_ENABLED = device(booleanPreferencesKey("brightness_swipe_gestures_enabled"))
@@ -430,11 +343,9 @@ class PlayerPreferences(
         val DOUBLE_TAP_SEEK_SECONDS = device(intPreferencesKey("double_tap_seek_seconds"))
         val DOUBLE_TAP_SEEK_ZONE = device(stringPreferencesKey("double_tap_seek_zone"))
 
-        // Notification preferences
         val NOTIF_DOWNLOADS_ENABLED = device(booleanPreferencesKey("notif_downloads_enabled"))
         val NOTIF_UPDATES_ENABLED = device(booleanPreferencesKey("notif_updates_enabled"))
 
-        // Overlay Controls preferences
         val OVERLAY_CAST_ENABLED = device(booleanPreferencesKey("overlay_cast_enabled"))
         val OVERLAY_CC_ENABLED = device(booleanPreferencesKey("overlay_cc_enabled"))
         val OVERLAY_PIP_ENABLED = device(booleanPreferencesKey("overlay_pip_enabled"))
@@ -446,66 +357,49 @@ class PlayerPreferences(
         val OVERLAY_SPONSORBLOCK_ENABLED = device(booleanPreferencesKey("overlay_sponsorblock_enabled"))
         val OVERLAY_NEXT_PREV_ENABLED = device(booleanPreferencesKey("overlay_next_prev_enabled"))
 
-        // Fullscreen Player
         val PORTRAIT_SEEKBAR_PADDING_MODE = device(stringPreferencesKey("portrait_seekbar_padding_mode"))
         val PORTRAIT_SEEKBAR_CUSTOM_PADDING_DP = device(intPreferencesKey("portrait_seekbar_custom_padding_dp"))
         val FULLSCREEN_SEEKBAR_PADDING_MODE = device(stringPreferencesKey("fullscreen_seekbar_padding_mode"))
         val FULLSCREEN_SEEKBAR_CUSTOM_PADDING_DP = device(intPreferencesKey("fullscreen_seekbar_custom_padding_dp"))
         val FRAME_STEP_BUTTONS_ENABLED = device(booleanPreferencesKey("frame_step_buttons_enabled"))
 
-        // Mini Player Customizations
         val MINI_BAR_SWIPE_LEFT_ACTION = device(stringPreferencesKey("mini_bar_swipe_left_action"))
         val MINI_BAR_SWIPE_RIGHT_ACTION = device(stringPreferencesKey("mini_bar_swipe_right_action"))
         val QUEUE_SWIPE_LEFT_ACTION = device(stringPreferencesKey("queue_swipe_left_action"))
         val QUEUE_SWIPE_RIGHT_ACTION = device(stringPreferencesKey("queue_swipe_right_action"))
 
-        // Audio focus during calls
         val PLAY_DURING_CALLS = device(booleanPreferencesKey("play_during_calls"))
 
-        // Donation / support prompt
         val DONATION_FIRST_LAUNCH_TIME = device(longPreferencesKey("donation_first_launch_time"))
         val DONATION_PROMPT_LAST_SHOWN = device(longPreferencesKey("donation_prompt_last_shown"))
         val DONATION_PROMPT_DISABLED = device(booleanPreferencesKey("donation_prompt_disabled"))
-
-        // Remember playback speed
-        val PAUSE_MUSIC_WHEN_MUTED = device(booleanPreferencesKey("pause_music_when_muted"))
-        val MUSIC_SIDE_SWIPES = device(booleanPreferencesKey("music_side_swipes"))
         val ANIMATED_ARTWORK_WIFI_ONLY = device(booleanPreferencesKey("animated_artwork_wifi_only"))
-        val AUTO_DOWNLOAD_LIKED_MUSIC = device(booleanPreferencesKey("auto_download_liked_music"))
+        val AUTO_DOWNLOAD_LIKED_VIDEOS = device(booleanPreferencesKey("auto_download_liked_videos"))
 
-        // Custom playback speeds
         val LONG_PRESS_PLAYBACK_SPEED = device(floatPreferencesKey("long_press_playback_speed"))
         val SPEED_SWIPE_SIDE = device(stringPreferencesKey("speed_swipe_side"))
         val SPEED_SWIPE_STEP = device(floatPreferencesKey("speed_swipe_step"))
 
-        // Cache size
         val MEDIA_CACHE_SIZE_MB = device(intPreferencesKey("media_cache_size_mb"))
-        val MUSIC_CACHE_SIZE_MB = device(intPreferencesKey("music_cache_size_mb"))
         val ARTWORK_CACHE_SIZE_MB = device(intPreferencesKey("artwork_cache_size_mb"))
 
-        // App icon — stores the component suffix of the currently selected launcher icon
         val APP_ICON_SUFFIX = device(stringPreferencesKey("app_icon_suffix"))
 
-        // Newest-first, newline-delimited so the list can be trimmed to a bounded size.
         val UNPLAYABLE_VIDEO_IDS = device(stringPreferencesKey("unplayable_video_ids"))
 
-        // Auto-backup settings
         val AUTO_BACKUP_FREQUENCY = device(stringPreferencesKey("auto_backup_frequency"))
         val AUTO_BACKUP_FOLDER_URI = device(stringPreferencesKey("auto_backup_folder_uri"))
         val AUTO_BACKUP_TYPE = device(stringPreferencesKey("auto_backup_type"))
 
-        // Volume boost: opt-in, default off
         val ALLOW_VOLUME_BOOST = device(booleanPreferencesKey("allow_volume_boost"))
 
         val NAMES: Set<String> = names
     }
 
     companion object {
-        /** Names of the keys that moved to the device store, for the one-time copy. */
         internal val DEVICE_KEY_NAMES: Set<String> get() = DeviceKeys.NAMES
     }
 
-    // Grid item size preference
     val gridItemSize: Flow<String> =
         context.playerPreferencesDataStore.data
             .map { preferences ->
@@ -518,7 +412,6 @@ class PlayerPreferences(
         }
     }
 
-    // ── Volume boost (#491): opt-in, default OFF ──
     val allowVolumeBoost: Flow<Boolean> =
         context.devicePreferencesDataStore.data
             .map { preferences ->
@@ -531,7 +424,6 @@ class PlayerPreferences(
         }
     }
 
-    // ── Shorts playback speed (#496): remembered across sessions ──
     val shortsPlaybackSpeed: Flow<Float> =
         context.playerPreferencesDataStore.data
             .map { preferences ->
@@ -666,7 +558,6 @@ class PlayerPreferences(
         }
     }
 
-    // SponsorBlock per-category action preferences
     fun sbActionForCategory(category: String): Flow<SponsorBlockAction> {
         val key =
             when (category) {
@@ -708,7 +599,6 @@ class PlayerPreferences(
         }
     }
 
-    // SponsorBlock per-category color preferences (stored as ARGB Int)
     private val sbColorKeys: Map<String, Preferences.Key<Int>> =
         mapOf(
             "sponsor" to Keys.SB_COLOR_SPONSOR,
@@ -729,11 +619,6 @@ class PlayerPreferences(
         return context.playerPreferencesDataStore.data.map { prefs -> prefs[key] }
     }
 
-    /**
-     * Every user-chosen category colour in a single read. The seek bar paints all categories at
-     * once, so collecting [sbColorForCategory] per category there would mean nine separate
-     * collectors over the same DataStore.
-     */
     private fun Preferences.readSponsorCategoryColors(): Map<String, Int> {
         val colors = mutableMapOf<String, Int>()
         sbColorKeys.forEach { (category, key) -> this[key]?.let { colors[category] = it } }
@@ -760,15 +645,18 @@ class PlayerPreferences(
             speedIndicatorEnabled =
                 device[DeviceKeys.OVERLAY_SPEED_INDICATOR_ENABLED] ?: overlayDefaults.speedIndicatorEnabled,
             commentsEnabled = device[DeviceKeys.OVERLAY_COMMENTS_ENABLED] ?: overlayDefaults.commentsEnabled,
-            sponsorBlockEnabled = device[DeviceKeys.OVERLAY_SPONSORBLOCK_ENABLED] ?: overlayDefaults.sponsorBlockEnabled,
-            nextPrevButtonsEnabled = device[DeviceKeys.OVERLAY_NEXT_PREV_ENABLED] ?: overlayDefaults.nextPrevButtonsEnabled,
+            sponsorBlockEnabled = device[DeviceKeys.OVERLAY_SPONSORBLOCK_ENABLED]
+                ?: overlayDefaults.sponsorBlockEnabled,
+            nextPrevButtonsEnabled = device[DeviceKeys.OVERLAY_NEXT_PREV_ENABLED]
+                ?: overlayDefaults.nextPrevButtonsEnabled,
             showControlsWhileLoading =
                 device[DeviceKeys.SHOW_CONTROLS_WHILE_LOADING] ?: overlayDefaults.showControlsWhileLoading,
             fullscreenSeekbarHorizontalPaddingDp =
                 resolveSeekbarHorizontalPaddingDp(
                     mode = fullscreenPaddingMode,
                     customPaddingDp =
-                        (device[DeviceKeys.FULLSCREEN_SEEKBAR_CUSTOM_PADDING_DP] ?: DEFAULT_FULLSCREEN_SEEKBAR_PADDING_DP)
+                        (device[DeviceKeys.FULLSCREEN_SEEKBAR_CUSTOM_PADDING_DP]
+                            ?: DEFAULT_FULLSCREEN_SEEKBAR_PADDING_DP)
                             .coerceIn(0, MAX_FULLSCREEN_SEEKBAR_PADDING_DP),
                     defaultPaddingDp = DEFAULT_FULLSCREEN_SEEKBAR_PADDING_DP,
                     maxPaddingDp = MAX_FULLSCREEN_SEEKBAR_PADDING_DP,
@@ -790,7 +678,11 @@ class PlayerPreferences(
     }
 
     val overlayPreferences: Flow<PlayerOverlayPreferences> =
-        combine(context.playerPreferencesDataStore.data, context.devicePreferencesDataStore.data, ::toOverlayPreferences)
+        combine(
+            context.playerPreferencesDataStore.data,
+            context.devicePreferencesDataStore.data,
+            ::toOverlayPreferences
+        )
 
     suspend fun setSbColorForCategory(
         category: String,
@@ -802,7 +694,6 @@ class PlayerPreferences(
         }
     }
 
-    // Chorplay for reading the stored SB User ID (may be null)
     val sbUserId: Flow<String?> =
         context.playerPreferencesDataStore.data
             .map { prefs -> prefs[Keys.SB_USER_ID]?.takeIf { it.isNotBlank() } }
@@ -823,7 +714,6 @@ class PlayerPreferences(
         }
     }
 
-    /** Returns the stored SponsorBlock user ID, generating a new UUID if not set. */
     suspend fun getOrCreateSbUserId(): String {
         val prefs = context.playerPreferencesDataStore.data.first()
         val existing = prefs[Keys.SB_USER_ID]
@@ -837,7 +727,6 @@ class PlayerPreferences(
         return newId
     }
 
-    // Slider Style preference.
     val sliderStyle: Flow<SliderStyle> =
         context.playerPreferencesDataStore.data
             .map { preferences ->
@@ -855,84 +744,6 @@ class PlayerPreferences(
         }
     }
 
-    val musicPlayerBackgroundStyle: Flow<MusicPlayerBackgroundStyle> =
-        context.playerPreferencesDataStore.data
-            .map { preferences ->
-                runCatching {
-                    MusicPlayerBackgroundStyle.valueOf(
-                        preferences[Keys.MUSIC_PLAYER_BACKGROUND_STYLE]
-                            ?: MusicPlayerBackgroundStyle.BLUR_GRADIENT.name,
-                    )
-                }.getOrDefault(MusicPlayerBackgroundStyle.BLUR_GRADIENT)
-            }
-
-    suspend fun setMusicPlayerBackgroundStyle(style: MusicPlayerBackgroundStyle) {
-        context.playerPreferencesDataStore.edit { preferences ->
-            preferences[Keys.MUSIC_PLAYER_BACKGROUND_STYLE] = style.name
-        }
-    }
-
-    /** Whether the music player's buttons and seek bar take the artwork's colors. */
-    val musicArtworkControlColors: Flow<Boolean> =
-        context.playerPreferencesDataStore.data
-            .map { preferences -> preferences[Keys.MUSIC_ARTWORK_CONTROL_COLORS] ?: true }
-
-    suspend fun setMusicArtworkControlColors(enabled: Boolean) {
-        context.playerPreferencesDataStore.edit { preferences ->
-            preferences[Keys.MUSIC_ARTWORK_CONTROL_COLORS] = enabled
-        }
-    }
-
-    /** Whether the artwork backgrounds turn light while the app theme is light. */
-    val musicPlayerFollowLightTheme: Flow<Boolean> =
-        context.playerPreferencesDataStore.data
-            .map { preferences -> preferences[Keys.MUSIC_PLAYER_FOLLOW_LIGHT_THEME] ?: false }
-
-    suspend fun setMusicPlayerFollowLightTheme(enabled: Boolean) {
-        context.playerPreferencesDataStore.edit { preferences ->
-            preferences[Keys.MUSIC_PLAYER_FOLLOW_LIGHT_THEME] = enabled
-        }
-    }
-
-    /** Whether the music player's action row shows a sleep timer button. */
-    val musicSleepTimerButton: Flow<Boolean> =
-        context.playerPreferencesDataStore.data
-            .map { preferences -> preferences[Keys.MUSIC_SLEEP_TIMER_BUTTON] ?: false }
-
-    suspend fun setMusicSleepTimerButton(enabled: Boolean) {
-        context.playerPreferencesDataStore.edit { preferences ->
-            preferences[Keys.MUSIC_SLEEP_TIMER_BUTTON] = enabled
-        }
-    }
-
-    /** The colors the controls use when artwork colors are off. */
-    val musicPlainControlColors: Flow<MusicPlainControlColors> =
-        context.playerPreferencesDataStore.data
-            .map { preferences ->
-                runCatching {
-                    MusicPlainControlColors.valueOf(
-                        preferences[Keys.MUSIC_PLAIN_CONTROL_COLORS] ?: MusicPlainControlColors.MONOCHROME.name,
-                    )
-                }.getOrDefault(MusicPlainControlColors.MONOCHROME)
-            }
-
-    suspend fun setMusicPlainControlColors(colors: MusicPlainControlColors) {
-        context.playerPreferencesDataStore.edit { preferences ->
-            preferences[Keys.MUSIC_PLAIN_CONTROL_COLORS] = colors.name
-        }
-    }
-
-    val hideMusicPlayerArtwork: Flow<Boolean> =
-        context.playerPreferencesDataStore.data
-            .map { preferences ->
-                preferences[Keys.HIDE_MUSIC_PLAYER_ARTWORK] ?: false
-            }
-
-    suspend fun setHideMusicPlayerArtwork(enabled: Boolean) {
-        context.playerPreferencesDataStore.edit { preferences ->
-            preferences[Keys.HIDE_MUSIC_PLAYER_ARTWORK] = enabled
-        }
-    }
 
     val shortsPlayerUiMode: Flow<ShortsPlayerUiMode> =
         context.playerPreferencesDataStore.data
@@ -984,8 +795,6 @@ class PlayerPreferences(
         }
     }
 
-    // The notes master switch. The two surface switches below are ANDed with it, so turning this off
-    // hides both without clearing either of their own settings.
     val notesEnabled: Flow<Boolean> =
         context.playerPreferencesDataStore.data
             .map { preferences -> preferences[Keys.NOTES_ENABLED] ?: true }
@@ -1016,13 +825,6 @@ class PlayerPreferences(
     val effectiveVideoNotesEnabled: Flow<Boolean> =
         combine(notesEnabled, videoNotesEnabled) { master, own -> master && own }
 
-    /**
-     * Master switch for Shorts (reels) as content. When OFF the app hides every reel surface and the
-     * five granular Shorts toggles below are overridden — read the `effective*` flows, never the raw
-     * ones, or that surface will silently ignore the master switch.
-     *
-     * Hiding only. Saved Shorts and Shorts watch history stay in the database untouched.
-     */
     val shortsContentEnabled: Flow<Boolean> =
         context.playerPreferencesDataStore.data
             .map { preferences ->
@@ -1035,7 +837,6 @@ class PlayerPreferences(
         }
     }
 
-    /** Keeps a channel's Shorts tab while the master switch hides Shorts everywhere else. */
     val channelShortsTabWhenHidden: Flow<Boolean> =
         context.playerPreferencesDataStore.data
             .map { preferences ->
@@ -1051,10 +852,6 @@ class PlayerPreferences(
         }
     }
 
-    /**
-     * When OFF the Library screen drops the horizontal preview shelves and lists each section as a
-     * single navigation row with its item count.
-     */
     val libraryShelfPreviewsEnabled: Flow<Boolean> =
         context.playerPreferencesDataStore.data
             .map { preferences ->
@@ -1067,17 +864,6 @@ class PlayerPreferences(
         }
     }
 
-    /** Library lists video and music playlists as two separate entries instead of one. */
-    val separatePlaylistKinds: Flow<Boolean> =
-        context.playerPreferencesDataStore.data
-            .map { preferences -> preferences[Keys.SEPARATE_PLAYLIST_KINDS] ?: false }
-            .distinctUntilChanged()
-
-    suspend fun setSeparatePlaylistKinds(enabled: Boolean) {
-        context.playerPreferencesDataStore.edit { preferences ->
-            preferences[Keys.SEPARATE_PLAYLIST_KINDS] = enabled
-        }
-    }
 
     val playlistListOrder: Flow<PlaylistListOrder> =
         context.playerPreferencesDataStore.data
@@ -1101,19 +887,7 @@ class PlayerPreferences(
         }
     }
 
-    /** The Videos/Music choice on the playlists page, kept between visits. */
-    val playlistsShowMusic: Flow<Boolean> =
-        context.playerPreferencesDataStore.data
-            .map { preferences -> preferences[Keys.PLAYLISTS_SHOW_MUSIC] ?: false }
-            .distinctUntilChanged()
 
-    suspend fun setPlaylistsShowMusic(showMusic: Boolean) {
-        context.playerPreferencesDataStore.edit { preferences ->
-            preferences[Keys.PLAYLISTS_SHOW_MUSIC] = showMusic
-        }
-    }
-
-    // Shorts shelf enabled preference
     val shortsShelfEnabled: Flow<Boolean> =
         context.playerPreferencesDataStore.data
             .map { preferences ->
@@ -1129,7 +903,6 @@ class PlayerPreferences(
         }
     }
 
-    // Home Shorts shelf enabled preference
     val homeShortsShelfEnabled: Flow<Boolean> =
         context.playerPreferencesDataStore.data
             .map { preferences ->
@@ -1155,10 +928,6 @@ class PlayerPreferences(
         }
     }
 
-    /**
-     * The engine's last answer that this viewer needs no onboarding, so a cold start can pick its
-     * first screen without waiting for the recommendation engine to load.
-     */
     val onboardingDone: Flow<Boolean> =
         context.playerPreferencesDataStore.data
             .map { preferences -> preferences[Keys.ONBOARDING_DONE] ?: false }
@@ -1169,7 +938,6 @@ class PlayerPreferences(
         }
     }
 
-    /** Keeps a copy of each Home load on the device so it can be exported for a recommendation report. */
     val homeSnapshotRecording: Flow<Boolean> =
         context.playerPreferencesDataStore.data
             .map { preferences -> preferences[Keys.HOME_SNAPSHOT_RECORDING] ?: false }
@@ -1180,7 +948,6 @@ class PlayerPreferences(
         }
     }
 
-    /** Collaborations of followed channels that someone else uploaded, in Subscriptions (#840). */
     val subscriptionCollaborationsEnabled: Flow<Boolean> =
         context.playerPreferencesDataStore.data
             .map { preferences -> preferences[Keys.SUBSCRIPTION_COLLABORATIONS_ENABLED] ?: true }
@@ -1192,8 +959,8 @@ class PlayerPreferences(
         }
     }
 
-    /** The Notes page's sort, by enum name; kept so a hand-made order is still there next visit. */
-    val notesSort: Flow<String?> = context.playerPreferencesDataStore.data.map { preferences -> preferences[Keys.NOTES_SORT] }
+    val notesSort: Flow<String?> =
+        context.playerPreferencesDataStore.data.map { preferences -> preferences[Keys.NOTES_SORT] }
 
     suspend fun setNotesSort(name: String) {
         context.playerPreferencesDataStore.edit { preferences ->
@@ -1231,7 +998,6 @@ class PlayerPreferences(
         }
     }
 
-    // Shorts navigation enabled preference
     val shortsNavigationEnabled: Flow<Boolean> =
         context.playerPreferencesDataStore.data
             .map { preferences ->
@@ -1247,7 +1013,6 @@ class PlayerPreferences(
         }
     }
 
-    // When OFF, the bottom navigation bar stays pinned instead of hiding/showing on scroll.
     val bottomNavHideOnScroll: Flow<Boolean> =
         context.playerPreferencesDataStore.data
             .map { preferences ->
@@ -1260,20 +1025,7 @@ class PlayerPreferences(
         }
     }
 
-    // Music navigation enabled preference
-    val musicNavigationEnabled: Flow<Boolean> =
-        context.playerPreferencesDataStore.data
-            .map { preferences ->
-                preferences[Keys.MUSIC_NAVIGATION_ENABLED] ?: true
-            }
 
-    suspend fun setMusicNavigationEnabled(enabled: Boolean) {
-        context.playerPreferencesDataStore.edit { preferences ->
-            preferences[Keys.MUSIC_NAVIGATION_ENABLED] = enabled
-        }
-    }
-
-    // Search nav tab enabled preference
     val searchNavigationEnabled: Flow<Boolean> =
         context.playerPreferencesDataStore.data
             .map { preferences ->
@@ -1286,7 +1038,6 @@ class PlayerPreferences(
         }
     }
 
-    // Categories nav tab enabled preference
     val categoriesNavigationEnabled: Flow<Boolean> =
         context.playerPreferencesDataStore.data
             .map { preferences ->
@@ -1309,7 +1060,6 @@ class PlayerPreferences(
         }
     }
 
-    // Continue Watching shelf enabled preference
     val continueWatchingEnabled: Flow<Boolean> =
         context.playerPreferencesDataStore.data
             .map { preferences ->
@@ -1322,7 +1072,6 @@ class PlayerPreferences(
         }
     }
 
-    // Show related videos preference
     val showRelatedVideos: Flow<Boolean> =
         context.playerPreferencesDataStore.data
             .map { preferences ->
@@ -1335,7 +1084,6 @@ class PlayerPreferences(
         }
     }
 
-    /** Seconds a double tap on either side jumps; 0 turns double-tap seek off. */
     val doubleTapSeekSeconds: Flow<Int> =
         context.devicePreferencesDataStore.data
             .map { preferences ->
@@ -1362,7 +1110,6 @@ class PlayerPreferences(
         }
     }
 
-    // Home view mode preference
     val homeViewMode: Flow<HomeViewMode> =
         context.playerPreferencesDataStore.data
             .map { preferences ->
@@ -1389,7 +1136,6 @@ class PlayerPreferences(
         }
     }
 
-    // Home feed enabled preference
     val homeFeedEnabled: Flow<Boolean> =
         context.playerPreferencesDataStore.data
             .map { preferences ->
@@ -1412,7 +1158,6 @@ class PlayerPreferences(
         }
     }
 
-    // Home subscription rotation cursor
     val homeSubsRotationCursor: Flow<Int> =
         context.playerPreferencesDataStore.data
             .map { preferences ->
@@ -1425,12 +1170,13 @@ class PlayerPreferences(
         }
     }
 
-    // Related video card style preference (tablet/player panel)
     val playerRelatedCardStyle: Flow<PlayerRelatedCardStyle> =
         context.playerPreferencesDataStore.data
             .map { preferences ->
                 try {
-                    PlayerRelatedCardStyle.valueOf(preferences[Keys.RELATED_CARD_STYLE] ?: PlayerRelatedCardStyle.FULL_WIDTH.name)
+                    PlayerRelatedCardStyle.valueOf(
+                        preferences[Keys.RELATED_CARD_STYLE] ?: PlayerRelatedCardStyle.FULL_WIDTH.name
+                    )
                 } catch (_: IllegalArgumentException) {
                     PlayerRelatedCardStyle.FULL_WIDTH
                 }
@@ -1478,7 +1224,6 @@ class PlayerPreferences(
         }
     }
 
-    /** Titles and descriptions in the video's own language instead of YouTube's translation (#1230). */
     val originalTitles: Flow<Boolean> =
         context.playerPreferencesDataStore.data
             .map { preferences -> preferences[Keys.ORIGINAL_TITLES] ?: false }
@@ -1490,31 +1235,7 @@ class PlayerPreferences(
         }
     }
 
-    val musicLoudnessNormalizationEnabled: Flow<Boolean> =
-        context.playerPreferencesDataStore.data
-            .map { preferences ->
-                preferences[Keys.MUSIC_LOUDNESS_NORMALIZATION_ENABLED] ?: true
-            }
 
-    suspend fun setMusicLoudnessNormalizationEnabled(enabled: Boolean) {
-        context.playerPreferencesDataStore.edit { preferences ->
-            preferences[Keys.MUSIC_LOUDNESS_NORMALIZATION_ENABLED] = enabled
-        }
-    }
-
-    val musicAudioOffloadEnabled: Flow<Boolean> =
-        context.devicePreferencesDataStore.data
-            .map { preferences ->
-                preferences[DeviceKeys.MUSIC_AUDIO_OFFLOAD_ENABLED] ?: false
-            }
-
-    suspend fun setMusicAudioOffloadEnabled(enabled: Boolean) {
-        context.devicePreferencesDataStore.edit { preferences ->
-            preferences[DeviceKeys.MUSIC_AUDIO_OFFLOAD_ENABLED] = enabled
-        }
-    }
-
-    // Quality preferences
     val defaultQualityWifi: Flow<VideoQuality> =
         context.devicePreferencesDataStore.data
             .map { preferences ->
@@ -1551,7 +1272,6 @@ class PlayerPreferences(
         }
     }
 
-    /** Codec to use when a video carries no [defaultVideoCodec] variant. AUTO keeps the built-in order. */
     val fallbackVideoCodec: Flow<VideoCodec> =
         context.devicePreferencesDataStore.data
             .map { preferences ->
@@ -1564,11 +1284,6 @@ class PlayerPreferences(
         }
     }
 
-    /**
-     * Both codec preferences as one comma-separated priority string ("av1,vp9"), which is what every
-     * stream selector ranks against. "auto" means no preference, leaving the built-in codec order.
-     * A fallback without a preferred codec is meaningless, so AUTO on the primary wins outright.
-     */
     val videoCodecPriority: Flow<String> =
         combine(defaultVideoCodec, fallbackVideoCodec) { preferred, fallback ->
             if (preferred == VideoCodec.AUTO) {
@@ -1582,7 +1297,6 @@ class PlayerPreferences(
             }
         }.distinctUntilChanged()
 
-    // Shorts quality preferences (default to 720p WiFi, 480p Cellular)
     val shortsQualityWifi: Flow<VideoQuality> =
         context.devicePreferencesDataStore.data
             .map { preferences ->
@@ -1627,23 +1341,15 @@ class PlayerPreferences(
         }
     }
 
-    /** The level for the network the device is on now, for work that has no composition to read it from. */
     suspend fun currentThumbnailQuality(): ThumbnailQuality =
-        ThumbnailQuality.effective(NetworkState.isOnWifi(context), thumbnailQualityWifi.first(), thumbnailQualityCellular.first())
+        ThumbnailQuality.effective(
+            NetworkState.isOnWifi(context),
+            thumbnailQualityWifi.first(),
+            thumbnailQualityCellular.first()
+        )
 
-    val musicAudioQuality: Flow<MusicAudioQuality> =
-        context.devicePreferencesDataStore.data
-            .map { preferences ->
-                MusicAudioQuality.fromString(preferences[DeviceKeys.MUSIC_AUDIO_QUALITY] ?: MusicAudioQuality.AUTO.label)
-            }
 
-    suspend fun setMusicAudioQuality(quality: MusicAudioQuality) {
-        context.devicePreferencesDataStore.edit { preferences ->
-            preferences[DeviceKeys.MUSIC_AUDIO_QUALITY] = quality.label
-        }
-    }
 
-    // Background play
     val backgroundPlayEnabled: Flow<Boolean> =
         context.playerPreferencesDataStore.data
             .map { preferences ->
@@ -1656,7 +1362,6 @@ class PlayerPreferences(
         }
     }
 
-    /** Whether swiping Chorplay away from recent apps leaves a playing video or song going (#1468). */
     val keepPlayingAfterSwipe: Flow<Boolean> =
         context.playerPreferencesDataStore.data
             .map { preferences ->
@@ -1682,7 +1387,6 @@ class PlayerPreferences(
         }
     }
 
-    /** A video the viewer opens loads and waits for play; what plays after it is the autoplay settings' call. */
     val startVideosPaused: Flow<Boolean> =
         context.playerPreferencesDataStore.data
             .map { preferences -> preferences[Keys.START_VIDEOS_PAUSED] ?: false }
@@ -1693,7 +1397,6 @@ class PlayerPreferences(
         }
     }
 
-    /** A video the viewer opens goes straight to fullscreen; what plays after it stays where the viewer is. */
     val openVideosFullscreen: Flow<Boolean> =
         context.playerPreferencesDataStore.data
             .map { preferences -> preferences[Keys.OPEN_VIDEOS_FULLSCREEN] ?: false }
@@ -1704,7 +1407,6 @@ class PlayerPreferences(
         }
     }
 
-    /** Turning the phone sideways enters fullscreen even while the system rotation lock is on. */
     val tiltFullscreenRotationLocked: Flow<Boolean> =
         context.devicePreferencesDataStore.data
             .map { preferences -> preferences[DeviceKeys.TILT_FULLSCREEN_ROTATION_LOCKED] ?: false }
@@ -1715,7 +1417,6 @@ class PlayerPreferences(
         }
     }
 
-    /** A Play button on headphones may start the last songs after Chorplay was closed. */
     val resumeFromHeadphones: Flow<Boolean> =
         context.devicePreferencesDataStore.data
             .map { preferences -> preferences[DeviceKeys.RESUME_FROM_HEADPHONES] ?: true }
@@ -1726,20 +1427,7 @@ class PlayerPreferences(
         }
     }
 
-    // Music endless radio — its own switch, independent of the VIDEO autoplay toggles.
-    val musicEndlessRadioEnabled: Flow<Boolean> =
-        context.playerPreferencesDataStore.data
-            .map { preferences ->
-                preferences[Keys.MUSIC_ENDLESS_RADIO_ENABLED] ?: true
-            }
 
-    suspend fun setMusicEndlessRadioEnabled(enabled: Boolean) {
-        context.playerPreferencesDataStore.edit { preferences ->
-            preferences[Keys.MUSIC_ENDLESS_RADIO_ENABLED] = enabled
-        }
-    }
-
-    // Autoplay for the playback queue (playlists / watch later) — independent of related-video autoplay.
     val queueAutoplayEnabled: Flow<Boolean> =
         context.playerPreferencesDataStore.data
             .map { preferences ->
@@ -1815,7 +1503,6 @@ class PlayerPreferences(
         }
     }
 
-    /** Videos and Shorts are turned down to YouTube's loudness level, as on youtube.com. */
     val videoVolumeNormalizationEnabled: Flow<Boolean> =
         context.playerPreferencesDataStore.data
             .map { preferences -> preferences[Keys.VIDEO_VOLUME_NORMALIZATION] ?: true }
@@ -1827,7 +1514,6 @@ class PlayerPreferences(
         }
     }
 
-    // SponsorBlock
     val sponsorBlockEnabled: Flow<Boolean> =
         context.playerPreferencesDataStore.data
             .map { preferences ->
@@ -1863,7 +1549,6 @@ class PlayerPreferences(
         }
     }
 
-    /** DeArrow's own default: a video with no thumbnail submission shows a frame from the video. */
     val deArrowRandomFrame: Flow<Boolean> =
         context.playerPreferencesDataStore.data
             .map { preferences -> preferences[Keys.DEARROW_RANDOM_FRAME] ?: true }
@@ -1873,8 +1558,6 @@ class PlayerPreferences(
             preferences[Keys.DEARROW_RANDOM_FRAME] = enabled
         }
     }
-
-    // ========== NOTIFICATION PREFERENCES ==========
 
     val notificationsEnabled: Flow<Boolean> =
         context.playerPreferencesDataStore.data
@@ -1945,8 +1628,6 @@ class PlayerPreferences(
             preferences[Keys.NOTIF_GENERAL_ENABLED] = enabled
         }
     }
-
-    // ========== OVERLAY CONTROLS PREFERENCES ==========
 
     val overlayCastEnabled: Flow<Boolean> =
         overlayPreferences.map { it.castEnabled }.distinctUntilChanged()
@@ -2145,7 +1826,6 @@ class PlayerPreferences(
                     edgeColor = preferences[Keys.SUBTITLE_EDGE_COLOR]?.let(::Color) ?: Color.Black,
                     isBold = preferences[Keys.SUBTITLE_BOLD] ?: true,
                     bottomPadding = bottomPadding,
-                    // Each starts at the value it would have used, so nobody's captions move until they set it.
                     fullscreenBottomPadding = fullscreenBottomPadding,
                     verticalFullscreenBottomPadding =
                         preferences[Keys.SUBTITLE_VERTICAL_FULLSCREEN_BOTTOM_PADDING] ?: fullscreenBottomPadding,
@@ -2180,11 +1860,6 @@ class PlayerPreferences(
         }
     }
 
-    /**
-     * Caption language the player reaches for, as a BCP-47 tag or
-     * [CaptionTrackResolver.NO_PREFERRED_LANGUAGE]. Written from the player whenever a caption
-     * track is picked, so turning captions off and on again returns to the same language.
-     */
     val preferredSubtitleLanguage: Flow<String> =
         context.playerPreferencesDataStore.data
             .map { preferences ->
@@ -2197,7 +1872,6 @@ class PlayerPreferences(
         }
     }
 
-    /** Turn captions on by themselves whenever the preferred language is available. */
     val autoEnableSubtitles: Flow<Boolean> =
         context.playerPreferencesDataStore.data
             .map { preferences ->
@@ -2250,20 +1924,6 @@ class PlayerPreferences(
         }
     }
 
-    val hiddenMusicHomeShelves: Flow<Set<String>> =
-        context.playerPreferencesDataStore.data
-            .map { preferences -> preferences[Keys.HIDDEN_MUSIC_HOME_SHELVES].orEmpty() }
-            .distinctUntilChanged()
-
-    suspend fun setMusicHomeShelfHidden(
-        shelf: String,
-        hidden: Boolean,
-    ) {
-        context.playerPreferencesDataStore.edit { preferences ->
-            val current = preferences[Keys.HIDDEN_MUSIC_HOME_SHELVES].orEmpty()
-            preferences[Keys.HIDDEN_MUSIC_HOME_SHELVES] = if (hidden) current + shelf else current - shelf
-        }
-    }
 
     val hiddenLibrarySections: Flow<Set<String>> =
         context.playerPreferencesDataStore.data
@@ -2280,8 +1940,8 @@ class PlayerPreferences(
         }
     }
 
-    /** The Everything, Videos or Music tab the recap was last left on. */
-    val recapSource: Flow<String?> = context.playerPreferencesDataStore.data.map { preferences -> preferences[Keys.RECAP_SOURCE] }
+    val recapSource: Flow<String?> =
+        context.playerPreferencesDataStore.data.map { preferences -> preferences[Keys.RECAP_SOURCE] }
 
     suspend fun setRecapSource(source: String) {
         context.playerPreferencesDataStore.edit { preferences ->
@@ -2289,86 +1949,19 @@ class PlayerPreferences(
         }
     }
 
-    val autoDownloadLikedMusic: Flow<Boolean> =
+    val autoDownloadLikedVideos: Flow<Boolean> =
         context.devicePreferencesDataStore.data
-            .map { preferences -> preferences[DeviceKeys.AUTO_DOWNLOAD_LIKED_MUSIC] ?: false }
+            .map { preferences -> preferences[DeviceKeys.AUTO_DOWNLOAD_LIKED_VIDEOS] ?: false }
             .distinctUntilChanged()
 
-    suspend fun setAutoDownloadLikedMusic(enabled: Boolean) {
+    suspend fun setAutoDownloadLikedVideos(enabled: Boolean) {
         context.devicePreferencesDataStore.edit { preferences ->
-            preferences[DeviceKeys.AUTO_DOWNLOAD_LIKED_MUSIC] = enabled
+            preferences[DeviceKeys.AUTO_DOWNLOAD_LIKED_VIDEOS] = enabled
         }
     }
 
-    /** Music videos start at 1x whatever speed would otherwise apply. */
-    val musicAtNormalSpeed: Flow<Boolean> =
-        context.playerPreferencesDataStore.data
-            .map { preferences -> preferences[Keys.MUSIC_AT_NORMAL_SPEED] ?: false }
-            .distinctUntilChanged()
 
-    suspend fun setMusicAtNormalSpeed(enabled: Boolean) {
-        context.playerPreferencesDataStore.edit { preferences ->
-            preferences[Keys.MUSIC_AT_NORMAL_SPEED] = enabled
-        }
-    }
 
-    val musicVideoSwitch: Flow<Boolean> =
-        context.playerPreferencesDataStore.data
-            .map { preferences -> preferences[Keys.MUSIC_VIDEO_SWITCH] ?: false }
-            .distinctUntilChanged()
-
-    suspend fun setMusicVideoSwitch(enabled: Boolean) {
-        context.playerPreferencesDataStore.edit { preferences ->
-            preferences[Keys.MUSIC_VIDEO_SWITCH] = enabled
-        }
-    }
-
-    val pauseMusicWhenMuted: Flow<Boolean> =
-        context.devicePreferencesDataStore.data
-            .map { preferences -> preferences[DeviceKeys.PAUSE_MUSIC_WHEN_MUTED] ?: false }
-            .distinctUntilChanged()
-
-    suspend fun setPauseMusicWhenMuted(enabled: Boolean) {
-        context.devicePreferencesDataStore.edit { preferences ->
-            preferences[DeviceKeys.PAUSE_MUSIC_WHEN_MUTED] = enabled
-        }
-    }
-
-    /** Podcasts and other long tracks pick up where they stopped when played again. */
-    val musicResumeLongTracks: Flow<Boolean> =
-        context.playerPreferencesDataStore.data
-            .map { preferences -> preferences[Keys.MUSIC_RESUME_LONG_TRACKS] ?: false }
-            .distinctUntilChanged()
-
-    suspend fun setMusicResumeLongTracks(enabled: Boolean) {
-        context.playerPreferencesDataStore.edit { preferences ->
-            preferences[Keys.MUSIC_RESUME_LONG_TRACKS] = enabled
-        }
-    }
-
-    /** Vertical swipes on the music player's left and right thirds change speed and volume. */
-    val musicSideSwipes: Flow<Boolean> =
-        context.devicePreferencesDataStore.data
-            .map { preferences -> preferences[DeviceKeys.MUSIC_SIDE_SWIPES] ?: false }
-            .distinctUntilChanged()
-
-    suspend fun setMusicSideSwipes(enabled: Boolean) {
-        context.devicePreferencesDataStore.edit { preferences ->
-            preferences[DeviceKeys.MUSIC_SIDE_SWIPES] = enabled
-        }
-    }
-
-    /** The music player's repeat mode, as Media3's own Player.REPEAT_MODE_* value. */
-    val musicRepeatMode: Flow<Int> =
-        context.playerPreferencesDataStore.data
-            .map { preferences -> preferences[Keys.MUSIC_REPEAT_MODE] ?: 0 }
-            .distinctUntilChanged()
-
-    suspend fun setMusicRepeatMode(mode: Int) {
-        context.playerPreferencesDataStore.edit { preferences ->
-            preferences[Keys.MUSIC_REPEAT_MODE] = mode
-        }
-    }
 
     val animatedArtwork: Flow<Boolean> =
         context.playerPreferencesDataStore.data
@@ -2426,7 +2019,6 @@ class PlayerPreferences(
         }
     }
 
-    // Subscription check interval (default: 360 minutes / 6 hours)
     val subscriptionCheckIntervalMinutes: Flow<Int> =
         context.playerPreferencesDataStore.data
             .map { preferences ->
@@ -2512,7 +2104,8 @@ class PlayerPreferences(
 
     suspend fun setSpeedSwipeStep(step: Float) {
         context.devicePreferencesDataStore.edit { preferences ->
-            preferences[DeviceKeys.SPEED_SWIPE_STEP] = step.takeIf { it in SPEED_SWIPE_STEPS } ?: DEFAULT_SPEED_SWIPE_STEP
+            preferences[DeviceKeys.SPEED_SWIPE_STEP] =
+                step.takeIf { it in SPEED_SWIPE_STEPS } ?: DEFAULT_SPEED_SWIPE_STEP
         }
     }
 
@@ -2529,7 +2122,6 @@ class PlayerPreferences(
         }
     }
 
-    // Subscriptions channel sort mode (persisted as the enum name)
     val subsSortMode: Flow<String> =
         context.playerPreferencesDataStore.data
             .map { preferences -> preferences[Keys.SUBS_SORT_MODE] ?: "" }
@@ -2602,7 +2194,6 @@ class PlayerPreferences(
         }
     }
 
-    // ── Donation / support prompt ───────────────────────────────────────────
     val donationFirstLaunchTime: Flow<Long> =
         context.devicePreferencesDataStore.data
             .map { preferences -> preferences[DeviceKeys.DONATION_FIRST_LAUNCH_TIME] ?: 0L }
@@ -2639,6 +2230,7 @@ class PlayerPreferences(
                 preferences[Keys.NAV_TAB_ORDER]
                     ?.split(",")
                     ?.mapNotNull { it.toIntOrNull() }
+                    ?.filter { it != 2 }
                     ?.takeIf { it.isNotEmpty() }
                     ?: DEFAULT_NAV_TAB_ORDER
             }
@@ -2779,7 +2371,6 @@ class PlayerPreferences(
         }
     }
 
-    /** Watched Shorts leave the Home and Subscriptions shelves and every Shorts queue, whatever the video settings say. */
     val hideWatchedShorts: Flow<Boolean> =
         context.playerPreferencesDataStore.data
             .map { preferences -> preferences[Keys.HIDE_WATCHED_SHORTS] ?: true }
@@ -2790,11 +2381,14 @@ class PlayerPreferences(
         }
     }
 
-    // Defaults to ALMOST_FINISHED so long videos only disappear in their final minute instead of at a flat 90%.
     val watchedThreshold: Flow<WatchedThreshold> =
         context.playerPreferencesDataStore.data
             .map { preferences ->
-                runCatching { WatchedThreshold.valueOf(preferences[Keys.WATCHED_THRESHOLD] ?: WatchedThreshold.ALMOST_FINISHED.name) }
+                runCatching {
+                    WatchedThreshold.valueOf(
+                        preferences[Keys.WATCHED_THRESHOLD] ?: WatchedThreshold.ALMOST_FINISHED.name
+                    )
+                }
                     .getOrDefault(WatchedThreshold.ALMOST_FINISHED)
             }
 
@@ -2804,11 +2398,14 @@ class PlayerPreferences(
         }
     }
 
-    /** What a video link shared to Chorplay from another app does; links tapped elsewhere always play. */
     val sharedLinkAction: Flow<SharedLinkAction> =
         context.playerPreferencesDataStore.data
             .map { preferences ->
-                runCatching { SharedLinkAction.valueOf(preferences[Keys.SHARED_LINK_ACTION] ?: SharedLinkAction.ASK_WHILE_PLAYING.name) }
+                runCatching {
+                    SharedLinkAction.valueOf(
+                        preferences[Keys.SHARED_LINK_ACTION] ?: SharedLinkAction.ASK_WHILE_PLAYING.name
+                    )
+                }
                     .getOrDefault(SharedLinkAction.ASK_WHILE_PLAYING)
             }
 
@@ -2818,7 +2415,6 @@ class PlayerPreferences(
         }
     }
 
-    /** When ON, sharing a video link sends only the bare URL, without the "Check out this video" text. */
     val shareWithoutText: Flow<Boolean> =
         context.playerPreferencesDataStore.data
             .map { preferences ->
@@ -2831,7 +2427,6 @@ class PlayerPreferences(
         }
     }
 
-    /** When ON, a video leaves Watch later once it counts as watched under [watchedThreshold]. */
     val removeWatchedFromWatchLater: Flow<Boolean> =
         context.playerPreferencesDataStore.data
             .map { preferences ->
@@ -2871,7 +2466,6 @@ class PlayerPreferences(
         }
     }
 
-    // Shorts background playback (default OFF — pauses when app goes to background)
     val shortsBackgroundPlay: Flow<Boolean> =
         context.playerPreferencesDataStore.data
             .map { preferences ->
@@ -2896,7 +2490,6 @@ class PlayerPreferences(
         }
     }
 
-    // Shorts playback mode (default LOOP — repeats the current short)
     val shortsPlaybackMode: Flow<String> =
         context.playerPreferencesDataStore.data
             .map { preferences ->
@@ -2970,13 +2563,13 @@ class PlayerPreferences(
         }
     }
 
-    /** The premiere reminders this profile set, with what it takes to queue them again. */
     val upcomingReminders: Flow<List<UpcomingReminder>> =
         context.playerPreferencesDataStore.data.map { preferences -> preferences.readReminders() }
 
     suspend fun saveUpcomingReminder(reminder: UpcomingReminder) {
         context.playerPreferencesDataStore.edit { preferences ->
-            preferences.writeReminders(preferences.readReminders().filterNot { it.videoId == reminder.videoId } + reminder)
+            preferences.writeReminders(
+                preferences.readReminders().filterNot { it.videoId == reminder.videoId } + reminder)
         }
     }
 
@@ -2994,7 +2587,6 @@ class PlayerPreferences(
         }
     }
 
-    /** Opt-in: off by default, so the feed never hides anything unless the user asks for it. */
     val hideUnplayableVideosFromSubscriptions: Flow<Boolean> =
         context.playerPreferencesDataStore.data
             .map { preferences ->
@@ -3007,11 +2599,6 @@ class PlayerPreferences(
         }
     }
 
-    /**
-     * Videos the player has permanently given up on (restricted, removed, or otherwise
-     * unplayable). Recorded regardless of the filter toggle so that enabling
-     * [hideUnplayableVideosFromSubscriptions] takes effect retroactively.
-     */
     val unplayableVideoIds: Flow<Set<String>> =
         context.devicePreferencesDataStore.data
             .map { preferences ->
@@ -3033,10 +2620,6 @@ class PlayerPreferences(
         }
     }
 
-    /**
-     * Clears the flag when a video turns out to play fine after all. Reads before writing so the
-     * common case (video was never flagged) costs no disk write — this runs on every playback start.
-     */
     suspend fun clearVideoUnplayable(videoId: String) {
         if (videoId.isBlank()) return
         val current =
@@ -3050,7 +2633,6 @@ class PlayerPreferences(
         }
     }
 
-    /** The video and Shorts cache size in MB; 0 means unlimited. Stored under the original single-cache key. */
     val mediaCacheSizeMb: Flow<Int> =
         context.devicePreferencesDataStore.data
             .map { preferences ->
@@ -3063,21 +2645,21 @@ class PlayerPreferences(
         }
     }
 
-    /** The song cache size in MB; 0 means unlimited. */
-    val musicCacheSizeMb: Flow<Int> =
+    val mediaCacheSizeMb: Flow<Int> =
         context.devicePreferencesDataStore.data
-            .map { preferences -> preferences[DeviceKeys.MUSIC_CACHE_SIZE_MB] ?: MediaCacheSizes.DEFAULT_MEDIA_MB }
+            .map { preferences -> preferences[DeviceKeys.MEDIA_CACHE_SIZE_MB] ?: MediaCacheSizes.DEFAULT_MEDIA_MB }
 
-    suspend fun setMusicCacheSizeMb(sizeMb: Int) {
+    suspend fun setMediaCacheSizeMb(sizeMb: Int) {
         context.devicePreferencesDataStore.edit { preferences ->
-            preferences[DeviceKeys.MUSIC_CACHE_SIZE_MB] = sizeMb
+            preferences[DeviceKeys.MEDIA_CACHE_SIZE_MB] = sizeMb
         }
     }
 
-    /** The image cache size in MB; [MediaCacheSizes.ARTWORK_AUTOMATIC_MB] leaves it to Coil. */
     val artworkCacheSizeMb: Flow<Int> =
         context.devicePreferencesDataStore.data
-            .map { preferences -> preferences[DeviceKeys.ARTWORK_CACHE_SIZE_MB] ?: MediaCacheSizes.ARTWORK_AUTOMATIC_MB }
+            .map { preferences ->
+                preferences[DeviceKeys.ARTWORK_CACHE_SIZE_MB] ?: MediaCacheSizes.ARTWORK_AUTOMATIC_MB
+            }
 
     suspend fun setArtworkCacheSizeMb(sizeMb: Int) {
         context.devicePreferencesDataStore.edit { preferences ->
@@ -3085,8 +2667,6 @@ class PlayerPreferences(
         }
     }
 
-    // Show region picker globe icon in CategoriesScreen top bar
-    // Selected app icon — component suffix string saved on each icon switch so it can be backed up/restored
     val selectedAppIcon: Flow<String?> =
         context.devicePreferencesDataStore.data
             .map { preferences ->
@@ -3099,12 +2679,6 @@ class PlayerPreferences(
         }
     }
 
-    // Video title max lines in the player info section — 0 means no limit (Int.MAX_VALUE)
-
-    /**
-     * [playlistId]'s own sort order. A playlist never sorted falls back to the single order older
-     * versions kept for every playlist, so nothing changes until the person picks one.
-     */
     fun playlistSortOrder(playlistId: String): Flow<String> =
         context.playerPreferencesDataStore.data
             .map { preferences ->
@@ -3141,7 +2715,6 @@ class PlayerPreferences(
         }
     }
 
-    // Video card inline like/dislike action buttons (default off)
     val videoCardActionsEnabled: Flow<Boolean> =
         context.playerPreferencesDataStore.data
             .map { preferences -> preferences[Keys.VIDEO_CARD_ACTIONS_ENABLED] ?: false }
@@ -3152,7 +2725,6 @@ class PlayerPreferences(
         }
     }
 
-    // Video card inline mark-as-watched action controls (default off)
     val videoCardMarkWatchedEnabled: Flow<Boolean> =
         context.playerPreferencesDataStore.data
             .map { preferences -> preferences[Keys.VIDEO_CARD_MARK_WATCHED_ENABLED] ?: false }
@@ -3163,7 +2735,6 @@ class PlayerPreferences(
         }
     }
 
-    // Show app logo icon in home screen top bar (default on)
     val showAppLogoIcon: Flow<Boolean> =
         context.playerPreferencesDataStore.data
             .map { preferences -> preferences[Keys.SHOW_APP_LOGO_ICON] ?: true }
@@ -3174,7 +2745,6 @@ class PlayerPreferences(
         }
     }
 
-    // Screen-level view mode toggles
     val searchIsGridMode: Flow<Boolean> =
         context.playerPreferencesDataStore.data
             .map { preferences -> preferences[Keys.SEARCH_IS_GRID_MODE] ?: false }
@@ -3205,8 +2775,6 @@ class PlayerPreferences(
         }
     }
 
-    // Buffer Preferences - Optimized for fast startup while maintaining stability
-    // These are the defaults that balance quick playback start with smooth streaming
     val minBufferMs: Flow<Int> =
         context.devicePreferencesDataStore.data
             .map { preferences ->
@@ -3265,7 +2833,6 @@ class PlayerPreferences(
         context.devicePreferencesDataStore.edit { preferences ->
             preferences[DeviceKeys.BUFFER_PROFILE] = profile.name
 
-            // If not custom, apply the profile values immediately
             if (profile != BufferProfile.CUSTOM) {
                 preferences[DeviceKeys.MIN_BUFFER_MS] = profile.minBuffer
                 preferences[DeviceKeys.MAX_BUFFER_MS] = profile.maxBuffer
@@ -3288,11 +2855,13 @@ class PlayerPreferences(
         }
     }
 
-    /** How many downloads transfer at the same time. */
     val concurrentDownloads: Flow<Int> =
         context.devicePreferencesDataStore.data
             .map { preferences ->
-                (preferences[DeviceKeys.CONCURRENT_DOWNLOADS] ?: DEFAULT_CONCURRENT_DOWNLOADS).coerceIn(1, MAX_CONCURRENT_DOWNLOADS)
+                (preferences[DeviceKeys.CONCURRENT_DOWNLOADS] ?: DEFAULT_CONCURRENT_DOWNLOADS).coerceIn(
+                    1,
+                    MAX_CONCURRENT_DOWNLOADS
+                )
             }
 
     suspend fun setConcurrentDownloads(count: Int) {
@@ -3301,11 +2870,14 @@ class PlayerPreferences(
         }
     }
 
-    // Download dialog style (Classic full dialog vs new Compact dialog)
     val downloadDialogStyle: Flow<DownloadDialogStyle> =
         context.devicePreferencesDataStore.data
             .map { preferences ->
-                runCatching { DownloadDialogStyle.valueOf(preferences[DeviceKeys.DOWNLOAD_DIALOG_STYLE] ?: DownloadDialogStyle.FULL.name) }
+                runCatching {
+                    DownloadDialogStyle.valueOf(
+                        preferences[DeviceKeys.DOWNLOAD_DIALOG_STYLE] ?: DownloadDialogStyle.FULL.name
+                    )
+                }
                     .getOrDefault(DownloadDialogStyle.FULL)
             }
 
@@ -3315,7 +2887,6 @@ class PlayerPreferences(
         }
     }
 
-    /** Download opens the download menu; off, it downloads the default choice at once. */
     val downloadAskEveryTime: Flow<Boolean> =
         context.devicePreferencesDataStore.data
             .map { preferences -> preferences[DeviceKeys.DOWNLOAD_ASK_EVERY_TIME] ?: true }
@@ -3326,7 +2897,6 @@ class PlayerPreferences(
         }
     }
 
-    /** The space used and free, shown at the top of the Downloads page. */
     val downloadsStorageCard: Flow<Boolean> =
         context.devicePreferencesDataStore.data
             .map { preferences -> preferences[DeviceKeys.DOWNLOADS_STORAGE_CARD] ?: true }
@@ -3337,7 +2907,6 @@ class PlayerPreferences(
         }
     }
 
-    /** Delete in the Downloads menus asks first; a swipe never does, its snackbar can undo it. */
     val downloadsConfirmDelete: Flow<Boolean> =
         context.devicePreferencesDataStore.data
             .map { preferences -> preferences[DeviceKeys.DOWNLOADS_CONFIRM_DELETE] ?: true }
@@ -3348,11 +2917,14 @@ class PlayerPreferences(
         }
     }
 
-    /** Whether a video the viewer opens is also saved for offline, and on which networks. */
     val autoDownloadOpenedVideos: Flow<AutoDownloadMode> =
         context.devicePreferencesDataStore.data
             .map { preferences ->
-                runCatching { AutoDownloadMode.valueOf(preferences[DeviceKeys.AUTO_DOWNLOAD_OPENED_VIDEOS] ?: AutoDownloadMode.OFF.name) }
+                runCatching {
+                    AutoDownloadMode.valueOf(
+                        preferences[DeviceKeys.AUTO_DOWNLOAD_OPENED_VIDEOS] ?: AutoDownloadMode.OFF.name
+                    )
+                }
                     .getOrDefault(AutoDownloadMode.OFF)
             }.distinctUntilChanged()
 
@@ -3362,7 +2934,6 @@ class PlayerPreferences(
         }
     }
 
-    // Remembered last-used download options (used by the compact dialog to preselect).
     val lastDownloadType: Flow<String?> =
         context.devicePreferencesDataStore.data
             .map { it[DeviceKeys.LAST_DOWNLOAD_TYPE] }
@@ -3394,7 +2965,6 @@ class PlayerPreferences(
         }
     }
 
-    /** The subtitle language last chosen in the download dialog; blank for none, null if never chosen. */
     val lastDownloadSubtitleLanguage: Flow<String?> =
         context.devicePreferencesDataStore.data
             .map { it[DeviceKeys.LAST_DOWNLOAD_SUBTITLE_LANGUAGE] }
@@ -3403,7 +2973,6 @@ class PlayerPreferences(
         context.devicePreferencesDataStore.edit { it[DeviceKeys.LAST_DOWNLOAD_SUBTITLE_LANGUAGE] = languageTag }
     }
 
-    /** Whether downloads started without the dialog save a subtitle file in the preferred language. */
     val downloadSubtitleFile: Flow<Boolean> =
         context.devicePreferencesDataStore.data
             .map { it[DeviceKeys.DOWNLOAD_SUBTITLE_FILE] ?: false }
@@ -3448,23 +3017,21 @@ class PlayerPreferences(
         }
     }
 
-    /** The audio quality songs are downloaded in, apart from the streaming one; there is no Auto. */
-    val musicDownloadQuality: Flow<MusicAudioQuality> =
+    val audioDownloadQuality: Flow<AudioStreamQuality> =
         context.devicePreferencesDataStore.data
             .map { preferences ->
-                preferences[DeviceKeys.MUSIC_DOWNLOAD_QUALITY]
-                    ?.let(MusicAudioQuality::fromString)
-                    ?.takeIf { it != MusicAudioQuality.AUTO }
-                    ?: MusicAudioQuality.HIGH
+                preferences[DeviceKeys.AUDIO_DOWNLOAD_QUALITY]
+                    ?.let(AudioStreamQuality::fromString)
+                    ?.takeIf { it != AudioStreamQuality.AUTO }
+                    ?: AudioStreamQuality.HIGH
             }
 
-    suspend fun setMusicDownloadQuality(quality: MusicAudioQuality) {
+    suspend fun setAudioDownloadQuality(quality: AudioStreamQuality) {
         context.devicePreferencesDataStore.edit { preferences ->
-            preferences[DeviceKeys.MUSIC_DOWNLOAD_QUALITY] = quality.label
+            preferences[DeviceKeys.AUDIO_DOWNLOAD_QUALITY] = quality.label
         }
     }
 
-    /** What the one pass that tagged older downloads did, once it has run; null before. */
     val downloadRetagResult: Flow<RetagResult?> =
         context.devicePreferencesDataStore.data
             .map { preferences ->
@@ -3483,11 +3050,13 @@ class PlayerPreferences(
         }
     }
 
-    /** The folder video downloads go to; unset means the default folder. */
     val downloadLocation: Flow<DownloadLocation> =
         context.devicePreferencesDataStore.data
             .map { preferences ->
-                DownloadLocation(preferences[DeviceKeys.DOWNLOAD_LOCATION], preferences[DeviceKeys.DOWNLOAD_LOCATION_TREE])
+                DownloadLocation(
+                    preferences[DeviceKeys.DOWNLOAD_LOCATION],
+                    preferences[DeviceKeys.DOWNLOAD_LOCATION_TREE]
+                )
             }
 
     suspend fun setDownloadLocation(location: DownloadLocation) {
@@ -3497,19 +3066,7 @@ class PlayerPreferences(
         }
     }
 
-    /** The folder music downloads go to; unset means they follow [downloadLocation]. */
-    val musicDownloadLocation: Flow<DownloadLocation> =
-        context.devicePreferencesDataStore.data
-            .map { preferences ->
-                DownloadLocation(preferences[DeviceKeys.MUSIC_DOWNLOAD_LOCATION], preferences[DeviceKeys.MUSIC_DOWNLOAD_LOCATION_TREE])
-            }
 
-    suspend fun setMusicDownloadLocation(location: DownloadLocation) {
-        context.devicePreferencesDataStore.edit { preferences ->
-            preferences.putOrRemove(DeviceKeys.MUSIC_DOWNLOAD_LOCATION, location.path)
-            preferences.putOrRemove(DeviceKeys.MUSIC_DOWNLOAD_LOCATION_TREE, location.treeUri)
-        }
-    }
 
     private fun MutablePreferences.putOrRemove(
         key: Preferences.Key<String>,
@@ -3637,96 +3194,6 @@ class PlayerPreferences(
         }
     }
 
-    // Lyrics Provider ordering and enable/disable
-    val lyricsProviderOrder: Flow<String> =
-        context.playerPreferencesDataStore.data
-            .map { preferences ->
-                preferences[Keys.LYRICS_PROVIDER_ORDER] ?: ""
-            }
-
-    suspend fun setLyricsProviderOrder(order: String) {
-        context.playerPreferencesDataStore.edit { preferences ->
-            preferences[Keys.LYRICS_PROVIDER_ORDER] = order
-        }
-    }
-
-    private val providerEnabledKeys =
-        mapOf(
-            "BetterLyrics" to Keys.LYRICS_PROVIDER_ENABLED_BETTERLYRICS,
-            "SimpMusic" to Keys.LYRICS_PROVIDER_ENABLED_SIMPMUSIC,
-            "LyricsPlus" to Keys.LYRICS_PROVIDER_ENABLED_LYRICSPLUS,
-            "LrcLib" to Keys.LYRICS_PROVIDER_ENABLED_LRCLIB,
-            "YouTube" to Keys.LYRICS_PROVIDER_ENABLED_YOUTUBE,
-            "KuGou" to Keys.LYRICS_PROVIDER_ENABLED_KUGOU,
-            "Paxsenix" to Keys.LYRICS_PROVIDER_ENABLED_PAXSENIX,
-            "YouTubeSubtitle" to Keys.LYRICS_PROVIDER_ENABLED_YOUTUBESUBTITLE,
-            "LrcRed" to Keys.LYRICS_PROVIDER_ENABLED_LRCRED,
-            "Unison" to Keys.LYRICS_PROVIDER_ENABLED_UNISON,
-        )
-
-    fun isLyricsProviderEnabled(providerName: String): Flow<Boolean> =
-        context.playerPreferencesDataStore.data.map { preferences ->
-            val key = providerEnabledKeys[providerName] ?: return@map true
-            preferences[key] ?: true
-        }
-
-    suspend fun setLyricsProviderEnabled(
-        providerName: String,
-        enabled: Boolean,
-    ) {
-        val key = providerEnabledKeys[providerName] ?: return
-        context.playerPreferencesDataStore.edit { preferences ->
-            preferences[key] = enabled
-        }
-    }
-
-    fun allLyricsProviderEnabledStates(): Flow<Map<String, Boolean>> =
-        context.playerPreferencesDataStore.data.map { preferences ->
-            providerEnabledKeys.mapValues { (_, key) -> preferences[key] ?: true }
-        }
-
-    val lyricsTextAlign: Flow<String> =
-        context.playerPreferencesDataStore.data
-            .map { preferences ->
-                preferences[Keys.LYRICS_TEXT_ALIGN] ?: LYRICS_ALIGN_CENTER
-            }
-
-    suspend fun setLyricsTextAlign(align: String) {
-        context.playerPreferencesDataStore.edit { preferences ->
-            preferences[Keys.LYRICS_TEXT_ALIGN] = align
-        }
-    }
-
-    val lyricsShowTranslation: Flow<Boolean> =
-        context.playerPreferencesDataStore.data.map { it[Keys.LYRICS_SHOW_TRANSLATION] ?: true }
-
-    suspend fun setLyricsShowTranslation(show: Boolean) {
-        context.playerPreferencesDataStore.edit { it[Keys.LYRICS_SHOW_TRANSLATION] = show }
-    }
-
-    val lyricsShowRomanization: Flow<Boolean> =
-        context.playerPreferencesDataStore.data.map { it[Keys.LYRICS_SHOW_ROMANIZATION] ?: true }
-
-    suspend fun setLyricsShowRomanization(show: Boolean) {
-        context.playerPreferencesDataStore.edit { it[Keys.LYRICS_SHOW_ROMANIZATION] = show }
-    }
-
-    /** Whether lyrics in other scripts get a Latin-script line made on the device when the source has none. */
-    val lyricsAutoRomanize: Flow<Boolean> =
-        context.playerPreferencesDataStore.data.map { it[Keys.LYRICS_AUTO_ROMANIZE] ?: false }
-
-    suspend fun setLyricsAutoRomanize(enabled: Boolean) {
-        context.playerPreferencesDataStore.edit { it[Keys.LYRICS_AUTO_ROMANIZE] = enabled }
-    }
-
-    val lyricsKeepScreenOn: Flow<Boolean> =
-        context.playerPreferencesDataStore.data.map { it[Keys.LYRICS_KEEP_SCREEN_ON] ?: false }
-
-    suspend fun setLyricsKeepScreenOn(enabled: Boolean) {
-        context.playerPreferencesDataStore.edit { it[Keys.LYRICS_KEEP_SCREEN_ON] = enabled }
-    }
-
-    // ========== MINI PLAYER PREFERENCES ==========
 
     val miniPlayerScale: Flow<Float> =
         context.playerPreferencesDataStore.data
@@ -3752,30 +3219,6 @@ class PlayerPreferences(
         }
     }
 
-    val showRestoredMusicMiniPlayer: Flow<Boolean> =
-        context.playerPreferencesDataStore.data
-            .map { preferences ->
-                preferences[Keys.SHOW_RESTORED_MUSIC_MINI_PLAYER] ?: true
-            }
-
-    suspend fun setShowRestoredMusicMiniPlayer(enabled: Boolean) {
-        context.playerPreferencesDataStore.edit { preferences ->
-            preferences[Keys.SHOW_RESTORED_MUSIC_MINI_PLAYER] = enabled
-        }
-    }
-
-    /** Whether starting a song opens the full player; off keeps it in the mini player. */
-    val openMusicPlayerOnPlay: Flow<Boolean> =
-        context.playerPreferencesDataStore.data
-            .map { preferences ->
-                preferences[Keys.OPEN_MUSIC_PLAYER_ON_PLAY] ?: false
-            }
-
-    suspend fun setOpenMusicPlayerOnPlay(enabled: Boolean) {
-        context.playerPreferencesDataStore.edit { preferences ->
-            preferences[Keys.OPEN_MUSIC_PLAYER_ON_PLAY] = enabled
-        }
-    }
 
     val playDuringCalls: Flow<Boolean> =
         context.devicePreferencesDataStore.data
@@ -3813,7 +3256,6 @@ class PlayerPreferences(
         }
     }
 
-    /** What swiping the music bar or the background video bar to the left does. */
     val miniBarSwipeLeftAction: Flow<MiniBarSwipeAction> =
         context.devicePreferencesDataStore.data
             .map { preferences -> MiniBarSwipeAction.fromString(preferences[DeviceKeys.MINI_BAR_SWIPE_LEFT_ACTION]) }
@@ -3824,7 +3266,6 @@ class PlayerPreferences(
         }
     }
 
-    /** What swiping the music bar or the background video bar to the right does. */
     val miniBarSwipeRightAction: Flow<MiniBarSwipeAction> =
         context.devicePreferencesDataStore.data
             .map { preferences -> MiniBarSwipeAction.fromString(preferences[DeviceKeys.MINI_BAR_SWIPE_RIGHT_ACTION]) }
@@ -3835,10 +3276,14 @@ class PlayerPreferences(
         }
     }
 
-    /** What swiping a song in the music queue to the left does. */
     val queueSwipeLeftAction: Flow<QueueSwipeAction> =
         context.devicePreferencesDataStore.data
-            .map { preferences -> QueueSwipeAction.fromString(preferences[DeviceKeys.QUEUE_SWIPE_LEFT_ACTION], QueueSwipeAction.PLAY_NEXT) }
+            .map { preferences ->
+                QueueSwipeAction.fromString(
+                    preferences[DeviceKeys.QUEUE_SWIPE_LEFT_ACTION],
+                    QueueSwipeAction.PLAY_NEXT
+                )
+            }
 
     suspend fun setQueueSwipeLeftAction(action: QueueSwipeAction) {
         context.devicePreferencesDataStore.edit { preferences ->
@@ -3846,10 +3291,14 @@ class PlayerPreferences(
         }
     }
 
-    /** What swiping a song in the music queue to the right does. */
     val queueSwipeRightAction: Flow<QueueSwipeAction> =
         context.devicePreferencesDataStore.data
-            .map { preferences -> QueueSwipeAction.fromString(preferences[DeviceKeys.QUEUE_SWIPE_RIGHT_ACTION], QueueSwipeAction.REMOVE) }
+            .map { preferences ->
+                QueueSwipeAction.fromString(
+                    preferences[DeviceKeys.QUEUE_SWIPE_RIGHT_ACTION],
+                    QueueSwipeAction.REMOVE
+                )
+            }
 
     suspend fun setQueueSwipeRightAction(action: QueueSwipeAction) {
         context.devicePreferencesDataStore.edit { preferences ->
@@ -3857,68 +3306,55 @@ class PlayerPreferences(
         }
     }
 
-    // DEEP FLOW (INCOGNITO / NO-ENGINE) MODE
-
-    val deepFlowActive: Flow<Boolean> =
+    val deepChorActive: Flow<Boolean> =
         context.playerPreferencesDataStore.data
-            .map { preferences -> preferences[Keys.DEEP_FLOW_ACTIVE] ?: false }
+            .map { preferences -> preferences[Keys.DEEP_CHOR_ACTIVE] ?: false }
 
-    val deepFlowActivatedAt: Flow<Long> =
+    val deepChorActivatedAt: Flow<Long> =
         context.playerPreferencesDataStore.data
-            .map { preferences -> preferences[Keys.DEEP_FLOW_ACTIVATED_AT] ?: 0L }
+            .map { preferences -> preferences[Keys.DEEP_CHOR_ACTIVATED_AT] ?: 0L }
 
-    val deepFlowExpireHours: Flow<Int> =
+    val deepChorExpireHours: Flow<Int> =
         context.playerPreferencesDataStore.data
-            .map { preferences -> preferences[Keys.DEEP_FLOW_EXPIRE_HOURS] ?: 4 }
+            .map { preferences -> preferences[Keys.DEEP_CHOR_EXPIRE_HOURS] ?: 4 }
 
-    val deepFlowSaveToHistory: Flow<Boolean> =
+    val deepChorSaveToHistory: Flow<Boolean> =
         context.playerPreferencesDataStore.data
-            .map { preferences -> preferences[Keys.DEEP_FLOW_SAVE_HISTORY] ?: false }
+            .map { preferences -> preferences[Keys.DEEP_CHOR_SAVE_HISTORY] ?: false }
 
     suspend fun setDeepChorplaySaveToHistory(enabled: Boolean) {
         context.playerPreferencesDataStore.edit { preferences ->
-            preferences[Keys.DEEP_FLOW_SAVE_HISTORY] = enabled
+            preferences[Keys.DEEP_CHOR_SAVE_HISTORY] = enabled
         }
     }
 
     suspend fun isDeepChorplaySaveToHistoryEnabled(): Boolean =
-        context.playerPreferencesDataStore.data.first()[Keys.DEEP_FLOW_SAVE_HISTORY] ?: false
+        context.playerPreferencesDataStore.data.first()[Keys.DEEP_CHOR_SAVE_HISTORY] ?: false
 
-    val deepFlowScrobble: Flow<Boolean> =
+    val deepChorOnSearch: Flow<Boolean> =
         context.playerPreferencesDataStore.data
-            .map { preferences -> preferences[Keys.DEEP_FLOW_SCROBBLE] ?: false }
-
-    suspend fun setDeepChorplayScrobble(enabled: Boolean) {
-        context.playerPreferencesDataStore.edit { preferences ->
-            preferences[Keys.DEEP_FLOW_SCROBBLE] = enabled
-        }
-    }
-
-    /** Off by default: the search screen shows its Deep Chorplay switch only once this is turned on. */
-    val deepFlowOnSearch: Flow<Boolean> =
-        context.playerPreferencesDataStore.data
-            .map { preferences -> preferences[Keys.DEEP_FLOW_ON_SEARCH] ?: false }
+            .map { preferences -> preferences[Keys.DEEP_CHOR_ON_SEARCH] ?: false }
 
     suspend fun setDeepChorplayOnSearch(enabled: Boolean) {
         context.playerPreferencesDataStore.edit { preferences ->
-            preferences[Keys.DEEP_FLOW_ON_SEARCH] = enabled
+            preferences[Keys.DEEP_CHOR_ON_SEARCH] = enabled
         }
     }
 
     suspend fun setDeepChorplayActive(enabled: Boolean) {
         context.playerPreferencesDataStore.edit { preferences ->
-            preferences[Keys.DEEP_FLOW_ACTIVE] = enabled
+            preferences[Keys.DEEP_CHOR_ACTIVE] = enabled
             if (enabled) {
-                preferences[Keys.DEEP_FLOW_ACTIVATED_AT] = System.currentTimeMillis()
+                preferences[Keys.DEEP_CHOR_ACTIVATED_AT] = System.currentTimeMillis()
             } else {
-                preferences[Keys.DEEP_FLOW_ACTIVATED_AT] = 0L
+                preferences[Keys.DEEP_CHOR_ACTIVATED_AT] = 0L
             }
         }
     }
 
     suspend fun setDeepChorplayExpireHours(hours: Int) {
         context.playerPreferencesDataStore.edit { preferences ->
-            preferences[Keys.DEEP_FLOW_EXPIRE_HOURS] = hours
+            preferences[Keys.DEEP_CHOR_EXPIRE_HOURS] = hours
         }
     }
 
@@ -3969,17 +3405,16 @@ class PlayerPreferences(
         }
     }
 
-    /** Whether a watch may be written to history: paused history and Deep Chorplay both stop it. */
     suspend fun isWatchHistorySavingBlocked(): Boolean =
         watchHistoryPaused.first() || (isDeepChorplayCurrentlyActive() && !isDeepChorplaySaveToHistoryEnabled())
 
     suspend fun isDeepChorplayCurrentlyActive(): Boolean {
         val prefs = context.playerPreferencesDataStore.data.first()
-        val active = prefs[Keys.DEEP_FLOW_ACTIVE] ?: false
+        val active = prefs[Keys.DEEP_CHOR_ACTIVE] ?: false
         if (!active) return false
-        val activatedAt = prefs[Keys.DEEP_FLOW_ACTIVATED_AT] ?: 0L
-        val expireHours = prefs[Keys.DEEP_FLOW_EXPIRE_HOURS] ?: 4
-        if (expireHours == DEEP_FLOW_NEVER_EXPIRES_HOURS) return true
+        val activatedAt = prefs[Keys.DEEP_CHOR_ACTIVATED_AT] ?: 0L
+        val expireHours = prefs[Keys.DEEP_CHOR_EXPIRE_HOURS] ?: 4
+        if (expireHours == DEEP_CHOR_NEVER_EXPIRES_HOURS) return true
         val elapsedHours = (System.currentTimeMillis() - activatedAt) / 3_600_000.0
         val stillActive = elapsedHours < expireHours
         if (!stillActive) {
@@ -3988,7 +3423,6 @@ class PlayerPreferences(
         return stillActive
     }
 
-    /** Without [includeDevice], only this profile's own settings, as a new profile copies them. */
     suspend fun getExportData(includeDevice: Boolean = true): SettingsBackup {
         val device =
             if (includeDevice) {
@@ -4031,18 +3465,20 @@ class PlayerPreferences(
         val (deviceBackup, profileBackup) = backup.splitBy { it in DeviceKeys.NAMES }
         context.playerPreferencesDataStore.edit { prefs -> prefs.restore(profileBackup) }
         context.devicePreferencesDataStore.edit { prefs -> prefs.restore(deviceBackup) }
-        // The UI language belongs to the language manager; written here alone it would never show,
-        // while YouTube's language follows what is shown (#1277).
+
         backup.strings[DeviceKeys.APP_LANGUAGE.name]
             ?.takeIf { AppLanguageManager.normalizeLanguageTag(it) != AppLanguageManager.appliedLanguage.value }
-            ?.let { tag -> withContext(Dispatchers.Main.immediate) { AppLanguageManager.applyLanguageTag(context, tag) } }
+            ?.let { tag ->
+                withContext(Dispatchers.Main.immediate) {
+                    AppLanguageManager.applyLanguageTag(
+                        context,
+                        tag
+                    )
+                }
+            }
     }
 }
 
-/**
- * The settings a backup carries. Device keys were copied out of the profile store, not moved, so the profile store's
- * own copies of them are stale and only the device store's count.
- */
 internal fun exportedPreferences(
     profile: Map<Preferences.Key<*>, Any>,
     device: Map<Preferences.Key<*>, Any>,
@@ -4058,14 +3494,14 @@ private fun SettingsBackup.splitBy(predicate: (String) -> Boolean): Pair<Setting
         longs.filterKeys(predicate),
         stringSets.filterKeys(predicate),
     ) to
-        SettingsBackup(
-            strings.filterKeys { !predicate(it) },
-            booleans.filterKeys { !predicate(it) },
-            ints.filterKeys { !predicate(it) },
-            floats.filterKeys { !predicate(it) },
-            longs.filterKeys { !predicate(it) },
-            stringSets.filterKeys { !predicate(it) },
-        )
+            SettingsBackup(
+                strings.filterKeys { !predicate(it) },
+                booleans.filterKeys { !predicate(it) },
+                ints.filterKeys { !predicate(it) },
+                floats.filterKeys { !predicate(it) },
+                longs.filterKeys { !predicate(it) },
+                stringSets.filterKeys { !predicate(it) },
+            )
 
 private fun MutablePreferences.restore(backup: SettingsBackup) {
     backup.strings.forEach { (k, v) ->
@@ -4080,7 +3516,6 @@ private fun MutablePreferences.restore(backup: SettingsBackup) {
     backup.stringSets.forEach { (k, v) -> this[stringSetPreferencesKey(k)] = v }
 }
 
-/** Action to take when a SponsorBlock segment is encountered. */
 enum class SponsorBlockAction(
     val displayName: String,
 ) {
@@ -4102,16 +3537,12 @@ enum class BufferProfile(
     val playbackBuffer: Int,
     val rebufferBuffer: Int,
 ) {
-    // Fast Start: Prioritize quick playback start
     AGGRESSIVE("Fast Start", 5_000, 30_000, 500, 2_500),
 
-    // Balanced: Good default for most connections
     STABLE("Balanced", 20_000, 50_000, 2_500, 5_000),
 
-    // Data Saver: Minimize data usage with smaller buffers
     DATASAVER("Data Saver", 12_000, 25_000, 1_500, 3_000),
 
-    // Custom: User-defined values
     CUSTOM("Custom", -1, -1, -1, -1),
     ;
 
@@ -4131,7 +3562,7 @@ enum class VideoQuality(
     Q_720P("720p", 720),
     Q_1080P("1080p", 1080),
     Q_1440P("1440p", 1440),
-    Q_2160P("2160p", 2160), // 4K
+    Q_2160P("2160p", 2160),
     AUTO("Auto", 0),
     ;
 
@@ -4160,7 +3591,7 @@ enum class VideoCodec(
     }
 }
 
-enum class MusicAudioQuality(
+enum class AudioStreamQuality(
     val label: String,
 ) {
     AUTO("Auto"),
@@ -4169,8 +3600,7 @@ enum class MusicAudioQuality(
     LOW("Low"),
     ;
 
-    /** The quality to actually stream: Auto picks High on Wi-Fi and Medium on mobile data, like video does. */
-    fun resolve(onWifi: Boolean): MusicAudioQuality =
+    fun resolve(onWifi: Boolean): AudioStreamQuality =
         when {
             this != AUTO -> this
             onWifi -> HIGH
@@ -4178,7 +3608,7 @@ enum class MusicAudioQuality(
         }
 
     companion object {
-        fun fromString(label: String): MusicAudioQuality = values().find { it.label == label } ?: AUTO
+        fun fromString(label: String): AudioStreamQuality = values().find { it.label == label } ?: AUTO
     }
 }
 
@@ -4196,42 +3626,21 @@ enum class DownloadDialogStyle {
     COMPACT,
 }
 
-/** When an opened video is downloaded on its own: never, only on Wi-Fi, or on any network. */
 enum class AutoDownloadMode {
     OFF,
     WIFI,
     ALWAYS,
 }
 
-/** Control colors for the music player when artwork colors are off. */
-enum class MusicPlainControlColors {
-    MONOCHROME,
-    APP_THEME,
-}
-
-enum class MusicPlayerBackgroundStyle {
-    BLUR_GRADIENT,
-    BLUR,
-    GRADIENT,
-    IMMERSIVE,
-    DEFAULT,
-}
-
-/** Which side of the fullscreen player a vertical swipe changes the playback speed on, in place of brightness or volume. */
 enum class SpeedSwipeSide {
     OFF,
     LEFT,
     RIGHT,
 }
 
-/** How much one step of a speed swipe changes the speed by. */
 val SPEED_SWIPE_STEPS = listOf(0.05f, 0.1f, 0.25f)
 const val DEFAULT_SPEED_SWIPE_STEP = 0.1f
 
-/**
- * How much of the player's width each double-tap seek side takes. [reachesEdges] lets taps count right
- * up to the screen edges instead of leaving them to the back gesture.
- */
 enum class DoubleTapSeekZone(
     val sideFraction: Float,
     val reachesEdges: Boolean = false,
@@ -4241,7 +3650,6 @@ enum class DoubleTapSeekZone(
     EDGE_TO_EDGE(1f / 3f, reachesEdges = true),
 }
 
-/** A mini bar swipe. The music bar only acts on [CLOSE], [NEXT] and [PREVIOUS]; it closes on the rest. */
 enum class MiniBarSwipeAction {
     CLOSE,
     NEXT,
@@ -4253,14 +3661,11 @@ enum class MiniBarSwipeAction {
     REMOVE_FROM_QUEUE,
     ;
 
-    val appliesToMusic: Boolean get() = this == CLOSE || this == NEXT || this == PREVIOUS
-
     companion object {
         fun fromString(value: String?): MiniBarSwipeAction = entries.firstOrNull { it.name == value } ?: CLOSE
     }
 }
 
-/** A swipe on a song in the music queue. */
 enum class QueueSwipeAction {
     PLAY_NEXT,
     MOVE_TO_END,
@@ -4275,7 +3680,6 @@ enum class QueueSwipeAction {
     }
 }
 
-/** How the volume and brightness read-outs are drawn mid-gesture. */
 enum class GestureOverlayStyle {
     CIRCULAR,
     VERTICAL,
@@ -4296,7 +3700,6 @@ enum class SeekbarPaddingMode {
     CUSTOM,
 }
 
-/** What a scrub shows above the bar: a filmstrip around the target, or the single frame under it. */
 enum class ScrubPreviewStyle {
     STRIP,
     FRAME,
@@ -4329,7 +3732,7 @@ internal fun resolveSeekbarHorizontalPaddingDp(
 
         SeekbarPaddingMode.SPACED,
         SeekbarPaddingMode.DEFAULT,
-        -> defaultPaddingDp
+            -> defaultPaddingDp
 
         SeekbarPaddingMode.CUSTOM -> customPaddingDp.coerceIn(0, maxPaddingDp)
     }
@@ -4339,10 +3742,6 @@ enum class HomeViewMode {
     LIST,
 }
 
-/**
- * How many cards the home grid puts on a row. [AUTO] keeps the responsive breakpoints; the rest
- * pin a count regardless of screen width. Only meaningful in [HomeViewMode.GRID].
- */
 enum class HomeFeedColumns(
     val fixedCount: Int?,
 ) {
@@ -4358,16 +3757,8 @@ enum class PlayerRelatedCardStyle {
 }
 
 enum class SharedLinkAction {
-    /** Play the video straight away, replacing what plays. */
     PLAY,
-
-    /** Offer the video's menu while something plays, so the queue is not lost; otherwise play it. */
     ASK_WHILE_PLAYING,
-
-    /** Always offer the video's menu. */
     ALWAYS_ASK,
 }
 
-const val LYRICS_ALIGN_LEFT = "left"
-const val LYRICS_ALIGN_CENTER = "center"
-const val LYRICS_ALIGN_RIGHT = "right"

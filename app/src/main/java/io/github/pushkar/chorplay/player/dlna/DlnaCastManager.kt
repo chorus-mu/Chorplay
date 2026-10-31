@@ -749,7 +749,7 @@ object DlnaCastManager {
             context.applicationContext
                 .getSystemService(Context.WIFI_SERVICE) as? WifiManager ?: return
         multicastLock =
-            wifiManager.createMulticastLock("flow_dlna_discovery").also {
+            wifiManager.createMulticastLock("chorplay_dlna_discovery").also {
                 it.setReferenceCounted(true)
                 it.acquire()
             }

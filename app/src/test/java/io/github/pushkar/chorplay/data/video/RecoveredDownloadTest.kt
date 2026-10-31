@@ -3,23 +3,18 @@ package io.github.pushkar.chorplay.data.video
 import com.google.common.truth.Truth.assertThat
 import io.github.pushkar.chorplay.data.local.entity.DownloadFileType
 import io.github.pushkar.chorplay.data.local.entity.DownloadItemStatus
-import io.github.pushkar.chorplay.data.video.downloader.request.StoredArtist
 import io.github.pushkar.chorplay.data.video.downloader.tags.DownloadKind
 import io.github.pushkar.chorplay.data.video.downloader.tags.DownloadTags
 import org.junit.Test
 
 class RecoveredDownloadTest {
-    private val song = FoundFile("/Music/Flow/Artist - Album/05 - Song.m4a", "05 - Song.m4a", 4_000, 215_000, 42)
+    private val song = FoundFile("/Movies/Chorplay/Artist - Album/05 - Song.m4a", "05 - Song.m4a", 4_000, 215_000, 42)
     private val tags =
         DownloadTags(
-            kind = DownloadKind.MUSIC,
+            kind = DownloadKind.VIDEO,
             videoId = "kcxK1Tnwy5M",
             title = "Song",
-            artists = listOf("Daft Punk"),
             channelId = "UC1",
-            album = "Alive 2007",
-            albumId = "MPREb_1",
-            trackNumber = 5,
             viewCount = 10,
             thumbnailUrl = "https://example.com/cover.jpg",
         )
@@ -31,12 +26,9 @@ class RecoveredDownloadTest {
         assertThat(download.videoId).isEqualTo("kcxK1Tnwy5M")
         assertThat(download.title).isEqualTo("Song")
         assertThat(download.uploader).isEqualTo("Daft Punk")
-        assertThat(download.kind).isEqualTo(DownloadKind.MUSIC)
-        assertThat(download.album).isEqualTo("Alive 2007")
-        assertThat(download.trackNumber).isEqualTo(5)
+        assertThat(download.kind).isEqualTo(DownloadKind.VIDEO)
         assertThat(download.duration).isEqualTo(215)
         assertThat(download.thumbnailPath).isEqualTo("/covers/k.jpg")
-        assertThat(StoredArtist.decode(download.artistsJson).map { it.name }).containsExactly("Daft Punk")
         assertThat(item.videoId).isEqualTo("kcxK1Tnwy5M")
         assertThat(item.fileType).isEqualTo(DownloadFileType.AUDIO)
         assertThat(item.mimeType).isEqualTo("audio/mp4")
@@ -45,7 +37,7 @@ class RecoveredDownloadTest {
 
     @Test
     fun `an untagged file gets a stable id from its path and its own title`() {
-        val file = FoundFile("/Download/Flow/clip.webm", "clip.webm", 1, 0, 0)
+        val file = FoundFile("/Download/Chorplay/clip.webm", "clip.webm", 1, 0, 0)
 
         val (download, item) = RecoveredDownload.rows(file, null, title = null, artist = null, coverPath = null)
 

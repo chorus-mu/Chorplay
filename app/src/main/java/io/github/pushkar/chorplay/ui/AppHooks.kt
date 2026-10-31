@@ -43,7 +43,7 @@ fun HandlePendingRoute(
         pendingRoute?.let { route ->
             navController.awaitGraph()
             onBeforeNavigate()
-            val tab = flowTabForRoute(route, downloadsTab())
+            val tab = chorTabForRoute(route, downloadsTab())
             when {
                 tab != null -> navController.navigateToTab(tab, startRoute)
                 else -> navController.openPage(route)

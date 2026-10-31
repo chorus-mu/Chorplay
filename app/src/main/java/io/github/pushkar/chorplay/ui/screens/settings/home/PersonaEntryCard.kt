@@ -21,18 +21,17 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import io.github.pushkar.chorplay.R
-import io.github.pushkar.chorplay.data.recommendation.FlowPersona
+import io.github.pushkar.chorplay.data.recommendation.ChorPersona
 import io.github.pushkar.chorplay.ui.screens.settings.taste.PersonaEmblem
 
 private val CardPadding = 16.dp
 private val CardSpacing = 16.dp
 private val EmblemSize = 56.dp
 
-/** The way into Your taste: the persona the engine has settled on, one tap from the full picture. */
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 internal fun PersonaEntryCard(
-    persona: FlowPersona?,
+    persona: ChorPersona?,
     selected: Boolean,
     onOpen: () -> Unit,
     modifier: Modifier = Modifier,
@@ -67,7 +66,8 @@ internal fun PersonaEntryCard(
                     overflow = TextOverflow.Ellipsis,
                 )
                 Text(
-                    text = persona?.let { stringResource(it.descriptionRes) } ?: stringResource(R.string.taste_card_hint),
+                    text = persona?.let { stringResource(it.descriptionRes) }
+                        ?: stringResource(R.string.taste_card_hint),
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                     maxLines = 2,

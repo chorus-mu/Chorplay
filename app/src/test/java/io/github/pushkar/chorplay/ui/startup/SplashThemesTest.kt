@@ -16,12 +16,12 @@ class SplashThemesTest {
 
     @Test
     fun `every alias with its own art gets a splash of its own on every tone`() {
-        val sharesDefault = setOf(".IconFlowRed", ".IconFlowLight")
+        val sharesDefault = setOf(".IconChorplayRed", ".IconChorplayLight")
         val fallback =
             mapOf(
-                SplashTone.LIGHT to R.style.Theme_Flow_Starting_Light,
-                SplashTone.DARK to R.style.Theme_Flow_Starting_Dark,
-                SplashTone.BLACK to R.style.Theme_Flow_Starting_Black,
+                SplashTone.LIGHT to R.style.Theme_Chorplay_Starting_Light,
+                SplashTone.DARK to R.style.Theme_Chorplay_Starting_Dark,
+                SplashTone.BLACK to R.style.Theme_Chorplay_Starting_Black,
             )
         val missing =
             (AppIcons.ALL_SUFFIXES - sharesDefault).flatMap { suffix ->
@@ -36,21 +36,21 @@ class SplashThemesTest {
 
     @Test
     fun `aliases with their own art get their own splash`() {
-        assertThat(splashThemeFor(".IconAmoled", SplashTone.BLACK)).isEqualTo(R.style.Theme_Flow_Starting_Black_Amoled)
-        assertThat(splashThemeFor(".IconFlowRed", SplashTone.DARK)).isEqualTo(R.style.Theme_Flow_Starting_Dark)
+        assertThat(splashThemeFor(".IconAmoled", SplashTone.BLACK)).isEqualTo(R.style.Theme_Chorplay_Starting_Black_Amoled)
+        assertThat(splashThemeFor(".IconChorplayRed", SplashTone.DARK)).isEqualTo(R.style.Theme_Chorplay_Starting_Dark)
     }
 
     @Test
     fun `an expressive icon opens on its own art in every tone`() {
         assertThat(
             splashThemeFor(".IconExpressiveScallop", SplashTone.LIGHT),
-        ).isEqualTo(R.style.Theme_Flow_Starting_Light_Expressive_Scallop)
-        assertThat(splashThemeFor(".IconExpressivePill", SplashTone.BLACK)).isEqualTo(R.style.Theme_Flow_Starting_Black_Expressive_Pill)
+        ).isEqualTo(R.style.Theme_Chorplay_Starting_Light_Expressive_Scallop)
+        assertThat(splashThemeFor(".IconExpressivePill", SplashTone.BLACK)).isEqualTo(R.style.Theme_Chorplay_Starting_Black_Expressive_Pill)
     }
 
     @Test
     fun `the white ghost outline never lands on a light splash`() {
-        assertThat(splashThemeFor(".IconGhost", SplashTone.LIGHT)).isEqualTo(R.style.Theme_Flow_Starting_Light)
+        assertThat(splashThemeFor(".IconGhost", SplashTone.LIGHT)).isEqualTo(R.style.Theme_Chorplay_Starting_Light)
     }
 
     @Test

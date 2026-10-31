@@ -12,9 +12,6 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import io.github.pushkar.chorplay.R
 import io.github.pushkar.chorplay.data.model.Video
-import io.github.pushkar.chorplay.data.music.DownloadedTrack
-import io.github.pushkar.chorplay.data.music.model.toMusicTrack
-import io.github.pushkar.chorplay.data.music.model.toVideo
 import io.github.pushkar.chorplay.data.video.DownloadedVideo
 import io.github.pushkar.chorplay.ui.components.layout.navigation.ChorplayTab
 import io.github.pushkar.chorplay.ui.components.shared.MediaKind
@@ -22,8 +19,6 @@ import io.github.pushkar.chorplay.ui.screens.channel.ChannelScreen
 import io.github.pushkar.chorplay.ui.screens.history.HistoryScreen
 import io.github.pushkar.chorplay.ui.screens.home.HomeViewModel
 import io.github.pushkar.chorplay.ui.screens.library.DownloadsScreen
-import io.github.pushkar.chorplay.ui.screens.music.MusicPlayerViewModel
-import io.github.pushkar.chorplay.ui.screens.music.MusicViewModel
 import io.github.pushkar.chorplay.ui.screens.playlists.PlaylistDetailScreen
 import io.github.pushkar.chorplay.ui.screens.playlists.PlaylistsScreen
 import io.github.pushkar.chorplay.ui.screens.search.SearchViewModel
@@ -34,15 +29,12 @@ import io.github.pushkar.chorplay.ui.tv.screens.TvLibraryScreen
 import io.github.pushkar.chorplay.ui.tv.screens.TvSearchScreen
 import io.github.pushkar.chorplay.ui.tv.screens.TvSubscriptionsScreen
 
-/** Top-level TV navigation graph plus detail routes (channel, …). */
 @androidx.annotation.OptIn(UnstableApi::class)
 @Composable
 fun TvNavHost(
     navController: NavHostController,
     startRoute: String,
     homeViewModel: HomeViewModel,
-    musicViewModel: MusicViewModel,
-    musicPlayerViewModel: MusicPlayerViewModel,
     subscriptionsViewModel: SubscriptionsViewModel,
     searchViewModel: SearchViewModel,
     onPlayVideo: (Video) -> Unit,
@@ -57,10 +49,6 @@ fun TvNavHost(
     val downloadsTitle = stringResource(R.string.library_downloads_label)
     val playDownloadedVideos: (List<DownloadedVideo>, Int) -> Unit = { videos, index ->
         onPlayPlaylist(videos.map { it.video }, index, downloadsTitle, false)
-    }
-    val playDownloadedMusic: (List<DownloadedTrack>, Int) -> Unit = { tracks, index ->
-        val queue = tracks.map { it.track }
-        musicPlayerViewModel.loadAndPlayTrack(queue[index], queue, downloadsTitle)
     }
 
     NavHost(
@@ -91,27 +79,17 @@ fun TvNavHost(
                 onVideoClick = onPlayVideo,
                 onChannelClick = { channel -> openChannel(channel.url.ifBlank { channel.id }) },
                 onPlaylistClick = { playlist -> navController.navigate(TvRoutes.playlist(playlist.id)) },
-                onPlayTrack = musicPlayerViewModel::loadAndPlayTrack,
-                onOpenAlbum = { navController.navigate(TvRoutes.musicCollection(it)) },
-                onOpenArtist = { navController.navigate(TvRoutes.musicArtist(it)) },
-                onOpenChannel = { openChannel(it) },
-                onOpenMusicPlaylist = { navController.navigate(TvRoutes.musicCollection(it)) },
-                onOpenMood = { navController.navigate(TvRoutes.musicBrowse(it)) },
-                onOpenMoods = { navController.navigate(TvRoutes.MOODS) },
                 modifier = Modifier.fillMaxSize(),
             )
         }
         composable(ChorplayTab.Library.route) {
             TvLibraryScreen(
                 onVideoClick = onPlayVideo,
-                onMusicClick = musicPlayerViewModel::loadAndPlayTrack,
                 onOpenHistory = { navController.navigate(TvRoutes.HISTORY) },
                 onOpenPlaylists = { kind -> navController.navigate(TvRoutes.playlists(kind)) },
                 onOpenPlaylist = { navController.navigate(TvRoutes.playlist(it)) },
-                onOpenMusicPlaylist = { navController.navigate(TvRoutes.musicCollection(it)) },
                 onOpenDownloads = { navController.navigate(TvRoutes.DOWNLOADS) },
                 onDownloadedVideoClick = playDownloadedVideos,
-                onDownloadedMusicClick = playDownloadedMusic,
                 modifier = Modifier.fillMaxSize(),
             )
         }
@@ -120,10 +98,8 @@ fun TvNavHost(
                 DownloadsScreen(
                     onBackClick = { navController.popBackStack() },
                     onVideoClick = playDownloadedVideos,
-                    onMusicClick = playDownloadedMusic,
                     onOpenCollection = { summary ->
-                        val id = summary.collection.id
-                        navController.navigate(if (summary.collection.kind.isMusic) TvRoutes.musicCollection(id) else TvRoutes.playlist(id))
+                        navController.navigate(TvRoutes.playlist(summary.collection.id))
                     },
                     onHomeClick = { onSelectRoot(startRoute) },
                 )
@@ -132,10 +108,9 @@ fun TvNavHost(
         composable(TvRoutes.HISTORY) {
             TvScreenFrame {
                 HistoryScreen(
-                    onVideoClick = { track -> onPlayVideo(track.toVideo()) },
+                    onVideoClick = onPlayVideo,
                     onBackClick = { navController.popBackStack() },
                     onShortsQueue = {},
-                    onMusicClick = { track, queue -> musicPlayerViewModel.loadAndPlayTrack(track, queue) },
                 )
             }
         }
@@ -153,8 +128,7 @@ fun TvNavHost(
             val kind =
                 entry.arguments?.getString(TvRoutes.PLAYLISTS_KIND_ARG)?.let { name ->
                     MediaKind.entries.firstOrNull {
-                        it.name ==
-                            name
+                        it.name == name
                     }
                 }
             TvScreenFrame {
@@ -162,7 +136,6 @@ fun TvNavHost(
                     fixedKind = kind,
                     onBackClick = { navController.popBackStack() },
                     onVideoPlaylistClick = { navController.navigate(TvRoutes.playlist(it.id)) },
-                    onMusicPlaylistClick = { navController.navigate(TvRoutes.musicCollection(it.id)) },
                 )
             }
         }
@@ -201,24 +174,11 @@ fun TvNavHost(
                 PlaylistDetailScreen(
                     onNavigateBack = { navController.popBackStack() },
                     onPlayPlaylist = { videos, index, shuffle, title ->
-                        val start = videos[index]
-                        if (start.isMusic) {
-                            val tracks = videos.filter { it.isMusic }.map { it.toMusicTrack() }
-                            musicPlayerViewModel.loadAndPlayTrack(start.toMusicTrack(), tracks, title)
-                        } else {
-                            onPlayPlaylist(videos, index, title, shuffle)
-                        }
+                        onPlayPlaylist(videos, index, title, shuffle)
                     },
                 )
             }
         }
-        tvMusicRoutes(
-            navController = navController,
-            musicViewModel = musicViewModel,
-            musicPlayerViewModel = musicPlayerViewModel,
-            onPlayVideo = onPlayVideo,
-            onSelectRoot = onSelectRoot,
-        )
         tvSettingsRoutes(navController = navController)
     }
 }

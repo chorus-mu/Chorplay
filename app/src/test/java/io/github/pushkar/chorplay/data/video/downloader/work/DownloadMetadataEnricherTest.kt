@@ -45,11 +45,20 @@ class DownloadMetadataEnricherTest {
         }
 
     @Test
-    fun `songs never ask the watch page`() =
+    fun `downloads with complete metadata never ask the watch page`() =
         runTest {
-            val song = request(DownloadKind.MUSIC)
+            val complete = DownloadRequest(
+                DownloadTags(
+                    kind = DownloadKind.VIDEO,
+                    videoId = "v",
+                    title = "Title",
+                    channelId = "UC",
+                    description = "About",
+                    releaseDate = "2023-01-01",
+                )
+            )
 
-            assertThat(enricher.enrich(song)).isSameInstanceAs(song)
+            assertThat(enricher.enrich(complete)).isSameInstanceAs(complete)
             coVerify(exactly = 0) { repository.enrichFromWatchMetadata(any()) }
         }
 

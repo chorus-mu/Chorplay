@@ -6,15 +6,15 @@ import io.github.pushkar.chorplay.ui.components.layout.navigation.NavigationVisi
 import org.junit.Test
 
 class TvTabsTest {
-    private val allOn = NavigationVisibility(home = true, shorts = true, music = true, search = true, categories = true)
+    private val allOn = NavigationVisibility(home = true, shorts = true, search = true, categories = true)
 
     @Test
     fun `follows the user's order and leaves Shorts and Explore off`() {
-        val order = listOf(ChorplayTab.Library, ChorplayTab.Shorts, ChorplayTab.Music, ChorplayTab.Explore, ChorplayTab.Home).map(ChorplayTab::id)
+        val order = listOf(ChorplayTab.Library, ChorplayTab.Shorts, ChorplayTab.Subscriptions, ChorplayTab.Explore, ChorplayTab.Home).map(ChorplayTab::id)
 
         val tabs = tvNavigation(order, defaultTabId = ChorplayTab.Home.id, visibility = allOn).tabs
 
-        assertThat(tabs.take(3)).containsExactly(ChorplayTab.Library, ChorplayTab.Music, ChorplayTab.Home).inOrder()
+        assertThat(tabs.take(3)).containsExactly(ChorplayTab.Library, ChorplayTab.Subscriptions, ChorplayTab.Home).inOrder()
         assertThat(tabs).containsNoneOf(ChorplayTab.Shorts, ChorplayTab.Explore)
     }
 
@@ -27,9 +27,9 @@ class TvTabsTest {
 
     @Test
     fun `hides the tabs the user hid`() {
-        val tabs = tvNavigation(emptyList(), ChorplayTab.Home.id, NavigationVisibility(home = false, music = false)).tabs
+        val tabs = tvNavigation(emptyList(), ChorplayTab.Home.id, NavigationVisibility(home = false)).tabs
 
-        assertThat(tabs).containsNoneOf(ChorplayTab.Home, ChorplayTab.Music)
+        assertThat(tabs).containsNoneOf(ChorplayTab.Home)
     }
 
     @Test

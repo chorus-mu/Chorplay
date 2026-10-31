@@ -3,15 +3,10 @@ package io.github.pushkar.chorplay.ui.screens.settings.appearance.player
 import androidx.annotation.StringRes
 import io.github.pushkar.chorplay.R
 import io.github.pushkar.chorplay.data.local.GestureOverlayStyle
-import io.github.pushkar.chorplay.data.local.MusicPlayerBackgroundStyle
 import io.github.pushkar.chorplay.data.local.SeekbarPaddingMode
 import io.github.pushkar.chorplay.data.local.ShortsPlayerUiMode
 import io.github.pushkar.chorplay.data.local.SliderStyle
 
-/**
- * Enum names predate the current slider drawings: SQUIGGLY draws the wave and EXPRESSIVE_WAVY the
- * squiggle, and stored preferences hold the old names, so the labels map across on purpose.
- */
 @StringRes
 internal fun sliderStyleLabel(style: SliderStyle): Int =
     when (style) {
@@ -23,15 +18,6 @@ internal fun sliderStyleLabel(style: SliderStyle): Int =
         SliderStyle.SLIM -> R.string.style_slim
     }
 
-@StringRes
-internal fun musicBackgroundLabel(style: MusicPlayerBackgroundStyle): Int =
-    when (style) {
-        MusicPlayerBackgroundStyle.BLUR_GRADIENT -> R.string.player_background_style_blur_gradient
-        MusicPlayerBackgroundStyle.BLUR -> R.string.player_background_style_blur
-        MusicPlayerBackgroundStyle.GRADIENT -> R.string.player_background_style_gradient
-        MusicPlayerBackgroundStyle.IMMERSIVE -> R.string.player_background_style_immersive
-        MusicPlayerBackgroundStyle.DEFAULT -> R.string.player_background_style_default
-    }
 
 @StringRes
 internal fun shortsUiModeLabel(mode: ShortsPlayerUiMode): Int =

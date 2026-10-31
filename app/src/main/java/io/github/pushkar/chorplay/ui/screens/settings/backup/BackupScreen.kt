@@ -34,7 +34,7 @@ import io.github.pushkar.chorplay.ui.components.settings.SettingsTabs
 import io.github.pushkar.chorplay.ui.components.shared.ChorplayConfirmDialog
 import io.github.pushkar.chorplay.ui.components.shared.ChorplayConnectedToggleGroup
 import io.github.pushkar.chorplay.ui.components.shared.ChorplayProgressBanner
-import io.github.pushkar.chorplay.ui.components.shared.FlowToggleOption
+import io.github.pushkar.chorplay.ui.components.shared.ChorToggleOption
 import kotlinx.coroutines.launch
 import java.time.Instant
 import java.time.ZoneId
@@ -125,10 +125,10 @@ internal fun BackupScreen(
             severalProfiles = severalProfiles,
             frequencyOptions =
                 listOf(
-                    FlowToggleOption(AutoBackupFrequency.NONE, stringResource(R.string.auto_backup_frequency_none)),
-                    FlowToggleOption(AutoBackupFrequency.DAILY, stringResource(R.string.auto_backup_frequency_daily)),
-                    FlowToggleOption(AutoBackupFrequency.WEEKLY, stringResource(R.string.auto_backup_frequency_weekly)),
-                    FlowToggleOption(AutoBackupFrequency.MONTHLY, stringResource(R.string.auto_backup_frequency_monthly)),
+                    ChorToggleOption(AutoBackupFrequency.NONE, stringResource(R.string.auto_backup_frequency_none)),
+                    ChorToggleOption(AutoBackupFrequency.DAILY, stringResource(R.string.auto_backup_frequency_daily)),
+                    ChorToggleOption(AutoBackupFrequency.WEEKLY, stringResource(R.string.auto_backup_frequency_weekly)),
+                    ChorToggleOption(AutoBackupFrequency.MONTHLY, stringResource(R.string.auto_backup_frequency_monthly)),
                 ),
             typeLabels =
                 mapOf(
@@ -148,17 +148,17 @@ internal fun BackupScreen(
                 ChorplayConnectedToggleGroup(
                     options =
                         listOf(
-                            FlowToggleOption(
+                            ChorToggleOption(
                                 SettingsTabs.BACKUP_EXPORT,
                                 stringResource(R.string.settings_backup_tab_export),
                                 Icons.Outlined.FileUpload,
                             ),
-                            FlowToggleOption(
+                            ChorToggleOption(
                                 SettingsTabs.BACKUP_IMPORT,
                                 stringResource(R.string.settings_backup_tab_import),
                                 Icons.Outlined.FileDownload,
                             ),
-                            FlowToggleOption(
+                            ChorToggleOption(
                                 SettingsTabs.BACKUP_AUTO,
                                 stringResource(R.string.settings_backup_tab_auto),
                                 Icons.Outlined.Schedule,

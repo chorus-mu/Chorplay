@@ -31,10 +31,10 @@ class RecapLinksTest {
 
     @Test
     fun `the story route carries the tab it was played from`() {
-        val route = RecapRoutes.story(RecapPeriod.Year(2026), RecapSource.MUSIC)
+        val route = RecapRoutes.story(RecapPeriod.Year(2026), RecapSource.VIDEO)
 
-        assertThat(route).isEqualTo("recap/story/2026?source=MUSIC")
-        assertThat(RecapRoutes.decodeSource("MUSIC")).isEqualTo(RecapSource.MUSIC)
+        assertThat(route).isEqualTo("recap/story/2026?source=VIDEO")
+        assertThat(RecapRoutes.decodeSource("VIDEO")).isEqualTo(RecapSource.VIDEO)
         assertThat(RecapRoutes.decodeSource(null)).isEqualTo(RecapSource.ALL)
     }
 }

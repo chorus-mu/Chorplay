@@ -42,11 +42,11 @@ import io.github.pushkar.chorplay.ui.components.library.PlaylistSortChip
 import io.github.pushkar.chorplay.ui.components.library.PlaylistSortOrder
 import io.github.pushkar.chorplay.ui.components.shared.ChorplayErrorState
 import io.github.pushkar.chorplay.ui.components.shared.ChorplayLoadingIndicator
-import io.github.pushkar.chorplay.ui.components.shared.FlowSelectionAction
+import io.github.pushkar.chorplay.ui.components.shared.ChorSelectionAction
 import io.github.pushkar.chorplay.ui.components.shared.ChorplaySelectionToolbar
 import io.github.pushkar.chorplay.ui.components.shared.ChorplaySidePanes
 import io.github.pushkar.chorplay.ui.components.shared.quickactions.sharedQuickActionsViewModel
-import io.github.pushkar.chorplay.ui.components.shared.rememberFlowPaneState
+import io.github.pushkar.chorplay.ui.components.shared.rememberChorPaneState
 import io.github.pushkar.chorplay.ui.components.shared.rememberReorderableLazyListState
 import io.github.pushkar.chorplay.ui.components.shared.rememberShareLinksWithoutText
 import io.github.pushkar.chorplay.utils.PLAYLIST_FILE_MIME_TYPE
@@ -90,7 +90,7 @@ fun PlaylistDetailScreen(
             target?.let(viewModel::exportTo)
         }
     val listState = rememberLazyListState()
-    val panes = rememberFlowPaneState()
+    val panes = rememberChorPaneState()
     val twoPane = panes.showsSidePane
 
     val isUserCreated = uiState.isLocalPlaylist && !uiState.isSaved
@@ -171,7 +171,6 @@ fun PlaylistDetailScreen(
             onExport = { exportLauncher.launch(viewModel.exportFileName) },
             onEdit = { dialog = PlaylistDialog.Edit },
             onDelete = { dialog = PlaylistDialog.Delete },
-            onMoveLibrary = viewModel::moveToOtherLibrary,
         )
 
     Scaffold(
@@ -276,7 +275,7 @@ fun PlaylistDetailScreen(
                 summary = pluralStringResource(R.plurals.selected_count_template, selectedIds.size, selectedIds.size),
                 actions =
                     listOf(
-                        FlowSelectionAction(Icons.Outlined.Delete, stringResource(R.string.remove)) {
+                        ChorSelectionAction(Icons.Outlined.Delete, stringResource(R.string.remove)) {
                             dialog = PlaylistDialog.RemoveSelected(selectedIds)
                         },
                     ),

@@ -91,7 +91,7 @@ fun ChorplayPillChip(
  * count of how many pills in this section are selected.
  */
 @Composable
-fun FlowPillSection(
+fun ChorPillSection(
     title: String,
     icon: ImageVector,
     selectedCount: Int,

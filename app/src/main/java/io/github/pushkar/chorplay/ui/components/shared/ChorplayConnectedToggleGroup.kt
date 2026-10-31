@@ -25,7 +25,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 
 /** One option of a [ChorplayConnectedToggleGroup]. */
-data class FlowToggleOption<T>(
+data class ChorToggleOption<T>(
     val value: T,
     val label: String,
     val icon: ImageVector? = null,
@@ -45,7 +45,7 @@ private val IconSpacing = 8.dp
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun <T> ChorplayConnectedToggleGroup(
-    options: List<FlowToggleOption<T>>,
+    options: List<ChorToggleOption<T>>,
     selected: T,
     onSelected: (T) -> Unit,
     modifier: Modifier = Modifier,

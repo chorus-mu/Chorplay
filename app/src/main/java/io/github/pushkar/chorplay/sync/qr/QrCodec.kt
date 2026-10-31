@@ -8,7 +8,7 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 
 /**
- * Builds and parses the `FLOW-SYNC/1` QR payload.
+ * Builds and parses the `CHOR-SYNC/1` QR payload.
  *
  * The QR carries the out-of-band session secret (`K_master`) plus the host's LAN address. Every
  * host marks its code `lease:"host"`: its own single-use listener closes when the code lapses, so
@@ -22,7 +22,7 @@ object QrCodec {
 
     /** Slack for a code without a lease (older builds), whose `exp` is the other device's clock. */
     private const val CLOCK_SKEW_GRACE_SECONDS = 600L
-    const val WS_PATH = "/flow-sync"
+    const val WS_PATH = "/chor-sync"
 
     /**
      * The sync role of the **device displaying the QR**. The scanner takes the complement:

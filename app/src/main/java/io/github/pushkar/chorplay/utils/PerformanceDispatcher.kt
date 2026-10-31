@@ -50,7 +50,7 @@ object PerformanceDispatcher {
             Thread({
                 Process.setThreadPriority(NETWORK_THREAD_NICE)
                 runnable.run()
-            }, "FlowNetwork-${networkThreadCounter.incrementAndGet()}").apply {
+            }, "ChorNetwork-${networkThreadCounter.incrementAndGet()}").apply {
                 isDaemon = true
             }
         }

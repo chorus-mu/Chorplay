@@ -89,11 +89,11 @@ fun Modifier.thumbnailGradientOverlay(
  * - [skipPartiallyExpanded] defaults to true, so sheets always open fully without
  *   stopping at the awkward half-expanded state.
  *
- * Usage: `sheetState = rememberFlowSheetState()`
+ * Usage: `sheetState = rememberChorSheetState()`
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun rememberFlowSheetState(skipPartiallyExpanded: Boolean = true): SheetState =
+fun rememberChorSheetState(skipPartiallyExpanded: Boolean = true): SheetState =
     rememberModalBottomSheetState(
         skipPartiallyExpanded = skipPartiallyExpanded,
     )

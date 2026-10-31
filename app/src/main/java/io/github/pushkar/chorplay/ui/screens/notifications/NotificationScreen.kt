@@ -48,14 +48,14 @@ import io.github.pushkar.chorplay.data.local.entity.NotificationEntity
 import io.github.pushkar.chorplay.data.model.Video
 import io.github.pushkar.chorplay.ui.components.layout.LocalChorplayBottomInsets
 import io.github.pushkar.chorplay.ui.components.layout.floatAboveBottomChrome
-import io.github.pushkar.chorplay.ui.components.layout.flowBottomContentPadding
+import io.github.pushkar.chorplay.ui.components.layout.chorBottomContentPadding
 import io.github.pushkar.chorplay.ui.components.layout.topbar.ChorplayTopBar
 import io.github.pushkar.chorplay.ui.components.shared.ChorplayAlertDialog
 import io.github.pushkar.chorplay.ui.components.shared.ChorplayEmptyState
-import io.github.pushkar.chorplay.ui.components.shared.FlowMaxContentWidth
-import io.github.pushkar.chorplay.ui.components.shared.FlowSectionHeader
-import io.github.pushkar.chorplay.ui.components.shared.FlowSegmentedGap
-import io.github.pushkar.chorplay.ui.components.shared.flowSegmentShape
+import io.github.pushkar.chorplay.ui.components.shared.ChorMaxContentWidth
+import io.github.pushkar.chorplay.ui.components.shared.ChorSectionHeader
+import io.github.pushkar.chorplay.ui.components.shared.ChorSegmentedGap
+import io.github.pushkar.chorplay.ui.components.shared.chorSegmentShape
 import io.github.pushkar.chorplay.ui.components.shared.quickactions.VideoQuickActionsBottomSheet
 import kotlinx.coroutines.launch
 import java.time.ZoneId
@@ -138,29 +138,29 @@ fun NotificationScreen(
         }
         Box(Modifier.fillMaxSize().padding(padding), contentAlignment = Alignment.TopCenter) {
             LazyColumn(
-                modifier = Modifier.widthIn(max = FlowMaxContentWidth).fillMaxWidth(),
+                modifier = Modifier.widthIn(max = ChorMaxContentWidth).fillMaxWidth(),
                 contentPadding =
                     PaddingValues(
                         start = GroupPadding,
                         end = GroupPadding,
-                        bottom = flowBottomContentPadding(ListBottomPadding),
+                        bottom = chorBottomContentPadding(ListBottomPadding),
                     ),
             ) {
                 sections.forEach { section ->
                     item(key = section.bucket, contentType = "header") {
-                        FlowSectionHeader(stringResource(section.bucket.titleRes))
+                        ChorSectionHeader(stringResource(section.bucket.titleRes))
                     }
                     itemsIndexed(section.items, key = { _, item -> item.id }, contentType = { _, _ -> "row" }) { index, item ->
                         NotificationRow(
                             notification = item,
                             isNew = section.bucket == NotificationBucket.NEW,
                             time = notificationTime(item.timestamp, today, zone).label(),
-                            shape = flowSegmentShape(index, section.items.size),
+                            shape = chorSegmentShape(index, section.items.size),
                             onClick = { onNotificationClick(item.videoId) },
                             onLongClick = { scope.launch { menu = NotificationMenu(item, viewModel.videoFor(item)) } },
                             onDismiss = { remove(item) },
                             onSave = { save(item) },
-                            modifier = Modifier.animateItem().padding(bottom = FlowSegmentedGap),
+                            modifier = Modifier.animateItem().padding(bottom = ChorSegmentedGap),
                         )
                     }
                 }

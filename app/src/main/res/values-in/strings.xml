@@ -5,7 +5,6 @@
     <string name="library_history_label">Riwayat</string>
     <string name="library_manage_data_label">Kelola Data</string>
     <string name="library_manage_data_subtitle">Hapus cache dan riwayat</string>
-    <string name="share_song">Bagikan lagu</string>
     <string name="download">Unduh</string>
     <string name="close">Tutup</string>
     <string name="nav_home">Beranda</string>
@@ -14,7 +13,7 @@
     <string name="clear_watch_history_alert_body">Ini akan menghapus semua video dari riwayat tontonan Anda. Tindakan ini tidak dapat dibatalkan.</string>
     <string name="video">Video</string>
     <string name="share">Bagikan</string>
-    <string name="song">Lagu</string>
+
     <string name="save">Simpan</string>
     <string name="lyrics">LIRIK</string>
     <string name="error_occurred">Terjadi kesalahan</string>
@@ -26,8 +25,7 @@
     <string name="codec_label">Kodek</string>
     <string name="quality_auto">Otomatis</string>
     <string name="quality_auto_template">Otomatis (%1$dp)</string>
-    <string name="tab_music">Musik</string>
-    <string name="playlist_public">Publik</string>
+<string name="playlist_public">Publik</string>
     <string name="playlist_private">Pribadi</string>
     <string name="not_interested">Tidak tertarik</string>
     <string name="quality">Kualitas</string>
@@ -35,13 +33,12 @@
     <string name="video_metadata_template">%1$s • %2$s • %3$s</string>
     <string name="video_metadata_short_template">%1$s • %2$s</string>
     <string name="nav_shorts">Shorts</string>
-    <string name="nav_music">Musik</string>
+
     <string name="description">Deskripsi</string>
     <string name="copy_description">Salin deskripsi</string>
     <string name="ago">Lalu</string>
     <string name="since">Sejak</string>
     <string name="view_artist">Lihat Artis</string>
-    <string name="view_album">Lihat Album</string>
     <string name="artist">Artis</string>
     <string name="explicit">E</string>
     <string name="filter_hd">HD</string>
@@ -57,26 +54,25 @@
     <string name="duration_over_20">Di atas 20 menit</string>
     <string name="time_today">Hari ini</string>
     <string name="time_yesterday">Kemarin</string>
-    <string name="share_song_chooser">Bagikan lagu</string>
-    <string name="music_history">Riwayat Musik</string>
+
+
     <string name="remove_from_history">Hapus dari riwayat</string>
     <string name="diagnostics_tab_crashes">Laporan Kerusakan</string>
     <string name="related_content">Konten Terkait</string>
     <string name="no_related_content">Tidak ada konten terkait yang ditemukan</string>
     <string name="audio_effects">Efek Audio</string>
-    <string name="play_next_desc">Diputar setelah lagu saat ini</string>
     <string name="add_to_queue">Tambahkan ke antrean</string>
     <string name="add_to_queue_desc">Tambahkan ke akhir antrean</string>
     <string name="app_name_uppercase">CHORPLAY</string>
     <string name="notification_badge_9_plus">9+</string>
     <string name="new_update_available">Pembaruan Baru Tersedia</string>
     <string name="update_available_template">%1$s kini tersedia</string>
-    <string name="update_flow">Perbarui Chorplay</string>
+    <string name="update_chorplay">Perbarui Chorplay</string>
     <string name="views_count_short_template">%1$s penayangan</string>
     <string name="library_settings_data_header"><![CDATA[Pengaturan &amp; Data]]></string>
     <string name="settings">Pengaturan</string>
     <string name="settings_title">Pengaturan</string>
-    <string name="settings_flow_engine_header">Mesin Chorplay</string>
+    <string name="settings_chor_engine_header">Mesin Chorplay</string>
     <string name="settings_header_appearance">Tampilan</string>
     <string name="settings_header_about">Tentang</string>
     <string name="settings_header_notifications">Notifikasi</string>
@@ -122,7 +118,7 @@
     <string name="appearance_category_dark">Gelap</string>
     <string name="appearance_category_special">Spesial</string>
     <string name="app_icon_apply_toast">Ikon diperbarui - launcher Anda akan disegarkan</string>
-    <string name="icon_name_flow_red">Chorplay Merah</string>
+    <string name="icon_name_chorplay_red">Chorplay Merah</string>
     <string name="icon_name_amoled">AMOLED Gelap</string>
     <string name="icon_name_monochrome">Monokrom</string>
     <string name="icon_name_ghost">Hantu</string>
@@ -149,8 +145,8 @@
     <string name="library">Perpustakaan</string>
     <string name="library_section_header">Konten Anda</string>
     <string name="library_playlists_label">Daftar Putar</string>
-    <string name="library_music_playlists_label">Daftar Putar Musik</string>
-    <string name="library_music_playlists_subtitle">Koleksi musik Anda</string>
+
+
     <string name="library_liked_videos_label">Suka</string>
     <string name="library_saved_shorts_label">Shorts yang Disimpan</string>
     <string name="library_watch_later_label">Tonton Nanti</string>
@@ -162,7 +158,7 @@
     <string name="empty_watch_history">Tidak Ada Riwayat Tontonan</string>
     <string name="empty_watch_history_body">Video yang Anda tonton akan muncul di sini</string>
     <string name="liked">Disukai</string>
-    <string name="liked_music">Musik yang Disukai</string>
+
     <string name="liked_videos">Suka</string>
     <string name="empty_liked">Tidak ada Suka</string>
     <string name="empty_liked_body">Konten yang Anda sukai akan muncul di sini</string>
@@ -187,7 +183,6 @@
     <string name="move_down">Pindah ke bawah</string>
     <string name="playing">Sedang Diputar</string>
     <string name="remove">Hapus</string>
-    <string name="share_message_template">Lihat lagu ini: %1$s oleh %2$s\nhttps://music.youtube.com/watch?v=%3$s</string>
     <string name="filter_discover">Temukan</string>
     <string name="filter_popular">Populer</string>
     <string name="filter_deep_cuts">Lagu tersembunyi</string>
@@ -210,7 +205,7 @@
     <string name="play_mode_suggestion_title">Saran Mode Putar</string>
     <string name="play_mode_suggestion_body">Video ini berdurasi kurang dari 2 menit. Apakah Anda ingin beralih ke pemutar khusus?</string>
     <string name="shorts_player">Pemutar Shorts</string>
-    <string name="music_player">Pemutar Musik</string>
+
     <plurals name="channels_count">
         <item quantity="other">%d saluran</item>
     </plurals>
@@ -284,7 +279,6 @@
     <string name="playback_header">Pemutaran</string>
     <string name="play_next">Putar berikutnya</string>
     <string name="more_header">Lainnya</string>
-    <string name="album_art">Sampul album</string>
     <string name="close_player">Tutup pemutar</string>
     <string name="views_template">%1$s penayangan</string>
     <string name="chapters">Bab</string>
@@ -355,26 +349,26 @@
     <string name="settings_reset_everything">Atur Ulang Semuanya</string>
     <string name="settings_analyzing_interactions">Menganalisis interaksi Anda...</string>
     <string name="settings_view_analytics">Lihat Analitik</string>
-    <string name="deep_flow_mode_title">Mode Chorplay Dalam</string>
-    <string name="deep_flow_mode_subtitle">Jeda pembelajaran saat Anda menjelajah</string>
-    <string name="deep_flow_learning_paused">PEMBELAJARAN DIJEDA</string>
-    <string name="deep_flow_expires_in">Berakhir dalam %s</string>
-    <string name="deep_flow_expire_duration_title">Nonaktifkan otomatis setelah</string>
-    <string name="deep_flow_expire_duration_subtitle">Pembelajaran dilanjutkan otomatis setelah %s</string>
-    <string name="deep_flow_dialog_title">Durasi Jeda</string>
-    <string name="deep_flow_dialog_body">Berapa lama pembelajaran harus dijeda?</string>
-    <string name="deep_flow_enabled_message">Chorplay Dalam diaktifkan</string>
-    <string name="deep_flow_disabled_message">Chorplay Dalam dinonaktifkan</string>
-    <string name="deep_flow_expired_message">Timer Chorplay Dalam berakhir</string>
-    <string name="deep_flow_active_until_disabled">Chorplay Dalam tetap aktif hingga Anda mematikannya</string>
-    <string name="deep_flow_duration_never">Tidak pernah</string>
-    <string name="deep_flow_duration_1h">1 jam</string>
-    <string name="deep_flow_duration_2h">2 jam</string>
-    <string name="deep_flow_duration_4h">4 jam</string>
-    <string name="deep_flow_duration_6h">6 jam</string>
-    <string name="deep_flow_duration_8h">8 jam</string>
-    <string name="deep_flow_duration_12h">12 jam</string>
-    <string name="deep_flow_duration_24h">24 jam</string>
+    <string name="deep_chor_mode_title">Mode Chorplay Dalam</string>
+    <string name="deep_chor_mode_subtitle">Jeda pembelajaran saat Anda menjelajah</string>
+    <string name="deep_chor_learning_paused">PEMBELAJARAN DIJEDA</string>
+    <string name="deep_chor_expires_in">Berakhir dalam %s</string>
+    <string name="deep_chor_expire_duration_title">Nonaktifkan otomatis setelah</string>
+    <string name="deep_chor_expire_duration_subtitle">Pembelajaran dilanjutkan otomatis setelah %s</string>
+    <string name="deep_chor_dialog_title">Durasi Jeda</string>
+    <string name="deep_chor_dialog_body">Berapa lama pembelajaran harus dijeda?</string>
+    <string name="deep_chor_enabled_message">Chorplay Dalam diaktifkan</string>
+    <string name="deep_chor_disabled_message">Chorplay Dalam dinonaktifkan</string>
+    <string name="deep_chor_expired_message">Timer Chorplay Dalam berakhir</string>
+    <string name="deep_chor_active_until_disabled">Chorplay Dalam tetap aktif hingga Anda mematikannya</string>
+    <string name="deep_chor_duration_never">Tidak pernah</string>
+    <string name="deep_chor_duration_1h">1 jam</string>
+    <string name="deep_chor_duration_2h">2 jam</string>
+    <string name="deep_chor_duration_4h">4 jam</string>
+    <string name="deep_chor_duration_6h">6 jam</string>
+    <string name="deep_chor_duration_8h">8 jam</string>
+    <string name="deep_chor_duration_12h">12 jam</string>
+    <string name="deep_chor_duration_24h">24 jam</string>
     <string name="settings_header_content_playback">Konten &amp; Pemutaran</string>
     <string name="notif_type_new_videos_subtitle">Beri tahu saat saluran yang dilanggan mengunggah video baru</string>
     <string name="notif_type_downloads_subtitle">Pemberitahuan progres, selesai, dan gagal</string>
@@ -462,8 +456,8 @@
     <string name="player_appearance_fullscreen_header">Layar Penuh</string>
     <string name="player_show_title_title">Tampilkan Judul Video</string>
     <string name="player_show_title_subtitle">Tampilkan judul video di bawah bilah atas saat mode layar penuh</string>
-    <string name="lyrics_provider_title">Penyedia Lirik</string>
-    <string name="lyrics_provider_subtitle">Pilih sumber lirik lagu yang Anda inginkan</string>
+
+
     <string name="theme_name_system_default">Default Sistem</string>
     <string name="theme_desc_system_default">Mengikuti perangkat Anda antara mode terang dan gelap.</string>
     <string name="theme_name_pure_light">Terang Murni</string>
@@ -526,13 +520,11 @@
     <string name="content_settings_layout_grid">Grid</string>
     <string name="content_settings_layout_list">Daftar</string>
     <string name="content_settings_grid_size_title">Ukuran Item Grid</string>
-    <string name="content_settings_grid_size_subtitle">Mengontrol ukuran sampul album dan kartu konten</string>
     <string name="content_settings_grid_big_title">Besar</string>
     <string name="content_settings_grid_big_desc">Gambar mini lebih besar</string>
     <string name="content_settings_grid_small_title">Kecil</string>
     <string name="content_settings_grid_small_desc">Tampilan ringkas</string>
     <string name="content_settings_header_preview">Pratinjau</string>
-    <string name="content_settings_preview_album_art">Pratinjau Sampul Album</string>
     <string name="content_settings_preview_big">Besar - gambar mini 128dp</string>
     <string name="content_settings_preview_small">Kecil - gambar mini 104dp</string>
     <string name="content_settings_dynamic_components">Komponen Dinamis</string>
@@ -577,8 +569,8 @@
     <string name="settings_home_shorts_shelf_subtitle">Tampilkan rak shorts horizontal di layar beranda.</string>
     <string name="settings_shorts_nav_tab_title">Tab Shorts di navigasi</string>
     <string name="settings_shorts_nav_tab_subtitle">Tampilkan tab Shorts di bilah navigasi bawah.</string>
-    <string name="settings_music_nav_tab_title">Tab Musik di navigasi</string>
-    <string name="settings_music_nav_tab_subtitle">Tampilkan tab Musik di bilah navigasi bawah.</string>
+
+
     <string name="settings_search_nav_tab_title">Tab Cari di navigasi</string>
     <string name="settings_search_nav_tab_subtitle">Tambahkan tab Pencarian ke bilah navigasi</string>
     <string name="nav_search">Cari</string>
@@ -831,7 +823,7 @@
     <string name="sleep_timer_custom_label">Waktu kustom</string>
     <string name="sleep_timer_unit">menit</string>
     <string name="sleep_timer_input_error">Masukkan nilai antara 1 dan 1440</string>
-    <string name="sleep_timer_end_of_song">Akhir lagu / video</string>
+    <string name="sleep_timer_end_of_video">Akhir lagu / video</string>
     <string name="sleep_timer_start">Mulai</string>
     <string name="sleep_timer_stops_in">Berhenti dalam</string>
     <string name="sleep_timer_end_of_media">Akhir lagu saat ini</string>
@@ -862,12 +854,12 @@
     <string name="period_six_months">6 bulan</string>
     <string name="period_one_year">1 tahun</string>
     <string name="import_data_title">Impor Data</string>
-    <string name="import_flow_backup_success">Cadangan Chorplay berhasil diimpor</string>
-    <string name="import_flow_backup_failed_template">Gagal mengimpor cadangan Chorplay: %1$s</string>
+    <string name="import_chorplay_backup_success">Cadangan Chorplay berhasil diimpor</string>
+    <string name="import_chorplay_backup_failed_template">Gagal mengimpor cadangan Chorplay: %1$s</string>
     <string name="import_newpipe_failed_template">Gagal mengimpor cadangan NewPipe: %1$s</string>
     <string name="import_youtube_failed_template">Gagal mengimpor cadangan YouTube: %1$s</string>
-    <string name="import_flow_backup_item_title">Impor Cadangan Chorplay</string>
-    <string name="import_flow_backup_desc">Pulihkan riwayat, pengaturan, dan langganan Anda dari file cadangan Chorplay.</string>
+    <string name="import_chorplay_backup_item_title">Impor Cadangan Chorplay</string>
+    <string name="import_chorplay_backup_desc">Pulihkan riwayat, pengaturan, dan langganan Anda dari file cadangan Chorplay.</string>
     <string name="import_from_newpipe">Impor dari NewPipe</string>
     <string name="import_from_newpipe_desc">Impor langganan dari file ekspor NewPipe (JSON).</string>
     <string name="import_from_libretube">Impor dari LibreTube</string>
@@ -880,10 +872,10 @@
     <string name="import_libretube_playlists_desc">Impor daftar putar lokal LibreTube Anda dari file cadangan JSON.</string>
     <string name="import_yt_takeout_all">Impor dari Google Takeout</string>
     <string name="import_yt_takeout_all_desc">Impor langganan, riwayat tontonan, dan daftar putar YouTube Anda sekaligus dari file ZIP Google Takeout.</string>
-    <string name="import_music_apps_section_title">Aplikasi Musik</string>
-    <string name="import_music_apps_section_subtitle">Impor pustaka musik Anda dari pemutar lain</string>
-    <string name="import_from_metrolist">Impor dari Metrolist</string>
-    <string name="import_from_metrolist_desc">Impor daftar putar musik dari file cadangan Metrolist (.zip). Daftar putar muncul di Pustaka Musik Anda.</string>
+
+
+
+
     <string name="import_from_youtube">Impor dari YouTube</string>
     <string name="import_from_youtube_desc">Impor langganan dari YouTube Takeout (CSV).</string>
     <string name="import_subscriptions_section_title">Langganan</string>
@@ -898,8 +890,6 @@
     <string name="import_yt_watch_history_desc">Impor riwayat tontonan Anda dari YouTube Takeout (watch-history.html).</string>
     <string name="import_yt_playlist">Impor Daftar Putar YouTube</string>
     <string name="import_yt_playlist_desc">Impor daftar putar dari CSV YouTube Takeout (Playlist-&lt;nama&gt;.csv).</string>
-    <string name="import_yt_music_playlist">Impor Daftar Putar YouTube Music</string>
-    <string name="import_yt_music_playlist_desc">Impor daftar putar musik dari CSV YouTube Music Takeout. Muncul di bawah Daftar Putar Musik.</string>
     <string name="import_yt_history_failed_template">Gagal mengimpor riwayat tontonan: %1$s</string>
     <string name="import_yt_playlist_failed_template">Gagal mengimpor daftar putar: %1$s</string>
     <string name="import_yt_history_empty_error">Tidak ada entri riwayat tontonan yang ditemukan dalam file ini. Pastikan file tersebut adalah file watch-history.html dari YouTube Takeout.</string>
@@ -948,9 +938,9 @@
     <string name="location_badge_active">Aktif</string>
     <string name="select_threads_count_desc">Pilih jumlah thread (1-8):</string>
     <string name="support_donations_title">Dukungan &amp; Donasi</string>
-    <string name="support_flow_dev_title">Dukung Pengembangan Chorplay</string>
-    <string name="support_flow_dev_desc">Jika Chorplay bermanfaat bagi Anda, Anda dapat mendukungnya melalui Patreon atau kripto di bawah ini. Terima kasih!</string>
-    <string name="support_flow_patreon">Dukung Chorplay di Patreon</string>
+    <string name="support_chorplay_dev_title">Dukung Pengembangan Chorplay</string>
+    <string name="support_chorplay_dev_desc">Jika Chorplay bermanfaat bagi Anda, Anda dapat mendukungnya melalui Patreon atau kripto di bawah ini. Terima kasih!</string>
+    <string name="support_chorplay_patreon">Dukung Chorplay di Patreon</string>
     <string name="thank_you_support_message">Terima kasih atas dukungan Anda! ❤️</string>
     <string name="address_copied_toast">Alamat disalin ke papan klip</string>
     <string name="donation_address_clip_label">Alamat Donasi</string>
@@ -961,7 +951,7 @@
     <string name="newpipe_extractor_subtitle">Pustaka ekstraksi inti</string>
     <string name="about_license">Lisensi</string>
     <string name="about_changelog">Catatan Perubahan</string>
-    <string name="whats_new_in_flow">Yang baru di Chorplay</string>
+    <string name="whats_new_in_chorplay">Yang baru di Chorplay</string>
     <string name="about_device_info">Info Perangkat</string>
     <string name="gnu_license_full_title">Lisensi Publik Umum GNU</string>
     <string name="loading_ellipsis">Memuat...</string>
@@ -1002,7 +992,7 @@
     <string name="playlist_empty_desc">Tambahkan video dari pemutar video\nuntuk membangun daftar putar Anda</string>
     <string name="delete_playlist_dialog_title">Hapus daftar putar?</string>
     <string name="delete_playlist_dialog_text">Ini akan menghapus secara permanen \'%1$s\' beserta semua videonya.</string>
-    <string name="welcome_to_flow">Selamat Datang di Chorplay</string>
+    <string name="welcome_to_chorplay">Selamat Datang di Chorplay</string>
     <string name="onboarding_subtitle">Ceritakan apa yang Anda minati</string>
     <string name="onboarding_instructions">Pilih minimal 3 topik untuk mempersonalisasi pengalaman Anda</string>
     <string name="btn_skip_for_now">Lewati untuk sekarang</string>
@@ -1019,7 +1009,7 @@
     <string name="category_creative">Kreatif</string>
     <string name="category_science_nature">Sains &amp; Alam</string>
     <string name="category_news_current_events">Berita &amp; Peristiwa Terkini</string>
-    <string name="flow_control_center">Pusat Kontrol Chorplay</string>
+    <string name="chorplay_control_center">Pusat Kontrol Chorplay</string>
     <string name="action_refresh">Segarkan</string>
     <string name="loading_neural_matrix">Memuat Matriks Neural...</string>
     <string name="neural_interest_map_subtitle">Peta minat neural Anda</string>
@@ -1043,12 +1033,9 @@
     <string name="stats_topics">Topik</string>
     <string name="empty_bubble_cloud_message">Tonton beberapa video untuk mengisi nebula minat Anda!</string>
     <string name="export_profile_data">Ekspor Data Profil</string>
-    <string name="flow_neural_profile_export_subject">Ekspor Profil Neural Chorplay</string>
-    <string name="screen_title_music_library">Pustaka Musik</string>
+    <string name="chorplay_neural_profile_export_subject">Ekspor Profil Neural Chorplay</string>
+
     <string name="header_your_collection">Koleksi Anda</string>
-    <string name="subtitle_liked_music">Lagu yang Anda sukai</string>
-    <string name="subtitle_history">Lagu yang Anda dengarkan</string>
-    <string name="empty_music_playlists">Belum ada daftar putar musik</string>
     <string name="rename_playlist_title">Ganti Nama Daftar Putar</string>
     <string name="action_rename">Ganti Nama</string>
     <string name="link_copied">Tautan disalin</string>
@@ -1086,27 +1073,25 @@
     <string name="action_add_to_favorites">Tambahkan ke Favorit</string>
     <string name="action_listen_now">Dengarkan Sekarang</string>
     <string name="action_play_all">Putar semua</string>
-    <string name="loading_music">Memuat musik...</string>
-    <string name="screen_title_music">MUSIK</string>
+
+
     <string name="section_listen_again">Dengarkan lagi</string>
     <string name="section_quick_picks">Pilihan cepat</string>
     <string name="section_recommended">Direkomendasikan</string>
     <string name="section_recently_played">Baru-baru ini diputar</string>
-    <string name="section_music_videos">Video musik</string>
+
     <string name="section_new_releases">Rilis terbaru</string>
     <string name="subtitle_single_template">Single · %1$s</string>
     <string name="section_popular_artists">Artis populer</string>
     <string name="section_mixed_for_you">Dikurasi untuk Anda</string>
     <string name="section_moods_and_genres">Suasana &amp; Genre</string>
     <string name="genre_mix_template">Campuran %1$s</string>
-    <string name="section_top_albums">Album Teratas</string>
     <string name="similar_to">Mirip dengan</string>
     <string name="section_similar_to">Mirip dengan %1$s</string>
     <string name="subtitle_similar_to">Berdasarkan riwayat mendengarkan Anda</string>
     <string name="section_vibe_vibes">Vibes %1$s</string>
     <string name="subtitle_community_playlists">Daftar Putar Komunitas</string>
     <string name="playlist_author_community">Daftar Putar Komunitas</string>
-    <string name="playlist_description_community">Daftar putar musik %1$s yang dikurasi oleh komunitas kami</string>
     <string name="radio">Radio</string>
     <string name="audio_settings_title">Pengaturan Audio</string>
     <string name="label_preset">Preset</string>
@@ -1122,32 +1107,26 @@
     <string name="template_gain">%1$.1fdB</string>
     <string name="template_q">%1$.1f</string>
     <string name="now_playing">SEDANG DIPUTAR</string>
-    <string name="voice_search_prompt">Ucapkan untuk mencari musik</string>
-    <string name="search_music_placeholder">Cari musik</string>
+
     <string name="voice_search_cd">Pencarian Suara</string>
-    <string name="filter_albums">Album</string>
-    <string name="filter_songs">Lagu</string>
+
     <string name="filter_community_playlists">Daftar putar komunitas</string>
     <string name="section_top_result">Hasil teratas</string>
-    <string name="subtitle_song_prefix">Lagu • %1$s</string>
+
     <string name="subtitle_artist">Artis</string>
-    <string name="subtitle_album_template">Album - %1$s</string>
     <string name="subtitle_playlist_template">Daftar putar - %1$s</string>
     <string name="plays_count_template">• %1$s pemutaran</string>
-    <string name="album_year_template">Album • %1$s • %2$s</string>
     <string name="search_source_template">Pencarian: %1$s</string>
     <string name="artist_source_template">Artis: %1$s</string>
     <string name="top_picks_for_you">Pilihan Terbaik untuk Anda</string>
     <string name="no_results_found">Tidak ada hasil yang ditemukan</string>
     <string name="no_tracks_available">Tidak ada lagu yang tersedia</string>
     <string name="tab_favorites">Favorit</string>
-    <string name="create_playlist_subtitle">Atur musik Anda</string>
     <string name="empty_playlists_title">Belum Ada Daftar Putar</string>
     <string name="empty_playlists_subtitle">Buat daftar putar pertama Anda untuk mengatur lagu favorit</string>
     <string name="empty_favorites_title">Belum Ada Favorit</string>
     <string name="empty_favorites_subtitle">Ketuk ikon hati pada lagu mana saja untuk menambahkannya ke favorit Anda</string>
     <string name="empty_history_title">Belum Ada Riwayat</string>
-    <string name="empty_history_subtitle">Mulai mendengarkan musik untuk melihat riwayat Anda di sini</string>
     <string name="empty_downloads_title">Belum Ada Unduhan</string>
     <string name="empty_downloads_subtitle">Unduh lagu untuk diputar secara luring</string>
     <string name="total_size">Total Ukuran</string>
@@ -1206,7 +1185,7 @@
     <string name="check_for_updates">Periksa Pembaruan</string>
     <string name="check_for_updates_subtitle">Ketuk untuk memeriksa versi terbaru</string>
     <string name="checking_for_updates">Memeriksa pembaruan…</string>
-    <string name="flow_is_up_to_date">Chorplay sudah terbaru!</string>
+    <string name="chorplay_is_up_to_date">Chorplay sudah terbaru!</string>
     <string name="update_check_failed">Tidak dapat memeriksa pembaruan. Periksa koneksi Anda.</string>
     <string name="export_engine_data">Ekspor Profil Mesin</string>
     <string name="export_engine_data_subtitle">Buat cadangan kepribadian AI &amp; data pembelajaran Anda</string>
@@ -1434,15 +1413,15 @@
     <string name="history_tab_videos">Video</string>
     <string name="history_tab_shorts">Shorts</string>
     <string name="empty_liked_videos">Tidak ada video yang disukai</string>
-    <string name="empty_liked_music">Tidak ada musik yang disukai</string>
-    <string name="empty_liked_music_body">Lagu yang Anda sukai akan muncul di sini</string>
+
+
     <string name="hide_channel_shorts">Sembunyikan Shorts dari channel ini</string>
     <string name="show_channel_shorts">Tampilkan Shorts dari channel ini</string>
     <string name="appearance_system_defaults_title">Tema Default Sistem</string>
     <string name="appearance_system_defaults_subtitle">Pilih tema yang digunakan saat perangkat Anda beralih antara mode terang dan gelap.</string>
     <string name="appearance_system_light_theme">Tema mode terang</string>
     <string name="appearance_system_dark_theme">Tema mode gelap</string>
-    <string name="icon_name_flow_light">Chorplay Light</string>
+    <string name="icon_name_chorplay_light">Chorplay Light</string>
     <string name="icon_name_material_sky">Material Sky</string>
     <string name="icon_name_material_mint">Material Mint</string>
     <string name="player_adaptive_size_title">Ukuran Pemutar Adaptif</string>
@@ -1493,12 +1472,12 @@
     <string name="upcoming_video_reminder_enabled">Pengingat disetel</string>
     <string name="upcoming_video_reminder_badge">Pengingat diaktifkan</string>
     <string name="subscriptions_video_section_title">Langganan video</string>
-    <string name="subscriptions_music_section_title">Langganan musik</string>
+
     <string name="subscriptions_quick_access_title">Akses cepat</string>
     <string name="subscriptions_compact_header">Langsung masuk ke saluran berlangganan terbaru Anda.</string>
-    <string name="subscriptions_compact_header_with_music">Saluran musik ditandai secara langsung agar umpan tetap ringkas.</string>
-    <string name="subscriptions_music_chip_label">Musik</string>
-    <string name="subscriptions_music_badge_cd">Langganan musik</string>
+
+
+
     <string name="no_subscriptions_found">Tidak ada langganan ditemukan</string>
     <string name="similar_content">Konten Serupa</string>
     <string name="no_similar_content_found">Tidak ada konten serupa ditemukan</string>
@@ -1508,7 +1487,6 @@
     <string name="already_downloaded_toast">Sudah diunduh</string>
     <string name="download_started_toast">Pengunduhan dimulai…</string>
     <string name="download_error_toast">Kesalahan unduhan: %1$s</string>
-    <string name="player_background_style_title">Latar Belakang Pemutar Musik</string>
     <string name="player_background_style_blur_gradient">Blur + Gradien</string>
     <string name="player_background_style_blur">Karya Seni Diburamkan</string>
     <string name="player_background_style_gradient">Gradien Palet</string>
@@ -1522,13 +1500,13 @@
     <string name="player_fullscreen_seekbar_width_custom">Kustom</string>
     <string name="player_fullscreen_seekbar_width_value">%1$d dp</string>
     <string name="lyrics_provider_lyrics_plus">LyricsPlus</string>
-    <string name="music_quality_header">Kualitas Audio Musik</string>
-    <string name="music_quality_auto">Otomatis</string>
-    <string name="music_quality_high">Tinggi</string>
-    <string name="music_quality_medium">Sedang</string>
-    <string name="music_quality_low">Rendah</string>
+
+
+
+
+
     <string name="video_download_location_label">Lokasi unduhan video</string>
-    <string name="music_download_location_label">Lokasi unduhan musik</string>
+
     <string name="section_daily_discover">Temuan Harian Anda</string>
     <string name="section_speed_dial">Putar cepat</string>
     <string name="shuffle_play">Putar acak</string>
@@ -1538,7 +1516,7 @@
     <string name="daily_discover_similar_to">Mirip dengan %1$s</string>
     <string name="daily_discover_based_on">Berdasarkan %1$s</string>
     <string name="daily_discover_for_fans_of">Untuk penggemar %1$s</string>
-    <string name="section_music_videos_for_you">Video musik untuk Anda</string>
+
     <string name="section_live_performances">Penampilan langsung</string>
     <string name="section_mood_and_genres">Suasana dan Genre</string>
     <string name="section_from_the_community">Dari komunitas</string>
@@ -1554,10 +1532,10 @@
     <string name="download_menu_style_classic_desc">Daftar lengkap setiap kualitas dan codec</string>
     <string name="download_menu_style_compact">Ringkas</string>
     <string name="download_menu_style_compact_desc">Judul yang dapat diedit, dropdown, dan jumlah thread</string>
-    <string name="music_playback_warning_forbidden">Akses aliran musik ditolak. YouTube mungkin membatasi IP ini; coba muat ulang atau ganti jaringan/VPN.</string>
-    <string name="music_playback_warning_network">Aliran musik gagal karena masalah jaringan. Periksa koneksi Anda atau coba jaringan lain.</string>
-    <string name="music_playback_warning_final">Lagu ini tidak dapat dimuat setelah beberapa kali percobaan. Coba jaringan atau VPN lain jika lagu terus gagal.</string>
-    <string name="music_playback_warning_generic">Pemutaran musik gagal. Coba lagi atau ganti jaringan jika ini terus terjadi.</string>
+
+
+
+
     <string name="settings_item_datetime">Tanggal &amp; Waktu</string>
     <string name="settings_item_datetime_subtitle">Sesuaikan cara tanggal unggahan ditampilkan</string>
     <string name="datetime_title">Tampilan Tanggal &amp; Waktu</string>
@@ -1622,13 +1600,13 @@
     <string name="local_media_permission_body">Memungkinkan akses ke media Anda sehingga Chorplay dapat menemukan dan memutar video dan musik lokal.</string>
     <string name="local_media_grant">Berikan akses</string>
     <string name="history_tab_local_videos">Video bawaan</string>
-    <string name="history_tab_local_music">Musik bawaan</string>
+
     <string name="share_link_only_template">https://youtube.com/watch?v=%1$s</string>
     <string name="content_settings_share_without_text_title">Bagikan tautan tanpa teks</string>
     <string name="content_settings_share_without_text_subtitle">Bagikan hanya tautan video, tanpa pesan “Check out this video”</string>
-    <string name="deep_flow_save_history_title">Simpan untuk melihat riwayat tontonan</string>
-    <string name="deep_flow_save_history_subtitle">Simpan riwayat tontonan tanpa memengaruhi rekomendasi</string>
-    <string name="icon_name_flow_play">Chorplay mainkan</string>
+    <string name="deep_chor_save_history_title">Simpan untuk melihat riwayat tontonan</string>
+    <string name="deep_chor_save_history_subtitle">Simpan riwayat tontonan tanpa memengaruhi rekomendasi</string>
+    <string name="icon_name_chorplay_play">Chorplay mainkan</string>
     <string name="player_appearance_controls_while_loading_title">Kontrol Saat Memuat</string>
     <string name="player_appearance_controls_while_loading_subtitle">Tampilkan kontrol sebelum video selesai dimuat</string>
     <string name="player_settings_autoplay_countdown_title">Jeda putar otomatis</string>
@@ -1659,19 +1637,16 @@
     <string name="player_settings_display">Tampilan</string>
     <string name="player_settings_ambient_mode">Mode ambient</string>
     <string name="player_settings_ambient_mode_subtitle">Cahaya lembut dari warna video di sekelilingnya</string>
-    <string name="recognize_music">Kenali musik</string>
+
     <string name="recognition_history">Riwayat pengenalan</string>
-    <string name="tap_to_recognize">Ketuk untuk mengenali</string>
+
     <string name="listening">Mendengarkan…</string>
     <string name="processing">Memproses…</string>
     <string name="no_match_found">Tidak ada kecocokan ditemukan</string>
     <string name="recognition_error">Pengenalan gagal</string>
     <string name="try_again">Coba lagi</string>
-    <string name="search_in_flow">Cari di Chorplay</string>
-    <string name="recognition_search_history">Cari lagu yang dikenali</string>
-    <string name="recognition_history_empty">Lagu yang dikenali akan muncul di sini</string>
+    <string name="search_in_chorplay">Cari di Chorplay</string>
     <string name="recognition_clear_history">Hapus riwayat?</string>
-    <string name="recognition_clear_history_body">Ini akan menghapus semua lagu yang dikenali. Tindakan ini tidak dapat dibatalkan.</string>
     <string name="sync_devices_title">Sinkronkan perangkat</string>
     <string name="sync_devices_subtitle">Sinkronkan pustaka, riwayat, dan profil melalui Wi-Fi lokal</string>
     <string name="sync_notification_title">Menyinkronkan perangkat</string>
@@ -1730,7 +1705,7 @@
     <string name="sync_error_peer_also_receive">Perangkat lain juga diatur ke mode Terima. Atur ke mode Kirim, lalu coba lagi.</string>
     <string name="sync_error_qr_expired">Sesi pemasangan ini telah kedaluwarsa. Minta perangkat lain membuat sesi baru.</string>
     <string name="sync_error_qr_wrong_version">Versi aplikasi di perangkat lain tidak kompatibel.</string>
-    <string name="sync_error_qr_not_flow">Data koneksi Chorplay tersebut tampaknya tidak valid.</string>
+    <string name="sync_error_qr_not_chorplay">Data koneksi Chorplay tersebut tampaknya tidak valid.</string>
     <string name="sync_error_qr_bad_address">Data koneksi tidak memiliki alamat jaringan yang valid.</string>
     <string name="subscriptions_sort_label">Urutkan channel</string>
     <string name="subscriptions_sort_default">Default</string>
@@ -1743,8 +1718,8 @@
     <string name="upcoming_waiting_count">%1$s menunggu</string>
     <string name="upcoming_video_starts_in">Dimulai dalam</string>
     <string name="sb_skip_segment">Lewati %1$s</string>
-    <string name="player_appearance_hide_music_artwork_title">Sembunyikan artwork pemutar musik</string>
-    <string name="player_appearance_hide_music_artwork_subtitle">Tampilkan ikon aplikasi pada warna artwork yang diekstrak sebagai gantinya</string>
+
+
     <string name="player_appearance_grouped_quality_selector_title">Pemilih kualitas berkelompok</string>
     <string name="player_appearance_grouped_quality_selector_subtitle">Satu baris untuk setiap resolusi, dengan codec di dalamnya</string>
     <string name="player_settings_header_video">Video</string>
@@ -1843,7 +1818,6 @@
     <string name="playlist_creation_menu_close">Tutup menu pembuatan playlist</string>
     <string name="add_comment_placeholder">Tambahkan komentar...</string>
     <string name="playlist_visibility_metadata">"%1$s -  %2$s"</string>
-    <string name="search_empty_prompt">Cari video, musik, dan lainnya</string>
     <string name="search_filter_all">Semua</string>
     <string name="search_toggle_view_mode">Alihkan tampilan hasil pencarian</string>
     <string name="channel_sort_latest">Terbaru</string>
@@ -1857,8 +1831,8 @@
     <string name="player_portrait_seekbar_width_spaced">Renggang</string>
     <string name="content_settings_home_reselect_refresh_title">Segarkan Beranda saat dipilih kembali</string>
     <string name="content_settings_home_reselect_refresh_subtitle">Ketuk Beranda lagi di bagian atas untuk memuat ulang</string>
-    <string name="content_settings_restored_music_mini_player_title">Tampilkan pemutar mini musik yang dipulihkan</string>
-    <string name="content_settings_restored_music_mini_player_subtitle">Tampilkan sesi musik terakhir Anda setelah dipulihkan</string>
+
+
     <string name="content_settings_hide_watched_home_title">Sembunyikan Video yang Ditonton dari Beranda</string>
     <string name="content_settings_hide_watched_home_subtitle">Sembunyikan video yang telah Anda tonton dari Beranda</string>
     <string name="content_settings_hide_watched_subscriptions_title">Sembunyikan Video yang Ditonton dari Langganan</string>
@@ -1895,54 +1869,54 @@
     <string name="subtitle_bold_text">Teks Tebal</string>
     <string name="subtitle_reset_default">Atur Ulang ke Bawaan</string>
     <string name="close_popup_player">Tutup pemutar pop-up</string>
-    <string name="discord_presence_title">Discord Rich Presence</string>
-    <string name="discord_presence_enable">Bagikan aktivitas pemutaran</string>
-    <string name="discord_presence_enable_description">Tetap terhubung selama jeda dan pemutaran di latar belakang</string>
-    <string name="discord_presence_off">Nonaktif</string>
-    <string name="discord_presence_not_connected">Tidak terhubung</string>
-    <string name="discord_presence_ready">Terhubung dan siap</string>
-    <string name="discord_presence_ready_as">Terhubung sebagai %1$s · tersambung saat pemutaran</string>
-    <string name="discord_presence_connected">Terhubung</string>
-    <string name="discord_presence_connected_as">Terhubung sebagai %1$s</string>
-    <string name="discord_presence_connected_account">Akun Discord: %1$s</string>
-    <string name="discord_presence_unavailable">Tidak tersedia dalam build ini</string>
-    <string name="discord_presence_connection_error">Kesalahan koneksi</string>
-    <string name="discord_presence_linking">Menunggu proses masuk Discord…</string>
-    <string name="discord_presence_connecting">Menghubungkan ke Discord…</string>
-    <string name="discord_presence_connect">Hubungkan akun Discord</string>
-    <string name="discord_presence_connect_action">Hubungkan</string>
-    <string name="discord_presence_disconnect">Putuskan dan lepaskan tautan</string>
-    <string name="discord_presence_unlink_action">Lepaskan tautan</string>
-    <string name="discord_presence_retry">Coba ulangi koneksi</string>
-    <string name="discord_presence_description">Tampilkan yang Anda putar sebagai status Discord Anda.</string>
-    <string name="discord_presence_connection_section">Koneksi</string>
-    <string name="discord_presence_account">Akun Discord</string>
-    <string name="discord_presence_privacy_section">Risiko privasi dan akun</string>
-    <string name="discord_presence_privacy_title">Privasi</string>
-    <string name="discord_presence_privacy_body">Chorplay membagikan judul, kreator, karya seni, dan progres dari konten yang Anda putar. Nonaktif secara default. Token Discord Anda dienkripsi dan tidak pernah dicatat.</string>
-    <string name="discord_presence_gateway_warning">Tindakan ini masuk menggunakan token Discord Anda, bukan login resmi. Tindakan ini melanggar Ketentuan Layanan Discord dan dapat menyebabkan akun Anda dibatasi atau diblokir.</string>
-    <string name="discord_presence_risk_dialog_title">Terima risiko akun Discord?</string>
-    <string name="discord_presence_risk_dialog_body">Menghubungkan memberi Chorplay token Discord Anda. Token tersebut tetap terenkripsi di perangkat ini dan hanya dikirim ke Discord. Metode ini melanggar Ketentuan Layanan Discord, sehingga akun Anda dapat dibatasi atau diblokir.</string>
-    <string name="discord_presence_risk_accept">Saya mengerti, hubungkan</string>
-    <string name="discord_error_not_initialized">Discord Rich Presence belum diinisialisasi.</string>
-    <string name="discord_error_enable_before_connect">Aktifkan Discord Rich Presence sebelum menghubungkan akun.</string>
-    <string name="discord_error_unavailable">Discord Rich Presence tidak tersedia dalam build ini.</string>
-    <string name="discord_error_open_flow">Buka Chorplay sebelum menghubungkan Discord.</string>
-    <string name="discord_error_connection_in_progress">Koneksi Discord sedang berlangsung.</string>
-    <string name="discord_error_login_timeout">Waktu proses masuk Discord habis.</string>
-    <string name="discord_error_login_cancelled">Koneksi Discord dibatalkan.</string>
-    <string name="discord_error_connection_incomplete">Koneksi Discord tidak selesai.</string>
-    <string name="discord_error_empty_token">Discord mengembalikan token sesi kosong.</string>
-    <string name="discord_error_missing_application_id">ID aplikasi Discord tidak ada dalam build ini.</string>
-    <string name="discord_error_gateway_timeout">Waktu koneksi Discord Gateway habis.</string>
-    <string name="discord_error_gateway_reconnect">Discord meminta penyambungan kembali.</string>
-    <string name="discord_error_session_rejected">Discord menolak sesi tersebut. Hubungkan kembali akun Anda.</string>
-    <string name="discord_error_gateway_failed">Koneksi Discord Gateway gagal.</string>
-    <string name="discord_error_heartbeat_unacknowledged">Heartbeat Discord Gateway tidak dikonfirmasi.</string>
-    <string name="discord_error_heartbeat_failed">Heartbeat Discord Gateway gagal.</string>
-    <string name="discord_account_fallback">Pengguna Discord</string>
-    <string name="discord_presence_playing_fallback">Diputar di Chorplay</string>
-    <string name="discord_presence_by_creator">oleh %1$s</string>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <string name="settings_item_interface_mode">Mode antarmuka</string>
     <string name="settings_item_interface_mode_subtitle">Pilih tata letak otomatis, seluler, atau TV</string>
     <string name="interface_mode_title">Mode antarmuka</string>
@@ -2002,7 +1976,7 @@
     <string name="tv_music_no_lyrics">Tidak ada lirik yang ditemukan</string>
     <string name="tv_music_radio">Radio</string>
     <string name="tv_settings_appearance">Tampilan</string>
-    <string name="tv_settings_flow_engine">Chorplay Engine</string>
+    <string name="tv_settings_chor_engine">Chorplay Engine</string>
     <string name="tv_settings_sync">Sinkronkan perangkat</string>
     <string name="tv_sync_qr_session_active">Kode ini tetap aktif selama layar ini terbuka.</string>
     <string name="tv_remote_guide_title">Panduan remote &amp; keypad</string>
@@ -2051,13 +2025,12 @@
     <string name="tv_theme_variant_amoled">AMOLED</string>
     <string name="tv_about_version">Versi %1$s</string>
     <string name="widget_now_playing_label">Sedang Diputar</string>
-    <string name="widget_now_playing_description">Kontrol musik yang sedang diputar di Chorplay</string>
     <string name="widget_quick_actions_label">Tindakan cepat</string>
     <string name="widget_quick_actions_description">Cari Chorplay dan langsung buka unduhan, riwayat, atau pengenalan</string>
-    <string name="widget_recognize_label">Kenali musik</string>
-    <string name="widget_recognize_description">Identifikasi lagu yang diputar di sekitar Anda dengan satu ketukan</string>
-    <string name="widget_turntable_label">Meja putar</string>
-    <string name="widget_turntable_description">Musik Anda sebagai piringan yang berputar</string>
+
+
+
+
     <string name="widget_recently_played_label">Lanjutkan menonton</string>
     <string name="widget_recently_played_description">Lanjutkan video dari posisi terakhir Anda</string>
     <string name="widget_downloads_label">Unduhan</string>
@@ -2070,7 +2043,6 @@
     <string name="widget_next">Trek berikutnya</string>
     <string name="widget_previous">Trek sebelumnya</string>
     <string name="widget_like">Sukai</string>
-    <string name="widget_artwork">Karya seni album</string>
     <string name="widget_open_downloads">Buka unduhan</string>
     <string name="widget_open_history">Buka riwayat</string>
     <string name="widget_no_recent">Video yang Anda tonton akan muncul di sini</string>
@@ -2086,11 +2058,11 @@
     <string name="ui_navigate">Navigasi</string>
     <string name="ui_options">Opsi</string>
     <string name="ui_selected">Dipilih</string>
-    <string name="ui_flow_logo">Logo Chorplay</string>
+    <string name="ui_chorplay_logo">Logo Chorplay</string>
     <string name="ui_list_view">Tampilan daftar</string>
     <string name="ui_grid_view">Tampilan kisi</string>
     <string name="ui_back">Kembali</string>
-    <string name="ui_add_songs">Tambahkan lagu</string>
+
     <string name="ui_close_search">Tutup pencarian</string>
     <string name="ui_save_to_library">Simpan ke koleksi</string>
     <string name="ui_remove_from_library">Hapus dari koleksi</string>
@@ -2099,9 +2071,9 @@
     <string name="ui_added">Ditambahkan</string>
     <string name="ui_sync_lyrics">Sinkronkan lirik</string>
     <string name="ui_downloading_playlist">Mengunduh playlist</string>
-    <string name="ui_no_songs_found">Tidak ada lagu yang ditemukan</string>
-    <string name="ui_search_songs_to_add">Cari lagu untuk ditambahkan…</string>
-    <string name="ui_add_songs_to_playlist">Tambahkan lagu ke playlist</string>
+
+
+
     <string name="ui_show_less">Tampilkan lebih sedikit</string>
     <string name="ui_show_more">Tampilkan lebih banyak</string>
     <string name="ui_try_sabr_download">Coba Unduhan SABR</string>
@@ -2147,7 +2119,7 @@
     <string name="toast_failed_to_add_track">Gagal menambahkan trek</string>
     <string name="toast_removed_from_playlist">Dihapus dari playlist</string>
     <string name="toast_failed_to_remove_track">Gagal menghapus trek</string>
-    <string name="toast_saved_playlist_to_music_library">Playlist disimpan ke koleksi musik Anda</string>
+
     <string name="toast_failed_to_save_playlist">Gagal menyimpan playlist</string>
     <string name="toast_removed_playlist_from_library">Playlist dihapus dari koleksi</string>
     <string name="toast_failed_to_merge_playlist">Gagal menggabungkan playlist</string>
@@ -2167,8 +2139,7 @@
     <string name="notification_channel_downloads_description">Menampilkan kemajuan dan penyelesaian unduhan</string>
     <string name="notification_channel_new_videos_description">Notifikasi saat kanal yang Anda langgani mengunggah video baru</string>
     <string name="notification_channel_video_playback_description">Kontrol pemutaran video</string>
-    <string name="notification_channel_music_playback_description">Kontrol pemutaran musik</string>
-    <string name="notification_download_progress_description">Kemajuan unduhan video dan audio</string>
+<string name="notification_download_progress_description">Kemajuan unduhan video dan audio</string>
     <string name="notification_channel_general_description">Notifikasi aplikasi umum</string>
     <string name="notification_channel_break_reminders_description">Pengingat waktu tidur dan istirahat</string>
     <string name="notification_channel_updates_description">Notifikasi pembaruan aplikasi</string>
@@ -2176,8 +2147,7 @@
     <string name="notification_channel_downloads">Unduhan</string>
     <string name="notification_channel_new_videos">Video Baru</string>
     <string name="notification_channel_video_playback">Pemutaran Video</string>
-    <string name="notification_channel_music_playback">Pemutaran Musik</string>
-    <string name="notification_channel_general">Umum</string>
+<string name="notification_channel_general">Umum</string>
     <string name="notification_channel_reminders">Pengingat</string>
     <string name="notification_channel_updates">Pembaruan Aplikasi</string>
     <string name="notification_channel_imports">Impor Data</string>
@@ -2237,7 +2207,6 @@
     <string name="fallback_unknown_channel">Kanal Tidak Diketahui</string>
     <string name="fallback_unknown_playlist">Playlist Tidak Diketahui</string>
     <string name="fallback_unknown_artist">Artis Tidak Diketahui</string>
-    <string name="fallback_unknown_album">Album Tidak Diketahui</string>
     <string name="fallback_unknown_video">Video Tidak Diketahui</string>
     <string name="fallback_local_video">Video lokal</string>
     <string name="fallback_local_audio">Audio lokal</string>
@@ -2377,9 +2346,7 @@
     <plurals name="videos_count_template">
         <item quantity="other">%1$d video</item>
     </plurals>
-    <plurals name="songs_count_template">
-        <item quantity="other">%1$d lagu</item>
-    </plurals>
+
     <string name="metadata_separator">·</string>
     <string name="player_time_separator">/</string>
     <string name="you">Anda</string>
@@ -2390,7 +2357,7 @@
     <string name="load_failed">Gagal memuat</string>
     <string name="import_success_count">Mengimpor %1$d %2$s</string>
     <string name="import_success">%1$s berhasil diimpor</string>
-    <plurals name="deep_flow_duration_hours">
+    <plurals name="deep_chor_duration_hours">
         <item quantity="other">%1$d jam</item>
     </plurals>
     <plurals name="appearance_themes_count_all">
@@ -2400,9 +2367,7 @@
     <string name="style_thick">Tebal</string>
     <string name="style_compact">Ringkas</string>
     <string name="style_wavy">Bergelombang</string>
-    <plurals name="lyrics_providers_enabled">
-        <item quantity="other">%1$d / %2$d penyedia diaktifkan</item>
-    </plurals>
+
     <plurals name="player_settings_shorts_playback_mode_auto_interval_summary">
         <item quantity="other">Gulir otomatis setiap %1$d detik</item>
     </plurals>
@@ -2458,7 +2423,6 @@
     <string name="import_label_freetube_watch_history">Riwayat tontonan FreeTube</string>
     <string name="import_label_newpipe_watch_history">Riwayat tontonan NewPipe</string>
     <string name="import_label_libretube_subscriptions">Langganan LibreTube</string>
-    <string name="import_label_metrolist_playlists">Daftar putar musik Metrolist</string>
     <string name="import_label_newpipe_playlists">Daftar putar NewPipe</string>
     <string name="import_label_libretube_playlists">Daftar putar LibreTube</string>
     <string name="import_label_youtube_takeout">YouTube Takeout</string>
@@ -2493,7 +2457,7 @@
     <string name="equalizer_frequency_label">F</string>
     <string name="equalizer_gain_label">G</string>
     <string name="equalizer_q_label">Q</string>
-    <string name="section_on_repeat">Diputar Berulang</string>
+
     <string name="section_daily_mix_title">Mix %1$s</string>
     <string name="section_daily_mix_label">Mix Harian</string>
     <string name="daily_mix_page_description">Dibuat dari artis yang Anda dengarkan secara bersamaan. Simpan untuk mempertahankan mix hari ini.</string>
@@ -2510,66 +2474,66 @@
     <string name="section_rotation_evening">Rotasi malam Anda</string>
     <string name="section_rotation_night">Rotasi larut malam Anda</string>
     <string name="source_your_rotation">Rotasi Anda</string>
-    <string name="music_genre_affinity_title">Genre dan suasana hati</string>
-    <string name="music_genre_affinity_subtitle">Dipelajari dari genre dan suasana hati yang benar-benar Anda putar</string>
+
+
     <string name="recommendations_header">Rekomendasi</string>
     <string name="not_interested_desc">Tampilkan lebih sedikit dari artis ini untuk sementara waktu</string>
     <string name="dont_recommend_artist">Jangan rekomendasikan %1$s</string>
     <string name="dont_recommend_artist_desc">Jangan pernah sarankan artis ini lagi</string>
     <string name="feedback_not_interested_applied">Anda akan melihat lebih sedikit %1$s</string>
     <string name="feedback_artist_blocked">%1$s tidak akan direkomendasikan lagi</string>
-    <string name="music_prefs_section_title">Rekomendasi musik</string>
-    <string name="music_endless_radio_title">Radio tanpa akhir</string>
-    <string name="music_endless_radio_desc">Tambahkan lagu serupa saat antrean berakhir</string>
-    <string name="music_content_language_title">Bahasa konten</string>
-    <string name="music_content_language_follow_app">Ikuti bahasa aplikasi</string>
-    <string name="music_content_language_dialog_title">Pilih bahasa konten</string>
-    <string name="music_content_country_title">Negara konten</string>
-    <string name="music_normalize_volume_title">Normalisasi volume</string>
-    <string name="music_normalize_volume_desc">Samakan tingkat volume setiap trek dengan target kenyaringan YouTube Music</string>
+
+
+
+    <string name="content_language_title">Bahasa konten</string>
+    <string name="content_language_follow_app">Ikuti bahasa aplikasi</string>
+    <string name="content_language_dialog_title">Pilih bahasa konten</string>
+    <string name="content_country_title">Negara konten</string>
+
+
     <string name="section_other_versions">Versi lain</string>
-    <string name="music_blocked_artists_title">Artis yang diblokir</string>
-    <string name="music_blocked_artists_empty">Tidak ada artis yang diblokir</string>
-    <string name="music_unblock">Batalkan pemblokiran</string>
-    <string name="export_music_brain_title">Ekspor Data Mesin Musik</string>
-    <string name="export_music_brain_desc">Simpan profil selera musik Anda sebagai file JSON</string>
-    <string name="import_music_brain_title">Impor Data Mesin Musik</string>
-    <string name="import_music_brain_desc">Pulihkan profil selera musik dari file JSON</string>
-    <string name="music_brain_export_success">Data mesin musik berhasil diekspor</string>
-    <string name="music_brain_export_failed">Ekspor data mesin musik gagal</string>
-    <string name="music_brain_import_success">Data mesin musik berhasil diimpor</string>
-    <string name="music_brain_import_failed">Impor mesin musik gagal</string>
-    <string name="music_persona_overview_title">Selera Musik</string>
-    <string name="music_persona_overview_subtitle">Hal yang telah dipelajari mesin musik dari kebiasaan mendengarkan Anda</string>
-    <string name="music_persona_maturity_cold">Tahap awal</string>
-    <string name="music_persona_maturity_warming">Sedang mempelajari</string>
-    <string name="music_persona_maturity_mature">Matang</string>
-    <string name="music_metric_total_plays">Pemutaran yang dihitung</string>
-    <string name="music_metric_total_plays_detail">Dengarkan 50%+</string>
-    <string name="music_metric_artists">Artis</string>
-    <string name="music_metric_artists_detail">dengan selera yang telah dipelajari</string>
-    <string name="music_metric_tracks">Trek yang dilacak</string>
-    <string name="music_metric_tracks_detail">riwayat pemutaran berulang</string>
-    <string name="music_metric_on_repeat">Sering Diputar</string>
-    <string name="music_metric_on_repeat_detail">sedang populer saat ini</string>
-    <string name="music_discovery_appetite">Minat terhadap penemuan</string>
-    <string name="music_discovery_appetite_detail">Seberapa banyak musik baru yang dicampurkan oleh mesin</string>
-    <string name="music_top_artists_title">Artis Teratas</string>
-    <string name="music_top_artists_subtitle">Preferensi terkuat Anda saat ini</string>
-    <string name="music_top_artist_plays">%1$d pemutaran</string>
-    <string name="music_listening_patterns_title">Pola Mendengarkan</string>
-    <string name="music_listening_patterns_subtitle">Waktu Anda benar-benar mendengarkan berdasarkan stempel waktu pemutaran</string>
-    <string name="music_bucket_weekday_morning">Pagi hari kerja</string>
-    <string name="music_bucket_weekday_afternoon">Siang hari kerja</string>
-    <string name="music_bucket_weekday_evening">Sore hari kerja</string>
-    <string name="music_bucket_weekday_night">Malam hari kerja</string>
-    <string name="music_bucket_weekend_morning">Pagi akhir pekan</string>
-    <string name="music_bucket_weekend_afternoon">Siang akhir pekan</string>
-    <string name="music_bucket_weekend_evening">Sore akhir pekan</string>
-    <string name="music_bucket_weekend_night">Malam akhir pekan</string>
-    <string name="music_bucket_plays">%1$d pemutaran</string>
-    <string name="music_blocked_artists_subtitle">Artis yang tidak akan pernah direkomendasikan oleh mesin</string>
-    <string name="music_persona_empty">Putar musik dan mesin akan mulai mempelajari preferensi Anda</string>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <string name="section_charts_in">Tangga lagu di %1$s</string>
     <string name="section_charts_global">Tangga lagu global</string>
     <string name="section_top_artists_in">Artis teratas di %1$s</string>
@@ -2598,8 +2562,7 @@
     <plurals name="remove_incomplete_downloads_message">
         <item quantity="other">Hapus %1$d unduhan yang dijeda, gagal, atau tidak lengkap? Unduhan yang telah selesai tidak akan dihapus.</item>
     </plurals>
-    <string name="sync_collection_music_profile">Profil selera musik</string>
-    <string name="sync_enter_connection_data">Masukkan data koneksi secara manual</string>
+<string name="sync_enter_connection_data">Masukkan data koneksi secara manual</string>
     <string name="sync_enter_connection_data_hint">Tempelkan data koneksi dari perangkat lain.</string>
     <string name="sync_connection_data_label">Data koneksi</string>
     <string name="sync_paste_connection_data">Tempel data koneksi</string>
@@ -2611,18 +2574,17 @@
     <plurals name="sync_selected_count">
         <item quantity="other">%1$d dari %2$d dipilih</item>
     </plurals>
-    <string name="sync_collection_music_profile_body">Hal yang telah dipelajari Chorplay tentang apa yang Anda dengarkan.</string>
-    <string name="diagnostics_report_subject">Laporan Diagnostik Chorplay</string>
+<string name="diagnostics_report_subject">Laporan Diagnostik Chorplay</string>
     <plurals name="merge_playlist_success">
         <item quantity="other">Menambahkan %1$d lagu ke “%2$s”</item>
     </plurals>
     <plurals name="taste_topic_breadth_detail">
         <item quantity="other">%1$d topik dalam vektor global</item>
     </plurals>
-    <string name="widget_on_repeat_label">Sering Diputar</string>
-    <string name="widget_on_repeat">Sering Diputar</string>
-    <string name="widget_on_repeat_description">Lagu yang terus Anda putar kembali</string>
-    <string name="widget_no_on_repeat">Lagu yang sering Anda putar ulang akan muncul di sini</string>
+
+
+
+
     <plurals name="ui_downloading_videos">
         <item quantity="other">Mengunduh %1$d video…</item>
     </plurals>
@@ -2654,7 +2616,7 @@
     <string name="duration_hours_minutes_short">%1$d j %2$d m</string>
     <string name="storage_size_gb">%1$.1f GB</string>
     <string name="duration_hours_decimal">%1$.1f j</string>
-    <string name="music_search_no_results">Tidak ada hasil untuk \"%1$s\"</string>
+
     <string name="audio_bitrate_kbps_template">%1$d kbps</string>
     <string name="scheduled_for_prefix">Dijadwalkan pada %1$s</string>
     <string name="live_in_prefix">Siaran Langsung %1$s</string>
@@ -2766,7 +2728,6 @@
     <string name="quick_action_artists">Artis</string>
     <string name="quick_action_failed">Itu tidak berhasil. Coba lagi.</string>
     <string name="start_radio">Mulai radio</string>
-    <string name="start_radio_desc">Putar stasiun berdasarkan lagu ini</string>
     <plurals name="playlists_count_template">
         <item quantity="other">%1$d playlist</item>
     </plurals>
@@ -2813,7 +2774,7 @@
     <string name="nav_rail_state_expanded">Diperluas</string>
     <string name="nav_rail_state_collapsed">Diciutkan</string>
     <string name="onboarding_channels_results_header">Channel</string>
-    <string name="onboarding_import_source_flow">Cadangan Chorplay</string>
+    <string name="onboarding_import_source_chorplay">Cadangan Chorplay</string>
     <string name="onboarding_import_source_youtube">YouTube</string>
     <string name="onboarding_import_footnote">Semua di sini bersifat opsional. Pengaturan memiliki impor yang sama.</string>
     <string name="onboarding_import_done">Diimpor</string>
@@ -2930,8 +2891,8 @@
     <string name="settings_section_layout">Tata letak</string>
     <string name="settings_section_video_cards">Kartu video</string>
     <string name="settings_section_more">Lainnya</string>
-    <string name="settings_music_artwork_size_title">Ukuran artwork musik</string>
-    <string name="settings_music_artwork_size_summary">Ukuran sampul album dan kartu pada halaman musik</string>
+
+
     <string name="settings_section_tabs">Tab</string>
     <string name="settings_section_tab_order">Urutan dan tab default</string>
     <string name="settings_theme_follow_system">Ikuti sistem</string>
@@ -2953,7 +2914,7 @@
     <string name="settings_value_pair">%1$s · %2$s</string>
     <string name="settings_shorts_tab_disabled_summary">Shorts dinonaktifkan di Feed &amp; konten</string>
     <string name="settings_section_seek_bar">Bilah pencarian</string>
-    <string name="settings_section_music_player">Pemutar musik</string>
+
     <string name="settings_section_video_player">Pemutar video</string>
     <string name="settings_section_mini_player">Pemutar mini</string>
     <string name="settings_seekbar_custom_width">Lebar kustom</string>
@@ -2967,7 +2928,7 @@
     <string name="settings_section_language_captions">Bahasa dan teks tertulis</string>
     <string name="settings_section_watch_page">Halaman tonton</string>
     <string name="settings_section_shorts_player">Pemutar Shorts</string>
-    <string name="settings_section_music">Musik</string>
+
     <string name="settings_section_advanced">Lanjutan</string>
     <string name="settings_keywords_autoplay">video berikutnya, selanjutnya, pemutaran berkelanjutan</string>
     <string name="settings_keywords_captions">subtitle, CC, teks tertulis</string>
@@ -2983,12 +2944,12 @@
     <string name="settings_seconds_value">%1$s dtk</string>
     <string name="settings_quality_tab_video">Video</string>
     <string name="settings_quality_tab_shorts">Shorts</string>
-    <string name="settings_quality_tab_music">Musik</string>
+
     <string name="settings_quality_wifi">Di Wi-Fi</string>
     <string name="settings_quality_mobile">Di data seluler</string>
     <string name="settings_section_resolution">Resolusi</string>
     <string name="settings_section_codec">Codec</string>
-    <string name="settings_music_quality_auto_summary">Tinggi di Wi-Fi, sedang di data seluler</string>
+
     <string name="settings_keywords_quality">resolusi, 1080p, 4K, HD, penggunaan data</string>
     <string name="settings_keywords_codec">h264, avc, vp9, av1, decoding perangkat keras</string>
     <string name="settings_quality_preferred_codec">Codec pilihan</string>
@@ -3003,7 +2964,7 @@
     <string name="settings_keywords_topics">minat, tidak tertarik, sembunyikan, blokir, bisukan, rekomendasi</string>
     <string name="settings_keywords_sponsorblock">lewati sponsor, iklan, segmen, intro, outro</string>
     <string name="settings_keywords_dearrow">clickbait, judul, thumbnail</string>
-    <string name="settings_keywords_discord">rich presence, sedang diputar, status</string>
+
     <string name="settings_segment_colour">Warna untuk %1$s</string>
     <string name="settings_truncated">%1$s…</string>
     <string name="settings_backup_exporting">Mengekspor…</string>
@@ -3012,12 +2973,12 @@
     <string name="settings_backup_tab_auto">Otomatis</string>
     <string name="settings_backup_full">Cadangan lengkap</string>
     <string name="settings_backup_individual">Ekspor individual</string>
-    <string name="settings_backup_restore_flow">Pulihkan dari Chorplay</string>
+    <string name="settings_backup_restore_chorplay">Pulihkan dari Chorplay</string>
     <string name="settings_backup_source_youtube">YouTube dan Google Takeout</string>
     <string name="settings_backup_source_newpipe">NewPipe</string>
     <string name="settings_backup_source_libretube">LibreTube</string>
     <string name="settings_backup_source_freetube">FreeTube</string>
-    <string name="settings_backup_source_metrolist">Metrolist</string>
+
     <string name="settings_backup_one_copy">Setiap cadangan menggantikan cadangan sebelumnya di folder tersebut.</string>
     <string name="settings_backup_needs_folder">Pilih folder terlebih dahulu</string>
     <string name="settings_keywords_backup">ekspor, impor, pulihkan, migrasikan, transfer, takeout, newpipe, libretube, freetube</string>
@@ -3028,7 +2989,7 @@
     <string name="settings_storage_access_summary">Juga memungkinkan Media lokal mencantumkan file yang disimpan oleh aplikasi lain</string>
     <string name="settings_storage_usage">%1$s tersedia dari %2$s</string>
     <string name="settings_location_default">Default</string>
-    <string name="settings_music_folder_label">Musik / Chorplay</string>
+
     <string name="settings_keywords_downloads">simpan offline, folder, penyimpanan, kartu SD</string>
     <string name="settings_section_notification_types">Beri tahu saya tentang</string>
     <string name="settings_keywords_notifications">pemberitahuan, push, unggahan baru, pemeriksaan latar belakang</string>
@@ -3157,8 +3118,8 @@
     <string name="taste_channels_header">Channel yang diprioritaskan</string>
     <string name="taste_channel_block">Blokir channel</string>
     <string name="taste_item_actions">Opsi lainnya untuk %1$s</string>
-    <string name="taste_music_header">Selera musik</string>
-    <string name="taste_music_stage">Tahap pembelajaran</string>
+
+
     <string name="taste_hidden_title">Disembunyikan dari Anda</string>
     <string name="taste_hidden_summary">Topik, channel, dan artis yang diblokir</string>
     <plurals name="taste_hidden_count">
@@ -3176,12 +3137,12 @@
     <string name="taste_export_video">Ekspor profil video</string>
     <string name="taste_import_video">Impor profil video</string>
     <string name="taste_reset_video">Atur ulang profil video</string>
-    <string name="taste_export_music">Ekspor profil musik</string>
-    <string name="taste_import_music">Impor profil musik</string>
-    <string name="taste_reset_music">Atur ulang profil musik</string>
+
+
+
     <string name="taste_reset_video_body">Ini menghapus data yang dipelajari Chorplay dari video Anda dan memulai ulang dari nol. Ringkasan serta channel, topik, dan video tersembunyi Anda tetap tersimpan.</string>
-    <string name="taste_reset_music_title">Atur ulang profil musik?</string>
-    <string name="taste_reset_music_body">Tindakan ini menghapus data yang dipelajari Chorplay dari musik Anda dan memulai kembali dari nol. Rekap Anda tetap ada.</string>
+
+
     <string name="taste_trait_now">Sekarang %1$s</string>
     <string name="taste_reset_done">Profil diatur ulang</string>
     <string name="diagnostics_engine_header">Detail mesin</string>
@@ -3194,8 +3155,7 @@
     <string name="recap_period_all">Sepanjang waktu</string>
     <string name="recap_source_all">Semuanya</string>
     <string name="recap_source_video">Video</string>
-    <string name="recap_source_music">Musik</string>
-    <string name="recap_total_time">Waktu di Chorplay</string>
+<string name="recap_total_time">Waktu di Chorplay</string>
     <string name="recap_delta_up">%1$s lebih banyak daripada periode sebelumnya</string>
     <string name="recap_delta_down">%1$s lebih sedikit daripada periode sebelumnya</string>
     <string name="recap_delta_same">Kurang lebih sama dengan periode sebelumnya</string>
@@ -3234,8 +3194,7 @@
     <string name="recap_format_long">Video</string>
     <string name="recap_format_shorts">Shorts</string>
     <string name="recap_format_live">Live</string>
-    <string name="recap_format_music">Musik</string>
-    <string name="recap_format_share">%1$s · %2$s</string>
+<string name="recap_format_share">%1$s · %2$s</string>
     <string name="recap_discoveries_title">Baru bagi Anda</string>
     <plurals name="recap_new_channels">
         <item quantity="other">%d channel baru</item>
@@ -3302,8 +3261,7 @@
     <string name="recap_story_streak_body">Hari tersibuk Anda adalah %1$s, dengan %2$s</string>
     <string name="recap_story_artist">Artis teratas Anda</string>
     <string name="recap_story_artist_body">%1$s, %2$d%% dari semua yang Anda putar</string>
-    <string name="recap_story_songs">Lagu yang terus Anda dengarkan</string>
-    <string name="recap_story_new">Baru bagi Anda</string>
+<string name="recap_story_new">Baru bagi Anda</string>
     <string name="recap_story_passed">Yang Anda lewati</string>
     <string name="recap_story_formats">Cara Anda menonton</string>
     <string name="recap_story_sponsor">Waktu yang dikembalikan SponsorBlock</string>
@@ -3357,8 +3315,8 @@
     <string name="pause_watch_history_title">Jeda riwayat tontonan</string>
     <string name="pause_watch_history_subtitle">Berhenti menyimpan tontonan Anda. Deep Chorplay juga berhenti belajar</string>
     <string name="content_settings_hide_watched_shorts_subtitle">Jangan tampilkan Shorts yang telah selesai ditonton dari rak dan feed Shorts</string>
-    <string name="settings_open_music_player_on_play_title">Buka pemutar penuh untuk lagu baru</string>
-    <string name="settings_open_music_player_on_play_summary">Nonaktif akan mempertahankan lagu baru di pemutar mini</string>
+
+
     <string name="cache_size_1gb">1 GB</string>
     <string name="cache_size_2gb">2 GB</string>
     <string name="cache_size_5gb">5 GB</string>
@@ -3370,18 +3328,17 @@
     <string name="concurrent_downloads_title">Unduhan sekaligus</string>
     <string name="concurrent_downloads_summary">Jumlah file yang diunduh pada waktu yang sama</string>
     <string name="download_location_not_writable">Tidak dapat menyimpan di sana. Menggunakan %1$s</string>
-    <string name="settings_music_video_switch_title">Peralihan lagu dan video</string>
-    <string name="settings_music_video_switch_summary">Beralih antara lagu dan video musiknya di pemutar</string>
+
+
     <string name="music_player_mode_song">Lagu</string>
     <string name="music_player_mode_video">Video</string>
-    <string name="music_video_unavailable">Lagu ini tidak memiliki video musik</string>
-    <string name="music_video_failed">Tidak dapat memuat video musik</string>
-    <string name="music_watch_video">Tonton video</string>
-    <string name="settings_pause_music_muted_title">Jeda musik saat dibisukan</string>
-    <string name="settings_pause_music_muted_summary">Lanjutkan saat volume kembali aktif</string>
-    <string name="music_watch_video_desc">Buka video musik di pemutar video</string>
+
+
+
+
+
+
     <string name="player_appearance_animated_artwork_title">Sampul animasi</string>
-    <string name="player_appearance_animated_artwork_subtitle">Ulangi artwork bergerak album jika tersedia</string>
     <string name="player_appearance_animated_artwork_wifi_title">Sampul animasi hanya melalui Wi-Fi</string>
     <string name="player_appearance_animated_artwork_wifi_subtitle">Pertahankan sampul tetap diam saat menggunakan data seluler</string>
     <string name="eq_preset_flat">Datar</string>
@@ -3471,9 +3428,9 @@
     <string name="eq_settings_summary">Prasetel, band, dan impor AutoEQ</string>
     <string name="eq_settings_keywords">equalizer, eq, bass, treble, autoeq, preamp, suara</string>
     <string name="eq_reset_done">Kurva diatur ulang</string>
-    <string name="music_search_section_artists">Artis</string>
-    <string name="music_search_section_playlists">Playlist</string>
-    <string name="music_search_section_episodes">Episode</string>
+
+
+
     <string name="download_quality_hdr">HDR</string>
     <string name="download_storage_access_prompt">Berikan akses penyimpanan untuk menyimpan unduhan di folder publik (opsional)</string>
     <string name="subtitle_forced">dipaksakan</string>
@@ -3521,8 +3478,8 @@
     </plurals>
     <string name="widget_browse_downloads">Telusuri unduhan</string>
     <string name="widget_shuffle">Acak</string>
-    <string name="widget_identify_song">Identifikasi lagu</string>
-    <string name="widget_open_music">Buka Musik</string>
+
+
     <string name="widget_config_shortcuts">Pintasan</string>
     <string name="widget_config_shortcuts_footer">Pilih hingga empat. Pencarian selalu tersedia.</string>
     <string name="widget_playlist_label">Playlist</string>
@@ -3531,9 +3488,7 @@
     <string name="widget_config_playlist">Playlist Anda</string>
     <string name="widget_playlist_empty">Belum ada apa pun di sini</string>
     <string name="widget_refresh">Muat ulang</string>
-    <plurals name="widget_playlist_songs">
-        <item quantity="other">%d lagu</item>
-    </plurals>
+
     <plurals name="widget_playlist_videos">
         <item quantity="other">%d video</item>
     </plurals>
@@ -3585,9 +3540,7 @@
     <plurals name="local_videos_count">
         <item quantity="other">%1$d video</item>
     </plurals>
-    <plurals name="local_songs_count">
-        <item quantity="other">%1$d lagu</item>
-    </plurals>
+
     <string name="local_menu_hide_folder">Sembunyikan folder ini</string>
     <string name="local_menu_delete_trash">Memindahkannya ke sampah selama 30 hari</string>
     <string name="local_menu_delete_permanent">Menghapusnya dari perangkat ini</string>
@@ -3631,7 +3584,7 @@
     <string name="downloads_storage_used">%1$s di Chorplay</string>
     <string name="downloads_storage_free">%1$s tersedia</string>
     <string name="downloads_storage_videos">Video %1$s</string>
-    <string name="downloads_storage_music">Musik %1$s</string>
+    <string name="downloads_storage_audio">Musik %1$s</string>
     <string name="downloads_section_in_progress">Sedang berlangsung</string>
     <string name="downloads_section_downloaded">Diunduh</string>
     <string name="download_bytes_progress">%1$s dari %2$s</string>
@@ -3659,8 +3612,8 @@
     <string name="import_no_likes">Tidak ditemukan suka. Ekspor My Activity untuk YouTube sebagai JSON, dengan akun Google Anda menggunakan bahasa Inggris.</string>
     <string name="removed_from_queue">Dihapus dari antrean</string>
     <string name="queue_after_this_template">%1$s setelah ini</string>
-    <string name="settings_music_download_quality">Kualitas unduhan lagu</string>
-    <string name="settings_music_download_quality_summary">Digunakan untuk lagu, album, dan playlist musik</string>
+
+
     <string name="download_retag_title">Tag untuk unduhan lama</string>
     <string name="download_retag_waiting">Menunggu untuk dimulai</string>
     <string name="download_retag_progress">Menambahkan tag, %1$d dari %2$d</string>
@@ -3686,47 +3639,24 @@
         <item quantity="other">%d video yang telah ditonton dihapus</item>
     </plurals>
     <string name="liked_videos_playlist">Video yang disukai</string>
-    <string name="liked_music_playlist">Musik yang disukai</string>
+
     <string name="liked_videos_empty_title">Belum ada video yang disukai</string>
     <string name="liked_videos_empty_body">Video yang Anda sukai akan muncul di sini</string>
     <string name="remove_selected_likes_text">Video tersebut tidak akan disukai lagi.</string>
-    <string name="removed_from_liked_music">Dihapus dari Musik yang disukai</string>
+
     <string name="liked_video_template">Menyukai %1$s</string>
-    <string name="liked_music_empty_title">Belum ada lagu yang disukai</string>
-    <string name="liked_music_empty_body">Lagu yang Anda sukai di pemutar musik akan muncul di sini</string>
+
+
     <plurals name="liked_videos_removed">
         <item quantity="other">%d video batal disukai</item>
     </plurals>
-    <string name="music_kind_album">Album</string>
-    <string name="music_kind_saved">Disimpan ke koleksi Anda</string>
-    <string name="music_playlist_empty_title">Playlist ini kosong</string>
-    <string name="music_playlist_empty_body">Tambahkan lagu dari menu di bagian atas</string>
-    <plurals name="songs_removed_from_playlist">
-        <item quantity="other">%d lagu dihapus</item>
-    </plurals>
-    <plurals name="songs_unliked">
-        <item quantity="other">%d lagu batal disukai</item>
-    </plurals>
-    <string name="music_sort_collection">Urutan playlist</string>
-    <string name="music_sort_album_order">Urutan album</string>
-    <string name="music_sort_recently_liked">Terakhir disukai</string>
-    <string name="music_sort_title">Judul</string>
-    <string name="music_sort_artist">Artis</string>
-    <string name="music_sort_album">Album</string>
-    <string name="music_sort_longest">Terpanjang terlebih dahulu</string>
-    <string name="music_sort_shortest">Terpendek terlebih dahulu</string>
-    <string name="music_collection_no_matches">Tidak ada lagu yang cocok dengan “%1$s”</string>
-    <string name="select_songs">Pilih lagu</string>
-    <plurals name="music_playlist_imported">
-        <item quantity="other">%1$s diimpor, %2$d lagu</item>
-    </plurals>
-    <plurals name="songs_downloading">
-        <item quantity="other">Mengunduh %d lagu</item>
-    </plurals>
-    <plurals name="songs_download_queued">
-        <item quantity="other">%d lagu dalam antrean unduhan</item>
-    </plurals>
-    <string name="songs_download_nothing_new">Semua yang ada di sini sudah diunduh atau tidak tersedia</string>
+
+
+    <string name="playlist_sort_longest">Terpanjang terlebih dahulu</string>
+    <string name="playlist_sort_shortest">Terpendek terlebih dahulu</string>
+
+
+
     <string name="save_as_playlist">Simpan sebagai playlist</string>
     <string name="daily_mix_saved_as_playlist">%1$s disimpan ke playlist Anda</string>
     <string name="home_reason_channel_memory">Dari channel yang Anda tonton</string>
@@ -3748,7 +3678,7 @@
     <string name="home_chip_failed">Tidak dapat memuat saat ini.</string>
     <string name="home_mix_title">Mix - %1$s</string>
     <string name="library_video_playlists">Playlist video</string>
-    <string name="library_music_playlists">Playlist musik</string>
+
     <string name="playlists_sort_newest">Terbaru</string>
     <string name="playlists_sort_oldest">Terlama</string>
     <string name="playlists_sort_name">Nama</string>
@@ -3756,16 +3686,14 @@
     <string name="playlists_reorder">Atur ulang playlist</string>
     <string name="playlists_show_list">Tampilkan sebagai daftar</string>
     <string name="playlists_show_grid">Tampilkan sebagai kisi</string>
-    <string name="settings_separate_playlists_title">Pisahkan playlist video dan musik</string>
     <string name="settings_separate_playlists_summary">Tampilkan sebagai dua entri di Koleksi</string>
-    <string name="music_home_your_playlists">Playlist Anda</string>
-    <string name="settings_music_normal_speed_title">Putar musik dengan kecepatan normal</string>
-    <string name="settings_music_normal_speed_summary">Video musik dimulai pada 1x</string>
+
+
+
     <string name="settings_speed_per_channel_title">Ingat kecepatan per channel</string>
     <string name="settings_speed_per_channel_summary">Setiap channel dimulai dengan kecepatan terakhir yang Anda pilih</string>
-    <string name="music_collection_suggestions">Saran</string>
+
     <string name="favourite_artists_title">Artis favorit</string>
-    <string name="favourite_artists_summary">Pilih artis untuk membentuk rekomendasi musik Anda</string>
     <string name="favourite_artists_search">Cari artis</string>
     <string name="favourite_artists_picked">Pilihan Anda</string>
     <string name="favourite_artists_popular">Populer saat ini</string>
@@ -3775,16 +3703,15 @@
     <string name="favourite_artists_remove">Hapus %1$s</string>
     <string name="settings_auto_download_likes_title">Unduh lagu yang disukai</string>
     <string name="settings_auto_download_likes_summary">Lagu yang Anda sukai disimpan untuk diputar offline</string>
-    <string name="recap_top_albums">Album teratas</string>
-    <string name="music_home_your_subscriptions">Langganan Anda</string>
-    <string name="music_home_shelf_rotation">Mix berdasarkan waktu</string>
-    <string name="music_home_shelf_similar">Mix harian dan artis serupa</string>
-    <string name="music_home_shelf_genres">Mix genre</string>
-    <string name="music_home_shelf_more">Lainnya dari YouTube Music</string>
-    <string name="music_home_shelf_charts">Tangga lagu</string>
-    <string name="settings_music_home_title">Beranda musik</string>
-    <string name="settings_music_home_summary">Pilih bagian yang ditampilkan di Beranda Musik</string>
-    <string name="settings_music_home_sections">Bagian</string>
+
+
+
+
+
+
+
+
+
     <string name="onboarding_step_artists">Artis</string>
     <string name="onboarding_artists_title">Pilih beberapa artis</string>
     <string name="onboarding_artists_subtitle">Pilihan musik Anda akan dimulai dari artis tersebut. Lewati jika Anda mau.</string>
@@ -3792,60 +3719,4 @@
     <plurals name="onboarding_ready_artists">
         <item quantity="other">%d artis</item>
     </plurals>
-    <string name="scrobbling_title">Scrobbling</string>
-    <string name="scrobbling_summary">Kirim riwayat musik yang Anda dengarkan ke Last.fm, Libre.fm, atau ListenBrainz</string>
-    <string name="settings_keywords_scrobbling">scrobble scrobbling last.fm lastfm libre.fm librefm listenbrainz</string>
-    <string name="scrobbling_lastfm">Last.fm</string>
-    <string name="scrobbling_librefm">Libre.fm</string>
-    <string name="scrobbling_listenbrainz">ListenBrainz</string>
-    <string name="scrobbling_account">Akun</string>
-    <string name="scrobbling_signed_in_as">Masuk sebagai %1$s</string>
-    <string name="scrobbling_signed_in">Sudah masuk</string>
-    <string name="scrobbling_not_signed_in">Belum masuk</string>
-    <string name="scrobbling_needs_key">Tambahkan API key Anda sendiri di bawah untuk masuk</string>
-    <string name="scrobbling_own_key">Gunakan API key Anda sendiri</string>
-    <string name="scrobbling_own_key_summary">Mengubahnya akan mengeluarkan Anda dari Last.fm</string>
-    <string name="scrobbling_own_key_values">API key dan secret</string>
-    <string name="scrobbling_own_key_missing">Belum diatur</string>
-    <string name="scrobbling_options">Opsi</string>
-    <string name="scrobbling_now_playing">Tampilkan yang sedang diputar</string>
-    <string name="scrobbling_now_playing_summary">Layanan dapat melihat lagu saat sedang diputar</string>
-    <string name="scrobbling_local">Scrobble file di perangkat ini</string>
-    <string name="scrobbling_local_summary">Menggunakan tag artis dan judul dari setiap file</string>
-    <string name="scrobbling_send_now">Kirim riwayat dengar yang tertunda</string>
-    <plurals name="scrobbling_waiting">
-        <item quantity="other">%d tertunda</item>
-    </plurals>
-    <string name="scrobbling_sign_in_title">Masuk ke %1$s</string>
-    <string name="scrobbling_user_name">Nama pengguna</string>
-    <string name="scrobbling_password">Kata sandi</string>
-    <string name="scrobbling_password_note">Kata sandi Anda dikirim sekali dan tidak pernah disimpan.</string>
-    <string name="scrobbling_token">Token pengguna</string>
-    <string name="scrobbling_token_note">Salin dari listenbrainz.org/settings.</string>
-    <string name="scrobbling_sign_in">Masuk</string>
-    <string name="scrobbling_sign_in_failed">Gagal masuk</string>
-    <string name="scrobbling_sign_out_title">Keluar dari %1$s?</string>
-    <string name="scrobbling_sign_out_body">Riwayat dengar yang menunggu untuk dikirim akan dihapus.</string>
-    <string name="scrobbling_sign_out">Keluar</string>
-    <string name="scrobbling_own_key_dialog_title">API key Last.fm Anda</string>
-    <string name="scrobbling_own_key_dialog_body">Buat secara gratis di last.fm/api/account/create.</string>
-    <string name="scrobbling_api_key">API key</string>
-    <string name="scrobbling_secret">Shared secret</string>
-    <string name="scrobbling_show_secret">Tampilkan</string>
-    <string name="scrobbling_hide_secret">Sembunyikan</string>
-    <string name="scrobbling_send_likes">Tandai lagu yang disukai sebagai loved</string>
-    <string name="scrobbling_send_likes_summary">Lagu yang disukai akan ditampilkan sebagai trek loved di Last.fm dan Libre.fm</string>
-    <string name="scrobbling_import">Impor artis teratas Anda</string>
-    <string name="scrobbling_import_summary">Menambahkan artis yang paling sering Anda putar ke artis favorit</string>
-    <string name="scrobbling_import_offer_title">Bentuk rekomendasi musik Anda dengan %1$s?</string>
-    <string name="scrobbling_import_offer_body">Chorplay menambahkan 20 artis yang paling sering Anda putar selama setahun terakhir ke artis favorit. Anda dapat menghapusnya kapan saja nanti.</string>
-    <string name="scrobbling_import_action">Impor</string>
-    <string name="scrobbling_import_later">Jangan sekarang</string>
-    <plurals name="scrobbling_import_done">
-        <item quantity="other">%d artis ditambahkan ke artis favorit Anda</item>
-    </plurals>
-    <string name="scrobbling_import_none">Tidak ada artis baru untuk ditambahkan</string>
-    <string name="scrobbling_import_failed">Tidak dapat membaca artis teratas Anda</string>
-    <string name="music_home_lastfm_discover">Temukan musik melalui Last.fm</string>
-    <string name="music_home_lastfm_discover_subtitle">Dipilih oleh pendengar Last.fm berdasarkan lagu yang sering Anda putar</string>
 </resources>

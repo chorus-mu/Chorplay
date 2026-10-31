@@ -44,7 +44,7 @@ private val PresetBorder = 1.dp
 private val PresetSpacing = 4.dp
 private const val LIGHT_SWATCH_LUMINANCE = 0.5f
 
-internal enum class IntegrationsDialog { USER_ID, DISCORD_RISK }
+internal enum class IntegrationsDialog { USER_ID }
 
 @Composable
 internal fun IntegrationsDialogs(
@@ -61,7 +61,10 @@ internal fun IntegrationsDialogs(
                 title = { Text(stringResource(R.string.sb_user_id_dialog_title)) },
                 text = {
                     Column(verticalArrangement = Arrangement.spacedBy(PresetSpacing)) {
-                        Text(stringResource(R.string.sb_user_id_dialog_body), style = MaterialTheme.typography.bodyMedium)
+                        Text(
+                            stringResource(R.string.sb_user_id_dialog_body),
+                            style = MaterialTheme.typography.bodyMedium
+                        )
                         OutlinedTextField(
                             value = input,
                             onValueChange = { input = it },
@@ -80,20 +83,6 @@ internal fun IntegrationsDialogs(
             )
         }
 
-        IntegrationsDialog.DISCORD_RISK -> {
-            ChorplayAlertDialog(
-                onDismissRequest = onDismiss,
-                title = { Text(stringResource(R.string.discord_presence_risk_dialog_title)) },
-                text = { Text(stringResource(R.string.discord_presence_risk_dialog_body)) },
-                confirmButton = {
-                    Button(onClick = {
-                        viewModel.connectDiscord()
-                        onDismiss()
-                    }) { Text(stringResource(R.string.discord_presence_risk_accept)) }
-                },
-                dismissButton = { TextButton(onClick = onDismiss) { Text(stringResource(R.string.cancel)) } },
-            )
-        }
 
         null -> {
             Unit
@@ -101,7 +90,6 @@ internal fun IntegrationsDialogs(
     }
 }
 
-/** Picks a segment colour from the presets, or goes back to the category's default. */
 @Composable
 internal fun SegmentColourDialog(
     category: String,

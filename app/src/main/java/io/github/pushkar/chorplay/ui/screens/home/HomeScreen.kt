@@ -83,7 +83,7 @@ fun HomeScreen(
     val homeFeedEnabled by preferences.homeFeedEnabled.collectAsStateWithLifecycle(initialValue = true)
     val refreshHomeOnReselect by preferences.refreshHomeOnReselect.collectAsStateWithLifecycle(initialValue = true)
     val showAppLogoIcon by preferences.showAppLogoIcon.collectAsStateWithLifecycle(initialValue = true)
-    val deepFlowActive by preferences.deepFlowActive.collectAsStateWithLifecycle(initialValue = false)
+    val deepChorActive by preferences.deepChorActive.collectAsStateWithLifecycle(initialValue = false)
 
     val gridStates = rememberHomeGridStates()
     val coroutineScope = rememberCoroutineScope()
@@ -112,13 +112,13 @@ fun HomeScreen(
 
     val haptic = LocalHapticFeedback.current
     val homeLabel = stringResource(R.string.nav_home)
-    val deepFlowLabel = stringResource(R.string.deep_flow_mode_title)
+    val deepChorLabel = stringResource(R.string.deep_chor_mode_title)
     val reselectHome: () -> Unit = { TabScrollEventBus.emitScrollToTop(ChorplayTab.Home.route) }
     val toggleDeepChorplay: () -> Unit = {
         haptic.performHapticFeedback(HapticFeedbackType.LongPress)
         coroutineScope.launch { DeepChorplayManager.toggle(context) }
     }
-    val logoClicks = Modifier.homeLogoClicks(homeLabel, deepFlowLabel, onClick = reselectHome, onLongClick = toggleDeepChorplay)
+    val logoClicks = Modifier.homeLogoClicks(homeLabel, deepChorLabel, onClick = reselectHome, onLongClick = toggleDeepChorplay)
 
     Scaffold(
         modifier = modifier.fillMaxSize(),
@@ -143,7 +143,7 @@ fun HomeScreen(
                     if (showAppLogoIcon) {
                         {
                             ChorplayHeaderLogoIcon(
-                                isDeepChorplayActive = deepFlowActive,
+                                isDeepChorplayActive = deepChorActive,
                                 modifier = Modifier.size(32.dp).then(logoClicks),
                             )
                         }

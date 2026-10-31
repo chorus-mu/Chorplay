@@ -37,7 +37,7 @@ internal data class DownloadSaveFolder(
 
 /** Starts the downloads both download dialogs offer, asking for storage access once on the way. */
 internal object DownloadLauncher {
-    private const val STORAGE_PREFS = "flow_storage_prefs"
+    private const val STORAGE_PREFS = "chorplay_storage_prefs"
     private const val STORAGE_PERMISSION_ASKED = "storage_permission_asked"
 
     /**

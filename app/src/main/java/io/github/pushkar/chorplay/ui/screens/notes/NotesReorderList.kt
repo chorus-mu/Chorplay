@@ -30,7 +30,7 @@ import androidx.compose.ui.unit.dp
 import io.github.pushkar.chorplay.R
 import io.github.pushkar.chorplay.data.notes.Note
 import io.github.pushkar.chorplay.data.notes.NoteKind
-import io.github.pushkar.chorplay.ui.components.layout.flowContentPadding
+import io.github.pushkar.chorplay.ui.components.layout.chorContentPadding
 import io.github.pushkar.chorplay.ui.components.shared.ChannelAvatarImage
 import io.github.pushkar.chorplay.ui.components.shared.MediaRow
 import io.github.pushkar.chorplay.ui.components.shared.MediaThumbnail
@@ -76,7 +76,7 @@ internal fun NotesReorderList(
     val moveDownLabel = stringResource(R.string.move_down)
     val channelNoteLabel = stringResource(R.string.note_channel_note)
     val unknownVideoLabel = stringResource(R.string.note_unknown_video)
-    LazyColumn(state = listState, modifier = modifier.fillMaxSize(), contentPadding = flowContentPadding()) {
+    LazyColumn(state = listState, modifier = modifier.fillMaxSize(), contentPadding = chorContentPadding()) {
         itemsIndexed(ordered, key = { _, note -> note.key }) { index, note ->
             ReorderableItem(reorderState, key = note.key) { isDragging ->
                 val itemScope = this

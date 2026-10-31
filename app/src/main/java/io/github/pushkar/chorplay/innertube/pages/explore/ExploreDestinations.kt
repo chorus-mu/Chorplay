@@ -7,9 +7,6 @@ package io.github.pushkar.chorplay.innertube.pages.explore
  * ANDROID, IOS, TVHTML5 and WEB_REMIX, with and without the legacy tab tokens, at any `gl`
  * (probed 2026-09-18). Do not try to revive them with a client swap or a params token.
  *
- * charts.youtube.com, which served the music and movie charts, answers 429 to every keyless request
- * since 2026-10-08. Music reads YouTube Music's charts instead; movies have no anonymous source.
- *
  * Only the browse ids live here. Every shelf and tab token is read back out of the response that
  * carried it, so a token rotation cannot strand a destination.
  */
@@ -19,7 +16,6 @@ enum class ExploreDestination(
 ) {
     LIVE("UC4R8DWoMoI7CAwX8_LjQHig", ExploreSectionKind.SHELVES),
     GAMING("UCOpNcN46UbXVtpKMrmU4Abg", ExploreSectionKind.GRID),
-    MUSIC(MUSIC_CHARTS_BROWSE_ID, ExploreSectionKind.CHART),
     NEWS("FEnews_destination", ExploreSectionKind.SHELVES),
     SPORTS("UCEgdi0XIXXZ-qJOFPf4JSKw", ExploreSectionKind.SHELVES),
     LEARNING("UCtFRv9O2AHqOZjjynzrv-xg", ExploreSectionKind.SHELVES),
@@ -41,11 +37,6 @@ enum class ExploreSectionKind {
 
     /** A flat grid of videos. */
     GRID,
-
-    /** A ranked, unpaginated chart read from YouTube Music's charts. */
-    CHART,
 }
 
-internal const val MUSIC_CHARTS_BROWSE_ID = "FEmusic_charts"
-
-private const val GAMING_TRENDING_PARAMS = "Egh0cmVuZGluZw%3D%3D"
+private const val GAMING_TRENDING_PARAMS = "4gIKGgh0cmVuZGluZw%3D%3D"

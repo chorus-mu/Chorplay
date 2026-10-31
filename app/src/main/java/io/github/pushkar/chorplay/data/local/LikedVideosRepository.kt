@@ -192,9 +192,7 @@ class LikedVideosRepository private constructor(
             }
         }
 
-    fun getLikedVideosFlow(): Flow<List<LikedVideoInfo>> = getAllLikedVideos().map { list -> list.filter { !it.isMusic } }
-
-    fun getLikedMusicFlow(): Flow<List<LikedVideoInfo>> = getAllLikedVideos().map { list -> list.filter { it.isMusic } }
+    fun getLikedVideosFlow(): Flow<List<LikedVideoInfo>> = getAllLikedVideos()
 
     private fun serializeVideo(video: LikedVideoInfo): String = LikeJson.encodeToString(LikedVideoInfo.serializer(), video)
 }

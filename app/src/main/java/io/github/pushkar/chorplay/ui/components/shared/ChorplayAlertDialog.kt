@@ -27,7 +27,7 @@ private val HeaderSpacing = 16.dp
 private val ButtonSpacing = 8.dp
 
 /** The spacing every Chorplay dialog shares, including the ones that lay out their own content. */
-object FlowDialogDefaults {
+object ChorDialogDefaults {
     /** Around the dialog's content, on every side but the bottom. */
     val ContentPadding = 24.dp
 
@@ -67,10 +67,10 @@ fun ChorplayAlertDialog(
             Column(
                 modifier =
                     Modifier.padding(
-                        start = FlowDialogDefaults.ContentPadding,
-                        top = FlowDialogDefaults.ContentPadding,
-                        end = FlowDialogDefaults.ContentPadding,
-                        bottom = FlowDialogDefaults.BottomPadding,
+                        start = ChorDialogDefaults.ContentPadding,
+                        top = ChorDialogDefaults.ContentPadding,
+                        end = ChorDialogDefaults.ContentPadding,
+                        bottom = ChorDialogDefaults.BottomPadding,
                     ),
             ) {
                 icon?.let {
@@ -92,7 +92,7 @@ fun ChorplayAlertDialog(
                         Box(
                             Modifier
                                 .weight(weight = 1f, fill = false)
-                                .padding(bottom = FlowDialogDefaults.ActionsSpacing)
+                                .padding(bottom = ChorDialogDefaults.ActionsSpacing)
                                 .align(Alignment.Start),
                         ) { it() }
                     }

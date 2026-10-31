@@ -26,7 +26,7 @@ import io.github.pushkar.chorplay.ui.components.settings.choice
 import io.github.pushkar.chorplay.ui.components.settings.nav
 import io.github.pushkar.chorplay.ui.components.settings.switch
 import io.github.pushkar.chorplay.ui.components.shared.ChorplayAlertDialog
-import io.github.pushkar.chorplay.ui.components.shared.FlowChoice
+import io.github.pushkar.chorplay.ui.components.shared.ChorChoice
 import io.github.pushkar.chorplay.ui.components.shared.ChorplayChoiceDialog
 import io.github.pushkar.chorplay.ui.screens.settings.index.HistoryIndex
 
@@ -42,7 +42,6 @@ private val RetentionPeriods =
         365 to R.string.period_one_year,
     )
 
-/** Whether Chorplay keeps your watch history, what it remembers about your searches, and for how long. */
 @Composable
 internal fun HistorySettingsScreen(
     onBack: (() -> Unit)?,
@@ -101,7 +100,11 @@ internal fun HistorySettingsScreen(
                 icon = Icons.Outlined.AutoDelete,
             )
             if (autoDelete) {
-                choice(HistoryIndex.retention, onClick = { dialog = HistoryDialog.RETENTION }, icon = Icons.Outlined.Schedule) {
+                choice(
+                    HistoryIndex.retention,
+                    onClick = { dialog = HistoryDialog.RETENTION },
+                    icon = Icons.Outlined.Schedule
+                ) {
                     pluralStringResource(R.plurals.delete_older_than_template, retentionDays, retentionDays)
                 }
             }
@@ -119,7 +122,12 @@ internal fun HistorySettingsScreen(
             ChorplayChoiceDialog(
                 title = stringResource(R.string.max_history_size_title),
                 description = stringResource(R.string.choose_history_size),
-                options = HistorySizes.map { FlowChoice(it, pluralStringResource(R.plurals.searches_count_template, it, it)) },
+                options = HistorySizes.map {
+                    ChorChoice(
+                        it,
+                        pluralStringResource(R.plurals.searches_count_template, it, it)
+                    )
+                },
                 selected = maxSize,
                 onSelect = viewModel::setMaxSize,
                 onDismiss = { dialog = null },
@@ -130,7 +138,7 @@ internal fun HistorySettingsScreen(
             ChorplayChoiceDialog(
                 title = stringResource(R.string.retention_period_title),
                 description = stringResource(R.string.delete_searches_older_than),
-                options = RetentionPeriods.map { (days, label) -> FlowChoice(days, stringResource(label)) },
+                options = RetentionPeriods.map { (days, label) -> ChorChoice(days, stringResource(label)) },
                 selected = retentionDays,
                 onSelect = viewModel::setRetentionDays,
                 onDismiss = { dialog = null },

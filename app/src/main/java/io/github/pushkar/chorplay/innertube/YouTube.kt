@@ -47,7 +47,6 @@ import io.github.pushkar.chorplay.innertube.pages.ArtistItemsContinuationPage
 import io.github.pushkar.chorplay.innertube.pages.ArtistItemsPage
 import io.github.pushkar.chorplay.innertube.pages.ArtistPage
 import io.github.pushkar.chorplay.innertube.pages.BrowseResult
-import io.github.pushkar.chorplay.innertube.pages.ChartsPage
 import io.github.pushkar.chorplay.innertube.pages.ExplorePage
 import io.github.pushkar.chorplay.innertube.pages.HistoryPage
 import io.github.pushkar.chorplay.innertube.pages.HomePage
@@ -82,7 +81,6 @@ import io.github.pushkar.chorplay.innertube.pages.channel.toChannelShortsPage
 import io.github.pushkar.chorplay.innertube.pages.channel.toChannelTabContent
 import io.github.pushkar.chorplay.innertube.pages.channel.toChannelTabs
 import io.github.pushkar.chorplay.innertube.pages.explore.ExploreDestinationPage
-import io.github.pushkar.chorplay.innertube.pages.explore.MusicVideoChart
 import io.github.pushkar.chorplay.innertube.pages.explore.exploreShelves
 import io.github.pushkar.chorplay.innertube.pages.explore.ranked
 import io.github.pushkar.chorplay.innertube.pages.explore.toExploreDestinationShell
@@ -780,20 +778,6 @@ object YouTube {
                 emit(shell.copy(shelves = shelves.toList()))
             }
         }.flowOn(PerformanceDispatcher.parsing)
-
-    /**
-     * A country's trending music videos: YouTube Music's charts page for [country] names the chart
-     * playlist, and the playlist browse gives its rows. Two requests, both on hosts that serve
-     * anonymous clients.
-     */
-    suspend fun musicVideoChart(country: String): Result<MusicVideoChart> =
-        runCatching {
-            val playlist =
-                getChartsPage(country.uppercase()).getOrThrow().trendingVideoChart()
-                    ?: return@runCatching MusicVideoChart(title = "")
-            val page = videoPlaylistPage(playlist.id).getOrThrow()
-            MusicVideoChart(title = playlist.title, entries = page.videos.ranked())
-        }
 
     suspend fun communityPosts(
         channelId: String,
@@ -2194,51 +2178,6 @@ object YouTube {
             LibraryPage(
                 items = items,
                 continuation = null,
-            )
-        }
-
-    suspend fun getChartsPage(
-        country: String? = null,
-        continuation: String? = null,
-    ): Result<ChartsPage> =
-        runCatching {
-            val response =
-                innerTube
-                    .browse(
-                        client = WEB_REMIX,
-                        browseId = "FEmusic_charts",
-                        params = "ggMGCgQIgAQ%3D",
-                        continuation = continuation,
-                        formData = country?.let { BrowseBody.FormData(selectedValues = listOf(it)) },
-                    ).body<BrowseResponse>()
-            ChartsPage.fromBrowseResponse(response, country)
-        }
-
-    suspend fun musicHistory() =
-        runCatching {
-            val response =
-                innerTube
-                    .browse(
-                        client = WEB_REMIX,
-                        browseId = "FEmusic_history",
-                        setLogin = true,
-                    ).body<BrowseResponse>()
-
-            HistoryPage(
-                sections =
-                    response.contents
-                        ?.singleColumnBrowseResultsRenderer
-                        ?.tabs
-                        ?.firstOrNull()
-                        ?.tabRenderer
-                        ?.content
-                        ?.sectionListRenderer
-                        ?.contents
-                        ?.mapNotNull {
-                            it.musicShelfRenderer?.let { musicShelfRenderer ->
-                                HistoryPage.fromMusicShelfRenderer(musicShelfRenderer)
-                            }
-                        },
             )
         }
 

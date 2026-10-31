@@ -39,7 +39,7 @@ class LanPairingTest {
     private val meta = DeviceMeta("app-tv", "Living room TV", "android")
 
     private suspend fun loopback(): Listening {
-        val server = WsServer("/flow-sync/2/pair")
+        val server = WsServer("/chor-sync/2/pair")
         return Listening(server, listOf(LanEndpoint("127.0.0.1", server.start())))
     }
 

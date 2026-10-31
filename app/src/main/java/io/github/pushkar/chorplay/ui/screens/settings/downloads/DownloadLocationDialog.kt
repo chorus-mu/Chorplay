@@ -18,13 +18,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import io.github.pushkar.chorplay.R
 import io.github.pushkar.chorplay.ui.components.shared.ChorplayAlertDialog
-import io.github.pushkar.chorplay.ui.components.shared.FlowNavRow
-import io.github.pushkar.chorplay.ui.components.shared.FlowSelectionRow
+import io.github.pushkar.chorplay.ui.components.shared.ChorNavRow
+import io.github.pushkar.chorplay.ui.components.shared.ChorSelectionRow
 
-/**
- * Where a kind of download is saved: the default folder, a preset, a folder picked with the system
- * picker, or a typed path. The default counts as selected while no location has been chosen.
- */
 @Composable
 internal fun DownloadLocationDialog(
     target: DownloadTarget,
@@ -60,7 +56,7 @@ internal fun DownloadLocationDialog(
         title = {
             Text(
                 stringResource(
-                    if (target == DownloadTarget.MUSIC) R.string.music_download_location_label else R.string.video_download_location_label,
+                    R.string.video_download_location_label,
                 ),
             )
         },
@@ -68,7 +64,7 @@ internal fun DownloadLocationDialog(
             Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
                 Text(stringResource(R.string.location_dialog_subtitle))
                 presets.forEach { (path, label, supporting) ->
-                    FlowSelectionRow(
+                    ChorSelectionRow(
                         title = label,
                         supportingText = supporting,
                         selected = selected == path,
@@ -79,14 +75,14 @@ internal fun DownloadLocationDialog(
                         },
                     )
                 }
-                FlowNavRow(
+                ChorNavRow(
                     title = stringResource(R.string.location_custom_saf_label),
                     supportingText = stringResource(R.string.location_custom_saf_desc),
                     leadingIcon = Icons.Outlined.CreateNewFolder,
                     showChevron = false,
                     onClick = onBrowse,
                 )
-                FlowNavRow(
+                ChorNavRow(
                     title = stringResource(R.string.location_custom_manual_label),
                     supportingText = stringResource(R.string.location_custom_manual_desc),
                     leadingIcon = Icons.Outlined.Edit,

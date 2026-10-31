@@ -225,12 +225,12 @@ fun MediaDownloadSheetCompact(
                 ChorplayConnectedToggleGroup(
                     options =
                         listOf(
-                            FlowToggleOption(
+                            ChorToggleOption(
                                 value = false,
                                 label = stringResource(R.string.video),
                                 icon = Icons.Outlined.VideoLibrary,
                             ),
-                            FlowToggleOption(
+                            ChorToggleOption(
                                 value = true,
                                 label = stringResource(R.string.download_audio),
                                 icon = Icons.Outlined.MusicNote,

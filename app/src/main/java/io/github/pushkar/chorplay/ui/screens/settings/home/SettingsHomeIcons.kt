@@ -30,7 +30,6 @@ import androidx.compose.material.icons.outlined.WorkHistory
 import androidx.compose.ui.graphics.vector.ImageVector
 import io.github.pushkar.chorplay.ui.components.settings.SettingsDestination
 
-/** One distinct icon per settings page, used on its row in the settings list. */
 internal fun destinationIcon(destination: SettingsDestination): ImageVector =
     when (destination.root) {
         SettingsDestination.HOME -> Icons.Outlined.Settings
@@ -59,7 +58,6 @@ internal object HomeRowIcons {
     val DeepChorplay: ImageVector = Icons.Outlined.VisibilityOff
     val DeepChorplayDuration: ImageVector = Icons.Outlined.Timer
     val DeepChorplayHistory: ImageVector = Icons.Outlined.WorkHistory
-    val DeepChorplayScrobble: ImageVector = Icons.Outlined.CloudUpload
     val DeepChorplayOnSearch: ImageVector = Icons.AutoMirrored.Outlined.ManageSearch
     val Updates: ImageVector = Icons.Outlined.Update
     val Support: ImageVector = Icons.Outlined.VolunteerActivism

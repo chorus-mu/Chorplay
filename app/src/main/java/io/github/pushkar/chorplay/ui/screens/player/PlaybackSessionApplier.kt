@@ -160,15 +160,12 @@ internal class PlaybackSessionApplier(
 
     private fun speedContextFor(
         videoId: String,
-        musicVideoType: String? = null,
         channelId: String? = null,
     ): PlaybackSpeedContext {
         val cached = uiState.value.cachedVideo?.takeIf { it.id == videoId }
         return PlaybackSpeedContext(
             videoId = videoId,
             channelId = channelId ?: cached?.channelId,
-            musicVideoType = musicVideoType,
-            knownMusic = cached?.isMusic == true,
         )
     }
 
@@ -432,7 +429,6 @@ internal class PlaybackSessionApplier(
             speedContext =
                 speedContextFor(
                     videoId = videoId,
-                    musicVideoType = result.playerResponse.videoDetails?.musicVideoType,
                     channelId = identity.channelId,
                 ),
             isCurrent = { isLoadCurrent(load.token) },
@@ -490,10 +486,6 @@ internal class PlaybackSessionApplier(
     /** Kept on the video, so the watch signal carries it. */
     private fun applyCategory(result: SecondaryMetadata.Category) {
         if (!isLoadCurrent(result.loadToken)) return
-        if (PlaybackSpeedPolicy.isMusic(musicVideoType = null, category = result.category, openedAsMusic = false)) {
-            scope.launch { playbackPreparer.applyLateMusicSignal(speedContextFor(result.videoId)) }
-        }
-
         uiState.update { state ->
             val cached = state.cachedVideo?.takeIf { it.id == result.videoId } ?: return@update state
             if (cached.category == result.category) return@update state

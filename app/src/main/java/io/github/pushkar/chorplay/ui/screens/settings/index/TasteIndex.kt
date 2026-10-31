@@ -16,8 +16,6 @@ internal object TasteIndex {
     val shape = entry("shape", R.string.taste_shape_header)
     val interests = entry("interests", R.string.taste_interests_header)
     val channels = entry("channels", R.string.taste_channels_header)
-    val music = entry("music", R.string.taste_music_header)
-    val appetite = entry("appetite", R.string.music_discovery_appetite, R.string.taste_music_header)
     val hidden = entry("hidden", R.string.taste_hidden_title)
     val remembered = entry("remembered_channels", R.string.taste_remembered_header)
     val clearRemembered = entry("clear_remembered", R.string.taste_remembered_clear, R.string.taste_remembered_header)
@@ -41,9 +39,6 @@ internal object TasteIndex {
     val exportVideo = entry("export_video", R.string.taste_export_video, R.string.taste_data_header)
     val importVideo = entry("import_video", R.string.taste_import_video, R.string.taste_data_header)
     val resetVideo = entry("reset_video", R.string.taste_reset_video, R.string.taste_data_header)
-    val exportMusic = entry("export_music", R.string.taste_export_music, R.string.taste_data_header)
-    val importMusic = entry("import_music", R.string.taste_import_music, R.string.taste_data_header)
-    val resetMusic = entry("reset_music", R.string.taste_reset_music, R.string.taste_data_header)
 
     val all =
         listOf(
@@ -53,14 +48,9 @@ internal object TasteIndex {
             channels,
             remembered,
             clearRemembered,
-            music,
-            appetite,
             exportVideo,
             importVideo,
             resetVideo,
-            exportMusic,
-            importMusic,
-            resetMusic,
             engineInteractions,
             engineTopics,
             engineChannels,

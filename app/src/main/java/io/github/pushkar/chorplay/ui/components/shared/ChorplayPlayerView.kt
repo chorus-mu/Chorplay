@@ -11,7 +11,7 @@ import io.github.pushkar.chorplay.player.surface.VideoSurfacePolicy
 
 /** The controller-less PlayerView layout on the surface type this device plays smoothest with. */
 @LayoutRes
-fun flowPlayerViewLayout(): Int =
+fun chorPlayerViewLayout(): Int =
     if (VideoSurfacePolicy.usesSurfaceView(Build.VERSION.SDK_INT)) {
         R.layout.video_player_view_surface
     } else {

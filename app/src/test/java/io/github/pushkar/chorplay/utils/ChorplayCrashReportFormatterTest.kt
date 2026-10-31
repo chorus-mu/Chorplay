@@ -8,7 +8,7 @@ class ChorplayCrashReportFormatterTest {
     @Test
     fun `oom report separates input state updates and final output`() {
         val report = ChorplayCrashReportFormatter.build(
-            FlowCrashReportSnapshot(
+            ChorCrashReportSnapshot(
                 timestampMs = 1_800_000_000_000L,
                 threadName = "main",
                 threadId = 1L,
@@ -23,9 +23,9 @@ class ChorplayCrashReportFormatterTest {
                 deviceInfo = "Model: Pixel Test",
                 memoryInfo = "Max heap: 256 MB",
                 breadcrumbs = listOf(
-                    FlowCrashBreadcrumb(1_799_999_990_000L, "activity", "onStop pip=false"),
-                    FlowCrashBreadcrumb(1_799_999_991_000L, "background-handoff", "handleBackgroundPlaybackOnStop"),
-                    FlowCrashBreadcrumb(1_799_999_992_000L, "video-service", "onStartCommand action=null startId=1")
+                    ChorCrashBreadcrumb(1_799_999_990_000L, "activity", "onStop pip=false"),
+                    ChorCrashBreadcrumb(1_799_999_991_000L, "background-handoff", "handleBackgroundPlaybackOnStop"),
+                    ChorCrashBreadcrumb(1_799_999_992_000L, "video-service", "onStartCommand action=null startId=1")
                 )
             )
         )

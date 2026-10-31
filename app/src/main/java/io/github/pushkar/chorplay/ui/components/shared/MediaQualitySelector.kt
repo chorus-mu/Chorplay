@@ -37,13 +37,13 @@ fun <T> MediaQualitySelectorContent(
 ) {
     if (!groupedByResolution) {
         val sorted = options.sortedByDescending { it.height }
-        FlowRowGroup {
+        ChorRowGroup {
             sorted.forEachIndexed { index, option ->
-                FlowSelectionRow(
+                ChorSelectionRow(
                     title = option.label,
                     supportingText = option.supportingText,
                     selected = option.selected,
-                    shape = flowRowGroupShape(index, sorted.size),
+                    shape = chorRowGroupShape(index, sorted.size),
                     onClick = { onOptionSelected(option.item) },
                 )
             }
@@ -60,12 +60,12 @@ fun <T> MediaQualitySelectorContent(
             .sortedByDescending { it.key }
             .map { it.value }
     val rowCount = resolutions.size + if (auto == null) 0 else 1
-    FlowRowGroup {
+    ChorRowGroup {
         if (auto != null) {
-            FlowSelectionRow(
+            ChorSelectionRow(
                 title = auto.label,
                 selected = auto.selected,
-                shape = flowRowGroupShape(0, rowCount),
+                shape = chorRowGroupShape(0, rowCount),
                 onClick = { onOptionSelected(auto.item) },
             )
         }
@@ -74,18 +74,18 @@ fun <T> MediaQualitySelectorContent(
             val codecOptions = group.filter { it.codecKey.isNotBlank() || it.codecLabel.isNotBlank() }
             if (codecOptions.isEmpty()) {
                 val option = group.first()
-                FlowSelectionRow(
+                ChorSelectionRow(
                     title = option.label,
                     supportingText = option.supportingText,
                     selected = option.selected,
-                    shape = flowRowGroupShape(rowIndex, rowCount),
+                    shape = chorRowGroupShape(rowIndex, rowCount),
                     onClick = { onOptionSelected(option.item) },
                 )
             } else {
                 MediaQualitySelectorCodecRow(
                     qualityLabel = group.first().resolutionLabel(),
                     codecOptions = codecOptions,
-                    shape = flowRowGroupShape(rowIndex, rowCount),
+                    shape = chorRowGroupShape(rowIndex, rowCount),
                     onOptionSelected = onOptionSelected,
                 )
             }

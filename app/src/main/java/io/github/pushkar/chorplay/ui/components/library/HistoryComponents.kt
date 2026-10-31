@@ -39,10 +39,8 @@ import androidx.compose.ui.unit.dp
 import io.github.pushkar.chorplay.R
 import io.github.pushkar.chorplay.data.local.VideoHistoryEntry
 import io.github.pushkar.chorplay.data.model.Video
-import io.github.pushkar.chorplay.data.model.toMusicTrack
 import io.github.pushkar.chorplay.data.model.toVideo
-import io.github.pushkar.chorplay.data.music.model.MusicTrack
-import io.github.pushkar.chorplay.ui.components.layout.flowBottomContentPadding
+import io.github.pushkar.chorplay.ui.components.layout.chorBottomContentPadding
 import io.github.pushkar.chorplay.ui.components.shared.FastScrollbar
 import io.github.pushkar.chorplay.ui.components.shared.ChorplayFilterChip
 import io.github.pushkar.chorplay.ui.components.shared.MediaRowAction
@@ -159,18 +157,14 @@ internal fun HistoryList(
     entries: List<VideoHistoryEntry>,
     shortVideos: Map<String, Video>,
     selectedFilter: HistoryContentFilter,
-    onVideoClick: (MusicTrack) -> Unit,
+    onVideoClick: (Video) -> Unit,
     onShortClick: (row: List<Video>, tapped: Video) -> Unit,
-    onMusicClick: (MusicTrack, List<MusicTrack>) -> Unit,
     onRemove: (VideoHistoryEntry) -> Unit,
 ) {
     val groupedEntries =
         remember(entries) {
             entries.groupBy { historySectionKey(it.timestamp) }
         }
-    val musicQueue =
-        remember(entries) {
-            entries.filter { it.isMusic }.map { it.toMusicTrack() }
         }
     val today = remember(entries) { startOfDay(System.currentTimeMillis()) }
     val listState = rememberLazyListState()
@@ -180,7 +174,7 @@ internal fun HistoryList(
         LazyColumn(
             state = listState,
             modifier = Modifier.fillMaxSize(),
-            contentPadding = PaddingValues(bottom = flowBottomContentPadding()),
+            contentPadding = PaddingValues(bottom = chorBottomContentPadding()),
             verticalArrangement = Arrangement.spacedBy(ItemSpacing),
         ) {
             groupedEntries.forEach { (sectionKey, sectionEntries) ->
@@ -204,20 +198,18 @@ internal fun HistoryList(
                     }
 
                     HistoryContentFilter.All -> {
-                        val shorts = sectionEntries.filter { it.isShort && !it.isMusic }
-                        val regular = sectionEntries.filter { !it.isShort || it.isMusic }
+                        val shorts = sectionEntries.filter { it.isShort }
+                        val regular = sectionEntries.filter { !it.isShort }
 
                         items(
                             items = regular,
                             key = { it.videoId },
-                            contentType = { if (it.isMusic) "track" else "video" },
+                            contentType = { "video" },
                         ) { entry ->
                             HistoryEntryRow(
                                 entry = entry,
-                                musicQueue = musicQueue,
-                                onVideoClick = onVideoClick,
-                                onMusicClick = onMusicClick,
-                                onRemove = onRemove,
+                                                                onVideoClick = onVideoClick,
+                                                                onRemove = onRemove,
                                 thumbnailWidth = thumbnailWidth,
                                 modifier = animateMediaListItem(),
                             )
@@ -239,14 +231,12 @@ internal fun HistoryList(
                         items(
                             items = sectionEntries,
                             key = { it.videoId },
-                            contentType = { if (it.isMusic) "track" else "video" },
+                            contentType = { "video" },
                         ) { entry ->
                             HistoryEntryRow(
                                 entry = entry,
-                                musicQueue = musicQueue,
-                                onVideoClick = onVideoClick,
-                                onMusicClick = onMusicClick,
-                                onRemove = onRemove,
+                                                                onVideoClick = onVideoClick,
+                                                                onRemove = onRemove,
                                 thumbnailWidth = thumbnailWidth,
                                 modifier = animateMediaListItem(),
                             )
@@ -301,23 +291,18 @@ internal fun HistorySectionHeader(
 @Composable
 internal fun HistoryEntryRow(
     entry: VideoHistoryEntry,
-    musicQueue: List<MusicTrack>,
-    onVideoClick: (MusicTrack) -> Unit,
-    onMusicClick: (MusicTrack, List<MusicTrack>) -> Unit,
+    onVideoClick: (Video) -> Unit,
     onRemove: (VideoHistoryEntry) -> Unit,
     modifier: Modifier = Modifier,
     thumbnailWidth: Dp = MediaThumbnailDefaults.VideoWidth,
 ) {
-    val track = remember(entry) { entry.toMusicTrack() }
+    val video = remember(entry) { entry.toVideo() }
     val removeLabel = stringResource(R.string.remove_from_history)
 
     LibraryMediaListRow(
-        track = track,
-        video = remember(entry) { entry.toVideo() },
-        isMusic = entry.isMusic,
+        video = video,
         title = entry.title.ifBlank { entry.videoId },
-        onVideoClick = { onVideoClick(track) },
-        onMusicClick = { onMusicClick(track, musicQueue) },
+        onVideoClick = { onVideoClick(video) },
         removeLabel = removeLabel,
         onRemove = { onRemove(entry) },
         showWatchProgress = true,
@@ -381,9 +366,7 @@ internal fun HistoryContentFilter.label(): String =
         HistoryContentFilter.All -> stringResource(R.string.view_all_button_label)
         HistoryContentFilter.Videos -> stringResource(R.string.history_tab_videos)
         HistoryContentFilter.Shorts -> stringResource(R.string.history_tab_shorts)
-        HistoryContentFilter.Music -> stringResource(R.string.nav_music)
         HistoryContentFilter.LocalVideos -> stringResource(R.string.history_tab_local_videos)
-        HistoryContentFilter.LocalMusic -> stringResource(R.string.history_tab_local_music)
     }
 
 @Composable

@@ -8,22 +8,15 @@ import android.window.SplashScreen
 import dagger.hilt.android.qualifiers.ApplicationContext
 import io.github.pushkar.chorplay.data.backup.BackupCoordinator
 import io.github.pushkar.chorplay.data.recommendation.ChorplayNeuroEngine
-import io.github.pushkar.chorplay.data.recommendation.music.MusicBrainEngine
-import io.github.pushkar.chorplay.data.scrobble.Scrobbler
 import io.github.pushkar.chorplay.data.stats.VideoStatsRecorder
-import io.github.pushkar.chorplay.discord.DiscordPresenceController
 import io.github.pushkar.chorplay.notification.NotificationHelper
 import io.github.pushkar.chorplay.notification.WellbeingAlarms
-import io.github.pushkar.chorplay.player.EnhancedMusicPlayerManager
-import io.github.pushkar.chorplay.player.MusicResumeTracker
 import io.github.pushkar.chorplay.player.PlaybackShutdown
-import io.github.pushkar.chorplay.service.MusicServiceState
 import io.github.pushkar.chorplay.sync.SyncManager
 import io.github.pushkar.chorplay.utils.potoken.PoTokenGenerator
 import io.github.pushkar.chorplay.widget.core.state.clearNowPlayingSnapshot
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.withTimeoutOrNull
 import java.io.File
 import javax.inject.Inject
 
@@ -31,14 +24,10 @@ class AppProfileSwitchSteps
 @Inject
 constructor(
     @ApplicationContext private val context: Context,
-    private val musicResumeTracker: MusicResumeTracker,
-    private val scrobbler: Scrobbler,
-    private val musicBrainEngine: MusicBrainEngine,
     private val neuroEngine: ChorplayNeuroEngine,
     private val videoStats: VideoStatsRecorder,
     private val sync: dagger.Lazy<SyncManager>,
     private val backups: dagger.Lazy<BackupCoordinator>,
-    private val discord: DiscordPresenceController,
     private val slices: dagger.Lazy<ProfileSlices>,
 ) : ProfileSwitchSteps {
     private val registry: ProfileRegistry get() = ActiveProfile.registry(context)
@@ -46,8 +35,6 @@ constructor(
     override suspend fun refusal(target: String): SwitchRefusal? =
         when {
             target == ActiveProfile.get(context).id -> SwitchRefusal.ALREADY_ACTIVE
-
-            MusicServiceState.isCarConnected -> SwitchRefusal.CAR_CONNECTED
 
             sync.get().isBusy -> SwitchRefusal.SYNC_RUNNING
 
@@ -75,14 +62,11 @@ constructor(
 
     override fun finishOpenSessions() = BeforeProfileSwitch.run()
 
-    override suspend fun saveQueue() = EnhancedMusicPlayerManager.persistQueueNow()
+    override suspend fun saveQueue() = Unit
 
     override suspend fun stopPlayback() = PlaybackShutdown.stopForSwitch(context)
 
     override suspend fun awaitWrites() {
-        musicResumeTracker.awaitWrites()
-        scrobbler.awaitWrites()
-        musicBrainEngine.awaitWrites()
         neuroEngine.awaitWrites()
         videoStats.awaitWrites()
     }
@@ -94,7 +78,6 @@ constructor(
         WellbeingAlarms.cancel(context)
         NotificationHelper.cancelProfileNotifications(context)
         context.clearNowPlayingSnapshot()
-        withTimeoutOrNull(DISCORD_TIMEOUT_MS) { discord.endForSwitch() }
     }
 
     override suspend fun clearCaches() {
@@ -119,7 +102,5 @@ constructor(
         Runtime.getRuntime().exit(0)
     }
 }
-
-private const val DISCORD_TIMEOUT_MS = 2_000L
 
 private const val MIN_SWITCHING_SCREEN_MS = 500L

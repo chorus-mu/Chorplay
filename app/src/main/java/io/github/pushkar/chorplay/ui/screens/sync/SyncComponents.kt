@@ -26,9 +26,9 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import io.github.pushkar.chorplay.ui.components.shared.FlowNavRow
-import io.github.pushkar.chorplay.ui.components.shared.FlowSegmentedGap
-import io.github.pushkar.chorplay.ui.components.shared.flowSegmentShape
+import io.github.pushkar.chorplay.ui.components.shared.ChorNavRow
+import io.github.pushkar.chorplay.ui.components.shared.ChorSegmentedGap
+import io.github.pushkar.chorplay.ui.components.shared.chorSegmentShape
 
 // The sync chorplay's building blocks. Every step is a header, a body of the same segmented rows the
 // settings pages use, and a bottom action row, so the flow reads as one screen changing.
@@ -80,8 +80,8 @@ internal fun SyncRowGroup(
     modifier: Modifier = Modifier,
     row: @Composable (index: Int, shape: Shape) -> Unit,
 ) {
-    Column(modifier = modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(FlowSegmentedGap)) {
-        repeat(count) { index -> row(index, flowSegmentShape(index = index, count = count)) }
+    Column(modifier = modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(ChorSegmentedGap)) {
+        repeat(count) { index -> row(index, chorSegmentShape(index = index, count = count)) }
     }
 }
 
@@ -98,7 +98,7 @@ internal class SyncOption(
 internal fun SyncOptions(options: List<SyncOption>) {
     SyncRowGroup(count = options.size) { index, shape ->
         val option = options[index]
-        FlowNavRow(
+        ChorNavRow(
             title = option.title,
             supportingText = option.body,
             leadingIcon = option.icon,
@@ -192,7 +192,7 @@ internal fun SyncCard(
 ) {
     Surface(
         modifier = modifier.fillMaxWidth(),
-        shape = flowSegmentShape(index = 0, count = 1),
+        shape = chorSegmentShape(index = 0, count = 1),
         color = containerColor,
     ) {
         Box(Modifier.fillMaxWidth()) { content() }

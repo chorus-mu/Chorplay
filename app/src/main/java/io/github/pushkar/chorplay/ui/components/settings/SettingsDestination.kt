@@ -4,20 +4,16 @@ import androidx.annotation.StringRes
 import androidx.compose.runtime.Immutable
 import io.github.pushkar.chorplay.R
 
-/**
- * Every page inside Settings. A destination with a [parent] is a sub-page: on a phone it pushes over
- * its parent, beside the settings list it replaces the parent in the detail pane.
- */
 enum class SettingsDestination(
     val id: String,
     @StringRes val titleRes: Int,
     val parent: SettingsDestination? = null,
 ) {
-    /** The settings list itself, for options that live directly on it such as Deep Chorplay. */
+
     HOME("home", R.string.settings_title),
     TASTE("taste", R.string.taste_title),
     HIDDEN_CONTENT("hidden_content", R.string.taste_hidden_title, TASTE),
-    FAVOURITE_ARTISTS("favourite_artists", R.string.favourite_artists_title, TASTE),
+
     DISCOVER_CHANNELS("discover_channels", R.string.discover_channels_title, TASTE),
     APPEARANCE("appearance", R.string.appearance_title),
     THEME("theme", R.string.settings_item_theme, APPEARANCE),
@@ -34,11 +30,11 @@ enum class SettingsDestination(
     EQUALIZER("equalizer", R.string.equalizer, PLAYBACK),
     QUALITY("quality", R.string.quality),
     CONTENT("content", R.string.settings_content_title),
-    MUSIC_HOME("music_home", R.string.settings_music_home_title, CONTENT),
+
     LIBRARY("library", R.string.library, CONTENT),
     TOPICS("topics", R.string.settings_topics_title),
     INTEGRATIONS("integrations", R.string.settings_integrations_title),
-    SCROBBLING("scrobbling", R.string.scrobbling_title, INTEGRATIONS),
+
     BACKUP("backup", R.string.settings_backup_title),
     SYNC("sync", R.string.sync_devices_title),
     PROFILES("profiles", R.string.profiles_title),
@@ -54,11 +50,9 @@ enum class SettingsDestination(
     DIAGNOSTICS("diagnostics", R.string.settings_item_diagnostics),
     ;
 
-    /** The top-level destination this page lives under — what the settings list shows as selected. */
     val root: SettingsDestination
         get() = parent?.root ?: this
 
-    /** This page and its parents, outermost first. */
     val path: List<SettingsDestination>
         get() = (parent?.path ?: emptyList()) + this
 
@@ -67,11 +61,10 @@ enum class SettingsDestination(
     }
 }
 
-/** Tabs of the destinations that switch between views with a toggle group. */
 object SettingsTabs {
     const val QUALITY_VIDEO = "video"
     const val QUALITY_SHORTS = "shorts"
-    const val QUALITY_MUSIC = "music"
+
     const val BACKUP_EXPORT = "export"
     const val BACKUP_IMPORT = "import"
     const val BACKUP_AUTO = "auto"
@@ -79,10 +72,6 @@ object SettingsTabs {
     const val TOPICS_BLOCKED = "blocked"
 }
 
-/**
- * Where to open Settings: a page, optionally one of its tabs, optionally an option on it to scroll
- * to and highlight. Encoded as a plain string so it survives the navigation route and saved state.
- */
 @Immutable
 data class SettingsTarget(
     val destination: SettingsDestination,

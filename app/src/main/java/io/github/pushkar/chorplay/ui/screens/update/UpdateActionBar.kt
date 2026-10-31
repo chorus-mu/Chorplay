@@ -28,7 +28,7 @@ import androidx.compose.ui.unit.dp
 import io.github.pushkar.chorplay.R
 import io.github.pushkar.chorplay.ui.components.layout.LocalChorplayBottomInsets
 import io.github.pushkar.chorplay.ui.components.shared.ChorplayActionButton
-import io.github.pushkar.chorplay.ui.components.shared.FlowMaxContentWidth
+import io.github.pushkar.chorplay.ui.components.shared.ChorMaxContentWidth
 
 private val BarPadding = 20.dp
 private val BarSpacing = 12.dp
@@ -46,7 +46,7 @@ internal fun UpdateActionBar(
         contentAlignment = Alignment.Center,
     ) {
         Row(
-            modifier = Modifier.widthIn(max = FlowMaxContentWidth).fillMaxWidth().padding(BarPadding),
+            modifier = Modifier.widthIn(max = ChorMaxContentWidth).fillMaxWidth().padding(BarPadding),
             horizontalArrangement = Arrangement.spacedBy(BarSpacing, Alignment.End),
             verticalAlignment = Alignment.CenterVertically,
         ) {

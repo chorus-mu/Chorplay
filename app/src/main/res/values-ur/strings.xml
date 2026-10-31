@@ -52,8 +52,8 @@
     <string name="library_section_header">آپ کا مواد</string>
     <string name="library_history_label">سرگزشت</string>
     <string name="library_playlists_label">پلے لسٹس</string>
-    <string name="library_music_playlists_label">موسیقی کی پلے لسٹس</string>
-    <string name="library_music_playlists_subtitle">آپ کے موسیقی کے مجموعے</string>
+
+
     <string name="library_liked_videos_label">پسندیدہ ویڈیوز</string>
     <string name="library_saved_shorts_label">محفوظ کردہ شارٹس</string>
     <string name="library_watch_later_label">بعد میں دیکھیں</string>
@@ -89,17 +89,16 @@
     <string name="history_tab_videos">ویڈیوز</string>
     <string name="history_tab_shorts">شارٹس</string>
     <string name="history_tab_local_videos">لوکل ویڈیوز</string>
-    <string name="history_tab_local_music">لوکل میوزک</string>
+
     <string name="liked">پسندیدہ</string>
-    <string name="liked_music">پسندیدہ میوزک</string>
+
     <string name="liked_videos">لائکس</string>
-    <string name="share_song">گانا شیئر کریں</string>
     <string name="empty_liked">کوئی لائکس نہیں ہیں</string>
     <string name="empty_liked_body">آپ کا پسندیدہ مواد یہاں نظر آئے گا</string>
     <string name="empty_liked_videos">کوئی پسندیدہ ویڈیوز نہیں ہیں</string>
-    <string name="empty_liked_music">کوئی پسندیدہ میوزک نہیں ہے</string>
-    <string name="empty_liked_music_body">آپ کے پسندیدہ گانے یہاں نظر آئیں گے</string>
-    <string name="song">گانا</string>
+
+
+
     <string name="video">ویڈیو</string>
     <string name="share">شیئر کریں</string>
     <string name="downloaded">ڈاؤن لوڈ شدہ</string>

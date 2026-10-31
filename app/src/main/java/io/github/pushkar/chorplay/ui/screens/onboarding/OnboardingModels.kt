@@ -9,14 +9,12 @@ import io.github.pushkar.chorplay.data.model.Channel
 internal const val MIN_TOPICS = 3
 internal const val STAGGER_DELAY_MS = 50L
 
-/** The setup steps in order. Welcome and Ready bookend the four steps the progress bar counts. */
 enum class OnboardingStep(
     @StringRes val labelRes: Int?,
 ) {
     WELCOME(null),
     INTERESTS(R.string.onboarding_step_interests),
     CHANNELS(R.string.onboarding_step_channels),
-    ARTISTS(R.string.onboarding_step_artists),
     ALERTS(R.string.onboarding_step_alerts),
     IMPORT(R.string.onboarding_step_import),
     READY(null),

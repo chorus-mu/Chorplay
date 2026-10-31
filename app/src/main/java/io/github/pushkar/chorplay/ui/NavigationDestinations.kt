@@ -9,7 +9,7 @@ import java.net.URI
 import java.net.URLEncoder
 
 /** The tab whose root screen [route] is, or null for every screen that is not a tab root. */
-internal fun flowTabForDestination(
+internal fun chorTabForDestination(
     route: String?,
     shortsSourceArg: String?,
 ): ChorplayTab? =
@@ -19,10 +19,10 @@ internal fun flowTabForDestination(
         else -> ChorplayTab.entries.firstOrNull { it.route == route }
     }
 
-internal fun NavBackStackEntry.flowTab(): ChorplayTab? = flowTabForDestination(destination.route, arguments?.getString(SHORTS_ROUTE_ARG))
+internal fun NavBackStackEntry.chorTab(): ChorplayTab? = chorTabForDestination(destination.route, arguments?.getString(SHORTS_ROUTE_ARG))
 
 /** The tab a route handed in from outside the graph (a widget, a shortcut) names, if any. */
-internal fun flowTabForRoute(
+internal fun chorTabForRoute(
     route: String,
     downloadsTab: Boolean,
 ): ChorplayTab? =
@@ -42,7 +42,6 @@ internal fun NavController.openDownloads(
 }
 
 /** Set on the Subscriptions entry to open its management view on the Music tab once. */
-internal const val OPEN_MUSIC_SUBSCRIPTIONS = "open_music_subscriptions"
 
 /** Switches tabs the way the bar does: one copy per tab, each keeping its own saved state. */
 internal fun NavController.navigateToTab(

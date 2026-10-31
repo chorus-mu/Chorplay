@@ -15,7 +15,7 @@ import io.github.pushkar.chorplay.ui.components.layout.rememberChorplayPaneScaff
 
 /** The pane layout for this window; keeps the adaptive library's experimental types out of screens. */
 @OptIn(ExperimentalMaterial3AdaptiveApi::class)
-class FlowPaneState(
+class ChorPaneState(
     val navigator: ThreePaneScaffoldNavigator<Any>,
 ) {
     /** Whether the window has room for a pane beside the main one. */
@@ -27,9 +27,9 @@ class FlowPaneState(
 
 @OptIn(ExperimentalMaterial3AdaptiveApi::class)
 @Composable
-internal fun rememberFlowPaneState(): FlowPaneState {
+internal fun rememberChorPaneState(): ChorPaneState {
     val navigator = rememberListDetailPaneScaffoldNavigator<Any>(scaffoldDirective = rememberChorplayPaneScaffoldDirective())
-    return remember(navigator) { FlowPaneState(navigator) }
+    return remember(navigator) { ChorPaneState(navigator) }
 }
 
 /**
@@ -40,7 +40,7 @@ internal fun rememberFlowPaneState(): FlowPaneState {
 @OptIn(ExperimentalMaterial3AdaptiveApi::class)
 @Composable
 fun ChorplaySidePanes(
-    panes: FlowPaneState,
+    panes: ChorPaneState,
     sidePaneWidth: Dp,
     sidePane: @Composable () -> Unit,
     mainPane: @Composable () -> Unit,

@@ -6,7 +6,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Download
 import androidx.compose.material.icons.outlined.Explore
 import androidx.compose.material.icons.outlined.Home
-import androidx.compose.material.icons.outlined.MusicNote
 import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material.icons.outlined.Slideshow
 import androidx.compose.material.icons.outlined.UnfoldLess
@@ -25,7 +24,6 @@ import io.github.pushkar.chorplay.ui.components.settings.SettingsPage
 import io.github.pushkar.chorplay.ui.components.settings.switch
 import io.github.pushkar.chorplay.ui.screens.settings.index.NavigationBarIndex
 
-/** Which tabs the navigation bar shows, in what order, and which one Chorplay opens on. */
 @Composable
 internal fun NavigationBarScreen(
     onBack: (() -> Unit)?,
@@ -58,11 +56,25 @@ internal fun NavigationBarScreen(
                 summary = if (shortsContent) null else shortsHiddenSummary,
                 icon = Icons.Outlined.Slideshow,
             )
-            switch(NavigationBarIndex.music, visibility.music, viewModel::setMusicTab, icon = Icons.Outlined.MusicNote)
             switch(NavigationBarIndex.search, visibility.search, viewModel::setSearchTab, icon = Icons.Outlined.Search)
-            switch(NavigationBarIndex.explore, visibility.categories, viewModel::setExploreTab, icon = Icons.Outlined.Explore)
-            switch(NavigationBarIndex.downloads, visibility.downloads, viewModel::setDownloadsTab, icon = Icons.Outlined.Download)
-            switch(NavigationBarIndex.hideOnScroll, hideOnScroll, viewModel::setHideNavOnScroll, icon = Icons.Outlined.UnfoldLess)
+            switch(
+                NavigationBarIndex.explore,
+                visibility.categories,
+                viewModel::setExploreTab,
+                icon = Icons.Outlined.Explore
+            )
+            switch(
+                NavigationBarIndex.downloads,
+                visibility.downloads,
+                viewModel::setDownloadsTab,
+                icon = Icons.Outlined.Download
+            )
+            switch(
+                NavigationBarIndex.hideOnScroll,
+                hideOnScroll,
+                viewModel::setHideNavOnScroll,
+                icon = Icons.Outlined.UnfoldLess
+            )
         }
         group(
             key = NavigationBarIndex.order.key,

@@ -38,7 +38,7 @@ class AppFontTest {
     fun `a custom font is used only when its file loads`() {
         val file = temp.newFile("custom.ttf")
         assertThat(appFontFamily(AppFont.CUSTOM, file) { FontFamily.Monospace }).isEqualTo(FontFamily.Monospace)
-        assertThat(appFontFamily(AppFont.CUSTOM, file) { null }).isEqualTo(FlowFontFamily)
+        assertThat(appFontFamily(AppFont.CUSTOM, file) { null }).isEqualTo(ChorFontFamily)
     }
 
     @Test
@@ -50,20 +50,20 @@ class AppFontTest {
                 loaded = true
                 FontFamily.Monospace
             },
-        ).isEqualTo(FlowFontFamily)
+        ).isEqualTo(ChorFontFamily)
         assertThat(
             appFontFamily(AppFont.CUSTOM, missing) {
                 loaded = true
                 FontFamily.Monospace
             },
-        ).isEqualTo(FlowFontFamily)
+        ).isEqualTo(ChorFontFamily)
         assertThat(loaded).isFalse()
     }
 
     @Test
     fun `built-in choices never touch the custom file`() {
         val file = temp.newFile("custom.ttf")
-        assertThat(appFontFamily(AppFont.SYSTEM, file) { error("not loaded") }).isEqualTo(FlowFontFamily)
+        assertThat(appFontFamily(AppFont.SYSTEM, file) { error("not loaded") }).isEqualTo(ChorFontFamily)
         assertThat(appFontFamily(AppFont.SERIF, file) { error("not loaded") }).isEqualTo(FontFamily.Serif)
     }
 }

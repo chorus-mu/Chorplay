@@ -64,7 +64,7 @@ fun DrawScope.drawMorph(
  * With no [imageUrl], or while it loads, [fallback] initials sit on the accent colour.
  */
 @Composable
-fun FlowMorphingPortrait(
+fun ChorMorphingPortrait(
     imageUrl: String,
     fallback: String,
     diameter: Dp,
@@ -109,7 +109,7 @@ fun FlowMorphingPortrait(
 
 /** Content that springs in after [index] siblings, for lists that should land one by one. */
 @Composable
-fun FlowPopIn(
+fun ChorPopIn(
     index: Int,
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,

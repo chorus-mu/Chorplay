@@ -39,7 +39,7 @@ import androidx.compose.ui.unit.dp
 import androidx.graphics.shapes.RoundedPolygon
 import io.github.pushkar.chorplay.R
 import io.github.pushkar.chorplay.ui.components.shared.ChorplayLogo
-import io.github.pushkar.chorplay.ui.components.shared.FlowPopIn
+import io.github.pushkar.chorplay.ui.components.shared.ChorPopIn
 
 internal val HeroStageSize = 300.dp
 private val SatelliteIconSize = 24.dp
@@ -72,7 +72,7 @@ internal fun WelcomeStep(
         stage = {
             hero(HeroLarge)
             Satellites.forEachIndexed { index, satellite ->
-                FlowPopIn(index + 1, Modifier.offset(satellite.offset.x, satellite.offset.y)) {
+                ChorPopIn(index + 1, Modifier.offset(satellite.offset.x, satellite.offset.y)) {
                     Surface(
                         shape = satellite.shape.toShape(),
                         color = MaterialTheme.colorScheme.surfaceContainerHigh,

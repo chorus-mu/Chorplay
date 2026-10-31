@@ -43,7 +43,7 @@ import io.github.pushkar.chorplay.data.model.Video
 import io.github.pushkar.chorplay.data.model.VideoCollaborator
 import io.github.pushkar.chorplay.ui.components.layout.navigation.LocalMediaNavigator
 import io.github.pushkar.chorplay.ui.components.shared.ChannelAvatarStack
-import io.github.pushkar.chorplay.ui.components.shared.FlowNavRow
+import io.github.pushkar.chorplay.ui.components.shared.ChorNavRow
 import io.github.pushkar.chorplay.ui.components.shared.ChorplaySubscribeButton
 import io.github.pushkar.chorplay.ui.components.shared.ChorplaySubscribeButtonSize
 import io.github.pushkar.chorplay.ui.components.shared.MediaThumbnail
@@ -264,7 +264,7 @@ private fun channelRow(
     }
 
     return QuickActionRow("channel") { shape ->
-        FlowNavRow(
+        ChorNavRow(
             title = channelLabel,
             onClick = {
                 if (isCollaboration) {
@@ -323,7 +323,7 @@ private fun feedRows(
             onDismiss()
         },
         QuickActionRow("watched") { shape ->
-            FlowNavRow(
+            ChorNavRow(
                 title = stringResource(if (isWatched) R.string.mark_as_unwatched else R.string.mark_as_watched),
                 leadingIcon = if (isWatched) Icons.Outlined.VisibilityOff else Icons.Outlined.Visibility,
                 onClick = {
@@ -372,7 +372,7 @@ private fun moreRows(
             }
         },
         QuickActionRow("details") { shape ->
-            FlowNavRow(
+            ChorNavRow(
                 title = stringResource(R.string.details_metadata),
                 leadingIcon = Icons.Outlined.Info,
                 onClick = onOpenDetails,
@@ -392,7 +392,7 @@ internal fun actionRow(
     onClick: () -> Unit,
 ): QuickActionRow =
     QuickActionRow(key) { shape ->
-        FlowNavRow(
+        ChorNavRow(
             title = title,
             supportingText = supporting,
             leadingIcon = icon,

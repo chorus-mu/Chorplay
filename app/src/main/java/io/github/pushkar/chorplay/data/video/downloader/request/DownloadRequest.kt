@@ -3,7 +3,6 @@ package io.github.pushkar.chorplay.data.video.downloader.request
 import io.github.pushkar.chorplay.data.video.downloader.tags.DownloadKind
 import io.github.pushkar.chorplay.data.video.downloader.tags.DownloadTags
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.json.Json
 
 /**
@@ -26,8 +25,6 @@ data class DownloadRequest(
     val collectionId: String? = null,
     val threads: Int? = null,
     val durationSeconds: Int = 0,
-    /** Credited artists with their channel ids, for a song's artist links; the tags carry the names. */
-    val artists: List<StoredArtist> = emptyList(),
     /** The caption track saved as a file beside a video; null leaves it to the Downloads setting. */
     val subtitle: DownloadSubtitle? = null,
     /** Where that file was written, so deleting the download removes it too. */
@@ -35,10 +32,9 @@ data class DownloadRequest(
 ) {
     val videoId: String get() = tags.videoId
     val kind: DownloadKind get() = tags.kind
-    val isMusic: Boolean get() = tags.kind == DownloadKind.MUSIC
 
     /** Music is always audio; so is anything asked for as audio only. */
-    val wantsAudioOnly: Boolean get() = audioOnly || isMusic
+    val wantsAudioOnly: Boolean get() = audioOnly
 
     fun encode(): String = json.encodeToString(serializer(), this)
 
@@ -71,19 +67,4 @@ data class DownloadSubtitle(
     }
 }
 
-/** A credited artist as a download keeps it: the name shown and the channel it opens. */
-@Serializable
-data class StoredArtist(
-    val name: String,
-    val id: String? = null,
-) {
-    companion object {
-        private val json = Json { ignoreUnknownKeys = true }
-        private val listSerializer = ListSerializer(serializer())
 
-        fun encode(artists: List<StoredArtist>): String = json.encodeToString(listSerializer, artists)
-
-        fun decode(raw: String?): List<StoredArtist> =
-            raw?.let { runCatching { json.decodeFromString(listSerializer, it) }.getOrNull() }.orEmpty()
-    }
-}

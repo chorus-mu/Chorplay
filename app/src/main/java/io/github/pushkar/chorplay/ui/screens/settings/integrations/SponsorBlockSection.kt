@@ -31,7 +31,7 @@ import io.github.pushkar.chorplay.data.local.SponsorBlockAction
 import io.github.pushkar.chorplay.data.model.SponsorBlockCategories
 import io.github.pushkar.chorplay.ui.components.settings.SettingsListScope
 import io.github.pushkar.chorplay.ui.components.settings.switch
-import io.github.pushkar.chorplay.ui.components.shared.FlowNavRow
+import io.github.pushkar.chorplay.ui.components.shared.ChorNavRow
 import io.github.pushkar.chorplay.ui.screens.settings.index.IntegrationsIndex
 import io.github.pushkar.chorplay.ui.theme.defaultSponsorBlockColor
 import io.github.pushkar.chorplay.utils.sponsorCategoryLabelRes
@@ -54,7 +54,7 @@ internal fun SettingsListScope.sponsorBlockSection(
         switch(IntegrationsIndex.contribute, viewModel.submitButton, viewModel::setSubmitButton, enabled = enabled)
         if (submitButton) {
             row(IntegrationsIndex.userId.key) { shape ->
-                FlowNavRow(
+                ChorNavRow(
                     title = stringResource(IntegrationsIndex.userId.title),
                     supportingText =
                         userId?.let { stringResource(R.string.settings_truncated, it.take(USER_ID_PREVIEW_LENGTH)) }

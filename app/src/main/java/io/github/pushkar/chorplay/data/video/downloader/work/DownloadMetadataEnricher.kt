@@ -16,7 +16,7 @@ import javax.inject.Singleton
 /**
  * Fills a video download's tags from its watch page: date, description, counts and channel id,
  * which a card rarely carries. One cached `/next` per download, stored with the request so a retry
- * never asks again. Songs are left as they are: their album and artists come from the music pages.
+ * never asks again.
  */
 @Singleton
 class DownloadMetadataEnricher
@@ -27,7 +27,7 @@ class DownloadMetadataEnricher
     ) {
         suspend fun enrich(request: DownloadRequest): DownloadRequest {
             val tags = request.tags
-            if (request.isMusic || (tags.releaseDate != null && tags.description != null && tags.channelId != null)) return request
+            if (tags.releaseDate != null && tags.description != null && tags.channelId != null) return request
             val base =
                 Video(
                     id = request.videoId,

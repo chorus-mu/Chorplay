@@ -11,7 +11,7 @@ import javax.inject.Inject
 
 /**
  * Writes `moov/udta/meta(hdlr 'mdir')/ilst` into an MP4 so Android's MediaStore, Media3 and
- * desktop players show title, artist, album, track number, date, lyrics and cover art.
+ * desktop players show title, artist, album, track number, date and cover art.
  *
  * Hand-rolled on purpose: nothing on the classpath can write `ilst`. media3-muxer 1.11.0
  * `Mp4Muxer.addMetadataEntry` accepts only `MdtaMetadataEntry` (string/float32), `XmpData`,

@@ -1,59 +1,19 @@
-/*
- * Copyright: Pushkar (2026) under GPLv3
- *
- * This file is part of Chorplay (https://github.com/chorus-mu/Chorplay).
- *
- * Chorplay is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, version 3 of the License.
- *
- * This recommendation algorithm (ChorplayNeuroEngine) is the intellectual property
- * of the Chorplay project. Any use of this code in other projects must
- * explicitly credit "Chorplay Android Client" and link back to the original repository.
- */
-
 package io.github.pushkar.chorplay.data.recommendation
 
 import io.github.pushkar.chorplay.data.model.Video
 import java.util.Calendar
 
-/**
- * Smart Discovery Query Engine V4.
- *
- * Core principle: every query is rooted in something the user has
- * demonstrated interest in. No generic mood templates, no robotic
- * grammar patterns. Queries should read like what a human types
- * into YouTube search — short, direct, natural.
- *
- * Key changes from V3:
- * - Removed template grammar system ("{S} crash course" etc.)
- * - Removed hardcoded mood/time-of-day content injection
- * - Time context uses the user's OWN viewing patterns, not generic moods
- * - Queries are natural topic combinations, not filled templates
- * - Confirmed-interest gating prevents spurious one-time watches from generating queries
- */
 internal class NeuroDiscovery(
     private val topicCategories: List<TopicCategory>,
     private val tokenizer: NeuroTokenizer,
 ) {
     companion object {
-        /** What Home searches before anything is learned or picked; never recorded as learned (#907). */
         val STARTER_QUERIES = listOf("Music", "Science", "Technology", "Education", "Nature")
         private const val SPECIFIC_QUERY_MAX_WORDS = 4
         private const val QUERY_MIN_SPECIFICITY = 0.65
-
-        // A phrase this strong against its word alone takes the word's place in searches.
         private const val PHRASE_SHARE = 0.5
-
-        /** How much a viewer must take to a format before searches ask for it. */
         private const val FORMAT_QUERY_MIN_AFFINITY = 0.2
     }
-
-    // ═══════════════════════════════════════════════
-    // TOPIC MATURITY SYSTEM
-    // A topic needs sustained engagement to be considered
-    // a real interest vs. a fleeting curiosity.
-    // ═══════════════════════════════════════════════
 
     private data class MatureTopic(
         val name: String,
@@ -62,7 +22,6 @@ internal class NeuroDiscovery(
         val categorySupport: Int,
         val hasTimeContext: Boolean,
         val hasDiscoveryEvidence: Boolean,
-        /** Interest-cluster representative this topic belongs to (set during selection). */
         val clusterKey: String? = null,
     )
 
@@ -95,7 +54,7 @@ internal class NeuroDiscovery(
                     topicCategories.count { cat ->
                         val catTopics = cat.topics.map { tokenizer.keyOf(it) }
                         catTopics.contains(name) &&
-                            catTopics.count { it in allTopics } >= 2
+                                catTopics.count { it in allTopics } >= 2
                     }
 
                 MatureTopic(
@@ -113,19 +72,6 @@ internal class NeuroDiscovery(
             )
     }
 
-    // ═══════════════════════════════════════════════
-    // TOPIC SELECTION — CLUSTER ROTATION
-    // Interest communities come from NeuroClusters (label propagation
-    // over the user's own co-watch/channel/catalog graph) and are served
-    // in staleness-weighted order, so EVERY saved interest cycles into
-    // the feed across sessions instead of the top topics monopolizing.
-    // ═══════════════════════════════════════════════
-
-    /**
-     * One served cluster's contribution to this feed. At depth 0 the query is the
-     * cluster's anchor; at depth d > 0 it becomes "anchor member_d" — walking the
-     * cluster's members like a tree so each load-more digs a branch deeper.
-     */
     private data class ClusterChoice(
         val topic: MatureTopic,
         val comboWith: String?,
@@ -140,19 +86,14 @@ internal class NeuroDiscovery(
         val primary: List<MatureTopic> get() = choices.take(1).map { it.topic }
         val secondary: List<MatureTopic> get() = choices.drop(1).map { it.topic }
 
-        fun allTopics(): List<MatureTopic> = (choices.map { it.topic } + emerging + crossCategory).distinctBy { it.name }
+        fun allTopics(): List<MatureTopic> =
+            (choices.map { it.topic } + emerging + crossCategory).distinctBy { it.name }
 
         fun uniqueTopicCount(): Int = allTopics().map { it.name }.distinct().size
     }
 
     private fun emptySelection() = TopicSelection(emptyList(), emptyList(), emptyList())
 
-    /**
-     * A one-word anchor searched alone returns YouTube's generic popular videos for that word, which
-     * read as trending (#907). The anchor's strongest phrase from its own cluster narrows it:
-     * "guitar" becomes "guitar playalong", "phonk" becomes "drift phonk". Members of other clusters
-     * never qualify an anchor ("mma android").
-     */
     private fun specificMember(
         anchorName: String,
         members: List<MatureTopic>,
@@ -198,16 +139,14 @@ internal class NeuroDiscovery(
             )
         if (clusters.isEmpty()) return emptySelection()
 
-        val scheduled = NeuroClusters.schedule(clusters, brain.clusterRotation, now) { brain.topicEvidence[it]?.firstSeenAt }
+        val scheduled =
+            NeuroClusters.schedule(clusters, brain.clusterRotation, now) { brain.topicEvidence[it]?.firstSeenAt }
 
         val byBase = HashMap<String, MatureTopic>()
         matureTopics.forEach { topic ->
             byBase.putIfAbsent(NeuroScoring.stripDomainTag(topic.name), topic)
         }
 
-        // The user's MAJOR interests (top clusters by mass) are in EVERY feed —
-        // never rotated away by staleness. Rotation governs only the tail slots,
-        // cycling micro-interests and fresh seeds through the remaining budget.
         val budget = maxClusters.coerceAtLeast(1)
         val majorKeys =
             clusters
@@ -218,16 +157,15 @@ internal class NeuroDiscovery(
                 .toSet()
         val served =
             (
-                scheduled.filter { it.representative in majorKeys } +
-                    scheduled.filter { it.representative !in majorKeys && it.mass > 0.0 }
-            ).take(budget)
+                    scheduled.filter { it.representative in majorKeys } +
+                            scheduled.filter { it.representative !in majorKeys && it.mass > 0.0 }
+                    ).take(budget)
         val choices =
             served.mapNotNull { cluster ->
                 val members = cluster.topics.mapNotNull { byBase[it] }
                 if (members.isEmpty()) return@mapNotNull null
                 val anchor = members.first().copy(clusterKey = cluster.representative)
                 val surfaceMember = specificMember(anchor.name, members)
-                // Load-more digs the branches in turn, starting after the one the refresh's own query used.
                 val others =
                     members
                         .drop(1)
@@ -260,7 +198,7 @@ internal class NeuroDiscovery(
             leftoverReps
                 .filter { topic ->
                     topic !in emerging &&
-                        categoryNameOf(topic.name)?.let { it !in representedCategories } == true
+                            categoryNameOf(topic.name)?.let { it !in representedCategories } == true
                 }.take(2)
 
         return TopicSelection(
@@ -301,22 +239,14 @@ internal class NeuroDiscovery(
 
         val evidence =
             brain.topicEvidence[base] ?: brain.topicEvidence[topic]
-                ?: return false
+            ?: return false
 
         return evidence.explicitSignals > 0 ||
-            evidence.watchSignals >= 2 ||
-            evidence.videoIds.size >= 2 ||
-            evidence.positiveScore >= 1.2 ||
-            // Modest but repeated engagement: enough to earn scheduled rotation
-            // slots for weak-tail interests (probation still damps their scores).
-            (evidence.positiveSignals >= 2 && evidence.positiveScore >= 0.5)
+                evidence.watchSignals >= 2 ||
+                evidence.videoIds.size >= 2 ||
+                evidence.positiveScore >= 1.2 ||
+                (evidence.positiveSignals >= 2 && evidence.positiveScore >= 0.5)
     }
-
-    // ═══════════════════════════════════════════════
-    // NATURAL QUERY QUALIFIERS
-    // Short words people actually append to YouTube searches.
-    // Used sparingly, only when a clear preference exists.
-    // ═══════════════════════════════════════════════
 
     private val freshnessWords = listOf("2025", "2026", "new", "latest")
 
@@ -336,15 +266,10 @@ internal class NeuroDiscovery(
             "compilation",
         )
 
-    // ═══════════════════════════════════════════════
-    // QUERY ENRICHMENT FOR AMBIGUOUS TOPICS
-    // ═══════════════════════════════════════════════
-
-    /** Words these lists compare keys with; key spec 2 never stems them ([NeuroStemmer]). */
     internal val curatedWords: Set<String> get() = ambiguousQueryWords + queryNoiseWords + fillerWords
 
-    /** Verbs titles use for anything ("I tested", "we built"), as keys titles give them. */
-    private val genericTitleVerbs = hashSetOf("test", "built", "make", "made", "tri", "use", "get", "got", "show", "watch")
+    private val genericTitleVerbs =
+        hashSetOf("test", "built", "make", "made", "tri", "use", "get", "got", "show", "watch")
 
     private val ambiguousQueryWords =
         hashSetOf(
@@ -390,7 +315,7 @@ internal class NeuroDiscovery(
             "tap",
             "tip",
             "web",
-            "flow",
+            "chor",
             "mix",
             "beat",
             "sound",
@@ -420,47 +345,30 @@ internal class NeuroDiscovery(
 
     private fun needsQueryEnrichment(topic: String): Boolean {
         val base = NeuroScoring.stripDomainTag(topic)
-        // Only genuinely AMBIGUOUS words need a qualifier. The old length<6 rule
-        // polluted short-but-specific anchors: "mma" became "mma android".
         return base in ambiguousQueryWords || base in tokenizer.polysemousWords
     }
 
-    /**
-     * Enriches an ambiguous topic into a specific YouTube query.
-     *
-     * Priority:
-     * 1. Domain tag → use as natural qualifier ("code:programming" → "code programming")
-     * 2. Strongest affinity partner ("code" + partner "python" → "code python")
-     * 3. Strongest co-topic in vector ("code" + co-topic "web" → "code web")
-     * 4. Category keyword ("code" → category "Technology" → "code technology")
-     * 5. Fallback: bare topic (shouldn't happen often)
-     */
     private fun buildNaturalQuery(
         topic: String,
         brain: UserBrain,
     ): String {
         val base = NeuroScoring.stripDomainTag(topic)
 
-        // A word the viewer mostly meets inside a phrase names something else alone: "elite" of
-        // "elite gen" searches up a TV series and a space game (#907).
         if (' ' !in base) enclosingPhrase(base, brain)?.let { return it }
 
         if (!needsQueryEnrichment(base)) return base
-
-        // 1. Domain-tagged: the tag IS the context
         if (topic.contains(":")) {
             val domain = topic.substringAfter(":")
             val qualifier = domainToQueryWord[domain] ?: domain
             return "$base $qualifier"
         }
 
-        // 2. Strongest affinity partner
         brain.topicAffinities.entries
             .filter { (key, value) ->
                 val parts = key.split("|")
                 parts.size == 2 &&
-                    (parts[0] == base || parts[1] == base) &&
-                    value > 0.10
+                        (parts[0] == base || parts[1] == base) &&
+                        value > 0.10
             }.sortedByDescending { it.value }
             .firstOrNull()
             ?.let { (key, _) ->
@@ -469,7 +377,6 @@ internal class NeuroDiscovery(
                 if (isSubstantialTopic(partner)) return "$base $partner"
             }
 
-        // 3. Strongest co-topic in global vector
         brain.globalVector.topics.entries
             .filter { (k, v) ->
                 val kBase = NeuroScoring.stripDomainTag(k)
@@ -481,7 +388,6 @@ internal class NeuroDiscovery(
                 return "$base $kBase"
             }
 
-        // 4. Category keyword
         topicCategories
             .find { cat ->
                 cat.topics.any { tokenizer.keyOf(it) == base }
@@ -529,23 +435,17 @@ internal class NeuroDiscovery(
             "hair" to "hairstyle",
         )
 
-    // ═══════════════════════════════════════════════
-    // MAIN QUERY GENERATION
-    // ═══════════════════════════════════════════════
-
     fun generateQueries(
         brain: UserBrain,
         now: Long = System.currentTimeMillis(),
         depth: Int = 0,
         channelEdges: Map<String, Double> = emptyMap(),
-        personaProvider: (UserBrain) -> FlowPersona,
+        personaProvider: (UserBrain) -> ChorPersona,
     ): List<DiscoveryQuery> {
         val persona = personaProvider(brain)
         val blocked = brain.blockedTopics
         val currentYear = Calendar.getInstance().get(Calendar.YEAR)
         val isMatureBrain = brain.totalInteractions > 50
-
-        // Step 1: Analyze topic maturity
         val bucket = TimeBucket.current()
         val timeVector = brain.timeVectors[bucket] ?: ContentVector()
         val timeTopicSet =
@@ -557,17 +457,12 @@ internal class NeuroDiscovery(
                 .toSet()
 
         val matureTopics = analyzeMatureTopics(brain, timeTopicSet)
-
-        // Step 2: Select topics — EVERY served cluster contributes to EVERY feed,
-        // and depth walks each cluster's members like a tree on load-more.
         val maxClusters =
             when (persona) {
-                FlowPersona.SPECIALIST -> 3
+                ChorPersona.SPECIALIST -> 3
                 else -> NeuroScoring.MAX_CLUSTERS_PER_REFRESH
             }
         val selection = selectDiverseTopics(matureTopics, brain, now, depth, maxClusters, channelEdges)
-
-        // Step 3: Generate queries — every strategy is interest-rooted
         val queries = mutableListOf<DiscoveryQuery>()
 
         addDirectQueries(queries, selection, brain, isMatureBrain, depth)
@@ -580,7 +475,6 @@ internal class NeuroDiscovery(
         addExplorationQueries(queries, brain)
         if (isMatureBrain) addPreferredTopicAnchors(queries, brain)
 
-        // Step 4: Filter, sanitize, balance
         val filtered =
             queries
                 .filter { q ->
@@ -592,12 +486,6 @@ internal class NeuroDiscovery(
         return balanceQueryStrategies(filtered, selection.uniqueTopicCount())
     }
 
-    // ═══════════════════════════════════════════════
-    // STRATEGY 1: DIRECT INTEREST QUERIES
-    // The most natural search — just the topic itself.
-    // "minecraft", "python", "guitar", "cooking"
-    // ═══════════════════════════════════════════════
-
     private fun addDirectQueries(
         queries: MutableList<DiscoveryQuery>,
         selection: TopicSelection,
@@ -605,9 +493,7 @@ internal class NeuroDiscovery(
         isMatureBrain: Boolean,
         depth: Int,
     ) {
-        // EVERY served cluster contributes one direct query per feed — that is the
-        // whole point of a multi-interest feed. Depth > 0 digs the cluster's branch
-        // ("android" → "android machine learning") instead of repeating the anchor.
+
         selection.choices.forEachIndexed { index, choice ->
             val topic = choice.topic
             if (!isDiscoveryEligible(topic, isMatureBrain)) return@forEachIndexed
@@ -633,12 +519,6 @@ internal class NeuroDiscovery(
         }
     }
 
-    // ═══════════════════════════════════════════════
-    // STRATEGY 2: INTEREST COMBINATION QUERIES
-    // Two of the user's topics combined naturally.
-    // "minecraft redstone", "python web", "cooking italian"
-    // ═══════════════════════════════════════════════
-
     private fun addCombinationQueries(
         queries: MutableList<DiscoveryQuery>,
         selection: TopicSelection,
@@ -651,7 +531,6 @@ internal class NeuroDiscovery(
 
         val primaryName = NeuroScoring.stripDomainTag(primary.name)
 
-        // Primary × top 2 secondary
         secondary.take(2).forEach { sec ->
             val secName = NeuroScoring.stripDomainTag(sec.name)
             queries.add(
@@ -665,7 +544,6 @@ internal class NeuroDiscovery(
             )
         }
 
-        // Secondary × secondary (one pair)
         if (secondary.size >= 2) {
             queries.add(
                 DiscoveryQuery(
@@ -678,7 +556,6 @@ internal class NeuroDiscovery(
             )
         }
 
-        // Cross-category combinations
         selection.crossCategory.take(1).forEach { cross ->
             queries.add(
                 DiscoveryQuery(
@@ -691,12 +568,6 @@ internal class NeuroDiscovery(
             )
         }
     }
-
-    // ═══════════════════════════════════════════════
-    // STRATEGY 3: AFFINITY-BACKED QUERIES
-    // Topics the user actually watches together.
-    // Inherently natural because they reflect real viewing.
-    // ═══════════════════════════════════════════════
 
     private fun addAffinityQueries(
         queries: MutableList<DiscoveryQuery>,
@@ -727,19 +598,6 @@ internal class NeuroDiscovery(
             }
     }
 
-    // ═══════════════════════════════════════════════
-    // STRATEGY 4: USER'S OWN TIME-CONTEXT INTERESTS
-    // What THIS user watches at this time of day.
-    // NOT generic moods — the user's actual patterns.
-    //
-    // A gamer at midnight gets "minecraft", not "lofi beats".
-    // A coder in the morning gets "python", not "morning motivation".
-    //
-    // Confirmed-interest gating: time topics must also appear
-    // in global interests to prevent one-time watches from
-    // generating recurring queries.
-    // ═══════════════════════════════════════════════
-
     private fun addTimeContextQueries(
         queries: MutableList<DiscoveryQuery>,
         brain: UserBrain,
@@ -758,8 +616,6 @@ internal class NeuroDiscovery(
 
         if (timeTopics.isEmpty()) return
 
-        // Only use time topics confirmed by global interest vector
-        // This prevents spurious one-time watches from generating queries
         val globalTopics = brain.globalVector.topics
         val confirmed =
             timeTopics.filter { topic ->
@@ -772,7 +628,6 @@ internal class NeuroDiscovery(
 
         val primaryName = selection.primary.firstOrNull()?.name
 
-        // Add top time-context interest (if different from primary)
         usableTopics.firstOrNull()?.let { timeTop ->
             if (timeTop != primaryName) {
                 queries.add(
@@ -786,7 +641,6 @@ internal class NeuroDiscovery(
             }
         }
 
-        // Combine two time-context interests
         if (usableTopics.size >= 2 &&
             usableTopics[0] != usableTopics[1]
         ) {
@@ -805,26 +659,20 @@ internal class NeuroDiscovery(
         when (bucket) {
             TimeBucket.WEEKDAY_MORNING,
             TimeBucket.WEEKEND_MORNING,
-            -> "morning"
+                -> "morning"
 
             TimeBucket.WEEKDAY_AFTERNOON,
             TimeBucket.WEEKEND_AFTERNOON,
-            -> "afternoon"
+                -> "afternoon"
 
             TimeBucket.WEEKDAY_EVENING,
             TimeBucket.WEEKEND_EVENING,
-            -> "evening"
+                -> "evening"
 
             TimeBucket.WEEKDAY_NIGHT,
             TimeBucket.WEEKEND_NIGHT,
-            -> "night"
+                -> "night"
         }
-
-    // ═══════════════════════════════════════════════
-    // STRATEGY 5: CHANNEL TOPIC SIGNATURES
-    // Derive queries from the topic profiles of channels
-    // the user rates highly. Discovers similar creators.
-    // ═══════════════════════════════════════════════
 
     private fun addChannelQueries(
         queries: MutableList<DiscoveryQuery>,
@@ -861,7 +709,6 @@ internal class NeuroDiscovery(
             }
         }
 
-        // Top niche across all channels
         val topNiche =
             brain.channelTopicProfiles.values
                 .flatMap { it.entries }
@@ -881,12 +728,6 @@ internal class NeuroDiscovery(
             )
         }
     }
-
-    // ═══════════════════════════════════════════════
-    // STRATEGY 6: FRESH CONTENT QUERIES
-    // Established interest + recency word.
-    // "minecraft 2025", "new python", "latest cooking"
-    // ═══════════════════════════════════════════════
 
     private fun addFreshQueries(
         queries: MutableList<DiscoveryQuery>,
@@ -922,25 +763,16 @@ internal class NeuroDiscovery(
         }
     }
 
-    // ═══════════════════════════════════════════════
-    // STRATEGY 7: FORMAT-MATCHED QUERIES
-    // Only when user has a clear format preference.
-    // Deep diver → "minecraft documentary"
-    // Skimmer → "minecraft highlights"
-    // No preference → skip entirely.
-    // ═══════════════════════════════════════════════
-
     private fun addFormatQueries(
         queries: MutableList<DiscoveryQuery>,
         selection: TopicSelection,
         brain: UserBrain,
-        persona: FlowPersona,
+        persona: ChorPersona,
         isMatureBrain: Boolean,
     ) {
         val primary = selection.primary.firstOrNull { isDiscoveryEligible(it, isMatureBrain) } ?: return
         val v = brain.globalVector
 
-        // The format the viewer actually watches, once there is one; until then a guess from length.
         val favourite =
             brain.formatAffinity
                 .filterValues { it >= FORMAT_QUERY_MIN_AFFINITY }
@@ -953,19 +785,19 @@ internal class NeuroDiscovery(
                 }
 
                 v.duration > 0.75 ||
-                    persona == FlowPersona.DEEP_DIVER ||
-                    persona == FlowPersona.SCHOLAR -> {
+                        persona == ChorPersona.DEEP_DIVER ||
+                        persona == ChorPersona.SCHOLAR -> {
                     longFormWords.random()
                 }
 
                 v.duration < 0.30 ||
-                    persona == FlowPersona.SKIMMER -> {
+                        persona == ChorPersona.SKIMMER -> {
                     shortFormWords.random()
                 }
 
                 else -> {
                     return
-                } // No clear preference — skip format queries
+                }
             }
 
         queries.add(
@@ -979,19 +811,11 @@ internal class NeuroDiscovery(
         )
     }
 
-    // ═══════════════════════════════════════════════
-    // STRATEGY 8: ADJACENT EXPLORATION
-    // Strictly user-grounded: candidates are topics the user's OWN graph
-    // points at but the vector barely knows — affinity partners of real
-    // interests, and topics taught by channels the user rates well.
-    // No catalog topics are ever injected.
-    // ═══════════════════════════════════════════════
-
     private fun addExplorationQueries(
         queries: MutableList<DiscoveryQuery>,
         brain: UserBrain,
     ) {
-        // Always reserve at least one exploration slot — no decay-to-zero bubble.
+
         val explorationBudget = if (brain.totalInteractions > 80) 1 else 2
         explorationTopics(brain).shuffled().take(explorationBudget).forEach { topic ->
             queries.add(
@@ -1005,13 +829,11 @@ internal class NeuroDiscovery(
         }
     }
 
-    /** Searches for the topics next to the viewer's interests that the vector barely knows yet. */
     fun explorationQueries(
         brain: UserBrain,
         limit: Int,
     ): List<String> = explorationTopics(brain).take(limit).map { buildNaturalQuery(it, brain) }
 
-    /** The strongest adjacent topics, best first: co-watched with real interests, or taught by liked channels. */
     private fun explorationTopics(brain: UserBrain): List<String> {
         val blocked = brain.blockedTopics
 
@@ -1024,8 +846,6 @@ internal class NeuroDiscovery(
 
         val adjacentWeights = mutableMapOf<String, Double>()
 
-        // (a) Affinity partners of established interests that the vector barely knows:
-        // the user has already watched these topics TOGETHER with a real interest.
         brain.topicAffinities.forEach { (key, affinity) ->
             val parts = key.split("|")
             if (parts.size != 2) return@forEach
@@ -1039,7 +859,6 @@ internal class NeuroDiscovery(
             }
         }
 
-        // (b) Topics that well-rated channels teach but the user hasn't explored.
         brain.channelTopicProfiles.forEach { (channelId, profile) ->
             val channelQuality = brain.channelScores[channelId] ?: return@forEach
             if (channelQuality < 0.55) return@forEach
@@ -1056,29 +875,22 @@ internal class NeuroDiscovery(
                 }
         }
 
-        // Exploration is a guess, so it also steers clear of the single words of a blocked phrase:
-        // channels that taught "resident evil" go on teaching "evil".
         val blockedPhraseWords = blocked.filter { ' ' in it }.flatMapTo(HashSet()) { tokenizer.tokenize(it) }
 
-        // Exploration searches the topic itself, so a word that needs a qualifier or is only a title's
-        // verb names nothing: "build" went out as "build knife", "test" brought cricket Test matches (#907).
         fun namesSubject(topic: String) =
             ' ' in topic || (topic !in ambiguousQueryWords && topic !in tokenizer.polysemousWords && topic !in genericTitleVerbs)
+
         val picks =
             adjacentWeights.entries
                 .filter { (topic, _) ->
                     namesSubject(topic) &&
-                        !blocked.any { b -> topic.contains(b) || tokenizer.keyOf(topic).contains(b) } &&
-                        tokenizer.keyOf(topic) !in blockedPhraseWords &&
-                        !tokenizer.isNoiseTopic(topic)
+                            !blocked.any { b -> topic.contains(b) || tokenizer.keyOf(topic).contains(b) } &&
+                            tokenizer.keyOf(topic) !in blockedPhraseWords &&
+                            !tokenizer.isNoiseTopic(topic)
                 }.sortedByDescending { it.value }
                 .take(6)
         return picks.map { it.key }
     }
-
-    // ═══════════════════════════════════════════════
-    // STRATEGY 9: PREFERRED TOPIC ANCHORS
-    // ═══════════════════════════════════════════════
 
     private fun addPreferredTopicAnchors(
         queries: MutableList<DiscoveryQuery>,
@@ -1103,8 +915,8 @@ internal class NeuroDiscovery(
                 .filter { pref ->
                     val lemma = tokenizer.keyOf(pref)
                     NeuroText.isTopicSized(lemma) &&
-                        lemma !in existingTokens &&
-                        !blocked.any { b -> lemma.contains(b) }
+                            lemma !in existingTokens &&
+                            !blocked.any { b -> lemma.contains(b) }
                 }.shuffled()
                 .take(3)
 
@@ -1119,10 +931,6 @@ internal class NeuroDiscovery(
             )
         }
     }
-
-    // ═══════════════════════════════════════════════
-    // CONFIDENCE CALIBRATION
-    // ═══════════════════════════════════════════════
 
     private fun calculateConfidence(topic: MatureTopic): Double {
         val maturityBase =
@@ -1141,10 +949,6 @@ internal class NeuroDiscovery(
         return (maturityBase + supportBonus + timeBonus)
             .coerceIn(0.20, 0.95)
     }
-
-    // ═══════════════════════════════════════════════
-    // QUERY QUALITY FILTERS
-    // ═══════════════════════════════════════════════
 
     private val yearRegex = Regex("^20[2-9]\\d$")
 
@@ -1180,7 +984,6 @@ internal class NeuroDiscovery(
             "network",
         )
 
-    /** 0 for confident searches, 1 for middling, 2 for the rest, with no gap between them (0.69 was in none). */
     internal fun confidenceTier(confidence: Double): Int =
         when {
             confidence >= 0.7 -> 0
@@ -1189,17 +992,16 @@ internal class NeuroDiscovery(
         }
 
     internal fun sanitizeQuery(raw: String): String? {
-        // A domain tag ("metal:music") tells the engine which metal; YouTube would read it as text (#907).
         val words = raw.trim().split(NeuroTokenizer.WHITESPACE_REGEX).map { it.substringBefore(':') }
         val deduped = LinkedHashSet(words)
         val cleaned =
             deduped.filter { word ->
                 val lower = word.lowercase()
                 lower.isNotEmpty() &&
-                    lower !in queryNoiseWords &&
-                    !yearRegex.matches(lower)
+                        lower !in queryNoiseWords &&
+                        !yearRegex.matches(lower)
             }
-        // Allow single-word queries (direct topic searches are natural)
+
         if (cleaned.isEmpty()) return null
         val result = cleaned.joinToString(" ")
         if (result.length > 60) {
@@ -1216,16 +1018,10 @@ internal class NeuroDiscovery(
         if (lower in queryNoiseWords) return false
         if (yearRegex.matches(lower)) return false
         if (lower.all { it.isDigit() }) return false
-        // Strip domain tags for checking: "metal:music" → "metal"
         val base = if (lower.contains(":")) lower.substringBefore(":") else lower
         if (!NeuroText.isTopicSized(base)) return false
-        // A word every subject uses ("normal", "better", "buy") searches up any subject (#907).
         return tokenizer.specificity(lower) >= QUERY_MIN_SPECIFICITY
     }
-
-    // ═══════════════════════════════════════════════
-    // BALANCING & DEDUPLICATION
-    // ═══════════════════════════════════════════════
 
     private val fillerWords =
         hashSetOf(
@@ -1266,13 +1062,9 @@ internal class NeuroDiscovery(
         queries: List<DiscoveryQuery>,
         availableTopicCount: Int,
     ): List<DiscoveryQuery> {
-        // ── Semantic deduplication ──
+
         val deduped = mutableListOf<DiscoveryQuery>()
         val seenTokenSets = mutableListOf<Set<String>>()
-
-        // Cluster ANCHORS (direct deep-dives) enter dedup first: they are each
-        // community's flag query. Otherwise a cross-combo like "android mma" can
-        // out-confidence a developing cluster's own "mma" and absorb its tokens.
         val sorted =
             queries.sortedWith(
                 compareByDescending<DiscoveryQuery> { it.strategy == QueryStrategy.DEEP_DIVE && it.clusterKey != null }
@@ -1296,12 +1088,10 @@ internal class NeuroDiscovery(
                     (intersection.toDouble() / union) > 0.3
                 }
 
-            // A cluster's sole representative always survives dedup — token overlap
-            // with another cluster's query must not erase a community from the feed.
             val keepForClusterCoverage =
                 isDuplicate &&
-                    query.clusterKey != null &&
-                    deduped.none { it.clusterKey == query.clusterKey }
+                        query.clusterKey != null &&
+                        deduped.none { it.clusterKey == query.clusterKey }
 
             if (!isDuplicate || keepForClusterCoverage) {
                 deduped.add(query)
@@ -1309,7 +1099,6 @@ internal class NeuroDiscovery(
             }
         }
 
-        // ── Diversity budget ──
         val minDistinctTopics =
             when {
                 availableTopicCount >= 6 -> 4
@@ -1321,9 +1110,6 @@ internal class NeuroDiscovery(
         val balanced = mutableListOf<DiscoveryQuery>()
         val topicsCovered = mutableSetOf<String>()
 
-        // Phase 0: cluster coverage is the FIRST guarantee — every served cluster's
-        // best query makes the cut before any strategy or confidence balancing.
-        // This is what puts mma + android + anime in the SAME feed.
         deduped
             .filter { it.clusterKey != null }
             .groupBy { it.clusterKey }
@@ -1335,7 +1121,6 @@ internal class NeuroDiscovery(
                 }
             }
 
-        // Phase 1: Ensure strategy diversity (1 per strategy)
         val strategyPriority =
             listOf(
                 QueryStrategy.DEEP_DIVE,
@@ -1359,7 +1144,6 @@ internal class NeuroDiscovery(
             }
         }
 
-        // Phase 2: Fill topic diversity gaps
         if (topicsCovered.size < minDistinctTopics) {
             val remaining = deduped.filter { it !in balanced }
             for (query in remaining) {
@@ -1372,7 +1156,6 @@ internal class NeuroDiscovery(
             }
         }
 
-        // Phase 3: Fill by confidence (with per-topic cap)
         val topicCountInOutput = mutableMapOf<String, Int>()
         balanced.forEach { q ->
             extractTopicRoot(q.query)?.let { root ->
@@ -1412,7 +1195,6 @@ internal class NeuroDiscovery(
             }
         }
 
-        // Phase 4: Shuffle within confidence tiers for variety
         return balanced
             .groupBy { confidenceTier(it.confidence) }
             .toSortedMap()

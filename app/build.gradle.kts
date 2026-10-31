@@ -31,8 +31,6 @@ fun secretValue(
         ?: System.getenv(environment)
         ?: ""
 
-// The in-app picker lists the same languages AGP writes into the generated locale config: every
-// values folder that carries a strings.xml, so a new Weblate language shows up in both at once.
 fun translatedLocaleTags(): List<String> =
     file("src/main/res")
         .listFiles()
@@ -62,7 +60,6 @@ android {
 
         buildConfigField("int", "NIGHTLY_RUN", "0")
         buildConfigField("String", "APP_LANGUAGE_TAGS", "\"${(listOf("en") + translatedLocaleTags()).joinToString(",")}\"")
-        // Last.fm keys come from the CI secrets; builds without them ask the viewer for their own key.
         buildConfigField("String", "LASTFM_API_KEY", "\"${secretValue("lastfmApiKey", "lastfm.apiKey", "LASTFM_API_KEY")}\"")
         buildConfigField("String", "LASTFM_API_SECRET", "\"${secretValue("lastfmApiSecret", "lastfm.apiSecret", "LASTFM_API_SECRET")}\"")
 
@@ -71,16 +68,13 @@ android {
             useSupportLibrary = true
         }
 
-        // Support all architectures for maximum device compatibility
         ndk {
             abiFilters.addAll(listOf("armeabi-v7a", "arm64-v8a", "x86", "x86_64"))
         }
     }
 
     dependenciesInfo {
-        // Disables dependency metadata when building APKs (for IzzyOnDroid/F-Droid)
         includeInApk = false
-        // Disables dependency metadata when building Android App Bundles (for Google Play)
         includeInBundle = false
     }
 
@@ -99,7 +93,6 @@ android {
             dimension = "version"
             isDefault = true
             buildConfigField("Boolean", "UPDATER_ENABLED", "true")
-            buildConfigField("String", "DISCORD_APPLICATION_ID", "\"1526515771021328514\"")
         }
         create("foss") {
             dimension = "version"
@@ -132,7 +125,7 @@ android {
                 ?: System.getenv("KEY_PASSWORD")
                 ?: ""
         }
-        // One long-lived key for every nightly, so each build installs over the last one.
+
         create("nightly") {
             storeFile = rootDir.resolve("nightly.keystore")
             storePassword = System.getenv("NIGHTLY_STORE_PASSWORD") ?: localProperties.getProperty("nightlyStorePassword") ?: ""
@@ -159,7 +152,7 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro",
             )
-            // Use release signing if configured, otherwise fallback to debug
+
             val releaseKeystore =
                 try {
                     signingConfigs.getByName("release").storeFile
@@ -170,12 +163,11 @@ android {
                 signingConfig = signingConfigs.getByName("release")
                 println("Using RELEASE signing config with keystore: ${releaseKeystore.absolutePath}")
             } else {
-                signingConfig = null // Let Gradle build an unsigned APK for IzzyOnDroid/F-Droid
+                signingConfig = null
                 println("WARNING: Release keystore not found. Building UNSIGNED release APK.")
             }
         }
-        // Nightly: release-level performance under its own app id. It must come after release,
-        // because initWith copies release as it stands at this point.
+
         create("nightly") {
             initWith(getByName("release"))
             applicationIdSuffix = ".nightly"
@@ -194,7 +186,7 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
-        isCoreLibraryDesugaringEnabled = true // Enable desugaring
+        isCoreLibraryDesugaringEnabled = true
     }
 
     packaging {
@@ -222,7 +214,6 @@ android {
     }
 }
 
-// JVM tests load Conscrypt's desktop build, which has the same API but native code for the host.
 configurations.matching { it.name.endsWith("UnitTestRuntimeClasspath") }.configureEach {
     exclude(group = "org.conscrypt", module = "conscrypt-android")
 }
@@ -239,7 +230,7 @@ androidComponents {
     onVariants(selector().withBuildType("nightly")) { variant ->
         val run = providers.environmentVariable("GITHUB_RUN_NUMBER").map(String::toInt)
         val sha = providers.environmentVariable("GITHUB_SHA").map { it.take(7) }
-        val base = providers.gradleProperty("chorplay.nightlyBaseVersion").orElse(providers.gradleProperty("flow.nightlyBaseVersion"))
+        val base = providers.gradleProperty("chorplay.nightlyBaseVersion")
         variant.outputs.forEach { output ->
             val localCode = output.versionCode.get()
             val localName = output.versionName.get()
@@ -279,23 +270,16 @@ composeCompiler {
 }
 
 dependencies {
-    // --- Core Android ---
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.core.splashscreen)
     implementation(libs.androidx.activity.compose)
-
-    // --- Compose (Using BOM is best practice) ---
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.ui)
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
     implementation(libs.androidx.material.icons.extended)
-
-    // --- Navigation ---
     implementation(libs.androidx.navigation.compose)
-
-    // --- Lifecycle & Architecture ---
     implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.androidx.lifecycle.runtime.compose)
     implementation(libs.androidx.window)
@@ -304,36 +288,22 @@ dependencies {
     implementation(libs.androidx.material3.adaptive.navigation)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.lifecycle.process)
-
-    // --- Layouts ---
     implementation(libs.androidx.constraintlayout.compose)
-
-    // --- Image Loading ---
     implementation(libs.coil.compose)
     implementation(libs.compose.reorderable)
     implementation(libs.coil.video)
     implementation(libs.coil.network.okhttp)
     implementation("androidx.palette:palette-ktx:1.0.0")
-
-    // --- Dependency Injection ---
     implementation(libs.hilt.android)
     ksp(libs.hilt.android.compiler)
     implementation(libs.hilt.navigation.compose)
-
-    // --- Data & Network ---
     implementation(libs.newpipe.extractor)
-
-    // Networking
     implementation(libs.okhttp)
-
-    // Ktor (Managed in libs.versions.toml)
     implementation(libs.ktor.client.core)
     implementation(libs.ktor.client.okhttp)
     implementation(libs.ktor.client.content.negotiation)
     implementation(libs.ktor.serialization.kotlinx.json)
     implementation(libs.ktor.client.encoding)
-
-    // --- Device Sync ---
     implementation(libs.ktor.server.core) {
         exclude(group = "org.fusesource.jansi", module = "jansi")
     }
@@ -353,7 +323,6 @@ dependencies {
     implementation(libs.bouncycastle.bcprov)
     implementation(libs.kotlin.bip39)
 
-    // --- Media Playback ---
     implementation(libs.androidx.media3.exoplayer)
     implementation(libs.androidx.media3.ui)
     implementation(libs.androidx.media3.common)
@@ -366,20 +335,15 @@ dependencies {
     implementation(libs.androidx.media3.inspector)
     implementation(libs.androidx.media)
 
-    // --- Database & Storage ---
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.room.ktx)
     ksp(libs.androidx.room.compiler)
 
     implementation(libs.androidx.datastore.preferences)
-    // implementation(libs.androidx.datastore) // In TOML if needed
-
-    // --- Home-screen widgets (Jetpack Glance) ---
     implementation(libs.androidx.glance.appwidget)
     implementation(libs.androidx.glance.material3)
     implementation(libs.androidx.graphics.shapes)
 
-    // --- Async & Utils ---
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.androidx.paging.runtime.ktx)
     implementation(libs.androidx.paging.compose)
@@ -389,40 +353,30 @@ dependencies {
     implementation(libs.brotli)
     implementation(libs.re2j)
 
-    // --- Baseline profiles ---
-    // Runtime installer for the merged baseline profile. AGP merges profiles shipped inside
-    // library AARs (Compose, RecyclerView, ...) at build time; this applies them at runtime,
-    // which matters for sideloaded/F-Droid installs that bypass Play's cloud profiles.
     implementation(libs.androidx.profileinstaller)
-    // Trace sections the startup and Home benchmarks measure (#1301); already on the classpath through Compose.
     implementation(libs.androidx.tracing)
     baselineProfile(project(":benchmark"))
 
-    // Desugaring for older Android versions
     coreLibraryDesugaring(libs.desugar.jdk.libs.nio)
 
-    // --- Testing ---
     testImplementation(libs.junit)
     testImplementation(libs.conscrypt.openjdk.uber)
     testImplementation(libs.kxml2)
     testImplementation(libs.kotlinx.coroutines.test)
     testImplementation(libs.mockk)
     testImplementation(libs.truth)
-    // Han word breaker for tests; the JDK breaker does not split Han runs.
     testImplementation(libs.icu4j)
     testImplementation(libs.turbine)
     testImplementation(libs.androidx.glance.appwidget.testing)
     testImplementation(libs.hilt.android.testing)
     kspTest(libs.hilt.android.compiler)
 
-    // Compose UI tests in the JVM (Robolectric) so CI's unit-test task covers them
     testImplementation(libs.robolectric)
     testImplementation(libs.androidx.test.core)
     testImplementation(libs.androidx.test.ext.junit)
     testImplementation(platform(libs.androidx.compose.bom))
     testImplementation(libs.androidx.ui.test.junit4)
 
-    // Room migration tests (device-sync schema 20→23)
     androidTestImplementation(libs.androidx.room.testing)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -435,7 +389,6 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
 }
 
-// Allow references to generated code
 ksp {
     arg("dagger.fastInit", "enabled")
 }

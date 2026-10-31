@@ -16,8 +16,8 @@
     <string name="library_section_header">您的內容</string>
     <string name="library_history_label">歷史</string>
     <string name="library_playlists_label">播放清單</string>
-    <string name="library_music_playlists_label">音樂清單</string>
-    <string name="library_music_playlists_subtitle">您的音樂收藏</string>
+
+
     <string name="library_liked_videos_label">讚好</string>
     <string name="library_saved_shorts_label">收藏的 Shorts</string>
     <string name="library_watch_later_label">稍後觀看</string>
@@ -44,15 +44,14 @@
     <string name="history_tab_shorts">Shorts</string>
     <string name="app_name">Chorplay</string>
     <string name="liked">已讚好</string>
-    <string name="liked_music">讚好音樂</string>
+
     <string name="liked_videos">讚好</string>
-    <string name="share_song">分享音樂</string>
     <string name="empty_liked">沒有讚好</string>
     <string name="empty_liked_body">你按讚的內容會顯示在這裡</string>
     <string name="empty_liked_videos">還未讚好任何影片</string>
-    <string name="empty_liked_music">還未讚好任何音樂</string>
-    <string name="empty_liked_music_body">您讚好的音樂會在此處顯示</string>
-    <string name="song">歌曲</string>
+
+
+
     <string name="video">影片</string>
     <string name="share">分享</string>
     <string name="downloaded">已下載</string>
@@ -89,7 +88,6 @@
     <string name="remove">刪除</string>
     <string name="related_content">相關內容</string>
     <string name="no_related_content">沒有相關內容</string>
-    <string name="share_message_template">聽一下這首歌：%1$s — %2$s\nhttps://music.youtube.com/watch?v=%3$s</string>
     <string name="hz">Hz</string>
     <string name="kbps">kbps</string>
     <string name="filter_discover">探索</string>
@@ -123,13 +121,12 @@
     <string name="play_mode_suggestion_title">播放模式建議</string>
     <string name="play_mode_suggestion_body">此影片時長少於 2 分鐘。要轉換到專用播放器嗎？</string>
     <string name="shorts_player">Shorts 播放器</string>
-    <string name="music_player">音樂播放器</string>
+
     <plurals name="channels_count">
         <item quantity="other">%d 個頻道</item>
     </plurals>
     <string name="tab_videos">影片</string>
-    <string name="tab_music">音樂</string>
-    <string name="empty_offline_title">離綫 %1$s</string>
+<string name="empty_offline_title">離綫 %1$s</string>
     <string name="empty_offline_body">您下載的 %1$s 會於此處顯示。\n沒有網絡仍可享受你的內容。</string>
     <string name="action_go_to_home">返回主頁</string>
     <string name="action_delete">刪除</string>
@@ -193,7 +190,7 @@
     </plurals>
     <string name="subscriptions_failed_channels_copy_logs">複製記錄檔</string>
     <string name="history_tab_local_videos">本機影片</string>
-    <string name="history_tab_local_music">本機音樂</string>
+
     <string name="playlist_creation_menu_open">建立播放清單</string>
     <string name="playlist_creation_menu_close">關閉建立播放清單選單</string>
     <string name="lyrics_save_file">另存為 .lrc 檔案</string>
@@ -247,12 +244,12 @@
     <string name="copied_to_clipboard">已複製 %1$s</string>
     <string name="unknown">未知</string>
     <string name="subscriptions_video_section_title">影片訂閱</string>
-    <string name="subscriptions_music_section_title">音樂訂閱</string>
+
     <string name="subscriptions_quick_access_title">快速存取</string>
     <string name="subscriptions_compact_header">快速進入你最新訂閱的頻道。</string>
-    <string name="subscriptions_compact_header_with_music">音樂頻道會以行內標記顯示，讓動態消息保持簡潔。</string>
-    <string name="subscriptions_music_chip_label">音樂</string>
-    <string name="subscriptions_music_badge_cd">音樂訂閱</string>
+
+
+
     <string name="no_subscriptions_found">找不到訂閱項目</string>
     <string name="live_chat">即時聊天室</string>
     <string name="live_chat_connecting">正在連線至即時聊天室…</string>
@@ -283,11 +280,11 @@
     <string name="new_update_available">有新的更新可用</string>
     <string name="update_available_template">%1$s 現已推出</string>
     <string name="release_notes">版本資訊</string>
-    <string name="update_flow">更新Chorplay</string>
+    <string name="update_chorplay">更新Chorplay</string>
     <string name="maybe_later">稍後再說</string>
     <string name="nav_home">首頁</string>
     <string name="nav_shorts">Shorts</string>
-    <string name="nav_music">音樂</string>
+
     <string name="nav_subs">訂閱</string>
     <string name="nav_library">媒體庫</string>
     <string name="notifications">通知</string>
@@ -307,7 +304,6 @@
     <string name="add_to_playlist">加入播放清單</string>
     <string name="playback_header">播放</string>
     <string name="play_next">下一個播放</string>
-    <string name="play_next_desc">在目前歌曲之後播放</string>
     <string name="add_to_queue">加入播放佇列</string>
     <string name="add_to_queue_desc">加入播放佇列末尾</string>
     <string name="similar_content">相似內容</string>
@@ -321,8 +317,6 @@
     <string name="audio_effects">音效</string>
     <string name="more_header">更多</string>
     <string name="view_artist">查看藝人</string>
-    <string name="view_album">查看專輯</string>
-    <string name="album_art">專輯封面</string>
     <string name="close_player">關閉播放器</string>
     <string name="views_template">%1$s 次觀看</string>
     <string name="chapters">章節</string>
@@ -336,9 +330,7 @@
     <plurals name="videos_count_template">
         <item quantity="other">%1$d 部影片</item>
     </plurals>
-    <plurals name="songs_count_template">
-        <item quantity="other">%1$d 首歌曲</item>
-    </plurals>
+
     <string name="player_time_separator">/</string>
     <string name="empty_downloads">尚無下載內容</string>
     <string name="play_all">全部播放</string>
@@ -443,9 +435,9 @@
     <string name="app_icon_picker_subtitle">選擇啟動器圖示樣式。變更會立即生效，啟動器將短暫重新整理。</string>
     <string name="app_icon_picker_warning">變更圖示可能會暫時將 Chorplay 從主畫面移除。如有需要，請從應用程式抽屜將它加回主畫面。</string>
     <string name="app_icon_apply_toast">圖示已更新－啟動器將重新整理</string>
-    <string name="icon_name_flow_red">Chorplay Red</string>
-    <string name="icon_name_flow_light">Chorplay Light</string>
-    <string name="icon_name_flow_play">Chorplay Play</string>
+    <string name="icon_name_chorplay_red">Chorplay Red</string>
+    <string name="icon_name_chorplay_light">Chorplay Light</string>
+    <string name="icon_name_chorplay_play">Chorplay Play</string>
     <string name="icon_name_amoled">AMOLED黑</string>
     <string name="icon_name_monochrome">單色</string>
     <string name="icon_name_ghost">幽靈</string>
@@ -456,14 +448,13 @@
     <string name="player_appearance_header">自訂播放器控制項</string>
     <string name="player_appearance_style_title">音樂進度條樣式</string>
     <string name="player_appearance_style_subtitle">選擇進度條的視覺樣式</string>
-    <string name="player_background_style_title">音樂播放器背景</string>
     <string name="player_background_style_blur_gradient">模糊＋漸層</string>
     <string name="player_background_style_blur">模糊化封面</string>
     <string name="player_background_style_gradient">調色盤漸變</string>
     <string name="player_background_style_immersive">沉浸式專輯封面</string>
     <string name="player_background_style_default">預設樣式</string>
-    <string name="player_appearance_hide_music_artwork_title">隱藏音樂播放器封面</string>
-    <string name="player_appearance_hide_music_artwork_subtitle">在提取的圖稿顏色上顯示應用程式圖示</string>
+
+
     <string name="player_appearance_shorts_ui_title">Shorts 播放器介面</string>
     <plurals name="subscriptions_refresh_progress_template">
         <item quantity="other">正在重新整理第 %1$d 個頻道，共 %2$d 個</item>
@@ -516,19 +507,18 @@
     <string name="load_failed">載入失敗</string>
     <string name="recent_searches">最近搜尋</string>
     <string name="import_master_backup_desc">從單一主備份檔案還原應用程式資料和引擎設定檔</string>
-    <string name="discord_presence_connected">已連接</string>
+
     <string name="player_appearance_volume_gesture_title">音量手勢</string>
     <plurals name="merge_playlist_success">
         <item quantity="other">已將 %1$d 首歌曲加入「%2$s」</item>
     </plurals>
     <string name="auto_backup_screen_title">自動備份</string>
-    <string name="discord_presence_ready">已連結並準備就緒</string>
+
     <string name="notification_channel_downloads_name">Chorplay 下載內容</string>
     <string name="player_settings_stable_voice_subtitle">將音量標準化，讓播放音量保持一致</string>
-    <string name="import_music_apps_section_title">音樂應用程式</string>
+
     <string name="default_download_codec_label">預設下載編碼格式</string>
-    <string name="notification_channel_music_playback_description">音樂播放控制項</string>
-    <string name="tv_subscriptions_empty">目前尚無訂閱影片</string>
+<string name="tv_subscriptions_empty">目前尚無訂閱影片</string>
     <string name="theme_desc_monochrome">中性且不易分心的配色，提供最清晰的視覺效果。</string>
     <string name="sb_category_outro">片尾／結尾畫面</string>
     <string name="category_all">全部</string>
@@ -547,7 +537,7 @@
     <string name="autoplay_countdown_play_now">立即播放</string>
     <string name="location_custom_manual_desc">輸入絕對路徑，例如：/storage/emulated/0/MyFolder</string>
     <string name="bedtime_notification_note">開始時會傳送通知。</string>
-    <string name="deep_flow_duration_12h">12小時</string>
+    <string name="deep_chor_duration_12h">12小時</string>
     <string name="proxy_settings_description">透過 HTTP 或 SOCKS5 Proxy 轉送遠端流量。投放和區域網路裝置仍會直接連線。</string>
     <string name="buffer_profile_stable">穩定版（預設）</string>
     <string name="theme_name_deep_ocean">深海蔚藍</string>
@@ -558,7 +548,7 @@
     <string name="diagnostics_copied">報告已複製到剪貼簿</string>
     <string name="theme_desc_cosmic_void">長夜無盡</string>
     <string name="cache_size_unlimited">無限</string>
-    <string name="music_quality_header">音樂音質</string>
+
     <string name="playback_speed_multiplier">%1$s×</string>
     <string name="theme_desc_espresso">濃醇暖意</string>
     <string name="unlike">取消按讚</string>
@@ -566,10 +556,10 @@
     <string name="import_yt_history_failed_template">匯入觀看記錄失敗：%1$s</string>
     <string name="permissions_header">權限</string>
     <string name="player_settings_overlay_cast">投放按鈕</string>
-    <string name="music_top_artists_subtitle">目前你最感興趣的內容</string>
+
     <string name="import_playlists_section_title">播放清單</string>
     <string name="delete_playlist_dialog_text">這將永久刪除「%1$s」及其中的所有影片。</string>
-    <string name="discord_presence_privacy_section">隱私權與帳戶風險</string>
+
     <string name="discovery_status_subtitle">目前影響探索方向的查詢與防護措施</string>
     <string name="trending">熱門</string>
     <string name="channels_header">頻道</string>
@@ -613,9 +603,9 @@
     <string name="channel_search_open">在頻道中搜尋</string>
     <string name="channel_search_close">關閉搜尋</string>
     <string name="channel_search_no_results">找不到符合「%1$s」的結果</string>
-    <string name="music_history">音樂播放記錄</string>
+
     <string name="remove_from_history">從記錄中移除</string>
-    <string name="share_song_chooser">分享歌曲</string>
+
     <string name="time_today">今天</string>
     <string name="time_yesterday">昨天</string>
     <string name="time_earlier">稍早</string>
@@ -624,32 +614,32 @@
     <string name="dismiss">關閉</string>
     <string name="notifications_empty_body">你已查看完所有內容！訂閱頻道的新更新會顯示在這裡。</string>
     <string name="settings_title">設定</string>
-    <string name="settings_flow_engine_header">Chorplay 引擎</string>
+    <string name="settings_chor_engine_header">Chorplay 引擎</string>
     <string name="settings_active_learning">主動學習</string>
     <string name="settings_reset_brain_title">要重設 Chorplay 個人化設定嗎？</string>
     <string name="settings_reset_brain_body">這會清除你的 Chorplay Brain 個人檔案。\n\n• 已學習的主題會被遺忘。\n• 個性特徵會重設。\n• 推薦內容會恢復為預設值。\n\n此操作無法復原。</string>
     <string name="settings_reset_everything">全部重設</string>
     <string name="settings_analyzing_interactions">正在分析你的互動...</string>
     <string name="settings_view_analytics">查看分析資料</string>
-    <string name="deep_flow_mode_title">Deep Chorplay模式</string>
-    <string name="deep_flow_mode_subtitle">瀏覽時暫停學習</string>
-    <string name="deep_flow_learning_paused">已暫停學習</string>
-    <string name="deep_flow_expires_in">將於 %s 後結束</string>
-    <string name="deep_flow_expire_duration_title">Deep Chorplay停用計時器</string>
-    <string name="deep_flow_expire_duration_subtitle">%s 後自動恢復學習</string>
-    <string name="deep_flow_dialog_title">暫停時長</string>
-    <string name="deep_flow_dialog_body">您要暫停學習多久？</string>
-    <string name="deep_flow_enabled_message">已啟用Deep Chorplay模式</string>
-    <string name="deep_flow_disabled_message">已停用Deep Chorplay模式</string>
-    <string name="deep_flow_expired_message">Deep Chorplay模式計時器已結束</string>
-    <string name="deep_flow_active_until_disabled">Deep Chorplay模式會持續啟用，直到你將其關閉</string>
-    <string name="deep_flow_duration_never">永不</string>
-    <string name="deep_flow_duration_1h">1小時</string>
-    <string name="deep_flow_duration_2h">2小時</string>
-    <string name="deep_flow_duration_4h">4小時</string>
-    <string name="deep_flow_duration_6h">6小時</string>
-    <string name="deep_flow_duration_8h">8小時</string>
-    <string name="deep_flow_duration_24h">24小時</string>
+    <string name="deep_chor_mode_title">Deep Chorplay模式</string>
+    <string name="deep_chor_mode_subtitle">瀏覽時暫停學習</string>
+    <string name="deep_chor_learning_paused">已暫停學習</string>
+    <string name="deep_chor_expires_in">將於 %s 後結束</string>
+    <string name="deep_chor_expire_duration_title">Deep Chorplay停用計時器</string>
+    <string name="deep_chor_expire_duration_subtitle">%s 後自動恢復學習</string>
+    <string name="deep_chor_dialog_title">暫停時長</string>
+    <string name="deep_chor_dialog_body">您要暫停學習多久？</string>
+    <string name="deep_chor_enabled_message">已啟用Deep Chorplay模式</string>
+    <string name="deep_chor_disabled_message">已停用Deep Chorplay模式</string>
+    <string name="deep_chor_expired_message">Deep Chorplay模式計時器已結束</string>
+    <string name="deep_chor_active_until_disabled">Deep Chorplay模式會持續啟用，直到你將其關閉</string>
+    <string name="deep_chor_duration_never">永不</string>
+    <string name="deep_chor_duration_1h">1小時</string>
+    <string name="deep_chor_duration_2h">2小時</string>
+    <string name="deep_chor_duration_4h">4小時</string>
+    <string name="deep_chor_duration_6h">6小時</string>
+    <string name="deep_chor_duration_8h">8小時</string>
+    <string name="deep_chor_duration_24h">24小時</string>
     <string name="settings_header_appearance">外觀</string>
     <string name="settings_header_content_playback">內容與播放</string>
     <string name="settings_header_data_management">資料管理</string>
@@ -734,8 +724,8 @@
     <string name="content_settings_home_columns_auto">自動</string>
     <string name="content_settings_layout_grid">網格</string>
     <string name="content_settings_layout_list">清單</string>
-    <string name="deep_flow_save_history_title">儲存至觀看記錄</string>
-    <string name="deep_flow_save_history_subtitle">保留觀看記錄，但不會影響推薦內容</string>
+    <string name="deep_chor_save_history_title">儲存至觀看記錄</string>
+    <string name="deep_chor_save_history_subtitle">保留觀看記錄，但不會影響推薦內容</string>
     <string name="persona_initiate_title">初學者</string>
     <string name="persona_initiate_description">剛開始探索。你的個人檔案仍在建立中。</string>
     <string name="settings_item_app_language">應用程式語言</string>
@@ -828,7 +818,7 @@
     </plurals>
     <string name="player_settings_double_tap_seek_dialog_title">雙擊跳轉時間</string>
     <string name="player_settings_double_tap_seek_dialog_body">在螢幕任一側連續點按兩下時跳轉的時間長度。</string>
-    <string name="import_music_apps_section_subtitle">從其他播放器匯入你的音樂媒體庫</string>
+
     <string name="player_settings_overlay_cc">字幕按鈕</string>
     <string name="player_settings_auto_pip_subtitle">離開 App 時切換至子母畫面</string>
     <string name="player_appearance_volume_boost_title">允許額外提高音量</string>
@@ -847,12 +837,10 @@
     <string name="settings_item_content_display">內容顯示</string>
     <string name="settings_item_content_display_subtitle">網格大小、縮圖與版面配置</string>
     <string name="content_settings_grid_size_title">網格項目大小</string>
-    <string name="content_settings_grid_size_subtitle">控制專輯封面和內容卡片的大小</string>
     <string name="content_settings_grid_big_title">大</string>
     <string name="content_settings_grid_big_desc">較大的縮圖</string>
     <string name="content_settings_grid_small_desc">緊湊檢視</string>
     <string name="content_settings_header_preview">預覽</string>
-    <string name="content_settings_preview_album_art">專輯封面預覽</string>
     <string name="content_settings_preview_big">大－128dp縮圖</string>
     <string name="content_settings_preview_small">小－104dp縮圖</string>
     <string name="content_settings_dynamic_components">動態元件</string>
@@ -883,8 +871,8 @@
     <string name="content_settings_shorts_content_title">顯示Shorts</string>
     <string name="content_settings_shorts_content_subtitle">在所有位置隱藏 Shorts。已儲存的 Shorts 和觀看記錄會保留。</string>
     <string name="content_settings_header_content_components">內容元件</string>
-    <string name="content_settings_restored_music_mini_player_title">顯示復原音樂的迷你播放器</string>
-    <string name="content_settings_restored_music_mini_player_subtitle">恢復後顯示你上次的音樂播放內容</string>
+
+
     <string name="content_settings_hide_watched_home_title">從首頁隱藏已觀看的影片</string>
     <string name="content_settings_hide_watched_home_subtitle">在首頁隱藏你已觀看的影片</string>
     <string name="content_settings_hide_watched_subscriptions_title">從訂閱內容中隱藏已觀看的影片</string>
@@ -932,10 +920,10 @@
     <string name="persona_skimmer_description">短片疾馳，快意即來。</string>
     <string name="search_content_description">搜尋</string>
     <string name="empty_browse_content">目前沒有可用的內容</string>
-    <string name="music_content_language_title">內容語言</string>
-    <string name="music_content_language_follow_app">跟隨應用程式語言</string>
-    <string name="music_content_language_dialog_title">選擇內容語言</string>
-    <string name="music_content_country_title">內容國家/地區</string>
+    <string name="content_language_title">內容語言</string>
+    <string name="content_language_follow_app">跟隨應用程式語言</string>
+    <string name="content_language_dialog_title">選擇內容語言</string>
+    <string name="content_country_title">內容國家/地區</string>
     <string name="sync_qr_content_description">同步QR code</string>
     <string name="error_age_restricted">受年齡限制的內容</string>
     <string name="error_geo_restricted_hint">內容擁有者已限制你所在國家／地區觀看這部影片。請嘗試使用 VPN。</string>
@@ -955,7 +943,6 @@
     <string name="download_failed_video_length">無法取得影片長度</string>
     <string name="download_failed_audio_length">無法取得音訊長度</string>
     <string name="import_no_content">在此備份中找不到可匯入的內容</string>
-    <string name="search_empty_prompt">搜尋影片、音樂等內容</string>
     <string name="import_success_count">已匯入 %1$d %2$s</string>
     <string name="import_success">%1$s 已成功匯入</string>
     <string name="search_filter_all">全部</string>
@@ -1011,7 +998,7 @@
     <string name="channel_search_failed">無法搜尋此頻道</string>
     <string name="share_community_post">分享社群貼文</string>
     <string name="peace_and_quiet">一片靜悄悄</string>
-    <plurals name="deep_flow_duration_hours">
+    <plurals name="deep_chor_duration_hours">
         <item quantity="other">%1$d 小時</item>
     </plurals>
     <string name="notif_master_toggle_subtitle">允許 Chorplay 在背景檢查新影片</string>
@@ -1084,11 +1071,7 @@
     <string name="player_appearance_scrub_preview_frame">單幀預覽</string>
     <string name="player_appearance_frame_step_title">逐幀播放按鈕</string>
     <string name="player_appearance_frame_step_subtitle">暫停時顯示上一幀/下一幀箭頭</string>
-    <string name="lyrics_provider_title">歌詞提供者</string>
-    <string name="lyrics_provider_subtitle">選擇偏好的歌詞來源</string>
-    <plurals name="lyrics_providers_enabled">
-        <item quantity="other">%1$d/%2$d 個歌詞來源已啟用</item>
-    </plurals>
+
     <string name="lyrics_provider_lrclib">LrcLib</string>
     <string name="lyrics_provider_better_lyrics">Better Lyrics</string>
     <string name="lyrics_provider_simpmusic">SimpMusic</string>
@@ -1107,8 +1090,8 @@
     <string name="settings_home_shorts_shelf_subtitle">在主畫面顯示橫向Shorts列。</string>
     <string name="settings_shorts_nav_tab_title">導覽列中的Shorts分頁</string>
     <string name="settings_shorts_nav_tab_subtitle">在底部導覽列顯示Shorts分頁。</string>
-    <string name="settings_music_nav_tab_title">導覽列中的音樂分頁</string>
-    <string name="settings_music_nav_tab_subtitle">在底部導覽列顯示音樂分頁。</string>
+
+
     <string name="settings_search_nav_tab_title">導覽列中的搜尋分頁</string>
     <string name="settings_search_nav_tab_subtitle">在導覽列中新增「搜尋」分頁</string>
     <string name="nav_search">搜尋</string>
@@ -1265,10 +1248,10 @@
     <string name="video_quality_warning">較高畫質會使用更多流量</string>
     <string name="video_quality_wifi_header">Wi‑Fi 畫質</string>
     <string name="video_quality_cellular_header">行動網路畫質</string>
-    <string name="music_quality_auto">自動</string>
-    <string name="music_quality_high">高</string>
-    <string name="music_quality_medium">中</string>
-    <string name="music_quality_low">低</string>
+
+
+
+
     <string name="quality_144p">144p</string>
     <string name="quality_240p">240p</string>
     <string name="quality_360p">360p</string>
@@ -1299,7 +1282,6 @@
     <string name="cache_size_200mb">200 MB</string>
     <string name="cache_size_500mb">500 MB (預設)</string>
     <string name="start_radio">開始播放電台</string>
-    <string name="start_radio_desc">根據這首歌曲播放電台</string>
     <plurals name="playlists_count_template">
         <item quantity="other">%1$d播放清單</item>
     </plurals>
@@ -1405,7 +1387,7 @@
     <string name="sleep_timer_custom_label">自訂時間</string>
     <string name="sleep_timer_unit">分鐘</string>
     <string name="sleep_timer_input_error">請輸入 1 到 1440 之間的數值</string>
-    <string name="sleep_timer_end_of_song">歌曲/影片結束時</string>
+    <string name="sleep_timer_end_of_video">歌曲/影片結束時</string>
     <string name="sleep_timer_start">開始</string>
     <string name="sleep_timer_stops_in">將在以下時間後停止</string>
     <string name="sleep_timer_end_of_media">目前歌曲結束時</string>
@@ -1436,8 +1418,7 @@
     <string name="sync_collection_subscription_groups_body">你用來整理頻道的資料夾。</string>
     <string name="sync_collection_settings">設定</string>
     <string name="sync_collection_recommendation_profile">推薦個人檔案</string>
-    <string name="sync_collection_music_profile">音樂偏好設定檔</string>
-    <string name="sync_preparing">準備中…</string>
+<string name="sync_preparing">準備中…</string>
     <string name="sync_connecting">正在連線…</string>
     <string name="sync_send_to_device">傳送至裝置</string>
     <string name="sync_receive_from_device">從裝置接收</string>
@@ -1538,10 +1519,8 @@
         <item quantity="other">將移除 %d 則通知，且無法復原。</item>
     </plurals>
     <string name="notifications_clear_confirm">全部清除</string>
-    <string name="deep_flow_scrobble_title">Deep Chorplay模式播放期間記錄聆聽紀錄</string>
-    <string name="taste_learning_paused">Deep Chorplay模式已開啟，偏好學習已暫停</string>
-    <string name="deep_flow_scrobble_subtitle">持續將聆聽紀錄傳送至 Last.fm、Libre.fm 和 ListenBrainz</string>
-    <string name="notif_type_shorts">Shorts</string>
+<string name="taste_learning_paused">Deep Chorplay模式已開啟，偏好學習已暫停</string>
+<string name="notif_type_shorts">Shorts</string>
     <string name="notif_type_shorts_subtitle">在訂閱頻道的新影片通知中包含 Shorts</string>
     <string name="remove_from_saved_shorts">從已儲存的 Shorts 中移除</string>
     <string name="mini_player_show">顯示迷你播放器</string>
@@ -1574,10 +1553,10 @@
     <string name="theme_desc_claude">紙感底色搭配溫暖的陶土色點綴。</string>
     <string name="content_settings_video_card_progress_title">顯示觀看進度</string>
     <string name="content_settings_video_card_progress_subtitle">在縮圖上顯示觀看進度列，標示已觀看的部分</string>
-    <string name="export_music_brain_desc">將你的音樂偏好設定檔儲存為 JSON 檔案</string>
-    <string name="import_music_brain_desc">從 JSON 檔案還原音樂偏好設定檔</string>
-    <string name="music_persona_overview_title">音樂偏好</string>
-    <string name="music_metric_artists_detail">已學習的偏好</string>
+
+
+
+
     <string name="taste_shape_title">偏好輪廓</string>
     <string name="taste_shape_subtitle">整體偏好與目前時段情境的比較</string>
     <string name="taste_pacing_context">目前情境：%1$s</string>
@@ -1608,8 +1587,8 @@
     <string name="taste_channels_header">偏好的頻道</string>
     <string name="taste_channel_block">封鎖頻道</string>
     <string name="taste_item_actions">%1$s 的更多選項</string>
-    <string name="taste_music_header">音樂偏好</string>
-    <string name="taste_music_stage">學習階段</string>
+
+
     <string name="taste_hidden_title">對你隱藏的內容</string>
     <string name="taste_hidden_summary">已封鎖的主題、頻道和藝人</string>
     <plurals name="taste_hidden_count">
@@ -1627,12 +1606,12 @@
     <string name="taste_export_video">匯出影片偏好設定檔</string>
     <string name="taste_import_video">匯入影片偏好設定檔</string>
     <string name="taste_reset_video">重設影片偏好設定檔</string>
-    <string name="taste_export_music">匯出音樂偏好設定檔</string>
-    <string name="taste_import_music">匯入音樂偏好設定檔</string>
-    <string name="taste_reset_music">重設音樂偏好設定檔</string>
+
+
+
     <string name="taste_reset_video_body">Chorplay 會忘記從你的影片和搜尋中學到的偏好。觀看記錄、喜歡的影片、播放清單和已隱藏的項目都會保留，首頁仍會使用它們。</string>
-    <string name="taste_reset_music_title">要重設音樂偏好設定檔嗎？</string>
-    <string name="taste_reset_music_body">這會清除 Chorplay 從你的音樂中學到的偏好，並從頭開始重新學習。你的聆聽回顧會保留。</string>
+
+
     <string name="taste_trait_now">目前：%1$s</string>
     <string name="taste_reset_done">已重設偏好設定檔</string>
     <string name="taste_remembered_header">你持續觀看的頻道</string>
@@ -1657,11 +1636,11 @@
     <string name="persona_specialist_title">專家派</string>
     <string name="persona_specialist_description">專注於少數幾個領域，清楚知道自己喜歡什麼。</string>
     <string name="reset_neural_profile_body">這將永久清除：\n\n• 所有已學習的偏好\n• 長期個人特質向量\n• 時段偏好模式\n• 頻道偏好分數\n\n你的動態消息將恢復為初始狀態。</string>
-    <string name="music_persona_overview_subtitle">音樂推薦引擎從你的聆聽習慣中學到的偏好</string>
-    <string name="music_persona_maturity_cold">初始學習階段</string>
-    <string name="music_persona_maturity_warming">正在熟悉你的喜好</string>
-    <string name="music_persona_maturity_mature">成熟階段</string>
-    <string name="music_persona_empty">播放一些音樂，推薦引擎就會開始學習你的喜好</string>
+
+
+
+
+
     <string name="export_engine_data_subtitle">備份你的 AI 個人特質與學習資料</string>
     <string name="import_engine_data_desc">從備份檔案還原你的 AI 個人特質設定檔</string>
     <string name="download_subtitle_file_subtitle">將字幕以所選字幕語言儲存在影片旁；適用於未透過選單下載的影片</string>
@@ -1684,20 +1663,6 @@
     <string name="recap_topics_title">你探索過的主題</string>
     <string name="recap_topics_new">你首次接觸：%1$s</string>
     <string name="recap_story_topics">你的興趣所至</string>
-    <string name="discord_presence_gateway_warning">這會使用你的 Discord 權杖登入，而非官方登入方式。此做法違反 Discord 服務條款，可能導致帳戶受到限制或遭到封鎖。</string>
-    <string name="discord_presence_privacy_body">Chorplay 會分享你正在播放內容的標題、創作者、封面圖片和播放進度。此功能預設為關閉。你的 Discord 權杖會加密儲存，且絕不會被記錄。</string>
-    <string name="scrobbling_summary">將你的聆聽紀錄傳送至 Last.fm、Libre.fm 或 ListenBrainz</string>
-    <string name="scrobbling_title">聆聽紀錄追蹤</string>
-    <string name="discord_presence_connected_account">Discord 帳戶:%1$s</string>
-    <string name="discord_presence_connect">連結 Discord 帳戶</string>
-    <string name="discord_presence_account">Discord 帳戶</string>
-    <string name="discord_presence_risk_dialog_title">要接受 Discord 帳戶風險嗎？</string>
-    <string name="discord_presence_risk_dialog_body">連結帳戶後，Chorplay 會取得你的 Discord 權杖。權杖會加密儲存在此裝置上，且只會傳送至 Discord。此登入方式違反 Discord 服務條款，你的帳戶可能因此受到限制或遭到封鎖。</string>
-    <string name="discord_error_enable_before_connect">連結帳戶前，請先啟用 Discord Rich Presence。</string>
-    <string name="discord_error_session_rejected">Discord 拒絕了此工作階段。請重新連結帳戶。</string>
-    <string name="discord_account_fallback">Discord 使用者</string>
-    <string name="discord_presence_enable">分享播放活動</string>
-    <string name="discord_presence_enable_description">暫停播放或在背景播放時，仍會保持連線</string>
     <string name="settings_language_region_summary">應用程式語言、內容語言與國家/地區</string>
     <string name="settings_appearance_summary">主題、應用程式圖示、版面配置與導覽列</string>
     <string name="settings_widgets_title">小工具</string>
@@ -1741,12 +1706,10 @@
     <string name="content_settings_channel_shorts_tab_subtitle">隱藏 Shorts 時，仍保留頻道的 Shorts 分頁</string>
     <string name="content_settings_hide_watched_shorts_title">隱藏已看過的 Shorts</string>
     <string name="content_settings_hide_watched_shorts_subtitle">不在內容區塊和 Shorts 動態中顯示你已看完的 Shorts</string>
-    <string name="settings_open_music_player_on_play_title">播放新歌曲時開啟完整播放器</string>
-    <string name="settings_open_music_player_on_play_summary">關閉時，新歌曲會留在迷你播放器中</string>
+
+
     <string name="content_settings_subs_collaborations_title">合作影片</string>
-    <string name="content_settings_subs_collaborations_subtitle">與你訂閱的頻道合作製作的影片</string>
-    <string name="categories_chart_source">YouTube Music 排行榜</string>
-    <plurals name="categories_rate_limited">
+    <string name="content_settings_subs_collaborations_subtitle">與你訂閱的頻道合作製作的影片</string>    <plurals name="categories_rate_limited">
         <item quantity="other">YouTube 目前限制了請求次數，請幾分鐘後再試。</item>
     </plurals>
     <string name="proxy_settings_bypass_vpn">使用 VPN 時略過代理伺服器</string>
@@ -1783,8 +1746,7 @@
     <string name="cache_group_header">快取</string>
     <string name="cache_in_use">已使用 %1$s</string>
     <string name="cache_videos">影片</string>
-    <string name="cache_songs">歌曲</string>
-    <string name="cache_artwork">封面</string>
+<string name="cache_artwork">封面</string>
     <string name="cache_other">其他</string>
     <string name="cache_used_of_limit">%1$s／%2$s</string>
     <string name="cache_used_no_limit">%1$s，無上限</string>
@@ -1792,8 +1754,7 @@
     <string name="cache_other_summary">歌詞與網路，%1$s</string>
     <string name="cache_measuring">計算中…</string>
     <string name="cache_videos_size_title">影片快取大小</string>
-    <string name="cache_songs_size_title">歌曲快取大小</string>
-    <string name="cache_artwork_size_title">封面快取大小</string>
+<string name="cache_artwork_size_title">封面快取大小</string>
     <string name="cache_size_applies_on_restart">下次啟動 Chorplay 時生效。</string>
     <string name="shorts_linked_video">相關影片</string>
     <string name="search_history_title">搜尋與記錄</string>
@@ -1830,12 +1791,12 @@
     <plurals name="days_count_template">
         <item quantity="other">%1$d 天</item>
     </plurals>
-    <string name="import_flow_backup_success">Chorplay 備份已成功匯入</string>
-    <string name="import_flow_backup_failed_template">無法匯入 Chorplay 備份：%1$s</string>
+    <string name="import_chorplay_backup_success">Chorplay 備份已成功匯入</string>
+    <string name="import_chorplay_backup_failed_template">無法匯入 Chorplay 備份：%1$s</string>
     <string name="import_newpipe_failed_template">無法匯入 NewPipe 備份：%1$s</string>
     <string name="import_youtube_failed_template">無法匯入 YouTube 備份：%1$s</string>
-    <string name="import_flow_backup_item_title">匯入 Chorplay 備份</string>
-    <string name="import_flow_backup_desc">從 Chorplay 備份檔還原你的記錄、設定和訂閱。</string>
+    <string name="import_chorplay_backup_item_title">匯入 Chorplay 備份</string>
+    <string name="import_chorplay_backup_desc">從 Chorplay 備份檔還原你的記錄、設定和訂閱。</string>
     <string name="import_from_newpipe">從 NewPipe 匯入</string>
     <string name="import_from_newpipe_desc">從 NewPipe 匯出檔 (JSON) 匯入訂閱。</string>
     <string name="import_from_libretube">從 LibreTube 匯入</string>
@@ -1847,8 +1808,8 @@
     <string name="import_libretube_playlists_desc">從備份的 JSON 檔匯入你的 LibreTube 本機播放清單。</string>
     <string name="import_yt_takeout_all">從 Google Takeout 匯入</string>
     <string name="import_yt_takeout_all_desc">從 Google Takeout 匯入訂閱、記錄、搜尋、播放清單、喜歡的影片和你的 YouTube Music 媒體庫。請選取匯出的所有 ZIP 檔。</string>
-    <string name="import_from_metrolist">從 Metrolist 匯入</string>
-    <string name="import_from_metrolist_desc">從 Metrolist 備份檔 (.zip) 匯入音樂播放清單。播放清單會顯示在你的音樂媒體庫中。</string>
+
+
     <string name="import_from_youtube">從 YouTube 匯入</string>
     <string name="import_from_youtube_desc">從 YouTube Takeout (CSV) 匯入訂閱。</string>
     <string name="import_label_newpipe_subscriptions">NewPipe 訂閱</string>
@@ -1858,7 +1819,6 @@
     <string name="import_label_freetube_watch_history">FreeTube 觀看記錄</string>
     <string name="import_label_newpipe_watch_history">NewPipe 觀看記錄</string>
     <string name="import_label_libretube_subscriptions">LibreTube 訂閱</string>
-    <string name="import_label_metrolist_playlists">Metrolist 音樂播放清單</string>
     <string name="import_label_newpipe_playlists">NewPipe 播放清單</string>
     <string name="import_label_libretube_playlists">LibreTube 播放清單</string>
     <string name="import_label_youtube_takeout">YouTube Takeout</string>
@@ -1887,19 +1847,13 @@
     <plurals name="import_takeout_part_playlists">
         <item quantity="other">%1$d 個播放清單（%2$d 部影片）</item>
     </plurals>
-    <plurals name="import_takeout_part_music_library">
-        <item quantity="other">%d 首 YouTube Music 媒體庫歌曲</item>
-    </plurals>
-    <string name="import_takeout_music_library_name">YouTube Music 媒體庫</string>
-    <plurals name="import_takeout_part_searches">
+<plurals name="import_takeout_part_searches">
         <item quantity="other">%d 筆搜尋</item>
     </plurals>
     <string name="import_yt_playlist">匯入 YouTube 播放清單</string>
     <string name="import_yt_playlist_desc">從 YouTube Takeout 的 CSV 檔 (Playlist-&lt;name&gt;.csv) 匯入播放清單。</string>
     <string name="import_yt_watch_later">匯入稍後觀看</string>
     <string name="import_yt_watch_later_desc">將 YouTube Takeout 的 CSV 檔直接匯入你的「稍後觀看」清單，檔名不限。</string>
-    <string name="import_yt_music_playlist">匯入 YouTube Music 播放清單</string>
-    <string name="import_yt_music_playlist_desc">從 YouTube Music Takeout 的 CSV 檔匯入音樂播放清單，會顯示在「音樂播放清單」中。</string>
     <plurals name="import_yt_playlist_success_template">
         <item quantity="other">已匯入播放清單「%1$s」，共 %2$d 部影片</item>
     </plurals>
@@ -1921,7 +1875,7 @@
     <string name="total_space_template">總計：%1$s</string>
     <string name="location_label">位置</string>
     <string name="video_download_location_label">影片下載位置</string>
-    <string name="music_download_location_label">音樂下載位置</string>
+
     <string name="internal_app_storage_label">應用程式內部儲存空間</string>
     <string name="preferences_header">偏好設定</string>
     <string name="default_video_quality_label">預設影片畫質</string>
@@ -1959,9 +1913,9 @@
         <item quantity="other">%1$d 個執行緒</item>
     </plurals>
     <string name="support_donations_title">支持與贊助</string>
-    <string name="support_flow_dev_title">支持 Chorplay 開發</string>
-    <string name="support_flow_dev_desc">如果 Chorplay 對你有幫助，歡迎透過 Open Collective、Patreon 或下方的加密貨幣支持。謝謝你！</string>
-    <string name="support_flow_patreon">在 Patreon 上支持 Chorplay</string>
+    <string name="support_chorplay_dev_title">支持 Chorplay 開發</string>
+    <string name="support_chorplay_dev_desc">如果 Chorplay 對你有幫助，歡迎透過 Open Collective、Patreon 或下方的加密貨幣支持。謝謝你！</string>
+    <string name="support_chorplay_patreon">在 Patreon 上支持 Chorplay</string>
     <string name="thank_you_support_message">感謝你的支持！❤️</string>
     <string name="address_copied_toast">位址已複製到剪貼簿</string>
     <string name="donation_address_clip_label">贊助位址</string>
@@ -1983,7 +1937,7 @@
     <string name="about_license">授權條款</string>
     <string name="about_license_name">GNU GPL v3</string>
     <string name="about_changelog">更新日誌</string>
-    <string name="whats_new_in_flow">Chorplay 的新功能</string>
+    <string name="whats_new_in_chorplay">Chorplay 的新功能</string>
     <string name="about_device_info">裝置資訊</string>
     <string name="gnu_license_full_title">GNU 通用公共授權條款</string>
     <string name="loading_ellipsis">載入中…</string>
@@ -2035,7 +1989,7 @@
     </plurals>
     <string name="remove_selected_playlist_text">這些影片將從此播放清單中移除。</string>
     <string name="remove_selected_watch_later_text">這些影片將從「稍後觀看」中移除。</string>
-    <string name="welcome_to_flow">歡迎使用 Chorplay</string>
+    <string name="welcome_to_chorplay">歡迎使用 Chorplay</string>
     <string name="onboarding_subtitle">告訴我們你感興趣的內容</string>
     <string name="onboarding_interests_title">你喜歡什麼？</string>
     <string name="onboarding_interests_ready">選得很好。你之後隨時可以在設定中更新。</string>
@@ -2059,7 +2013,7 @@
     <string name="onboarding_step_interests">興趣</string>
     <string name="onboarding_step_channels">頻道</string>
     <string name="onboarding_step_import">匯入</string>
-    <string name="onboarding_import_source_flow">Chorplay 備份</string>
+    <string name="onboarding_import_source_chorplay">Chorplay 備份</string>
     <string name="onboarding_import_source_youtube">YouTube</string>
     <string name="onboarding_import_footnote">這裡的一切都是選用的，設定中也有相同的匯入功能。</string>
     <string name="onboarding_import_done">已匯入</string>
@@ -2114,7 +2068,7 @@
     <string name="category_creative">創作</string>
     <string name="category_science_nature">科學與自然</string>
     <string name="category_news_current_events">新聞與時事</string>
-    <string name="flow_control_center">Chorplay 控制中心</string>
+    <string name="chorplay_control_center">Chorplay 控制中心</string>
     <string name="action_refresh">重新整理</string>
     <string name="loading_neural_matrix">正在載入神經矩陣…</string>
     <string name="neural_interest_map_subtitle">你的神經興趣地圖</string>
@@ -2134,12 +2088,9 @@
     <string name="stats_interactions">互動</string>
     <string name="empty_bubble_cloud_message">多看一些影片，讓你的興趣星雲亮起來吧！</string>
     <string name="export_profile_data">匯出設定檔資料</string>
-    <string name="flow_neural_profile_export_subject">Chorplay 神經設定檔匯出</string>
-    <string name="screen_title_music_library">音樂媒體庫</string>
+    <string name="chorplay_neural_profile_export_subject">Chorplay 神經設定檔匯出</string>
+
     <string name="header_your_collection">你的收藏</string>
-    <string name="subtitle_liked_music">你喜歡的歌曲</string>
-    <string name="subtitle_history">你聽過的歌曲</string>
-    <string name="empty_music_playlists">目前沒有音樂播放清單</string>
     <string name="rename_playlist_title">重新命名播放清單</string>
     <string name="action_rename">重新命名</string>
     <string name="link_copied">已複製連結</string>
@@ -2182,10 +2133,10 @@
     <string name="action_add_to_favorites">加入最愛</string>
     <string name="action_listen_now">立即聆聽</string>
     <string name="action_play_all">全部播放</string>
-    <string name="loading_music">載入音樂中…</string>
-    <string name="screen_title_music">音樂</string>
+
+
     <string name="section_listen_again">再聽一次</string>
-    <string name="section_on_repeat">重複播放</string>
+
     <string name="section_daily_mix_title">%1$s 精選輯</string>
     <string name="section_daily_mix_label">每日精選</string>
     <string name="daily_mix_page_description">依據你經常一起聆聽的藝人製作。儲存即可保留今天的精選。</string>
@@ -2202,66 +2153,65 @@
     <string name="section_rotation_evening">你的傍晚常聽</string>
     <string name="section_rotation_night">你的深夜常聽</string>
     <string name="source_your_rotation">你的常聽</string>
-    <string name="music_genre_affinity_title">曲風與心情</string>
-    <string name="music_genre_affinity_subtitle">根據你實際播放的曲風與心情頁面學習而來</string>
+
+
     <string name="recommendations_header">推薦</string>
     <string name="not_interested_desc">暫時減少顯示這位藝人的內容</string>
     <string name="dont_recommend_artist">不要推薦 %1$s</string>
     <string name="dont_recommend_artist_desc">不再推薦這位藝人</string>
     <string name="feedback_not_interested_applied">你將會較少看到 %1$s</string>
     <string name="feedback_artist_blocked">不會再推薦 %1$s</string>
-    <string name="music_prefs_section_title">音樂推薦</string>
-    <string name="music_endless_radio_title">無盡電台</string>
-    <string name="music_endless_radio_desc">播放佇列結束時，自動加入相似的歌曲</string>
-    <string name="settings_music_video_switch_title">歌曲與影片切換</string>
-    <string name="settings_music_video_switch_summary">在播放器中切換歌曲和它的音樂影片</string>
+
+
+
+
+
     <string name="music_player_mode_song">歌曲</string>
     <string name="music_player_mode_video">影片</string>
-    <string name="music_video_unavailable">這首歌曲沒有音樂影片</string>
-    <string name="music_video_failed">無法載入音樂影片</string>
-    <string name="music_watch_video">觀看影片</string>
-    <string name="settings_pause_music_muted_title">靜音時暫停音樂</string>
-    <string name="settings_pause_music_muted_summary">音量恢復時繼續播放</string>
-    <string name="music_watch_video_desc">在影片播放器中開啟音樂影片</string>
+
+
+
+
+
+
     <string name="player_appearance_animated_artwork_title">動態封面</string>
-    <string name="player_appearance_animated_artwork_subtitle">專輯有動態封面時，循環播放</string>
     <string name="player_appearance_animated_artwork_wifi_title">僅在 Wi-Fi 下顯示動態封面</string>
     <string name="player_appearance_animated_artwork_wifi_subtitle">使用行動數據時，維持靜態封面</string>
-    <string name="music_normalize_volume_title">音量標準化</string>
-    <string name="music_normalize_volume_desc">將每首曲目調整至 YouTube Music 的響度標準</string>
+
+
     <string name="section_other_versions">其他版本</string>
-    <string name="music_blocked_artists_title">已封鎖的藝人</string>
-    <string name="music_blocked_artists_empty">沒有已封鎖的藝人</string>
-    <string name="music_unblock">解除封鎖</string>
-    <string name="export_music_brain_title">匯出音樂引擎資料</string>
-    <string name="import_music_brain_title">匯入音樂引擎資料</string>
-    <string name="music_brain_export_success">已匯出音樂引擎資料</string>
-    <string name="music_brain_export_failed">匯出音樂引擎資料失敗</string>
-    <string name="music_brain_import_success">已匯入音樂引擎資料</string>
-    <string name="music_brain_import_failed">匯入音樂引擎資料失敗</string>
-    <string name="music_metric_total_plays">計入的播放次數</string>
-    <string name="music_metric_total_plays_detail">聆聽達 50% 以上</string>
-    <string name="music_metric_artists">藝人</string>
-    <string name="music_metric_tracks">已追蹤曲目</string>
-    <string name="music_metric_tracks_detail">重複播放記錄</string>
-    <string name="music_metric_on_repeat">重複播放</string>
-    <string name="music_metric_on_repeat_detail">目前熱門</string>
-    <string name="music_discovery_appetite">探索慾</string>
-    <string name="music_discovery_appetite_detail">引擎混入新音樂的比例</string>
-    <string name="music_top_artists_title">最常聽的藝人</string>
-    <string name="music_top_artist_plays">%1$d 次播放</string>
-    <string name="music_listening_patterns_title">聆聽節奏</string>
-    <string name="music_listening_patterns_subtitle">依據實際播放時間，呈現你真正聆聽的時段</string>
-    <string name="music_bucket_weekday_morning">平日早晨</string>
-    <string name="music_bucket_weekday_afternoon">平日下午</string>
-    <string name="music_bucket_weekday_evening">平日傍晚</string>
-    <string name="music_bucket_weekday_night">平日夜晚</string>
-    <string name="music_bucket_weekend_morning">週末早晨</string>
-    <string name="music_bucket_weekend_afternoon">週末下午</string>
-    <string name="music_bucket_weekend_evening">週末傍晚</string>
-    <string name="music_bucket_weekend_night">週末夜晚</string>
-    <string name="music_bucket_plays">%1$d 次播放</string>
-    <string name="music_blocked_artists_subtitle">引擎永遠不會推薦的藝人</string>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <string name="section_daily_discover">你的每日探索</string>
     <string name="section_quick_picks">快速選曲</string>
     <string name="section_speed_dial">快速存取</string>
@@ -2274,8 +2224,8 @@
     <string name="daily_discover_for_fans_of">適合 %1$s 的粉絲</string>
     <string name="section_recommended">推薦</string>
     <string name="section_recently_played">最近播放</string>
-    <string name="section_music_videos">音樂影片</string>
-    <string name="section_music_videos_for_you">為你推薦的音樂影片</string>
+
+
     <string name="section_live_performances">現場表演</string>
     <string name="section_new_releases">最新發行</string>
     <string name="subtitle_single_template">單曲 · %1$s</string>
@@ -2286,7 +2236,6 @@
     <string name="section_from_the_community">來自社群</string>
     <string name="daily_discover_subtitle">根據你的聆聽習慣挑選的新選擇</string>
     <string name="genre_mix_template">%1$s 精選輯</string>
-    <string name="section_top_albums">熱門專輯</string>
     <string name="section_charts_in">%1$s 排行榜</string>
     <string name="section_charts_global">全球排行榜</string>
     <string name="section_top_artists_in">%1$s 熱門藝人</string>
@@ -2299,7 +2248,6 @@
     <string name="section_vibe_vibes">%1$s 氛圍</string>
     <string name="subtitle_community_playlists">社群播放清單</string>
     <string name="playlist_author_community">社群播放清單</string>
-    <string name="playlist_description_community">由社群精選的 %1$s 音樂播放清單</string>
     <string name="radio">電台</string>
     <string name="audio_settings_title">音訊設定</string>
     <string name="label_preset">預設集</string>
@@ -2405,29 +2353,24 @@
     <string name="eq_settings_keywords">等化器、EQ、低音、高音、AutoEQ、前級放大、音效</string>
     <string name="eq_reset_done">已重設曲線</string>
     <string name="now_playing">正在播放</string>
-    <string name="voice_search_prompt">說話即可搜尋音樂</string>
-    <string name="search_music_placeholder">搜尋音樂</string>
+
     <string name="voice_search_cd">語音搜尋</string>
-    <string name="filter_albums">專輯</string>
-    <string name="filter_songs">歌曲</string>
+
     <string name="filter_community_playlists">社群播放清單</string>
     <string name="section_top_result">最佳結果</string>
-    <string name="music_search_section_artists">藝人</string>
-    <string name="music_search_section_playlists">播放清單</string>
-    <string name="music_search_section_episodes">單集</string>
-    <string name="subtitle_song_prefix">歌曲 • %1$s</string>
+
+
+
+
     <string name="subtitle_artist">藝人</string>
-    <string name="subtitle_album_template">專輯 • %1$s</string>
     <string name="subtitle_playlist_template">播放清單 • %1$s</string>
     <string name="plays_count_template">• %1$s 次播放</string>
-    <string name="album_year_template">專輯 • %1$s • %2$s</string>
     <string name="search_source_template">搜尋：%1$s</string>
     <string name="artist_source_template">藝人：%1$s</string>
     <string name="top_picks_for_you">為你精選</string>
     <string name="no_results_found">找不到結果</string>
     <string name="no_tracks_available">沒有可用的曲目</string>
     <string name="tab_favorites">最愛</string>
-    <string name="create_playlist_subtitle">整理你的音樂</string>
     <string name="empty_playlists_title">還沒有播放清單</string>
     <string name="empty_playlists_subtitle">建立你的第一個播放清單，整理你喜愛的曲目</string>
     <string name="empty_favorites_title">還沒有最愛</string>
@@ -2436,7 +2379,6 @@
         <item quantity="other">%1$d 首最愛曲目</item>
     </plurals>
     <string name="empty_history_title">還沒有記錄</string>
-    <string name="empty_history_subtitle">開始聆聽音樂，記錄就會顯示在這裡</string>
     <string name="empty_downloads_title">還沒有下載內容</string>
     <string name="empty_downloads_subtitle">下載曲目以便離線播放</string>
     <string name="total_size">總大小</string>
@@ -2574,7 +2516,7 @@
     <string name="subtitle_edge_color">邊緣顏色</string>
     <string name="subtitle_custom_color">自訂顏色</string>
     <string name="subtitle_reset_default">重設為預設值</string>
-    <string name="flow_is_up_to_date">Chorplay 已是最新版本！</string>
+    <string name="chorplay_is_up_to_date">Chorplay 已是最新版本！</string>
     <string name="export_engine_data">匯出引擎設定檔</string>
     <string name="export_engine_success">已成功匯出引擎設定檔</string>
     <string name="export_engine_failed">無法匯出引擎設定檔</string>
@@ -2619,7 +2561,7 @@
     <string name="sync_error_peer_also_send">對方裝置也設為「傳送」。請將它改為「接收」後再試一次。</string>
     <string name="sync_error_peer_also_receive">對方裝置也設為「接收」。請將它改為「傳送」後再試一次。</string>
     <string name="sync_error_qr_wrong_version">對方裝置的應用程式版本不相容。</string>
-    <string name="sync_error_qr_not_flow">這看起來不是有效的 Chorplay 連線資料。</string>
+    <string name="sync_error_qr_not_chorplay">這看起來不是有效的 Chorplay 連線資料。</string>
     <string name="sync_error_qr_bad_address">連線資料缺少有效的網路位址。</string>
     <string name="sync_error_qr_not_local">此代碼指向區域網路以外，因此 Chorplay 不會連線。請只使用你自己裝置顯示的代碼。</string>
     <string name="sync_error_no_peer">代碼失效前沒有任何裝置連線。請確認兩台裝置在同一個 Wi-Fi 下，然後再試一次。</string>
@@ -2656,8 +2598,7 @@
     <string name="sync_collection_subscriptions_body">你訂閱的頻道。</string>
     <string name="sync_collection_settings_body">播放、外觀和下載偏好設定。</string>
     <string name="sync_collection_recommendation_profile_body">Chorplay 學到的你的觀看偏好。</string>
-    <string name="sync_collection_music_profile_body">Chorplay 學到的你的聆聽偏好。</string>
-    <string name="sync_waiting_for_peer">正在等待對方裝置連線…</string>
+<string name="sync_waiting_for_peer">正在等待對方裝置連線…</string>
     <string name="sync_cancel_session">取消同步</string>
     <string name="sync_expires_label">QR Code 失效時間</string>
     <string name="sync_expires_seconds">%1$d 秒</string>
@@ -2727,11 +2668,11 @@
     <string name="error_extraction_failed_hint">YouTube 可能更新了格式。Chorplay 很快就會更新，請稍後再試。</string>
     <string name="error_generic">無法載入影片</string>
     <string name="error_generic_hint">發生未知錯誤，請再試一次。</string>
-    <string name="music_playback_warning_forbidden">音樂串流的存取遭拒。YouTube 可能限制了這個 IP，請嘗試重新載入，或切換網路／VPN。</string>
-    <string name="music_playback_warning_network">因網路問題，音樂串流失敗。請檢查網路連線，或改用其他網路。</string>
-    <string name="music_playback_warning_unavailable">這首歌曲已無法在 YouTube 上收聽。</string>
-    <string name="music_playback_warning_final">重試多次後仍無法載入這首歌曲。如果歌曲持續失敗，請改用其他網路或 VPN。</string>
-    <string name="music_playback_warning_generic">音樂播放失敗。請再試一次；如果持續發生，請切換網路。</string>
+
+
+
+
+
     <string name="player_lock_controls">鎖定控制項</string>
     <string name="player_unlock_controls">解除鎖定控制項</string>
     <string name="player_brightness_auto">自動</string>
@@ -2885,53 +2826,50 @@
     <string name="history_export_failed">無法匯出觀看記錄</string>
     <string name="history_delete_shorts">從記錄中刪除 Shorts</string>
     <string name="history_delete_shorts_title">要刪除 Shorts 嗎？</string>
-    <string name="recognize_music">辨識音樂</string>
+
     <string name="recognition_history">辨識記錄</string>
-    <string name="tap_to_recognize">點選以辨識</string>
+
     <string name="listening">正在聆聽…</string>
     <string name="processing">處理中…</string>
     <string name="no_match_found">找不到相符結果</string>
     <string name="recognition_error">辨識失敗</string>
     <string name="try_again">再試一次</string>
-    <string name="search_in_flow">在 Chorplay 中搜尋</string>
-    <string name="recognition_search_history">搜尋已辨識的歌曲</string>
-    <string name="recognition_history_empty">已辨識的歌曲會顯示在這裡</string>
+    <string name="search_in_chorplay">在 Chorplay 中搜尋</string>
     <string name="recognition_clear_history">要清除記錄嗎？</string>
-    <string name="recognition_clear_history_body">這會移除所有已辨識的歌曲，且無法復原。</string>
     <string name="close_popup_player">關閉彈出式播放器</string>
-    <string name="discord_presence_title">Discord Rich Presence</string>
-    <string name="discord_presence_off">關閉</string>
-    <string name="discord_presence_not_connected">未連線</string>
-    <string name="discord_presence_ready_as">已綁定為 %1$s · 播放時連線</string>
-    <string name="discord_presence_connected_as">已連線為 %1$s</string>
-    <string name="discord_presence_unavailable">此版本無法使用</string>
-    <string name="discord_presence_connection_error">連線錯誤</string>
-    <string name="discord_presence_linking">正在等待 Discord 登入…</string>
-    <string name="discord_presence_connecting">正在連線到 Discord…</string>
-    <string name="discord_presence_connect_action">連線</string>
-    <string name="discord_presence_disconnect">中斷連線並解除綁定</string>
-    <string name="discord_presence_unlink_action">解除綁定</string>
-    <string name="discord_presence_retry">重試連線</string>
-    <string name="discord_presence_description">在你的 Discord 狀態中顯示正在播放的內容。</string>
-    <string name="discord_presence_connection_section">連線</string>
-    <string name="discord_presence_privacy_title">隱私權</string>
-    <string name="discord_presence_risk_accept">我了解，繼續連線</string>
-    <string name="discord_error_not_initialized">Discord Rich Presence 尚未初始化。</string>
-    <string name="discord_error_unavailable">此版本無法使用 Discord Rich Presence。</string>
-    <string name="discord_error_open_flow">連線 Discord 前請先開啟 Chorplay。</string>
-    <string name="discord_error_connection_in_progress">已有 Discord 連線正在進行中。</string>
-    <string name="discord_error_login_timeout">Discord 登入逾時。</string>
-    <string name="discord_error_login_cancelled">已取消 Discord 連線。</string>
-    <string name="discord_error_connection_incomplete">Discord 連線未完成。</string>
-    <string name="discord_error_empty_token">Discord 傳回了空白的工作階段權杖。</string>
-    <string name="discord_error_missing_application_id">此版本缺少 Discord 應用程式 ID。</string>
-    <string name="discord_error_gateway_timeout">Discord Gateway 連線逾時。</string>
-    <string name="discord_error_gateway_reconnect">Discord 要求重新連線。</string>
-    <string name="discord_error_gateway_failed">Discord Gateway 連線失敗。</string>
-    <string name="discord_error_heartbeat_unacknowledged">Discord Gateway 心跳未獲回應。</string>
-    <string name="discord_error_heartbeat_failed">Discord Gateway 心跳失敗。</string>
-    <string name="discord_presence_playing_fallback">正在 Chorplay 中播放</string>
-    <string name="discord_presence_by_creator">作者：%1$s</string>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <string name="tv_home_title">首頁</string>
     <string name="tv_home_recommended">推薦</string>
     <string name="tv_no_recommendations">目前沒有推薦內容</string>
@@ -2978,7 +2916,7 @@
     <string name="tv_music_no_lyrics">找不到歌詞</string>
     <string name="tv_music_radio">電台</string>
     <string name="tv_settings_appearance">外觀</string>
-    <string name="tv_settings_flow_engine">Chorplay 引擎</string>
+    <string name="tv_settings_chor_engine">Chorplay 引擎</string>
     <string name="tv_settings_sync">同步裝置</string>
     <string name="tv_sync_qr_session_active">只要這個畫面保持開啟，此代碼就會持續有效。</string>
     <string name="tv_remote_guide_title">遙控器與按鍵指南</string>
@@ -3023,18 +2961,17 @@
     <string name="tv_theme_variant_amoled">AMOLED</string>
     <string name="tv_about_version">版本 %1$s</string>
     <string name="widget_now_playing_label">正在播放</string>
-    <string name="widget_now_playing_description">控制 Chorplay 中正在播放的音樂</string>
     <string name="widget_quick_actions_label">快速動作</string>
     <string name="widget_quick_actions_description">搜尋 Chorplay，並快速前往下載、記錄或音樂辨識</string>
-    <string name="widget_recognize_label">辨識音樂</string>
-    <string name="widget_recognize_description">一鍵辨識周圍正在播放的歌曲</string>
-    <string name="widget_turntable_label">唱盤</string>
-    <string name="widget_turntable_description">你的音樂化身旋轉的黑膠唱片</string>
+
+
+
+
     <string name="widget_recently_played_label">繼續觀看</string>
-    <string name="widget_on_repeat_label">重複播放</string>
-    <string name="widget_on_repeat">重複播放</string>
-    <string name="widget_on_repeat_description">你一再回味的歌曲</string>
-    <string name="widget_no_on_repeat">你反覆播放的歌曲會顯示在這裡</string>
+
+
+
+
     <string name="widget_recently_played_description">從上次中斷的地方繼續觀看影片</string>
     <string name="widget_downloads_label">下載</string>
     <string name="widget_downloads_description">播放你下載的影片與歌曲</string>
@@ -3046,7 +2983,6 @@
     <string name="widget_next">下一首</string>
     <string name="widget_previous">上一首</string>
     <string name="widget_like">喜歡</string>
-    <string name="widget_artwork">專輯封面</string>
     <string name="widget_open_downloads">開啟下載</string>
     <string name="widget_open_history">開啟記錄</string>
     <string name="widget_no_recent">你觀看的影片會顯示在這裡</string>
@@ -3062,8 +2998,8 @@
     </plurals>
     <string name="widget_browse_downloads">瀏覽下載內容</string>
     <string name="widget_shuffle">隨機播放</string>
-    <string name="widget_identify_song">辨識歌曲</string>
-    <string name="widget_open_music">開啟音樂</string>
+
+
     <string name="widget_config_shortcuts">捷徑</string>
     <string name="widget_config_shortcuts_footer">最多可選四個，搜尋一律會保留。</string>
     <string name="widget_playlist_label">播放清單</string>
@@ -3072,9 +3008,7 @@
     <string name="widget_config_playlist">你的播放清單</string>
     <string name="widget_playlist_empty">這裡還沒有內容</string>
     <string name="widget_refresh">重新整理</string>
-    <plurals name="widget_playlist_songs">
-        <item quantity="other">%d 首歌曲</item>
-    </plurals>
+
     <plurals name="widget_playlist_videos">
         <item quantity="other">%d 部影片</item>
     </plurals>
@@ -3097,11 +3031,11 @@
     <string name="ui_navigate">導覽</string>
     <string name="ui_options">選項</string>
     <string name="ui_selected">已選取</string>
-    <string name="ui_flow_logo">Chorplay 標誌</string>
+    <string name="ui_chorplay_logo">Chorplay 標誌</string>
     <string name="ui_list_view">清單檢視</string>
     <string name="ui_grid_view">格狀檢視</string>
     <string name="ui_back">返回</string>
-    <string name="ui_add_songs">新增歌曲</string>
+
     <string name="ui_close_search">關閉搜尋</string>
     <string name="ui_save_to_library">儲存到媒體庫</string>
     <string name="ui_remove_from_library">從媒體庫中移除</string>
@@ -3110,9 +3044,9 @@
     <string name="ui_added">已新增</string>
     <string name="ui_sync_lyrics">同步歌詞</string>
     <string name="ui_downloading_playlist">正在下載播放清單</string>
-    <string name="ui_no_songs_found">找不到歌曲</string>
-    <string name="ui_search_songs_to_add">搜尋要新增的歌曲…</string>
-    <string name="ui_add_songs_to_playlist">將歌曲加入播放清單</string>
+
+
+
     <string name="ui_show_less">顯示較少</string>
     <string name="ui_show_more">顯示更多</string>
     <string name="ui_try_sabr_download">嘗試 SABR 下載</string>
@@ -3189,7 +3123,7 @@
     <string name="toast_failed_to_add_track">無法新增曲目</string>
     <string name="toast_removed_from_playlist">已從播放清單中移除</string>
     <string name="toast_failed_to_remove_track">無法移除曲目</string>
-    <string name="toast_saved_playlist_to_music_library">播放清單已儲存到你的音樂媒體庫</string>
+
     <string name="toast_failed_to_save_playlist">無法儲存播放清單</string>
     <string name="toast_removed_playlist_from_library">播放清單已從媒體庫中移除</string>
     <string name="toast_failed_to_merge_playlist">無法合併播放清單</string>
@@ -3249,8 +3183,7 @@
     <string name="notification_channel_downloads">下載</string>
     <string name="notification_channel_new_videos">新影片</string>
     <string name="notification_channel_video_playback">影片播放</string>
-    <string name="notification_channel_music_playback">音樂播放</string>
-    <string name="notification_channel_general">一般</string>
+<string name="notification_channel_general">一般</string>
     <string name="notification_channel_reminders">提醒</string>
     <string name="notification_channel_updates">應用程式更新</string>
     <string name="notification_channel_imports">資料匯入</string>
@@ -3313,9 +3246,7 @@
     <plurals name="local_videos_count">
         <item quantity="other">%1$d 部影片</item>
     </plurals>
-    <plurals name="local_songs_count">
-        <item quantity="other">%1$d 首歌曲</item>
-    </plurals>
+
     <string name="local_menu_hide_folder">隱藏這個資料夾</string>
     <string name="local_menu_delete_trash">會移到垃圾桶並保留 30 天</string>
     <string name="local_menu_delete_permanent">從這個裝置中刪除</string>
@@ -3359,7 +3290,7 @@
     <string name="downloads_storage_used">Chorplay 佔用 %1$s</string>
     <string name="downloads_storage_free">剩餘 %1$s</string>
     <string name="downloads_storage_videos">影片 %1$s</string>
-    <string name="downloads_storage_music">音樂 %1$s</string>
+    <string name="downloads_storage_audio">音樂 %1$s</string>
     <string name="downloads_section_in_progress">進行中</string>
     <string name="downloads_section_downloaded">已下載</string>
     <string name="download_bytes_progress">%1$s／%2$s</string>
@@ -3434,7 +3365,6 @@
     <string name="fallback_unknown_channel">未知頻道</string>
     <string name="fallback_unknown_playlist">未知播放清單</string>
     <string name="fallback_unknown_artist">未知藝人</string>
-    <string name="fallback_unknown_album">未知專輯</string>
     <string name="fallback_unknown_video">未知影片</string>
     <string name="fallback_local_video">本機影片</string>
     <string name="fallback_local_audio">本機音訊</string>
@@ -3445,7 +3375,7 @@
     <string name="removed_from_queue">已從佇列中移除</string>
     <string name="queue_after_this_template">此後還有 %1$s</string>
     <string name="reorder_queue_item">重新排序佇列項目</string>
-    <string name="music_search_no_results">找不到「%1$s」的結果</string>
+
     <plurals name="chapters_count_template">
         <item quantity="other">%1$d 個章節</item>
     </plurals>
@@ -3480,8 +3410,8 @@
     <string name="settings_section_layout">版面配置</string>
     <string name="settings_section_video_cards">影片卡片</string>
     <string name="settings_section_more">更多</string>
-    <string name="settings_music_artwork_size_title">音樂封面大小</string>
-    <string name="settings_music_artwork_size_summary">音樂頁面中專輯封面和卡片的大小</string>
+
+
     <string name="settings_section_tabs">分頁</string>
     <string name="settings_section_tab_order">順序與預設分頁</string>
     <string name="settings_theme_follow_system">跟隨系統</string>
@@ -3502,7 +3432,7 @@
     <string name="settings_color_hex">十六進位色碼</string>
     <string name="settings_value_pair">%1$s · %2$s</string>
     <string name="settings_section_seek_bar">進度列</string>
-    <string name="settings_section_music_player">音樂播放器</string>
+
     <string name="settings_section_video_player">影片播放器</string>
     <string name="settings_section_mini_player">迷你播放器</string>
     <string name="settings_seekbar_custom_width">自訂寬度</string>
@@ -3516,7 +3446,7 @@
     <string name="settings_section_language_captions">語言與字幕</string>
     <string name="settings_section_watch_page">觀看頁面</string>
     <string name="settings_section_shorts_player">Shorts 播放器</string>
-    <string name="settings_section_music">音樂</string>
+
     <string name="settings_section_advanced">進階</string>
     <string name="settings_keywords_autoplay">下一部影片、接下來播放、連續播放</string>
     <string name="settings_keywords_captions">字幕、cc、隱藏式字幕</string>
@@ -3532,7 +3462,7 @@
     <string name="settings_seconds_value">%1$s 秒</string>
     <string name="settings_quality_tab_video">影片</string>
     <string name="settings_quality_tab_shorts">Shorts</string>
-    <string name="settings_quality_tab_music">音樂</string>
+
     <string name="settings_section_thumbnails">縮圖</string>
     <string name="thumbnail_quality_high">高</string>
     <string name="thumbnail_quality_medium">中</string>
@@ -3548,7 +3478,7 @@
     <string name="settings_quality_mobile">使用行動數據時</string>
     <string name="settings_section_resolution">解析度</string>
     <string name="settings_section_codec">編碼格式</string>
-    <string name="settings_music_quality_auto_summary">Wi-Fi 下為高，行動數據下為中</string>
+
     <string name="settings_keywords_quality">解析度、1080p、4k、hd、流量使用量</string>
     <string name="settings_keywords_codec">h264、avc、vp9、av1、硬體解碼</string>
     <string name="settings_quality_preferred_codec">偏好的編碼格式</string>
@@ -3566,7 +3496,7 @@
     <string name="settings_keywords_hide_watched">已看過、已觀看、篩選</string>
     <string name="settings_keywords_sponsorblock">略過贊助商、廣告、片段、片頭、片尾</string>
     <string name="settings_keywords_dearrow">標題黨、標題、縮圖</string>
-    <string name="settings_keywords_discord">rich presence、正在播放、狀態</string>
+
     <string name="settings_segment_colour">%1$s 的顏色</string>
     <string name="settings_truncated">%1$s…</string>
     <string name="settings_backup_exporting">正在匯出…</string>
@@ -3575,18 +3505,18 @@
     <string name="settings_backup_tab_auto">自動</string>
     <string name="settings_backup_full">完整備份</string>
     <string name="settings_backup_individual">個別匯出</string>
-    <string name="settings_backup_restore_flow">從 Chorplay 還原</string>
+    <string name="settings_backup_restore_chorplay">從 Chorplay 還原</string>
     <string name="settings_backup_source_youtube">YouTube 與 Google Takeout</string>
     <string name="settings_backup_source_newpipe">NewPipe</string>
     <string name="settings_backup_source_libretube">LibreTube</string>
     <string name="settings_backup_source_freetube">FreeTube</string>
-    <string name="settings_backup_source_metrolist">Metrolist</string>
+
     <string name="settings_backup_one_copy">每次備份都會取代資料夾中的上一份備份。</string>
     <string name="settings_backup_needs_folder">請先選擇資料夾</string>
     <string name="settings_quick_download_quality">下載畫質</string>
     <string name="settings_quick_download_quality_summary">下載時優先選用</string>
-    <string name="settings_music_download_quality">歌曲下載音質</string>
-    <string name="settings_music_download_quality_summary">用於歌曲、專輯和音樂播放清單</string>
+
+
     <string name="download_retag_title">舊下載內容的標籤</string>
     <string name="download_retag_waiting">等待開始</string>
     <string name="download_retag_progress">正在新增標籤，%1$d／%2$d</string>
@@ -3596,7 +3526,7 @@
     <string name="settings_storage_access_summary">也讓「本機媒體」列出其他應用程式儲存的檔案</string>
     <string name="settings_storage_usage">剩餘 %1$s／共 %2$s</string>
     <string name="settings_location_default">預設</string>
-    <string name="settings_music_folder_label">Music / Chorplay</string>
+
     <string name="settings_keywords_downloads">離線儲存、資料夾、儲存空間、sd 卡</string>
     <string name="settings_section_notification_types">通知我以下內容</string>
     <string name="settings_keywords_notifications">提醒、推播、新上傳、背景檢查、shorts</string>
@@ -3718,8 +3648,7 @@
     <string name="recap_period_all">全部時間</string>
     <string name="recap_source_all">全部</string>
     <string name="recap_source_video">影片</string>
-    <string name="recap_source_music">音樂</string>
-    <string name="recap_total_time">在 Chorplay 的時間</string>
+<string name="recap_total_time">在 Chorplay 的時間</string>
     <string name="recap_delta_up">比前一期多了 %1$s</string>
     <string name="recap_delta_down">比前一期少了 %1$s</string>
     <string name="recap_delta_same">與前一期差不多</string>
@@ -3756,8 +3685,7 @@
     <string name="recap_format_long">影片</string>
     <string name="recap_format_shorts">Shorts</string>
     <string name="recap_format_live">直播</string>
-    <string name="recap_format_music">音樂</string>
-    <string name="recap_format_share">%1$s · %2$s</string>
+<string name="recap_format_share">%1$s · %2$s</string>
     <string name="recap_discoveries_title">新發現</string>
     <plurals name="recap_new_channels">
         <item quantity="other">%d 個新頻道</item>
@@ -3823,8 +3751,7 @@
     <string name="recap_story_streak_body">你最忙碌的一天是 %1$s，共 %2$s</string>
     <string name="recap_story_artist">你最常聽的藝人</string>
     <string name="recap_story_artist_body">%1$s，佔你所有播放內容的 %2$d%%</string>
-    <string name="recap_story_songs">你一再回味的歌曲</string>
-    <string name="recap_story_new">新發現</string>
+<string name="recap_story_new">新發現</string>
     <string name="recap_story_passed">你略過的內容</string>
     <string name="recap_story_formats">你的觀看方式</string>
     <string name="recap_story_sponsor">SponsorBlock 還給你的時間</string>
@@ -3863,47 +3790,24 @@
         <item quantity="other">已移除 %d 部已觀看的影片</item>
     </plurals>
     <string name="liked_videos_playlist">喜歡的影片</string>
-    <string name="liked_music_playlist">喜歡的音樂</string>
+
     <string name="liked_videos_empty_title">還沒有喜歡的影片</string>
     <string name="liked_videos_empty_body">你喜歡的影片會顯示在這裡</string>
     <string name="remove_selected_likes_text">這些項目將被取消喜歡。</string>
-    <string name="removed_from_liked_music">已從「喜歡的音樂」中移除</string>
+
     <string name="liked_video_template">已喜歡 %1$s</string>
-    <string name="liked_music_empty_title">還沒有喜歡的歌曲</string>
-    <string name="liked_music_empty_body">你在音樂播放器中喜歡的歌曲會顯示在這裡</string>
+
+
     <plurals name="liked_videos_removed">
         <item quantity="other">已取消喜歡 %d 部影片</item>
     </plurals>
-    <string name="music_kind_album">專輯</string>
-    <string name="music_kind_saved">已儲存到你的媒體庫</string>
-    <string name="music_playlist_empty_title">這個播放清單是空的</string>
-    <string name="music_playlist_empty_body">從上方選單新增歌曲</string>
-    <plurals name="songs_removed_from_playlist">
-        <item quantity="other">已移除 %d 首歌曲</item>
-    </plurals>
-    <plurals name="songs_unliked">
-        <item quantity="other">已取消喜歡 %d 首歌曲</item>
-    </plurals>
-    <string name="music_sort_collection">播放清單順序</string>
-    <string name="music_sort_album_order">專輯順序</string>
-    <string name="music_sort_recently_liked">最近喜歡</string>
-    <string name="music_sort_title">標題</string>
-    <string name="music_sort_artist">藝人</string>
-    <string name="music_sort_album">專輯</string>
-    <string name="music_sort_longest">最長優先</string>
-    <string name="music_sort_shortest">最短優先</string>
-    <string name="music_collection_no_matches">沒有符合「%1$s」的歌曲</string>
-    <string name="select_songs">選取歌曲</string>
-    <plurals name="music_playlist_imported">
-        <item quantity="other">已匯入 %1$s，共 %2$d 首歌曲</item>
-    </plurals>
-    <plurals name="songs_downloading">
-        <item quantity="other">正在下載 %d 首歌曲</item>
-    </plurals>
-    <plurals name="songs_download_queued">
-        <item quantity="other">已將 %d 首歌曲排入下載佇列</item>
-    </plurals>
-    <string name="songs_download_nothing_new">這裡的內容都已下載，或無法使用</string>
+
+
+    <string name="playlist_sort_longest">最長優先</string>
+    <string name="playlist_sort_shortest">最短優先</string>
+
+
+
     <string name="save_as_playlist">儲存為播放清單</string>
     <string name="daily_mix_saved_as_playlist">已將 %1$s 儲存到你的播放清單</string>
     <string name="home_reason_channel_memory">來自你常看的頻道</string>
@@ -3919,7 +3823,7 @@
     <string name="home_chip_failed">目前無法載入。</string>
     <string name="home_mix_title">合輯 - %1$s</string>
     <string name="library_video_playlists">影片播放清單</string>
-    <string name="library_music_playlists">音樂播放清單</string>
+
     <string name="playlists_sort_newest">最新</string>
     <string name="playlists_sort_oldest">最舊</string>
     <string name="playlists_sort_name">名稱</string>
@@ -3927,16 +3831,14 @@
     <string name="playlists_reorder">重新排序播放清單</string>
     <string name="playlists_show_list">以清單顯示</string>
     <string name="playlists_show_grid">以格狀顯示</string>
-    <string name="settings_separate_playlists_title">分開顯示影片與音樂播放清單</string>
     <string name="settings_separate_playlists_summary">在媒體庫中顯示為兩個項目</string>
-    <string name="music_home_your_playlists">你的播放清單</string>
-    <string name="settings_music_normal_speed_title">以正常速度播放音樂</string>
-    <string name="settings_music_normal_speed_summary">音樂影片從 1 倍速開始</string>
+
+
+
     <string name="settings_speed_per_channel_title">記住每個頻道的播放速度</string>
     <string name="settings_speed_per_channel_summary">每個頻道都會以你上次選擇的速度開始</string>
-    <string name="music_collection_suggestions">建議</string>
+
     <string name="favourite_artists_title">最愛的藝人</string>
-    <string name="favourite_artists_summary">挑選藝人，打造你的音樂推薦</string>
     <string name="discover_channels_title">探索頻道</string>
     <string name="discover_channels_summary">像初次設定時一樣搜尋頻道並訂閱</string>
     <string name="discover_channels_suggested_footer">你看過幾次但還沒訂閱的頻道。</string>
@@ -3954,16 +3856,15 @@
     <string name="auto_download_wifi">使用 Wi-Fi 時</string>
     <string name="auto_download_always">一律</string>
     <string name="auto_download_queued">正在儲存以供離線使用</string>
-    <string name="recap_top_albums">最常聽的專輯</string>
-    <string name="music_home_your_subscriptions">你的訂閱</string>
-    <string name="music_home_shelf_rotation">依時段精選</string>
-    <string name="music_home_shelf_similar">每日精選與相似藝人</string>
-    <string name="music_home_shelf_genres">曲風精選</string>
-    <string name="music_home_shelf_more">YouTube Music 的更多內容</string>
-    <string name="music_home_shelf_charts">排行榜</string>
-    <string name="settings_music_home_title">音樂首頁</string>
-    <string name="settings_music_home_summary">選擇音樂首頁要顯示的區塊</string>
-    <string name="settings_music_home_sections">區塊</string>
+
+
+
+
+
+
+
+
+
     <string name="onboarding_step_artists">藝人</string>
     <string name="onboarding_artists_title">挑選一些藝人</string>
     <string name="onboarding_artists_subtitle">你的音樂推薦會從他們開始，也可以略過。</string>
@@ -3971,60 +3872,6 @@
     <plurals name="onboarding_ready_artists">
         <item quantity="other">%d 位藝人</item>
     </plurals>
-    <string name="settings_keywords_scrobbling">scrobble scrobbling last.fm lastfm libre.fm librefm listenbrainz 音樂記錄 聆聽記錄</string>
-    <string name="scrobbling_lastfm">Last.fm</string>
-    <string name="scrobbling_librefm">Libre.fm</string>
-    <string name="scrobbling_listenbrainz">ListenBrainz</string>
-    <string name="scrobbling_account">帳號</string>
-    <string name="scrobbling_signed_in_as">已登入為 %1$s</string>
-    <string name="scrobbling_signed_in">已登入</string>
-    <string name="scrobbling_not_signed_in">未登入</string>
-    <string name="scrobbling_needs_key">請在下方新增你自己的 API 金鑰才能登入</string>
-    <string name="scrobbling_own_key">使用你自己的 API 金鑰</string>
-    <string name="scrobbling_own_key_summary">變更後會登出 Last.fm</string>
-    <string name="scrobbling_own_key_values">API 金鑰與密鑰</string>
-    <string name="scrobbling_own_key_missing">未設定</string>
-    <string name="scrobbling_options">選項</string>
-    <string name="scrobbling_now_playing">顯示正在播放</string>
-    <string name="scrobbling_now_playing_summary">播放時，服務可以看到這首歌曲</string>
-    <string name="scrobbling_local">記錄本機檔案的聆聽</string>
-    <string name="scrobbling_local_summary">使用每個檔案的藝人與標題標籤</string>
-    <string name="scrobbling_send_now">傳送等待中的聆聽記錄</string>
-    <plurals name="scrobbling_waiting">
-        <item quantity="other">%d 筆等待中</item>
-    </plurals>
-    <string name="scrobbling_sign_in_title">登入 %1$s</string>
-    <string name="scrobbling_user_name">使用者名稱</string>
-    <string name="scrobbling_password">密碼</string>
-    <string name="scrobbling_password_note">你的密碼只會傳送一次，絕不會儲存。</string>
-    <string name="scrobbling_token">使用者權杖</string>
-    <string name="scrobbling_token_note">請從 listenbrainz.org/settings 複製。</string>
-    <string name="scrobbling_sign_in">登入</string>
-    <string name="scrobbling_sign_in_failed">登入失敗</string>
-    <string name="scrobbling_sign_out_title">要登出 %1$s 嗎？</string>
-    <string name="scrobbling_sign_out_body">等待傳送的聆聽記錄將會被捨棄。</string>
-    <string name="scrobbling_sign_out">登出</string>
-    <string name="scrobbling_own_key_dialog_title">你的 Last.fm API 金鑰</string>
-    <string name="scrobbling_own_key_dialog_body">可至 last.fm/api/account/create 免費建立。</string>
-    <string name="scrobbling_api_key">API 金鑰</string>
-    <string name="scrobbling_secret">共用密鑰</string>
-    <string name="scrobbling_show_secret">顯示</string>
-    <string name="scrobbling_hide_secret">隱藏</string>
-    <string name="scrobbling_send_likes">將喜歡的歌曲標為愛心</string>
-    <string name="scrobbling_send_likes_summary">你喜歡的歌曲會在 Last.fm 與 Libre.fm 中顯示為「愛心曲目」</string>
-    <string name="scrobbling_import">匯入你最常聽的藝人</string>
-    <string name="scrobbling_import_summary">將你播放次數最多的藝人加入最愛</string>
-    <string name="scrobbling_import_offer_title">要用 %1$s 打造你的音樂推薦嗎？</string>
-    <string name="scrobbling_import_offer_body">Chorplay 會將你過去一年播放次數最多的 20 位藝人加入最愛藝人，之後你可以隨時移除任何一位。</string>
-    <string name="scrobbling_import_action">匯入</string>
-    <string name="scrobbling_import_later">現在不要</string>
-    <plurals name="scrobbling_import_done">
-        <item quantity="other">已將 %d 位藝人加入最愛</item>
-    </plurals>
-    <string name="scrobbling_import_none">沒有可新增的新藝人</string>
-    <string name="scrobbling_import_failed">無法讀取你最常聽的藝人</string>
-    <string name="music_home_lastfm_discover">透過 Last.fm 探索</string>
-    <string name="music_home_lastfm_discover_subtitle">根據你重複播放的內容，由 Last.fm 聽眾挑選</string>
     <string name="notif_check_interval_off_new_videos">「新影片」關閉時停用</string>
     <string name="content_settings_live_chat_enabled_title">即時聊天</string>
     <string name="content_settings_live_chat_enabled_subtitle">在直播中顯示聊天室</string>
@@ -4116,9 +3963,9 @@
     <plurals name="search_watch_empty_unwatched">
         <item quantity="other">這裡沒有未觀看的影片</item>
     </plurals>
-    <string name="deep_flow_on_search_title">在搜尋中顯示</string>
-    <string name="deep_flow_on_search_subtitle">在最近搜尋上方顯示 Deep Chorplay 開關</string>
-    <string name="support_flow_open_collective">在 Open Collective 上支持 Chorplay</string>
+    <string name="deep_chor_on_search_title">在搜尋中顯示</string>
+    <string name="deep_chor_on_search_subtitle">在最近搜尋上方顯示 Deep Chorplay 開關</string>
+    <string name="support_chorplay_open_collective">在 Open Collective 上支持 Chorplay</string>
     <string name="auto_tab_for_you">為你推薦</string>
     <string name="auto_tab_queue">佇列</string>
     <string name="taste_unknown_channel">未知頻道</string>
@@ -4132,7 +3979,6 @@
     <string name="error_video_decoder_failed_hint">點選「重試」即可重新載入影片。</string>
     <string name="queue_swipe_left">佇列向左滑動</string>
     <string name="queue_swipe_right">佇列向右滑動</string>
-    <string name="queue_swipe_subtitle">適用於「接下來播放」中的歌曲</string>
     <string name="queue_move_to_end">移到最後</string>
     <string name="lyrics_provider_lrc_red">lrc.red</string>
     <string name="lyrics_provider_kugou">酷狗音樂</string>
@@ -4150,16 +3996,14 @@
     <string name="lyrics_provider_unison_desc">社群歌詞 · 曲庫較小</string>
     <string name="lyrics_provider_youtube_captions_desc">逐行同步 · 影片的字幕</string>
     <string name="lyrics_provider_youtube_music_desc">純文字 · 「歌詞」分頁</string>
-    <plurals name="import_takeout_part_music_playlists">
-        <item quantity="other">%d 個 YouTube Music 播放清單</item>
-    </plurals>
+
     <string name="playlist_unavailable_hidden">已隱藏無法播放的影片</string>
     <string name="error_bot_wall_network_hint">請改用其他網路，例如行動數據。</string>
     <string name="error_bot_wall_session">YouTube 要求確認你不是機器人</string>
     <string name="error_bot_wall_session_hint">請重設 YouTube 工作階段後再試一次。</string>
-    <string name="playlist_move_to_music">移到音樂</string>
+
     <string name="playlist_move_to_videos">移到影片</string>
-    <string name="playlist_moved_to_music">已移到音樂</string>
+
     <string name="playlist_moved_to_videos">已移到影片</string>
     <string name="lyrics_auto_romanize_japanese">尚不支援日文</string>
     <string name="filter_artists">藝人</string>
@@ -4172,16 +4016,16 @@
     <string name="error_members_or_paid_hint">這部影片需要加入頻道會員，或在 YouTube 購買後才能觀看。</string>
     <string name="error_rate_limited">YouTube 限制了這個網路</string>
     <string name="error_rate_limited_hint">請稍候再試，或改用其他網路。</string>
-    <string name="music_playback_warning_rate_limited">YouTube 限制了這個網路，請稍後再試。</string>
-    <string name="music_playback_warning_members_or_paid">這首歌曲需要會員資格，或在 YouTube 購買。</string>
+
+
     <string name="notifications_already_in_watch_later">已在「稍後觀看」中</string>
     <string name="notifications_save_to_watch_later">儲存到「稍後觀看」</string>
     <string name="player_settings_normalize_volume">音量標準化</string>
     <string name="player_settings_normalize_volume_summary">把太大聲的影片調降到 YouTube 的音量水準</string>
-    <string name="settings_music_resume_title">繼續播放 Podcast 與長曲目</string>
-    <string name="settings_music_resume_summary">超過 10 分鐘的曲目會從上次中斷的地方開始</string>
-    <string name="settings_music_side_swipes_title">速度與音量滑動</string>
-    <string name="settings_music_side_swipes_summary">滑動左側調整速度，滑動右側調整音量</string>
+
+
+
+
     <string name="keyboard_shortcuts_player">播放器</string>
     <string name="keyboard_shortcut_play_pause">播放或暫停</string>
     <string name="keyboard_shortcut_seek_back">倒轉</string>
@@ -4191,10 +4035,10 @@
     <string name="keyboard_shortcut_exit_fullscreen">結束全螢幕</string>
     <string name="keyboard_shortcut_faster">加快</string>
     <string name="keyboard_shortcut_slower">放慢</string>
-    <string name="music_audio_offload_title">硬體音訊解碼</string>
-    <string name="music_audio_offload_desc">較省電。部分手機開啟後可能沒有聲音</string>
-    <string name="music_service_disabled">無法播放音樂。這部裝置上的 Chorplay 音樂服務已關閉。</string>
-    <string name="deep_flow_long_press_hint">在首頁長按 Chorplay 標誌或名稱即可切換 Deep Chorplay</string>
+
+
+
+    <string name="deep_chor_long_press_hint">在首頁長按 Chorplay 標誌或名稱即可切換 Deep Chorplay</string>
     <string name="nav_downloads">下載</string>
     <string name="settings_downloads_nav_tab_title">導覽列的下載分頁</string>
     <string name="settings_downloads_nav_tab_subtitle">在導覽列新增「下載」分頁</string>
@@ -4205,12 +4049,11 @@
     <string name="buffer_long_memory_note">記憶體不足時，較長的緩衝會提前停止。</string>
     <string name="home_new_videos">新影片</string>
     <string name="settings_resume_from_headphones_title">從耳機繼續播放</string>
-    <string name="settings_resume_from_headphones_summary">按下耳機上的播放鍵，會重新播放你最近聽的歌曲</string>
     <string name="playback_background_restricted_title">背景活動受到限制</string>
     <string name="playback_background_restricted_subtitle">將 Chorplay 滑掉後，手機可能會將它停止。點一下即可允許。</string>
     <string name="download_ask_every_time_title">每次詢問</string>
     <string name="download_ask_every_time_summary">關閉時，下載會使用你設定的下載畫質</string>
-    <string name="share_download_with_flow">使用 Chorplay 下載</string>
+    <string name="share_download_with_chorplay">使用 Chorplay 下載</string>
     <string name="share_download_not_a_video">只能從分享的連結下載影片</string>
     <string name="downloads_storage_card_title">儲存空間摘要</string>
     <string name="downloads_storage_card_summary">在「下載」頂端顯示已用與可用空間</string>

@@ -1,10 +1,9 @@
 package io.github.pushkar.chorplay.data.localmedia
 
 import io.github.pushkar.chorplay.data.model.Video
-import io.github.pushkar.chorplay.data.music.model.MusicTrack
 import io.github.pushkar.chorplay.utils.foldForSearch
 
-/** A video or song file on the device, as MediaStore describes it. */
+/** A video file on the device, as MediaStore describes it. */
 data class LocalMediaItem(
     val id: Long,
     val isVideo: Boolean,
@@ -33,13 +32,14 @@ data class LocalMediaItem(
     val isPortrait: Boolean get() = height > width && width > 0
 
     /** Everything a search looks through, folded once per read rather than on every keystroke. */
-    val searchText: String by lazy { listOf(title, fileName, folderName, artist, album).joinToString("\n").foldForSearch() }
+    val searchText: String by lazy {
+        listOf(title, fileName, folderName, artist, album).joinToString("\n").foldForSearch()
+    }
 }
 
 /** Everything the device holds, or [failed] when MediaStore could not be read. */
 data class LocalLibrary(
     val videos: List<LocalMediaItem> = emptyList(),
-    val music: List<LocalMediaItem> = emptyList(),
     val failed: Boolean = false,
 )
 
@@ -54,17 +54,6 @@ fun LocalMediaItem.toVideo(): Video =
         duration = (durationMs / MILLIS_PER_SECOND).toInt(),
         viewCount = 0,
         uploadDate = "",
-    )
-
-/** The file as the music player's track; a song without artist tags is credited to its folder. */
-fun LocalMediaItem.toMusicTrack(): MusicTrack =
-    MusicTrack(
-        videoId = mediaId,
-        title = title,
-        artist = artist.ifBlank { folderName },
-        thumbnailUrl = artworkUri.orEmpty(),
-        duration = (durationMs / MILLIS_PER_SECOND).toInt(),
-        album = album,
     )
 
 private const val MILLIS_PER_SECOND = 1_000L

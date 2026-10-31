@@ -21,8 +21,8 @@ import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import io.github.pushkar.chorplay.R
-import io.github.pushkar.chorplay.ui.components.shared.FlowRowGroup
-import io.github.pushkar.chorplay.ui.components.shared.flowRowGroupShape
+import io.github.pushkar.chorplay.ui.components.shared.ChorRowGroup
+import io.github.pushkar.chorplay.ui.components.shared.chorRowGroupShape
 import java.text.DecimalFormat
 import kotlin.math.abs
 
@@ -38,9 +38,9 @@ internal fun SubtitleTimingCard(
     modifier: Modifier = Modifier,
 ) {
     val haptics = LocalHapticFeedback.current
-    FlowRowGroup(modifier = modifier) {
+    ChorRowGroup(modifier = modifier) {
         Surface(
-            shape = flowRowGroupShape(0, 1),
+            shape = chorRowGroupShape(0, 1),
             color = MaterialTheme.colorScheme.surfaceContainerHigh,
             modifier = Modifier.fillMaxWidth(),
         ) {

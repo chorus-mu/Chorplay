@@ -187,7 +187,7 @@ Chorplay ships two flavors. The permission difference between them is the one ab
 
 - `foss`: no in-app updater, no `REQUEST_INSTALL_PACKAGES`. This is the build intended for F-Droid
   style distribution.
-- `github`: adds the in-app updater and the optional Discord presence integration.
+- `github`: adds the in-app updater.
 
 ## Network endpoints
 
@@ -209,7 +209,6 @@ project-operated proxy or relay in between.
   them on.
 - `returnyoutubedislikeapi.com`: Return YouTube Dislike, only if the user turns it on.
 - `api.github.com` and `github.com`: release check and changelog, `github` flavor only.
-- `discord.com`: rich presence, `github` flavor only, and only after the user links an account.
 - Local network addresses: DLNA renderers on the LAN, and the peer device during Device Sync.
 
 ## What Chorplay does not do

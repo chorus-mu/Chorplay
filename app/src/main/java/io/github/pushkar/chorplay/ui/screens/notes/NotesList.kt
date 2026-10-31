@@ -37,13 +37,13 @@ import io.github.pushkar.chorplay.R
 import io.github.pushkar.chorplay.data.notes.Note
 import io.github.pushkar.chorplay.data.notes.NoteKind
 import io.github.pushkar.chorplay.data.notes.NoteMoments
-import io.github.pushkar.chorplay.ui.components.layout.flowContentPadding
+import io.github.pushkar.chorplay.ui.components.layout.chorContentPadding
 import io.github.pushkar.chorplay.ui.components.shared.ChannelAvatarImage
 import io.github.pushkar.chorplay.ui.components.shared.ChorplayConnectedToggleGroup
 import io.github.pushkar.chorplay.ui.components.shared.ChorplayEmptyState
 import io.github.pushkar.chorplay.ui.components.shared.ChorplayLoadingIndicator
 import io.github.pushkar.chorplay.ui.components.shared.ChorplaySearchField
-import io.github.pushkar.chorplay.ui.components.shared.FlowToggleOption
+import io.github.pushkar.chorplay.ui.components.shared.ChorToggleOption
 import io.github.pushkar.chorplay.ui.components.shared.MediaThumbnail
 import io.github.pushkar.chorplay.utils.formatDurationMillis
 
@@ -87,9 +87,9 @@ internal fun NotesListPane(
         ChorplayConnectedToggleGroup(
             options =
                 listOf(
-                    FlowToggleOption(NotesFilter.All, stringResource(R.string.notes_filter_all)),
-                    FlowToggleOption(NotesFilter.Videos, stringResource(R.string.notes_filter_videos)),
-                    FlowToggleOption(NotesFilter.Channels, stringResource(R.string.notes_filter_channels)),
+                    ChorToggleOption(NotesFilter.All, stringResource(R.string.notes_filter_all)),
+                    ChorToggleOption(NotesFilter.Videos, stringResource(R.string.notes_filter_videos)),
+                    ChorToggleOption(NotesFilter.Channels, stringResource(R.string.notes_filter_channels)),
                 ),
             selected = state.filter,
             onSelected = onFilterChange,
@@ -120,7 +120,7 @@ internal fun NotesListPane(
             else -> {
                 LazyColumn(
                     modifier = Modifier.fillMaxSize(),
-                    contentPadding = flowContentPadding(horizontal = 12.dp, top = 4.dp),
+                    contentPadding = chorContentPadding(horizontal = 12.dp, top = 4.dp),
                     verticalArrangement = Arrangement.spacedBy(8.dp),
                 ) {
                     items(state.visible, key = { it.key }) { note ->

@@ -1,17 +1,3 @@
-/*
- * Copyright: Pushkar (2026) under GPLv3
- *
- * This file is part of Chorplay (https://github.com/chorus-mu/Chorplay).
- *
- * Chorplay is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, version 3 of the License.
- *
- * This recommendation algorithm (ChorplayNeuroEngine) is the intellectual property
- * of the Chorplay project. Any use of this code in other projects must
- * explicitly credit "Chorplay Android Client" and link back to the original repository.
- */
-
 package io.github.pushkar.chorplay.data.recommendation
 
 import android.content.ComponentCallbacks2
@@ -46,21 +32,6 @@ import kotlin.contracts.contract
 import kotlin.math.ln
 import kotlin.math.log10
 
-/**
- * Chorplay Neuro Engine (V10.0 — Channel Intelligence + Shorts Vector + Anti-Rec + Momentum)
- *
- * Client-side hybrid recommendation: Vector Space Model + Heuristic Rules.
- *
- * This file is the thin orchestrator that delegates all heavy logic to:
- * - NeuroModels.kt    — data classes and enums
- * - NeuroScoring.kt   — scoring factor calculators and constants
- * - NeuroVectorMath.kt — vector algebra (cosine similarity, vector adjustment)
- * - NeuroTokenizer.kt  — tokenization, IDF, feature extraction
- * - NeuroStorage.kt    — DataStore persistence, export/import, migration
- * - NeuroDiscovery.kt  — smart query generation (V2)
- */
-typealias ChorplayNeuroEngine = ChorplayNeuroEngine
-
 class ChorplayNeuroEngine internal constructor(
     private val appContext: Context,
     private val storage: NeuroStorage,
@@ -75,61 +46,27 @@ class ChorplayNeuroEngine internal constructor(
     companion object {
         private const val TAG = "ChorplayNeuroEngine"
 
-        // ── Orchestrator-only constants ──
-        // Trace sections the startup and Home benchmarks read (#1301).
         const val TRACE_INIT = "neuro.init"
         const val TRACE_RANK = "neuro.rank"
 
-        // A refresh ranks about 600 candidates; a smaller cache missed on every one of them.
         private const val FEATURE_CACHE_MAX = 700
         private const val SESSION_TOPIC_HISTORY_MAX = 50
         private const val SAVE_DEBOUNCE_MS = 5000L
-
-        /** Impressions, rotation and cooldown state change on every scroll and feed load; none needs a fast save. */
         private const val BOOKKEEPING_SAVE_DEBOUNCE_MS = 30_000L
-
-        // ── Suppression constants ──
-
-        /** How long a channel stays hard-suppressed before escalating to a full block */
         private const val CHANNEL_SUPPRESSION_DAYS = 14L
-
-        /** "Not interested" on a video never expires; past this many marks the oldest are dropped. */
         internal const val MAX_SUPPRESSED_VIDEOS = 5_000
-
-        /** Max suppressed channel entries to prevent unbounded growth */
         private const val MAX_SUPPRESSED_CHANNELS = 100
-
         private const val TOPIC_EVIDENCE_MAX_ENTRIES = 500
-
         private const val COUNTED_DOCUMENTS_MAX = 500
-
-        /** Opened videos whose related lists wait for a real watch or a like ([NeuroCoWatchStore]). */
         private const val PENDING_RELATED_MAX = 30
 
-        /** The most a channel watched alongside the viewer's own adds to a score. */
         internal const val COWATCH_MAX_PRIOR = 0.04
 
-        /** Where a channel's score starts; a watch moves it above, a rejection below. */
         private const val NEUTRAL_CHANNEL_SCORE = 0.5
-
-        /** A subscription teaches its channel name about half what a full watch teaches. */
         private const val SUBSCRIPTION_RATE = 0.08
-
-        // ── Import bootstrap constants ──
         private const val SUBSCRIPTION_SEED_WEIGHT = 0.25
 
-        /**
-         * A subscription list carries no dates, so a channel followed years ago seeds as strongly as
-         * one followed last week. Seeds stay below the established tier so watching decides which
-         * of them last (#1030).
-         */
         internal const val SUBSCRIPTION_SEED_CAP = NeuroVectorMath.ESTABLISHED_TOPIC_THRESHOLD - 0.01
-
-        /**
-         * An imported history ends cold start and warm-up but no more: counting every imported
-         * video as an interaction damps all later learning as if the person had used Chorplay for
-         * months (#1030).
-         */
         internal const val HISTORY_BOOTSTRAP_MAX_INTERACTIONS = NeuroScoring.ONBOARDING_WARMUP_INTERACTIONS
 
         @Volatile
@@ -144,8 +81,6 @@ class ChorplayNeuroEngine internal constructor(
 
         private fun requireInstance(): ChorplayNeuroEngine =
             instance ?: error("ChorplayNeuroEngine not initialized. Call initialize(context) first.")
-
-        // ── Backward-compatible forwarding API ──
 
         suspend fun initialize(context: Context) = getInstance(context).initialize()
 
@@ -186,7 +121,6 @@ class ChorplayNeuroEngine internal constructor(
         internal suspend fun interestClusters(brain: UserBrain): List<NeuroClusters.TopicCluster> =
             requireInstance().interestClusters(brain)
 
-        /** How specific [key] is in general language ([NeuroSpecificity]); 1 before the engine starts. */
         fun specificity(key: String): Double = instance?.specificity(key) ?: 1.0
 
         suspend fun getSavedBrainSnapshot(): UserBrain = requireInstance().getSavedBrainSnapshot()
@@ -196,7 +130,8 @@ class ChorplayNeuroEngine internal constructor(
             transform: (ChannelMemoryState) -> ChannelMemoryState,
         ) = requireInstance().updateChannelMemory(bookkeeping, transform)
 
-        suspend fun interestChips(now: Long = System.currentTimeMillis()): List<InterestChip> = requireInstance().interestChips(now)
+        suspend fun interestChips(now: Long = System.currentTimeMillis()): List<InterestChip> =
+            requireInstance().interestChips(now)
 
         fun outsideCategory(
             videos: List<Video>,
@@ -221,7 +156,7 @@ class ChorplayNeuroEngine internal constructor(
 
         suspend fun shareByInterest(ranked: List<Video>): List<Video> = requireInstance().shareByInterest(ranked)
 
-        fun getPersona(brain: UserBrain): FlowPersona = requireInstance().getPersona(brain)
+        fun getPersona(brain: UserBrain): ChorPersona = requireInstance().getPersona(brain)
 
         suspend fun markNotInterested(video: Video) = requireInstance().markNotInterested(video)
 
@@ -243,10 +178,6 @@ class ChorplayNeuroEngine internal constructor(
             percentWatched: Float = 0f,
         ) = getInstance(context).onVideoInteraction(video, interactionType, percentWatched)
 
-        /**
-         * Fire-and-forget variant on the engine's own scope. Safe to call from
-         * lifecycle teardown (e.g. ViewModel.onCleared) where viewModelScope is dead.
-         */
         fun onVideoInteractionAsync(
             context: Context,
             video: Video,
@@ -271,13 +202,15 @@ class ChorplayNeuroEngine internal constructor(
             novelRatio: Double,
         ) = requireInstance().reportQueryResultNovelty(query, novelRatio)
 
-        suspend fun getRecentlyShownVideoIds(withinHours: Long = 48L): Set<String> = requireInstance().getRecentlyShownVideoIds(withinHours)
+        suspend fun getRecentlyShownVideoIds(withinHours: Long = 48L): Set<String> =
+            requireInstance().getRecentlyShownVideoIds(withinHours)
 
         suspend fun getExcludedChannelIds(): Set<String> = requireInstance().getExcludedChannelIds()
 
         suspend fun feedExclusions(): FeedExclusions = requireInstance().feedExclusions()
 
-        suspend fun blockedContentMatcher(): (title: String, channelName: String) -> Boolean = requireInstance().blockedContentMatcher()
+        suspend fun blockedContentMatcher(): (title: String, channelName: String) -> Boolean =
+            requireInstance().blockedContentMatcher()
 
         suspend fun selectShortsSeeds(
             candidates: List<ShortsSeedInput>,
@@ -293,7 +226,8 @@ class ChorplayNeuroEngine internal constructor(
 
         suspend fun onChannelUploadsObserved(uploads: List<Video>) = requireInstance().onChannelUploadsObserved(uploads)
 
-        suspend fun completeOnboarding(selectedTopics: Set<String>) = requireInstance().completeOnboarding(selectedTopics)
+        suspend fun completeOnboarding(selectedTopics: Set<String>) =
+            requireInstance().completeOnboarding(selectedTopics)
 
         suspend fun completeOnboarding(
             context: Context,
@@ -309,7 +243,8 @@ class ChorplayNeuroEngine internal constructor(
             input: InputStream,
         ): Boolean = getInstance(context).importBrainFromStream(input)
 
-        suspend fun bootstrapFromSubscriptions(channelNames: List<String>) = requireInstance().bootstrapFromSubscriptions(channelNames)
+        suspend fun bootstrapFromSubscriptions(channelNames: List<String>) =
+            requireInstance().bootstrapFromSubscriptions(channelNames)
 
         suspend fun bootstrapFromSubscriptions(
             context: Context,
@@ -396,59 +331,44 @@ class ChorplayNeuroEngine internal constructor(
             get() = NeuroTopicCatalog.TOPIC_CATEGORIES
     }
 
-    // ── Module Instances ──
     private val tokenizer = NeuroTokenizer()
     private val playerPreferences by lazy { PlayerPreferences(appContext) }
-    private val isLearningPaused: suspend () -> Boolean = learningPaused ?: { playerPreferences.isDeepChorplayCurrentlyActive() }
+    private val isLearningPaused: suspend () -> Boolean =
+        learningPaused ?: { playerPreferences.isDeepChorplayCurrentlyActive() }
     private val discovery by lazy {
         NeuroDiscovery(NeuroTopicCatalog.TOPIC_CATEGORIES, tokenizer)
     }
 
-    private val deepFlowBookkeeping = NeuroDeepChorplayHousekeeping()
-
-    // ── Concurrency ──
+    private val deepChorBookkeeping = NeuroDeepChorplayHousekeeping()
     private val brainMutex = Mutex()
     private val saveScope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
     private var pendingSaveJob: Job? = null
-
-    // Feature vector cache (LRU)
     private val featureCache =
         object : LinkedHashMap<String, ContentVector>(
             200,
             0.75f,
             true,
         ) {
-            override fun removeEldestEntry(eldest: MutableMap.MutableEntry<String, ContentVector>?): Boolean = size > FEATURE_CACHE_MAX
+            override fun removeEldestEntry(eldest: MutableMap.MutableEntry<String, ContentVector>?): Boolean =
+                size > FEATURE_CACHE_MAX
         }
 
-    // Session tracking
     private var sessionStartTime: Long = System.currentTimeMillis()
     private var sessionVideoCount: Int = 0
-
-    // Discovery tree depth: 0 on refresh, +1 per load-more regeneration —
-    // each round digs one level deeper into every cluster's branches.
     private var discoveryRound: Int = 0
-
-    // Channels passively profiled from upload titles this session (once each).
     private val passiveProfiledChannels = HashSet<String>()
     private val sessionTopicHistory = mutableListOf<String>()
     private val recentInteractions = mutableListOf<MomentumEntry>()
-
-    // Counts a visible item at most once per session (viewport impressions).
     private val sessionImpressed = HashSet<String>()
 
-    // IDF tracking — persisted in brain state
     private var idfWordFrequency = mutableMapOf<String, Int>()
     private var idfTotalDocuments = 0
-
-    // Videos counted as documents this session. With the persisted watch history, one video is one
-    // document however often it is opened, watched and liked, so it cannot promote its own pairs (#907).
     private val countedDocuments =
         object : LinkedHashMap<String, Unit>(COUNTED_DOCUMENTS_MAX + 50, 0.75f, false) {
-            override fun removeEldestEntry(eldest: MutableMap.MutableEntry<String, Unit>?): Boolean = size > COUNTED_DOCUMENTS_MAX
+            override fun removeEldestEntry(eldest: MutableMap.MutableEntry<String, Unit>?): Boolean =
+                size > COUNTED_DOCUMENTS_MAX
         }
 
-    // Impression cache
     private val impressionCache =
         object : LinkedHashMap<String, ImpressionEntry>(
             NeuroScoring.IMPRESSION_CACHE_MAX + 50,
@@ -459,7 +379,6 @@ class ChorplayNeuroEngine internal constructor(
                 size > NeuroScoring.IMPRESSION_CACHE_MAX
         }
 
-    // Watch history
     private val watchHistory =
         LinkedHashMap<String, WatchEntry>(
             NeuroScoring.WATCH_HISTORY_MAX + 50,
@@ -472,10 +391,6 @@ class ChorplayNeuroEngine internal constructor(
     @Volatile
     private var isInitialized = false
 
-    /**
-     * Every read and write of the brain goes through here. A caller that reaches the engine before
-     * [initialize] would otherwise read the empty default brain, or save it over the persisted one.
-     */
     @OptIn(ExperimentalContracts::class)
     private suspend inline fun <T> withBrainLock(action: () -> T): T {
         contract { callsInPlace(action, InvocationKind.EXACTLY_ONCE) }
@@ -483,28 +398,24 @@ class ChorplayNeuroEngine internal constructor(
         return brainMutex.withLock(action = action)
     }
 
-    // =================================================
-    // PUBLIC API
-    // =================================================
-
     suspend fun initialize() {
         brainMutex.withLock {
             if (isInitialized) return
-
-            // Off the caller's thread: a cold start calls this from the main thread too (#1301).
             traced(TRACE_INIT) {
                 withContext(Dispatchers.Default) {
-                    val stores = listOf(async { contentStore.load() }, async { categoryStore.load() }, async { coWatchStore.load() })
+                    val stores = listOf(
+                        async { contentStore.load() },
+                        async { categoryStore.load() },
+                        async { coWatchStore.load() })
                     val loaded = storage.load()
                     if (loaded != null) {
                         currentUserBrain = loaded
                     } else if (!storage.hasSavedBrain()) {
-                        // Only a first start migrates: once a brain is saved, an empty one is a reset one (#907).
                         storage.migrateLegacy()?.let { migrated ->
                             currentUserBrain = migrated
                             Log.i(TAG, "Migrated an earlier brain")
                         }
-                        storage.save(deepFlowBookkeeping.persistable(currentUserBrain))
+                        storage.save(deepChorBookkeeping.persistable(currentUserBrain))
                     }
                     storage.deleteOldBrainFiles()
 
@@ -512,27 +423,37 @@ class ChorplayNeuroEngine internal constructor(
                     val maintained = runMaintenanceIfNeeded(currentUserBrain)
                     if (maintained !== currentUserBrain) {
                         if (currentUserBrain.schemaVersion < NeuroMaintenance.KEY_SPEC_2_SCHEMA_VERSION) {
-                            storage.keepCopyBeforeMigration(currentUserBrain, NeuroMaintenance.KEY_SPEC_2_SCHEMA_VERSION)
+                            storage.keepCopyBeforeMigration(
+                                currentUserBrain,
+                                NeuroMaintenance.KEY_SPEC_2_SCHEMA_VERSION
+                            )
                         } else if (currentUserBrain.schemaVersion < NeuroMaintenance.KEY_SPEC_3_SCHEMA_VERSION) {
-                            storage.keepCopyBeforeMigration(currentUserBrain, NeuroMaintenance.KEY_SPEC_3_SCHEMA_VERSION)
+                            storage.keepCopyBeforeMigration(
+                                currentUserBrain,
+                                NeuroMaintenance.KEY_SPEC_3_SCHEMA_VERSION
+                            )
                         }
                         currentUserBrain = maintained
-                        storage.save(deepFlowBookkeeping.persistable(currentUserBrain))
+                        storage.save(deepChorBookkeeping.persistable(currentUserBrain))
                     }
 
                     idfWordFrequency = currentUserBrain.idfWordFrequency.toMutableMap()
                     idfTotalDocuments = currentUserBrain.idfTotalDocuments
 
-                    // Picks made before spellings were kept still read as chosen ("R&B", never "Rnb").
                     val unspelled =
                         currentUserBrain.preferredTopics.filter { label ->
                             tokenizer.keysOf(label).any {
                                 it !in
-                                    currentUserBrain.displayForms
+                                        currentUserBrain.displayForms
                             }
                         }
                     if (unspelled.isNotEmpty()) {
-                        currentUserBrain = currentUserBrain.copy(displayForms = withPickSpellings(currentUserBrain.displayForms, unspelled))
+                        currentUserBrain = currentUserBrain.copy(
+                            displayForms = withPickSpellings(
+                                currentUserBrain.displayForms,
+                                unspelled
+                            )
+                        )
                     }
 
                     currentUserBrain.watchHistoryMap.forEach { (id, pct) ->
@@ -554,7 +475,6 @@ class ChorplayNeuroEngine internal constructor(
         appContext.unregisterComponentCallbacks(trimCallbacks)
     }
 
-    /** [brain] with a language profile and key language, the app language the first time; the tokenizer follows them. */
     private fun withLanguageProfile(brain: UserBrain): UserBrain {
         val profile = brain.languageProfile ?: NeuroLanguages.normalize(Locale.getDefault().language)
         val keyLanguage = brain.keyLanguage ?: profile
@@ -567,27 +487,24 @@ class ChorplayNeuroEngine internal constructor(
         }
     }
 
-    /** The language this brain's keys are stemmed for ([UserBrain.keyLanguage]). */
     internal suspend fun keyLanguage(): String {
         initialize()
         return tokenizer.keyLanguage
     }
 
-    /** How this brain reads a stored key, so sync reads a peer's keys the same way ([NeuroKeyMigration.keyFunction]). */
     internal suspend fun topicKeyFunction(): (String) -> List<String> {
         initialize()
         return NeuroKeyMigration.keyFunction(tokenizer)
     }
 
-    /** One-time brain maintenance, see NeuroMaintenance for the rationale. */
     private fun runMaintenanceIfNeeded(brain: UserBrain): UserBrain {
         val updated = NeuroMaintenance.runIfNeeded(brain, tokenizer)
         if (updated !== brain) {
             Log.i(
                 TAG,
                 "Brain maintenance: topics ${brain.globalVector.topics.size} → " +
-                    "${updated.globalVector.topics.size}, affinities ${brain.topicAffinities.size} → " +
-                    "${updated.topicAffinities.size}",
+                        "${updated.globalVector.topics.size}, affinities ${brain.topicAffinities.size} → " +
+                        "${updated.topicAffinities.size}",
             )
         }
         return updated
@@ -595,9 +512,8 @@ class ChorplayNeuroEngine internal constructor(
 
     suspend fun getBrainSnapshot(): UserBrain = withBrainLock { currentUserBrain }
 
-    /** The brain as its export writes it, plus the device-local stores ranking reads. */
     internal suspend fun diagnosticState(): NeuroDiagnosticState {
-        val brain = withBrainLock { deepFlowBookkeeping.persistable(currentUserBrain) }
+        val brain = withBrainLock { deepChorBookkeeping.persistable(currentUserBrain) }
         return NeuroDiagnosticState(
             brain = Json.encodeToJsonElement(with(storage) { brain.toSerializable() }),
             categories = categoryStore.index(),
@@ -605,12 +521,10 @@ class ChorplayNeuroEngine internal constructor(
         )
     }
 
-    /** The brain as saved: during Deep Chorplay, without that session's bookkeeping. */
-    suspend fun getSavedBrainSnapshot(): UserBrain = withBrainLock { deepFlowBookkeeping.persistable(currentUserBrain) }
+    suspend fun getSavedBrainSnapshot(): UserBrain = withBrainLock { deepChorBookkeeping.persistable(currentUserBrain) }
 
-    /** Lines the bookkeeping up with Deep Chorplay before it is written. Call under brainMutex. */
-    private fun syncBookkeeping(deepFlowActive: Boolean) {
-        currentUserBrain = deepFlowBookkeeping.beforeWrite(currentUserBrain, deepFlowActive)
+    private fun syncBookkeeping(deepChorActive: Boolean) {
+        currentUserBrain = deepChorBookkeeping.beforeWrite(currentUserBrain, deepChorActive)
     }
 
     private fun clustersOf(brain: UserBrain): List<NeuroClusters.TopicCluster> =
@@ -624,7 +538,6 @@ class ChorplayNeuroEngine internal constructor(
             channelEdges = coWatchEdges(brain),
         )
 
-    /** Home's interest chips, kept stable across loads by [InterestChips.stable]. */
     suspend fun interestChips(now: Long): List<InterestChip> =
         withContext(Dispatchers.Default) {
             val brain = getBrainSnapshot()
@@ -632,12 +545,12 @@ class ChorplayNeuroEngine internal constructor(
             val picks = pickKeys(brain)
             val hasEvidence = { cluster: NeuroClusters.TopicCluster ->
                 cluster.topics.size >= 2 ||
-                    cluster.topics.any { it in picks } ||
-                    brain.topicEvidence[cluster.representative]?.let {
-                        it.watchSignals >= 2 || it.explicitSignals > 0 ||
-                            it.positiveScore >= 1.2
-                    } ==
-                    true
+                        cluster.topics.any { it in picks } ||
+                        brain.topicEvidence[cluster.representative]?.let {
+                            it.watchSignals >= 2 || it.explicitSignals > 0 ||
+                                    it.positiveScore >= 1.2
+                        } ==
+                        true
             }
             val categoryOf = { cluster: NeuroClusters.TopicCluster ->
                 NeuroCategories.clusterCategory(cluster.topics, brain.channelTopicProfiles, categoryStore::categoryOf)
@@ -645,9 +558,9 @@ class ChorplayNeuroEngine internal constructor(
             val groups = InterestChips.groups(clusters, hasEvidence, categoryOf)
             val set = InterestChips.stable(brain.interestChips, groups, now)
             if (set != brain.interestChips) {
-                val deepFlow = isLearningPaused()
+                val deepChor = isLearningPaused()
                 withBrainLock {
-                    syncBookkeeping(deepFlow)
+                    syncBookkeeping(deepChor)
                     currentUserBrain = currentUserBrain.copy(interestChips = set)
                     scheduleDebouncedSave(bookkeeping = true)
                 }
@@ -659,10 +572,10 @@ class ChorplayNeuroEngine internal constructor(
 
     private val pendingRelated =
         object : LinkedHashMap<String, List<Video>>(PENDING_RELATED_MAX, 0.75f, true) {
-            override fun removeEldestEntry(eldest: MutableMap.MutableEntry<String, List<Video>>?): Boolean = size > PENDING_RELATED_MAX
+            override fun removeEldestEntry(eldest: MutableMap.MutableEntry<String, List<Video>>?): Boolean =
+                size > PENDING_RELATED_MAX
         }
 
-    /** Keeps [related], the list shown beside [videoId], until the viewer really watches or likes the video. */
     suspend fun noteRelated(
         videoId: String,
         related: List<Video>,
@@ -671,7 +584,6 @@ class ChorplayNeuroEngine internal constructor(
         withBrainLock { pendingRelated[videoId] = related }
     }
 
-    /** Records [related] for a [seed] from the viewer's history or likes; feed seeds teach nothing. */
     suspend fun noteRelatedOfWatched(
         seed: GraphSeedInput,
         related: List<Video>,
@@ -681,10 +593,6 @@ class ChorplayNeuroEngine internal constructor(
         withBrainLock { coWatchStore.record(seed.id, seed.channelId, related) }
     }
 
-    /**
-     * The related list of [video], an upload of a channel the viewer follows: which channels sit next
-     * to the viewer's own, for [neighbourChannels]. Nothing is learned about the viewer's taste.
-     */
     suspend fun noteRelatedOfFollowed(
         video: Video,
         related: List<Video>,
@@ -695,17 +603,12 @@ class ChorplayNeuroEngine internal constructor(
 
     fun specificity(key: String): Double = tokenizer.specificity(key)
 
-    /** The viewer's interests grouped as Home's chips and searches group them ([NeuroClusters]). */
     internal suspend fun interestClusters(brain: UserBrain): List<NeuroClusters.TopicCluster> =
         withContext(Dispatchers.Default) { clustersOf(brain) }
 
-    /** The names co-watch has seen the channels of its related lists under. */
     suspend fun coWatchChannelNames(): Map<String, String> = withBrainLock { coWatchStore.channelNames() }
-
-    /** Videos whose related list co-watch already holds. */
     suspend fun coWatchSourceIds(): Set<String> = withBrainLock { coWatchStore.index().sources.keys }
 
-    /** Channels several of the viewer's followed or watched channels sit next to ([NeighbourChannels]). */
     internal suspend fun neighbourChannels(
         subscribed: Set<String>,
         now: Long = System.currentTimeMillis(),
@@ -719,14 +622,13 @@ class ChorplayNeuroEngine internal constructor(
                 anchors,
                 excluded = { channel ->
                     channel in brain.blockedChannels ||
-                        (brain.suppressedChannels[channel] ?: 0L) > suppressionCutoff ||
-                        (brain.channelScores[channel] ?: NEUTRAL_CHANNEL_SCORE) < NEUTRAL_CHANNEL_SCORE
+                            (brain.suppressedChannels[channel] ?: 0L) > suppressionCutoff ||
+                            (brain.channelScores[channel] ?: NEUTRAL_CHANNEL_SCORE) < NEUTRAL_CHANNEL_SCORE
                 },
                 now,
             )
         }
 
-    /** Confirmed pairs of channels watched together, a channel counting as watched once a watch raised its score. */
     private fun coWatchEdges(
         brain: UserBrain,
         now: Long = System.currentTimeMillis(),
@@ -737,7 +639,6 @@ class ChorplayNeuroEngine internal constructor(
         channelId: String,
     ) = (brain.channelScores[channelId] ?: 0.0) > NEUTRAL_CHANNEL_SCORE
 
-    /** Ids of [videos] from channels known to post in a category other than [category]. */
     fun outsideCategory(
         videos: List<Video>,
         category: String,
@@ -751,7 +652,6 @@ class ChorplayNeuroEngine internal constructor(
     suspend fun explorationQueries(limit: Int): List<String> =
         withContext(Dispatchers.Default) { discovery.explorationQueries(getBrainSnapshot(), limit) }
 
-    /** Ids of [videos] that match something the viewer has rejected repeatedly. */
     suspend fun rejectedByPattern(videos: List<Video>): Set<String> =
         withContext(Dispatchers.Default) {
             val brain = getBrainSnapshot()
@@ -759,19 +659,28 @@ class ChorplayNeuroEngine internal constructor(
             val idf = takeIdfSnapshotSafe()
             val now = System.currentTimeMillis()
             videos
-                .filter { NeuroScoring.calculateRejectionPatternPenalty(getOrExtractFeatures(it, idf), brain.rejectionPatterns, now) < 1.0 }
+                .filter {
+                    NeuroScoring.calculateRejectionPatternPenalty(
+                        getOrExtractFeatures(it, idf),
+                        brain.rejectionPatterns,
+                        now
+                    ) < 1.0
+                }
                 .mapTo(HashSet()) { it.id }
         }
 
-    /** How close each video is to the viewer's long-term taste, 0..1, without the feed's penalties. */
     suspend fun tasteAffinity(videos: List<Video>): Map<String, Double> =
         withContext(Dispatchers.Default) {
             val global = NeuroVectorMath.PreparedVector(getBrainSnapshot().globalVector)
             val idf = takeIdfSnapshotSafe()
-            videos.associate { it.id to NeuroVectorMath.calculateCosineSimilarity(global, getOrExtractFeatures(it, idf)) }
+            videos.associate {
+                it.id to NeuroVectorMath.calculateCosineSimilarity(
+                    global,
+                    getOrExtractFeatures(it, idf)
+                )
+            }
         }
 
-    /** The interest cluster each video belongs to, by its strongest topic; unknown topics are their own key. */
     suspend fun clusterKeys(videos: List<Video>): Map<String, String> =
         withContext(Dispatchers.Default) {
             val brain = getBrainSnapshot()
@@ -792,7 +701,6 @@ class ChorplayNeuroEngine internal constructor(
             }
         }
 
-    /** [ranked] with its places shared between the viewer's lasting interests ([NeuroInterestShare]). */
     suspend fun shareByInterest(ranked: List<Video>): List<Video> =
         withContext(Dispatchers.Default) {
             val clusters = clustersOf(getBrainSnapshot())
@@ -811,7 +719,6 @@ class ChorplayNeuroEngine internal constructor(
             ) { NeuroInterestShare.groupOf(getOrExtractFeatures(it, idf).topics, groupByTopic) }
         }
 
-    /** A short-lived nudge, such as opening an interest chip: session topics only, never long-term taste. */
     suspend fun noteSessionTopics(topics: List<String>) {
         withBrainLock {
             sessionTopicHistory += topics
@@ -819,9 +726,6 @@ class ChorplayNeuroEngine internal constructor(
         }
     }
 
-    /**
-     * Updates the channel memory, saving on the [bookkeeping] delay or as promptly as learning.
-     */
     suspend fun updateChannelMemory(
         bookkeeping: Boolean,
         transform: (ChannelMemoryState) -> ChannelMemoryState,
@@ -832,11 +736,12 @@ class ChorplayNeuroEngine internal constructor(
         }
     }
 
-    /** Forgets what was learned; what the viewer chose to hide stays hidden. */
     suspend fun resetBrain() {
         withBrainLock {
-            currentUserBrain = withLanguageProfile(currentUserBrain.keepingHiddenContent().copy(languageProfile = null, keyLanguage = null))
-            deepFlowBookkeeping.forget()
+            currentUserBrain = withLanguageProfile(
+                currentUserBrain.keepingHiddenContent().copy(languageProfile = null, keyLanguage = null)
+            )
+            deepChorBookkeeping.forget()
             featureCache.clear()
             idfWordFrequency.clear()
             idfTotalDocuments = 0
@@ -844,7 +749,7 @@ class ChorplayNeuroEngine internal constructor(
             impressionCache.clear()
             watchHistory.clear()
             resetSessionInternal()
-            storage.save(deepFlowBookkeeping.persistable(currentUserBrain))
+            storage.save(deepChorBookkeeping.persistable(currentUserBrain))
             storage.deleteOldBrainFiles()
             storage.deleteCopiesBeforeMigration()
             contentStore.clear()
@@ -876,11 +781,6 @@ class ChorplayNeuroEngine internal constructor(
     private val saveLock = Any()
     private var pendingSaveIsLearning = false
 
-    /**
-     * Saves the brain once events stop arriving. A learning event saves after [SAVE_DEBOUNCE_MS];
-     * bookkeeping waits [BOOKKEEPING_SAVE_DEBOUNCE_MS] and never postpones a learning save already
-     * pending, which writes the bookkeeping too. The whole brain is re-encoded on every save.
-     */
     private fun scheduleDebouncedSave(bookkeeping: Boolean = false) {
         synchronized(saveLock) {
             val pending = pendingSaveJob
@@ -891,7 +791,6 @@ class ChorplayNeuroEngine internal constructor(
         }
     }
 
-    /** Writes a pending save now: the app is leaving the screen and may not come back to finish it. */
     private fun flushPendingSave() {
         synchronized(saveLock) {
             val pending = pendingSaveJob ?: return
@@ -901,10 +800,6 @@ class ChorplayNeuroEngine internal constructor(
         }
     }
 
-    /**
-     * Waits for interactions still being learned, then writes a pending save now, before a profile switch restarts
-     * the process. Interactions are learned first because each one can schedule its own save.
-     */
     suspend fun awaitWrites() {
         saveScope.coroutineContext.job.children
             .filter { it !== pendingSaveJob }
@@ -918,7 +813,7 @@ class ChorplayNeuroEngine internal constructor(
         saveScope.launch {
             delay(delayMs)
             brainMutex.withLock {
-                storage.save(deepFlowBookkeeping.persistable(currentUserBrain))
+                storage.save(deepChorBookkeeping.persistable(currentUserBrain))
             }
             contentStore.persistIfDirty()
             categoryStore.persistIfDirty()
@@ -936,10 +831,6 @@ class ChorplayNeuroEngine internal constructor(
             @Deprecated("Deprecated in Java")
             override fun onLowMemory() = flushPendingSave()
         }
-
-    // =================================================
-    // BLOCKED TOPICS & CHANNELS API
-    // =================================================
 
     suspend fun getBlockedTopics(): Set<String> = withBrainLock { currentUserBrain.blockedTopics }
 
@@ -974,7 +865,7 @@ class ChorplayNeuroEngine internal constructor(
                     timeVectors = scrubbedTimeVectors,
                     preferredTopics = cleanedPreferred,
                 )
-            storage.save(deepFlowBookkeeping.persistable(currentUserBrain))
+            storage.save(deepChorBookkeeping.persistable(currentUserBrain))
         }
     }
 
@@ -996,9 +887,9 @@ class ChorplayNeuroEngine internal constructor(
                 currentUserBrain.copy(
                     blockedTopics =
                         currentUserBrain.blockedTopics -
-                            topic.lowercase(),
+                                topic.lowercase(),
                 )
-            storage.save(deepFlowBookkeeping.persistable(currentUserBrain))
+            storage.save(deepChorBookkeeping.persistable(currentUserBrain))
         }
     }
 
@@ -1016,10 +907,10 @@ class ChorplayNeuroEngine internal constructor(
                 currentUserBrain.copy(
                     blockedChannels =
                         currentUserBrain.blockedChannels +
-                            channelId,
+                                channelId,
                     channelScores = cleanedScores,
                 )
-            storage.save(deepFlowBookkeeping.persistable(currentUserBrain))
+            storage.save(deepChorBookkeeping.persistable(currentUserBrain))
         }
     }
 
@@ -1029,19 +920,15 @@ class ChorplayNeuroEngine internal constructor(
                 currentUserBrain.copy(
                     blockedChannels = currentUserBrain.blockedChannels - channelId,
                 )
-            storage.save(deepFlowBookkeeping.persistable(currentUserBrain))
+            storage.save(deepChorBookkeeping.persistable(currentUserBrain))
         }
     }
-
-    // =================================================
-    // ONBOARDING & PREFERRED TOPICS
-    // =================================================
 
     suspend fun needsOnboarding(): Boolean =
         withBrainLock {
             !currentUserBrain.hasCompletedOnboarding &&
-                currentUserBrain.totalInteractions < 5 &&
-                currentUserBrain.preferredTopics.isEmpty()
+                    currentUserBrain.totalInteractions < 5 &&
+                    currentUserBrain.preferredTopics.isEmpty()
         }
 
     suspend fun hasCompletedOnboarding(): Boolean = withBrainLock { currentUserBrain.hasCompletedOnboarding }
@@ -1062,7 +949,7 @@ class ChorplayNeuroEngine internal constructor(
                             topics = newTopics,
                         ),
                 )
-            storage.save(deepFlowBookkeeping.persistable(currentUserBrain))
+            storage.save(deepChorBookkeeping.persistable(currentUserBrain))
         }
     }
 
@@ -1101,9 +988,9 @@ class ChorplayNeuroEngine internal constructor(
                     globalVector = currentUserBrain.globalVector.copy(topics = newTopics),
                     hasCompletedOnboarding =
                         currentUserBrain.hasCompletedOnboarding ||
-                            normalizedPreferred.isNotEmpty(),
+                                normalizedPreferred.isNotEmpty(),
                 )
-            storage.save(deepFlowBookkeeping.persistable(currentUserBrain))
+            storage.save(deepChorBookkeeping.persistable(currentUserBrain))
         }
     }
 
@@ -1122,38 +1009,42 @@ class ChorplayNeuroEngine internal constructor(
                             topics = newTopics,
                         ),
                 )
-            storage.save(deepFlowBookkeeping.persistable(currentUserBrain))
+            storage.save(deepChorBookkeeping.persistable(currentUserBrain))
         }
     }
 
-    /** A pick is written as the viewer chose it ("Cooking"), even before any title writes it. */
     private fun withPickSpellings(
         forms: Map<String, DisplayForm>,
         labels: Collection<String>,
     ): Map<String, DisplayForm> =
         labels.fold(forms) { current, label ->
             val keys = tokenizer.keysOf(label)
-            // A label that is one key is that key's spelling, words like "of" included ("Call of Duty").
             val spellings =
-                keys.singleOrNull()?.let { key -> mapOf(key to label.trim()) } ?: NeuroDisplayForms.spellingsIn(label, keys, tokenizer)
+                keys.singleOrNull()?.let { key -> mapOf(key to label.trim()) } ?: NeuroDisplayForms.spellingsIn(
+                    label,
+                    keys,
+                    tokenizer
+                )
             NeuroDisplayForms.record(current, spellings.filter { (key, spelling) -> key != spelling }) { true }
         }
 
-    /** The keys the viewer's picks stand for, as titles key them. */
     fun pickKeys(brain: UserBrain): Set<String> = brain.preferredTopics.flatMapTo(HashSet(), tokenizer::keysOf)
 
-    /** Each pick as the viewer chose it, with the keys titles give it. */
-    fun pickKeysByLabel(brain: UserBrain): Map<String, List<String>> = brain.preferredTopics.associateWith(tokenizer::keysOf)
+    fun pickKeysByLabel(brain: UserBrain): Map<String, List<String>> =
+        brain.preferredTopics.associateWith(tokenizer::keysOf)
 
-    /** [topic] is a pick as the viewer typed it, or the key Your taste lists for it. */
     suspend fun removePreferredTopic(topic: String) {
         withBrainLock {
             currentUserBrain =
                 currentUserBrain.copy(
                     preferredTopics =
-                        currentUserBrain.preferredTopics.filterNot { label -> label == topic || topic in tokenizer.keysOf(label) }.toSet(),
+                        currentUserBrain.preferredTopics.filterNot { label ->
+                            label == topic || topic in tokenizer.keysOf(
+                                label
+                            )
+                        }.toSet(),
                 )
-            storage.save(deepFlowBookkeeping.persistable(currentUserBrain))
+            storage.save(deepChorBookkeeping.persistable(currentUserBrain))
         }
     }
 
@@ -1164,7 +1055,7 @@ class ChorplayNeuroEngine internal constructor(
                     currentUserBrain.copy(
                         hasCompletedOnboarding = true,
                     )
-                storage.save(deepFlowBookkeeping.persistable(currentUserBrain))
+                storage.save(deepChorBookkeeping.persistable(currentUserBrain))
                 Log.i(TAG, "Onboarding completed without replacing existing topics")
                 return
             }
@@ -1182,7 +1073,6 @@ class ChorplayNeuroEngine internal constructor(
                 tokenizer.keysOf(topic).forEach { key -> newTopics.merge(key, weight, ::maxOf) }
             }
 
-            // Picks are not linked to each other: unrelated picks must stay separate interests (#907).
             currentUserBrain =
                 currentUserBrain.copy(
                     displayForms = withPickSpellings(currentUserBrain.displayForms, selectedTopics),
@@ -1193,7 +1083,7 @@ class ChorplayNeuroEngine internal constructor(
                         ),
                     hasCompletedOnboarding = true,
                 )
-            storage.save(deepFlowBookkeeping.persistable(currentUserBrain))
+            storage.save(deepChorBookkeeping.persistable(currentUserBrain))
             Log.i(TAG, "Onboarding: ${selectedTopics.size} topics")
         }
     }
@@ -1228,7 +1118,7 @@ class ChorplayNeuroEngine internal constructor(
 
                 InteractionType.SKIPPED,
                 InteractionType.DISLIKED,
-                -> {
+                    -> {
                     0.0
                 }
             }
@@ -1266,7 +1156,8 @@ class ChorplayNeuroEngine internal constructor(
                     positiveSignals = (existing?.positiveSignals ?: 0) + 1,
                     watchSignals = (existing?.watchSignals ?: 0) + if (isWatchSignal) 1 else 0,
                     explicitSignals = (existing?.explicitSignals ?: 0) + if (isExplicitSignal) 1 else 0,
-                    positiveScore = ((existing?.positiveScore ?: 0.0) + signalScore).coerceAtMost(TopicEvidence.MAX_SCORE),
+                    positiveScore = ((existing?.positiveScore
+                        ?: 0.0) + signalScore).coerceAtMost(TopicEvidence.MAX_SCORE),
                     videoIds = nextVideoIds,
                     channelIds = nextChannelIds,
                     firstSeenAt = existing?.firstSeenAt?.takeIf { it > 0L } ?: now,
@@ -1277,7 +1168,6 @@ class ChorplayNeuroEngine internal constructor(
         return capEvidence(updated)
     }
 
-    // Cap evidence entries, keeping the strongest signal of either valence.
     private fun capEvidence(map: MutableMap<String, TopicEvidence>): Map<String, TopicEvidence> =
         if (map.size <= TOPIC_EVIDENCE_MAX_ENTRIES) {
             map
@@ -1291,7 +1181,6 @@ class ChorplayNeuroEngine internal constructor(
                 .associate { it.key to it.value }
         }
 
-    // Records a negative signal against a video's primary topics (skip/dislike/not-interested).
     private fun bumpNegativeEvidence(
         current: Map<String, TopicEvidence>,
         videoVector: ContentVector,
@@ -1326,10 +1215,6 @@ class ChorplayNeuroEngine internal constructor(
         if (value in existing) return existing
         return (existing.toList() + value).takeLast(TopicEvidence.MAX_IDS).toSet()
     }
-
-    // =================================================
-    // SUBSCRIPTION BOOTSTRAP
-    // =================================================
 
     suspend fun bootstrapFromSubscriptions(channelNames: List<String>) {
         if (channelNames.isEmpty()) return
@@ -1382,8 +1267,6 @@ class ChorplayNeuroEngine internal constructor(
                 }
             }
 
-            // Channel-name words are inferred, so they never join preferredTopics: that set is the
-            // person's own choice, never decays and anchors every refresh.
             currentUserBrain =
                 currentUserBrain.copy(
                     globalVector =
@@ -1394,12 +1277,12 @@ class ChorplayNeuroEngine internal constructor(
                     hasCompletedOnboarding = true,
                 )
 
-            storage.save(deepFlowBookkeeping.persistable(currentUserBrain))
+            storage.save(deepChorBookkeeping.persistable(currentUserBrain))
             Log.i(
                 TAG,
                 "Bootstrap: seeded ${topicWeights.size} topics from " +
-                    "${channelNames.size} subscriptions " +
-                    "(top: ${topKeywords.take(5).joinToString()})",
+                        "${channelNames.size} subscriptions " +
+                        "(top: ${topKeywords.take(5).joinToString()})",
             )
         }
     }
@@ -1410,7 +1293,7 @@ class ChorplayNeuroEngine internal constructor(
         withBrainLock {
             val isMatureBrain =
                 currentUserBrain.totalInteractions > 50 &&
-                    currentUserBrain.globalVector.topics.size > 10
+                        currentUserBrain.globalVector.topics.size > 10
             val historyLearningRate = if (isMatureBrain) 0.015 else 0.035
 
             val idfSnapshot = takeIdfSnapshot()
@@ -1457,7 +1340,7 @@ class ChorplayNeuroEngine internal constructor(
                 val newChScore = (currentChScore * 0.95) + (1.0 * 0.05)
                 val newChannelScores =
                     updatedBrain.channelScores +
-                        (video.channelId to newChScore)
+                            (video.channelId to newChScore)
 
                 var newAffinities = updatedBrain.topicAffinities
                 val topTopics =
@@ -1508,7 +1391,7 @@ class ChorplayNeuroEngine internal constructor(
                 updatedBrain.copy(
                     totalInteractions =
                         updatedBrain.totalInteractions +
-                            toProcess.size.coerceAtMost(HISTORY_BOOTSTRAP_MAX_INTERACTIONS),
+                                toProcess.size.coerceAtMost(HISTORY_BOOTSTRAP_MAX_INTERACTIONS),
                     idfWordFrequency = idfWordFrequency.toMap(),
                     idfTotalDocuments = idfTotalDocuments,
                     watchHistoryMap = watchHistory.mapValues { it.value.percentWatched },
@@ -1517,22 +1400,19 @@ class ChorplayNeuroEngine internal constructor(
 
             compactIdfIfNeeded()
 
-            storage.save(deepFlowBookkeeping.persistable(currentUserBrain))
+            storage.save(deepChorBookkeeping.persistable(currentUserBrain))
             featureCache.clear()
 
             Log.i(
                 TAG,
                 "History bootstrap: processed ${toProcess.size} videos, " +
-                    "${updatedBrain.globalVector.topics.size} topics learned",
+                        "${updatedBrain.globalVector.topics.size} topics learned",
             )
         }
     }
 
-    // Periodic IDF maintenance: halve aged counts and cap the distinct vocabulary.
-
     private fun isDocumentCounted(videoId: String): Boolean = videoId in watchHistory || videoId in countedDocuments
 
-    /** Counts [terms] as one more document, unless [videoId] already counted as one. */
     private inline fun countDocument(
         videoId: String,
         terms: () -> Collection<String>,
@@ -1561,12 +1441,7 @@ class ChorplayNeuroEngine internal constructor(
         withBrainLock {
             val now = System.currentTimeMillis()
 
-            // 1. Hard-suppress this specific video
             val newSuppressedVideos = suppressVideo(currentUserBrain.suppressedVideoIds, video.id, now)
-
-            // 2. Channel suppression — rolling, self-healing window. Inferred dislikes
-            // never become a permanent block; only explicit blockChannel() does that,
-            // so two mis-taps can no longer kill a channel forever.
             val newSuppressedChannels = currentUserBrain.suppressedChannels.toMutableMap()
             if (video.channelId.isNotBlank()) {
                 newSuppressedChannels[video.channelId] = now
@@ -1576,10 +1451,7 @@ class ChorplayNeuroEngine internal constructor(
                 }
             }
 
-            // 3. Update rejection pattern memory BEFORE vector adjustment
             val updatedPatterns = NeuroScoring.recordRejection(currentUserBrain.rejectionPatterns, videoVector, now)
-
-            // 4. Aggressive vector adjustment — scales with rejection count
             val aggressionFactor =
                 NeuroScoring.getRejectionAggressionFactor(
                     videoVector,
@@ -1588,8 +1460,6 @@ class ChorplayNeuroEngine internal constructor(
                 )
             val newGlobal = adjustVectorByRejection(currentUserBrain.globalVector, videoVector, aggressionFactor)
             val newRecent = adjustVectorByRejection(currentUserBrain.recentVector, videoVector, aggressionFactor)
-
-            // 5. Channel score — scales with rejection aggression
             val newChannelScores = currentUserBrain.channelScores.toMutableMap()
             if (video.channelId.isNotBlank()) {
                 val currentScore = newChannelScores[video.channelId] ?: 0.5
@@ -1597,7 +1467,6 @@ class ChorplayNeuroEngine internal constructor(
                     (currentScore * aggressionFactor).coerceAtLeast(0.01)
             }
 
-            // 6. Time bucket adjustment
             val bucket = TimeBucket.current()
             val currentBucketVec = currentUserBrain.timeVectors[bucket] ?: ContentVector()
             val newBucketVec =
@@ -1617,11 +1486,16 @@ class ChorplayNeuroEngine internal constructor(
                     totalInteractions = currentUserBrain.totalInteractions + 1,
                     suppressedVideoIds = newSuppressedVideos,
                     suppressedChannels = newSuppressedChannels,
-                    channelMemory = ChannelMemory.recordRejection(currentUserBrain.channelMemory, video.channelId, video.channelName, now),
+                    channelMemory = ChannelMemory.recordRejection(
+                        currentUserBrain.channelMemory,
+                        video.channelId,
+                        video.channelName,
+                        now
+                    ),
                     rejectionPatterns = updatedPatterns,
                     topicEvidence = bumpNegativeEvidence(currentUserBrain.topicEvidence, videoVector),
                 )
-            storage.save(deepFlowBookkeeping.persistable(currentUserBrain))
+            storage.save(deepChorBookkeeping.persistable(currentUserBrain))
         }
     }
 
@@ -1643,20 +1517,14 @@ class ChorplayNeuroEngine internal constructor(
         return current.copy(topics = newTopics)
     }
 
-    // =================================================
-    // DISCOVERY QUERY GENERATION
-    // =================================================
-
     suspend fun generateDiscoveryQueries(resetDepth: Boolean = false): List<String> =
         withContext(Dispatchers.Default) {
-            val deepFlow = isLearningPaused()
+            val deepChor = isLearningPaused()
             withBrainLock {
-                syncBookkeeping(deepFlow)
+                syncBookkeeping(deepChor)
                 val brain = currentUserBrain
                 val blocked = brain.blockedTopics
 
-                // Tree depth: a refresh starts broad (depth 0); each load-more
-                // regeneration digs one level deeper into every cluster's branches.
                 if (resetDepth) discoveryRound = 0
                 val depth = discoveryRound
                 discoveryRound++
@@ -1686,15 +1554,15 @@ class ChorplayNeuroEngine internal constructor(
                         }
                     }
 
-                // ── Query rotation: filter queries too similar to recently used ones ──
                 if (brain.recentQueryTokens.isNotEmpty() && candidates.size > 3) {
-                    candidates = NeuroScoring.rotateQueries(candidates, brain.recentQueryTokens) { tokenizer.tokenize(it).toSet() }
+                    candidates = NeuroScoring.rotateQueries(candidates, brain.recentQueryTokens) {
+                        tokenizer.tokenize(it).toSet()
+                    }
                 }
 
-                // ── Skip queries whose recent RESULTS were mostly already shown ──
                 val staleExpiryCutoff =
                     System.currentTimeMillis() -
-                        NeuroScoring.STALE_QUERY_EXPIRY_HOURS * 60 * 60 * 1000L
+                            NeuroScoring.STALE_QUERY_EXPIRY_HOURS * 60 * 60 * 1000L
                 val activeStaleKeys =
                     brain.staleQueries
                         .filter { (_, ts) -> ts > staleExpiryCutoff }
@@ -1709,7 +1577,6 @@ class ChorplayNeuroEngine internal constructor(
                     }
                 }
 
-                // ── Track used queries for future rotation; fallback searches were never learned ──
                 val updatedRecentTokens =
                     if (discoveryQueries.isEmpty()) {
                         brain.recentQueryTokens
@@ -1718,7 +1585,6 @@ class ChorplayNeuroEngine internal constructor(
                             .takeLast(NeuroScoring.RECENT_QUERY_TOKENS_MAX)
                     }
 
-                // ── Advance cluster rotation for the interest clusters actually served ──
                 val candidateSet = candidates.toHashSet()
                 val servedClusters =
                     discoveryQueries
@@ -1755,10 +1621,6 @@ class ChorplayNeuroEngine internal constructor(
             }
         }
 
-    /**
-     * With [longTermCandidates], the last of [maxSeeds] goes to a lasting interest none of the
-     * recent seeds covers, so a week of one new hobby cannot push the older ones out of the lane.
-     */
     suspend fun selectRelatedSeeds(
         candidates: List<GraphSeedInput>,
         maxSeeds: Int = 4,
@@ -1776,9 +1638,9 @@ class ChorplayNeuroEngine internal constructor(
                 brainSnapshot = currentUserBrain
                 val channelSuppressionCutoff = now - (CHANNEL_SUPPRESSION_DAYS * 24 * 60 * 60 * 1000L)
                 excludedChannelIds = currentUserBrain.blockedChannels +
-                    currentUserBrain.suppressedChannels
-                        .filter { (_, ts) -> ts > channelSuppressionCutoff }
-                        .keys
+                        currentUserBrain.suppressedChannels
+                            .filter { (_, ts) -> ts > channelSuppressionCutoff }
+                            .keys
                 recentSeedIds =
                     currentUserBrain.recentRelatedSeeds
                         .filter { (_, ts) -> ts > seedCooldownCutoff }
@@ -1786,17 +1648,10 @@ class ChorplayNeuroEngine internal constructor(
                 topicScores = currentUserBrain.interests.topics
             }
             val hidden = brainSnapshot.suppressedVideoIds.keys
-
-            // Map seed topic keys to interest communities so the spread-first pick
-            // allocates one related seed per MAJOR interest (mma, android, anime…)
-            // before any interest gets a second one.
             val clusters = clustersOf(brainSnapshot)
-            val topicToCommunity = clusters.flatMap { cluster -> cluster.topics.map { it to cluster.representative } }.toMap()
+            val topicToCommunity =
+                clusters.flatMap { cluster -> cluster.topics.map { it to cluster.representative } }.toMap()
             val communityOf = { key: String -> topicToCommunity[NeuroScoring.stripDomainTag(key)] ?: key }
-
-            // Seed rotation: newest-first selection kept picking the same seeds every
-            // refresh, making the RELATED lane byte-identical. Recently used seeds are
-            // cooled down unless that would starve the selection.
             val selected =
                 GraphSeedSelector.selectWithLongTerm(
                     candidates = candidates.filterNot { it.id in hidden },
@@ -1810,9 +1665,9 @@ class ChorplayNeuroEngine internal constructor(
                     topicScores = topicScores,
                 )
             if (selected.isNotEmpty()) {
-                val deepFlow = isLearningPaused()
+                val deepChor = isLearningPaused()
                 withBrainLock {
-                    syncBookkeeping(deepFlow)
+                    syncBookkeeping(deepChor)
                     val updated = currentUserBrain.recentRelatedSeeds.toMutableMap()
                     updated.entries.removeAll { it.value < seedCooldownCutoff }
                     selected.forEach { updated[it] = now }
@@ -1832,10 +1687,6 @@ class ChorplayNeuroEngine internal constructor(
             selected
         }
 
-    /**
-     * The reels a related reel chain is opened from, with the same six-hour rotation the video
-     * seeds get, so two sessions in a row do not reopen the same chain.
-     */
     suspend fun selectShortsSeeds(
         candidates: List<ShortsSeedInput>,
         maxSeeds: Int,
@@ -1850,14 +1701,14 @@ class ChorplayNeuroEngine internal constructor(
                 val channelSuppressionCutoff = now - (CHANNEL_SUPPRESSION_DAYS * 24 * 60 * 60 * 1000L)
                 excludedChannelIds =
                     currentUserBrain.blockedChannels +
-                    currentUserBrain.suppressedChannels.filter { (_, ts) -> ts > channelSuppressionCutoff }.keys
+                            currentUserBrain.suppressedChannels.filter { (_, ts) -> ts > channelSuppressionCutoff }.keys
                 recentSeedIds = currentUserBrain.recentShortsSeeds.filter { (_, ts) -> ts > seedCooldownCutoff }.keys
             }
             val selected = ShortsSeedSelector.select(candidates, maxSeeds, now, excludedChannelIds, recentSeedIds)
             if (selected.isNotEmpty()) {
-                val deepFlow = isLearningPaused()
+                val deepChor = isLearningPaused()
                 withBrainLock {
-                    syncBookkeeping(deepFlow)
+                    syncBookkeeping(deepChor)
                     val updated = currentUserBrain.recentShortsSeeds.toMutableMap()
                     updated.entries.removeAll { it.value < seedCooldownCutoff }
                     selected.forEach { updated[it] = now }
@@ -1873,17 +1724,15 @@ class ChorplayNeuroEngine internal constructor(
             selected
         }
 
-    /** Blocked + actively suppressed channels, for assembly paths that bypass rank(). */
     suspend fun getExcludedChannelIds(): Set<String> =
         withBrainLock {
             val cutoff = System.currentTimeMillis() - (CHANNEL_SUPPRESSION_DAYS * 24 * 60 * 60 * 1000L)
             currentUserBrain.blockedChannels +
-                currentUserBrain.suppressedChannels
-                    .filter { (_, ts) -> ts > cutoff }
-                    .keys
+                    currentUserBrain.suppressedChannels
+                        .filter { (_, ts) -> ts > cutoff }
+                        .keys
         }
 
-    /** The blocked topics as one text test, for feed paths whose reels never pass through [rank]. */
     suspend fun blockedContentMatcher(): (title: String, channelName: String) -> Boolean {
         val matchers =
             withBrainLock {
@@ -1897,7 +1746,6 @@ class ChorplayNeuroEngine internal constructor(
         return { title, channelName -> NeuroScoring.isBlockedByText(title, channelName, matchers, tokenizer::keyOf) }
     }
 
-    /** The same suppression windows [rank] applies; the topic matchers are built only if a caller asks. */
     suspend fun feedExclusions(now: Long = System.currentTimeMillis()): FeedExclusions {
         val brain = withBrainLock { currentUserBrain }
         val channelCutoff = now - CHANNEL_SUPPRESSION_DAYS * 86_400_000L
@@ -1910,16 +1758,11 @@ class ChorplayNeuroEngine internal constructor(
             suppressedChannelIds = brain.suppressedChannels.filterValues { it > channelCutoff }.keys,
             blockedText = { title, channelName ->
                 brain.blockedTopics.isNotEmpty() &&
-                    NeuroScoring.isBlockedByText(title, channelName, matchers, tokenizer::keyOf)
+                        NeuroScoring.isBlockedByText(title, channelName, matchers, tokenizer::keyOf)
             },
         )
     }
 
-    /**
-     * Learns a channel's creator-declared keyword tags (+ description lead) into
-     * its topic profile and the tag-affinity graph. Authored identity — the
-     * strongest channel-level signal available; fetched on subscribe.
-     */
     suspend fun onChannelTagsLearned(
         channelId: String,
         tags: List<String>,
@@ -1932,7 +1775,6 @@ class ChorplayNeuroEngine internal constructor(
             val profiles = currentUserBrain.channelTopicProfiles.toMutableMap()
             profiles[channelId] = NeuroChannelKnowledge.mergeProfile(profiles[channelId].orEmpty(), additions)
 
-            // Creator-authored co-occurrence: declared tags belong together.
             val tagAffinities = currentUserBrain.tagAffinities.toMutableMap()
             val tokens = additions.keys.take(5).toList()
             for (i in tokens.indices) {
@@ -1962,11 +1804,6 @@ class ChorplayNeuroEngine internal constructor(
         }
     }
 
-    /**
-     * Passive channel profiling from upload titles the subs lane already fetched.
-     * Low weight, once per channel per session — teaches what each subscribed
-     * channel is about without waiting for the user to click anything.
-     */
     suspend fun onChannelUploadsObserved(uploads: List<Video>) {
         if (uploads.isEmpty()) return
         val byChannel = uploads.filter { it.channelId.isNotBlank() }.groupBy { it.channelId }
@@ -1992,7 +1829,6 @@ class ChorplayNeuroEngine internal constructor(
         }
     }
 
-    // Evicts the lowest-quality channels' profiles when over the cap. Call under brainMutex.
     private fun capChannelProfiles(profiles: MutableMap<String, Map<String, Double>>): Map<String, Map<String, Double>> {
         if (profiles.size <= NeuroScoring.CHANNEL_PROFILE_MAX_CHANNELS) return profiles
         val channelScores = currentUserBrain.channelScores
@@ -2004,27 +1840,20 @@ class ChorplayNeuroEngine internal constructor(
         return profiles.toMap()
     }
 
-    /** Feed-history ids shown within the window — for assembly-time exclusion sets. */
     suspend fun getRecentlyShownVideoIds(withinHours: Long = 48L): Set<String> =
         withBrainLock {
             val cutoff = System.currentTimeMillis() - withinHours * 60 * 60 * 1000L
             currentUserBrain.feedHistory.filter { it.value.lastShown > cutoff }.keys
         }
 
-    /**
-     * Marks a discovery query stale when its RESULTS were mostly already shown —
-     * a stronger repetition signal than query-wording overlap. Stale queries are
-     * skipped by generateDiscoveryQueries for STALE_QUERY_EXPIRY_HOURS; a query
-     * that comes back with fresh results clears its mark.
-     */
     suspend fun reportQueryResultNovelty(
         query: String,
         novelRatio: Double,
     ) {
         val key = queryStaleKey(query) ?: return
-        val deepFlow = isLearningPaused()
+        val deepChor = isLearningPaused()
         withBrainLock {
-            syncBookkeeping(deepFlow)
+            syncBookkeeping(deepChor)
             val now = System.currentTimeMillis()
             val expiryCutoff = now - NeuroScoring.STALE_QUERY_EXPIRY_HOURS * 60 * 60 * 1000L
             val updated = currentUserBrain.staleQueries.toMutableMap()
@@ -2049,14 +1878,6 @@ class ChorplayNeuroEngine internal constructor(
         return tokens.sorted().joinToString("|")
     }
 
-    // =================================================
-    // MAIN RANKING FUNCTION
-    // =================================================
-
-    /**
-     * [minRelevance] above 0 drops candidates that share less topic overlap with the viewer (see [NeuroScoring.keepRelevant]).
-     * [trace] collects why each returned video was admitted.
-     */
     suspend fun rank(
         candidates: List<Video>,
         userSubs: Set<String>,
@@ -2073,18 +1894,16 @@ class ChorplayNeuroEngine internal constructor(
         withContext(Dispatchers.Default) {
             if (candidates.isEmpty()) return@withContext emptyList()
 
-            // Session staleness auto-reset
             val sessionAgeMinutes = getSessionDurationMinutes()
             if (sessionAgeMinutes > NeuroScoring.SESSION_RESET_IDLE_MINUTES ||
                 (
-                    sessionAgeMinutes > NeuroScoring.SESSION_RESET_EMPTY_MINUTES &&
-                        sessionVideoCount == 0
-                )
+                        sessionAgeMinutes > NeuroScoring.SESSION_RESET_EMPTY_MINUTES &&
+                                sessionVideoCount == 0
+                        )
             ) {
                 withBrainLock { resetSessionInternal() }
             }
 
-            // Take consistent snapshots under the lock
             val brain: UserBrain
             val idfSnapshot: IdfSnapshot
             val sessionTopics: List<String>
@@ -2103,8 +1922,6 @@ class ChorplayNeuroEngine internal constructor(
 
             val random = rankRandom ?: java.util.Random()
             val now = System.currentTimeMillis()
-
-            // Hard suppression: videos for good, channels for a rolling window
             val channelSuppressionCutoff = now - (CHANNEL_SUPPRESSION_DAYS * 24 * 60 * 60 * 1000L)
             val activeSuppressedVideos = brain.suppressedVideoIds.keys
             val activeSuppressedChannels =
@@ -2112,7 +1929,6 @@ class ChorplayNeuroEngine internal constructor(
                     .filter { (_, ts) -> ts > channelSuppressionCutoff }
                     .keys
 
-            // Precompute blocked matchers ONCE (precision blocking — see NeuroScoring).
             val blockedMatchers =
                 NeuroScoring.buildBlockedMatchers(
                     brain.blockedTopics,
@@ -2120,7 +1936,6 @@ class ChorplayNeuroEngine internal constructor(
                     tokenizer::keyOf,
                 )
 
-            // ── Feed overlap ratio (for adaptive jitter + feed history penalty) ──
             val feedOverlapRatio =
                 if (candidates.isEmpty() || brain.feedHistory.isEmpty()) {
                     0.0
@@ -2135,7 +1950,6 @@ class ChorplayNeuroEngine internal constructor(
                     (overlap.toDouble() / candidateIds.size).coerceIn(0.0, 1.0)
                 }
 
-            // Pre-filter blocked content
             val filtered =
                 candidates.filter { video ->
                     if (video.id in activeSuppressedVideos) return@filter false
@@ -2153,18 +1967,14 @@ class ChorplayNeuroEngine internal constructor(
 
             if (filtered.isEmpty()) return@withContext emptyList()
 
-            // Hard seen-gate: recently over-shown items are removed, not just
-            // penalized — score penalties let high-scoring repeats punch back in.
             val gated = NeuroScoring.applySeenGate(filtered, brain.feedHistory, now) { it.id }
 
-            // Extract all features with consistent IDF snapshot
             val videoVectors =
                 gated.map { video ->
                     val channelProfile = brain.channelTopicProfiles[video.channelId]
                     video to getOrExtractFeatures(video, idfSnapshot, channelProfile)
                 }
 
-            // Vector-level topic blocking: remove videos whose top topics match blocked topics
             val blockedTopicLemmas = brain.blockedTopics.map { tokenizer.keyOf(it) }.toSet()
             val unblocked =
                 if (blockedTopicLemmas.isEmpty()) {
@@ -2176,7 +1986,6 @@ class ChorplayNeuroEngine internal constructor(
                                 .sortedByDescending { it.value }
                                 .take(3)
                                 .map { it.key }
-                        // Token-precise: "art" must block "art", not "startup".
                         !topVideoTopics.any { topic ->
                             val base = NeuroScoring.stripDomainTag(topic)
                             val parts = base.split(' ')
@@ -2201,47 +2010,37 @@ class ChorplayNeuroEngine internal constructor(
                     )
                 }
 
-            // How many candidates carry a category decides whether a category probe is worth adding (D4, #907).
             val categorized =
                 vectorFiltered.count { (video, _) ->
                     video.category != null ||
-                        categoryStore.categoryOf(video.channelId) != null
+                            categoryStore.categoryOf(video.channelId) != null
                 }
             Log.d(TAG, "Category known for $categorized of ${vectorFiltered.size} candidates")
 
-            // Time context
             val bucket = TimeBucket.current()
             val timeContextVector = brain.timeVectors[bucket] ?: ContentVector()
-
-            // Skipping several videos in a row earns an exploration slot (see applySmartDiversity); it
-            // never reweights scoring, where it once made less relevant videos outscore relevant ones (#907).
             val tasteWeight = 0.8
             val wContext = tasteWeight * 0.5 * NeuroScoring.timeBucketConfidence(brain, bucket)
             val wPersonality = tasteWeight - wContext
             val wNovelty = 0.2
-
-            // Onboarding warmup factor
             val isColdStart = brain.totalInteractions < NeuroScoring.COLD_START_THRESHOLD
             val isOnboarding = brain.totalInteractions < NeuroScoring.ONBOARDING_WARMUP_INTERACTIONS
             val onboardingWarmup =
                 if (isOnboarding) {
                     1.0 - (
-                        brain.totalInteractions /
-                            NeuroScoring.ONBOARDING_WARMUP_INTERACTIONS.toDouble()
-                    ) * 0.5
+                            brain.totalInteractions /
+                                    NeuroScoring.ONBOARDING_WARMUP_INTERACTIONS.toDouble()
+                            ) * 0.5
                 } else {
                     0.5
                 }
 
-            // Precompute lemmatized preferred topics once (was per-candidate)
             val lemmatizedPreferred = brain.preferredTopics.flatMapTo(HashSet(), tokenizer::keysOf)
-
-            // Persona sets exploration appetite: explorers roam, specialists stay focused.
             val exploreWeight =
                 when (getPersona(brain)) {
-                    FlowPersona.EXPLORER -> 1.0
-                    FlowPersona.SPECIALIST -> 0.3
-                    FlowPersona.INITIATE -> 0.0
+                    ChorPersona.EXPLORER -> 1.0
+                    ChorPersona.SPECIALIST -> 0.3
+                    ChorPersona.INITIATE -> 0.0
                     else -> 0.6
                 }
 
@@ -2266,19 +2065,20 @@ class ChorplayNeuroEngine internal constructor(
                     now = now,
                     exploreWeight = exploreWeight,
                     categoryOf = categoryStore::categoryOf,
-                    coWatchPrior = NeuroCoWatchStore.neighbours(coWatchEdges(brain, now)) { isWatchedChannel(brain, it) },
+                    coWatchPrior = NeuroCoWatchStore.neighbours(coWatchEdges(brain, now)) {
+                        isWatchedChannel(
+                            brain,
+                            it
+                        )
+                    },
                 )
 
-            // Jitter magnitude is invariant across candidates in a single rank() call
             val jitterMagnitude =
                 NeuroScoring.calculateAdaptiveJitter(
                     brain.totalInteractions,
                     feedOverlapRatio,
                 )
 
-            // Score first, then jitter RELATIVE to the live score distribution.
-            // Absolute jitter (0.12-0.20) frequently exceeded typical post-penalty
-            // scores, degrading ranking to a shuffle exactly when the feed was stale.
             val baseScored =
                 vectorFiltered.map { (video, videoVector) ->
                     Triple(video, videoVector, NeuroScoring.scoreCandidate(video, videoVector, scoringParams))
@@ -2296,23 +2096,19 @@ class ChorplayNeuroEngine internal constructor(
                     .map { (video, videoVector, base) ->
                         ScoredVideo(video, base + random.nextDouble() * jitterUnit, videoVector)
                     }.toMutableList()
-
-            // Apply diversity reranking
             val extraExploration = if (brain.consecutiveSkips >= NeuroScoring.BOREDOM_SKIPS) 1 else 0
             val viewer = NeuroVectorMath.PreparedVector(brain.interests)
-            // Every diversity phase asks, so each candidate is judged once.
             val unrelated = HashMap<String, Boolean>()
             val isUnrelated = { candidate: ScoredVideo ->
                 unrelated.getOrPut(candidate.video.id) {
                     brain.totalInteractions >= NeuroScoring.COLD_START_THRESHOLD &&
-                        candidate.video.channelId !in userSubs &&
-                        (brain.channelScores[candidate.video.channelId] ?: 0.0) < NeuroScoring.KNOWN_CHANNEL_SCORE &&
-                        NeuroVectorMath.topicSimilarity(viewer, candidate.vector, tokenizer::specificity) <
-                        NeuroScoring.UNRELATED_SIMILARITY
+                            candidate.video.channelId !in userSubs &&
+                            (brain.channelScores[candidate.video.channelId]
+                                ?: 0.0) < NeuroScoring.KNOWN_CHANNEL_SCORE &&
+                            NeuroVectorMath.topicSimilarity(viewer, candidate.vector, tokenizer::specificity) <
+                            NeuroScoring.UNRELATED_SIMILARITY
                 }
             }
-            // A Home lane under the relevance floor never fills with them; the Shorts feed, chips and channel
-            // memory still place them last, as they always did.
             return@withContext NeuroScoring.applySmartDiversity(
                 scored,
                 tokenizer,
@@ -2330,12 +2126,10 @@ class ChorplayNeuroEngine internal constructor(
 
     private suspend fun recordFeedImpressionsLocked(ids: List<String>) {
         val now = System.currentTimeMillis()
-        val deepFlow = isLearningPaused()
+        val deepChor = isLearningPaused()
 
         withBrainLock {
-            syncBookkeeping(deepFlow)
-            // Only count items not already impressed this session (avoids re-penalizing
-            // content the user keeps scrolling past within one sitting).
+            syncBookkeeping(deepChor)
             val fresh = ids.filter { sessionImpressed.add(it) }
             if (fresh.isEmpty()) return@withBrainLock
 
@@ -2361,8 +2155,8 @@ class ChorplayNeuroEngine internal constructor(
 
             val expiryCutoff =
                 now - (
-                    NeuroScoring.FEED_HISTORY_EXPIRY_DAYS * 24 * 60 * 60 * 1000
-                )
+                        NeuroScoring.FEED_HISTORY_EXPIRY_DAYS * 24 * 60 * 60 * 1000
+                        )
             val pruned =
                 if (updatedHistory.size > NeuroScoring.FEED_HISTORY_MAX) {
                     updatedHistory.entries
@@ -2379,16 +2173,12 @@ class ChorplayNeuroEngine internal constructor(
         }
     }
 
-    // =================================================
-    // LEARNING FUNCTION
-    // =================================================
-
     suspend fun onVideoInteraction(
         video: Video,
         interactionType: InteractionType,
         percentWatched: Float = 0f,
     ) {
-        // Deep Chorplay mode: freeze vector learning while active and not yet expired
+
         if (isLearningPaused()) return
 
         val idfSnapshot = withBrainLock { takeIdfSnapshot() }
@@ -2420,9 +2210,9 @@ class ChorplayNeuroEngine internal constructor(
                 InteractionType.WATCHED -> {
                     val baseWatchRate = 0.15 * percentWatched
                     val timeBonus = (
-                        ln(1.0 + absoluteMinutesWatched) /
-                            ln(1.0 + 60.0) * 0.08
-                    )
+                            ln(1.0 + absoluteMinutesWatched) /
+                                    ln(1.0 + 60.0) * 0.08
+                            )
                     baseWatchRate + timeBonus
                 }
 
@@ -2441,17 +2231,15 @@ class ChorplayNeuroEngine internal constructor(
         var strength = learningRate / NeuroVectorMath.DECAY_REFERENCE_RATE
 
         withBrainLock {
-            // Maturity damping slows duration, pacing and complexity; topic evidence needs no brake (see NeuroVectorMath.Horizon).
             if (learningRate > 0) {
                 val maturityDamping =
                     1.0 / (
-                        1.0 +
-                            ln(1.0 + currentUserBrain.totalInteractions / 50.0)
-                    )
+                            1.0 +
+                                    ln(1.0 + currentUserBrain.totalInteractions / 50.0)
+                            )
                 learningRate *= maturityDamping.coerceIn(0.25, 1.0)
             }
 
-            // 0. Watch velocity: adjust click learning rate based on impression timing
             if (interactionType == InteractionType.CLICK) {
                 val impression = impressionCache[video.id]
                 if (impression != null) {
@@ -2460,22 +2248,15 @@ class ChorplayNeuroEngine internal constructor(
                     val clickVelocity =
                         when {
                             secondsSinceImpression < 5.0 -> 1.5
-
-                            // instant click
                             secondsSinceImpression < 30.0 -> 1.0
-
-                            // normal
                             secondsSinceImpression < 120.0 -> 0.8
-
-                            // delayed
-                            else -> 0.6 // much later
+                            else -> 0.6
                         }
                     learningRate *= clickVelocity
                     strength *= clickVelocity
                 }
             }
 
-            // 1. Update the long-term and recent taste
             val learningVector = if (learningRate > 0) NeuroVectorMath.phraseFirst(videoVector) else videoVector
             val pickKeys = currentUserBrain.preferredTopics.flatMapTo(HashSet(), tokenizer::keysOf)
 
@@ -2485,17 +2266,20 @@ class ChorplayNeuroEngine internal constructor(
             ) = if (learningRate > 0) {
                 NeuroVectorMath.learn(vector, learningVector, strength, horizon, learningRate, pickKeys)
             } else {
-                NeuroVectorMath.adjustVector(vector, videoVector, learningRate, pruneBelow = NeuroVectorMath.EVIDENCE_PRUNE_THRESHOLD)
+                NeuroVectorMath.adjustVector(
+                    vector,
+                    videoVector,
+                    learningRate,
+                    pruneBelow = NeuroVectorMath.EVIDENCE_PRUNE_THRESHOLD
+                )
             }
+
             var newGlobal = learnOn(currentUserBrain.globalVector, NeuroVectorMath.LONG_TERM)
             val newRecent = learnOn(currentUserBrain.recentVector, NeuroVectorMath.RECENT)
-
-            // 1a. A real watch, like or save counts at least the acquisition floor for its top
-            // topics (see NeuroVectorMath.plantTopics).
             val isStrongSignal =
                 interactionType == InteractionType.LIKED ||
-                    interactionType == InteractionType.SAVED ||
-                    (interactionType == InteractionType.WATCHED && percentWatched >= 0.40f)
+                        interactionType == InteractionType.SAVED ||
+                        (interactionType == InteractionType.WATCHED && percentWatched >= 0.40f)
             if (isStrongSignal && !video.isShort) {
                 newGlobal =
                     NeuroVectorMath.plantTopics(
@@ -2503,12 +2287,15 @@ class ChorplayNeuroEngine internal constructor(
                         videoVector,
                         NeuroScoring.TOPIC_ACQUISITION_FLOOR,
                         NeuroScoring.TOPIC_ACQUISITION_TOP_K,
-                        tokenizer.plantFilter(video, idfSnapshot, ownDocuments = if (isDocumentCounted(video.id)) 1 else 0),
+                        tokenizer.plantFilter(
+                            video,
+                            idfSnapshot,
+                            ownDocuments = if (isDocumentCounted(video.id)) 1 else 0
+                        ),
                     )
             }
             newGlobal = NeuroVectorMath.capTopics(newGlobal, NeuroVectorMath.MAX_GLOBAL_TOPICS, pickKeys)
 
-            // A watch session ends in one WATCHED or SKIPPED; either way the channel posted in that category.
             val categoryId = NeuroCategories.idOf(video.category)
             val sessionEnded = interactionType == InteractionType.WATCHED || interactionType == InteractionType.SKIPPED
             if (categoryId != null && sessionEnded) categoryStore.record(video.channelId, categoryId)
@@ -2518,7 +2305,6 @@ class ChorplayNeuroEngine internal constructor(
                 pendingRelated.remove(video.id)?.let { coWatchStore.record(video.id, video.channelId, it) }
             }
 
-            // 1b. Shorts-specific vector (not dampened by SHORTS_LEARNING_PENALTY)
             val newShortsVector =
                 if (video.isShort) {
                     val shortsRate =
@@ -2539,7 +2325,6 @@ class ChorplayNeuroEngine internal constructor(
                     currentUserBrain.shortsVector
                 }
 
-            // 2. Update time bucket
             val bucket = TimeBucket.current()
             val currentBucketVec =
                 currentUserBrain.timeVectors[bucket]
@@ -2552,7 +2337,6 @@ class ChorplayNeuroEngine internal constructor(
                     currentUserBrain.timeBucketCounts
                 }
 
-            // 3. Channel score
             val currentChScore =
                 currentUserBrain.channelScores[video.channelId] ?: 0.5
             val outcome = if (learningRate > 0) 1.0 else 0.0
@@ -2561,13 +2345,12 @@ class ChorplayNeuroEngine internal constructor(
                     (currentChScore * NeuroScoring.DISLIKE_CHANNEL_FACTOR).coerceAtLeast(0.01)
                 } else {
                     (currentChScore * NeuroScoring.CHANNEL_EMA_DECAY) +
-                        (outcome * NeuroScoring.CHANNEL_EMA_ALPHA)
+                            (outcome * NeuroScoring.CHANNEL_EMA_ALPHA)
                 }
             var newChannelScores =
                 currentUserBrain.channelScores +
-                    (video.channelId to newChScore)
+                        (video.channelId to newChScore)
 
-            // Channel pruning
             if (newChannelScores.size > NeuroScoring.MAX_CHANNEL_SCORES) {
                 val sorted = newChannelScores.entries.sortedBy { it.value }
                 val keepLow = sorted.take(NeuroScoring.CHANNEL_KEEP_LOW)
@@ -2578,17 +2361,14 @@ class ChorplayNeuroEngine internal constructor(
                         .filter { it.key in keepSet }
             }
 
-            // 4. Consecutive skips. Boredom is passive skipping; an explicit rejection says what the
-            // viewer does not want, which is no reason to make the next feed more random (#907).
             val newSkips =
                 when (interactionType) {
                     InteractionType.CLICK, InteractionType.LIKED,
                     InteractionType.WATCHED, InteractionType.SAVED,
-                    -> {
+                        -> {
                         0
                     }
 
-                    // A swiped-away Short is how Shorts are browsed, not a sign of boredom with the feed (#907).
                     InteractionType.SKIPPED -> {
                         if (video.isShort) {
                             currentUserBrain.consecutiveSkips
@@ -2603,12 +2383,15 @@ class ChorplayNeuroEngine internal constructor(
                 }
             val newRejectionPatterns =
                 if (interactionType == InteractionType.DISLIKED) {
-                    NeuroScoring.recordRejection(currentUserBrain.rejectionPatterns, videoVector, System.currentTimeMillis())
+                    NeuroScoring.recordRejection(
+                        currentUserBrain.rejectionPatterns,
+                        videoVector,
+                        System.currentTimeMillis()
+                    )
                 } else {
                     currentUserBrain.rejectionPatterns
                 }
 
-            // 5. Topic co-occurrence
             var newAffinities = currentUserBrain.topicAffinities
             if (learningRate > 0) {
                 val topTopics =
@@ -2632,10 +2415,6 @@ class ChorplayNeuroEngine internal constructor(
                                     .coerceAtMost(NeuroScoring.AFFINITY_MAX)
                         }
                     }
-                    // No per-update value pruning: the old filter (> 0.05) deleted every
-                    // newborn edge in the same update that created it (+0.01), so no pair
-                    // could EVER accumulate organically. The size cap alone bounds growth —
-                    // it evicts the weakest pairs first, which is the pruning we wanted.
                     newAffinities = mutableAffinities
                     if (newAffinities.size > NeuroScoring.AFFINITY_MAX_ENTRIES) {
                         newAffinities =
@@ -2647,9 +2426,6 @@ class ChorplayNeuroEngine internal constructor(
                 }
             }
 
-            // 5b. Tag-grounded knowledge: persist the tag-rich vector so this video
-            // is scored on real content when it reappears as a bare-title candidate,
-            // and record tag co-occurrence edges for interest clustering.
             var newTagAffinities = currentUserBrain.tagAffinities
             if (learningRate > 0 && video.tags.isNotEmpty()) {
                 contentStore.put(video.id, videoVector.topics)
@@ -2697,10 +2473,10 @@ class ChorplayNeuroEngine internal constructor(
                     signalScore = topicEvidenceSignal,
                     isWatchSignal =
                         interactionType == InteractionType.WATCHED &&
-                            percentWatched >= 0.40f,
+                                percentWatched >= 0.40f,
                     isExplicitSignal =
                         interactionType == InteractionType.LIKED ||
-                            interactionType == InteractionType.SAVED,
+                                interactionType == InteractionType.SAVED,
                 )
             val newTopicEvidence =
                 if (
@@ -2712,7 +2488,6 @@ class ChorplayNeuroEngine internal constructor(
                     positiveEvidence
                 }
 
-            // 6. Update IDF counters on interaction
             if (learningRate > 0 && countDocument(video.id) { tokenizer.documentTerms(video, videoVector) }) {
                 compactIdfIfNeeded()
 
@@ -2721,7 +2496,6 @@ class ChorplayNeuroEngine internal constructor(
                 }
             }
 
-            // 7. Persona tracking
             val rawPersona = getPersona(currentUserBrain)
             val lastPersonaName = currentUserBrain.lastPersona
             val newStability =
@@ -2732,7 +2506,6 @@ class ChorplayNeuroEngine internal constructor(
                     1
                 }
 
-            // 8. Session tracking
             val primaryTopic =
                 videoVector.topics
                     .maxByOrNull { it.value }
@@ -2745,7 +2518,6 @@ class ChorplayNeuroEngine internal constructor(
             }
             sessionVideoCount++
 
-            // 9. Channel topic profile update
             var newChannelProfiles = currentUserBrain.channelTopicProfiles
             if (learningRate > 0) {
                 val channelId = video.channelId
@@ -2756,7 +2528,7 @@ class ChorplayNeuroEngine internal constructor(
                 videoVector.topics.forEach { (topic, weight) ->
                     val current = existingProfile[topic] ?: 0.0
                     existingProfile[topic] = current +
-                        (weight - current) * NeuroScoring.CHANNEL_PROFILE_LEARNING_RATE
+                            (weight - current) * NeuroScoring.CHANNEL_PROFILE_LEARNING_RATE
                 }
 
                 val profileIterator = existingProfile.iterator()
@@ -2799,7 +2571,6 @@ class ChorplayNeuroEngine internal constructor(
                 newChannelProfiles = mutableProfiles
             }
 
-            // 10. Engagement momentum tracking
             if (primaryTopic != null) {
                 recentInteractions.add(MomentumEntry(primaryTopic, learningRate > 0))
                 while (recentInteractions.size > NeuroScoring.MOMENTUM_WINDOW) {
@@ -2843,7 +2614,11 @@ class ChorplayNeuroEngine internal constructor(
                             .lineSequence()
                             .firstOrNull { it.isNotBlank() }
                             .orEmpty()
-                    NeuroLanguages.vote(profile, currentUserBrain.languageVotes, NeuroLanguages.detectText("${video.title}\n$firstLine"))
+                    NeuroLanguages.vote(
+                        profile,
+                        currentUserBrain.languageVotes,
+                        NeuroLanguages.detectText("${video.title}\n$firstLine")
+                    )
                 } else {
                     profile to currentUserBrain.languageVotes
                 }
@@ -2858,7 +2633,7 @@ class ChorplayNeuroEngine internal constructor(
                     recentVector = newRecent,
                     timeVectors =
                         currentUserBrain.timeVectors +
-                            (bucket to newBucketVec),
+                                (bucket to newBucketVec),
                     timeBucketCounts = newBucketCounts,
                     channelScores = newChannelScores,
                     topicAffinities = newAffinities,
@@ -2891,11 +2666,14 @@ class ChorplayNeuroEngine internal constructor(
                                     currentUserBrain.displayForms,
                                     NeuroDisplayForms.spellingsIn(video.title, keys, tokenizer),
                                 ) { it in newGlobal.topics }
-                            // Keys stemmed from tags or the channel name still read as written somewhere.
+
                             val elsewhere = (video.tags + video.channelName).joinToString(" | ")
-                            NeuroDisplayForms.fillGaps(fromTitle, NeuroDisplayForms.spellingsIn(elsewhere, keys, tokenizer)) {
+                            NeuroDisplayForms.fillGaps(
+                                fromTitle,
+                                NeuroDisplayForms.spellingsIn(elsewhere, keys, tokenizer)
+                            ) {
                                 it in
-                                    newGlobal.topics
+                                        newGlobal.topics
                             }
                         } else {
                             currentUserBrain.displayForms
@@ -2922,7 +2700,6 @@ class ChorplayNeuroEngine internal constructor(
         }
     }
 
-    /** Fire-and-forget interaction on the engine's own scope (survives ViewModel teardown). */
     fun onVideoInteractionAsync(
         video: Video,
         interactionType: InteractionType,
@@ -2937,11 +2714,6 @@ class ChorplayNeuroEngine internal constructor(
         }
     }
 
-    /**
-     * Live subscription changes are strong channel-intent signals. Subscribing lifts
-     * the channel's quality floor and clears any inferred suppression; unsubscribing
-     * caps it back to neutral (it is not a dislike).
-     */
     suspend fun onChannelSubscriptionChanged(
         channelId: String,
         channelName: String,
@@ -2981,11 +2753,6 @@ class ChorplayNeuroEngine internal constructor(
         }
     }
 
-    /**
-     * A typed search is the most explicit interest statement in the product.
-     * Records explicit topic evidence and plants the query's phrase-level topics
-     * (see NeuroSearchLearning) without counting as a full interaction.
-     */
     suspend fun onSearchQuery(rawQuery: String) {
         if (rawQuery.isBlank() || isLearningPaused()) return
         withBrainLock {
@@ -2996,15 +2763,14 @@ class ChorplayNeuroEngine internal constructor(
             currentUserBrain =
                 learned.copy(
                     topicEvidence = capEvidence(learned.topicEvidence.toMutableMap()),
-                    displayForms = NeuroDisplayForms.fillGaps(learned.displayForms, spellings) { it in learned.globalVector.topics },
+                    displayForms = NeuroDisplayForms.fillGaps(
+                        learned.displayForms,
+                        spellings
+                    ) { it in learned.globalVector.topics },
                 )
             scheduleDebouncedSave()
         }
     }
-
-    // =================================================
-    // FEATURE EXTRACTION (delegates to NeuroTokenizer)
-    // =================================================
 
     private fun getOrExtractFeatures(
         video: Video,
@@ -3020,8 +2786,6 @@ class ChorplayNeuroEngine internal constructor(
         }
         var vector = tokenizer.extractFeatures(video, idfSnapshot, channelProfile)
         if (!hasTags) {
-            // A bare-title candidate we have watched before: score it on the
-            // tag-rich vector stored at watch time instead of its title alone.
             contentStore.topicsFor(video.id)?.let { storedTopics ->
                 vector = vector.copy(topics = storedTopics)
             }
@@ -3032,7 +2796,6 @@ class ChorplayNeuroEngine internal constructor(
         return vector
     }
 
-    /** The strongest topics of [video], read without learning anything from it. */
     suspend fun topTopicsFor(
         video: Video,
         limit: Int,
@@ -3051,18 +2814,13 @@ class ChorplayNeuroEngine internal constructor(
 
     private suspend fun takeIdfSnapshotSafe(): IdfSnapshot = withBrainLock { takeIdfSnapshot() }
 
-    // =================================================
-    // SEEN SHORTS
-    // =================================================
-
     suspend fun recordSeenShorts(shortIds: List<String>) {
         if (shortIds.isEmpty()) return
-        val deepFlow = isLearningPaused()
+        val deepChor = isLearningPaused()
         withBrainLock {
-            syncBookkeeping(deepFlow)
+            syncBookkeeping(deepChor)
             val now = System.currentTimeMillis()
             val updated = currentUserBrain.seenShortsHistory.toMutableMap()
-            // Every sighting refreshes the stamp, so the seven-day window runs from the last time on screen.
             shortIds.forEach { id -> updated[id] = now }
             if (updated.size > NeuroScoring.SEEN_SHORTS_MAX) {
                 val toRemove =
@@ -3085,16 +2843,11 @@ class ChorplayNeuroEngine internal constructor(
                 .keys
         }
 
-    // =================================================
-    // EXPORT / IMPORT (delegates to NeuroStorage)
-    // =================================================
-
     suspend fun exportBrainToStream(output: OutputStream): Boolean {
-        val brainCopy = withBrainLock { deepFlowBookkeeping.persistable(currentUserBrain) }
+        val brainCopy = withBrainLock { deepChorBookkeeping.persistable(currentUserBrain) }
         return storage.exportToStream(brainCopy, output)
     }
 
-    /** [afterSync] marks a brain merged with peers, whose keys may follow an older key spec. */
     suspend fun importBrainFromStream(
         input: InputStream,
         afterSync: Boolean = false,
@@ -3106,11 +2859,9 @@ class ChorplayNeuroEngine internal constructor(
                         ?: return@withContext false
 
                 withBrainLock {
-                    // Imported brains may pre-date the current maintenance, so run it.
                     val maintained = runMaintenanceIfNeeded(withLanguageProfile(finalBrain))
                     currentUserBrain = if (afterSync) NeuroKeyMigration.afterSync(maintained, tokenizer) else maintained
-                    deepFlowBookkeeping.forget()
-                    // From the maintained brain: maintenance re-keys words, and the next event saves this map over it.
+                    deepChorBookkeeping.forget()
                     idfWordFrequency = currentUserBrain.idfWordFrequency.toMutableMap()
                     idfTotalDocuments = currentUserBrain.idfTotalDocuments
                     countedDocuments.clear()
@@ -3118,14 +2869,16 @@ class ChorplayNeuroEngine internal constructor(
                     finalBrain.watchHistoryMap.forEach { (id, pct) ->
                         watchHistory[id] = WatchEntry(pct, System.currentTimeMillis())
                     }
-                    storage.save(deepFlowBookkeeping.persistable(currentUserBrain))
+                    storage.save(deepChorBookkeeping.persistable(currentUserBrain))
                 }
                 Log.i(
                     TAG,
                     "Brain imported (${finalBrain.totalInteractions} " +
-                        "interactions, ${finalBrain.timeVectors.count {
-                            it.value.topics.isNotEmpty()
-                        }} active time buckets)",
+                            "interactions, ${
+                                finalBrain.timeVectors.count {
+                                    it.value.topics.isNotEmpty()
+                                }
+                            } active time buckets)",
                 )
                 true
             } catch (e: Exception) {
@@ -3134,12 +2887,8 @@ class ChorplayNeuroEngine internal constructor(
             }
         }
 
-    // =================================================
-    // PERSONA ENGINE
-    // =================================================
-
-    fun getPersona(brain: UserBrain): FlowPersona {
-        if (brain.totalInteractions < 15) return FlowPersona.INITIATE
+    fun getPersona(brain: UserBrain): ChorPersona {
+        if (brain.totalInteractions < 15) return ChorPersona.INITIATE
 
         val v = brain.globalVector
 
@@ -3166,60 +2915,60 @@ class ChorplayNeuroEngine internal constructor(
             v.topics.entries
                 .filter {
                     musicKeywords.contains(it.key) ||
-                        it.key.contains("feat")
+                            it.key.contains("feat")
                 }.sumOf { it.value }
         val totalScore = v.topics.values.sum()
 
         fun mag(cv: ContentVector) = cv.topics.values.sum()
         val nightMag = (
-            mag(
-                brain.timeVectors[TimeBucket.WEEKDAY_NIGHT]
-                    ?: ContentVector(),
-            ) +
                 mag(
-                    brain.timeVectors[TimeBucket.WEEKEND_NIGHT]
+                    brain.timeVectors[TimeBucket.WEEKDAY_NIGHT]
                         ?: ContentVector(),
+                ) +
+                        mag(
+                            brain.timeVectors[TimeBucket.WEEKEND_NIGHT]
+                                ?: ContentVector(),
+                        )
                 )
-        )
         val morningMag = (
-            mag(
-                brain.timeVectors[TimeBucket.WEEKDAY_MORNING]
-                    ?: ContentVector(),
-            ) +
                 mag(
-                    brain.timeVectors[TimeBucket.WEEKEND_MORNING]
+                    brain.timeVectors[TimeBucket.WEEKDAY_MORNING]
                         ?: ContentVector(),
+                ) +
+                        mag(
+                            brain.timeVectors[TimeBucket.WEEKEND_MORNING]
+                                ?: ContentVector(),
+                        )
                 )
-        )
         val isNocturnal = nightMag > (morningMag * 1.5) && nightMag > 5.0
 
         val rawPersona =
             when {
                 totalScore > 0 &&
-                    musicScore > (totalScore * 0.4) -> FlowPersona.AUDIOPHILE
+                        musicScore > (totalScore * 0.4) -> ChorPersona.AUDIOPHILE
 
-                v.isLive > 0.6 -> FlowPersona.LIVEWIRE
+                v.isLive > 0.6 -> ChorPersona.LIVEWIRE
 
-                isNocturnal -> FlowPersona.NIGHT_OWL
+                isNocturnal -> ChorPersona.NIGHT_OWL
 
                 brain.totalInteractions > 500 &&
-                    v.pacing > 0.65 -> FlowPersona.BINGER
+                        v.pacing > 0.65 -> ChorPersona.BINGER
 
-                v.complexity > 0.75 -> FlowPersona.SCHOLAR
+                v.complexity > 0.75 -> ChorPersona.SCHOLAR
 
-                v.duration > 0.70 -> FlowPersona.DEEP_DIVER
+                v.duration > 0.70 -> ChorPersona.DEEP_DIVER
 
                 v.duration < 0.35 &&
-                    v.pacing > 0.60 -> FlowPersona.SKIMMER
+                        v.pacing > 0.60 -> ChorPersona.SKIMMER
 
-                diversityIndex < 0.25 -> FlowPersona.SPECIALIST
+                diversityIndex < 0.25 -> ChorPersona.SPECIALIST
 
-                else -> FlowPersona.EXPLORER
+                else -> ChorPersona.EXPLORER
             }
 
         val lastPersona =
             brain.lastPersona?.let { name ->
-                FlowPersona.entries.find { it.name == name }
+                ChorPersona.entries.find { it.name == name }
             }
 
         return if (lastPersona != null &&

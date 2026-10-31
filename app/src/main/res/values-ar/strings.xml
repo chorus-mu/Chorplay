@@ -56,10 +56,9 @@
     <string name="related_videos">الفيديوهات المشابه</string>
     <string name="quality_auto">تلقائي</string>
     <string name="quality_auto_template">تلقائي (%1$dp)</string>
-    <string name="music_player">مشغل الموسيقى</string>
+
     <string name="tab_videos">الفيديوهات</string>
-    <string name="tab_music">الموسيقى</string>
-    <string name="action_go_to_home">رجوع للقائمة الرئيسية</string>
+<string name="action_go_to_home">رجوع للقائمة الرئيسية</string>
     <string name="action_delete">حذف</string>
     <string name="downloads_title">التحميلات</string>
     <string name="download_deleted">التحميلات المحذوفه</string>
@@ -75,7 +74,7 @@
     <string name="new_update_available">تحديث جديد متاح</string>
     <string name="update_available_template">الإصدار %1$s متاح الأن</string>
     <string name="release_notes">معلومات الإصدار</string>
-    <string name="update_flow">حدث Chorplay</string>
+    <string name="update_chorplay">حدث Chorplay</string>
     <string name="maybe_later">لاحقا</string>
     <string name="nav_home">المنزل</string>
     <string name="nav_subs">الإشتراكات</string>
@@ -96,8 +95,6 @@
     <string name="audio_effects">المؤثرات الصوتية</string>
     <string name="more_header">المزيد</string>
     <string name="view_artist">عرض الفنان</string>
-    <string name="view_album">عرض الألبوم</string>
-    <string name="album_art">لوحة الألبوم</string>
     <string name="close_player">إغلاق المشغل</string>
     <string name="views_template">%1$s مشاهدة</string>
     <string name="chapters">الفصول</string>
@@ -154,16 +151,16 @@
     <string name="no_playlists_found">لا توجد قوائم تشغيل</string>
     <string name="subscribers_count_template">%1$s مشترك</string>
     <string name="views_count_short_template">%1$s مشاهدة</string>
-    <string name="music_history">سجل الموسيقى</string>
+
     <string name="remove_from_history">محو من السجل</string>
-    <string name="share_song_chooser">شارك الأغنية</string>
+
     <string name="time_today">اليوم</string>
     <string name="time_yesterday">الأمس</string>
     <string name="time_earlier">سابقًا</string>
     <string name="clear_all_notifications">مسح كل الإشعارات</string>
     <string name="delete">حذف</string>
     <string name="settings_title">الإعدادات</string>
-    <string name="settings_flow_engine_header">محرك Chorplay</string>
+    <string name="settings_chor_engine_header">محرك Chorplay</string>
     <string name="settings_active_learning">التعلم النشط</string>
     <string name="settings_reset_brain_title">إعادة ضبط طابع Chorplay؟</string>
     <string name="settings_reset_brain_body">سيؤدي هذا إلى مسح ملفك الشخصي في Chorplay Brain.\n\n• سيتم نسيان المواضيع التي تعلّمها.\n• ستُعاد سمات الشخصية إلى الإعدادات الافتراضية.\n• ستعود التوصيات إلى الإعدادات الافتراضية.\n\nلا يمكن التراجع عن هذا الإجراء.</string>
@@ -298,7 +295,6 @@
     <string name="content_settings_layout_grid">شبكة</string>
     <string name="content_settings_layout_list">قائمة</string>
     <string name="content_settings_grid_size_title">حجم عنصر الشبكة</string>
-    <string name="content_settings_grid_size_subtitle">تحكم في حجم صورة الألبوم و بطاقات المحتوى</string>
     <string name="content_settings_grid_big_title">كبير</string>
     <string name="content_settings_grid_big_desc">صور مصغرة أكبر</string>
     <string name="content_settings_grid_small_title">صغيرة</string>
@@ -379,8 +375,8 @@
     <string name="settings_subs_shorts_shelf_subtitle">إظهار قسم Shorts في خلاصة الاشتراكات</string>
     <string name="settings_shorts_nav_tab_title">علامة تبويب \"الفيديوهات القصيرة\" في شريط التنقل</string>
     <string name="settings_shorts_nav_tab_subtitle">اعرض تبويب \"المقاطع القصيرة\" في شريط التنقل السفلي.</string>
-    <string name="settings_music_nav_tab_title">علامة تبويب الموسيقى في شريط التنقل</string>
-    <string name="settings_music_nav_tab_subtitle">اعرض علامة تبويب الموسيقى في شريط التنقل السفلي.</string>
+
+
     <string name="settings_search_nav_tab_title">علامة تبويب البحث في شريط التنقل</string>
     <string name="settings_search_nav_tab_subtitle">إضافة علامة تبويب البحث إلى شريط التنقل</string>
     <string name="nav_search">البحث</string>
@@ -571,7 +567,7 @@
     <string name="sleep_timer_custom_label">وقت مخصص</string>
     <string name="sleep_timer_unit">دقيقة</string>
     <string name="sleep_timer_input_error">أدخل قيمة بين 1 و 1440</string>
-    <string name="sleep_timer_end_of_song">نهاية الأغنية / الفيديو</string>
+    <string name="sleep_timer_end_of_video">نهاية الأغنية / الفيديو</string>
     <string name="sleep_timer_start">بدء</string>
     <string name="sleep_timer_stops_in">يتوقف عند</string>
     <string name="sleep_timer_end_of_media">نهاية الأغنية الحالية</string>
@@ -602,20 +598,20 @@
     <string name="period_six_months">6 أشهر</string>
     <string name="period_one_year">1 سنة</string>
     <string name="import_data_title">استيراد البيانات</string>
-    <string name="import_flow_backup_success">تم استيراد النسخة الاحتياطية من Chorplay بنجاح</string>
-    <string name="import_flow_backup_failed_template">فشل استيراد نسخة Chorplay الاحتياطية: %1$s</string>
+    <string name="import_chorplay_backup_success">تم استيراد النسخة الاحتياطية من Chorplay بنجاح</string>
+    <string name="import_chorplay_backup_failed_template">فشل استيراد نسخة Chorplay الاحتياطية: %1$s</string>
     <string name="import_newpipe_failed_template">فشل في استرداد نسخة NewPipe الاحتياطية: %1$s</string>
     <string name="import_youtube_failed_template">فشل في استيراد نسخة احتياطية من يوتيوب: %1$s</string>
-    <string name="import_flow_backup_item_title">استيراد نسخة احتياطية من Chorplay</string>
-    <string name="import_flow_backup_desc">استرد سجلك، إعداداتك و إشتراكاتك من ملف النسخ الاحتياطي لـ Chorplay.</string>
+    <string name="import_chorplay_backup_item_title">استيراد نسخة احتياطية من Chorplay</string>
+    <string name="import_chorplay_backup_desc">استرد سجلك، إعداداتك و إشتراكاتك من ملف النسخ الاحتياطي لـ Chorplay.</string>
     <string name="import_from_newpipe">استرداد من NewPipe</string>
     <string name="import_from_newpipe_desc">إسترداد الإشتراكات من ملف استرداد NewPipe بصيغة (JSON).</string>
     <string name="import_from_libretube">استيراد من LibreTube</string>
     <string name="import_from_libretube_desc">إسترداد الإشتراكات من ملف نسخة احتياطية LibreTube بصيغة (JSON).</string>
-    <string name="import_music_apps_section_title">تطبيقات الموسيقى</string>
-    <string name="import_music_apps_section_subtitle">استورد مكتبة الموسيقى الخاصة بك من مشغلات أخرى</string>
-    <string name="import_from_metrolist">استيراد من Metrolist</string>
-    <string name="import_from_metrolist_desc">استورد قوائم تشغيل الموسيقى من ملف النسخ الاحتياطي لـ Metrolist بصيغة (zip). ستظهر قوائم التشغيل في مكتبة الموسيقى الخاصة بك.</string>
+
+
+
+
     <string name="import_from_youtube">استيراد من YouTube</string>
     <string name="import_from_youtube_desc">استيراد الإشتراكات من YouTube Takeout بصيغة (CSV).</string>
     <string name="import_yt_data_section_title">بيانات YouTube</string>
@@ -624,8 +620,6 @@
     <string name="import_yt_watch_history_desc">استرجع سجل المشاهدة الخاص بك من YouTube Takeout (watch-history.html).</string>
     <string name="import_yt_playlist">استيراد قائمة تشغيل YouTube</string>
     <string name="import_yt_playlist_desc">استورد قائمة تشغيل من ملف CSV الخاص بـ YouTube Takeout (Playlist-&lt;name&gt;.csv).</string>
-    <string name="import_yt_music_playlist">استيراد قائمة تشغيل YouTube Music</string>
-    <string name="import_yt_music_playlist_desc">استورد قائمة تشغيل موسيقية من ملف CSV الخاص بخدمة YouTube Music Takeout. تظهر القائمة ضمن قوائم تشغيل الموسيقى.</string>
     <string name="import_yt_history_failed_template">فشل استيراد سجل المشاهدة: %1$s</string>
     <string name="import_yt_playlist_failed_template">فشل استيراد قائمة التشغيل: %1$s</string>
     <string name="import_yt_history_empty_error">لم يتم العثور على أي سجلات مشاهدة في هذا الملف. تأكد من أنه ملف watch-history.html خاص بـ YouTube Takeout.</string>
@@ -664,8 +658,8 @@
     <string name="location_badge_active">نشط</string>
     <string name="select_threads_count_desc">حدد عدد التقسيمات (١-٨):</string>
     <string name="support_donations_title">الدعم والتبرعات</string>
-    <string name="support_flow_dev_title">إدعم تطوير Chorplay</string>
-    <string name="support_flow_dev_desc">إذا كان Chorplay مفيدًا لك، يمكنك دعمه عبر Open Collective, Patreon أو بالعملات الرقمية أدناه. شكرًا لك!</string>
+    <string name="support_chorplay_dev_title">إدعم تطوير Chorplay</string>
+    <string name="support_chorplay_dev_desc">إذا كان Chorplay مفيدًا لك، يمكنك دعمه عبر Open Collective, Patreon أو بالعملات الرقمية أدناه. شكرًا لك!</string>
     <string name="thank_you_support_message">شكراً لدعمكم! ❤️</string>
     <string name="address_copied_toast">تم نسخ العنوان إلى الحافظة</string>
     <string name="donation_address_clip_label">عنوان التبرع</string>
@@ -676,7 +670,7 @@
     <string name="newpipe_extractor_subtitle">مكتبة الاستخراج الأساسية</string>
     <string name="about_license">رخصة</string>
     <string name="about_changelog">سجل التغييرات</string>
-    <string name="whats_new_in_flow">ما الجديد في Chorplay</string>
+    <string name="whats_new_in_chorplay">ما الجديد في Chorplay</string>
     <string name="about_device_info">معلومات الجهاز</string>
     <string name="gnu_license_full_title">رخصة GNU General Public</string>
     <string name="loading_ellipsis">تحميل…</string>
@@ -717,7 +711,7 @@
     <string name="playlist_empty_desc">أضف مقاطع الفيديو من مشغل الفيديو\nلإنشاء قائمة التشغيل الخاصة بك</string>
     <string name="delete_playlist_dialog_title">هل تريد حذف قائمة التشغيل؟</string>
     <string name="delete_playlist_dialog_text">سيؤدي هذا إلى حذف \'%1$s\' وجميع مقاطع الفيديو فيه بشكل دائم.</string>
-    <string name="welcome_to_flow">مرحبا بك في Chorplay</string>
+    <string name="welcome_to_chorplay">مرحبا بك في Chorplay</string>
     <string name="onboarding_subtitle">أخبرنا بما يثير اهتمامك</string>
     <string name="onboarding_instructions">إختر 3 مواضيع على الأقل لتخصيص تجربتك</string>
     <string name="btn_skip_for_now">تخطي الآن</string>
@@ -734,7 +728,7 @@
     <string name="category_creative">الإبداع</string>
     <string name="category_science_nature">العلوم و الطبيعة</string>
     <string name="category_news_current_events">الأخبار و الأحداث الجارية</string>
-    <string name="flow_control_center">مركز تحكم Chorplay</string>
+    <string name="chorplay_control_center">مركز تحكم Chorplay</string>
     <string name="action_refresh">إعادة التحميل</string>
     <string name="loading_neural_matrix">جار تحميل دماغ المحتوى…</string>
     <string name="neural_interest_map_subtitle">خريطة إهتماماتك العصبية</string>
@@ -757,12 +751,9 @@
     <string name="stats_topics">المواضيع</string>
     <string name="empty_bubble_cloud_message">شاهد بعض الفيديوهات لتوسيع دائرة اهتمامك!</string>
     <string name="export_profile_data">تصدير بيانات الملف الشخصي</string>
-    <string name="flow_neural_profile_export_subject">تصدير ملف تعريف التدفق العصبي لChorplay</string>
-    <string name="screen_title_music_library">مكتبة الموسيقى</string>
+    <string name="chorplay_neural_profile_export_subject">تصدير ملف تعريف التدفق العصبي لChorplay</string>
+
     <string name="header_your_collection">مجموعتك</string>
-    <string name="subtitle_liked_music">الأغاني المفضلة لديك</string>
-    <string name="subtitle_history">الأغاني التي استمعت إليها</string>
-    <string name="empty_music_playlists">لا توجد قوائم تشغيل موسيقى بعد</string>
     <string name="rename_playlist_title">إعادة تسمية قائمة التشغيل</string>
     <string name="action_rename">إعادة التسمية</string>
     <string name="link_copied">تم نسخ الرابط</string>
@@ -794,19 +785,18 @@
     <string name="action_add_to_favorites">أضف إلى المفضلة</string>
     <string name="action_listen_now">استمع الآن</string>
     <string name="action_play_all">تشغيل الكل</string>
-    <string name="loading_music">جارٍ تحميل الموسيقى…</string>
-    <string name="screen_title_music">الموسيقى</string>
+
+
     <string name="section_listen_again">استمع مجددا</string>
     <string name="section_quick_picks">اختيارات سريعة</string>
     <string name="section_recommended">إقتراحات</string>
     <string name="section_recently_played">مشغل مؤخرا</string>
-    <string name="section_music_videos">فيديوهات موسيقية</string>
+
     <string name="section_new_releases">الإصدارات الجديدة</string>
     <string name="section_popular_artists">فنانون رائجون</string>
     <string name="section_mixed_for_you">قائمة لأجلك</string>
     <string name="section_moods_and_genres">الأجواء والأنواع</string>
     <string name="genre_mix_template">مزيج %1$s</string>
-    <string name="section_top_albums">أفضل الألبومات</string>
     <string name="similar_to">مماثلة لـ</string>
     <string name="section_similar_to">مماثلة لـ %1$s</string>
     <string name="subtitle_similar_to">بناءً على سجل استماعك</string>
@@ -821,32 +811,26 @@
     <string name="template_pitch">درجة الصوت: %1$d أنصاف نغمات</string>
     <string name="label_parametric_equalizer">معادل صوت بارامتري</string>
     <string name="template_freq">%1$d هرتز</string>
-    <string name="voice_search_prompt">تحدث للبحث عن الموسيقى</string>
-    <string name="search_music_placeholder">ابحث عن الموسيقى</string>
+
     <string name="voice_search_cd">البحث الصوتي</string>
-    <string name="filter_albums">الألبومات</string>
-    <string name="filter_songs">الأغاني</string>
+
     <string name="filter_community_playlists">قوائم تشغيل المجتمع</string>
     <string name="section_top_result">أعلى نتيجة</string>
-    <string name="subtitle_song_prefix">أغنية • %1$s</string>
+
     <string name="subtitle_artist">فنان</string>
-    <string name="subtitle_album_template">ألبوم • %1$s</string>
     <string name="subtitle_playlist_template">قائمة تشغيل • %1$s</string>
     <string name="plays_count_template">تم التشغيل • %1$s مرة</string>
-    <string name="album_year_template">ألبوم • %1$s • %2$s</string>
     <string name="search_source_template">بحث: %1$s</string>
     <string name="artist_source_template">الفنان: %1$s</string>
     <string name="top_picks_for_you">أفضل الخيارات لك</string>
     <string name="no_results_found">لا توجد نتائج</string>
     <string name="no_tracks_available">لا توجد اغاني متاحة</string>
     <string name="tab_favorites">المفضلة</string>
-    <string name="create_playlist_subtitle">رتب الاغاني الخاصة بك</string>
     <string name="empty_playlists_title">لا توجد قوائم تشغيل حتى الآن</string>
     <string name="empty_playlists_subtitle">أنشئ قائمة تشغيلك الأولى لتنظيم أغانيك المفضلة</string>
     <string name="empty_favorites_title">لا يوجد عناصر مفضلة بعد</string>
     <string name="empty_favorites_subtitle">انقر على أيقونة القلب الموجودة على أي اغنية لإضافته إلى مفضلاتك</string>
     <string name="empty_history_title">لا يوجد سجل بعد</string>
-    <string name="empty_history_subtitle">ابدأ الإستماع للموسيقى للاطلاع على سجلاتك هنا</string>
     <string name="empty_downloads_title">لا تنزيلات بعد</string>
     <string name="empty_downloads_subtitle">قم بتنزيل المقاطع الصوتية للاستماع إليها بلا إنترنت</string>
     <string name="total_size">الحجم الإجمالي</string>
@@ -905,7 +889,7 @@
     <string name="check_for_updates">التحقق من وجود تحديثات</string>
     <string name="check_for_updates_subtitle">انقر للتحقق من أحدث إصدار</string>
     <string name="checking_for_updates">جارٍ التحقق من وجود تحديثات…</string>
-    <string name="flow_is_up_to_date">Chorplay محدث لأخر إصدار!</string>
+    <string name="chorplay_is_up_to_date">Chorplay محدث لأخر إصدار!</string>
     <string name="update_check_failed">تعذر التحقق من وجود تحديثات. يرجى التحقق من اتصالك بالإنترنت.</string>
     <string name="export_engine_data">تصدير ملف تعريف المحرك</string>
     <string name="export_engine_data_subtitle">قم بعمل نسخة احتياطية من بيانات شخصية الذكاء الاصطناعي وبيانات التعلم الخاصة بك</string>
@@ -993,16 +977,14 @@
     <string name="merge_playlist_dialog_title">أضف جميع الأغاني إلى…</string>
     <string name="merge_playlist_no_playlists">لا توجد قوائم تشغيل حتى الآن. أنشئ واحدة أولاً!</string>
     <string name="app_name">Chorplay</string>
-    <string name="library_music_playlists_label">قوائم تشغيل الموسيقى</string>
-    <string name="library_music_playlists_subtitle">مجموعات الموسيقى الخاصة بك</string>
+
+
     <string name="library_manage_data_subtitle">مسح ذاكرة التخزين المؤقت و التاريخ</string>
     <string name="clear">مسح</string>
-    <string name="liked_music">موسيقى أعجبتني</string>
+
     <string name="liked_videos">الإعجابات</string>
-    <string name="share_song">مشاركة الأغنية</string>
-    <string name="song">أغنية</string>
+
     <string name="playing_from">اللعب من</string>
-    <string name="share_message_template">تحقق من تلك الأغنية: %1$s من %2$s\nhttps://music.youtube.com/watch?v=%3$s</string>
     <string name="filter_deep_cuts">تقطيعات عميقة</string>
     <string name="filter_workout">التمارين</string>
     <string name="track_details">تفاصيل المسار</string>
@@ -1047,11 +1029,10 @@
     <string name="pinned_comment">تعليق مثبت</string>
     <string name="pinned_by_creator">تم التثبيت بواسطة منشئ المحتوى</string>
     <string name="nav_shorts">مقاطع قصيرة</string>
-    <string name="nav_music">موسيقى</string>
+
     <string name="tags">العلامات</string>
     <string name="ago">منذ</string>
     <string name="since">منذ</string>
-    <string name="play_next_desc">يُشغّل بعد الأغنية الحالية</string>
     <string name="app_name_uppercase">CHORPLAY</string>
     <string name="notification_badge_9_plus">9+</string>
     <string name="explicit">صريحة</string>
@@ -1066,11 +1047,11 @@
     <string name="settings_item_time_management">إدارة الوقت</string>
     <string name="settings_item_time_management_subtitle">إحصائيات الاستخدام، تذكيرات وقت النوم</string>
     <string name="app_icon_apply_toast">تم تحديث الأيقونة - سيتم تحديث مشغل التطبيقات الخاص بك</string>
-    <string name="icon_name_flow_red">أحمر Chorplay</string>
+    <string name="icon_name_chorplay_red">أحمر Chorplay</string>
     <string name="icon_name_dynamic">ألوان ديناميكية</string>
     <string name="player_nav_btn_subtitle">إظهار أزرار الفيديو التالي و السابق في المشغل المصغر</string>
-    <string name="lyrics_provider_title">مُقدّم كلمات الأغاني</string>
-    <string name="lyrics_provider_subtitle">اختر مصدرك المفضل لكلمات الأغاني</string>
+
+
     <string name="lyrics_provider_lrclib">LrcLib</string>
     <string name="lyrics_provider_better_lyrics">Better Lyrics</string>
     <string name="lyrics_provider_simpmusic">SimpMusic</string>
@@ -1099,7 +1080,6 @@
     <string name="theme_desc_espresso">درجات بنية دافئة وغنية مستوحاة من القهوة.</string>
     <string name="theme_name_gunmetal">رمادي معدني</string>
     <string name="theme_desc_gunmetal">درجات رمادية صناعية بلمسة معدنية باردة.</string>
-    <string name="content_settings_preview_album_art">معاينة الألبوم الفني</string>
     <string name="content_settings_preview_big">كبير - 128dp الصور المصغرة</string>
     <string name="content_settings_preview_small">صغير - 104dp صور مصغرة</string>
     <string name="content_settings_explore_region_picker_title">أداة اختيار البلد السريعة في الاستكشاف</string>
@@ -1144,7 +1124,6 @@
     <string name="empty_moods_genres">لا توجد حالات مزاجية أو أنواع موسيقية متاحة</string>
     <string name="subtitle_single_template">منفردة · %1$s</string>
     <string name="section_vibe_vibes">أجواء %1$s</string>
-    <string name="playlist_description_community">قائمة تشغيل منتقاة من موسيقى %1$s من مجتمعنا</string>
     <string name="template_bass_boost">تعزيز الجهير: %1$ddB</string>
     <string name="action_add_band">أضف فرقة</string>
     <string name="template_preamp">مضخم أولي: %1$.1f dB</string>
@@ -1230,26 +1209,26 @@
     <string name="files_access_title">الوصول إلى الملفات</string>
     <string name="permissions_header">الأذونات</string>
     <string name="appearance_role_scrim">تعتيم</string>
-    <string name="deep_flow_mode_subtitle">إيقاف التعلّم مؤقتًا أثناء التصفح</string>
-    <string name="deep_flow_learning_paused">التعلم متوقف</string>
-    <string name="deep_flow_expires_in">تنتهي صلاحيته خلال %s</string>
-    <string name="deep_flow_expire_duration_title">التعطيل التلقائي بعد</string>
-    <string name="deep_flow_expire_duration_subtitle">إستأنف التعلم تلقائيًا بعد %s</string>
-    <string name="deep_flow_dialog_title">مدة الإيقاف المؤقت</string>
-    <string name="deep_flow_dialog_body">إلى متى يجب أن يتوقف التعلم؟</string>
-    <string name="deep_flow_duration_1h">1 ساعة</string>
-    <string name="deep_flow_duration_2h">2 ساعة</string>
-    <string name="deep_flow_duration_4h">4 ساعة</string>
-    <string name="deep_flow_duration_6h">6 ساعة</string>
-    <string name="deep_flow_duration_8h">8 ساعة</string>
-    <string name="deep_flow_duration_12h">12 ساعة</string>
-    <string name="deep_flow_duration_24h">24 ساعة</string>
+    <string name="deep_chor_mode_subtitle">إيقاف التعلّم مؤقتًا أثناء التصفح</string>
+    <string name="deep_chor_learning_paused">التعلم متوقف</string>
+    <string name="deep_chor_expires_in">تنتهي صلاحيته خلال %s</string>
+    <string name="deep_chor_expire_duration_title">التعطيل التلقائي بعد</string>
+    <string name="deep_chor_expire_duration_subtitle">إستأنف التعلم تلقائيًا بعد %s</string>
+    <string name="deep_chor_dialog_title">مدة الإيقاف المؤقت</string>
+    <string name="deep_chor_dialog_body">إلى متى يجب أن يتوقف التعلم؟</string>
+    <string name="deep_chor_duration_1h">1 ساعة</string>
+    <string name="deep_chor_duration_2h">2 ساعة</string>
+    <string name="deep_chor_duration_4h">4 ساعة</string>
+    <string name="deep_chor_duration_6h">6 ساعة</string>
+    <string name="deep_chor_duration_8h">8 ساعة</string>
+    <string name="deep_chor_duration_12h">12 ساعة</string>
+    <string name="deep_chor_duration_24h">24 ساعة</string>
     <string name="appearance_customizer_subtitle">ضبط كل دور من ألوان Material 3 ومعاينة التغييرات فوراً</string>
     <string name="appearance_customizer_format_hint">تنسيق Hex: #RRGGBB أو #AARRGGBB</string>
     <string name="appearance_role_tertiary">مرحلة ثالثة</string>
     <string name="appearance_role_on_tertiary">علي المرحلة الثالثة</string>
     <string name="appearance_role_outline">الخطوط العريضة/الخارجية</string>
-    <string name="deep_flow_mode_title">وضع تعلم Chorplay العميق</string>
+    <string name="deep_chor_mode_title">وضع تعلم Chorplay العميق</string>
     <string name="sb_settings_title">SponsorBlock, DeArrow &amp; RYD</string>
     <string name="sb_settings_subtitle">إجراءات التقسيمات، خيارات DeArrow، و اعدادت عداد عدم الإعجاب</string>
     <string name="sb_settings_general_header">عام</string>
@@ -1271,20 +1250,20 @@
     <string name="player_appearance_fullscreen_header">ملء الشاشة</string>
     <string name="player_show_title_title">إظهار عنوان الفيديو</string>
     <string name="player_show_title_subtitle">إعرض عنوان الفيديو أسفل الشريط العلوي أثناء وضع ملء الشاشة</string>
-    <string name="deep_flow_duration_never">أبداً</string>
+    <string name="deep_chor_duration_never">أبداً</string>
     <string name="player_appearance_volume_gesture_subtitle">إسحب من الحافة اليمنى في وضع ملء الشاشة لضبط مستوى الصوت</string>
-    <string name="deep_flow_active_until_disabled">يبقي تعلم Chorplay العميق مفعل حتي تقوم بتعطيله</string>
+    <string name="deep_chor_active_until_disabled">يبقي تعلم Chorplay العميق مفعل حتي تقوم بتعطيله</string>
     <string name="copy_video_link">انسخ رابط الفيديو</string>
     <string name="player_appearance_brightness_gesture_title">إيماءات السطوع</string>
-    <string name="deep_flow_enabled_message">تعلم Chorplay العميق مفعل</string>
+    <string name="deep_chor_enabled_message">تعلم Chorplay العميق مفعل</string>
     <string name="player_appearance_volume_gesture_title">إيماءات الصوت</string>
     <string name="copy_channel_link">انسخ رابط القناة</string>
     <string name="export_newpipe_subs_failed">فشل تصدير إشتراكات NewPipe</string>
-    <string name="deep_flow_disabled_message">تعلم Chorplay العميق معطل</string>
+    <string name="deep_chor_disabled_message">تعلم Chorplay العميق معطل</string>
     <string name="export_newpipe_subs_desc">ملف JSON من NewPipe. في NewPipe، استخدم «الاستيراد من تصدير سابق».</string>
     <string name="content_settings_video_card_mark_watched_subtitle">زر العين على البطاقات لتحديد الفيديوهات كمُشاهدة</string>
     <string name="export_newpipe_subs_success">تم تصدير إشتراكات NewPipe بنجاح</string>
-    <string name="deep_flow_expired_message">إنتهي مؤقت تعلم Chorplay العميق</string>
+    <string name="deep_chor_expired_message">إنتهي مؤقت تعلم Chorplay العميق</string>
     <string name="content_settings_video_card_mark_watched_title">زر وضع علامة كمشاهدة على بطاقة الفيديو</string>
     <string name="player_appearance_brightness_gesture_subtitle">إسحب من الحافة اليسرى في وضع ملء الشاشة لضبط مستوي السطوع</string>
     <string name="export_newpipe_subs_title">تصدير الإشتراكات (بتنسيق NewPipe)</string>
@@ -1310,7 +1289,7 @@
     <string name="settings_item_app_language_subtitle">استخدم لغة جهازك أو اختر لغة يدويًا</string>
     <string name="settings_language_dialog_title">إختر لغة التطبيق</string>
     <string name="settings_language_system_default">‌الإفتراضي للنظام</string>
-    <string name="support_flow_patreon">إدعم Chorplay على Patreon</string>
+    <string name="support_chorplay_patreon">إدعم Chorplay على Patreon</string>
     <string name="select_text">حدد النص</string>
     <string name="resume">إستأنف</string>
     <string name="import_playlists_section_title">قوائم التشغيل</string>
@@ -1429,7 +1408,7 @@
     <string name="appearance_system_defaults_subtitle">إختر السمة التي سيتم استخدامها عند تبديل جهازك بين الوضع الفاتح والوضع الداكن.</string>
     <string name="appearance_system_light_theme">الوضع الفاتح</string>
     <string name="appearance_system_dark_theme">الوضع الداكن</string>
-    <string name="icon_name_flow_light">فاتح Chorplay</string>
+    <string name="icon_name_chorplay_light">فاتح Chorplay</string>
     <string name="icon_name_material_sky">سماوي Material</string>
     <string name="icon_name_material_mint">نعناع Material</string>
     <string name="theme_name_material_you">الألوان الديناميكية</string>
@@ -1481,8 +1460,8 @@
     <string name="playlist_sort_date_published_oldest">وقت النشر (الأقدم)</string>
     <string name="remove_selected_playlist_text">سيتم حذفها من قائمة التشغيل هذه.</string>
     <string name="remove_selected_watch_later_text">سيتم حذفها من المشاهدة لاحقاً.</string>
-    <string name="empty_liked_music_body">ستظهر الأغاني التي تعجبك هنا</string>
-    <string name="empty_liked_music">لا يوجد موسيقى أعجبتك</string>
+
+
     <string name="playlist_sort_options">‏خيارات فرز قائمة التشغيل</string>
     <string name="playlist_sort_manual">يدوي</string>
     <string name="playlist_sort_date_added_newest">تاريخ الإضافة (الأحدث)</string>
@@ -1493,11 +1472,11 @@
     <string name="upcoming_video_reminder_action">ذكرني</string>
     <string name="upcoming_video_reminder_badge">تم تفعيل التذكير</string>
     <string name="subscriptions_video_section_title">إشتراكات الفيديو</string>
-    <string name="subscriptions_music_section_title">إشتراكات الموسيقى</string>
+
     <string name="subscriptions_quick_access_title">الوصول السريع</string>
     <string name="subscriptions_compact_header">‎إنتقل إلى أحدث قنواتك التي اشتركت بها.</string>
-    <string name="subscriptions_compact_header_with_music">‏يتم تمييز قنوات الموسيقى بشكل مضمن للحفاظ على حجم البث صغيرًا.</string>
-    <string name="subscriptions_music_badge_cd">‎إشتراك الموسيقى</string>
+
+
     <string name="no_subscriptions_found">لم يتم العثور على أي إشتراكات</string>
     <string name="player_fullscreen_seekbar_width_title">حجم عرض شريط التقدم في وضع ملء الشاشة</string>
     <string name="player_fullscreen_seekbar_width_subtitle">%1$d dp ملء علي كل جانب</string>
@@ -1506,7 +1485,7 @@
     <string name="player_fullscreen_seekbar_width_custom">‏مخصص</string>
     <string name="player_fullscreen_seekbar_width_value">%1$d dp</string>
     <string name="upcoming_video_reminder_enabled">التذكير محدد</string>
-    <string name="subscriptions_music_chip_label">الموسيقى</string>
+
     <string name="player_appearance_remember_brightness_title">تذكر مستوي السطوع</string>
     <string name="player_appearance_remember_brightness_subtitle">الاحتفاظ بمستوى السطوع الأخير للفيديو التالي</string>
     <string name="lyrics_provider_lyrics_plus">LyricsPlus</string>
@@ -1516,7 +1495,7 @@
     <string name="daily_discover_sounds_like">كأنه مثل %1$s</string>
     <string name="daily_discover_based_on">بناءاً علي %1$s</string>
     <string name="daily_discover_for_fans_of">من أجل محبي %1$s</string>
-    <string name="section_music_videos_for_you">فيديوهات موسيقية من أجلك</string>
+
     <string name="section_live_performances">العروض الحية</string>
     <string name="section_mood_and_genres">المزاج و الأنواع</string>
     <string name="section_from_the_community">من المجتمع</string>
@@ -1524,7 +1503,6 @@
     <string name="section_daily_discover">إكتشافك اليومي</string>
     <string name="feeling_lucky">أشعر أني محظوظ؟</string>
     <string name="section_speed_dial">الطلب السريع</string>
-    <string name="player_background_style_title">خلفية مشغل الموسيقى</string>
     <string name="player_background_style_blur_gradient">ضبابي + تدرج لوني</string>
     <string name="player_background_style_blur">ضبابي</string>
     <string name="player_background_style_gradient">‎تدرج الألوان</string>
@@ -1542,17 +1520,17 @@
     <string name="saved_to_library">تم الحفظ في المكتبة</string>
     <string name="failed_to_save_to_library">فشل الحفظ إلي المكتبة</string>
     <string name="open">مفتوح</string>
-    <string name="music_quality_header">دقة صوت الموسيقي</string>
-    <string name="music_quality_auto">تلقائي</string>
-    <string name="music_quality_high">عالي</string>
-    <string name="music_quality_medium">متوسط</string>
-    <string name="music_quality_low">منخفضة</string>
-    <string name="music_playback_warning_forbidden">تم رفض الوصول إلى بث الموسيقى. قد يكون موقع يوتيوب يقيّد الوصول إلى هذا العنوان IP؛ حاول إعادة تحميل الصفحة أو تغيير الشبكة/VPN.</string>
-    <string name="music_playback_warning_network">فشل بث الموسيقى بسبب مشكلة في الشبكة. تحقق من إتصالك بالإنترنت أو جرب شبكة أخرى.</string>
-    <string name="music_playback_warning_final">لم يتم تحميل هذه الأغنية بعد عدة محاولات. جرّب شبكة أخرى أو استخدام VPN إذا استمرت مشكلة تحميل الأغاني.</string>
-    <string name="music_playback_warning_generic">فشل تشغيل الموسيقى. حاول مرة أخرى أو غيّر الشبكة إذا استمر هذا الأمر.</string>
+
+
+
+
+
+
+
+
+
     <string name="video_download_location_label">مجلد تحميل الفيديو</string>
-    <string name="music_download_location_label">مجلد تحميل الموسيقي</string>
+
     <string name="refresh_lyrics">إعادة تحديث الكلمات</string>
     <string name="settings_item_datetime">التاريخ والوقت</string>
     <string name="settings_item_datetime_subtitle">‏قم بتخصيص طريقة عرض تاريخ نشر المحتوي</string>
@@ -1629,13 +1607,13 @@
     <string name="local_media_permission_body">إسمح بالوصول إلى الوسائط الخاصة بك حتى يتمكن Chorplay من العثور على مقاطع الفيديو والموسيقى المحلية وتشغيلها.</string>
     <string name="local_media_grant">منح الوصول</string>
     <string name="history_tab_local_videos">الفيديوهات المحلية</string>
-    <string name="history_tab_local_music">الموسيقي المحلية</string>
+
     <string name="share_link_only_template">https://youtube.com/watch?v=%1$s</string>
     <string name="content_settings_share_without_text_title">مشاركة الروابط بدون نص</string>
     <string name="content_settings_share_without_text_subtitle">شارك فقط رابط الفيديو، بدون رسالة \"شاهد هذا الفيديو\"</string>
-    <string name="deep_flow_save_history_title">حفظ إلي سجل المشاهدة</string>
-    <string name="deep_flow_save_history_subtitle">الاحتفاظ بسجل المشاهدة دون استخدامه لتحسين التوصيات</string>
-    <string name="icon_name_flow_play">زر تشغيل</string>
+    <string name="deep_chor_save_history_title">حفظ إلي سجل المشاهدة</string>
+    <string name="deep_chor_save_history_subtitle">الاحتفاظ بسجل المشاهدة دون استخدامه لتحسين التوصيات</string>
+    <string name="icon_name_chorplay_play">زر تشغيل</string>
     <string name="player_appearance_controls_while_loading_subtitle">إظهار عناصر التحكم قبل اكتمال تحميل الفيديو</string>
     <string name="content_settings_watched_threshold_90">تم تشغيل 90%</string>
     <string name="content_settings_watched_threshold_95">تم تشغيل 95%</string>
@@ -1653,22 +1631,19 @@
     <string name="autoplay_countdown_cancel">إلفاء</string>
     <string name="autoplay_countdown_restart">‪إعادة تشغيل</string>
     <string name="autoplay_countdown_play_now">تشغيل الأن</string>
-    <string name="recognize_music">التعرف على الموسيقى</string>
+
     <string name="recognition_history">تاريخ التعرف علي الموسيقي</string>
-    <string name="tap_to_recognize">انقر للتعرف</string>
+
     <string name="listening">‫يستمع…</string>
     <string name="processing">جاري التعرف…</string>
     <string name="no_match_found">لم يتم العثور على تطابق</string>
     <string name="recognition_error">فشل التعرف</string>
     <string name="try_again">إعادة المحاولة</string>
-    <string name="search_in_flow">ابحث في Chorplay</string>
+    <string name="search_in_chorplay">ابحث في Chorplay</string>
     <string name="player_appearance_controls_while_loading_title">التحكم أثناء تحميل الفيديو</string>
     <string name="content_settings_watched_threshold_title">وضع علامة تمت مشاهدته عند</string>
     <string name="content_settings_watched_threshold_dialog_body">مقدار ما يجب مشاهدته من الفيديو حتى يُحتسب كمشاهد.</string>
-    <string name="recognition_search_history">بحث في الموسيقي التي تم التعرف عليها</string>
-    <string name="recognition_history_empty">الموسيقى التي تم التعرف عليها ستظهر هنا</string>
     <string name="recognition_clear_history">مسح التاريخ؟</string>
-    <string name="recognition_clear_history_body">يؤدي هذا إلى حذف جميع الأغاني التي تم التعرف عليها. ولا يمكن التراجع عن هذا الإجراء.</string>
     <string name="player_settings_display">العرض</string>
     <string name="player_settings_ambient_mode">وضع Ambient</string>
     <string name="player_settings_ambient_mode_subtitle">توهج خفيف بألوان الفيديو من حوله</string>
@@ -1737,7 +1712,7 @@
     <string name="sync_error_peer_also_receive">الجهاز الآخر جاهز أيضاً على وضع الاستقبال. قم بضبطه على وضع الإرسال، ثم قم بالمسح الضوئي مرة أخرى.</string>
     <string name="sync_error_qr_expired">انتهت صلاحية هذا الرمز. اطلب من الجهاز الآخر إنشاء رمز جديد. إذا استمرت صلاحية الرموز في الانتهاء على الفور، فتحقق من صحة التاريخ والوقت على كلا الجهازين.</string>
     <string name="sync_error_qr_wrong_version">إصدار التطبيق غير متوافق على الجهاز الآخر.</string>
-    <string name="sync_error_qr_not_flow">هذه ليست بيانات اتصال صالحة لـ Chorplay.</string>
+    <string name="sync_error_qr_not_chorplay">هذه ليست بيانات اتصال صالحة لـ Chorplay.</string>
     <string name="sync_error_qr_bad_address">بيانات الاتصال تفتقد إلى عنوان شبكة صالح.</string>
     <string name="upcoming_video_starts_in">يبدأ خلال</string>
     <string name="player_settings_header_video">فيديو</string>
@@ -1750,8 +1725,8 @@
     <string name="subscriptions_sort_default">إفتراضي</string>
     <string name="subscriptions_sort_name">الاسم (A–Z)</string>
     <string name="upcoming_waiting_count">%1$s في الإنتظار</string>
-    <string name="player_appearance_hide_music_artwork_title">إخفاء صورة مشغل الموسيقى</string>
-    <string name="player_appearance_hide_music_artwork_subtitle">إعرض أيقونة التطبيق على لون العمل الفني المستخرج بدلاً من ذلك</string>
+
+
     <string name="onboarding_interests_title">ما الذي تستمتع به؟</string>
     <string name="onboarding_interests_hint">إختر ما لا يقل عن %1$d مواضيع لتخصيص الخلاصة الخاص بك. %2$d موضوعات متبقية.</string>
     <string name="onboarding_interests_ready">تشكيلة رائعة. يمكنك تحديث هذا لاحقًا من الإعدادات.</string>
@@ -1861,7 +1836,6 @@
     <string name="channel_error_log_clip_label">سجل أخطاء قناة Chorplay</string>
     <string name="channel_search_failed">تعذر البحث في هذه القناة</string>
     <string name="add_comment_placeholder">كتابة تعليق…</string>
-    <string name="search_empty_prompt">إبحث عن مقاطع الفيديو، الموسيقى والمزيد</string>
     <string name="audio_track_number_template">%1$s %2$d</string>
     <string name="subtitle_auto_generated_template">%1$s (%2$s)</string>
     <string name="dlna_cast_to_device">البث إلى جهاز</string>
@@ -1888,10 +1862,9 @@
     <string name="content_settings_hide_watched_subscriptions_subtitle">إخفاء الفيديوهات التي شاهدتها من الاشتراكات</string>
     <string name="desc_more">المزيد...</string>
     <string name="widget_now_playing_label">يعرض الأن</string>
-    <string name="widget_now_playing_description">تحكم في الموسيقى التي يتم تشغيلها في Chorplay</string>
     <string name="widget_quick_actions_label">الاجراءات السريعة</string>
-    <string name="widget_recognize_label">التعرف علي الموسيقى</string>
-    <string name="widget_recognize_description">تعرف على الأغنية التي تسمعها من حولك بنقرة واحدة</string>
+
+
     <string name="widget_recently_played_label">متابعة المشاهدة</string>
     <string name="widget_recently_played_description">استكمل مشاهدة الفيديوهات من حيث توقفت</string>
     <string name="widget_downloads_label">التحميلات</string>
@@ -1904,20 +1877,19 @@
     <string name="widget_next">المسار التالي</string>
     <string name="widget_previous">المسار السابق</string>
     <string name="widget_like">إعجاب</string>
-    <string name="widget_artwork">صورة غلاف العمل الفني</string>
     <string name="widget_open_downloads">فتح التحميلات</string>
     <string name="widget_open_history">‎فتح السجل</string>
     <string name="widget_no_recent">ستظهر مقاطع الفيديو التي تشاهدها هنا</string>
     <string name="widget_no_downloads">ستظهر تنزيلاتك هنا</string>
     <string name="widget_quick_actions_description">إبحث في Chorplay و انتقل إلى التنزيلات أو السجل أو التعرف علي الموسيقى</string>
-    <string name="widget_turntable_label">قرص دوار</string>
-    <string name="widget_turntable_description">إجعل موسيقاك كقرص دوار</string>
+
+
     <string name="playlist_creation_menu_open">إنشاء قائمة تشغيل</string>
     <string name="playlist_creation_menu_close">‎إغلاق قائمة إنشاء قوائم التشغيل</string>
     <string name="playlist_visibility_metadata">%1$s • %2$s</string>
     <string name="playlist_filter_owned">مملوكة</string>
-    <string name="content_settings_restored_music_mini_player_title">إظهار مُشغّل الصوتيات المصغّر المُستعاد</string>
-    <string name="content_settings_restored_music_mini_player_subtitle">إظهار آخر جلسة موسيقي لك بعد استعادتها</string>
+
+
     <string name="ui_open_in_youtube">افتح في YouTube</string>
     <string name="ui_playback_error">خطأ في التشغيل</string>
     <string name="ui_replay">إعادة التشغيل</string>
@@ -1927,9 +1899,9 @@
     <string name="ui_in_library">في المكتبة</string>
     <string name="ui_options">الخيارات</string>
     <string name="ui_selected">محدد</string>
-    <string name="ui_flow_logo">شعار Chorplay</string>
+    <string name="ui_chorplay_logo">شعار Chorplay</string>
     <string name="ui_back">تراجع</string>
-    <string name="ui_add_songs">إضافة أغاني</string>
+
     <string name="ui_close_search">إغلاق البحث</string>
     <string name="ui_save_to_library">حفظ إلي المكتبة</string>
     <string name="ui_remove_from_library">حذف من المكتبة</string>
@@ -1938,9 +1910,9 @@
     <string name="ui_added">مضافة</string>
     <string name="ui_sync_lyrics">مزامنة الكلمات</string>
     <string name="ui_downloading_playlist">جاري تنزيل قائمة التشغيل</string>
-    <string name="ui_no_songs_found">لم يتم العثور علي أغاني</string>
-    <string name="ui_search_songs_to_add">ابحث عن الأغاني لإضافتها…</string>
-    <string name="ui_add_songs_to_playlist">أضف الأغاني إلى قائمة التشغيل</string>
+
+
+
     <string name="ui_show_less">عرض أقل</string>
     <string name="ui_show_more">عرض المزيد</string>
     <string name="ui_try_sabr_download">جرب طريقة تحميل SABR</string>
@@ -1989,7 +1961,7 @@
     <string name="toast_sabr_download_started">بدأ طريقة تنزيل SABR</string>
     <string name="toast_sabr_download_started_for_video">‎بدأ طريقة تنزيل SABR: %1$s</string>
     <string name="toast_sabr_download_failed">فشل طريقة تنزيل SABR: %1$s</string>
-    <string name="toast_saved_playlist_to_music_library">تم حفظ قائمة التشغيل في مكتبة الموسيقى الخاصة بك</string>
+
     <string name="toast_failed_to_save_playlist">‍فشل حفظ قائمة التشغيل</string>
     <string name="toast_removed_playlist_from_library">تمت إزالة قائمة التشغيل من المكتبة</string>
     <string name="toast_failed_to_merge_playlist">‎فشل دمج قائمة التشغيل</string>
@@ -2009,8 +1981,7 @@
     <string name="notification_channel_downloads_description">يعرض تقدم التنزيل و إنتهائه</string>
     <string name="notification_channel_new_videos_description">إشعارات عندما تقوم القنوات المشترك بها برفع ‫مقاطع فيديو جديدة</string>
     <string name="notification_channel_video_playback_description">‌متحكمات تشغيل الفيديو</string>
-    <string name="notification_channel_music_playback_description">متحكمات تشغيل الموسيقى</string>
-    <string name="notification_download_progress_description">‎تقدم تنزيل الفيديو و الصوت</string>
+<string name="notification_download_progress_description">‎تقدم تنزيل الفيديو و الصوت</string>
     <string name="notification_channel_general_description">إشعارات التطبيق العامة</string>
     <string name="notification_channel_break_reminders_description">تذكير بمواعيد النوم و الاستراحة</string>
     <string name="notification_channel_updates_description">‎إشعارات تحديث التطبيق</string>
@@ -2018,8 +1989,7 @@
     <string name="notification_channel_downloads">التنزيلات</string>
     <string name="notification_channel_new_videos">فيديوهات جديدة</string>
     <string name="notification_channel_video_playback">تشغيل الفيديو</string>
-    <string name="notification_channel_music_playback">تشغيل الموسيقى</string>
-    <string name="notification_channel_general">عام</string>
+<string name="notification_channel_general">عام</string>
     <string name="notification_channel_reminders">التذكيرات</string>
     <string name="notification_channel_updates">تحديثات التطبيق</string>
     <string name="notification_channel_imports">استيراد البيانات</string>
@@ -2079,7 +2049,6 @@
     <string name="fallback_unknown_channel">قناة غير معروفة</string>
     <string name="fallback_unknown_playlist">قائمة تشغيل غير معروفة</string>
     <string name="fallback_unknown_artist">فنان غير معروف</string>
-    <string name="fallback_unknown_album">ألبوم غير معروف</string>
     <string name="fallback_unknown_video">فيديو غير معروف</string>
     <string name="fallback_local_video">فيديو محلي</string>
     <string name="fallback_local_audio">الصوت المحلي</string>
@@ -2093,59 +2062,59 @@
     <string name="action_save_preset">حفظ الإعداد المسبق</string>
     <string name="label_preset_name">إسم‌ الإعداد المسبق</string>
     <string name="ui_instrumental">موسيقى آلية</string>
-    <string name="discord_presence_title">تفعيل تكامل الحالة المتقدم لـ Discord</string>
-    <string name="discord_presence_enable">مشاركة نشاط التشغيل</string>
-    <string name="discord_presence_enable_description">يبقى متصلاً أثناء التوقف المؤقت والتشغيل في الخلفية</string>
-    <string name="discord_presence_off">معطل</string>
-    <string name="discord_presence_not_connected">غير متصل</string>
-    <string name="discord_presence_ready">مربوط وجاهز</string>
-    <string name="discord_presence_ready_as">مربوط كـ %1$s · يتصل أثناء التشغيل</string>
-    <string name="discord_presence_connected">متصل</string>
-    <string name="discord_presence_connected_as">متصل كـ %1$s</string>
-    <string name="discord_presence_connected_account">حساب Discord: %1$s</string>
-    <string name="discord_presence_unavailable">غير متوفر في هذا الإصدار</string>
-    <string name="discord_presence_connection_error">خطأ في الاتصال</string>
-    <string name="discord_presence_linking">بانتظار تسجيل الدخول إلى Discord…</string>
-    <string name="discord_presence_connecting">جارٍ الاتصال إلى Discord…</string>
-    <string name="discord_presence_connect">ربط حساب Discord</string>
-    <string name="discord_presence_connect_action">ربط</string>
-    <string name="discord_presence_disconnect">قطع الاتصال وإلغاء الربط</string>
-    <string name="discord_presence_unlink_action">إلغاء الربط</string>
-    <string name="discord_presence_retry">إعادة محاولة الاتصال</string>
-    <string name="discord_presence_description">إظهار ما تشغّله كحالة لك على Discord.</string>
-    <string name="discord_presence_connection_section">الاتصال</string>
-    <string name="discord_presence_account">حساب Discord</string>
-    <string name="discord_presence_privacy_section">الخصوصية ومخاطر الحساب</string>
-    <string name="discord_presence_privacy_title">الخصوصية</string>
-    <string name="discord_presence_privacy_body">يشارك Chorplay العنوان واسم المنشئ والصورة ومدة التقدم لما تشغّله. يكون معطّلًا افتراضيًا. يتم تشفير رمز Discord الخاص بك ولا يتم تسجيله مطلقًا.</string>
-    <string name="discord_presence_gateway_warning">يستخدم هذا تسجيل الدخول عبر رمز Discord الخاص بك بدلًا من تسجيل الدخول الرسمي. هذا يخالف شروط خدمة Discord وقد يؤدي إلى تقييد حسابك أو حظره.</string>
-    <string name="discord_presence_risk_dialog_title">هل تقبل مخاطر استخدام حساب Discord؟</string>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <string name="about_creator_name">Pushkar</string>
     <string name="about_website_address">github.com/chorus-mu/Chorplay</string>
     <string name="about_reddit">Reddit</string>
     <string name="about_reddit_subtitle">r/Chorplay_Official</string>
     <string name="about_license_name">GNU GPL v3</string>
-    <string name="discord_presence_risk_dialog_body">عند الاتصال، تمنح Chorplay رمز Discord الخاص بك. يبقى مشفّرًا على هذا الجهاز ولا يُرسل إلا إلى Discord. تخالف هذه الطريقة شروط خدمة Discord، لذا قد يتم تقييد حسابك أو حظره.</string>
-    <string name="discord_presence_risk_accept">أنا أفهم، اتصل</string>
-    <string name="discord_error_not_initialized">لم يتم تهيئة ميزة \"الحضور الغني\" في ديسكورد.</string>
-    <string name="discord_error_enable_before_connect">‏قم بتفعيل خاصية \"الحضور الغني\" في ديسكورد قبل ربط الحساب.</string>
-    <string name="discord_error_unavailable">خاصية \"الحضور الغني\" في ديسكورد غير متاحة في هذه النسخة.</string>
-    <string name="discord_error_open_flow">افتح تطبيق Chorplay قبل الاتصال بـ Discord.</string>
-    <string name="discord_error_connection_in_progress">‎تم بالفعل إنشاء اتصال عبر ديسكورد.</string>
-    <string name="discord_error_login_timeout">انتهت مهلة تسجيل الدخول إلى Discord.</string>
-    <string name="discord_error_login_cancelled">تم إلغاء اتصال Discord.</string>
-    <string name="discord_error_connection_incomplete">لم يكتمل الاتصال بـ Discord.</string>
-    <string name="discord_error_empty_token">أعاد Discord رمز جلسة فارغاً.</string>
-    <string name="discord_error_missing_application_id">معرف تطبيق Discord مفقود من هذه النسخة.</string>
-    <string name="discord_error_gateway_timeout">انقطع الاتصال ببوابة Discord.</string>
-    <string name="discord_error_gateway_reconnect">طلب Discord إعادة الاتصال.</string>
-    <string name="discord_error_session_rejected">رفض Discord الجلسة. أعد ربط حسابك.</string>
-    <string name="discord_error_gateway_failed">فشل الإتصال ببوابة Discord.</string>
-    <string name="discord_error_heartbeat_unacknowledged">لم يتم تأكيد Discord Gateway heartbeat.</string>
-    <string name="discord_error_heartbeat_failed">فشل Discord Gateway heartbeat.</string>
-    <string name="discord_account_fallback">مستخدم Discord</string>
-    <string name="discord_presence_playing_fallback">يلعب علي Chorplay</string>
-    <string name="discord_presence_by_creator">بواسطة %1$s</string>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <string name="settings_item_interface_mode">وضع الواجهة</string>
     <string name="settings_item_interface_mode_subtitle">‎اختر تخطيط الهاتف، التلفاز أو تلقائياً</string>
     <string name="interface_mode_title">وضع الواجهة</string>
@@ -2209,7 +2178,7 @@
     <string name="tv_music_no_lyrics">لم يتم العثور على كلمات</string>
     <string name="tv_music_radio">Radio</string>
     <string name="tv_settings_appearance">المظهر</string>
-    <string name="tv_settings_flow_engine">محرك Chorplay</string>
+    <string name="tv_settings_chor_engine">محرك Chorplay</string>
     <string name="tv_settings_sync">مزامنة الأجهزة</string>
     <string name="tv_player_queue">‪قائمة الانتظار</string>
     <string name="tv_sync_qr_session_active">يبقى هذا الرمز نشطًا طالما أن هذه الشاشة مفتوحة.</string>
@@ -2419,14 +2388,7 @@
         <item quantity="many">%1$d فيديو</item>
         <item quantity="other">%1$d فيديو</item>
     </plurals>
-    <plurals name="songs_count_template">
-        <item quantity="zero">لا توجد اغاني</item>
-        <item quantity="one">أغنية واحدة</item>
-        <item quantity="two">%1$d أغنية</item>
-        <item quantity="few">%1$d أغاني</item>
-        <item quantity="many">%1$d أغنية</item>
-        <item quantity="other">%1$d أغنية</item>
-    </plurals>
+
     <string name="metadata_separator">·</string>
     <string name="player_time_separator">/</string>
     <string name="you">أنت</string>
@@ -2436,7 +2398,7 @@
     <string name="load_failed">فشل التحميل</string>
     <string name="import_success_count">تم استيراد %1$d %2$s</string>
     <string name="import_success">تم استيراد %1$s بنجاح</string>
-    <plurals name="deep_flow_duration_hours">
+    <plurals name="deep_chor_duration_hours">
         <item quantity="zero">%1$d ساعة</item>
         <item quantity="one">%1$d ساعة</item>
         <item quantity="two">%1$d ساعة</item>
@@ -2452,14 +2414,7 @@
         <item quantity="many">%1$d سمة</item>
         <item quantity="other">%1$d سمة</item>
     </plurals>
-    <plurals name="lyrics_providers_enabled">
-        <item quantity="zero">تم تفعيل %1$d / %2$d موفر خدمة</item>
-        <item quantity="one">تم تفعيل %1$d / %2$d موفر خدمة</item>
-        <item quantity="two">تم تفعيل %1$d / %2$d موفر خدمة</item>
-        <item quantity="few">تم تفعيل %1$d / %2$d موفري خدمة</item>
-        <item quantity="many">تم تفعيل %1$d / %2$d موفر خدمة</item>
-        <item quantity="other">تم تفعيل %1$d / %2$d موفر خدمة</item>
-    </plurals>
+
     <plurals name="player_settings_shorts_playback_mode_auto_interval_summary">
         <item quantity="one">التمرير التلقائي كل %1$d ثانية</item>
         <item quantity="two">التمرير التلقائي كل %1$d ثانية</item>
@@ -2578,7 +2533,6 @@
     <string name="import_label_freetube_watch_history">سجل مشاهدة FreeTube</string>
     <string name="import_label_newpipe_watch_history">سجل مشاهدة NewPipe</string>
     <string name="import_label_libretube_subscriptions">اشتراكات LibreTube</string>
-    <string name="import_label_metrolist_playlists">قوائم تشغيل موسيقي ‏Metrolist</string>
     <string name="import_label_newpipe_playlists">قوائم تشغيل NewPipe</string>
     <string name="import_label_libretube_playlists">قوائم تشغيل LibreTube</string>
     <string name="conjunction_and">و</string>
@@ -2670,7 +2624,7 @@
     <string name="equalizer_frequency_label">F</string>
     <string name="equalizer_gain_label">G</string>
     <string name="equalizer_q_label">Q</string>
-    <string name="section_on_repeat">على التكرار</string>
+
     <string name="section_daily_mix_title">%1$s Mix</string>
     <string name="section_daily_mix_label">Mix اليومي</string>
     <string name="daily_mix_page_description">مزيج موسيقي من الفنانين الذين تستمع إليهم معًا. احفظه للاحتفاظ بمزيج اليوم.</string>
@@ -2684,24 +2638,24 @@
     <string name="section_rotation_morning">اقتراحاتك الصباحية</string>
     <string name="section_rotation_night">اقتراحاتك لأخر الليل</string>
     <string name="source_your_rotation">اقتراحاتك</string>
-    <string name="music_genre_affinity_title">الأنواع والمزاجات</string>
-    <string name="music_genre_affinity_subtitle">تم التعرّف عليها من خلال أنواع الموسيقى والحالات المزاجية التي تستمع إليها بالفعل</string>
+
+
     <string name="recommendations_header">التوصيات</string>
     <string name="not_interested_desc">قلّل عرض الموسيقى لهذا الفنان لفترة من الوقت</string>
     <string name="dont_recommend_artist">لا تقترح %1$s</string>
     <string name="dont_recommend_artist_desc">لا تقترح هذا الفنان مرة أخرى</string>
     <string name="feedback_not_interested_applied">سترى محتوي أقل من %1$s</string>
     <string name="feedback_artist_blocked">لن يتم اقتراح محتوي %1$s بعد الآن</string>
-    <string name="music_prefs_section_title">إقتراحات الموسيقي</string>
-    <string name="music_endless_radio_title">راديو لانهائي</string>
-    <string name="music_endless_radio_desc">إضافة اغاني مشابهة عند انتهاء قائمة الانتظار</string>
-    <string name="music_blocked_artists_title">الفنانون المحظورون</string>
-    <string name="music_blocked_artists_empty">لا يوجد فنانون محظورون</string>
-    <string name="music_unblock">إلغاء الحظر</string>
-    <string name="export_music_brain_title">تصدير بيانات محرك الموسيقى</string>
-    <string name="export_music_brain_desc">احفظ ملف تعريف ذوقك الموسيقي كملف JSON</string>
-    <string name="import_music_brain_title">استيراد بيانات محرك الموسيقى</string>
-    <string name="import_music_brain_desc">‎استعادة ملف تعريف ذوق موسيقي من ملف JSON</string>
+
+
+
+
+
+
+
+
+
+
     <plurals name="ui_downloading_videos">
         <item quantity="one">جارٍ تنزيل فيديو واحد…</item>
         <item quantity="two">جارٍ تنزيل %1$d فيديو…</item>
@@ -2749,41 +2703,41 @@
         <item quantity="many">تمت إضافة %1$d قناة</item>
         <item quantity="other">تمت إضافة %1$d قناة</item>
     </plurals>
-    <string name="music_brain_export_success">تم تصدير بيانات محرك الموسيقى</string>
-    <string name="music_brain_export_failed">فشل تصدير محرك الموسيقى</string>
-    <string name="music_brain_import_success">تم استيراد بيانات محرك الموسيقى</string>
-    <string name="music_brain_import_failed">فشل استيراد محرك الموسيقى</string>
-    <string name="music_persona_overview_title">ذوق الموسيقى</string>
-    <string name="music_persona_overview_subtitle">ما تعلمه محرك الموسيقى من استماعك</string>
-    <string name="music_persona_maturity_cold">بداية باردة</string>
-    <string name="music_persona_maturity_warming">الاحماء</string>
-    <string name="music_persona_maturity_mature">ناضج</string>
-    <string name="music_metric_total_plays">عدد ما تم تشغيله</string>
-    <string name="music_metric_total_plays_detail">أكثر من 50% يستمعون</string>
-    <string name="music_metric_artists">‏الفنانون</string>
-    <string name="music_metric_artists_detail">مع الذوق المتعلم</string>
-    <string name="music_metric_tracks">المقاطع الصوتية المتتبعة</string>
-    <string name="music_metric_tracks_detail">سجل مرات التكرار</string>
-    <string name="music_metric_on_repeat">يُعاد تشغيله باستمرار</string>
-    <string name="music_metric_on_repeat_detail">الرائج الآن</string>
-    <string name="music_discovery_appetite">شغف الاكتشاف</string>
-    <string name="music_discovery_appetite_detail">مقدار الموسيقى الجديدة التي يمزجها المحرك</string>
-    <string name="music_top_artists_title">أفضل الفنانين</string>
-    <string name="music_top_artists_subtitle">‎أقوى تفضيلاتك حاليًا</string>
-    <string name="music_top_artist_plays">%1$d مرة تشغيل</string>
-    <string name="music_listening_patterns_title">إيقاع الاستماع</string>
-    <string name="music_listening_patterns_subtitle">متى تستمع فعليًا، استنادًا إلى أوقات التشغيل الفعلية</string>
-    <string name="music_bucket_weekday_morning">صباحات أيام الأسبوع</string>
-    <string name="music_bucket_weekday_afternoon">فترات بعد الظهر في أيام الأسبوع</string>
-    <string name="music_bucket_weekday_evening">أمسيات أيام الأسبوع</string>
-    <string name="music_bucket_weekday_night">ليالي أيام الأسبوع</string>
-    <string name="music_bucket_weekend_morning">صباحات عطلة نهاية الأسبوع</string>
-    <string name="music_bucket_weekend_afternoon">‎ظهيرة العطلة</string>
-    <string name="music_bucket_weekend_evening">مساء العطلة</string>
-    <string name="music_bucket_weekend_night">ليل العطلة</string>
-    <string name="music_bucket_plays">%1$d تشغيل</string>
-    <string name="music_blocked_artists_subtitle">فنانون لن يقترحهم المحرك أبدًا</string>
-    <string name="music_persona_empty">استمع لبعض الموسيقى ليبدأ المحرك بالتعلّم</string>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <plurals name="favorites_count_template">
         <item quantity="one">‍%1$d مقطع مفضل</item>
         <item quantity="two">‍%1$d مقطع مفضل</item>
@@ -2799,16 +2753,14 @@
         <item quantity="many">إزالة %1$d من التنزيلات المتوقفة أو الفاشلة أو غير المكتملة؟ لن تتأثر التنزيلات المكتملة.</item>
         <item quantity="other">إزالة %1$d من التنزيلات المتوقفة أو الفاشلة أو غير المكتملة؟ لن تتأثر التنزيلات المكتملة.</item>
     </plurals>
-    <string name="sync_collection_music_profile">ملف ذوقك الموسيقي</string>
-    <plurals name="sync_selected_count">
+<plurals name="sync_selected_count">
         <item quantity="one">تم تحديد %1$d من %2$d</item>
         <item quantity="two">تم تحديد %1$d من %2$d</item>
         <item quantity="few">تم تحديد %1$d من %2$d</item>
         <item quantity="many">تم تحديد %1$d من %2$d</item>
         <item quantity="other">تم تحديد %1$d من %2$d</item>
     </plurals>
-    <string name="sync_collection_music_profile_body">ما تعلّمه Chorplay عن ذوقك الموسيقي.</string>
-    <string name="diagnostics_report_subject">تقرير تشخيص Chorplay</string>
+<string name="diagnostics_report_subject">تقرير تشخيص Chorplay</string>
     <plurals name="merge_playlist_success">
         <item quantity="one">تمت إضافة %1$d أغنية إلى \"%2$s\"</item>
         <item quantity="two">تمت إضافة %1$d أغنية إلى \"%2$s\"</item>
@@ -2823,10 +2775,10 @@
         <item quantity="many">%1$d موضوع في المتجه العام</item>
         <item quantity="other">%1$d موضوع في المتجه العام</item>
     </plurals>
-    <string name="widget_on_repeat_label">قيد التكرار</string>
-    <string name="widget_on_repeat">قيد التكرار</string>
-    <string name="widget_on_repeat_description">الأغاني التي تعود للاستماع‌ إليها باستمرار</string>
-    <string name="widget_no_on_repeat">ستظهر هنا الأغاني التي تستمع إليها بإستمرار</string>
+
+
+
+
     <string name="playlist_download_queue_empty">تعذّر إضافة أي تنزيلات من قائمة التشغيل هذه</string>
     <string name="artist_known_related_badge">ضمن اقتراحاتك</string>
     <string name="removed_from_history">تمت إزالته من السجل</string>
@@ -2837,7 +2789,7 @@
     <string name="library_empty_body">ستظهر هنا الفيديوهات والموسيقى التي تشاهدها أو تعجبك أو تحفظها أو تنزلها.</string>
     <string name="playlist_load_failed">تعذَّر تحميل قائمة التشغيل</string>
     <string name="library_settings_subtitle">التشغيل، والتنزيلات، والمظهر، والبيانات</string>
-    <string name="music_search_no_results">لا توجد نتائج لـ \"%1$s\"</string>
+
     <string name="chart_position_template">#%1$d</string>
     <string name="download_progress_percent">%1$d%%</string>
     <string name="download_status_paused_template">%1$d%% • %2$s</string>
@@ -2845,12 +2797,12 @@
     <string name="file_size_mb">%1$s MB</string>
     <string name="file_size_gb">%1$s GB</string>
     <string name="section_artists_for_you">فنانون مقترحون لك</string>
-    <string name="music_content_language_title">لغة المحتوى</string>
-    <string name="music_content_language_follow_app">اتباع لغة التطبيق</string>
-    <string name="music_content_language_dialog_title">اختر لغة المحتوى</string>
-    <string name="music_content_country_title">بلد المحتوى</string>
-    <string name="music_normalize_volume_title">توحيد مستوى الصوت</string>
-    <string name="music_normalize_volume_desc">ضبط مستوى صوت جميع المقاطع وفق معيار YouTube Music</string>
+    <string name="content_language_title">لغة المحتوى</string>
+    <string name="content_language_follow_app">اتباع لغة التطبيق</string>
+    <string name="content_language_dialog_title">اختر لغة المحتوى</string>
+    <string name="content_country_title">بلد المحتوى</string>
+
+
     <string name="section_other_versions">إصدارات أخرى</string>
     <string name="section_charts_in">قوائم %1$s</string>
     <string name="section_deep_cuts">أعمال غير شائعة</string>
@@ -2989,7 +2941,6 @@
     <string name="categories_shelf_back">العودة إلى كل الأقسام</string>
     <string name="shorts_settings_this_short">هذا المقطع القصير</string>
     <string name="start_radio">بدء الراديو</string>
-    <string name="start_radio_desc">تشغيل محطة استنادًا إلى هذه الأغنية</string>
     <plurals name="playlists_count_template">
         <item quantity="zero">لا توجد قوائم تشغيل</item>
         <item quantity="one">قائمة تشغيل واحدة</item>
@@ -3068,7 +3019,7 @@
         <item quantity="other">ستتم إزالة %d إشعار. لا يمكنك التراجع عن ذلك.</item>
     </plurals>
     <string name="onboarding_channels_results_header">القنوات</string>
-    <string name="onboarding_import_source_flow">النسخ الاحتياطي لـ Chorplay</string>
+    <string name="onboarding_import_source_chorplay">النسخ الاحتياطي لـ Chorplay</string>
     <string name="onboarding_import_source_youtube">YouTube</string>
     <string name="onboarding_import_footnote">كل شئ هنا اختياري. تحتوي الإعدادات على نفس خيارات الاستيراد.</string>
     <string name="onboarding_import_done">تم الاستيراد</string>
@@ -3190,8 +3141,7 @@
     <string name="recap_period_all">طول الوقت</string>
     <string name="recap_source_all">كل شيء</string>
     <string name="recap_source_video">الفيديوهات</string>
-    <string name="recap_source_music">الموسيقى</string>
-    <string name="recap_total_time">الوقت في Chorplay</string>
+<string name="recap_total_time">الوقت في Chorplay</string>
     <string name="recap_delta_up">أكثر بـ %1$s من الوقت السابق</string>
     <string name="recap_delta_down">أقل بـ %1$s من الوقت السابق</string>
     <string name="recap_delta_same">تقريبًا مماثل كالوقت السابق</string>
@@ -3229,8 +3179,8 @@
     <string name="player_appearance_plain_control_colors_title">ألوان عناصر التحكم</string>
     <string name="player_appearance_plain_control_colors_monochrome">أبيض وأسود</string>
     <string name="player_appearance_plain_control_colors_app">سمة التطبيق</string>
-    <string name="settings_open_music_player_on_play_title">فتح المشغل الكامل للأغاني الجديدة</string>
-    <string name="settings_open_music_player_on_play_summary">عند إيقافه، تبقى الأغنية الجديدة في المشغل المصغّر</string>
+
+
     <string name="eq_preset_rnb">R&amp;B</string>
     <string name="eq_my_curve">منحني</string>
     <string name="eq_not_saved">‍غير محفوظ</string>
@@ -3353,14 +3303,7 @@
         <item quantity="many">%1$d فيديو</item>
         <item quantity="other">%1$d فيديو</item>
     </plurals>
-    <plurals name="local_songs_count">
-        <item quantity="zero">لا توجد أغاني</item>
-        <item quantity="one">أغنية واحدة</item>
-        <item quantity="two">أغنيتان</item>
-        <item quantity="few">%1$d أغاني</item>
-        <item quantity="many">%1$d أغنية</item>
-        <item quantity="other">%1$d أغنية</item>
-    </plurals>
+
     <string name="local_menu_hide_folder">إخفاء هذا المجلد</string>
     <string name="local_menu_delete_trash">ينقله إلى المهملات لمدة 30 يومًا</string>
     <string name="local_menu_delete_permanent">يحذفه من هذا الجهاز</string>
@@ -3424,7 +3367,7 @@
     <string name="downloads_storage_used">%1$s في Chorplay</string>
     <string name="downloads_storage_free">%1$s متاح</string>
     <string name="downloads_storage_videos">فيديوهات %1$s</string>
-    <string name="downloads_storage_music">موسيقى %1$s</string>
+    <string name="downloads_storage_audio">موسيقى %1$s</string>
     <string name="check_out_short_template">شاهد هذا المقطع القصير: %1$s\nhttps://youtube.com/shorts/%2$s</string>
     <string name="link_not_supported">لا يمكن لـ Chorplay فتح هذا النوع من الروابط</string>
     <string name="content_settings_hide_watched_shorts_title">‎إخفاء مقاطع Shorts التي تمت مشاهدتها</string>
@@ -3441,9 +3384,9 @@
         <item quantity="many">%d نطاقات ترددية</item>
         <item quantity="other">%d نطاقات ترددية</item>
     </plurals>
-    <string name="music_search_section_artists">الفنانون</string>
-    <string name="music_search_section_playlists">قوائم التشغيل</string>
-    <string name="music_search_section_episodes">الحلقات</string>
+
+
+
     <plurals name="export_newpipe_subs_skipped">
         <item quantity="zero">تم التصدير، ولم يتم تضمين أي قناة بدون معرّف قناة</item>
         <item quantity="one">تم التصدير، ولم يتم تضمين قناة واحدة بدون معرّف قناة</item>
@@ -3489,8 +3432,8 @@
     <string name="settings_section_layout">التخطيط</string>
     <string name="settings_section_video_cards">بطاقات الفيديو</string>
     <string name="settings_section_more">المزيد</string>
-    <string name="settings_music_artwork_size_title">حجم صورة الغلاف الموسيقي</string>
-    <string name="settings_music_artwork_size_summary">حجم أغلفة الألبومات والبطاقات في صفحات الموسيقى</string>
+
+
     <string name="settings_section_tabs">علامات التبويب</string>
     <string name="settings_section_tab_order">ترتيب التبويبات والتبويب الافتراضي</string>
     <string name="settings_theme_follow_system">اتباع النظام</string>
@@ -3515,12 +3458,12 @@
     <string name="settings_section_pip">صورة داخل صورة والمشغل المصغّر</string>
     <string name="settings_section_language_captions">اللغة والترجمات</string>
     <string name="settings_section_shorts_player">مشغّل المقاطع القصيرة</string>
-    <string name="settings_section_music">الموسيقى</string>
+
     <string name="settings_keywords_autoplay">الفيديو التالي، التشغيل التالي، التشغيل التلقائي</string>
     <string name="settings_keywords_gestures">السحب، النقر المزدوج، اللمس</string>
     <string name="settings_speed_preset_hint">مثل 1.35</string>
     <string name="settings_speed_preset_add">إضافة إعداد مسبق</string>
-    <string name="settings_section_music_player">مشغّل الموسيقى</string>
+
     <string name="settings_section_video_player">مشغّل الفيديو</string>
     <string name="settings_section_mini_player">المشغّل المصغّر</string>
     <string name="settings_section_speed">السرعة</string>
@@ -3545,8 +3488,8 @@
     </plurals>
     <string name="widget_browse_downloads">تصفح التنزيلات</string>
     <string name="widget_shuffle">تشغيل عشوائي</string>
-    <string name="widget_identify_song">التعرّف على الأغنية</string>
-    <string name="widget_open_music">فتح الموسيقى</string>
+
+
     <string name="widget_config_shortcuts">اختصارات</string>
     <string name="widget_config_shortcuts_footer">اختر ما يصل إلى أربعة. البحث موجود دائمًا.</string>
     <string name="widget_playlist_label">قائمة تشغيل</string>
@@ -3555,14 +3498,7 @@
     <string name="widget_config_playlist">قائمة تشغيلك</string>
     <string name="widget_playlist_empty">لا يوجد شيء هنا بعد</string>
     <string name="widget_refresh">تحديث</string>
-    <plurals name="widget_playlist_songs">
-        <item quantity="zero">%d أغنية</item>
-        <item quantity="one">أغنية واحدة</item>
-        <item quantity="two">أغنيتان</item>
-        <item quantity="few">%d أغاني</item>
-        <item quantity="many">%d أغنية</item>
-        <item quantity="other">%d أغنية</item>
-    </plurals>
+
     <plurals name="widget_playlist_videos">
         <item quantity="zero">%d فيديو</item>
         <item quantity="one">فيديو واحد</item>
@@ -3599,12 +3535,12 @@
     <string name="settings_seconds_value">%1$s ث</string>
     <string name="settings_quality_tab_video">الفيديو</string>
     <string name="settings_quality_tab_shorts">Shorts</string>
-    <string name="settings_quality_tab_music">الموسيقى</string>
+
     <string name="settings_quality_wifi">عبر Wi-Fi</string>
     <string name="settings_quality_mobile">عبر بيانات الهاتف المحمول</string>
     <string name="settings_section_resolution">الدقة</string>
     <string name="settings_section_codec">برنامج الترميز</string>
-    <string name="settings_music_quality_auto_summary">جودة عالية عبر Wi-Fi، ومتوسطة عبر بيانات الهاتف المحمول</string>
+
     <string name="settings_keywords_quality">الدقة، 1080p، 4K، HD، استهلاك البيانات</string>
     <string name="settings_keywords_codec">H.264، AVC، VP9، AV1، فك الترميز العتادي</string>
     <string name="settings_quality_preferred_codec">برنامج الترميز المفضّل</string>
@@ -3627,12 +3563,12 @@
     <string name="settings_backup_tab_auto">تلقائي</string>
     <string name="settings_backup_full">نسخة احتياطية كاملة</string>
     <string name="settings_backup_individual">عمليات تصدير منفصلة</string>
-    <string name="settings_backup_restore_flow">استعادة من Chorplay</string>
+    <string name="settings_backup_restore_chorplay">استعادة من Chorplay</string>
     <string name="settings_backup_source_youtube">YouTube و Google Takeout</string>
     <string name="settings_backup_source_newpipe">NewPipe</string>
     <string name="settings_backup_source_libretube">LibreTube</string>
     <string name="settings_backup_source_freetube">FreeTube</string>
-    <string name="settings_backup_source_metrolist">Metrolist</string>
+
     <string name="settings_backup_one_copy">كل نسخة احتياطية تستبدل السابقة في المجلد.</string>
     <string name="settings_backup_needs_folder">اختر مجلدًا أولًا</string>
     <string name="settings_keywords_backup">تصدير، استيراد، استعادة، ترحيل، نقل، تصدير البيانات، NewPipe، LibreTube، FreeTube</string>
@@ -3643,7 +3579,7 @@
     <string name="settings_storage_access_summary">يتيح أيضًا لقائمة الوسائط المحلية عرض الملفات المحفوظة بواسطة التطبيقات الأخرى</string>
     <string name="settings_storage_usage">%1$s متاحة من %2$s</string>
     <string name="settings_location_default">افتراضي</string>
-    <string name="settings_music_folder_label">الموسيقى / Chorplay</string>
+
     <string name="settings_keywords_downloads">حفظ بلا إنترنت، مجلد، مساحة التخزين، بطاقة SD</string>
     <string name="settings_section_notification_types">أبلغني بشأن</string>
     <string name="settings_keywords_notifications">‎التنبيهات، الإشعارات الفورية، التحميلات الجديدة، التحقق في الخلفية، Shorts</string>
@@ -3777,8 +3713,8 @@
     <string name="taste_channels_header">القنوات التي يفضّلها</string>
     <string name="taste_channel_block">حظر القناة</string>
     <string name="taste_item_actions">خيارات إضافية لـ %1$s</string>
-    <string name="taste_music_header">ذوقك الموسيقي</string>
-    <string name="taste_music_stage">مرحلة التعلّم</string>
+
+
     <string name="taste_hidden_title">مخفي عنك</string>
     <string name="taste_hidden_summary">المواضيع والقنوات والفنانون المحظورون</string>
     <plurals name="taste_hidden_count">
@@ -3801,12 +3737,12 @@
     <string name="taste_export_video">تصدير ملف الفيديو</string>
     <string name="taste_import_video">استيراد ملف الفيديو</string>
     <string name="taste_reset_video">إعادة ضبط ملف الفيديو</string>
-    <string name="taste_export_music">تصدير ملف الموسيقى</string>
-    <string name="taste_import_music">استيراد ملف الموسيقى</string>
-    <string name="taste_reset_music">إعادة ضبط ملف الموسيقى</string>
+
+
+
     <string name="taste_reset_video_body">ينسى Chorplay ما تعلّمه من فيديوهاتك وعمليات بحثك. يظل سجل المشاهدة والإعجابات وقوائم التشغيل والعناصر المخفية محفوظة، وتستمر صفحة «المنزل» في استخدامها.</string>
-    <string name="taste_reset_music_title">هل تريد إعادة ضبط ملف الموسيقى؟</string>
-    <string name="taste_reset_music_body">‏يمسح هذا ما تعلّمه Chorplay من موسيقاك ويبدأ من الصفر. يبقى ملخصك كما هو.</string>
+
+
     <string name="taste_trait_now">الآن %1$s</string>
     <string name="taste_reset_done">تمت إعادة ضبط الملف الشخصي</string>
     <string name="diagnostics_engine_header">تفاصيل المحرك</string>
@@ -3825,7 +3761,7 @@
     <string name="recap_top_tracks">الأغاني الأكثر استماعًا</string>
     <string name="recap_top_genres">الأنواع الموسيقية</string>
     <string name="eq_preamp">المضخّم الأوّلي</string>
-    <string name="settings_keywords_discord">الحضور الغني، قيد التشغيل الآن، الحالة</string>
+
     <plurals name="recap_views_count">
         <item quantity="zero">لا توجد مشاهدات</item>
         <item quantity="one">مشاهدة واحدة</item>
@@ -3848,8 +3784,7 @@
     <string name="recap_format_long">الفيديوهات</string>
     <string name="recap_format_shorts">Shorts</string>
     <string name="recap_format_live">مباشر</string>
-    <string name="recap_format_music">الموسيقى</string>
-    <string name="recap_format_share">%1$s · %2$s</string>
+<string name="recap_format_share">%1$s · %2$s</string>
     <string name="recap_discoveries_title">جديد عليك</string>
     <string name="recap_passed_title">ما تجاوزته</string>
     <string name="recap_passed_subtitle">ما تخطيته مبكرًا أو لم يعجبك أو أخفيته</string>
@@ -3883,8 +3818,7 @@
     <string name="recap_story_streak_body">كان أكثر أيامك نشاطًا هو %1$s، بواقع %2$s</string>
     <string name="recap_story_artist">فنانك المفضّل</string>
     <string name="recap_story_artist_body">%1$s، %2$d%% من كل ما شغّلته</string>
-    <string name="recap_story_songs">الأغاني التي واصلت العودة إليها</string>
-    <string name="recap_story_new">جديد عليك</string>
+<string name="recap_story_new">جديد عليك</string>
     <string name="recap_story_passed">ما تجاوزته</string>
     <string name="recap_story_formats">طريقة مشاهدتك</string>
     <string name="recap_story_sponsor">الوقت الذي وفّره لك SponsorBlock</string>
@@ -3917,29 +3851,29 @@
     <string name="content_settings_remove_watched_watch_later_title">‎إزالة الفيديوهات التي شاهدتها</string>
     <string name="content_settings_remove_watched_watch_later_subtitle">إزالة الفيديوهات من «المشاهدة لاحقًا» بعد الانتهاء من مشاهدتها</string>
     <string name="liked_videos_playlist">الفيديوهات التي أعجبتك</string>
-    <string name="liked_music_playlist">الموسيقى التي أعجبتك</string>
+
     <string name="liked_videos_empty_title">لا توجد فيديوهات أعجبتك بعد</string>
     <string name="liked_videos_empty_body">ستظهر هنا الفيديوهات التي تعجبك</string>
     <string name="remove_selected_likes_text">سيتم إلغاء الإعجاب بها.</string>
-    <string name="removed_from_liked_music">تمت إزالته من الموسيقى التي أعجبتك</string>
+
     <string name="liked_video_template">%1$s التي أعجبتك</string>
-    <string name="liked_music_empty_title">لا توجد أغانٍ أعجبتك بعد</string>
-    <string name="liked_music_empty_body">ستظهر هنا الأغاني التي تعجبك في مشغل الموسيقى</string>
-    <string name="music_kind_album">الألبوم</string>
-    <string name="music_kind_saved">تم الحفظ في مكتبتك</string>
-    <string name="music_playlist_empty_title">قائمة التشغيل هذه فارغة</string>
-    <string name="music_playlist_empty_body">أضف أغانٍ من القائمة في الأعلى</string>
-    <string name="music_sort_collection">ترتيب قائمة التشغيل</string>
-    <string name="music_sort_album_order">ترتيب الألبوم</string>
-    <string name="music_sort_recently_liked">أُعجب به مؤخرًا</string>
-    <string name="music_sort_title">العنوان</string>
-    <string name="music_sort_artist">الفنان</string>
-    <string name="music_sort_album">الألبوم</string>
-    <string name="music_sort_longest">الأطول أولاً</string>
-    <string name="music_sort_shortest">الأقصر أولاً</string>
-    <string name="music_collection_no_matches">لا توجد أغاني تطابق \"%1$s\"</string>
-    <string name="select_songs">تحديد الأغاني</string>
-    <string name="songs_download_nothing_new">كل شيء هنا محمل بالفعل أو غير متاح</string>
+
+
+
+
+
+
+
+
+
+
+
+
+    <string name="playlist_sort_longest">الأطول أولاً</string>
+    <string name="playlist_sort_shortest">الأقصر أولاً</string>
+
+
+
     <string name="save_as_playlist">حفظ كقائمة تشغيل</string>
     <string name="daily_mix_saved_as_playlist">تم حفظ %1$s في قوائم التشغيل الخاصة بك</string>
     <string name="eq_type_low_pass">تمرير منخفض</string>
@@ -4029,46 +3963,11 @@
         <item quantity="many">تم إلغاء الإعجاب بـ %d فيديو</item>
         <item quantity="other">تم إلغاء الإعجاب بـ %d فيديو</item>
     </plurals>
-    <plurals name="songs_removed_from_playlist">
-        <item quantity="zero">لم تتم إزالة أي أغنية</item>
-        <item quantity="one">تمت إزالة أغنية واحدة</item>
-        <item quantity="two">تمت إزالة أغنيتين</item>
-        <item quantity="few">تمت إزالة %d أغانٍ</item>
-        <item quantity="many">تمت إزالة %d أغنية</item>
-        <item quantity="other">تمت إزالة %d أغنية</item>
-    </plurals>
-    <plurals name="songs_unliked">
-        <item quantity="zero">لم يتم إلغاء الإعجاب بأي أغنية</item>
-        <item quantity="one">تم إلغاء الإعجاب بأغنية واحدة</item>
-        <item quantity="two">تم إلغاء الإعجاب بأغنيتين</item>
-        <item quantity="few">تم إلغاء الإعجاب بـ %d أغانٍ</item>
-        <item quantity="many">تم إلغاء الإعجاب بـ %d أغنية</item>
-        <item quantity="other">تم إلغاء الإعجاب بـ %d أغنية</item>
-    </plurals>
-    <plurals name="music_playlist_imported">
-        <item quantity="zero">تم استيراد %1$s، ولم تُستورد أي أغنية</item>
-        <item quantity="one">تم استيراد %1$s، وأُضيفت أغنية واحدة</item>
-        <item quantity="two">تم استيراد %1$s، وأُضيفت أغنيتان</item>
-        <item quantity="few">تم استيراد %1$s، وأُضيفت %2$d أغانٍ</item>
-        <item quantity="many">تم استيراد %1$s، وأُضيفت %2$d أغنية</item>
-        <item quantity="other">تم استيراد %1$s، وأُضيفت %2$d أغنية</item>
-    </plurals>
-    <plurals name="songs_downloading">
-        <item quantity="zero">لا توجد أغانٍ قيد التنزيل</item>
-        <item quantity="one">جارٍ تنزيل أغنية واحدة</item>
-        <item quantity="two">جارٍ تنزيل أغنيتين</item>
-        <item quantity="few">جارٍ تنزيل %d أغانٍ</item>
-        <item quantity="many">جارٍ تنزيل %d أغنية</item>
-        <item quantity="other">جارٍ تنزيل %d أغنية</item>
-    </plurals>
-    <plurals name="songs_download_queued">
-        <item quantity="zero">لا توجد أغانٍ في قائمة انتظار التنزيل</item>
-        <item quantity="one">أغنية واحدة في قائمة انتظار التنزيل</item>
-        <item quantity="two">‌أغنيتان في قائمة انتظار التنزيل</item>
-        <item quantity="few">%d أغانٍ في قائمة انتظار التنزيل</item>
-        <item quantity="many">%d أغنية في قائمة انتظار التنزيل</item>
-        <item quantity="other">%d أغنية في قائمة انتظار التنزيل</item>
-    </plurals>
+
+
+
+
+
     <string name="eq_type_low_shelf">رف منخفض</string>
     <string name="eq_type_high_shelf">رف مرتفع</string>
     <string name="eq_import_summary">%1$d مرشحات، المضخّم الأوّلي %2$s</string>
@@ -4101,8 +4000,8 @@
     <string name="download_collection_delete_files">حذف التنزيلات</string>
     <string name="download_collection_keep_files">الاحتفاظ بالملفات</string>
     <string name="import_no_likes">لم يتم العثور على أي إعجابات. صدّر «نشاطي» على YouTube بصيغة JSON، مع ضبط حساب Google على اللغة الإنجليزية.</string>
-    <string name="settings_music_download_quality">جودة تنزيل الأغاني</string>
-    <string name="settings_music_download_quality_summary">تُستخدم للأغاني والألبومات وقوائم التشغيل الموسيقية</string>
+
+
     <string name="download_retag_title">العلامات للتنزيلات القديمة</string>
     <string name="download_retag_waiting">في انتظار البدء</string>
     <string name="download_retag_progress">جارٍ إضافة العلامات، %1$d من أصل %2$d</string>
@@ -4153,7 +4052,7 @@
     <string name="home_chip_empty_body">اسحب لأسفل للاطلاع مرة أخرى لاحقًا.</string>
     <string name="home_chip_failed">تعذّر تحميل هذا الآن.</string>
     <string name="library_video_playlists">قوائم تشغيل الفيديوهات</string>
-    <string name="library_music_playlists">قوائم تشغيل الموسيقى</string>
+
     <string name="playlists_sort_newest">الأحدث</string>
     <string name="playlists_sort_oldest">الأقدم</string>
     <string name="playlists_sort_name">الاسم</string>
@@ -4161,8 +4060,8 @@
     <string name="playlists_reorder">إعادة ترتيب قوائم التشغيل</string>
     <string name="playlists_show_list">عرض كقائمة</string>
     <string name="playlists_show_grid">عرض كشبكة</string>
-    <string name="music_home_your_playlists">قوائم التشغيل الخاصة بك</string>
-    <string name="music_collection_suggestions">اقتراحات</string>
+
+
     <string name="favourite_artists_title">الفنّانون المفضلون</string>
     <string name="home_reason_channel_memory">من قناة تشاهدها</string>
     <string name="taste_remembered_header">القنوات التي تواصل مشاهدتها</string>
@@ -4173,19 +4072,17 @@
     <string name="taste_remembered_clear">مسح ذاكرة القناة</string>
     <string name="home_chip_mixes">اقتراحات</string>
     <string name="home_mix_title">اقتراحات - %1$s</string>
-    <string name="settings_separate_playlists_title">فصل قوائم تشغيل الفيديو والموسيقى</string>
-    <string name="settings_music_normal_speed_title">تشغيل الموسيقى بالسرعة العادية</string>
-    <string name="settings_music_normal_speed_summary">تبدأ مقاطع الفيديو الموسيقية بسرعة 1x</string>
+
+
     <string name="settings_speed_per_channel_title">تذكر السرعة لكل قناة</string>
     <string name="settings_speed_per_channel_summary">تبدأ كل قناة بالسرعة التي اخترتها آخر مرة</string>
-    <string name="favourite_artists_summary">اختر الفنانين لتشكيل موسيقاك</string>
     <string name="favourite_artists_picked">اختياراتك</string>
     <string name="favourite_artists_results">النتائج</string>
     <string name="favourite_artists_none">لا فنّانين موجودين</string>
     <string name="favourite_artists_add">إضافة %1$s</string>
     <string name="favourite_artists_remove">إزالة %1$s</string>
     <string name="settings_auto_download_likes_title">تنزيل الأغاني التي تم الإعجاب بها</string>
-    <string name="music_home_your_subscriptions">اشتراكاتك</string>
+
     <plurals name="onboarding_ready_artists">
         <item quantity="zero">لا فنّانين</item>
         <item quantity="one">%d فنان</item>
@@ -4194,97 +4091,38 @@
         <item quantity="many">%d فنانًا</item>
         <item quantity="other">%d فنان</item>
     </plurals>
-    <string name="scrobbling_user_name">اسم المستخدم</string>
-    <string name="scrobbling_password">كلمة المرور</string>
-    <string name="scrobbling_sign_in">تسجيل الدخول</string>
-    <string name="scrobbling_sign_in_failed">فشل تسجيل الدخول</string>
-    <string name="scrobbling_sign_out_title">هل تريد تسجيل الخروج من %1$s؟</string>
-    <string name="scrobbling_sign_out">تسجيل الخروج</string>
-    <string name="scrobbling_show_secret">إظهار</string>
-    <string name="scrobbling_hide_secret">إخفاء</string>
-    <string name="scrobbling_import_later">ليس الآن</string>
-    <plurals name="scrobbling_import_done">
-        <item quantity="one">تمت إضافة فنان واحد إلى المفضلة لديك</item>
-        <item quantity="two">تمت إضافة فنانان إلى المفضلة لديك</item>
-        <item quantity="few">تمت إضافة %d فنّانين إلى المفضلة لديك</item>
-        <item quantity="many">تمت إضافة %d فنانًا إلى المفضلة لديك</item>
-        <item quantity="other">تمت إضافة %d فنان إلى المفضلة لديك</item>
-    </plurals>
-    <string name="scrobbling_import_none">لا يوجد فنانون جدد لإضافتهم</string>
-    <string name="recap_top_albums">أفضل الألبومات</string>
-    <string name="scrobbling_import">استيراد أفضل الفنانين لديك</string>
-    <string name="scrobbling_import_failed">تعذّر قراءة أفضل الفنانين لديك</string>
     <string name="cache_size_1gb">1 جيجابايت</string>
     <string name="cache_size_2gb">2 جيجابايت</string>
     <string name="cache_size_5gb">5 جيجابايت</string>
-    <string name="settings_music_video_switch_title">التبديل بين الأغنية والفيديو</string>
-    <string name="settings_music_video_switch_summary">التبديل بين الأغنية والفيديو الموسيقي الخاص بها في المشغّل</string>
+
+
     <string name="music_player_mode_song">أغنية</string>
     <string name="music_player_mode_video">فيديو</string>
-    <string name="music_video_unavailable">لا يوجد فيديو موسيقي لهذه الأغنية</string>
-    <string name="music_video_failed">تعذّر تحميل الفيديو الموسيقي</string>
-    <string name="music_watch_video">مشاهدة الفيديو</string>
-    <string name="settings_pause_music_muted_title">إيقاف الموسيقى مؤقتًا عند كتم الصوت</string>
-    <string name="settings_pause_music_muted_summary">استئناف الموسيقى عند إعادة تشغيل الصوت</string>
-    <string name="music_watch_video_desc">فتح الفيديو الموسيقي في مشغّل الفيديو</string>
+
+
+
+
+
+
     <string name="player_appearance_animated_artwork_title">الغلاف المتحرك</string>
-    <string name="player_appearance_animated_artwork_subtitle">تكرار الغلاف المتحرك للألبوم إذا كان متاحًا</string>
     <string name="player_appearance_animated_artwork_wifi_title">تشغيل الأغلفة المتحركة عبر Wi-Fi فقط</string>
     <string name="player_appearance_animated_artwork_wifi_subtitle">إيقاف حركة الغلاف عند استخدام بيانات الهاتف</string>
     <string name="settings_separate_playlists_summary">عرضهما كعنصرين منفصلين في المكتبة</string>
     <string name="favourite_artists_search">البحث عن الفنانين</string>
     <string name="favourite_artists_popular">الرائج الآن</string>
     <string name="settings_auto_download_likes_summary">يتم حفظ الأغاني التي تعجبك للاستماع إليها بلا إنترنت</string>
-    <string name="music_home_shelf_rotation">مزيج حسب وقت اليوم</string>
-    <string name="music_home_shelf_similar">مزيج يومي وفنانون مشابهون</string>
-    <string name="music_home_shelf_genres">مزيج حسب النوع الموسيقي</string>
-    <string name="music_home_shelf_more">المزيد من YouTube Music</string>
-    <string name="music_home_shelf_charts">الأغاني الرائجة</string>
-    <string name="settings_music_home_title">الصفحة الرئيسية للموسيقى</string>
-    <string name="settings_music_home_summary">اختيار الأقسام التي تظهر في الصفحة الرئيسية للموسيقى</string>
-    <string name="settings_music_home_sections">‎الأقسام</string>
+
+
+
+
+
+
+
+
     <string name="onboarding_step_artists">الفنانون</string>
     <string name="onboarding_artists_title">اختر بعض الفنانين</string>
     <string name="onboarding_artists_subtitle">ستبدأ اقتراحاتك الموسيقية بهؤلاء الفنانين. يمكنك تخطي هذه الخطوة إذا أردت.</string>
     <string name="onboarding_artists_search_placeholder">البحث عن فنانين</string>
-    <string name="scrobbling_title">تسجيل الاستماع</string>
-    <string name="scrobbling_summary">إرسال ما تستمع إليه إلى Last.fm أو Libre.fm أو ListenBrainz</string>
-    <string name="settings_keywords_scrobbling">إرسال ما تستمع إليه إلى Last.fm أو Libre.fm أو ListenBrainz</string>
-    <string name="scrobbling_lastfm">Last.fm</string>
-    <string name="scrobbling_librefm">Libre.fm</string>
-    <string name="scrobbling_listenbrainz">ListenBrainz</string>
-    <string name="scrobbling_account">الحساب</string>
-    <string name="scrobbling_signed_in_as">تم تسجيل الدخول باسم %1$s</string>
-    <string name="scrobbling_signed_in">تم تسجيل الدخول</string>
-    <string name="scrobbling_not_signed_in">لم يتم تسجيل الدخول</string>
-    <string name="scrobbling_needs_key">أضف مفتاح API الخاص بك أدناه لتسجيل الدخول</string>
-    <string name="scrobbling_own_key">استخدم مفتاح API الخاص بك</string>
-    <string name="scrobbling_own_key_summary">سيؤدي تغييره إلى تسجيل خروجك من Last.fm</string>
-    <string name="scrobbling_own_key_values">مفتاح API و السر</string>
-    <string name="scrobbling_own_key_missing">غير مُعيّن</string>
-    <string name="scrobbling_options">‎الخيارات</string>
-    <string name="scrobbling_now_playing">إظهار ما يتم تشغيله الآن</string>
-    <string name="scrobbling_now_playing_summary">تتيح للخدمات معرفة الأغنية التي يتم تشغيلها</string>
-    <string name="scrobbling_local">تسجيل الأغاني التي تستمع إليها على هذا الجهاز</string>
-    <string name="scrobbling_local_summary">يستخدم وسوم الفنان والعنوان في كل ملف</string>
-    <string name="scrobbling_send_now">إرسال عمليات الاستماع المعلّقة</string>
-    <string name="scrobbling_sign_in_title">تسجيل الدخول إلى %1$s</string>
-    <string name="scrobbling_password_note">يُرسل كلمة المرور مرة واحدة ولا يتم حفظها.</string>
-    <string name="scrobbling_token">رمز المستخدم</string>
-    <string name="scrobbling_token_note">انسخه من listenbrainz.org/settings.</string>
-    <string name="scrobbling_sign_out_body">سيتم حذف عمليات الاستماع المعلّقة للإرسال.</string>
-    <string name="scrobbling_own_key_dialog_title">مفتاح API الخاص بك في Last.fm</string>
-    <string name="scrobbling_own_key_dialog_body">أنشئ مفتاحًا مجانًا من last.fm/api/account/create.</string>
-    <string name="scrobbling_api_key">مفتاح API</string>
-    <string name="scrobbling_secret">السر المشترك</string>
-    <string name="scrobbling_send_likes">الأغاني التي أعجبتك</string>
-    <string name="scrobbling_send_likes_summary">تظهر الإعجابات كأغانٍ مفضلة على Last.fm وLibre.fm</string>
-    <string name="scrobbling_import_summary">إضافة الفنانين الأكثر استماعًا إليهم إلى مفضلاتك</string>
-    <string name="scrobbling_import_offer_title">شكّل ذوقك الموسيقي مع %1$s؟</string>
-    <string name="scrobbling_import_offer_body">سيضيف Chorplay أكثر 20 فنانًا استمعت إليهم خلال العام الماضي إلى فنانيك المفضّلين. ويمكنك إزالة أيٍّ منهم لاحقًا.</string>
-    <string name="scrobbling_import_action">استيراد</string>
-    <string name="music_home_lastfm_discover">اكتشف مع Last.fm</string>
-    <string name="music_home_lastfm_discover_subtitle">اختيارات مستمعي Last.fm من أغانيك الأكثر استماعًا</string>
     <string name="remove_from_saved_shorts">إزالة من الشورتز المحفوظة</string>
     <string name="content_settings_channel_shorts_tab_title">تبويب المقاطع القصيرة في القنوات</string>
     <string name="content_settings_channel_shorts_tab_subtitle">إبقاء تبويب المقاطع القصيرة في القناة حتى عند إخفاء المقاطع القصيرة</string>
@@ -4372,14 +4210,6 @@
     <string name="auto_download_wifi">عبر Wi-Fi</string>
     <string name="auto_download_always">دائمًا</string>
     <string name="auto_download_queued">الحفظ للاستخدام بلا إنترنت</string>
-    <plurals name="scrobbling_waiting">
-        <item quantity="zero">%d في الانتظار</item>
-        <item quantity="one">%d في الانتظار</item>
-        <item quantity="two">%d في الانتظار</item>
-        <item quantity="few">%d في الانتظار</item>
-        <item quantity="many">%d في الانتظار</item>
-        <item quantity="other">%d في الانتظار</item>
-    </plurals>
     <string name="channel_name_copied">تم نسخ اسم القناة إلى الحافظة</string>
     <string name="copy_channel_name">نسخ اسم القناة</string>
     <string name="channel_name_clip_label">اسم القناة</string>
@@ -4412,8 +4242,7 @@
     <string name="cache_group_header">التخزين المؤقت</string>
     <string name="cache_in_use">المستخدم: %1$s</string>
     <string name="cache_videos">الفيديوهات</string>
-    <string name="cache_songs">الأغاني</string>
-    <string name="cache_artwork">الغلاف الفني</string>
+<string name="cache_artwork">الغلاف الفني</string>
     <string name="cache_other">أخرى</string>
     <string name="cache_used_of_limit">%1$s من %2$s</string>
     <string name="cache_used_no_limit">%1$s، بلا حد</string>
@@ -4421,8 +4250,7 @@
     <string name="cache_other_summary">الكلمات والشبكة، %1$s</string>
     <string name="cache_measuring">جارٍ القياس…</string>
     <string name="cache_videos_size_title">حجم ذاكرة تخزين الفيديو المؤقتة</string>
-    <string name="cache_songs_size_title">حجم ذاكرة تخزين الأغاني المؤقتة</string>
-    <string name="cache_artwork_size_title">حجم ذاكرة تخزين الأغلفة الفنية المؤقتة</string>
+<string name="cache_artwork_size_title">حجم ذاكرة تخزين الأغلفة الفنية المؤقتة</string>
     <string name="cache_size_applies_on_restart">يُطبق في المرة التالية التي يبدأ فيها Chorplay.</string>
     <string name="settings_font_title">الخط</string>
     <string name="settings_font_summary">نوع الخط المستخدم في جميع أنحاء Chorplay</string>
@@ -4442,10 +4270,8 @@
     <string name="font_import_not_font">اختر ملف ‎.ttf أو ‎.otf</string>
     <string name="font_import_too_large">يمكن أن يصل حجم ملفات الخطوط إلى %1$d ميغابايت</string>
     <string name="font_import_unreadable">تعذّر قراءة الملف كخط</string>
-    <string name="deep_flow_scrobble_title">تسجيل الاستماع أثناء Deep Chorplay</string>
-    <string name="taste_learning_paused">Deep Chorplay مفعّل، والتعلّم متوقف مؤقتًا</string>
-    <string name="deep_flow_scrobble_subtitle">الاستمرار في إرسال ما تستمع إليه إلى Last.fm وLibre.fm وListenBrainz</string>
-    <string name="downloads_recover_title">البحث عن التنزيلات من تثبيت سابق</string>
+<string name="taste_learning_paused">Deep Chorplay مفعّل، والتعلّم متوقف مؤقتًا</string>
+<string name="downloads_recover_title">البحث عن التنزيلات من تثبيت سابق</string>
     <string name="downloads_recover_body">يحفظ Chorplay التنزيلات في المجلدين Download/Chorplay و Music/Chorplay. لعرض الملفات التي حفظها إصدار سابق من التطبيق فيهما، اسمح بالوصول إلى ملفات الفيديو والصوت.</string>
     <string name="downloads_recover_allow">السماح بالوصول</string>
     <string name="downloads_recover_dismiss">ليس الآن</string>
@@ -4464,9 +4290,7 @@
     <string name="mini_bar_swipe_right">السحب لليمين</string>
     <string name="mini_bar_swipe_subtitle">لشريط الموسيقى و شريط فيديو الخلفية</string>
     <string name="mini_bar_nothing_next">لا يوجد شيء تالياً</string>
-    <string name="mini_bar_nothing_previous">لا يوجد شيء سابقاً</string>
-    <string name="categories_chart_source">قوائم تصنيفات YouTube Music</string>
-    <plurals name="categories_rate_limited">
+    <string name="mini_bar_nothing_previous">لا يوجد شيء سابقاً</string>    <plurals name="categories_rate_limited">
         <item quantity="zero">يفرض YouTube قيودًا على الطلبات حاليًا. حاول مجددًا بعد بضع دقائق.</item>
     </plurals>
     <string name="import_takeout_step_history">سجل المشاهدة</string>
@@ -4496,16 +4320,7 @@
         <item quantity="many">%1$d قائمة تشغيل (%2$d فيديو)</item>
         <item quantity="other">%1$d قائمة تشغيل (%2$d فيديو)</item>
     </plurals>
-    <plurals name="import_takeout_part_music_library">
-        <item quantity="zero">%d أغنية في مكتبة YouTube Music</item>
-        <item quantity="one">أغنية واحدة في مكتبة YouTube Music</item>
-        <item quantity="two">أغنيتان في مكتبة YouTube Music</item>
-        <item quantity="few">%d أغاني في مكتبة YouTube Music</item>
-        <item quantity="many">%d أغنية في مكتبة YouTube Music</item>
-        <item quantity="other">%d أغنية في مكتبة YouTube Music</item>
-    </plurals>
-    <string name="import_takeout_music_library_name">مكتبة YouTube Music</string>
-    <plurals name="import_takeout_part_searches">
+<plurals name="import_takeout_part_searches">
         <item quantity="zero">%d عملية بحث</item>
         <item quantity="one">%d عملية بحث</item>
         <item quantity="two">%d عملية بحث</item>
@@ -4528,7 +4343,7 @@
     <string name="sync_error_declined">تم رفض الدمج. لم يتم نقل أي شيء.</string>
     <string name="sync_error_protocol">تعذّر على الجهازين الاتفاق على خطوات المزامنة. حدّث Chorplay على كلا الجهازين وحاول مرة أخرى.</string>
     <string name="sync_error_peer">أبلغ الجهاز الآخر عن مشكلة: %1$s</string>
-    <string name="music_playback_warning_unavailable">لم تعد هذه الأغنية متاحة على YouTube.</string>
+
     <string name="notif_type_shorts_subtitle">تضمين المقاطع القصيرة في تنبيهات الفيديو الجديد من الاشتراكات</string>
     <string name="notif_type_shorts">Shorts</string>
     <string name="about_notices">إشعارات المصادر المفتوحة</string>
@@ -4633,9 +4448,9 @@
     <plurals name="search_watch_empty_unwatched">
         <item quantity="zero">لا توجد فيديوهات غير مشاهدة</item>
     </plurals>
-    <string name="deep_flow_on_search_title">إظهار في البحث</string>
-    <string name="deep_flow_on_search_subtitle">مفتاح تبديل Deep Chorplay فوق عمليات البحث الأخيرة</string>
-    <string name="support_flow_open_collective">ادعم Chorplay على Open Collective</string>
+    <string name="deep_chor_on_search_title">إظهار في البحث</string>
+    <string name="deep_chor_on_search_subtitle">مفتاح تبديل Deep Chorplay فوق عمليات البحث الأخيرة</string>
+    <string name="support_chorplay_open_collective">ادعم Chorplay على Open Collective</string>
     <string name="auto_tab_for_you">مقترح لك</string>
     <string name="auto_tab_queue">قائمة التشغيل</string>
     <string name="taste_unknown_channel">قناة غير معروفة</string>
@@ -4665,28 +4480,20 @@
     <string name="lyrics_provider_youtube_music_desc">نص عادي · تبويب الكلمات</string>
     <string name="queue_swipe_left">السحب لليسار في قائمة التشغيل</string>
     <string name="queue_swipe_right">السحب لليمين في قائمة التشغيل</string>
-    <string name="queue_swipe_subtitle">للأغاني في التالي</string>
     <string name="queue_move_to_end">نقل إلى النهاية</string>
-    <string name="playlist_move_to_music">نقل إلى الموسيقى</string>
+
     <string name="playlist_move_to_videos">نقل إلى الفيديوهات</string>
-    <string name="playlist_moved_to_music">تم النقل إلى الموسيقى</string>
+
     <string name="playlist_moved_to_videos">تم النقل إلى الفيديوهات</string>
-    <plurals name="import_takeout_part_music_playlists">
-        <item quantity="zero">لا توجد قوائم تشغيل في الموسيقى</item>
-        <item quantity="one">قائمة تشغيل واحدة في الموسيقى</item>
-        <item quantity="two">%d قائمة تشغيل في الموسيقى</item>
-        <item quantity="few">%d قوائم تشغيل في الموسيقى</item>
-        <item quantity="many">%d قائمة تشغيل في الموسيقى</item>
-        <item quantity="other">‌%d قائمة تشغيل في الموسيقى</item>
-    </plurals>
+
     <string name="lyrics_auto_romanize_japanese">غير متاح للغة اليابانية حتى الآن</string>
     <string name="notifications_already_in_watch_later">موجود بالفعل في قائمة المشاهدة لاحقًا</string>
     <string name="notifications_save_to_watch_later">حفظ في قائمة المشاهدة لاحقًا</string>
     <string name="player_settings_normalize_volume">توحيد مستوى الصوت</string>
     <string name="player_settings_normalize_volume_summary">خفض صوت الفيديوهات المرتفعة إلى مستوى صوت YouTube</string>
-    <string name="settings_music_resume_title">استئناف تشغيل البودكاست والمقاطع الصوتية الطويلة</string>
-    <string name="settings_music_side_swipes_title">التحكم في السرعة و مستوى الصوت بالسحب</string>
-    <string name="settings_music_side_swipes_summary">اسحب على الجانب الأيسر للتحكم في السرعة، وعلى الجانب الأيمن للتحكم في مستوى الصوت</string>
+
+
+
     <string name="filter_artists">‎الفنانون</string>
     <string name="filter_featured_playlists">قوائم التشغيل المميزة</string>
     <string name="filter_podcasts">البودكاست</string>
@@ -4701,9 +4508,9 @@
     <string name="error_bot_wall_network_hint">جرّب شبكة أخرى، مثل بيانات الجوال.</string>
     <string name="error_bot_wall_session">يريد YouTube التأكد من أنك لست روبوتًا</string>
     <string name="error_bot_wall_session_hint">أعد تعيين جلسة YouTube، ثم حاول مرة أخرى.</string>
-    <string name="music_playback_warning_rate_limited">YouTube يقيّد هذه الشبكة. حاول مرة أخرى لاحقًا.</string>
-    <string name="music_playback_warning_members_or_paid">تحتاج هذه الأغنية إلى عضوية أو شراء على YouTube.</string>
-    <string name="settings_music_resume_summary">بدء تشغيل مقاطع الموسيقي التي تتجاوز مدتها 10 دقائق من حيث توقفت</string>
+
+
+
     <string name="keyboard_shortcuts_player">المشغّل</string>
     <string name="keyboard_shortcut_seek_back">ترجيع</string>
     <string name="keyboard_shortcut_volume_up">رفع مستوى الصوت</string>
@@ -4713,8 +4520,8 @@
     <string name="keyboard_shortcut_seek_forward">تقديم</string>
     <string name="keyboard_shortcut_play_pause">تشغيل أو إيقاف</string>
     <string name="keyboard_shortcut_exit_fullscreen">خروج من وضع ملء الشاشة</string>
-    <string name="music_service_disabled">تعذّر تشغيل الموسيقى. خدمة الموسيقى في Chorplay متوقفة على هذا الجهاز.</string>
-    <string name="deep_flow_long_press_hint">اضغط مطولًا على شعار Chorplay أو اسمه في الشاشة الرئيسية للتبديل إلى Deep Chorplay</string>
+
+    <string name="deep_chor_long_press_hint">اضغط مطولًا على شعار Chorplay أو اسمه في الشاشة الرئيسية للتبديل إلى Deep Chorplay</string>
     <string name="nav_downloads">التنزيلات</string>
     <string name="settings_downloads_nav_tab_title">تبويب التنزيلات في شريط التنقل</string>
     <string name="settings_downloads_nav_tab_subtitle">أضف تبويب التنزيلات إلى شريط التنقل</string>
@@ -4740,14 +4547,13 @@
     <string name="master_restore_too_many">ستؤدي هذه النسخة الاحتياطية إلى إنشاء أكثر من %1$d من ملفات التعريف. احذف ملف تعريف واحدًا، ثم حاول مرة أخرى.</string>
     <string name="home_new_videos">فيديوهات جديدة</string>
     <string name="settings_resume_from_headphones_title">استئناف التشغيل من سماعات الرأس</string>
-    <string name="settings_resume_from_headphones_summary">‏زر التشغيل على سماعات الرأس يعيد تشغيل آخر أغانيك</string>
     <string name="playback_background_restricted_title">نشاط التطبيق في الخلفية مقيّد</string>
     <string name="playback_background_restricted_subtitle">قد يتوقف تطبيق Chorplay عند إزالته من التطبيقات المفتوحة. اضغط للسماح له بالاستمرر في العمل.</string>
-    <string name="music_audio_offload_title">تفريغ الصوت إلى النظام</string>
-    <string name="music_audio_offload_desc">يوفّر البطارية. قد لا تُصدر بعض الهواتف أي صوت عند تفعيله</string>
+
+
     <string name="download_ask_every_time_title">اسأل في كل مرة</string>
     <string name="download_ask_every_time_summary">عند إيقاف هذا الخيار، يستخدم التنزيل جودة التنزيل الخاصة بك</string>
-    <string name="share_download_with_flow">التنزيل باستخدام Chorplay</string>
+    <string name="share_download_with_chorplay">التنزيل باستخدام Chorplay</string>
     <string name="share_download_not_a_video">لا يمكن تنزيل سوى الفيديوهات من الروابط المشتركة</string>
     <string name="downloads_storage_card_title">ملخص مساحة التخزين</string>
     <string name="downloads_storage_card_summary">عرض المساحة المستخدمة والمتاحة أعلى قسم التنزيلات</string>

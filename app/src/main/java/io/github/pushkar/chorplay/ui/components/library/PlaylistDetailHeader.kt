@@ -26,7 +26,6 @@ import androidx.compose.material.icons.outlined.Delete
 import androidx.compose.material.icons.outlined.Download
 import androidx.compose.material.icons.outlined.DownloadDone
 import androidx.compose.material.icons.outlined.Edit
-import androidx.compose.material.icons.outlined.LibraryMusic
 import androidx.compose.material.icons.outlined.MoreVert
 import androidx.compose.material.icons.outlined.SaveAs
 import androidx.compose.material.icons.outlined.Share
@@ -65,7 +64,7 @@ import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import io.github.pushkar.chorplay.R
 import io.github.pushkar.chorplay.ui.components.shared.ChorplayActionButtonPair
-import io.github.pushkar.chorplay.ui.components.shared.FlowPairAction
+import io.github.pushkar.chorplay.ui.components.shared.ChorPairAction
 import io.github.pushkar.chorplay.ui.components.shared.ChorplaySortChip
 import io.github.pushkar.chorplay.ui.components.shared.connectedButtonShapes
 import io.github.pushkar.chorplay.ui.components.shared.thumbnailUrlOrNull
@@ -97,8 +96,6 @@ internal data class PlaylistHeaderState(
     val downloadProgress: Float? = null,
     /** Saved as a downloaded collection; downloading again picks up only what is new. */
     val isDownloaded: Boolean = false,
-    /** The library a stored playlist sits in, offered a move to the other; null hides the move. */
-    val isInMusicLibrary: Boolean? = null,
 )
 
 /** What the header's buttons do; a missing capability in [PlaylistHeaderState] hides its button. */
@@ -112,7 +109,6 @@ internal class PlaylistHeaderActions(
     val onExport: () -> Unit,
     val onEdit: () -> Unit,
     val onDelete: () -> Unit,
-    val onMoveLibrary: () -> Unit,
 )
 
 /** The header at the top of the list, on windows too narrow for a side pane. */
@@ -242,8 +238,8 @@ private fun PlaylistNote(text: String) {
 @Composable
 private fun PlaylistPrimaryActions(actions: PlaylistHeaderActions) {
     ChorplayActionButtonPair(
-        primary = FlowPairAction(Icons.Filled.PlayArrow, stringResource(R.string.play_all), actions.onPlayAll),
-        secondary = FlowPairAction(Icons.Filled.Shuffle, stringResource(R.string.shuffle), actions.onShuffle),
+        primary = ChorPairAction(Icons.Filled.PlayArrow, stringResource(R.string.play_all), actions.onPlayAll),
+        secondary = ChorPairAction(Icons.Filled.Shuffle, stringResource(R.string.shuffle), actions.onShuffle),
     )
 }
 
@@ -281,7 +277,7 @@ private fun PlaylistSecondaryActions(
         IconButton(onClick = actions.onShare) {
             Icon(Icons.Outlined.Share, contentDescription = stringResource(R.string.share))
         }
-        if (state.canEdit || state.canExport || state.isInMusicLibrary != null) PlaylistOverflowMenu(state, actions)
+        if (state.canEdit || state.canExport) PlaylistOverflowMenu(state, actions)
     }
 }
 
@@ -306,18 +302,7 @@ private fun PlaylistOverflowMenu(
                     },
                 )
             }
-            state.isInMusicLibrary?.let { inMusic ->
-                DropdownMenuItem(
-                    text = { Text(stringResource(if (inMusic) R.string.playlist_move_to_videos else R.string.playlist_move_to_music)) },
-                    leadingIcon = {
-                        Icon(if (inMusic) Icons.Outlined.VideoLibrary else Icons.Outlined.LibraryMusic, contentDescription = null)
-                    },
-                    onClick = {
-                        open = false
-                        actions.onMoveLibrary()
-                    },
-                )
-            }
+
             if (!state.canEdit) return@DropdownMenu
             DropdownMenuItem(
                 text = { Text(stringResource(R.string.edit_playlist_action)) },

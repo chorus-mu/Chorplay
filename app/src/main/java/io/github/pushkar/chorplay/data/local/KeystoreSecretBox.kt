@@ -10,14 +10,10 @@ import javax.crypto.KeyGenerator
 import javax.crypto.SecretKey
 import javax.crypto.spec.GCMParameterSpec
 
-/**
- * Seals short secrets with an AES-GCM key that never leaves the Android Keystore, so a secret copied
- * out of the preferences file (a rooted device, an adb backup) is useless anywhere else.
- */
 internal object KeystoreSecretBox {
     private const val TAG = "KeystoreSecretBox"
     private const val KEYSTORE = "AndroidKeyStore"
-    private const val KEY_ALIAS = "flow_preference_secrets"
+    private const val KEY_ALIAS = "chorplay_preference_secrets"
     private const val TRANSFORMATION = "AES/GCM/NoPadding"
     private const val PREFIX = "ks1:"
     private const val IV_BYTES = 12
@@ -31,10 +27,6 @@ internal object KeystoreSecretBox {
         return PREFIX + Base64.encodeToString(sealed, Base64.NO_WRAP)
     }
 
-    /**
-     * The secret inside [stored]. A value saved before sealing existed is returned as it is; one that
-     * no longer opens (the key was wiped with the app's data) reads as empty rather than as garbage.
-     */
     fun open(stored: String?): String {
         if (stored.isNullOrEmpty() || !stored.startsWith(PREFIX)) return stored.orEmpty()
         return runCatching {

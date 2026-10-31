@@ -208,7 +208,7 @@ class SyncInteropTest {
     ) = Capabilities(
         mapOf(
             SyncCollection.PLAYLISTS to Capability(1, produce = true, consume = true),
-            SyncCollection.FLOW_NEURO_BRAIN to Capability(13, produce = true, consume = true, keySpec = keySpec, keyLanguage = keyLanguage),
+            SyncCollection.CHOR_NEURO_BRAIN to Capability(13, produce = true, consume = true, keySpec = keySpec, keyLanguage = keyLanguage),
         ),
     )
 
@@ -221,18 +221,18 @@ class SyncInteropTest {
                         link.host,
                         isHost = true,
                         localCaps = peer,
-                        selection = Selection(accept = listOf(SyncCollection.PLAYLISTS, SyncCollection.FLOW_NEURO_BRAIN)),
+                        selection = Selection(accept = listOf(SyncCollection.PLAYLISTS, SyncCollection.CHOR_NEURO_BRAIN)),
                     ).run(SyncRole.RECEIVER)
                 }
             android(
                 link.client,
                 isHost = false,
                 localCaps = brainCaps(keySpec = 2, keyLanguage = "en"),
-                selection = Selection(send = listOf(SyncCollection.PLAYLISTS, SyncCollection.FLOW_NEURO_BRAIN)),
+                selection = Selection(send = listOf(SyncCollection.PLAYLISTS, SyncCollection.CHOR_NEURO_BRAIN)),
                 payload =
                     mapOf(
                         SyncCollection.PLAYLISTS to wire("""{"syncId":"p1"}"""),
-                        SyncCollection.FLOW_NEURO_BRAIN to wire("""{"deviceId":"a"}"""),
+                        SyncCollection.CHOR_NEURO_BRAIN to wire("""{"deviceId":"a"}"""),
                     ),
             ).run(SyncRole.SENDER)
             receiver.await()
@@ -249,10 +249,10 @@ class SyncInteropTest {
 
     @Test
     fun the_brain_goes_only_to_a_peer_that_writes_topic_keys_the_same_way() {
-        assertEquals(listOf(SyncCollection.PLAYLISTS), sentSelection(caps(SyncCollection.PLAYLISTS, SyncCollection.FLOW_NEURO_BRAIN)))
+        assertEquals(listOf(SyncCollection.PLAYLISTS), sentSelection(caps(SyncCollection.PLAYLISTS, SyncCollection.CHOR_NEURO_BRAIN)))
         assertEquals(listOf(SyncCollection.PLAYLISTS), sentSelection(brainCaps(keySpec = 2, keyLanguage = "es")))
         assertEquals(
-            listOf(SyncCollection.PLAYLISTS, SyncCollection.FLOW_NEURO_BRAIN),
+            listOf(SyncCollection.PLAYLISTS, SyncCollection.CHOR_NEURO_BRAIN),
             sentSelection(brainCaps(keySpec = 2, keyLanguage = "en")),
         )
     }

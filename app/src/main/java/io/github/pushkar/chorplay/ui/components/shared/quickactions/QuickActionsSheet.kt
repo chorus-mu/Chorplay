@@ -46,14 +46,14 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import io.github.pushkar.chorplay.ui.components.shared.ChorplayModalSheetDefaults
-import io.github.pushkar.chorplay.ui.components.shared.FlowRowGroup
-import io.github.pushkar.chorplay.ui.components.shared.FlowSectionHeader
+import io.github.pushkar.chorplay.ui.components.shared.ChorRowGroup
+import io.github.pushkar.chorplay.ui.components.shared.ChorSectionHeader
 import io.github.pushkar.chorplay.ui.components.shared.ChorplaySheetHeader
-import io.github.pushkar.chorplay.ui.components.shared.FlowSheetPresenter
-import io.github.pushkar.chorplay.ui.components.shared.LocalFlowSheetPresenter
+import io.github.pushkar.chorplay.ui.components.shared.ChorSheetPresenter
+import io.github.pushkar.chorplay.ui.components.shared.LocalChorSheetPresenter
 import io.github.pushkar.chorplay.ui.components.shared.connectedButtonShapes
-import io.github.pushkar.chorplay.ui.components.shared.flowRowGroupShape
-import io.github.pushkar.chorplay.ui.components.shared.rememberFlowSheetState
+import io.github.pushkar.chorplay.ui.components.shared.chorRowGroupShape
+import io.github.pushkar.chorplay.ui.components.shared.rememberChorSheetState
 import kotlinx.coroutines.launch
 
 /** The values every quick actions sheet shares. */
@@ -95,7 +95,7 @@ class QuickActionsSheetController internal constructor(
  * the screen and expands as it is dragged or scrolled up, or opens in full with [expandFully], for a
  * sheet whose last row is what it is for. Every way out animates the sheet away.
  * [page] names the page on show, so switching pages keeps one sheet and resets its scroll; on a page
- * ([onBack] set) back returns to the menu instead of closing it. A [LocalFlowSheetPresenter] shows
+ * ([onBack] set) back returns to the menu instead of closing it. A [LocalChorSheetPresenter] shows
  * the same content its own way instead.
  */
 @OptIn(ExperimentalMaterial3Api::class)
@@ -107,12 +107,12 @@ fun QuickActionsSheet(
     expandFully: Boolean = false,
     content: @Composable ColumnScope.(QuickActionsSheetController) -> Unit,
 ) {
-    val presenter = LocalFlowSheetPresenter.current
+    val presenter = LocalChorSheetPresenter.current
     if (presenter != null) {
         PresentedQuickActionsSheet(presenter, onDismiss, page, onBack, content)
         return
     }
-    val sheetState = rememberFlowSheetState(skipPartiallyExpanded = expandFully)
+    val sheetState = rememberChorSheetState(skipPartiallyExpanded = expandFully)
     val scope = rememberCoroutineScope()
     val latestOnDismiss by rememberUpdatedState(onDismiss)
     val controller =
@@ -152,7 +152,7 @@ fun QuickActionsSheet(
 /** A presenter has no hide animation of its own to wait for, so every way out closes at once. */
 @Composable
 private fun PresentedQuickActionsSheet(
-    presenter: FlowSheetPresenter,
+    presenter: ChorSheetPresenter,
     onDismiss: () -> Unit,
     page: Any?,
     onBack: (() -> Unit)?,
@@ -327,10 +327,10 @@ fun QuickActionsGroup(
     rows: List<QuickActionRow>,
 ) {
     if (rows.isEmpty()) return
-    if (title != null) FlowSectionHeader(text = title)
-    FlowRowGroup {
+    if (title != null) ChorSectionHeader(text = title)
+    ChorRowGroup {
         rows.forEachIndexed { index, row ->
-            key(row.key) { row.content(flowRowGroupShape(index = index, count = rows.size)) }
+            key(row.key) { row.content(chorRowGroupShape(index = index, count = rows.size)) }
         }
     }
 }

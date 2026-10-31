@@ -31,22 +31,22 @@ class CollectionOwnersTest {
         assertThat(CollectionOwners.candidates("watch_later", study)).contains(stored)
         assertThat(CollectionOwners.playlistId(stored)).isEqualTo("watch_later")
         assertThat(collection(stored, DownloadCollectionKind.LOCAL_PLAYLIST).asPage().id).isEqualTo("watch_later")
-        assertThat(CollectionOwners.playlistId("MPREb_x")).isEqualTo("MPREb_x")
+        assertThat(CollectionOwners.playlistId("PLabc")).isEqualTo("PLabc")
     }
 
     @Test
     fun `each profile sees its own playlists and the shared ones, never another's`() {
         val defaultsWatchLater = collection("watch_later", DownloadCollectionKind.LOCAL_PLAYLIST)
         val studysWatchLater = collection("7f3c:watch_later", DownloadCollectionKind.LOCAL_PLAYLIST)
-        val studysMix = collection("7f3c:0b9e2c4d-1111-4c2e-9a0f-2d5b8e4c1a77", DownloadCollectionKind.MUSIC_PLAYLIST)
-        val album = collection("MPREb_x", DownloadCollectionKind.MUSIC_ALBUM)
+        val studysPlaylist = collection("7f3c:0b9e2c4d-1111-4c2e-9a0f-2d5b8e4c1a77", DownloadCollectionKind.LOCAL_PLAYLIST)
+        val sharedPlaylist = collection("PLabc", DownloadCollectionKind.VIDEO_PLAYLIST)
 
-        assertThat(listOf(defaultsWatchLater, studysWatchLater, studysMix, album).filter { CollectionOwners.isVisible(it, default) })
-            .containsExactly(defaultsWatchLater, album)
-        assertThat(listOf(defaultsWatchLater, studysWatchLater, studysMix, album).filter { CollectionOwners.isVisible(it, study) })
-            .containsExactly(studysWatchLater, studysMix, album)
-        assertThat(listOf(defaultsWatchLater, studysWatchLater, studysMix, album).filter { CollectionOwners.isVisible(it, gaming) })
-            .containsExactly(album)
+        assertThat(listOf(defaultsWatchLater, studysWatchLater, studysPlaylist, sharedPlaylist).filter { CollectionOwners.isVisible(it, default) })
+            .containsExactly(defaultsWatchLater, sharedPlaylist)
+        assertThat(listOf(defaultsWatchLater, studysWatchLater, studysPlaylist, sharedPlaylist).filter { CollectionOwners.isVisible(it, study) })
+            .containsExactly(studysWatchLater, studysPlaylist, sharedPlaylist)
+        assertThat(listOf(defaultsWatchLater, studysWatchLater, studysPlaylist, sharedPlaylist).filter { CollectionOwners.isVisible(it, gaming) })
+            .containsExactly(sharedPlaylist)
     }
 
     @Test

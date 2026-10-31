@@ -20,7 +20,7 @@ import org.junit.Test
 import java.io.File
 import kotlin.io.path.createTempDirectory
 
-/** FLOW-SYNC/1 skips a payload it applied before; linked devices must not, or a re-sent identical payload is lost. */
+/** CHOR-SYNC/1 skips a payload it applied before; linked devices must not, or a re-sent identical payload is lost. */
 class ApplyOnceTest {
     private val syncLog = mockk<SyncLogDao>(relaxed = true) { coEvery { isAlreadyApplied(any(), any(), any()) } returns true }
 
@@ -48,7 +48,7 @@ class ApplyOnceTest {
     private val peer = PeerInfo("did", "Phone", "android")
 
     @Test
-    fun flow_sync_1_skips_a_payload_it_already_applied() =
+    fun chorplay_sync_1_skips_a_payload_it_already_applied() =
         runTest {
             val stats = applier.applyPayload(peer, received, "0:0:node0000")
             assertEquals(1, stats.getValue(SyncCollection.WATCH_HISTORY).skipped)

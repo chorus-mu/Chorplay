@@ -33,12 +33,7 @@ data class DownloadCollectionEntity(
 
 enum class DownloadCollectionKind {
     VIDEO_PLAYLIST,
-    MUSIC_ALBUM,
-    MUSIC_PLAYLIST,
     LOCAL_PLAYLIST,
-    ;
-
-    val isMusic: Boolean get() = this == MUSIC_ALBUM || this == MUSIC_PLAYLIST
 }
 
 /**

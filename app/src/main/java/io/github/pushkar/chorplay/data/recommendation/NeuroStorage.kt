@@ -1,17 +1,3 @@
-/*
- * Copyright: Pushkar (2026) under GPLv3
- *
- * This file is part of Chorplay (https://github.com/chorus-mu/Chorplay).
- *
- * Chorplay is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, version 3 of the License.
- *
- * This recommendation algorithm (ChorplayNeuroEngine) is the intellectual property
- * of the Chorplay project. Any use of this code in other projects must
- * explicitly credit "Chorplay Android Client" and link back to the original repository.
- */
-
 package io.github.pushkar.chorplay.data.recommendation
 
 import android.content.Context
@@ -36,37 +22,26 @@ import java.io.File
 import java.io.InputStream
 import java.io.OutputStream
 
-/**
- * All persistence concerns: DataStore, serialization,
- * legacy migration, export/import.
- */
 internal class NeuroStorage(
     private val appContext: Context,
 ) {
     companion object {
         private const val TAG = "ChorplayNeuroEngine"
         private const val BRAIN_FILENAME = "user_neuro_brain.json"
-        private const val BRAIN_DATASTORE_FILE = "flow_neuro_brain_v10.json"
-        private val PREVIOUS_DATASTORE_FILES = listOf("v9", "v8", "v7").map { "flow_neuro_brain_$it.json" }
+        private const val BRAIN_DATASTORE_FILE = "chorplay_neuro_brain_v10.json"
+        private val PREVIOUS_DATASTORE_FILES = listOf("v9", "v8", "v7").map { "chorplay_neuro_brain_$it.json" }
         private const val SCHEMA_VERSION = NeuroMaintenance.TARGET_SCHEMA_VERSION
         private const val PRE_MIGRATION_PREFIX = "neuro_brain_before_v"
 
-        /** The schema of a brain that predates the field, so every maintenance step runs on it. */
         const val LEGACY_SCHEMA_VERSION = 0
 
         private val LEGACY_ONLY_KEYS = listOf("morning", "afternoon", "evening", "night", "longTerm")
 
-        /** The schema [json] declares, or [LEGACY_SCHEMA_VERSION] when it has none. */
-        internal fun declaredSchema(json: JsonObject): Int = json["schemaVersion"]?.jsonPrimitive?.intOrNull ?: LEGACY_SCHEMA_VERSION
+        internal fun declaredSchema(json: JsonObject): Int =
+            json["schemaVersion"]?.jsonPrimitive?.intOrNull ?: LEGACY_SCHEMA_VERSION
 
-        /**
-         * An export from before time buckets, which only the legacy parser reads. Today's format can
-         * hold empty time vectors, so having none says nothing about its age (#907).
-         */
         internal fun isLegacyFormat(json: JsonObject): Boolean = LEGACY_ONLY_KEYS.any { it in json }
     }
-
-    // ── Serializable models ──
 
     @Serializable
     data class SerializableVector(
@@ -167,8 +142,6 @@ internal class NeuroStorage(
         val forgottenAt: Long = 0L,
     )
 
-    // ── DataStore setup ──
-
     private object BrainSerializer : Serializer<SerializableBrain> {
         override val defaultValue: SerializableBrain = SerializableBrain()
 
@@ -206,11 +179,8 @@ internal class NeuroStorage(
     }
 
     private fun brainFile() = ProfileFiles.dataStore(appContext, StoreScope.PROFILE_PRIVATE, BRAIN_DATASTORE_FILE)
-
-    // Legacy formats exist only in Default; elsewhere these resolve inside the profile's own folder and are absent.
-    private fun previousBrainFile(fileName: String) = ProfileFiles.dataStore(appContext, StoreScope.DEFAULT_ONLY, fileName)
-
-    // ── Conversion functions ──
+    private fun previousBrainFile(fileName: String) =
+        ProfileFiles.dataStore(appContext, StoreScope.DEFAULT_ONLY, fileName)
 
     fun ContentVector.toSerializable() =
         SerializableVector(
@@ -340,7 +310,7 @@ internal class NeuroStorage(
                     Log.i(
                         TAG,
                         "Loaded brain v${data.schemaVersion}, " +
-                            "${data.interactions} interactions",
+                                "${data.interactions} interactions",
                     )
                     return@withContext brain
                 }
@@ -351,30 +321,28 @@ internal class NeuroStorage(
             }
         }
 
-    // ── Export / Import ──
-
     private fun SerializableBrain.hasAnyUserState(): Boolean =
         interactions > 0 ||
-            hasCompletedOnboarding ||
-            preferredTopics.isNotEmpty() ||
-            blockedTopics.isNotEmpty() ||
-            blockedChannels.isNotEmpty() ||
-            channelScores.isNotEmpty() ||
-            topicAffinities.isNotEmpty() ||
-            idfWordFrequency.isNotEmpty() ||
-            idfTotalDocuments > 0 ||
-            watchHistoryMap.isNotEmpty() ||
-            seenShortsHistory.isNotEmpty() ||
-            channelTopicProfiles.isNotEmpty() ||
-            shortsVector.topics.isNotEmpty() ||
-            suppressedVideoIds.isNotEmpty() ||
-            suppressedChannels.isNotEmpty() ||
-            rejectionPatterns.isNotEmpty() ||
-            feedHistory.isNotEmpty() ||
-            recentQueryTokens.isNotEmpty() ||
-            topicEvidence.isNotEmpty() ||
-            global.topics.isNotEmpty() ||
-            timeVectors.any { (_, vector) -> vector.topics.isNotEmpty() }
+                hasCompletedOnboarding ||
+                preferredTopics.isNotEmpty() ||
+                blockedTopics.isNotEmpty() ||
+                blockedChannels.isNotEmpty() ||
+                channelScores.isNotEmpty() ||
+                topicAffinities.isNotEmpty() ||
+                idfWordFrequency.isNotEmpty() ||
+                idfTotalDocuments > 0 ||
+                watchHistoryMap.isNotEmpty() ||
+                seenShortsHistory.isNotEmpty() ||
+                channelTopicProfiles.isNotEmpty() ||
+                shortsVector.topics.isNotEmpty() ||
+                suppressedVideoIds.isNotEmpty() ||
+                suppressedChannels.isNotEmpty() ||
+                rejectionPatterns.isNotEmpty() ||
+                feedHistory.isNotEmpty() ||
+                recentQueryTokens.isNotEmpty() ||
+                topicEvidence.isNotEmpty() ||
+                global.topics.isNotEmpty() ||
+                timeVectors.any { (_, vector) -> vector.topics.isNotEmpty() }
 
     suspend fun exportToStream(
         brain: UserBrain,
@@ -418,9 +386,11 @@ internal class NeuroStorage(
                 Log.i(
                     TAG,
                     "Brain imported (${finalBrain.totalInteractions} " +
-                        "interactions, ${finalBrain.timeVectors.count {
-                            it.value.topics.isNotEmpty()
-                        }} active time buckets)",
+                            "interactions, ${
+                                finalBrain.timeVectors.count {
+                                    it.value.topics.isNotEmpty()
+                                }
+                            } active time buckets)",
                 )
                 finalBrain
             } catch (e: Exception) {
@@ -428,8 +398,6 @@ internal class NeuroStorage(
                 null
             }
         }
-
-    // ── Migration ──
 
     suspend fun migrateLegacy(): UserBrain? =
         withContext(Dispatchers.IO) {
@@ -446,7 +414,7 @@ internal class NeuroStorage(
                     Log.i(
                         TAG,
                         "Legacy brain migrated " +
-                            "(${migrated.totalInteractions} interactions)",
+                                "(${migrated.totalInteractions} interactions)",
                     )
                     return@withContext migrated
                 } catch (e: Exception) {
@@ -457,10 +425,6 @@ internal class NeuroStorage(
             tryMigrateFromPreviousDataStore()
         }
 
-    /**
-     * Keeps [brain] as it was before migration [toSchema] for one release, so a migration that went
-     * wrong can be undone. noBackupFilesDir never leaves the device.
-     */
     suspend fun keepCopyBeforeMigration(
         brain: UserBrain,
         toSchema: Int,
@@ -473,7 +437,6 @@ internal class NeuroStorage(
         }.onFailure { Log.e(TAG, "Could not keep the brain before migration $toSchema", it) }
     }
 
-    /** Removes the copies [keepCopyBeforeMigration] kept: a reset forgets what was learned. */
     suspend fun deleteCopiesBeforeMigration() =
         withContext(Dispatchers.IO) {
             ProfileFiles
@@ -482,17 +445,14 @@ internal class NeuroStorage(
                 ?.forEach { it.delete() }
         }
 
-    /** True once any brain, even an empty one after a reset, has been saved in the current format. */
     suspend fun hasSavedBrain(): Boolean = withContext(Dispatchers.IO) { brainFile().exists() }
-
-    /** Removes the brain files of earlier formats once a current one is saved, so nothing can bring an old brain back. */
     suspend fun deleteOldBrainFiles() =
         withContext(Dispatchers.IO) {
             if (!brainFile().exists()) return@withContext
             (
-                listOf(ProfileFiles.file(appContext, StoreScope.DEFAULT_ONLY, BRAIN_FILENAME)) +
-                    PREVIOUS_DATASTORE_FILES.map(::previousBrainFile)
-            ).filter { it.exists() }
+                    listOf(ProfileFiles.file(appContext, StoreScope.DEFAULT_ONLY, BRAIN_FILENAME)) +
+                            PREVIOUS_DATASTORE_FILES.map(::previousBrainFile)
+                    ).filter { it.exists() }
                 .forEach { file ->
                     if (file.delete()) Log.i(TAG, "Deleted old brain file ${file.name}")
                 }
@@ -626,7 +586,7 @@ internal class NeuroStorage(
                     },
                 hasCompletedOnboarding =
                     partialParse.hasCompletedOnboarding ||
-                        jsonObj.optBoolean("hasCompletedOnboarding", false),
+                            jsonObj.optBoolean("hasCompletedOnboarding", false),
                 lastPersona = partialParse.lastPersona,
                 personaStability = partialParse.personaStability,
                 idfWordFrequency =
@@ -668,11 +628,12 @@ internal class NeuroStorage(
                     data.hasCompletedOnboarding ||
                     data.preferredTopics.isNotEmpty()
                 ) {
-                    val brain = data.toUserBrain().copy(schemaVersion = declaredSchema(Json.parseToJsonElement(text).jsonObject))
+                    val brain = data.toUserBrain()
+                        .copy(schemaVersion = declaredSchema(Json.parseToJsonElement(text).jsonObject))
                     Log.i(
                         TAG,
                         "Migrated $fileName " +
-                            "(${data.interactions} interactions)",
+                                "(${data.interactions} interactions)",
                     )
                     return brain
                 }
@@ -698,10 +659,6 @@ internal class NeuroStorage(
         )
     }
 }
-
-// ── Reverse conversions (pure, Context-free) ──
-// Top-level so offline diagnostics can parse an exported brain without an
-// Android Context. The forward (save) direction stays inside NeuroStorage.
 
 internal fun NeuroStorage.SerializableVector.toContentVector() =
     ContentVector(

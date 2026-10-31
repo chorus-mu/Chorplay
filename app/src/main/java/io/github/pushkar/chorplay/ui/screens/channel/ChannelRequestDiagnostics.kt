@@ -13,7 +13,7 @@ internal fun buildChannelRequestErrorLog(
 ): String {
     val locale = YouTube.locale
     return buildString {
-        appendLine("FLOW CHANNEL REQUEST ERROR")
+        appendLine("CHORPLAY CHANNEL REQUEST ERROR")
         appendLine("Operation: $operation")
         appendLine("App: ${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE})")
         appendLine("Device: ${Build.MANUFACTURER} ${Build.MODEL}")

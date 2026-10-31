@@ -9,7 +9,7 @@ package io.github.pushkar.chorplay.ui.screens.home
 import com.google.common.truth.Truth.assertThat
 import io.github.pushkar.chorplay.data.local.VideoHistoryEntry
 import io.github.pushkar.chorplay.data.model.Video
-import io.github.pushkar.chorplay.data.recommendation.FlowPersona
+import io.github.pushkar.chorplay.data.recommendation.ChorPersona
 import io.github.pushkar.chorplay.data.recommendation.GraphSeedInput
 import io.github.pushkar.chorplay.data.recommendation.GraphSeedSource
 import io.github.pushkar.chorplay.data.recommendation.UserBrain
@@ -99,7 +99,7 @@ class HomeFeedLogicTest {
         val deepDiver =
             feedTasteProfile(
                 UserBrain(totalInteractions = 200),
-                FlowPersona.DEEP_DIVER,
+                ChorPersona.DEEP_DIVER,
             )
         assertThat(feedFitPenalty(essay, deepDiver)).isEqualTo(0.0)
     }

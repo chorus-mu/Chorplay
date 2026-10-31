@@ -45,9 +45,6 @@
     -->
     <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
 
-    <!-- Microphone capture for music recognition (Shazam) -->
-    <uses-permission android:name="android.permission.RECORD_AUDIO" />
-    <uses-feature android:name="android.hardware.microphone" android:required="false" />
 
     <!-- Device Sync (Chorplay Sync): resolve the host LAN IP for the QR code. -->
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
@@ -99,9 +96,6 @@
         <meta-data
             android:name="com.samsung.android.multidisplay.keep_process_alive"
             android:value="true" />
-        <meta-data
-            android:name="com.google.android.gms.car.application"
-            android:resource="@xml/automotive_app_desc" />
 
         <activity
             android:name=".TvActivity"
@@ -208,16 +202,6 @@
             </intent-filter>
         </activity>
         
-        <!-- Media3 Music Service -->
-        <service
-            android:name=".service.Media3MusicService"
-            android:foregroundServiceType="mediaPlayback"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="androidx.media3.session.MediaLibraryService"/>
-                <action android:name="android.media.browse.MediaBrowserService"/>
-            </intent-filter>
-        </service>
         
         <!-- Video Playback Service (Media3 MediaSessionService) for background playback and media controls -->
         <service
@@ -230,15 +214,6 @@
             </intent-filter>
         </service>
 
-        <!-- Media3 playback resumption: a headset's Play after Chorplay was killed reaches the music
-             service (the only MediaLibraryService), which resumes the saved queue. -->
-        <receiver
-            android:name="androidx.media3.session.MediaButtonReceiver"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MEDIA_BUTTON" />
-            </intent-filter>
-        </receiver>
 
         <!-- The download queue runs as WorkManager work; its foreground service carries dataSync. -->
         <service
@@ -290,107 +265,6 @@
 
         <!-- Home-screen widgets (Jetpack Glance) -->
         <receiver
-            android:name=".widget.core.action.WidgetPlaybackReceiver"
-            android:exported="false" />
-        <activity
-            android:name=".widget.config.WidgetConfigActivity"
-            android:exported="true"
-            android:excludeFromRecents="true"
-            android:taskAffinity=""
-            android:theme="@style/Theme.Chorplay">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
-            </intent-filter>
-        </activity>
-        <receiver
-            android:name=".widget.nowplaying.NowPlayingWidgetReceiver"
-            android:exported="true"
-            android:label="@string/widget_now_playing_label">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/widget_now_playing_info" />
-        </receiver>
-        <receiver
-            android:name=".widget.turntable.TurntableWidgetReceiver"
-            android:exported="true"
-            android:label="@string/widget_turntable_label">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/widget_turntable_info" />
-        </receiver>
-        <receiver
-            android:name=".widget.quickactions.QuickActionsWidgetReceiver"
-            android:exported="true"
-            android:label="@string/widget_quick_actions_label">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/widget_quick_actions_info" />
-        </receiver>
-        <receiver
-            android:name=".widget.recognize.RecognizeWidgetReceiver"
-            android:exported="true"
-            android:label="@string/widget_recognize_label">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/widget_recognize_info" />
-        </receiver>
-        <receiver
-            android:name=".widget.recent.RecentlyPlayedWidgetReceiver"
-            android:exported="true"
-            android:label="@string/widget_recently_played_label">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/widget_recently_played_info" />
-        </receiver>
-        <receiver
-            android:name=".widget.onrepeat.OnRepeatWidgetReceiver"
-            android:exported="true"
-            android:label="@string/widget_on_repeat_label">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/widget_on_repeat_info" />
-        </receiver>
-        <receiver
-            android:name=".widget.playlist.PlaylistWidgetReceiver"
-            android:exported="true"
-            android:label="@string/widget_playlist_label">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/widget_playlist_info" />
-        </receiver>
-        <receiver
-            android:name=".widget.week.WeekWidgetReceiver"
-            android:exported="true"
-            android:label="@string/widget_week_label">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/widget_week_info" />
-        </receiver>
-        <receiver
             android:name=".widget.downloads.DownloadsWidgetReceiver"
             android:exported="true"
             android:label="@string/widget_downloads_label">
@@ -406,7 +280,7 @@
         <activity-alias
             android:name=".DownloadShareAlias"
             android:exported="true"
-            android:label="@string/share_download_with_flow"
+            android:label="@string/share_download_with_chorplay"
             android:targetActivity=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />
@@ -418,7 +292,7 @@
         <!-- App Icon Variants (via activity-alias)                          -->
         <!-- Default: Chorplay Red -->
         <activity-alias
-            android:name=".IconFlowRed"
+            android:name=".IconChorplayRed"
             android:enabled="true"
             android:exported="true"
             android:icon="@mipmap/ic_launcher"
@@ -432,7 +306,7 @@
 
         <!-- Chorplay Light -->
         <activity-alias
-            android:name=".IconFlowLight"
+            android:name=".IconChorplayLight"
             android:enabled="false"
             android:exported="true"
             android:icon="@mipmap/ic_launcher_chorplay_light"
@@ -446,7 +320,7 @@
 
         <!-- Chorplay Play (white background, red video frame + play mark) -->
         <activity-alias
-            android:name=".IconFlowPlay"
+            android:name=".IconChorplayPlay"
             android:enabled="false"
             android:exported="true"
             android:icon="@mipmap/ic_launcher_chorplay_play"
@@ -666,12 +540,6 @@
                 android:resource="@xml/shared_file_paths" />
         </provider>
 
-        <!-- Song artwork for Android Auto, which only loads browse images from content URIs. Read access is granted to the browsing car app. -->
-        <provider
-            android:name=".service.auto.AutoArtworkProvider"
-            android:authorities="${applicationId}.auto.artwork"
-            android:exported="false"
-            android:grantUriPermissions="true" />
     </application>
 
 </manifest>

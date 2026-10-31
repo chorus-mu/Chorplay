@@ -189,25 +189,7 @@ class YouTubeTakeoutCsvParserTest {
     }
 
     @Test
-    fun `the youtube music library songs file is read by its shape`() {
-        val csv =
-            "Video ID,Song Title,Album Title,Artist Name 1,Artist Name 2\n" +
-                "kcxK1Tnwy5M,One More Time,Alive 2007,Daft Punk,\n" +
-                "dQw4w9WgXcQ,\"Never Gonna Give You Up\",Whenever You Need Somebody,Rick Astley,"
-
-        assertThat(parse(csv))
-            .isEqualTo(
-                YouTubeTakeoutCsvContent.MusicLibrarySongs(
-                    listOf(
-                        TakeoutLibrarySong("kcxK1Tnwy5M", "One More Time", "Alive 2007", "Daft Punk"),
-                        TakeoutLibrarySong("dQw4w9WgXcQ", "Never Gonna Give You Up", "Whenever You Need Somebody", "Rick Astley"),
-                    ),
-                ),
-            )
-    }
-
-    @Test
-    fun `the account's own uploads are not mistaken for the music library`() {
+    fun `the account's own uploads are unsupported`() {
         val channelId = "UC${"e".repeat(22)}"
         val uploads =
             "Video ID,Duration,Language,Channel ID,Title,Created\n" +

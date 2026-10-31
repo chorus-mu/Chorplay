@@ -19,7 +19,6 @@ import io.github.pushkar.chorplay.data.local.entity.DownloadCollectionKind
 import io.github.pushkar.chorplay.data.migration.WatchLaterMetadataMigrator
 import io.github.pushkar.chorplay.data.model.PlaylistInfo
 import io.github.pushkar.chorplay.data.model.Video
-import io.github.pushkar.chorplay.data.music.YouTubeMusicService
 import io.github.pushkar.chorplay.data.playlist.PlaylistFileCodec
 import io.github.pushkar.chorplay.data.playlist.PlaylistTransfer
 import io.github.pushkar.chorplay.data.repository.RemotePlaylistPage
@@ -158,34 +157,20 @@ class PlaylistDetailViewModel
             viewModelScope.launch {
                 val state = _uiState.value
                 val thumbnailUrl = state.thumbnailUrl.ifEmpty { state.videos.firstOrNull()?.thumbnailUrl ?: "" }
-                if (state.isFromMusic) {
-                    repository.saveExternalMusicPlaylist(playlistId, state.playlistName, state.description, thumbnailUrl)
-                } else {
-                    repository.saveExternalVideoPlaylist(playlistId, state.playlistName, state.description, thumbnailUrl)
-                }
+                repository.saveExternalVideoPlaylist(playlistId, state.playlistName, state.description, thumbnailUrl)
                 repository.addVideosToPlaylist(playlistId, state.videos)
-                _uiState.update { it.copy(isLocalPlaylist = true, isSaved = true, isInMusicLibrary = state.isFromMusic) }
-                val saved = if (state.isFromMusic) R.string.toast_saved_playlist_to_music_library else R.string.ui_playlist_saved_to_library
+                _uiState.update { it.copy(isLocalPlaylist = true, isSaved = true) }
+                val saved = R.string.ui_playlist_saved_to_library
                 _messages.send(PlaylistUiMessage(stringRes = saved))
             }
         }
 
-        /** Moves this stored playlist between the video and music libraries. */
-        fun moveToOtherLibrary() {
-            val toMusic = _uiState.value.isInMusicLibrary?.not() ?: return
-            viewModelScope.launch {
-                repository.moveToLibrary(playlistId, isMusic = toMusic)
-                _uiState.update { it.copy(isInMusicLibrary = toMusic) }
-                _messages.send(
-                    PlaylistUiMessage(stringRes = if (toMusic) R.string.playlist_moved_to_music else R.string.playlist_moved_to_videos),
-                )
-            }
-        }
+
 
         fun unsaveFromLibrary() {
             viewModelScope.launch {
                 repository.unsaveExternalPlaylist(playlistId)
-                _uiState.update { it.copy(isLocalPlaylist = false, isSaved = false, isInMusicLibrary = null) }
+                _uiState.update { it.copy(isLocalPlaylist = false, isSaved = false) }
                 _messages.send(PlaylistUiMessage(stringRes = R.string.ui_playlist_removed_from_library))
             }
         }
@@ -418,8 +403,7 @@ class PlaylistDetailViewModel
 
         private suspend fun loadLocalPlaylist(localInfo: PlaylistInfo) {
             val isSaved = repository.isExternalPlaylistSaved(playlistId)
-            val isMusic = repository.getPlaylistEntity(playlistId)?.isMusic
-            _uiState.update {
+                        _uiState.update {
                 it.copy(
                     playlistName = localInfo.name,
                     description = localInfo.description,
@@ -427,7 +411,7 @@ class PlaylistDetailViewModel
                     thumbnailUrl = localInfo.thumbnailUrl,
                     isLocalPlaylist = true,
                     isSaved = isSaved,
-                    isInMusicLibrary = isMusic.takeIf { playlistId != PlaylistRepository.SAVED_SHORTS_ID },
+                    
                     isWatchLater = false,
                     isLoading = false,
                     errorMessage = null,
@@ -464,27 +448,6 @@ class PlaylistDetailViewModel
                     )
                 }
                 page.continuation?.let { loadRemainingPages(page, it) }
-                return
-            }
-
-            val musicDetails = runCatching { YouTubeMusicService.fetchPlaylistDetails(playlistId) }.getOrNull()
-            if (musicDetails != null) {
-                _uiState.update {
-                    it.copy(
-                        playlistName = musicDetails.title,
-                        ownerName = musicDetails.author.takeIf(String::isNotBlank),
-                        description = musicDetails.description.orEmpty(),
-                        isPrivate = false,
-                        videos = musicDetails.tracks.map { track -> track.toPlaylistVideo() },
-                        thumbnailUrl = musicDetails.thumbnailUrl,
-                        isLocalPlaylist = false,
-                        isSaved = false,
-                        isFromMusic = true,
-                        isWatchLater = false,
-                        isLoading = false,
-                        errorMessage = null,
-                    )
-                }
                 return
             }
 
@@ -571,18 +534,3 @@ class PlaylistDetailViewModel
                     enrichSemaphore.release()
                 }
             }
-        }
-    }
-
-private fun io.github.pushkar.chorplay.data.music.model.MusicTrack.toPlaylistVideo(): Video =
-    Video(
-        id = videoId,
-        title = title,
-        channelName = artist,
-        channelId = channelId,
-        thumbnailUrl = thumbnailUrl,
-        duration = duration,
-        viewCount = views,
-        uploadDate = "",
-        isMusic = true,
-    )

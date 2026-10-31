@@ -1,6 +1,7 @@
 package io.github.pushkar.chorplay.player.stream
 
-import io.github.pushkar.chorplay.data.local.MusicAudioQuality
+import io.github.pushkar.chorplay.data.local.AudioStreamQuality
+import io.github.pushkar.chorplay.innertube.models.response.PlayerResponse
 import org.schabi.newpipe.extractor.stream.AudioStream
 import org.schabi.newpipe.extractor.stream.AudioTrackType
 import java.util.Locale
@@ -10,7 +11,7 @@ object AudioStreamSelector {
     fun selectPreferredAudioStream(
         streams: List<AudioStream>,
         preferredAudioLanguage: String,
-        preferredMusicAudioQuality: MusicAudioQuality = MusicAudioQuality.AUTO,
+        preferredAudioQuality: AudioStreamQuality = AudioStreamQuality.AUTO,
         compatibilityFilter: ((AudioStream) -> Boolean)? = null,
     ): AudioStream? {
         if (streams.isEmpty()) return null
@@ -21,25 +22,25 @@ object AudioStreamSelector {
                 ?: streams
 
         val preferredCandidates = preferredCandidates(compatibleStreams, preferredAudioLanguage)
-        return selectByQuality(preferredCandidates, preferredMusicAudioQuality)
-            ?: selectByQuality(compatibleStreams, preferredMusicAudioQuality)
+        return selectByQuality(preferredCandidates, preferredAudioQuality)
+            ?: selectByQuality(compatibleStreams, preferredAudioQuality)
     }
 
     private fun selectByQuality(
         streams: List<AudioStream>,
-        preferredMusicAudioQuality: MusicAudioQuality,
+        preferredAudioQuality: AudioStreamQuality,
     ): AudioStream? {
         if (streams.isEmpty()) return null
 
         val streamsWithKnownBitrate = streams.filter { it.audioBitrate() > 0 }.ifEmpty { streams }
-        return when (preferredMusicAudioQuality) {
-            MusicAudioQuality.AUTO,
-            MusicAudioQuality.HIGH,
-            -> streamsWithKnownBitrate.maxByOrNull { it.audioBitrate() }
+        return when (preferredAudioQuality) {
+            AudioStreamQuality.AUTO,
+            AudioStreamQuality.HIGH,
+                -> streamsWithKnownBitrate.maxByOrNull { it.audioBitrate() }
 
-            MusicAudioQuality.MEDIUM -> streamsWithKnownBitrate.minByOrNull { abs(it.audioBitrate() - MEDIUM_BITRATE_TARGET) }
+            AudioStreamQuality.MEDIUM -> streamsWithKnownBitrate.minByOrNull { abs(it.audioBitrate() - MEDIUM_BITRATE_TARGET) }
 
-            MusicAudioQuality.LOW -> streamsWithKnownBitrate.minByOrNull { it.audioBitrate() }
+            AudioStreamQuality.LOW -> streamsWithKnownBitrate.minByOrNull { it.audioBitrate() }
         }
     }
 
@@ -76,17 +77,38 @@ object AudioStreamSelector {
         return streams
     }
 
-    /**
-     * True when [languageTag] is [preference] itself or a regional form of it ("pt" matches "pt-BR").
-     * Track display names are never matched: "French" contains "en" and "Chinese" contains "hi".
-     */
     fun languageMatches(
         languageTag: String?,
         preference: String,
     ): Boolean {
         if (languageTag.isNullOrBlank() || preference.isBlank()) return false
         return languageTag.equals(preference, ignoreCase = true) ||
-            languageTag.startsWith("$preference-", ignoreCase = true)
+                languageTag.startsWith("$preference-", ignoreCase = true)
+    }
+
+
+    internal fun preferredAudioFormats(
+        formats: List<PlayerResponse.StreamingData.Format>,
+        preferredAudioLanguage: String,
+    ): List<PlayerResponse.StreamingData.Format> {
+        val normalizedPreference = preferredAudioLanguage.trim().lowercase(Locale.ROOT)
+
+        if (normalizedPreference.isBlank() || normalizedPreference == "original") {
+            val originals = formats.filter { it.isOriginal }
+            if (originals.isNotEmpty()) return originals
+            return formats
+        }
+
+        val languageMatches =
+            formats.filter { format ->
+                languageMatches(format.audioLanguageTag, normalizedPreference)
+            }
+        if (languageMatches.isNotEmpty()) return languageMatches
+
+        val originals = formats.filter { it.isOriginal }
+        if (originals.isNotEmpty()) return originals
+
+        return formats
     }
 
     private const val MEDIUM_BITRATE_TARGET = 128_000

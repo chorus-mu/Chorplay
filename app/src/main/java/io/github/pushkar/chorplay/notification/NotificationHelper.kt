@@ -34,16 +34,10 @@ import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 import java.net.URL
 
-/**
- * Comprehensive notification helper for the app
- * Handles all notification channels and provides methods for showing various notification types
- */
 object NotificationHelper {
-    // Notification Channel IDs
     const val CHANNEL_DOWNLOADS = "downloads_channel"
     const val CHANNEL_SUBSCRIPTIONS = "subscriptions_channel"
     const val CHANNEL_PLAYBACK = "playback_channel"
-    const val CHANNEL_MUSIC_PLAYBACK = "music_playback_channel"
     const val CHANNEL_GENERAL = "general_channel"
     const val CHANNEL_REMINDERS = "reminders_channel"
     const val CHANNEL_UPDATES = "updates_channel"
@@ -52,17 +46,20 @@ object NotificationHelper {
     private const val NOTIFICATION_JOIN_REQUEST = 9998
     const val CHANNEL_IMPORTS = "imports_channel"
 
-    /** On every notification that belongs to one profile, so a tap left over from before a switch opens nothing of it. */
     const val EXTRA_PROFILE_ID = "io.github.pushkar.chorplay.extra.PROFILE_ID"
 
-    /** Channels whose notifications show one profile's content; a switch clears them. */
     private val ProfileChannels =
-        setOf(CHANNEL_SUBSCRIPTIONS, CHANNEL_REMINDERS, CHANNEL_GENERAL, CHANNEL_IMPORTS, AutoBackupWorker.NOTIFICATION_CHANNEL_ID)
+        setOf(
+            CHANNEL_SUBSCRIPTIONS,
+            CHANNEL_REMINDERS,
+            CHANNEL_GENERAL,
+            CHANNEL_IMPORTS,
+            AutoBackupWorker.NOTIFICATION_CHANNEL_ID
+        )
 
     private fun profileIntent(context: Context): Intent =
         Intent(context, MainActivity::class.java).putExtra(EXTRA_PROFILE_ID, ActiveProfile.get(context).id)
 
-    /** Clears the running profile's notifications before a switch; downloads and updates stay. */
     fun cancelProfileNotifications(context: Context) {
         val manager = context.getSystemService(NotificationManager::class.java) ?: return
         manager.activeNotifications
@@ -70,7 +67,6 @@ object NotificationHelper {
             .forEach { manager.cancel(it.tag, it.id) }
     }
 
-    /** False for a notification of another profile, still in the shade from before a switch. */
     fun opensInRunningProfile(
         context: Context,
         intent: Intent,
@@ -81,15 +77,13 @@ object NotificationHelper {
         runningId: String,
     ): Boolean = stamped == null || stamped == runningId
 
-    // Notification IDs
     const val NOTIFICATION_DOWNLOAD_PROGRESS = 1001
     const val NOTIFICATION_DOWNLOAD_COMPLETE = 1002
     const val NOTIFICATION_DOWNLOAD_FAILED = 1003
-    const val NOTIFICATION_NEW_VIDEO = 2000 // Base ID, per-video IDs are this + (videoId hash & 0xFFFF)
-    const val NOTIFICATION_NEW_VIDEO_SUMMARY = 1999 // Group summary; kept below the per-video range
+    const val NOTIFICATION_NEW_VIDEO = 2000
+    const val NOTIFICATION_NEW_VIDEO_SUMMARY = 1999
     private const val GROUP_NEW_VIDEOS = "new_videos"
     const val NOTIFICATION_PLAYBACK = 3001
-    const val NOTIFICATION_MUSIC_PLAYBACK = 3002
     const val NOTIFICATION_GENERAL = 4000
     const val NOTIFICATION_REMINDER = 5000
     const val NOTIFICATION_IMPORT_PROGRESS = 6001
@@ -98,9 +92,6 @@ object NotificationHelper {
 
     private var channelsCreated = false
 
-    /**
-     * Store notification in database
-     */
     private suspend fun storeNotification(
         context: Context,
         entity: NotificationEntity,
@@ -115,17 +106,11 @@ object NotificationHelper {
         }
     }
 
-    /**
-     * Initialize all notification channels
-     * Should be called once when the app starts (e.g., in Application.onCreate())
-     */
     fun createNotificationChannels(context: Context) {
         if (channelsCreated) return
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-
-            // Downloads channel - High importance for active downloads
             val downloadsChannel =
                 NotificationChannel(
                     CHANNEL_DOWNLOADS,
@@ -138,7 +123,6 @@ object NotificationHelper {
                     enableVibration(false)
                 }
 
-            // Subscriptions channel - Default importance for new videos
             val subscriptionsChannel =
                 NotificationChannel(
                     CHANNEL_SUBSCRIPTIONS,
@@ -151,7 +135,6 @@ object NotificationHelper {
                     enableVibration(true)
                 }
 
-            // Video playback channel - Low importance for background playback
             val playbackChannel =
                 NotificationChannel(
                     CHANNEL_PLAYBACK,
@@ -164,20 +147,6 @@ object NotificationHelper {
                     enableVibration(false)
                 }
 
-            // Music playback channel - Low importance for background music
-            val musicPlaybackChannel =
-                NotificationChannel(
-                    CHANNEL_MUSIC_PLAYBACK,
-                    context.getString(R.string.notification_channel_music_playback),
-                    NotificationManager.IMPORTANCE_LOW,
-                ).apply {
-                    description = context.getString(R.string.notification_channel_music_playback_description)
-                    setShowBadge(false)
-                    enableLights(false)
-                    enableVibration(false)
-                }
-
-            // General notifications channel
             val generalChannel =
                 NotificationChannel(
                     CHANNEL_GENERAL,
@@ -198,7 +167,6 @@ object NotificationHelper {
                     setShowBadge(true)
                 }
 
-            // Updates channel
             val updatesChannel =
                 NotificationChannel(
                     CHANNEL_UPDATES,
@@ -226,7 +194,6 @@ object NotificationHelper {
                     downloadsChannel,
                     subscriptionsChannel,
                     playbackChannel,
-                    musicPlaybackChannel,
                     generalChannel,
                     remindersChannel,
                     updatesChannel,
@@ -238,9 +205,6 @@ object NotificationHelper {
         }
     }
 
-    /**
-     * Check if notification permission is granted (Android 13+)
-     */
     fun hasNotificationPermission(context: Context): Boolean {
         if (!runBlocking { PlayerPreferences(context).notificationsEnabled.first() }) {
             return false
@@ -256,12 +220,6 @@ object NotificationHelper {
         }
     }
 
-    // ========== IMPORT NOTIFICATIONS ==========
-
-    /**
-     * Show (or update) the import-in-progress notification.
-     * When total == 0 the progress bar is indeterminate.
-     */
     fun showImportProgress(
         context: Context,
         label: String,
@@ -289,7 +247,6 @@ object NotificationHelper {
         NotificationManagerCompat.from(context).notify(NOTIFICATION_IMPORT_PROGRESS, builder.build())
     }
 
-    /** Replace the progress notification with a one-shot completion notification. */
     fun showImportComplete(
         context: Context,
         label: String,
@@ -297,7 +254,7 @@ object NotificationHelper {
         message: String? = null,
     ) {
         if (!hasNotificationPermission(context)) return
-        // cancel progress first
+
         NotificationManagerCompat.from(context).cancel(NOTIFICATION_IMPORT_PROGRESS)
         val builder =
             NotificationCompat
@@ -310,16 +267,10 @@ object NotificationHelper {
         NotificationManagerCompat.from(context).notify(NOTIFICATION_IMPORT_COMPLETE, builder.build())
     }
 
-    /** Cancel the ongoing import progress notification (e.g. on error). */
     fun cancelImportNotification(context: Context) {
         NotificationManagerCompat.from(context).cancel(NOTIFICATION_IMPORT_PROGRESS)
     }
 
-    // ========== DOWNLOAD NOTIFICATIONS ==========
-
-    /**
-     * Show download progress notification
-     */
     fun showDownloadProgress(
         context: Context,
         videoTitle: String,
@@ -375,9 +326,6 @@ object NotificationHelper {
         NotificationManagerCompat.from(context).notify(notificationId, builder.build())
     }
 
-    /**
-     * Show download complete notification
-     */
     suspend fun showDownloadComplete(
         context: Context,
         videoTitle: String,
@@ -388,7 +336,6 @@ object NotificationHelper {
         if (!hasNotificationPermission(context)) return
         if (!PlayerPreferences(context).notifDownloadsEnabled.first()) return
 
-        // Intent to open the downloaded file or app
         val openIntent =
             Intent(context, MainActivity::class.java).apply {
                 flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
@@ -413,10 +360,8 @@ object NotificationHelper {
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                 .setCategory(NotificationCompat.CATEGORY_STATUS)
 
-        // Cancel progress notification
         NotificationManagerCompat.from(context).cancel(NOTIFICATION_DOWNLOAD_PROGRESS)
 
-        // Load thumbnail if provided
         if (!thumbnailUrl.isNullOrEmpty()) {
             val bitmap = getBitmapFromUrl(context, thumbnailUrl)
             if (bitmap != null) {
@@ -427,9 +372,7 @@ object NotificationHelper {
         NotificationManagerCompat.from(context).notify(notificationId, builder.build())
     }
 
-    /**
-     * Show download failed notification
-     */
+
     fun showDownloadFailed(
         context: Context,
         videoTitle: String,
@@ -439,7 +382,6 @@ object NotificationHelper {
         if (!hasNotificationPermission(context)) return
         if (!runBlocking { PlayerPreferences(context).notifDownloadsEnabled.first() }) return
 
-        // Intent to retry download
         val retryIntent =
             Intent(context, NotificationActionReceiver::class.java).apply {
                 action = NotificationActionReceiver.ACTION_RETRY_DOWNLOAD
@@ -472,16 +414,10 @@ object NotificationHelper {
                 .setCategory(NotificationCompat.CATEGORY_ERROR)
                 .build()
 
-        // Cancel progress notification
         NotificationManagerCompat.from(context).cancel(NOTIFICATION_DOWNLOAD_PROGRESS)
         NotificationManagerCompat.from(context).notify(notificationId, notification)
     }
 
-    // ========== SUBSCRIPTION NOTIFICATIONS ==========
-
-    /**
-     * Represents a single new video found during a subscription check cycle.
-     */
     data class NewVideoEntry(
         val channelName: String,
         val videoTitle: String,
@@ -489,9 +425,6 @@ object NotificationHelper {
         val thumbnailUrl: String?,
     )
 
-    /**
-     * Dispatcher for subscription update notifications.
-     */
     suspend fun showSubscriptionUpdates(
         context: Context,
         videos: List<NewVideoEntry>,
@@ -609,9 +542,6 @@ object NotificationHelper {
         manager.notify(NOTIFICATION_NEW_VIDEO_SUMMARY, summaryNotification)
     }
 
-    /**
-     * Show notification for new video from subscribed channel
-     */
     suspend fun showNewVideoNotification(
         context: Context,
         channelName: String,
@@ -623,7 +553,6 @@ object NotificationHelper {
         if (!hasNotificationPermission(context)) return
         if (!PlayerPreferences(context).notifNewVideosEnabled.first()) return
 
-        // Save to database
         storeNotification(
             context,
             NotificationEntity(
@@ -635,10 +564,7 @@ object NotificationHelper {
             ),
         )
 
-        // Generate unique notification ID based on video ID
         val notificationId = NOTIFICATION_NEW_VIDEO + videoId.hashCode().and(0xFFFF)
-
-        // Intent to open the video
         val watchIntent =
             profileIntent(context).apply {
                 flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
@@ -666,7 +592,6 @@ object NotificationHelper {
                 .setCategory(NotificationCompat.CATEGORY_SOCIAL)
                 .setGroup("new_videos")
 
-        // Try to load thumbnail
         thumbnailUrl?.let { url ->
             val bitmap = getBitmapFromUrl(context, url, followThumbnailSetting = true)
             bitmap?.let {
@@ -683,9 +608,6 @@ object NotificationHelper {
         NotificationManagerCompat.from(context).notify(notificationId, builder.build())
     }
 
-    /**
-     * Show grouped notification summary for multiple new videos
-     */
     fun showNewVideosSummary(
         context: Context,
         videoCount: Int,
@@ -713,11 +635,6 @@ object NotificationHelper {
         NotificationManagerCompat.from(context).notify(NOTIFICATION_NEW_VIDEO, summaryNotification)
     }
 
-    // ========== UPDATE NOTIFICATIONS ==========
-
-    /**
-     * Show notification for new app update
-     */
     fun showUpdateNotification(
         context: Context,
         release: AppRelease,
@@ -754,7 +671,6 @@ object NotificationHelper {
         NotificationManagerCompat.from(context).notify(9999, notification)
     }
 
-    /** A device asked to join this device's linked group with the admin token; the tap opens Linked devices. */
     fun showJoinRequest(
         context: Context,
         name: String,
@@ -787,11 +703,6 @@ object NotificationHelper {
         NotificationManagerCompat.from(context).notify(NOTIFICATION_JOIN_REQUEST, notification)
     }
 
-    // ========== GENERAL NOTIFICATIONS ==========
-
-    /**
-     * Show a simple notification
-     */
     fun showSimpleNotification(
         context: Context,
         title: String,
@@ -827,9 +738,6 @@ object NotificationHelper {
         NotificationManagerCompat.from(context).notify(notificationId, notification)
     }
 
-    /**
-     * Show watch later reminder notification
-     */
     fun showWatchLaterReminder(
         context: Context,
         videoTitle: String,
@@ -868,11 +776,6 @@ object NotificationHelper {
         NotificationManagerCompat.from(context).notify(notificationId, notification)
     }
 
-    // ========== UTILITY FUNCTIONS ==========
-
-    /**
-     * Cancel a specific notification
-     */
     fun cancelNotification(
         context: Context,
         notificationId: Int,
@@ -880,9 +783,6 @@ object NotificationHelper {
         NotificationManagerCompat.from(context).cancel(notificationId)
     }
 
-    /**
-     * Show reminder notification (Bedtime, Take a break)
-     */
     fun showReminderNotification(
         context: Context,
         title: String,
@@ -919,7 +819,6 @@ object NotificationHelper {
                 notify(NOTIFICATION_REMINDER, builder.build())
             }
         } catch (e: SecurityException) {
-            // Should be covered by hasNotificationPermission check, but safety first
             e.printStackTrace()
         }
     }
@@ -977,23 +876,10 @@ object NotificationHelper {
         }
     }
 
-    /**
-     * Cancel all notifications
-     */
     fun cancelAllNotifications(context: Context) {
         NotificationManagerCompat.from(context).cancelAll()
     }
 
-    /**
-     * Load bitmap from URL for notification large icon/picture.
-     *
-     * Uses the app's shared Coil ImageLoader so notification artwork reuses the memory/disk
-     * cache the feed already populated instead of refetching through a second image stack.
-     * Hardware bitmaps are disabled because notification bitmaps must be parcelable to
-     * SystemUI, and INEXACT precision keeps the "never upscale" behaviour of the previous
-     * centerInside/onlyScaleDown request. With [followThumbnailSetting], a viewer who turned
-     * thumbnails off gets one only if it is already cached.
-     */
     suspend fun getBitmapFromUrl(
         context: Context,
         url: String,

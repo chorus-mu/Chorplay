@@ -4,7 +4,6 @@ import com.google.common.truth.Truth.assertThat
 import io.github.pushkar.chorplay.data.localmedia.LocalLibrary
 import io.github.pushkar.chorplay.data.localmedia.LocalMediaItem
 import io.github.pushkar.chorplay.data.localmedia.LocalMediaSettings
-import io.github.pushkar.chorplay.ui.components.shared.MediaKind
 import org.junit.Test
 
 class LocalMediaStateTest {
@@ -70,13 +69,5 @@ class LocalMediaStateTest {
 
         assertThat(state.listsFolders).isFalse()
         assertThat(state.items.map { it.id }).containsExactly(2L, 1L).inOrder()
-    }
-
-    @Test
-    fun `the music tab reads the music list`() {
-        val state = buildState(library, LocalMediaSettings(), LocalPlayback(), LocalMediaSelection(kind = MediaKind.Music), nowMs = 10)
-
-        assertThat(state.items).isEmpty()
-        assertThat(state.totalCount).isEqualTo(0)
     }
 }

@@ -13,7 +13,6 @@ class LibrarySectionVisibilityTest {
                 LibrarySection.PLAYLISTS,
                 LibrarySection.WATCH_LATER,
                 LibrarySection.LIKED_VIDEOS,
-                LibrarySection.LIKED_MUSIC,
                 LibrarySection.DOWNLOADS,
                 LibrarySection.SAVED_SHORTS,
             ).inOrder()
@@ -26,12 +25,11 @@ class LibrarySectionVisibilityTest {
     }
 
     @Test
-    fun `separate playlist kinds replace the combined section and hide independently`() {
+    fun `playlists section can be hidden`() {
         val visible =
-            visibleContentSections(setOf(LibrarySection.MUSIC_PLAYLISTS), separatePlaylistKinds = true, shortsEnabled = true)
+            visibleContentSections(setOf(LibrarySection.PLAYLISTS), separatePlaylistKinds = false, shortsEnabled = true)
 
-        assertThat(visible).contains(LibrarySection.VIDEO_PLAYLISTS)
-        assertThat(visible).containsNoneOf(LibrarySection.PLAYLISTS, LibrarySection.MUSIC_PLAYLISTS)
+        assertThat(visible).doesNotContain(LibrarySection.PLAYLISTS)
     }
 
     @Test

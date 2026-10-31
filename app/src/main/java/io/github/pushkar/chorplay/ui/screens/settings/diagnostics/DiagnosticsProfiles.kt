@@ -20,7 +20,7 @@ import io.github.pushkar.chorplay.data.profile.ProfileRegistryState
 import io.github.pushkar.chorplay.data.profile.displayName
 import io.github.pushkar.chorplay.ui.components.profiles.ProfileAvatar
 import io.github.pushkar.chorplay.ui.components.settings.SettingsListScope
-import io.github.pushkar.chorplay.ui.components.shared.FlowNavRow
+import io.github.pushkar.chorplay.ui.components.shared.ChorNavRow
 
 /** Debug builds only, until the Profiles screens arrive: add, switch to and delete profiles. Kept out of settings search. */
 internal fun SettingsListScope.debugProfiles(
@@ -37,7 +37,7 @@ internal fun SettingsListScope.debugProfiles(
         state.profiles.forEach { profile ->
             val running = profile.id == runningId
             row("diagnostics.profiles.${profile.id}") { shape ->
-                FlowNavRow(
+                ChorNavRow(
                     title = profile.displayName(LocalContext.current),
                     supportingText =
                         stringResource(
@@ -63,7 +63,7 @@ internal fun SettingsListScope.debugProfiles(
         }
         if (state.profiles.size < ProfileRegistry.MAX_PROFILES) {
             row("diagnostics.profiles.add") { shape ->
-                FlowNavRow(
+                ChorNavRow(
                     title = stringResource(R.string.diagnostics_profile_add),
                     onClick = onAdd,
                     leadingIcon = Icons.Outlined.PersonAdd,
@@ -73,7 +73,7 @@ internal fun SettingsListScope.debugProfiles(
             }
             row("diagnostics.profiles.photo") { shape ->
                 val picker = rememberLauncherForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri -> uri?.let(onPhoto) }
-                FlowNavRow(
+                ChorNavRow(
                     title = stringResource(R.string.diagnostics_profile_photo),
                     onClick = { picker.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)) },
                     leadingIcon = Icons.Outlined.AddAPhoto,
@@ -82,7 +82,7 @@ internal fun SettingsListScope.debugProfiles(
                 )
             }
             row("diagnostics.profiles.add_copy") { shape ->
-                FlowNavRow(
+                ChorNavRow(
                     title = stringResource(R.string.diagnostics_profile_add_copy),
                     supportingText = stringResource(R.string.diagnostics_profile_add_copy_summary),
                     onClick = onAddCopy,

@@ -4,7 +4,6 @@ import androidx.annotation.StringRes
 import io.github.pushkar.chorplay.data.local.LikedVideoInfo
 import io.github.pushkar.chorplay.data.local.entity.PlaylistVideoCrossRef
 import io.github.pushkar.chorplay.data.model.Video
-import io.github.pushkar.chorplay.player.EnhancedMusicPlayerManager
 import io.github.pushkar.chorplay.player.RemovedQueueEntry
 
 /**
@@ -55,10 +54,6 @@ sealed interface QuickActionUndo {
         val entry: RemovedQueueEntry,
     ) : QuickActionUndo
 
-    /** A song swiped out of the music queue. */
-    data class MusicQueueRemoval(
-        val removed: EnhancedMusicPlayerManager.RemovedQueueTrack,
-    ) : QuickActionUndo
 
     /** A download queued because the viewer opened the video. */
     data class AutoDownload(

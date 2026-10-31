@@ -32,39 +32,33 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import io.github.pushkar.chorplay.R
 import io.github.pushkar.chorplay.data.local.entity.DownloadWithItems
-import io.github.pushkar.chorplay.data.music.DownloadedTrack
 import io.github.pushkar.chorplay.data.video.DownloadProgressUpdate
 import io.github.pushkar.chorplay.data.video.DownloadedVideo
-import io.github.pushkar.chorplay.ui.components.layout.flowBottomContentPadding
+import io.github.pushkar.chorplay.ui.components.layout.chorBottomContentPadding
 import io.github.pushkar.chorplay.ui.components.shared.ChorplayEmptyState
 import io.github.pushkar.chorplay.ui.components.shared.ChorplayPullToRefreshBox
 import io.github.pushkar.chorplay.ui.components.shared.MediaKind
 import io.github.pushkar.chorplay.ui.components.shared.animateMediaGridItem
 
 private val GridSpacing = 12.dp
-private val MusicGridPadding = 16.dp
 
-/** Rows carry their own side padding, so content above them is inset to match; cards use the grid's. */
 private fun rowInset(columns: Int): Dp = if (columns > 1) 0.dp else 16.dp
 
-/** Rows carry their own side padding; cards need the grid's. */
 @Composable
 private fun listPadding(side: Dp) =
     PaddingValues(
         start = side,
         end = side,
         top = 4.dp,
-        bottom = flowBottomContentPadding(),
+        bottom = chorBottomContentPadding(),
     )
 
-/** Which items are selected and how a tap changes that; tapping plays when [active] is false. */
 internal class LibrarySelection(
     val active: Boolean,
     val ids: Set<String>,
     val onToggle: (String) -> Unit,
 )
 
-/** What the in-progress rows can do; each callback takes the download's video id. */
 internal class ActiveDownloadActions(
     val onPause: (String) -> Unit,
     val onResume: (String) -> Unit,
@@ -73,10 +67,6 @@ internal class ActiveDownloadActions(
     val onCancelAll: () -> Unit,
 )
 
-/**
- * Video downloads under the screen's [header]: what is still downloading, then what is finished,
- * as rows on a phone and as cards on wider windows, as many columns as the space holds.
- */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun VideosDownloadsList(
@@ -124,7 +114,13 @@ internal fun VideosDownloadsList(
                 if (videos.isNotEmpty()) {
                     fullWidth(
                         "section_done",
-                    ) { DownloadsSectionHeader(stringResource(R.string.downloads_section_downloaded), videos.size, rowInset(columns)) }
+                    ) {
+                        DownloadsSectionHeader(
+                            stringResource(R.string.downloads_section_downloaded),
+                            videos.size,
+                            rowInset(columns)
+                        )
+                    }
                 } else if (query.isNotBlank()) {
                     fullWidth("no_results") { NoResults(query) }
                 }
@@ -145,76 +141,16 @@ internal fun VideosDownloadsList(
                             asCard = asCard,
                             selectionMode = selection.active,
                             selected = video.video.id in selection.ids,
-                            onClick = { if (selection.active) selection.onToggle(video.video.id) else onVideoClick(videos, index) },
+                            onClick = {
+                                if (selection.active) selection.onToggle(video.video.id) else onVideoClick(
+                                    videos,
+                                    index
+                                )
+                            },
                             onDeleteClick = { onDelete(video.video.id, video.video.title) },
                             rowThumbnailWidth = grid.rowThumbnailWidth,
                         )
                     }
-                }
-            }
-        }
-    }
-}
-
-/** Song downloads under [header]: in progress first, then finished, in one or two columns of rows. */
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-internal fun MusicDownloadsList(
-    header: @Composable () -> Unit,
-    shelf: @Composable (horizontalInset: Dp) -> Unit,
-    tracks: List<DownloadedTrack>,
-    totalCount: Int,
-    incomplete: List<DownloadWithItems>,
-    progress: Map<String, DownloadProgressUpdate>,
-    columns: Int,
-    query: String,
-    selection: LibrarySelection,
-    activeActions: ActiveDownloadActions,
-    isRefreshing: Boolean,
-    onRefresh: () -> Unit,
-    onMusicClick: (List<DownloadedTrack>, Int) -> Unit,
-    onSwipeDelete: (id: String) -> Unit,
-    onHomeClick: () -> Unit,
-    modifier: Modifier = Modifier,
-) {
-    ChorplayPullToRefreshBox(
-        isRefreshing = isRefreshing,
-        onRefresh = onRefresh,
-        state = rememberPullToRefreshState(),
-        modifier = modifier.fillMaxSize(),
-    ) {
-        if (totalCount == 0 && incomplete.isEmpty()) {
-            DownloadsEmptyState(kind = MediaKind.Music, onHomeClick = onHomeClick)
-            return@ChorplayPullToRefreshBox
-        }
-        LazyVerticalGrid(
-            columns = GridCells.Fixed(columns),
-            contentPadding = listPadding(if (columns > 1) MusicGridPadding else 0.dp),
-            horizontalArrangement = Arrangement.spacedBy(GridSpacing),
-            modifier = Modifier.fillMaxSize(),
-        ) {
-            fullWidth("header") { Box(Modifier.padding(horizontal = rowInset(columns))) { header() } }
-            fullWidth("collections") { shelf(rowInset(columns)) }
-            activeSection(incomplete, progress, emptySet(), activeActions, rowInset(columns))
-            if (tracks.isNotEmpty()) {
-                fullWidth(
-                    "section_done",
-                ) { DownloadsSectionHeader(stringResource(R.string.downloads_section_downloaded), tracks.size, rowInset(columns)) }
-            } else if (query.isNotBlank()) {
-                fullWidth("no_results") { NoResults(query) }
-            }
-            itemsIndexed(tracks, key = { _, track -> track.track.videoId }, contentType = { _, _ -> "track" }) { index, track ->
-                DownloadSwipeToDelete(
-                    enabled = !selection.active,
-                    onDelete = { onSwipeDelete(track.track.videoId) },
-                    modifier = animateMediaGridItem(),
-                ) {
-                    MusicDownloadRow(
-                        downloadedTrack = track,
-                        selectionMode = selection.active,
-                        selected = track.track.videoId in selection.ids,
-                        onClick = { if (selection.active) selection.onToggle(track.track.videoId) else onMusicClick(tracks, index) },
-                    )
                 }
             }
         }
@@ -239,7 +175,10 @@ private fun LazyGridScope.activeSection(
     fullWidth("section_active") {
         DownloadsSectionHeader(stringResource(R.string.downloads_section_in_progress), incomplete.size, inset) {
             IconButton(onClick = actions.onCancelAll) {
-                Icon(Icons.Outlined.DeleteSweep, contentDescription = stringResource(R.string.remove_incomplete_downloads))
+                Icon(
+                    Icons.Outlined.DeleteSweep,
+                    contentDescription = stringResource(R.string.remove_incomplete_downloads)
+                )
             }
         }
     }

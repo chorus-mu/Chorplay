@@ -35,7 +35,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import io.github.pushkar.chorplay.R
 import io.github.pushkar.chorplay.data.local.VideoHistoryEntry
-import io.github.pushkar.chorplay.data.music.model.MusicTrack
+import io.github.pushkar.chorplay.data.model.Video
 import io.github.pushkar.chorplay.data.shorts.queue.ShortsQueueSource
 import io.github.pushkar.chorplay.ui.components.layout.LocalChorplayBottomInsets
 import io.github.pushkar.chorplay.ui.components.layout.floatAboveBottomChrome
@@ -53,10 +53,10 @@ private val SearchFieldPadding = PaddingValues(horizontal = 16.dp, vertical = 8.
 
 @Composable
 fun HistoryScreen(
-    onVideoClick: (MusicTrack) -> Unit,
+    onVideoClick: (Video) -> Unit,
     onBackClick: () -> Unit,
     onShortsQueue: (ShortsQueueSource) -> Unit = {},
-    onMusicClick: (MusicTrack, List<MusicTrack>) -> Unit = { track, _ -> onVideoClick(track) },
+    
     modifier: Modifier = Modifier,
     viewModel: HistoryViewModel = hiltViewModel(),
 ) {
@@ -195,7 +195,6 @@ fun HistoryScreen(
                         selectedFilter = contentFilter,
                         onVideoClick = onVideoClick,
                         onShortClick = { row, tapped -> onShortsQueue(viewModel.shortsRowSource(row, tapped)) },
-                        onMusicClick = onMusicClick,
                         onRemove = onRemove,
                     )
                 }

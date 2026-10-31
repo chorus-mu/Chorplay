@@ -66,7 +66,7 @@ import io.github.pushkar.chorplay.ui.components.channel.ChannelTabItems
 import io.github.pushkar.chorplay.ui.components.channel.ChannelTabRow
 import io.github.pushkar.chorplay.ui.components.channel.CommunityPostCard
 import io.github.pushkar.chorplay.ui.components.channel.PostsPaneMaxWidth
-import io.github.pushkar.chorplay.ui.components.layout.flowBottomContentPadding
+import io.github.pushkar.chorplay.ui.components.layout.chorBottomContentPadding
 import io.github.pushkar.chorplay.ui.components.shared.FeedShelfActions
 import io.github.pushkar.chorplay.ui.components.shared.FeedShelfSections
 import io.github.pushkar.chorplay.ui.components.shared.FeedShelfSlots
@@ -283,7 +283,7 @@ internal fun ChannelContent(
             // Off on a D-pad, which also stops focus at a row's edge from paging to the next tab.
             userScrollEnabled = !dpad,
         ) { page ->
-            val listPadding = PaddingValues(top = contentTopInset, bottom = flowBottomContentPadding())
+            val listPadding = PaddingValues(top = contentTopInset, bottom = chorBottomContentPadding())
             val tab = visibleTabs.getOrElse(page) { visibleTabs.first() }
 
             when {

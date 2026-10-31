@@ -2,7 +2,6 @@ package io.github.pushkar.chorplay.sync.merge
 
 import io.github.pushkar.chorplay.sync.canonical.BrainCounters
 import io.github.pushkar.chorplay.sync.canonical.CanonicalBrain
-import io.github.pushkar.chorplay.sync.canonical.CanonicalMusicBrain
 import io.github.pushkar.chorplay.sync.canonical.GCounter
 
 /**
@@ -60,28 +59,4 @@ object CounterOwnership {
                     .filterValues { it.perDevice.isNotEmpty() },
         )
     }
-
-    fun music(
-        merged: CanonicalMusicBrain,
-        local: CanonicalMusicBrain,
-        remote: CanonicalMusicBrain,
-        own: Set<String>,
-        sender: Set<String>,
-    ): CanonicalMusicBrain =
-        merged.copy(
-            totalPlays = reconcile(merged.totalPlays, local.totalPlays, listOf(remote.totalPlays), own, sender),
-            artistAffinity =
-                merged.artistAffinity.mapValues { (artist, affinity) ->
-                    affinity.copy(
-                        plays =
-                            reconcile(
-                                affinity.plays,
-                                local.artistAffinity[artist]?.plays ?: GCounter(),
-                                listOfNotNull(remote.artistAffinity[artist]?.plays),
-                                own,
-                                sender,
-                            ),
-                    )
-                },
-        )
 }

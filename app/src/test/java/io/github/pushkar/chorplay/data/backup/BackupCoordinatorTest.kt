@@ -9,7 +9,6 @@ import io.github.pushkar.chorplay.data.profile.ActiveProfile
 import io.github.pushkar.chorplay.data.profile.MasterRestored
 import io.github.pushkar.chorplay.data.profile.ProfileSlices
 import io.github.pushkar.chorplay.data.profile.RunningProfile
-import io.github.pushkar.chorplay.data.recommendation.music.FavouriteArtistsStore
 import io.github.pushkar.chorplay.notification.NotificationHelper
 import io.github.pushkar.chorplay.sync2.service.LinkedReset
 import io.mockk.coEvery
@@ -35,7 +34,6 @@ class BackupCoordinatorTest {
     private val repository: BackupRepository = mockk(relaxed = true)
     private val first: Uri = mockk()
     private val second: Uri = mockk()
-    private val favourites: FavouriteArtistsStore = mockk(relaxed = true)
     private val linkedReset: LinkedReset = mockk(relaxed = true)
     private val slices: ProfileSlices = mockk(relaxed = true)
 
@@ -43,7 +41,6 @@ class BackupCoordinatorTest {
         BackupCoordinator(
             context,
             repository,
-            mockk(relaxed = true),
             mockk(relaxed = true),
             linkedReset,
             slices,
@@ -101,26 +98,6 @@ class BackupCoordinatorTest {
             val outcome = withTimeout(2_000) { coordinator.operation.first { it !is BackupOperation.Running } }
             assertThat(outcome).isInstanceOf(BackupOperation.Succeeded::class.java)
             verify(exactly = 0) { DocumentsContract.deleteDocument(any(), any()) }
-        }
-
-    @Test
-    fun `a profile's backup carries the picked artists and its restore puts them back`() =
-        runBlocking {
-            val picks = "[]".toByteArray()
-            coEvery { favourites.export() } returns picks
-            coEvery { repository.exportMasterBackup(first, any(), any(), picks) } returns Result.success(Unit)
-            val restore = slot<suspend (ByteArray) -> Unit>()
-            coEvery { repository.importMasterBackup(second, any(), any(), capture(restore)) } coAnswers {
-                restore.captured(picks)
-                Result.success(Unit)
-            }
-            val realSlices = ProfileSlices(context, repository, mockk(relaxed = true), mockk(relaxed = true), favourites, linkedReset)
-
-            realSlices.export(first)
-            realSlices.import(second)
-
-            coVerify { repository.exportMasterBackup(first, any(), any(), picks) }
-            coVerify { favourites.restore(picks) }
         }
 
     @Test

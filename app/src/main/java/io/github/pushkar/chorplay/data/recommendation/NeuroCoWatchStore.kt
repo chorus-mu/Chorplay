@@ -1,13 +1,3 @@
-/*
- * Copyright: Pushkar (2026) under GPLv3
- *
- * This file is part of Chorplay (https://github.com/chorus-mu/Chorplay).
- *
- * This recommendation algorithm (ChorplayNeuroEngine) is the intellectual property
- * of the Chorplay project. Any use of this code in other projects must
- * explicitly credit "Chorplay Android Client" and link back to the original repository.
- */
-
 package io.github.pushkar.chorplay.data.recommendation
 
 import android.content.Context
@@ -28,11 +18,6 @@ import java.io.InputStream
 import java.io.OutputStream
 import kotlin.math.pow
 
-/**
- * Channels watched together (#907), from the related lists YouTube shows beside videos the viewer
- * really watched or liked. One list is noise: a pair of channels counts only once two different
- * videos list it, or the viewer has watched both. Device-local, never synced or backed up.
- */
 internal class NeuroCoWatchStore(
     private val appContext: Context,
 ) {
@@ -42,7 +27,6 @@ internal class NeuroCoWatchStore(
         const val CHANNELS_PER_SOURCE = 10
         const val HALF_LIFE_MS = 45L * 24L * 60L * 60L * 1000L
 
-        /** Fresh sources that make a pair as strong as it gets. */
         private const val FULL_STRENGTH_SOURCES = 2.0
 
         fun pairKey(
@@ -50,10 +34,6 @@ internal class NeuroCoWatchStore(
             b: String,
         ) = if (a < b) "$a|$b" else "$b|$a"
 
-        /**
-         * Confirmed channel pairs ("a|b") and their strength from 0 to 1: the decayed number of source
-         * videos listing them, over [FULL_STRENGTH_SOURCES]. [isWatched] confirms a pair seen once.
-         */
         fun edges(
             sources: Collection<Source>,
             isWatched: (channelId: String) -> Boolean,
@@ -75,7 +55,6 @@ internal class NeuroCoWatchStore(
                 }.mapValues { (_, value) -> (value / FULL_STRENGTH_SOURCES).coerceAtMost(1.0) }
         }
 
-        /** For each channel next to one the viewer watches, the strongest such pair. */
         fun neighbours(
             edges: Map<String, Double>,
             isWatched: (channelId: String) -> Boolean,
@@ -95,7 +74,6 @@ internal class NeuroCoWatchStore(
         val channelId: String = "",
         val related: List<String> = emptyList(),
         val at: Long = 0L,
-        /** The related channels' names, so a neighbour channel can be fetched and named (#907). */
         val names: Map<String, String> = emptyMap(),
     )
 
@@ -110,7 +88,9 @@ internal class NeuroCoWatchStore(
         override suspend fun readFrom(input: InputStream): CoWatchIndex =
             try {
                 val text = input.bufferedReader().readText()
-                if (text.isBlank()) defaultValue else Json { ignoreUnknownKeys = true }.decodeFromString<CoWatchIndex>(text)
+                if (text.isBlank()) defaultValue else Json { ignoreUnknownKeys = true }.decodeFromString<CoWatchIndex>(
+                    text
+                )
             } catch (e: Exception) {
                 Log.e(TAG, "Failed to read co-watch index", e)
                 defaultValue
@@ -127,7 +107,13 @@ internal class NeuroCoWatchStore(
     private val coWatchDataStore: DataStore<CoWatchIndex> by lazy {
         DataStoreFactory.create(
             serializer = CoWatchSerializer,
-            produceFile = { ProfileFiles.dataStore(appContext, StoreScope.PROFILE_PRIVATE, "flow_neuro_cowatch_v1.json") },
+            produceFile = {
+                ProfileFiles.dataStore(
+                    appContext,
+                    StoreScope.PROFILE_PRIVATE,
+                    "chorplay_neuro_cowatch_v1.json"
+                )
+            },
         )
     }
 
@@ -154,14 +140,13 @@ internal class NeuroCoWatchStore(
 
     fun index(): CoWatchIndex = CoWatchIndex(sources)
 
-    fun channelNames(): Map<String, String> = sources.values.fold(HashMap()) { names, source -> names.apply { putAll(source.names) } }
+    fun channelNames(): Map<String, String> =
+        sources.values.fold(HashMap()) { names, source -> names.apply { putAll(source.names) } }
 
-    /** Replaces the in-memory index without persisting it, for replaying a recorded Home load. */
-    fun restore(index: CoWatchIndex) {
+            fun restore(index: CoWatchIndex) {
         sources = index.sources
     }
 
-    /** Records the channels of [relatedVideos], the list beside [videoId], a video of [channelId] the viewer took to or follows. */
     fun record(
         videoId: String,
         channelId: String,
@@ -192,7 +177,6 @@ internal class NeuroCoWatchStore(
         dirty = true
     }
 
-    /** Persists the in-memory index if it changed; callers debounce. */
     suspend fun persistIfDirty() {
         if (!dirty) return
         dirty = false

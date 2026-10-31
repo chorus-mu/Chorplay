@@ -24,103 +24,97 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
-/** The Appearance page and its Navigation bar sub-page. */
 @HiltViewModel
 class AppearanceViewModel
-    @Inject
-    constructor(
-        private val preferences: PlayerPreferences,
-        private val uiModePreferences: AppUiModePreferences,
-        private val appIconController: AppIconController,
-        localDataManager: LocalDataManager,
-        fontPreferences: AppFontPreferences,
-    ) : SettingsViewModel() {
-        val themeMode = localDataManager.themeMode.asState(ThemeMode.SYSTEM)
-        val themeVariant = localDataManager.themeVariant.asState(ThemeVariant.DARK)
-        val customThemeName = localDataManager.activeCustomTheme.map { it?.name }.asState(null)
-        val interfaceMode = uiModePreferences.mode.asState(AppUiMode.AUTOMATIC)
-        val font = fontPreferences.selection.asState(AppFontSelection())
+@Inject
+constructor(
+    private val preferences: PlayerPreferences,
+    private val uiModePreferences: AppUiModePreferences,
+    private val appIconController: AppIconController,
+    localDataManager: LocalDataManager,
+    fontPreferences: AppFontPreferences,
+) : SettingsViewModel() {
+    val themeMode = localDataManager.themeMode.asState(ThemeMode.SYSTEM)
+    val themeVariant = localDataManager.themeVariant.asState(ThemeVariant.DARK)
+    val customThemeName = localDataManager.activeCustomTheme.map { it?.name }.asState(null)
+    val interfaceMode = uiModePreferences.mode.asState(AppUiMode.AUTOMATIC)
+    val font = fontPreferences.selection.asState(AppFontSelection())
 
-        val homeViewMode = preferences.homeViewMode.asState(HomeViewMode.GRID)
-        val homeColumns = preferences.homeFeedColumns.asState(HomeFeedColumns.AUTO)
-        val gridItemSize =
-            preferences.gridItemSize
-                .map { raw -> GridItemSize.entries.firstOrNull { it.name == raw } ?: GridItemSize.BIG }
-                .asState(GridItemSize.BIG)
-        val libraryPreviews = preferences.libraryShelfPreviewsEnabled.asState(true)
-        val separatePlaylists = preferences.separatePlaylistKinds.asState(false)
-        val appLogo = preferences.showAppLogoIcon.asState(true)
-        val groupBadges = preferences.showChannelGroupBadges.asState(false)
-        val cardLikeButtons = preferences.videoCardActionsEnabled.asState(false)
-        val cardMarkWatched = preferences.videoCardMarkWatchedEnabled.asState(false)
-        val cardWatchProgress = preferences.showWatchProgress.asState(true)
+    val homeViewMode = preferences.homeViewMode.asState(HomeViewMode.GRID)
+    val homeColumns = preferences.homeFeedColumns.asState(HomeFeedColumns.AUTO)
+    val gridItemSize =
+        preferences.gridItemSize
+            .map { raw -> GridItemSize.entries.firstOrNull { it.name == raw } ?: GridItemSize.BIG }
+            .asState(GridItemSize.BIG)
+    val libraryPreviews = preferences.libraryShelfPreviewsEnabled.asState(true)
+    val appLogo = preferences.showAppLogoIcon.asState(true)
+    val groupBadges = preferences.showChannelGroupBadges.asState(false)
+    val cardLikeButtons = preferences.videoCardActionsEnabled.asState(false)
+    val cardMarkWatched = preferences.videoCardMarkWatchedEnabled.asState(false)
+    val cardWatchProgress = preferences.showWatchProgress.asState(true)
 
-        val shortsContent = preferences.shortsContentEnabled.asState(true)
-        val navigationVisibility: StateFlow<NavigationVisibility> =
-            combine(
-                preferences.homeNavigationEnabled,
-                preferences.shortsNavigationEnabled,
-                preferences.musicNavigationEnabled,
-                preferences.searchNavigationEnabled,
-                preferences.categoriesNavigationEnabled,
-            ) { home, shorts, music, search, categories ->
-                NavigationVisibility(home = home, shorts = shorts, music = music, search = search, categories = categories)
-            }.combine(preferences.downloadsNavigationEnabled) { visibility, downloads -> visibility.copy(downloads = downloads) }
-                .asState(NavigationVisibility())
-        val hideNavOnScroll = preferences.bottomNavHideOnScroll.asState(true)
-        val navTabOrder = preferences.navTabOrder.asState(DEFAULT_NAV_TAB_ORDER)
-        val defaultNavTabIndex = preferences.defaultNavTabIndex.asState(0)
+    val shortsContent = preferences.shortsContentEnabled.asState(true)
+    val navigationVisibility: StateFlow<NavigationVisibility> =
+        combine(
+            preferences.homeNavigationEnabled,
+            preferences.shortsNavigationEnabled,
+            preferences.searchNavigationEnabled,
+            preferences.categoriesNavigationEnabled,
+        ) { home, shorts, search, categories ->
+            NavigationVisibility(home = home, shorts = shorts, search = search, categories = categories)
+        }.combine(preferences.downloadsNavigationEnabled) { visibility, downloads -> visibility.copy(downloads = downloads) }
+            .asState(NavigationVisibility())
+    val hideNavOnScroll = preferences.bottomNavHideOnScroll.asState(true)
+    val navTabOrder = preferences.navTabOrder.asState(DEFAULT_NAV_TAB_ORDER)
+    val defaultNavTabIndex = preferences.defaultNavTabIndex.asState(0)
 
-        private val _appIcon = MutableStateFlow(AppIcons.DEFAULT_SUFFIX)
-        val appIcon: StateFlow<String> = _appIcon.asStateFlow()
+    private val _appIcon = MutableStateFlow(AppIcons.DEFAULT_SUFFIX)
+    val appIcon: StateFlow<String> = _appIcon.asStateFlow()
 
-        init {
-            write { _appIcon.value = appIconController.activeSuffix() }
+    init {
+        write { _appIcon.value = appIconController.activeSuffix() }
+    }
+
+    fun setInterfaceMode(mode: AppUiMode) = write { uiModePreferences.setMode(mode) }
+
+    fun setAppIcon(suffix: String) =
+        write {
+            appIconController.apply(suffix)
+            _appIcon.value = suffix
         }
 
-        fun setInterfaceMode(mode: AppUiMode) = write { uiModePreferences.setMode(mode) }
+    fun setHomeViewMode(mode: HomeViewMode) = write { preferences.setHomeViewMode(mode) }
 
-        fun setAppIcon(suffix: String) =
-            write {
-                appIconController.apply(suffix)
-                _appIcon.value = suffix
-            }
+    fun setHomeColumns(columns: HomeFeedColumns) = write { preferences.setHomeFeedColumns(columns) }
 
-        fun setHomeViewMode(mode: HomeViewMode) = write { preferences.setHomeViewMode(mode) }
+    fun setGridItemSize(size: GridItemSize) = write { preferences.setGridItemSize(size.name) }
 
-        fun setHomeColumns(columns: HomeFeedColumns) = write { preferences.setHomeFeedColumns(columns) }
+    fun setLibraryPreviews(enabled: Boolean) = write { preferences.setLibraryShelfPreviewsEnabled(enabled) }
 
-        fun setGridItemSize(size: GridItemSize) = write { preferences.setGridItemSize(size.name) }
+    fun setAppLogo(enabled: Boolean) = write { preferences.setShowAppLogoIcon(enabled) }
 
-        fun setLibraryPreviews(enabled: Boolean) = write { preferences.setLibraryShelfPreviewsEnabled(enabled) }
+    fun setGroupBadges(enabled: Boolean) = write { preferences.setShowChannelGroupBadges(enabled) }
 
-        fun setSeparatePlaylists(enabled: Boolean) = write { preferences.setSeparatePlaylistKinds(enabled) }
+    fun setCardLikeButtons(enabled: Boolean) = write { preferences.setVideoCardActionsEnabled(enabled) }
 
-        fun setAppLogo(enabled: Boolean) = write { preferences.setShowAppLogoIcon(enabled) }
+    fun setCardMarkWatched(enabled: Boolean) = write { preferences.setVideoCardMarkWatchedEnabled(enabled) }
 
-        fun setGroupBadges(enabled: Boolean) = write { preferences.setShowChannelGroupBadges(enabled) }
+    fun setCardWatchProgress(enabled: Boolean) = write { preferences.setShowWatchProgress(enabled) }
 
-        fun setCardLikeButtons(enabled: Boolean) = write { preferences.setVideoCardActionsEnabled(enabled) }
+    fun setHomeTab(enabled: Boolean) = write { preferences.setHomeNavigationEnabled(enabled) }
 
-        fun setCardMarkWatched(enabled: Boolean) = write { preferences.setVideoCardMarkWatchedEnabled(enabled) }
+    fun setShortsTab(enabled: Boolean) = write { preferences.setShortsNavigationEnabled(enabled) }
 
-        fun setCardWatchProgress(enabled: Boolean) = write { preferences.setShowWatchProgress(enabled) }
 
-        fun setHomeTab(enabled: Boolean) = write { preferences.setHomeNavigationEnabled(enabled) }
+    fun setSearchTab(enabled: Boolean) = write { preferences.setSearchNavigationEnabled(enabled) }
 
-        fun setShortsTab(enabled: Boolean) = write { preferences.setShortsNavigationEnabled(enabled) }
+    fun setExploreTab(enabled: Boolean) = write { preferences.setCategoriesNavigationEnabled(enabled) }
 
-        fun setMusicTab(enabled: Boolean) = write { preferences.setMusicNavigationEnabled(enabled) }
+    fun setDownloadsTab(enabled: Boolean) = write { preferences.setDownloadsNavigationEnabled(enabled) }
 
-        fun setSearchTab(enabled: Boolean) = write { preferences.setSearchNavigationEnabled(enabled) }
+    fun setHideNavOnScroll(enabled: Boolean) = write { preferences.setBottomNavHideOnScroll(enabled) }
 
-        fun setExploreTab(enabled: Boolean) = write { preferences.setCategoriesNavigationEnabled(enabled) }
+    fun setNavTabOrder(order: List<Int>) = write { preferences.setNavTabOrder(order) }
 
-        fun setDownloadsTab(enabled: Boolean) = write { preferences.setDownloadsNavigationEnabled(enabled) }
-
-        fun setHideNavOnScroll(enabled: Boolean) = write { preferences.setBottomNavHideOnScroll(enabled) }
-
-        fun setNavTabOrder(order: List<Int>) = write { preferences.setNavTabOrder(order) }
-
-        fun setDefaultNavTab(index: Int) = write { preferences.setDefaultNavTabIndex(index) }
-    }
+    fun setDefaultNavTab(index: Int) = write { preferences.setDefaultNavTabIndex(index) }
+}

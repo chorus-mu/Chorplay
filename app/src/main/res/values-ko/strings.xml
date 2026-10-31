@@ -22,7 +22,7 @@
     <string name="stats">통계</string>
     <string name="library_section_header">내 콘텐츠</string>
     <string name="library_history_label">기록</string>
-    <string name="library_music_playlists_subtitle">내 음악 컬렉션</string>
+
     <string name="library_liked_videos_label">좋아요</string>
     <string name="library_saved_shorts_label">저장한 Shorts</string>
     <string name="library_watch_later_label">나중에 볼 동영상</string>
@@ -59,11 +59,10 @@
     <string name="history_tab_shorts">Shorts</string>
     <string name="history_tab_local_videos">로컬 동영상</string>
     <string name="liked">좋아요 표시함</string>
-    <string name="liked_music">좋아요 표시한 음악</string>
+
     <string name="liked_videos">좋아요</string>
-    <string name="share_song">노래 공유</string>
     <string name="empty_liked_body">좋아요 표시한 동영상이 여기에 표시됩니다</string>
-    <string name="empty_liked_music_body">좋아요 표시한 노래가 여기에 표시됩니다</string>
+
     <string name="video">동영상</string>
     <string name="share">공유</string>
     <string name="downloaded">다운로드됨</string>
@@ -87,11 +86,11 @@
     <string name="shorts">Shorts</string>
     <string name="library">라이브러리</string>
     <string name="library_playlists_label">재생목록</string>
-    <string name="library_music_playlists_label">음악 재생목록</string>
-    <string name="history_tab_local_music">로컬 음악</string>
+
+
     <string name="empty_liked">좋아요 표시한 항목이 없습니다</string>
     <string name="empty_liked_videos">좋아요 표시한 동영상이 없습니다</string>
-    <string name="empty_liked_music">좋아요 표시한 음악이 없습니다</string>
+
     <string name="resume">계속 재생</string>
     <string name="play">재생</string>
     <string name="next">다음</string>
@@ -108,7 +107,6 @@
     <string name="remove">삭제</string>
     <string name="related_content">관련 콘텐츠</string>
     <string name="no_related_content">관련 콘텐츠를 찾을 수 없습니다</string>
-    <string name="share_message_template">이 노래를 들어보세요: %2$s의 %1$s\nhttps://music.youtube.com/watch?v=%3$s</string>
     <string name="filter_discover">둘러보기</string>
     <string name="filter_popular">인기곡</string>
     <string name="filter_deep_cuts">숨은 명곡</string>
@@ -125,7 +123,7 @@
     <string name="logs_copied">로그를 복사했습니다</string>
     <string name="logs_copy_failed">로그를 복사할 수 없습니다</string>
     <string name="channel_error_log_clip_label">Chorplay 채널 오류 로그</string>
-    <string name="song">노래</string>
+
     <string name="playlist_filter_owned">내가 만든 항목</string>
     <string name="playlist_creation_menu_open">재생목록 만들기</string>
     <string name="playlist_creation_menu_close">재생목록 만들기 메뉴 닫기</string>
@@ -149,13 +147,12 @@
     <string name="play_mode_suggestion_title">재생 모드 추천</string>
     <string name="play_mode_suggestion_body">이 동영상은 2분 미만입니다. 전용 플레이어로 전환할까요?</string>
     <string name="shorts_player">Shorts 플레이어</string>
-    <string name="music_player">음악 플레이어</string>
+
     <plurals name="channels_count">
         <item quantity="other">채널 %d개</item>
     </plurals>
     <string name="tab_videos">동영상</string>
-    <string name="tab_music">음악</string>
-    <string name="empty_offline_title">오프라인 %1$s</string>
+<string name="empty_offline_title">오프라인 %1$s</string>
     <string name="empty_offline_body">다운로드한 %1$s이(가) 여기에 표시됩니다.\n인터넷이 없어도 콘텐츠를 즐겨 보세요.</string>
     <string name="action_go_to_home">홈으로 이동</string>
     <string name="action_delete">삭제</string>
@@ -213,12 +210,12 @@
     <string name="copied_to_clipboard">%1$s을(를) 복사했습니다</string>
     <string name="unknown">알 수 없음</string>
     <string name="subscriptions_video_section_title">동영상 구독</string>
-    <string name="subscriptions_music_section_title">음악 구독</string>
+
     <string name="subscriptions_quick_access_title">빠른 접근</string>
     <string name="subscriptions_compact_header">최근 구독한 채널을 바로 확인하세요.</string>
-    <string name="subscriptions_compact_header_with_music">피드를 간결하게 유지하도록 음악 채널은 별도로 표시됩니다.</string>
-    <string name="subscriptions_music_chip_label">음악</string>
-    <string name="subscriptions_music_badge_cd">음악 구독</string>
+
+
+
     <string name="no_subscriptions_found">구독한 채널을 찾을 수 없습니다</string>
     <string name="live_chat">실시간 채팅</string>
     <string name="live_chat_connecting">실시간 채팅에 연결하는 중…</string>
@@ -243,11 +240,11 @@
     <string name="new_update_available">새 업데이트가 있습니다</string>
     <string name="update_available_template">%1$s 버전을 사용할 수 있습니다</string>
     <string name="release_notes">업데이트 내용</string>
-    <string name="update_flow">Chorplay 업데이트</string>
+    <string name="update_chorplay">Chorplay 업데이트</string>
     <string name="maybe_later">나중에</string>
     <string name="nav_home">홈</string>
     <string name="nav_shorts">Shorts</string>
-    <string name="nav_music">음악</string>
+
     <string name="nav_subs">구독</string>
     <string name="nav_library">라이브러리</string>
     <string name="notifications">알림</string>
@@ -267,7 +264,6 @@
     <string name="add_to_playlist">재생목록에 추가</string>
     <string name="playback_header">재생</string>
     <string name="play_next">다음에 재생</string>
-    <string name="play_next_desc">대기열 맨 앞에 추가</string>
     <string name="add_to_queue">대기열에 추가</string>
     <string name="add_to_queue_desc">대기열 맨 뒤에 추가</string>
     <string name="similar_content">비슷한 콘텐츠</string>
@@ -281,8 +277,6 @@
     <string name="audio_effects">오디오 효과</string>
     <string name="more_header">더보기</string>
     <string name="view_artist">아티스트 보기</string>
-    <string name="view_album">앨범 보기</string>
-    <string name="album_art">앨범아트</string>
     <string name="close_player">플레이어 닫기</string>
     <string name="views_template">조회수 %1$s회</string>
     <string name="chapters">챕터</string>
@@ -316,7 +310,6 @@
     <string name="search_hint">검색</string>
     <string name="search_videos_channels_placeholder">동영상, 채널 검색...</string>
     <string name="recent_searches">최근 검색어</string>
-    <string name="search_empty_prompt">동영상, 음악 등을 검색하세요</string>
     <string name="trending">인기 급상승</string>
     <string name="channels_header">채널</string>
     <string name="videos_header">동영상</string>
@@ -370,9 +363,9 @@
     <string name="channel_search_open">채널 내 검색</string>
     <string name="channel_search_close">검색 닫기</string>
     <string name="channel_search_no_results">“%1$s”에 대한 결과가 없습니다</string>
-    <string name="music_history">음악 기록</string>
+
     <string name="remove_from_history">기록에서 삭제</string>
-    <string name="share_song_chooser">노래 공유</string>
+
     <string name="time_today">오늘</string>
     <string name="time_yesterday">어제</string>
     <string name="time_earlier">이전</string>
@@ -382,35 +375,35 @@
     <string name="peace_and_quiet">조용하네요</string>
     <string name="notifications_empty_body">모든 알림을 확인했습니다! 구독 채널의 새 소식이 여기에 표시됩니다.</string>
     <string name="settings_title">설정</string>
-    <string name="settings_flow_engine_header">Chorplay 엔진</string>
+    <string name="settings_chor_engine_header">Chorplay 엔진</string>
     <string name="settings_active_learning">활성 학습 중</string>
     <string name="settings_reset_brain_title">Chorplay 성향을 초기화할까요?</string>
     <string name="settings_reset_brain_body">‘Chorplay Brain’ 관심사 프로필이 완전히 삭제됩니다.\n\n• 학습한 모든 주제를 잊습니다.\n• 성향 특성이 중립으로 초기화됩니다.\n• 추천이 기본값으로 돌아갑니다.\n\n이 작업은 되돌릴 수 없습니다.</string>
     <string name="settings_reset_everything">모두 초기화</string>
     <string name="settings_analyzing_interactions">상호작용을 분석하는 중...</string>
     <string name="settings_view_analytics">분석 보기</string>
-    <string name="deep_flow_mode_title">Deep Chorplay 모드</string>
-    <string name="deep_flow_mode_subtitle">학습을 일시중지하여 프로필에 영향을 주지 않고 둘러봅니다</string>
-    <string name="deep_flow_learning_paused">학습 일시중지됨</string>
-    <string name="deep_flow_expires_in">%s 후 종료</string>
-    <string name="deep_flow_expire_duration_title">자동 해제 시간</string>
-    <string name="deep_flow_expire_duration_subtitle">%s 후 학습이 자동으로 재개됩니다</string>
-    <string name="deep_flow_save_history_title">시청 기록에 저장</string>
-    <string name="deep_flow_save_history_subtitle">시청한 동영상을 진행률과 함께 기록에 저장합니다. 엔진은 해당 기록에서 학습하지 않습니다. 끄면 아무것도 저장되지 않습니다.</string>
-    <string name="deep_flow_dialog_title">일시중지 시간</string>
-    <string name="deep_flow_dialog_body">학습을 얼마나 오래 일시중지할까요?</string>
-    <string name="deep_flow_enabled_message">Deep Chorplay를 사용 설정했습니다</string>
-    <string name="deep_flow_disabled_message">Deep Chorplay를 사용 중지했습니다</string>
-    <string name="deep_flow_expired_message">Deep Chorplay 타이머가 종료되었습니다</string>
-    <string name="deep_flow_active_until_disabled">직접 끌 때까지 Deep Chorplay가 유지됩니다</string>
-    <string name="deep_flow_duration_never">제한 없음</string>
-    <string name="deep_flow_duration_1h">1시간</string>
-    <string name="deep_flow_duration_2h">2시간</string>
-    <string name="deep_flow_duration_4h">4시간</string>
-    <string name="deep_flow_duration_6h">6시간</string>
-    <string name="deep_flow_duration_8h">8시간</string>
-    <string name="deep_flow_duration_12h">12시간</string>
-    <string name="deep_flow_duration_24h">24시간</string>
+    <string name="deep_chor_mode_title">Deep Chorplay 모드</string>
+    <string name="deep_chor_mode_subtitle">학습을 일시중지하여 프로필에 영향을 주지 않고 둘러봅니다</string>
+    <string name="deep_chor_learning_paused">학습 일시중지됨</string>
+    <string name="deep_chor_expires_in">%s 후 종료</string>
+    <string name="deep_chor_expire_duration_title">자동 해제 시간</string>
+    <string name="deep_chor_expire_duration_subtitle">%s 후 학습이 자동으로 재개됩니다</string>
+    <string name="deep_chor_save_history_title">시청 기록에 저장</string>
+    <string name="deep_chor_save_history_subtitle">시청한 동영상을 진행률과 함께 기록에 저장합니다. 엔진은 해당 기록에서 학습하지 않습니다. 끄면 아무것도 저장되지 않습니다.</string>
+    <string name="deep_chor_dialog_title">일시중지 시간</string>
+    <string name="deep_chor_dialog_body">학습을 얼마나 오래 일시중지할까요?</string>
+    <string name="deep_chor_enabled_message">Deep Chorplay를 사용 설정했습니다</string>
+    <string name="deep_chor_disabled_message">Deep Chorplay를 사용 중지했습니다</string>
+    <string name="deep_chor_expired_message">Deep Chorplay 타이머가 종료되었습니다</string>
+    <string name="deep_chor_active_until_disabled">직접 끌 때까지 Deep Chorplay가 유지됩니다</string>
+    <string name="deep_chor_duration_never">제한 없음</string>
+    <string name="deep_chor_duration_1h">1시간</string>
+    <string name="deep_chor_duration_2h">2시간</string>
+    <string name="deep_chor_duration_4h">4시간</string>
+    <string name="deep_chor_duration_6h">6시간</string>
+    <string name="deep_chor_duration_8h">8시간</string>
+    <string name="deep_chor_duration_12h">12시간</string>
+    <string name="deep_chor_duration_24h">24시간</string>
     <string name="settings_header_appearance">화면 및 테마</string>
     <string name="settings_header_content_playback">콘텐츠 및 재생</string>
     <string name="settings_header_data_management">데이터 관리</string>
@@ -554,9 +547,9 @@
     <string name="app_icon_picker_subtitle">런처 아이콘 스타일을 선택하세요. 변경 사항은 즉시 적용되며 런처가 잠시 새로고침됩니다.</string>
     <string name="app_icon_picker_warning">알림: 아이콘 전환에는 Android 시스템 기능이 사용되므로 홈 화면의 앱 바로가기가 잠시 사라질 수 있습니다. 필요하면 런처를 길게 눌러 다시 추가하세요.</string>
     <string name="app_icon_apply_toast">아이콘이 업데이트되었습니다. 런처가 새로고침됩니다</string>
-    <string name="icon_name_flow_red">Chorplay 레드</string>
-    <string name="icon_name_flow_light">Chorplay 라이트</string>
-    <string name="icon_name_flow_play">Chorplay 플레이</string>
+    <string name="icon_name_chorplay_red">Chorplay 레드</string>
+    <string name="icon_name_chorplay_light">Chorplay 라이트</string>
+    <string name="icon_name_chorplay_play">Chorplay 플레이</string>
     <string name="icon_name_amoled">AMOLED 다크</string>
     <string name="icon_name_monochrome">모노크롬</string>
     <string name="icon_name_ghost">고스트</string>
@@ -567,13 +560,12 @@
     <string name="player_appearance_header">플레이어 컨트롤 맞춤설정</string>
     <string name="player_appearance_style_title">음악 진행률 표시줄 스타일</string>
     <string name="player_appearance_style_subtitle">탐색 막대의 시각적 스타일을 선택하세요</string>
-    <string name="player_background_style_title">음악 플레이어 배경</string>
     <string name="player_background_style_blur_gradient">블러 + 그라데이션</string>
     <string name="player_background_style_blur">흐린 앨범아트</string>
     <string name="player_background_style_gradient">팔레트 그라데이션</string>
     <string name="player_background_style_default">기본 표면</string>
-    <string name="player_appearance_hide_music_artwork_title">음악 플레이어 앨범아트 숨기기</string>
-    <string name="player_appearance_hide_music_artwork_subtitle">대신 추출한 앨범아트 색상 위에 앱 아이콘을 표시합니다</string>
+
+
     <string name="player_appearance_shorts_ui_title">Shorts 플레이어 UI</string>
     <string name="player_appearance_shorts_ui_subtitle">Shorts 오버레이에 표시할 요소의 양을 선택하세요</string>
     <string name="shorts_player_ui_default">기본</string>
@@ -626,8 +618,8 @@
     <string name="player_fullscreen_seekbar_width_default">기본</string>
     <string name="player_fullscreen_seekbar_width_custom">사용자 지정</string>
     <string name="player_fullscreen_seekbar_width_value">%1$d dp</string>
-    <string name="lyrics_provider_title">가사 제공업체</string>
-    <string name="lyrics_provider_subtitle">선호하는 노래 가사 출처를 선택하세요</string>
+
+
     <string name="lyrics_provider_lrclib">LrcLib</string>
     <string name="lyrics_provider_better_lyrics">Better Lyrics</string>
     <string name="lyrics_provider_simpmusic">SimpMusic</string>
@@ -696,13 +688,11 @@
     <string name="content_settings_layout_grid">그리드</string>
     <string name="content_settings_layout_list">목록</string>
     <string name="content_settings_grid_size_title">그리드 항목 크기</string>
-    <string name="content_settings_grid_size_subtitle">앨범아트 및 콘텐츠 카드의 크기를 조절합니다</string>
     <string name="content_settings_grid_big_title">크게</string>
     <string name="content_settings_grid_big_desc">더 큰 썸네일</string>
     <string name="content_settings_grid_small_title">작게</string>
     <string name="content_settings_grid_small_desc">간결한 보기</string>
     <string name="content_settings_header_preview">미리보기</string>
-    <string name="content_settings_preview_album_art">앨범아트 미리보기</string>
     <string name="content_settings_preview_big">크게 - 128dp 썸네일</string>
     <string name="content_settings_preview_small">작게 - 104dp 썸네일</string>
     <string name="content_settings_dynamic_components">동적 구성요소</string>
@@ -735,8 +725,8 @@
     <string name="content_settings_show_app_logo_title">앱 로고 아이콘 표시</string>
     <string name="content_settings_show_app_logo_subtitle">홈 화면 상단 표시줄에서 앱 이름 옆에 Chorplay 로고를 표시합니다</string>
     <string name="content_settings_header_content_components">콘텐츠 구성요소</string>
-    <string name="content_settings_restored_music_mini_player_title">복원된 음악 미니 플레이어 표시</string>
-    <string name="content_settings_restored_music_mini_player_subtitle">마지막 음악 세션이 복원되면 자동으로 표시합니다</string>
+
+
     <string name="content_settings_hide_watched_home_title">홈에서 시청한 동영상 숨기기</string>
     <string name="content_settings_hide_watched_home_subtitle">이미 시청한 동영상을 홈 피드에서 숨깁니다</string>
     <string name="content_settings_hide_watched_subscriptions_title">구독에서 시청한 동영상 숨기기</string>
@@ -781,8 +771,8 @@
     <string name="settings_home_shorts_shelf_subtitle">홈 화면에 가로형 Shorts 선반을 표시합니다.</string>
     <string name="settings_shorts_nav_tab_title">탐색 표시줄의 Shorts 탭</string>
     <string name="settings_shorts_nav_tab_subtitle">하단 탐색 표시줄에 Shorts 탭을 표시합니다.</string>
-    <string name="settings_music_nav_tab_title">탐색 표시줄의 음악 탭</string>
-    <string name="settings_music_nav_tab_subtitle">하단 탐색 표시줄에 음악 탭을 표시합니다.</string>
+
+
     <string name="settings_search_nav_tab_title">탐색 표시줄의 검색 탭</string>
     <string name="settings_search_nav_tab_subtitle">하단 탐색 표시줄에 빠른 검색 탭을 표시합니다.</string>
     <string name="nav_search">검색</string>
@@ -947,11 +937,11 @@
     <string name="video_quality_warning">화질이 높을수록 데이터 사용량이 늘어납니다</string>
     <string name="video_quality_wifi_header">Wi-Fi 화질</string>
     <string name="video_quality_cellular_header">모바일 데이터 화질</string>
-    <string name="music_quality_header">음악 음질</string>
-    <string name="music_quality_auto">자동</string>
-    <string name="music_quality_high">높음</string>
-    <string name="music_quality_medium">보통</string>
-    <string name="music_quality_low">낮음</string>
+
+
+
+
+
     <string name="quality_144p">144p</string>
     <string name="quality_240p">240p</string>
     <string name="quality_360p">360p</string>
@@ -1067,7 +1057,7 @@
     <string name="sleep_timer_custom_label">사용자 지정 시간</string>
     <string name="sleep_timer_unit">분</string>
     <string name="sleep_timer_input_error">1~1440 사이의 값을 입력하세요</string>
-    <string name="sleep_timer_end_of_song">노래/동영상 종료 시</string>
+    <string name="sleep_timer_end_of_video">노래/동영상 종료 시</string>
     <string name="sleep_timer_start">시작</string>
     <string name="sleep_timer_stops_in">종료까지</string>
     <string name="sleep_timer_end_of_media">현재 노래 종료 시</string>
@@ -1098,12 +1088,12 @@
     <string name="period_six_months">6개월</string>
     <string name="period_one_year">1년</string>
     <string name="import_data_title">데이터 가져오기</string>
-    <string name="import_flow_backup_success">Chorplay 백업을 가져왔습니다</string>
-    <string name="import_flow_backup_failed_template">Chorplay 백업을 가져오지 못했습니다: %1$s</string>
+    <string name="import_chorplay_backup_success">Chorplay 백업을 가져왔습니다</string>
+    <string name="import_chorplay_backup_failed_template">Chorplay 백업을 가져오지 못했습니다: %1$s</string>
     <string name="import_newpipe_failed_template">NewPipe 백업을 가져오지 못했습니다: %1$s</string>
     <string name="import_youtube_failed_template">YouTube 백업을 가져오지 못했습니다: %1$s</string>
-    <string name="import_flow_backup_item_title">Chorplay 백업 가져오기</string>
-    <string name="import_flow_backup_desc">Chorplay 백업 파일에서 기록, 설정 및 구독을 복원합니다.</string>
+    <string name="import_chorplay_backup_item_title">Chorplay 백업 가져오기</string>
+    <string name="import_chorplay_backup_desc">Chorplay 백업 파일에서 기록, 설정 및 구독을 복원합니다.</string>
     <string name="import_from_newpipe">NewPipe에서 가져오기</string>
     <string name="import_from_newpipe_desc">NewPipe 내보내기 파일(JSON)에서 구독을 가져옵니다.</string>
     <string name="import_from_libretube">LibreTube에서 가져오기</string>
@@ -1116,10 +1106,10 @@
     <string name="import_libretube_playlists_desc">LibreTube 백업 JSON 파일에서 로컬 재생목록을 가져옵니다.</string>
     <string name="import_yt_takeout_all">Google Takeout에서 가져오기</string>
     <string name="import_yt_takeout_all_desc">Google Takeout ZIP 파일에서 YouTube 구독, 시청 기록 및 재생목록을 한 번에 가져옵니다.</string>
-    <string name="import_music_apps_section_title">음악 앱</string>
-    <string name="import_music_apps_section_subtitle">다른 플레이어에서 음악 라이브러리를 가져옵니다</string>
-    <string name="import_from_metrolist">Metrolist에서 가져오기</string>
-    <string name="import_from_metrolist_desc">Metrolist 백업 파일(.zip)에서 음악 재생목록을 가져옵니다. 재생목록은 음악 라이브러리에 표시됩니다.</string>
+
+
+
+
     <string name="import_from_youtube">YouTube에서 가져오기</string>
     <string name="import_from_youtube_desc">YouTube Takeout(CSV)에서 구독을 가져옵니다.</string>
     <string name="import_subscriptions_section_title">구독</string>
@@ -1134,8 +1124,6 @@
     <string name="import_yt_watch_history_desc">YouTube Takeout(watch-history.html)에서 시청 기록을 가져옵니다.</string>
     <string name="import_yt_playlist">YouTube 재생목록 가져오기</string>
     <string name="import_yt_playlist_desc">YouTube Takeout CSV(Playlist-&lt;name&gt;.csv)에서 재생목록을 가져옵니다.</string>
-    <string name="import_yt_music_playlist">YouTube Music 재생목록 가져오기</string>
-    <string name="import_yt_music_playlist_desc">YouTube Music Takeout CSV에서 음악 재생목록을 가져옵니다. 음악 재생목록 아래에 표시됩니다.</string>
     <string name="import_yt_history_failed_template">시청 기록을 가져오지 못했습니다: %1$s</string>
     <string name="import_yt_playlist_failed_template">재생목록을 가져오지 못했습니다: %1$s</string>
     <string name="import_yt_history_empty_error">이 파일에서 시청 기록 항목을 찾을 수 없습니다. YouTube Takeout의 watch-history.html 파일인지 확인하세요.</string>
@@ -1157,7 +1145,7 @@
     <string name="total_space_template">전체: %1$s</string>
     <string name="location_label">위치</string>
     <string name="video_download_location_label">동영상 다운로드 위치</string>
-    <string name="music_download_location_label">음악 다운로드 위치</string>
+
     <string name="internal_app_storage_label">앱 내부 저장공간</string>
     <string name="preferences_header">환경설정</string>
     <string name="default_video_quality_label">기본 동영상 화질</string>
@@ -1188,9 +1176,9 @@
     <string name="location_badge_active">사용 중</string>
     <string name="select_threads_count_desc">스레드 수 선택(1~8):</string>
     <string name="support_donations_title">후원 및 기부</string>
-    <string name="support_flow_dev_title">Chorplay 개발 후원</string>
-    <string name="support_flow_dev_desc">Chorplay가 유용하고 개발을 후원하고 싶다면 Patreon 또는 아래 암호화폐 주소로 지원할 수 있습니다. 여러분의 후원은 프로젝트를 계속 유지하는 데 큰 도움이 됩니다!</string>
-    <string name="support_flow_patreon">Patreon에서 Chorplay 후원</string>
+    <string name="support_chorplay_dev_title">Chorplay 개발 후원</string>
+    <string name="support_chorplay_dev_desc">Chorplay가 유용하고 개발을 후원하고 싶다면 Patreon 또는 아래 암호화폐 주소로 지원할 수 있습니다. 여러분의 후원은 프로젝트를 계속 유지하는 데 큰 도움이 됩니다!</string>
+    <string name="support_chorplay_patreon">Patreon에서 Chorplay 후원</string>
     <string name="thank_you_support_message">후원해 주셔서 감사합니다! ❤️</string>
     <string name="address_copied_toast">주소를 클립보드에 복사했습니다</string>
     <string name="donation_address_clip_label">기부 주소</string>
@@ -1208,7 +1196,7 @@
     <string name="newpipe_extractor_subtitle">핵심 추출 라이브러리</string>
     <string name="about_license">라이선스</string>
     <string name="about_changelog">변경 기록</string>
-    <string name="whats_new_in_flow">Chorplay의 새로운 기능</string>
+    <string name="whats_new_in_chorplay">Chorplay의 새로운 기능</string>
     <string name="about_device_info">기기 정보</string>
     <string name="gnu_license_full_title">GNU 일반 공중 사용 허가서</string>
     <string name="loading_ellipsis">불러오는 중...</string>
@@ -1258,7 +1246,7 @@
     <string name="playlist_sort_date_published_oldest">게시 날짜(오래된순)</string>
     <string name="remove_selected_playlist_text">이 재생목록에서 삭제됩니다.</string>
     <string name="remove_selected_watch_later_text">나중에 볼 동영상에서 삭제됩니다.</string>
-    <string name="welcome_to_flow">Chorplay에 오신 것을 환영합니다</string>
+    <string name="welcome_to_chorplay">Chorplay에 오신 것을 환영합니다</string>
     <string name="onboarding_subtitle">관심사를 알려 주세요</string>
     <string name="onboarding_instructions">맞춤 환경을 위해 주제를 3개 이상 선택하세요</string>
     <string name="onboarding_interests_title">무엇을 좋아하시나요?</string>
@@ -1295,7 +1283,7 @@
     <string name="category_creative">창작</string>
     <string name="category_science_nature">과학 및 자연</string>
     <string name="category_news_current_events">뉴스 및 시사</string>
-    <string name="flow_control_center">Chorplay 제어 센터</string>
+    <string name="chorplay_control_center">Chorplay 제어 센터</string>
     <string name="action_refresh">새로고침</string>
     <string name="loading_neural_matrix">신경 매트릭스를 불러오는 중...</string>
     <string name="neural_interest_map_subtitle">나의 신경 관심사 지도</string>
@@ -1339,12 +1327,9 @@
     <string name="stats_topics">주제</string>
     <string name="empty_bubble_cloud_message">동영상을 시청하여 관심사 성운을 채워 보세요!</string>
     <string name="export_profile_data">프로필 데이터 내보내기</string>
-    <string name="flow_neural_profile_export_subject">Chorplay 신경 프로필 내보내기</string>
-    <string name="screen_title_music_library">음악 라이브러리</string>
+    <string name="chorplay_neural_profile_export_subject">Chorplay 신경 프로필 내보내기</string>
+
     <string name="header_your_collection">내 컬렉션</string>
-    <string name="subtitle_liked_music">좋아요 표시한 노래</string>
-    <string name="subtitle_history">감상한 노래</string>
-    <string name="empty_music_playlists">아직 음악 재생목록이 없습니다</string>
     <string name="rename_playlist_title">재생목록 이름 변경</string>
     <string name="action_rename">이름 변경</string>
     <string name="link_copied">링크를 복사했습니다</string>
@@ -1382,8 +1367,8 @@
     <string name="action_add_to_favorites">즐겨찾기에 추가</string>
     <string name="action_listen_now">지금 듣기</string>
     <string name="action_play_all">모두 재생</string>
-    <string name="loading_music">음악을 불러오는 중...</string>
-    <string name="screen_title_music">음악</string>
+
+
     <string name="section_listen_again">다시 듣기</string>
     <string name="section_daily_discover">오늘의 맞춤 발견</string>
     <string name="section_quick_picks">빠른 선곡</string>
@@ -1397,8 +1382,8 @@
     <string name="daily_discover_for_fans_of">%1$s 팬을 위한 추천</string>
     <string name="section_recommended">추천</string>
     <string name="section_recently_played">최근 재생</string>
-    <string name="section_music_videos">뮤직비디오</string>
-    <string name="section_music_videos_for_you">나를 위한 뮤직비디오</string>
+
+
     <string name="section_live_performances">라이브 공연</string>
     <string name="section_new_releases">신곡</string>
     <string name="subtitle_single_template">싱글 · %1$s</string>
@@ -1409,14 +1394,12 @@
     <string name="section_from_the_community">커뮤니티 추천</string>
     <string name="daily_discover_subtitle">감상 기록을 바탕으로 한 새로운 선곡</string>
     <string name="genre_mix_template">%1$s 믹스</string>
-    <string name="section_top_albums">인기 앨범</string>
     <string name="similar_to">비슷한 음악</string>
     <string name="section_similar_to">%1$s와(과) 비슷한 음악</string>
     <string name="subtitle_similar_to">감상 기록을 기반으로 추천</string>
     <string name="section_vibe_vibes">%1$s 분위기</string>
     <string name="subtitle_community_playlists">커뮤니티 재생목록</string>
     <string name="playlist_author_community">커뮤니티 재생목록</string>
-    <string name="playlist_description_community">커뮤니티가 선별한 %1$s 음악 재생목록</string>
     <string name="radio">라디오</string>
     <string name="audio_settings_title">오디오 설정</string>
     <string name="label_preset">프리셋</string>
@@ -1432,32 +1415,26 @@
     <string name="template_gain">%1$.1f dB</string>
     <string name="template_q">%1$.1f</string>
     <string name="now_playing">현재 재생 중</string>
-    <string name="voice_search_prompt">음악을 검색하려면 말씀하세요</string>
-    <string name="search_music_placeholder">음악 검색</string>
+
     <string name="voice_search_cd">음성 검색</string>
-    <string name="filter_albums">앨범</string>
-    <string name="filter_songs">노래</string>
+
     <string name="filter_community_playlists">커뮤니티 재생목록</string>
     <string name="section_top_result">가장 관련성 높은 결과</string>
-    <string name="subtitle_song_prefix">노래 • %1$s</string>
+
     <string name="subtitle_artist">아티스트</string>
-    <string name="subtitle_album_template">앨범 • %1$s</string>
     <string name="subtitle_playlist_template">재생목록 • %1$s</string>
     <string name="plays_count_template">• 재생 %1$s회</string>
-    <string name="album_year_template">앨범 • %1$s • %2$s</string>
     <string name="search_source_template">검색: %1$s</string>
     <string name="artist_source_template">아티스트: %1$s</string>
     <string name="top_picks_for_you">나를 위한 인기 추천</string>
     <string name="no_results_found">검색 결과가 없습니다</string>
     <string name="no_tracks_available">사용 가능한 트랙이 없습니다</string>
     <string name="tab_favorites">즐겨찾기</string>
-    <string name="create_playlist_subtitle">음악을 정리하세요</string>
     <string name="empty_playlists_title">아직 재생목록이 없습니다</string>
     <string name="empty_playlists_subtitle">첫 재생목록을 만들어 좋아하는 트랙을 정리하세요</string>
     <string name="empty_favorites_title">아직 즐겨찾기가 없습니다</string>
     <string name="empty_favorites_subtitle">트랙의 하트 아이콘을 탭하여 즐겨찾기에 추가하세요</string>
     <string name="empty_history_title">아직 기록이 없습니다</string>
-    <string name="empty_history_subtitle">음악을 들으면 감상 기록이 여기에 표시됩니다</string>
     <string name="empty_downloads_title">아직 다운로드가 없습니다</string>
     <string name="empty_downloads_subtitle">오프라인 재생을 위해 트랙을 다운로드하세요</string>
     <string name="total_size">전체 크기</string>
@@ -1547,7 +1524,7 @@
     <string name="check_for_updates">업데이트 확인</string>
     <string name="check_for_updates_subtitle">탭하여 최신 버전을 확인하세요</string>
     <string name="checking_for_updates">업데이트를 확인하는 중…</string>
-    <string name="flow_is_up_to_date">Chorplay가 최신 버전입니다!</string>
+    <string name="chorplay_is_up_to_date">Chorplay가 최신 버전입니다!</string>
     <string name="update_check_failed">업데이트를 확인할 수 없습니다. 연결 상태를 확인하세요.</string>
     <string name="export_engine_data">엔진 프로필 내보내기</string>
     <string name="export_engine_data_subtitle">AI 성향 및 학습 데이터를 백업합니다</string>
@@ -1623,7 +1600,7 @@
     <string name="sync_error_peer_also_receive">다른 기기도 받기로 설정되어 있습니다. 다른 기기를 보내기로 설정한 뒤 다시 스캔하세요.</string>
     <string name="sync_error_qr_expired">이 QR 코드는 만료되었습니다. 다른 기기에서 새 코드를 표시하세요.</string>
     <string name="sync_error_qr_wrong_version">다른 기기의 앱 버전과 호환되지 않습니다.</string>
-    <string name="sync_error_qr_not_flow">Chorplay 동기화 코드가 아닌 것 같습니다.</string>
+    <string name="sync_error_qr_not_chorplay">Chorplay 동기화 코드가 아닌 것 같습니다.</string>
     <string name="sync_error_qr_bad_address">동기화 코드에 올바른 네트워크 주소가 없습니다.</string>
     <string name="auto_backup_title">자동 백업</string>
     <string name="auto_backup_subtitle">폴더에 자동 백업 일정을 설정합니다</string>
@@ -1696,10 +1673,10 @@
     <string name="error_extraction_failed_hint">YouTube 형식이 변경되었을 수 있습니다. Chorplay가 곧 업데이트될 예정이니 나중에 다시 시도하세요.</string>
     <string name="error_generic">동영상을 불러오지 못했습니다</string>
     <string name="error_generic_hint">알 수 없는 오류가 발생했습니다. 다시 시도하세요.</string>
-    <string name="music_playback_warning_forbidden">음악 스트림 접근이 거부되었습니다. YouTube에서 이 IP를 제한하고 있을 수 있으니 다시 불러오거나 네트워크/VPN을 바꿔 보세요.</string>
-    <string name="music_playback_warning_network">네트워크 문제로 음악 스트림을 재생하지 못했습니다. 연결 상태를 확인하거나 다른 네트워크를 사용해 보세요.</string>
-    <string name="music_playback_warning_final">여러 번 다시 시도했지만 이 노래를 불러오지 못했습니다. 문제가 계속되면 다른 네트워크나 VPN을 사용해 보세요.</string>
-    <string name="music_playback_warning_generic">음악 재생에 실패했습니다. 다시 시도하거나 문제가 계속되면 네트워크를 바꿔 보세요.</string>
+
+
+
+
     <string name="player_lock_controls">컨트롤 잠금</string>
     <string name="player_unlock_controls">컨트롤 잠금 해제</string>
     <string name="player_settings_overlay_controls">오버레이 컨트롤</string>
@@ -1870,28 +1847,24 @@
     <string name="history_delete_shorts">기록에서 Shorts 삭제</string>
     <string name="history_delete_shorts_title">Shorts를 삭제할까요?</string>
     <string name="history_delete_shorts_body">시청 기록에서 모든 Shorts가 삭제됩니다. 다른 동영상은 유지됩니다.</string>
-    <string name="recognize_music">음악 인식</string>
+
     <string name="recognition_history">인식 기록</string>
-    <string name="tap_to_recognize">탭하여 인식</string>
+
     <string name="listening">듣는 중…</string>
     <string name="processing">처리 중…</string>
     <string name="no_match_found">일치하는 곡을 찾을 수 없습니다</string>
     <string name="recognition_error">인식 실패</string>
     <string name="try_again">다시 시도</string>
-    <string name="search_in_flow">Chorplay에서 검색</string>
-    <string name="recognition_search_history">인식한 노래 검색</string>
-    <string name="recognition_history_empty">인식한 노래가 여기에 표시됩니다</string>
+    <string name="search_in_chorplay">Chorplay에서 검색</string>
     <string name="recognition_clear_history">기록을 지울까요?</string>
-    <string name="recognition_clear_history_body">인식한 모든 노래가 삭제됩니다. 이 작업은 되돌릴 수 없습니다.</string>
     <string name="close_popup_player">팝업 플레이어 닫기</string>
     <string name="widget_now_playing_label">현재 재생 중</string>
-    <string name="widget_now_playing_description">Chorplay에서 재생 중인 음악을 제어합니다</string>
     <string name="widget_quick_actions_label">빠른 작업</string>
     <string name="widget_quick_actions_description">Chorplay를 검색하고 다운로드, 기록 또는 음악 인식으로 바로 이동합니다</string>
-    <string name="widget_recognize_label">음악 인식</string>
-    <string name="widget_recognize_description">주변에서 재생 중인 노래를 한 번의 탭으로 식별합니다</string>
-    <string name="widget_turntable_label">턴테이블</string>
-    <string name="widget_turntable_description">회전하는 레코드로 음악을 표시합니다</string>
+
+
+
+
     <string name="widget_recently_played_label">최근 재생</string>
     <string name="widget_recently_played_description">중단한 곳에서 이어서 재생합니다</string>
     <string name="widget_downloads_label">다운로드</string>
@@ -1904,7 +1877,6 @@
     <string name="widget_next">다음 트랙</string>
     <string name="widget_previous">이전 트랙</string>
     <string name="widget_like">좋아요</string>
-    <string name="widget_artwork">앨범아트</string>
     <string name="widget_open_downloads">다운로드 열기</string>
     <string name="widget_open_history">기록 열기</string>
     <string name="widget_no_recent">시청한 동영상이 여기에 표시됩니다</string>
@@ -1920,11 +1892,11 @@
     <string name="ui_navigate">이동</string>
     <string name="ui_options">옵션</string>
     <string name="ui_selected">선택됨</string>
-    <string name="ui_flow_logo">Chorplay 로고</string>
+    <string name="ui_chorplay_logo">Chorplay 로고</string>
     <string name="ui_list_view">목록 보기</string>
     <string name="ui_grid_view">그리드 보기</string>
     <string name="ui_back">뒤로</string>
-    <string name="ui_add_songs">노래 추가</string>
+
     <string name="ui_close_search">검색 닫기</string>
     <string name="ui_save_to_library">라이브러리에 저장</string>
     <string name="ui_remove_from_library">라이브러리에서 삭제</string>
@@ -1933,9 +1905,9 @@
     <string name="ui_added">추가됨</string>
     <string name="ui_sync_lyrics">가사 동기화</string>
     <string name="ui_downloading_playlist">재생목록 다운로드 중</string>
-    <string name="ui_no_songs_found">노래를 찾을 수 없습니다</string>
-    <string name="ui_search_songs_to_add">추가할 노래 검색…</string>
-    <string name="ui_add_songs_to_playlist">재생목록에 노래 추가</string>
+
+
+
     <string name="ui_show_less">간략히 보기</string>
     <string name="ui_show_more">더보기</string>
     <string name="ui_try_sabr_download">SABR 다운로드 시도</string>
@@ -1981,7 +1953,7 @@
     <string name="toast_failed_to_add_track">트랙을 추가하지 못했습니다</string>
     <string name="toast_removed_from_playlist">재생목록에서 삭제했습니다</string>
     <string name="toast_failed_to_remove_track">트랙을 삭제하지 못했습니다</string>
-    <string name="toast_saved_playlist_to_music_library">재생목록을 음악 라이브러리에 저장했습니다</string>
+
     <string name="toast_failed_to_save_playlist">재생목록을 저장하지 못했습니다</string>
     <string name="toast_removed_playlist_from_library">재생목록을 라이브러리에서 삭제했습니다</string>
     <string name="toast_failed_to_merge_playlist">재생목록을 병합하지 못했습니다</string>
@@ -2001,8 +1973,7 @@
     <string name="notification_channel_downloads_description">다운로드 진행률과 완료 상태를 표시합니다</string>
     <string name="notification_channel_new_videos_description">구독 채널이 새 동영상을 업로드하면 알립니다</string>
     <string name="notification_channel_video_playback_description">동영상 재생 컨트롤</string>
-    <string name="notification_channel_music_playback_description">음악 재생 컨트롤</string>
-    <string name="notification_download_progress_description">동영상 및 오디오 다운로드 진행률</string>
+<string name="notification_download_progress_description">동영상 및 오디오 다운로드 진행률</string>
     <string name="notification_channel_general_description">일반 앱 알림</string>
     <string name="notification_channel_break_reminders_description">취침 시간 및 휴식 알림</string>
     <string name="notification_channel_updates_description">앱 업데이트 알림</string>
@@ -2010,8 +1981,7 @@
     <string name="notification_channel_downloads">다운로드</string>
     <string name="notification_channel_new_videos">새 동영상</string>
     <string name="notification_channel_video_playback">동영상 재생</string>
-    <string name="notification_channel_music_playback">음악 재생</string>
-    <string name="notification_channel_general">일반</string>
+<string name="notification_channel_general">일반</string>
     <string name="notification_channel_reminders">알림</string>
     <string name="notification_channel_updates">앱 업데이트</string>
     <string name="notification_channel_imports">데이터 가져오기</string>
@@ -2071,7 +2041,6 @@
     <string name="fallback_unknown_channel">알 수 없는 채널</string>
     <string name="fallback_unknown_playlist">알 수 없는 재생목록</string>
     <string name="fallback_unknown_artist">알 수 없는 아티스트</string>
-    <string name="fallback_unknown_album">알 수 없는 앨범</string>
     <string name="fallback_unknown_video">알 수 없는 동영상</string>
     <string name="fallback_local_video">로컬 동영상</string>
     <string name="fallback_local_audio">로컬 오디오</string>

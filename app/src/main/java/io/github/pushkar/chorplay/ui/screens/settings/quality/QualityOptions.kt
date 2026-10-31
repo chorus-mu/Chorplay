@@ -4,12 +4,11 @@ import androidx.annotation.StringRes
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import io.github.pushkar.chorplay.R
-import io.github.pushkar.chorplay.data.local.MusicAudioQuality
+
 import io.github.pushkar.chorplay.data.local.ThumbnailQuality
 import io.github.pushkar.chorplay.data.local.VideoCodec
 import io.github.pushkar.chorplay.data.local.VideoQuality
 
-/** Resolutions offered for regular video and Shorts, best first. */
 internal val VideoQualities =
     listOf(
         VideoQuality.AUTO,
@@ -23,7 +22,6 @@ internal val VideoQualities =
         VideoQuality.Q_144P,
     )
 
-internal val MusicQualities = MusicAudioQuality.entries.toList()
 
 internal val ThumbnailQualities = ThumbnailQuality.entries.toList()
 
@@ -59,25 +57,13 @@ internal fun videoQualityLabel(quality: VideoQuality): Int =
         VideoQuality.Q_2160P -> R.string.quality_2160p_4k
     }
 
-@StringRes
-internal fun musicQualityLabel(quality: MusicAudioQuality): Int =
-    when (quality) {
-        MusicAudioQuality.AUTO -> R.string.music_quality_auto
-        MusicAudioQuality.HIGH -> R.string.music_quality_high
-        MusicAudioQuality.MEDIUM -> R.string.music_quality_medium
-        MusicAudioQuality.LOW -> R.string.music_quality_low
-    }
-
-/** The fallback choices for [preferred]: every codec but the preferred one. */
 internal fun fallbackCodecs(preferred: VideoCodec): List<VideoCodec> = VideoCodec.entries.filter { it != preferred }
 
-/** A fallback equal to the new preferred codec is meaningless, so it drops back to automatic. */
 internal fun fallbackAfterPreferredChange(
     preferred: VideoCodec,
     fallback: VideoCodec,
 ): VideoCodec = if (fallback == preferred) VideoCodec.AUTO else fallback
 
-/** Codec names are product names and stay as they are; only "automatic" is translated. */
 @Composable
 internal fun codecLabel(codec: VideoCodec): String =
     if (codec == VideoCodec.AUTO) stringResource(R.string.player_settings_video_codec_fallback_auto) else codec.label

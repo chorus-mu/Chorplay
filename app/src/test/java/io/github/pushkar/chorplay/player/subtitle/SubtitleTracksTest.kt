@@ -92,7 +92,7 @@ class SubtitleTracksTest {
 
     @Test
     fun `caption indexes are read back from prefixed format ids`() {
-        assertThat(MediaLoader.subtitleTrackIndex("2:flow-subtitle-12")).isEqualTo(12)
+        assertThat(MediaLoader.subtitleTrackIndex("2:chorplay-subtitle-12")).isEqualTo(12)
         assertThat(MediaLoader.subtitleTrackIndex(MediaLoader.subtitleTrackId(0))).isEqualTo(0)
         assertThat(MediaLoader.subtitleTrackIndex("3")).isNull()
         assertThat(MediaLoader.subtitleTrackIndex(null)).isNull()

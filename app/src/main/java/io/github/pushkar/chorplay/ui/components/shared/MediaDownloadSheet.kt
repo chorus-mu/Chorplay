@@ -179,7 +179,7 @@ fun MediaDownloadSheet(
         }
 
         if (qualities.isNotEmpty()) {
-            FlowSectionHeader(text = stringResource(R.string.video))
+            ChorSectionHeader(text = stringResource(R.string.video))
             DownloadTileGrid(items = qualities, columns = VIDEO_COLUMNS) { item, modifier ->
                 val tileOption = DownloadSheetChoices.option(item, option, preferredCodec)
                 DownloadChoiceTile(
@@ -202,7 +202,7 @@ fun MediaDownloadSheet(
             }
             if (audioOnly == null && quality != null && quality.options.size > 1 && option != null) {
                 ChorplayConnectedToggleGroup(
-                    options = quality.options.map { FlowToggleOption(it, formatOptionLabel(it, hdrLabel)) },
+                    options = quality.options.map { ChorToggleOption(it, formatOptionLabel(it, hdrLabel)) },
                     selected = option,
                     onSelected = { chosenOption = it },
                     colors = toggleColors,
@@ -225,7 +225,7 @@ fun MediaDownloadSheet(
         }
 
         if (audioStreams.isNotEmpty()) {
-            FlowSectionHeader(text = stringResource(R.string.ui_audio_only))
+            ChorSectionHeader(text = stringResource(R.string.ui_audio_only))
             val shownAudio = if (allLanguages) audioStreams else (primaryAudio + listOfNotNull(chosenAudio)).distinct()
             DownloadTileGrid(items = shownAudio, columns = AUDIO_COLUMNS) { stream, modifier ->
                 DownloadChoiceTile(

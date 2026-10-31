@@ -21,13 +21,9 @@ internal object IlstAtoms {
         val atoms = ByteArrayOutputStream()
         atoms.writeText(copyrightType("nam"), tags.title)
         atoms.writeText(copyrightType("ART"), tags.displayArtist())
-        atoms.writeText(copyrightType("alb"), tags.album)
-        atoms.writeText(type("aART"), tags.albumArtist)
-        tags.trackNumber?.takeIf { it > 0 }?.let { atoms.write(trackNumberAtom(it, tags.trackTotal ?: 0)) }
         atoms.writeText(copyrightType("day"), tags.releaseDate)
         atoms.writeText(copyrightType("cmt"), tags.sourceUrl)
         atoms.writeText(type("desc"), tags.description?.let { ChorplayTagFields.truncate(it, ChorplayTagFields.DESCRIPTION_MAX_CHARS) })
-        atoms.writeText(copyrightType("lyr"), tags.lyrics)
         atoms.writeText(copyrightType("too"), ENCODER_NAME)
         cover?.let(::coverAtom)?.let(atoms::write)
         ChorplayTagFields.encode(tags).forEach { (name, value) -> atoms.write(freeformAtom(name, value)) }
@@ -80,20 +76,7 @@ internal object IlstAtoms {
                 .array(),
         )
 
-    private fun trackNumberAtom(
-        number: Int,
-        total: Int,
-    ): ByteArray {
-        val payload =
-            ByteBuffer
-                .allocate(8)
-                .putShort(0)
-                .putShort(number.coerceAtMost(0xFFFF).toShort())
-                .putShort(total.coerceIn(0, 0xFFFF).toShort())
-                .putShort(0)
-                .array()
-        return box(type("trkn"), dataAtom(DATA_TYPE_IMPLICIT, payload))
-    }
+
 
     private fun coverAtom(bytes: ByteArray): ByteArray? {
         val dataType = coverDataType(bytes) ?: return null

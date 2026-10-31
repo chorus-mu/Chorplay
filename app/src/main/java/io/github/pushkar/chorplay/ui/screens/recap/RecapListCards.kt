@@ -17,15 +17,14 @@ import androidx.compose.ui.unit.dp
 import io.github.pushkar.chorplay.R
 import io.github.pushkar.chorplay.data.local.dao.ChannelVideoCount
 import io.github.pushkar.chorplay.data.stats.LedgerAction
-import io.github.pushkar.chorplay.data.stats.MusicRecap
 import io.github.pushkar.chorplay.data.stats.RankedItem
 import io.github.pushkar.chorplay.data.stats.RankedKind
 import io.github.pushkar.chorplay.data.stats.VideoRecap
 import io.github.pushkar.chorplay.data.stats.ViewFormat
 import io.github.pushkar.chorplay.ui.components.layout.navigation.LocalMediaNavigator
-import io.github.pushkar.chorplay.ui.components.shared.FlowSegmentedGap
+import io.github.pushkar.chorplay.ui.components.shared.ChorSegmentedGap
 import io.github.pushkar.chorplay.ui.components.shared.chorplayArtistShape
-import io.github.pushkar.chorplay.ui.components.shared.flowRowGroupShape
+import io.github.pushkar.chorplay.ui.components.shared.chorRowGroupShape
 import io.github.pushkar.chorplay.ui.components.stats.StatBigNumber
 import io.github.pushkar.chorplay.ui.components.stats.StatCard
 import io.github.pushkar.chorplay.ui.components.stats.StatLegendItem
@@ -63,7 +62,7 @@ private fun RankedRows(
     value: @Composable (RankedItem) -> String,
 ) {
     val navigator = LocalMediaNavigator.current
-    Column(verticalArrangement = Arrangement.spacedBy(FlowSegmentedGap)) {
+    Column(verticalArrangement = Arrangement.spacedBy(ChorSegmentedGap)) {
         items.forEachIndexed { index, item ->
             val link = item.link()
             StatRankRow(
@@ -71,7 +70,7 @@ private fun RankedRows(
                 title = item.name.ifBlank { stringResource(R.string.recap_unnamed_item) },
                 value = value(item),
                 detail = item.detail,
-                shape = flowRowGroupShape(index, items.size),
+                shape = chorRowGroupShape(index, items.size),
                 imageUrl = item.imageUrl,
                 imageShape = if (portraits) chorplayArtistShape() else MaterialTheme.shapes.medium,
                 onClick = link?.let { { navigator.openLink(it) } },
@@ -109,11 +108,10 @@ internal fun TopicsCard(video: VideoRecap) {
     }
 }
 
-/** How time split between long videos, Shorts, live and music. */
+/** How time split between long videos, Shorts and live. */
 @Composable
 internal fun FormatsCard(
     video: VideoRecap,
-    music: MusicRecap?,
     key: Any,
 ) {
     val primary = MaterialTheme.colorScheme.primary
@@ -122,7 +120,6 @@ internal fun FormatsCard(
             Triple(R.string.recap_format_long, video.formatMs[ViewFormat.LONG] ?: 0L, primary),
             Triple(R.string.recap_format_shorts, video.formatMs[ViewFormat.SHORT] ?: 0L, primary.copy(alpha = FORMAT_SECONDARY)),
             Triple(R.string.recap_format_live, video.formatMs[ViewFormat.LIVE] ?: 0L, primary.copy(alpha = FORMAT_TERTIARY)),
-            Triple(R.string.recap_format_music, music?.activity?.totalMs ?: 0L, MaterialTheme.colorScheme.secondary),
         ).filter { it.second > 0L }
     if (shares.isEmpty()) return
     val entrance = rememberStatEntrance(key)
@@ -145,18 +142,11 @@ internal fun FormatsCard(
 @Composable
 internal fun DiscoveriesCard(
     video: VideoRecap?,
-    music: MusicRecap?,
 ) {
     val channels = video?.discoveredChannels.orEmpty()
-    val artists = music?.discoveredArtists.orEmpty()
-    if (channels.isEmpty() && artists.isEmpty()) return
+    if (channels.isEmpty()) return
     StatCard(title = stringResource(R.string.recap_discoveries_title)) {
-        if (channels.isNotEmpty()) {
-            NamedGroup(pluralStringResource(R.plurals.recap_new_channels, channels.size, channels.size), channels)
-        }
-        if (artists.isNotEmpty()) {
-            NamedGroup(pluralStringResource(R.plurals.recap_new_artists, artists.size, artists.size), artists)
-        }
+        NamedGroup(pluralStringResource(R.plurals.recap_new_channels, channels.size, channels.size), channels)
     }
 }
 
@@ -181,14 +171,12 @@ private const val TOP_NAMES = 8
 @Composable
 internal fun PassedOnCard(
     video: VideoRecap?,
-    music: MusicRecap?,
 ) {
     val dislikes = video?.dislikes.orEmpty()
     val notInterested = video?.actions?.get(LedgerAction.NOT_INTERESTED) ?: 0
-    val blocked = (video?.actions?.get(LedgerAction.BLOCK_CHANNEL) ?: 0) + (music?.blockedArtists?.size ?: 0)
+    val blocked = video?.actions?.get(LedgerAction.BLOCK_CHANNEL) ?: 0
     val skippedVideos = video?.skippedVideos.orEmpty()
-    val skippedTracks = music?.skippedTracks.orEmpty()
-    if (dislikes.isEmpty() && notInterested == 0 && blocked == 0 && skippedVideos.isEmpty() && skippedTracks.isEmpty()) return
+    if (dislikes.isEmpty() && notInterested == 0 && blocked == 0 && skippedVideos.isEmpty()) return
     StatCard(title = stringResource(R.string.recap_passed_title), subtitle = stringResource(R.string.recap_passed_subtitle)) {
         FlowRow(horizontalArrangement = Arrangement.spacedBy(SectionSpacing * 2)) {
             if (video != null) StatBigNumber(dislikes.size.toString(), stringResource(R.string.recap_dislikes))
@@ -198,10 +186,6 @@ internal fun PassedOnCard(
         if (skippedVideos.isNotEmpty()) {
             Text(stringResource(R.string.recap_skipped_videos), style = MaterialTheme.typography.titleSmall)
             RankedRows(skippedVideos.take(SHORT_LIST)) { timesLabel(it) }
-        }
-        if (skippedTracks.isNotEmpty()) {
-            Text(stringResource(R.string.recap_skipped_tracks), style = MaterialTheme.typography.titleSmall)
-            RankedRows(skippedTracks.take(SHORT_LIST)) { timesLabel(it) }
         }
     }
 }

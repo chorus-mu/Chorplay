@@ -68,7 +68,7 @@ class ChorplayRowsTest {
     fun selectionRowIsARadioButtonThatReportsItsSelection() {
         var clicked = false
         setRow {
-            FlowSelectionRow(
+            ChorSelectionRow(
                 title = "1080p",
                 selected = true,
                 onClick = { clicked = true },
@@ -88,7 +88,7 @@ class ChorplayRowsTest {
     @Test
     fun unselectedSelectionRowReportsItsSelection() {
         setRow {
-            FlowSelectionRow(
+            ChorSelectionRow(
                 title = "720p",
                 selected = false,
                 onClick = {},
@@ -102,7 +102,7 @@ class ChorplayRowsTest {
     @Test
     fun selectionRowIsAOneLineRowWithoutSupportingText() {
         setRow {
-            FlowSelectionRow(
+            ChorSelectionRow(
                 title = "1080p",
                 selected = true,
                 onClick = {},
@@ -116,7 +116,7 @@ class ChorplayRowsTest {
     @Test
     fun selectionRowWithSupportingTextIsATwoLineRow() {
         setRow {
-            FlowSelectionRow(
+            ChorSelectionRow(
                 title = "1080p",
                 selected = true,
                 onClick = {},
@@ -133,7 +133,7 @@ class ChorplayRowsTest {
     fun navRowShowsItsTrailingValueAndFiresOnClick() {
         var clicked = false
         setRow {
-            FlowNavRow(
+            ChorNavRow(
                 title = string(R.string.playback_speed),
                 onClick = { clicked = true },
                 modifier = Modifier.testTag(ROW_TAG),
@@ -154,7 +154,7 @@ class ChorplayRowsTest {
     @Test
     fun navRowWithoutATrailingValueRendersOnlyTheChevron() {
         setRow {
-            FlowNavRow(
+            ChorNavRow(
                 title = string(R.string.cast_to_tv),
                 onClick = {},
                 modifier = Modifier.testTag(ROW_TAG),
@@ -223,7 +223,7 @@ class ChorplayRowsTest {
 
     @Test
     fun sectionHeaderRendersItsLabel() {
-        setRow { FlowSectionHeader(text = string(R.string.audio_effects)) }
+        setRow { ChorSectionHeader(text = string(R.string.audio_effects)) }
 
         rule.onNodeWithText(string(R.string.audio_effects)).assertIsDisplayed()
     }

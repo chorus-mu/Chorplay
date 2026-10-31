@@ -9,7 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import io.github.pushkar.chorplay.ui.components.FeedGridLayout
-import io.github.pushkar.chorplay.ui.components.layout.flowBottomContentPadding
+import io.github.pushkar.chorplay.ui.components.layout.chorBottomContentPadding
 import io.github.pushkar.chorplay.ui.components.shared.card.VideoCardLayout
 import io.github.pushkar.chorplay.ui.components.shared.card.VideoCardSkeleton
 
@@ -43,7 +43,7 @@ fun FeedGridSkeleton(
     LazyVerticalGrid(
         columns = plan.cells,
         modifier = modifier.fillMaxSize(),
-        contentPadding = plan.contentPadding(top = topPadding, bottom = flowBottomContentPadding()),
+        contentPadding = plan.contentPadding(top = topPadding, bottom = chorBottomContentPadding()),
         verticalArrangement = Arrangement.spacedBy(plan.rowSpacing),
         userScrollEnabled = false,
     ) {

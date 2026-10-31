@@ -21,7 +21,6 @@ import io.github.pushkar.chorplay.ui.screens.update.UPDATE_ROUTE
 import io.github.pushkar.chorplay.utils.PLAYLIST_FILE_MIME_TYPE
 import kotlinx.coroutines.launch
 
-/** What MainActivity is started or re-delivered with: a link, a widget or notification route, a share or a playlist file. */
 internal class IncomingIntents(
     private val activity: ComponentActivity,
     private val links: IncomingLinks,
@@ -29,7 +28,8 @@ internal class IncomingIntents(
 ) {
     private fun playlistFileIn(intent: Intent): Uri? {
         val type =
-            intent.type ?: intent.data?.takeIf { it.scheme == ContentResolver.SCHEME_CONTENT }?.let(activity.contentResolver::getType)
+            intent.type ?: intent.data?.takeIf { it.scheme == ContentResolver.SCHEME_CONTENT }
+                ?.let(activity.contentResolver::getType)
         if (type != PLAYLIST_FILE_MIME_TYPE) return null
         return when (intent.action) {
             Intent.ACTION_VIEW -> intent.data
@@ -40,7 +40,8 @@ internal class IncomingIntents(
 
     private fun importPlaylistFile(file: Uri) {
         activity.lifecycleScope.launch {
-            val result = playlistTransfer.get().import(file, activity.getString(R.string.imported_playlist_default_name))
+            val result =
+                playlistTransfer.get().import(file, activity.getString(R.string.imported_playlist_default_name))
             Toast.makeText(activity, result.message(activity), Toast.LENGTH_LONG).show()
             if (result is PlaylistImport.Imported) {
                 links.openRoute(if (result.isMusic) musicCollectionRoute(result.playlistId) else "playlist/${result.playlistId}")
@@ -48,7 +49,6 @@ internal class IncomingIntents(
         }
     }
 
-    /** [isRestoringState]: a recreated activity gets its launch intent again; a playlist file in it was already imported. */
     fun handle(
         intent: Intent,
         isRestoringState: Boolean,
@@ -93,17 +93,16 @@ internal class IncomingIntents(
             return
         }
         if (linkText != null) {
-            val understood = links.openLink(linkText, isShared = intent.action == Intent.ACTION_SEND, isRestoring = isRestoringState)
-            if (!understood && !isRestoringState) Toast.makeText(activity, R.string.link_not_supported, Toast.LENGTH_LONG).show()
+            val understood =
+                links.openLink(linkText, isShared = intent.action == Intent.ACTION_SEND, isRestoring = isRestoringState)
+            if (!understood && !isRestoringState) Toast.makeText(
+                activity,
+                R.string.link_not_supported,
+                Toast.LENGTH_LONG
+            ).show()
             return
         }
 
-        if (intent.getBooleanExtra("open_music_player", false)) {
-            links.openMusicPlayer()
-            intent.removeExtra("notification_video_id")
-            intent.removeExtra("video_id")
-            return
-        }
 
         if (intent.getBooleanExtra("open_video_player", false)) {
             intent.removeExtra("open_video_player")
@@ -117,7 +116,6 @@ internal class IncomingIntents(
     }
 
     private companion object {
-        /** The share-menu entry Download with Chorplay: an activity-alias of MainActivity in the manifest. */
         const val DOWNLOAD_SHARE_ALIAS = ".DownloadShareAlias"
     }
 }

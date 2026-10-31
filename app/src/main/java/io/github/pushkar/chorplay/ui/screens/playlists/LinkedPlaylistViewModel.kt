@@ -3,76 +3,64 @@ package io.github.pushkar.chorplay.ui.screens.playlists
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.github.pushkar.chorplay.data.model.Video
-import io.github.pushkar.chorplay.data.music.model.MusicTrack
-import io.github.pushkar.chorplay.data.newmusic.InnertubeMusicService
 import io.github.pushkar.chorplay.data.repository.RemotePlaylistPage
 import io.github.pushkar.chorplay.data.repository.YouTubePlaylistRepository
 import io.github.pushkar.chorplay.data.repository.walkPlaylistPages
 import javax.inject.Inject
 
-/** A playlist a link plays from, positioned at the video the link names. */
 internal data class LinkedQueue<T>(
     val items: List<T>,
     val startIndex: Int,
     val title: String?,
 )
 
-/**
- * Reads the playlist a `watch?v=…&list=…` link plays its video from. It loads nothing until asked,
- * so the route that plays the link can own one freely.
- */
 @HiltViewModel
 internal class LinkedPlaylistViewModel
-    @Inject
-    constructor(
-        private val playlists: YouTubePlaylistRepository,
-    ) : ViewModel() {
-        /** Null when the playlist cannot be read or the video is not in it, so the video plays alone. */
-        suspend fun videoQueue(
-            playlistId: String,
-            startVideoId: String,
-        ): LinkedQueue<Video>? {
-            playlists.cachedComplete(playlistId)?.let { cached ->
-                return linkedQueue(cached.videos, startVideoId, cached.title, Video::id)
-            }
-            val first = playlists.firstPage(playlistId) ?: return null
-            return findLinkedVideoQueue(first, startVideoId) { token -> playlists.nextPage(playlistId, token) }
+@Inject
+constructor(
+    private val playlists: YouTubePlaylistRepository,
+) : ViewModel() {
+    suspend fun videoQueue(
+        playlistId: String,
+        startVideoId: String,
+    ): LinkedQueue<Video>? {
+        playlists.cachedComplete(playlistId)?.let { cached ->
+            return linkedQueue(cached.videos, startVideoId, cached.title, Video::id)
         }
-
-        suspend fun musicQueue(
-            videoId: String,
-            playlistId: String,
-        ): LinkedQueue<MusicTrack>? =
-            linkedQueue(InnertubeMusicService.fetchQueue(playlistId = playlistId), videoId, title = null, MusicTrack::videoId)
+        val first = playlists.firstPage(playlistId) ?: return null
+        return findLinkedVideoQueue(first, startVideoId) { token -> playlists.nextPage(playlistId, token) }
     }
+}
 
 internal fun <T> linkedQueue(
     items: List<T>,
     startId: String,
     title: String?,
     idOf: (T) -> String,
-): LinkedQueue<T>? = items.indexOfFirst { idOf(it) == startId }.takeIf { it >= 0 }?.let { LinkedQueue(items, it, title) }
-
-/**
- * Walks the playlist a page at a time until the linked video turns up, so a link deep into a long
- * playlist still finds it, and stops after [maxPages] rather than reading thousands of videos
- * before anything plays.
- */
-internal suspend fun findLinkedVideoQueue(
-    first: RemotePlaylistPage,
-    startVideoId: String,
-    maxPages: Int = LINKED_PLAYLIST_MAX_PAGES,
-    nextPage: suspend (continuation: String) -> Pair<List<Video>, String?>?,
-): LinkedQueue<Video>? {
-    val walk =
-        walkPlaylistPages(
-            firstVideos = first.videos,
-            firstToken = first.continuation,
-            maxPages = maxPages,
-            nextPage = nextPage,
-            keepGoing = { videos -> videos.none { it.id == startVideoId } },
-        )
-    return linkedQueue(walk.videos, startVideoId, first.title, Video::id)
+): LinkedQueue<T>? {
+    val index = items.indexOfFirst { idOf(it) == startId }.takeIf { it >= 0 } ?: return null
+    return LinkedQueue(items, index, title)
 }
 
-private const val LINKED_PLAYLIST_MAX_PAGES = 10
+internal suspend fun findLinkedVideoQueue(
+    firstPage: RemotePlaylistPage,
+    videoId: String,
+    fetchNext: suspend (String) -> RemotePlaylistPage?,
+): LinkedQueue<Video>? {
+    val accumulated = ArrayList<Video>(firstPage.videos)
+    var targetIndex = accumulated.indexOfFirst { it.id == videoId }
+    if (targetIndex >= 0) return LinkedQueue(accumulated, targetIndex, firstPage.title)
+
+    walkPlaylistPages(firstPage.continuationToken, fetchNext) { page ->
+        val startOffset = accumulated.size
+        accumulated.addAll(page.videos)
+        val found = page.videos.indexOfFirst { it.id == videoId }
+        if (found >= 0) {
+            targetIndex = startOffset + found
+            return@walkPlaylistPages false
+        }
+        true
+    }
+
+    return if (targetIndex >= 0) LinkedQueue(accumulated, targetIndex, firstPage.title) else null
+}

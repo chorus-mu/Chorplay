@@ -26,14 +26,14 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import io.github.pushkar.chorplay.R
 import io.github.pushkar.chorplay.data.model.Channel
-import io.github.pushkar.chorplay.ui.components.shared.FlowPopIn
+import io.github.pushkar.chorplay.ui.components.shared.ChorPopIn
 import io.github.pushkar.chorplay.ui.components.shared.ChorplayQuickSearchChips
 import io.github.pushkar.chorplay.ui.components.shared.ChorplaySearchField
-import io.github.pushkar.chorplay.ui.components.shared.FlowSectionHeader
-import io.github.pushkar.chorplay.ui.components.shared.FlowSegmentedGap
+import io.github.pushkar.chorplay.ui.components.shared.ChorSectionHeader
+import io.github.pushkar.chorplay.ui.components.shared.ChorSegmentedGap
 import io.github.pushkar.chorplay.ui.components.shared.MediaChannelSubscribeRow
 import io.github.pushkar.chorplay.ui.components.shared.dismissKeyboardOnPress
-import io.github.pushkar.chorplay.ui.components.shared.flowSegmentShape
+import io.github.pushkar.chorplay.ui.components.shared.chorSegmentShape
 import io.github.pushkar.chorplay.utils.formatSubscriberCount
 
 private val SearchLoadingSize = 24.dp
@@ -105,7 +105,7 @@ private fun LazyListScope.channelResults(
         }
 
         state.results.isNotEmpty() -> {
-            item(key = "results") { FlowSectionHeader(stringResource(R.string.onboarding_channels_results_header)) }
+            item(key = "results") { ChorSectionHeader(stringResource(R.string.onboarding_channels_results_header)) }
             itemsIndexed(state.results, key = { _, channel -> channel.id }) { index, channel ->
                 val row: @Composable () -> Unit = {
                     MediaChannelSubscribeRow(
@@ -117,13 +117,13 @@ private fun LazyListScope.channelResults(
                             },
                         subscribed = state.isSubscribed(channel.id),
                         notifying = channel.id in state.notifying,
-                        shape = flowSegmentShape(index, state.results.size),
+                        shape = chorSegmentShape(index, state.results.size),
                         onToggle = { onSubscribeToggle(channel) },
                         onNotificationsChange = { onNotificationsChange(channel.id, it) },
                     )
                 }
-                val modifier = Modifier.animateItem().padding(bottom = FlowSegmentedGap)
-                if (index < MAX_POPPED_ROWS) FlowPopIn(index, modifier) { row() } else Box(modifier) { row() }
+                val modifier = Modifier.animateItem().padding(bottom = ChorSegmentedGap)
+                if (index < MAX_POPPED_ROWS) ChorPopIn(index, modifier) { row() } else Box(modifier) { row() }
             }
         }
     }

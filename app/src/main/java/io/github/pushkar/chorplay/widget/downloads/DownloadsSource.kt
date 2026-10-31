@@ -3,7 +3,6 @@ package io.github.pushkar.chorplay.widget.downloads
 import androidx.glance.appwidget.GlanceAppWidget
 import io.github.pushkar.chorplay.data.local.entity.DownloadItemStatus
 import io.github.pushkar.chorplay.data.local.entity.DownloadWithItems
-import io.github.pushkar.chorplay.data.music.DownloadManager
 import io.github.pushkar.chorplay.data.video.VideoDownloadManager
 import io.github.pushkar.chorplay.widget.core.refresh.WidgetContentKey
 import io.github.pushkar.chorplay.widget.core.refresh.WidgetContentSource
@@ -35,7 +34,6 @@ class DownloadsSource
     @Inject
     constructor(
         private val videoDownloads: VideoDownloadManager,
-        private val musicDownloads: DownloadManager,
     ) : WidgetContentSource {
         override val key = WidgetContentKey.DOWNLOADS
         override val widget: GlanceAppWidget get() = DownloadsWidget()
@@ -53,19 +51,7 @@ class DownloadsSource
                         downloadedAt = it.downloadedAt,
                     )
                 }
-            val songs =
-                musicDownloads.downloadedTracks.first().map {
-                    WidgetDownload(
-                        id = it.track.videoId,
-                        title = it.track.title,
-                        subtitle = it.track.artist,
-                        thumbnailUrl = it.track.listThumbnailUrl,
-                        durationSeconds = it.track.duration.toLong(),
-                        isMusic = true,
-                        downloadedAt = it.downloadedAt,
-                    )
-                }
-            val items = (videos + songs).sortedByDescending { it.downloadedAt }.distinctBy { it.id }.take(MAX_ITEMS)
+            val items = videos.sortedByDescending { it.downloadedAt }.distinctBy { it.id }.take(MAX_ITEMS)
             return WidgetDownloads(items, inProgressCount(videoDownloads.allDownloads.first()))
         }
 

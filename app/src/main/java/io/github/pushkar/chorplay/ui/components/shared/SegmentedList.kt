@@ -16,7 +16,7 @@ import androidx.compose.ui.unit.Dp
  * Vertical gap between the rows of a segmented track list.
  */
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
-val FlowSegmentedGap: Dp = ListItemDefaults.SegmentedGap
+val ChorSegmentedGap: Dp = ListItemDefaults.SegmentedGap
 
 /**
  * Shape of row [index] in a segmented list of [count] rows: the outer rows carry the group's
@@ -25,7 +25,7 @@ val FlowSegmentedGap: Dp = ListItemDefaults.SegmentedGap
  */
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
-fun flowSegmentShape(
+fun chorSegmentShape(
     index: Int,
     count: Int,
 ): Shape = ListItemDefaults.segmentedShapes(index = index, count = count).shape

@@ -59,8 +59,7 @@ internal fun OverviewCard(
             emphasized = true,
         )
         FlowRow(horizontalArrangement = Arrangement.spacedBy(FigureSpacing), verticalArrangement = Arrangement.spacedBy(InsightSpacing)) {
-            if (source != RecapSource.MUSIC) StatBigNumber(summary.video.views.toString(), stringResource(R.string.recap_views))
-            if (source != RecapSource.VIDEO) StatBigNumber(summary.music.plays.toString(), stringResource(R.string.recap_plays))
+            StatBigNumber(summary.video.views.toString(), stringResource(R.string.recap_views))
             StatBigNumber(activity.activeDays.toString(), stringResource(R.string.recap_active_days))
             StatBigNumber(
                 pluralStringResource(R.plurals.recap_days, activity.longestStreak, activity.longestStreak),

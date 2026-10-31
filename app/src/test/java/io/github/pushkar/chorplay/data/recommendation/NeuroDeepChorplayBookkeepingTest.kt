@@ -11,7 +11,7 @@ import org.junit.Test
  * rotation) works in memory but never reaches storage, and is dropped once Deep Chorplay ends.
  */
 class NeuroDeepChorplayBookkeepingTest {
-    private var deepFlow = true
+    private var deepChor = true
     private val saved = mutableListOf<UserBrain>()
     private val persisted =
         UserBrain(
@@ -27,7 +27,7 @@ class NeuroDeepChorplayBookkeepingTest {
             }
         }
     private val engine =
-        ChorplayNeuroEngine(mockk(relaxed = true), storage, mockk<NeuroContentStore>(relaxed = true), learningPaused = { deepFlow })
+        ChorplayNeuroEngine(mockk(relaxed = true), storage, mockk<NeuroContentStore>(relaxed = true), learningPaused = { deepChor })
 
     @Test
     fun `Deep Chorplay impressions stay in memory and never reach a save`() =
@@ -55,7 +55,7 @@ class NeuroDeepChorplayBookkeepingTest {
     fun `ending Deep Chorplay drops the session bookkeeping`() =
         runTest {
             engine.recordFeedImpressions(listOf("during"))
-            deepFlow = false
+            deepChor = false
             engine.recordFeedImpressions(listOf("after"))
             engine.blockChannel("UCblocked")
 
@@ -66,7 +66,7 @@ class NeuroDeepChorplayBookkeepingTest {
     @Test
     fun `outside Deep Chorplay impressions are saved as before`() =
         runTest {
-            deepFlow = false
+            deepChor = false
             engine.recordFeedImpressions(listOf("plain"))
             engine.blockChannel("UCblocked")
 

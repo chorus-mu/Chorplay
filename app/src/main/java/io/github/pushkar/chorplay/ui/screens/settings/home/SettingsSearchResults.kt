@@ -15,7 +15,7 @@ import io.github.pushkar.chorplay.ui.components.settings.SettingEntry
 import io.github.pushkar.chorplay.ui.components.settings.SettingsDestination
 import io.github.pushkar.chorplay.ui.components.settings.SettingsListScope
 import io.github.pushkar.chorplay.ui.components.shared.ChorplayEmptyState
-import io.github.pushkar.chorplay.ui.components.shared.FlowNavRow
+import io.github.pushkar.chorplay.ui.components.shared.ChorNavRow
 import io.github.pushkar.chorplay.ui.components.shared.LocalDpadNavigation
 import io.github.pushkar.chorplay.ui.screens.settings.index.DestinationIndex
 import io.github.pushkar.chorplay.ui.screens.settings.index.SearchableSetting
@@ -23,7 +23,6 @@ import io.github.pushkar.chorplay.ui.screens.settings.index.SettingsIndex
 
 private const val BREADCRUMB_SEPARATOR = " › "
 
-/** Every option this build and device can show, with its strings resolved for the current locale. */
 @Composable
 internal fun rememberSearchableSettings(): List<SearchableSetting> {
     val resources = LocalContext.current.resources
@@ -31,7 +30,13 @@ internal fun rememberSearchableSettings(): List<SearchableSetting> {
     val onTv = LocalDpadNavigation.current
     return remember(configuration, onTv) {
         SettingsIndex.all
-            .filter { it.availability.isAvailable(githubFeatures = BuildConfig.UPDATER_ENABLED, sdk = Build.VERSION.SDK_INT, tv = onTv) }
+            .filter {
+                it.availability.isAvailable(
+                    githubFeatures = BuildConfig.UPDATER_ENABLED,
+                    sdk = Build.VERSION.SDK_INT,
+                    tv = onTv
+                )
+            }
             .filter { DestinationIndex.isReachable(it, onTv) }
             .map { it.resolve(resources) }
     }
@@ -43,7 +48,8 @@ private fun SettingEntry.resolve(resources: Resources): SearchableSetting {
             .filter { it != SettingsDestination.HOME }
             .map { resources.getString(it.titleRes) }
     val sectionTitle = section?.let(resources::getString)
-    val crumbs = (pageTitles + listOfNotNull(sectionTitle)).ifEmpty { listOf(resources.getString(R.string.settings_title)) }
+    val crumbs =
+        (pageTitles + listOfNotNull(sectionTitle)).ifEmpty { listOf(resources.getString(R.string.settings_title)) }
     return SearchableSetting(
         entry = this,
         title = resources.getString(title),
@@ -59,7 +65,6 @@ private fun SettingEntry.resolve(resources: Resources): SearchableSetting {
     )
 }
 
-/** The ranked results for a settings search, or an empty state when nothing matches. */
 internal fun SettingsListScope.searchResults(
     query: String,
     results: List<SearchableSetting>,
@@ -77,7 +82,7 @@ internal fun SettingsListScope.searchResults(
     group(key = "search#results") {
         results.forEach { result ->
             row(result.entry.key) { shape ->
-                FlowNavRow(
+                ChorNavRow(
                     title = result.title,
                     supportingText = result.breadcrumb,
                     onClick = { onResultClick(result.entry) },

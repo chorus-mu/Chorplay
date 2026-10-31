@@ -9,12 +9,12 @@ import org.junit.Test
 class ChorplayTabTest {
     @Test
     fun hiddenHomeFallsBackToFirstVisibleDestination() {
-        val visibility = NavigationVisibility(home = false, shorts = false, music = false)
+        val visibility = NavigationVisibility(home = false, shorts = false)
 
         val resolved =
             resolveDefaultChorplayTab(
                 preferredId = ChorplayTab.Home.id,
-                order = listOf(0, 4, 3, 1, 2, 5, 6),
+                order = listOf(0, 4, 3, 1, 5, 6, 7),
                 visibility = visibility,
             )
 
@@ -38,12 +38,12 @@ class ChorplayTabTest {
     fun tabsFollowTheSavedOrder() {
         val tabs =
             visibleChorplayTabs(
-                order = listOf(4, 3, 2, 1, 0),
+                order = listOf(4, 3, 1, 0),
                 visibility = NavigationVisibility(),
             )
 
         assertEquals(
-            listOf(ChorplayTab.Library, ChorplayTab.Subscriptions, ChorplayTab.Music, ChorplayTab.Shorts, ChorplayTab.Home),
+            listOf(ChorplayTab.Library, ChorplayTab.Subscriptions, ChorplayTab.Shorts, ChorplayTab.Home),
             tabs,
         )
     }
@@ -61,7 +61,6 @@ class ChorplayTabTest {
                 ChorplayTab.Subscriptions,
                 ChorplayTab.Home,
                 ChorplayTab.Shorts,
-                ChorplayTab.Music,
                 ChorplayTab.Library,
                 ChorplayTab.Search,
                 ChorplayTab.Explore,
@@ -94,19 +93,18 @@ class ChorplayTabTest {
         val orders =
             listOf(
                 DEFAULT_NAV_TAB_ORDER,
-                listOf(6, 5, 4, 3, 2, 1, 0),
+                listOf(6, 5, 4, 3, 1, 0),
                 listOf(4, 3),
                 emptyList(),
             )
 
-        for (bits in 0 until 32) {
+        for (bits in 0 until 16) {
             val visibility =
                 NavigationVisibility(
                     home = bits and 1 != 0,
                     shorts = bits and 2 != 0,
-                    music = bits and 4 != 0,
-                    search = bits and 8 != 0,
-                    categories = bits and 16 != 0,
+                    search = bits and 4 != 0,
+                    categories = bits and 8 != 0,
                 )
 
             for (order in orders) {

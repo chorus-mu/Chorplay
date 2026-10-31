@@ -11,7 +11,7 @@ import org.junit.Test
 import javax.crypto.AEADBadTagException
 
 /**
- * Known-answer tests for FLOW-SYNC/1 crypto. These guard byte-exact interop with the Rust
+ * Known-answer tests for CHOR-SYNC/1 crypto. These guard byte-exact interop with the Rust
  * desktop (RustCrypto). HKDF is validated against RFC 5869, base64url against RFC 4648, and
  * AES-GCM via round-trip + tamper + AAD-binding.
  */
@@ -117,7 +117,7 @@ class SyncCryptoTest {
         val key = SyncCrypto.randomMasterKey()
         val nonce = SyncCrypto.randomNonce()
         val aad = SyncBytes.fromHex("01") + ByteArray(24) { it.toByte() } + SyncBytes.fromHex("0a")
-        val plaintext = "hello flow-sync".toByteArray()
+        val plaintext = "hello chor-sync".toByteArray()
 
         val sealed = SyncCrypto.seal(key, nonce, plaintext, aad)
         assertEquals("ct should be plaintext+tag", plaintext.size + SyncCrypto.TAG_LEN, sealed.size)

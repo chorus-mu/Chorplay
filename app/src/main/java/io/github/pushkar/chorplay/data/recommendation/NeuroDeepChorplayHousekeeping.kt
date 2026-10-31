@@ -12,9 +12,9 @@ internal class NeuroDeepChorplayHousekeeping {
     /** Call before a bookkeeping write; returns the brain the write should start from. */
     fun beforeWrite(
         brain: UserBrain,
-        deepFlowActive: Boolean,
+        deepChorActive: Boolean,
     ): UserBrain {
-        if (deepFlowActive) {
+        if (deepChorActive) {
             if (held == null) held = Fields.of(brain)
             return brain
         }

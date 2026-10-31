@@ -8,7 +8,7 @@ import androidx.compose.ui.unit.dp
 import io.github.pushkar.chorplay.data.local.HomeFeedColumns
 import io.github.pushkar.chorplay.data.model.Video
 import io.github.pushkar.chorplay.innertube.pages.renderer.FeedShelf
-import io.github.pushkar.chorplay.ui.components.layout.flowBottomContentPadding
+import io.github.pushkar.chorplay.ui.components.layout.chorBottomContentPadding
 import io.github.pushkar.chorplay.ui.components.shared.FeedShelfActions
 import io.github.pushkar.chorplay.ui.components.shared.FeedShelfSections
 
@@ -46,7 +46,7 @@ internal fun CategoryShelfPage(
         isLoading = isLoading,
         listState = listState,
         columnPreference = columnPreference,
-        contentPadding = PaddingValues(bottom = flowBottomContentPadding()),
+        contentPadding = PaddingValues(bottom = chorBottomContentPadding()),
         topInset = 0.dp,
         actions = actions,
         showChannelInfo = true,

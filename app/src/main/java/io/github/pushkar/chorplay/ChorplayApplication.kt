@@ -19,7 +19,6 @@ import io.github.pushkar.chorplay.data.profile.ProfileWebView
 import io.github.pushkar.chorplay.data.profile.ProfileWorkReconciler
 import io.github.pushkar.chorplay.data.repository.NewPipeDownloader
 import io.github.pushkar.chorplay.data.repository.YouTubeRepository
-import io.github.pushkar.chorplay.discord.DiscordPresenceRuntime
 import io.github.pushkar.chorplay.innertube.YouTube
 import io.github.pushkar.chorplay.network.AppProxyManager
 import io.github.pushkar.chorplay.network.VpnStateMonitor
@@ -115,21 +114,16 @@ class ChorplayApplication :
         linkedForeground.install()
         YouTube.cacheDirectory = cacheDir.resolve("innertube_http_cache")
 
-        DiscordPresenceRuntime.initialize(this, okHttpClient)
 
         val playerPreferences = PlayerPreferences(this)
 
-        // Injects modern TLS/SSL certificates so OkHttp and Ktor don't crash
         if (android.os.Build.VERSION.SDK_INT <= android.os.Build.VERSION_CODES.N_MR1) {
             Security.insertProviderAt(Conscrypt.newProvider(), 1)
         }
 
-        // Install crash handler for real-time monitoring
         ChorplayCrashHandler.install(this)
 
         try {
-            // Seeded from the device locale so the very first extraction is already localized; the
-            // stored app-language/region preference takes over as soon as it loads below.
             val localization = newPipeLocalization(Locale.getDefault().toLanguageTag())
             NewPipe.init(
                 NewPipeDownloader.getInstance(this),
@@ -139,7 +133,6 @@ class ChorplayApplication :
             YoutubeStreamExtractor.setPoTokenProvider(NewPipePoTokenProvider)
             Log.d(TAG, "NewPipe initialized with ${localization.localizationCode}")
         } catch (e: Exception) {
-            // Log error but don't crash the app
             Log.e(TAG, "Failed to initialize NewPipe", e)
         }
 
@@ -153,19 +146,8 @@ class ChorplayApplication :
 
         PipePipeNsigDecoder.initialize(this)
 
-        // Initialize notification channels
         NotificationHelper.createNotificationChannels(this)
         Log.d(TAG, "Notification channels created")
-
-        /*
-        try {
-            // Initialize YoutubeDL
-            com.yausername.youtubedl_android.YoutubeDL.getInstance().init(this)
-            Log.d(TAG, "YoutubeDL initialized")
-        } catch (e: Exception) {
-            Log.e(TAG, "Failed to initialize YoutubeDL", e)
-        }
-         */
 
         PendingSlice.start(ProfileFiles.noBackupRoot(this), CoroutineScope(SupervisorJob() + Dispatchers.IO)) { file ->
             profileSlices.get().applyPending(file)
@@ -221,7 +203,12 @@ class ChorplayApplication :
                 playerPreferences.contentLanguage,
                 playerPreferences.trendingRegion,
             ) { appLanguage, contentLanguage, region ->
-                contentYouTubeLocale(appLanguage, contentLanguage, region, AppLanguageManager.deviceLocale(this@ChorplayApplication))
+                contentYouTubeLocale(
+                    appLanguage,
+                    contentLanguage,
+                    region,
+                    AppLanguageManager.deviceLocale(this@ChorplayApplication)
+                )
             }.distinctUntilChanged().collectLatest { newLocale ->
                 YouTube.locale = newLocale
                 NewPipe.setupLocalization(
@@ -261,7 +248,6 @@ class ChorplayApplication :
                 val youtubeRepository = YouTubeRepository.getInstance(playerPreferences)
                 val repaired =
                     repository.repairVideoThumbnailSubscriptions { channelId ->
-                        // Startup's own fetches hold the InnerTube connections for a while; nothing waits on this.
                         withTimeoutOrNull(20_000L) {
                             youtubeRepository.fetchChannelAvatarById(channelId)
                         }.orEmpty()
@@ -285,9 +271,7 @@ class ChorplayApplication :
     }
 
     override fun onTerminate() {
-        DiscordPresenceRuntime.shutdown()
         super.onTerminate()
-        // Clean up performance dispatcher resources
         PerformanceDispatcher.shutdown()
     }
 

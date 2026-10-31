@@ -18,7 +18,7 @@ import io.github.pushkar.chorplay.data.model.Video
 import io.github.pushkar.chorplay.ui.components.FeedGridLayout
 import io.github.pushkar.chorplay.ui.components.PlaylistCard
 import io.github.pushkar.chorplay.ui.components.PlaylistCardLayout
-import io.github.pushkar.chorplay.ui.components.layout.flowBottomContentPadding
+import io.github.pushkar.chorplay.ui.components.layout.chorBottomContentPadding
 import io.github.pushkar.chorplay.ui.components.shared.FeedGridSkeleton
 import io.github.pushkar.chorplay.ui.components.shared.ChorplayEmptyState
 import io.github.pushkar.chorplay.ui.components.shared.ChorplayErrorState
@@ -56,7 +56,7 @@ internal fun HomeChipContent(
 
         is ChipFeed.Videos -> {
             HomeFeedGrid(
-                uiState = HomeUiState(videos = feed.videos, hasMorePages = false, isFlowFeed = true),
+                uiState = HomeUiState(videos = feed.videos, hasMorePages = false, isChorFeed = true),
                 feedLayout = feedLayout,
                 isListView = isListView,
                 gridState = gridState,
@@ -114,7 +114,7 @@ private fun HomeMixGrid(
                 start = feedLayout.contentPadding,
                 end = feedLayout.contentPadding,
                 top = MixGridTopPadding,
-                bottom = flowBottomContentPadding(),
+                bottom = chorBottomContentPadding(),
             ),
         verticalArrangement = Arrangement.spacedBy(feedLayout.cardSpacing),
     ) {

@@ -15,7 +15,7 @@ import io.github.pushkar.chorplay.R
 import io.github.pushkar.chorplay.data.local.PlayerPreferences
 import io.github.pushkar.chorplay.data.model.SponsorBlockCategories
 import io.github.pushkar.chorplay.data.repository.SponsorBlockRepository
-import io.github.pushkar.chorplay.ui.components.shared.FlowDialogDefaults
+import io.github.pushkar.chorplay.ui.components.shared.ChorDialogDefaults
 import io.github.pushkar.chorplay.utils.formatDurationMillis
 import io.github.pushkar.chorplay.utils.parseTimestampMs
 import io.github.pushkar.chorplay.utils.sponsorCategoryLabelRes
@@ -58,12 +58,12 @@ internal fun SbSubmitSegmentDialog(
                     Modifier
                         .fillMaxWidth()
                         .padding(
-                            start = FlowDialogDefaults.ContentPadding,
-                            top = FlowDialogDefaults.ContentPadding,
-                            end = FlowDialogDefaults.ContentPadding,
-                            bottom = FlowDialogDefaults.BottomPadding,
+                            start = ChorDialogDefaults.ContentPadding,
+                            top = ChorDialogDefaults.ContentPadding,
+                            end = ChorDialogDefaults.ContentPadding,
+                            bottom = ChorDialogDefaults.BottomPadding,
                         ),
-                verticalArrangement = Arrangement.spacedBy(FlowDialogDefaults.ActionsSpacing),
+                verticalArrangement = Arrangement.spacedBy(ChorDialogDefaults.ActionsSpacing),
             ) {
                 Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
                     // Title

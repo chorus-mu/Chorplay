@@ -343,7 +343,7 @@ private fun InactiveTimerContent(
                 modifier = Modifier.size(18.dp),
             )
             Spacer(Modifier.width(8.dp))
-            Text(stringResource(R.string.sleep_timer_end_of_song))
+            Text(stringResource(R.string.sleep_timer_end_of_video))
         }
 
         Surface(

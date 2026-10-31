@@ -14,7 +14,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import io.github.pushkar.chorplay.ui.components.shared.ChorplayConnectedToggleGroup
 import io.github.pushkar.chorplay.ui.components.shared.ChorplaySearchField
-import io.github.pushkar.chorplay.ui.components.shared.FlowToggleOption
+import io.github.pushkar.chorplay.ui.components.shared.ChorToggleOption
 import io.github.pushkar.chorplay.ui.components.shared.MediaKind
 import io.github.pushkar.chorplay.ui.utils.LocalWindowSizeClass
 import io.github.pushkar.chorplay.ui.utils.isMediumWidth
@@ -40,7 +40,7 @@ internal fun LibraryKindHeader(
     trailing: (@Composable () -> Unit)? = null,
 ) {
     val focusManager = LocalFocusManager.current
-    val options = MediaKind.entries.map { FlowToggleOption(it, stringResource(it.labelRes), it.icon) }
+    val options = MediaKind.entries.map { ChorToggleOption(it, stringResource(it.labelRes), it.icon) }
     val search: @Composable (Modifier) -> Unit = { fieldModifier ->
         ChorplaySearchField(
             query = query,

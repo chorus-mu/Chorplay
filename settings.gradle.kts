@@ -15,6 +15,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Flow"
+rootProject.name = "Chorplay"
 include(":app")
 include(":benchmark")

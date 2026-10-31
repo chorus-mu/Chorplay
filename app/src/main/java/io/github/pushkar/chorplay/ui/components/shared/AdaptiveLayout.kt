@@ -17,7 +17,7 @@ import io.github.pushkar.chorplay.ui.utils.isExpandedWidth
 import io.github.pushkar.chorplay.ui.utils.isMediumWidth
 
 /** Widest a single column of rows grows, so it stays readable on a tablet or an unfolded foldable. */
-val FlowMaxContentWidth: Dp = 720.dp
+val ChorMaxContentWidth: Dp = 720.dp
 
 private val MinLaneItemWidth = 240.dp
 private val MinHeroArtworkSize = 180.dp
@@ -29,7 +29,7 @@ private const val HERO_ARTWORK_FRACTION = 0.55f
  * split-screen and freeform windows lay out like the narrow devices they behave as.
  */
 @Composable
-fun flowWindowWidth(): Dp {
+fun chorWindowWidth(): Dp {
     val density = LocalDensity.current
     val width = LocalWindowInfo.current.containerSize.width
     return with(density) { width.toDp() }
@@ -40,19 +40,19 @@ fun flowWindowWidth(): Dp {
  * the next card showing, and stops growing at [maxWidth] on wider windows.
  */
 @Composable
-fun flowLaneItemWidth(
+fun chorLaneItemWidth(
     maxWidth: Dp,
     peek: Dp = 40.dp,
-): Dp = flowLaneItemWidthFor(flowWindowWidth(), maxWidth, peek)
+): Dp = chorLaneItemWidthFor(chorWindowWidth(), maxWidth, peek)
 
-fun flowLaneItemWidthFor(
+fun chorLaneItemWidthFor(
     windowWidth: Dp,
     maxWidth: Dp,
     peek: Dp,
 ): Dp = (windowWidth - Dimensions.ContentPaddingHorizontal * 2 - peek).coerceIn(MinLaneItemWidth, maxWidth)
 
 @Composable
-fun flowGridColumns(
+fun chorGridColumns(
     compact: Int,
     medium: Int,
     expanded: Int,
@@ -66,12 +66,12 @@ fun flowGridColumns(
 }
 
 @Composable
-fun flowGridCellWidth(
+fun chorGridCellWidth(
     columns: Int,
     gap: Dp = Dimensions.ItemSpacing,
-): Dp = flowGridCellWidthFor(flowWindowWidth(), columns, gap)
+): Dp = chorGridCellWidthFor(chorWindowWidth(), columns, gap)
 
-fun flowGridCellWidthFor(
+fun chorGridCellWidthFor(
     windowWidth: Dp,
     columns: Int,
     gap: Dp,
@@ -82,6 +82,6 @@ fun flowGridCellWidthFor(
  * tablet header stays a header rather than a poster.
  */
 @Composable
-fun flowHeroArtworkSize(): Dp = flowHeroArtworkSizeFor(flowWindowWidth())
+fun chorHeroArtworkSize(): Dp = chorHeroArtworkSizeFor(chorWindowWidth())
 
-fun flowHeroArtworkSizeFor(windowWidth: Dp): Dp = (windowWidth * HERO_ARTWORK_FRACTION).coerceIn(MinHeroArtworkSize, MaxHeroArtworkSize)
+fun chorHeroArtworkSizeFor(windowWidth: Dp): Dp = (windowWidth * HERO_ARTWORK_FRACTION).coerceIn(MinHeroArtworkSize, MaxHeroArtworkSize)

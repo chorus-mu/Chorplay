@@ -14,7 +14,7 @@ import java.io.IOException
 
 /**
  * Settings that belong to the device rather than to a profile: downloads, language, region, player controls,
- * storage and update checks. They used to live in player_preferences and flow_preferences; [DeviceKeysCopy] copies
+ * storage and update checks. They used to live in player_preferences and chorplay_preferences; [DeviceKeysCopy] copies
  * them here once.
  */
 internal val Context.devicePreferencesDataStore: DataStore<Preferences> by safePreferencesDataStore(
@@ -32,7 +32,7 @@ internal val Context.devicePreferencesDataStore: DataStore<Preferences> by safeP
                     DeviceKeysCopy.Source(
                         store = context.dataStore,
                         names = LocalDataManager.DEVICE_KEY_NAMES,
-                        file = ProfileFiles.preferences(context, StoreScope.PROFILE_SETTINGS, "flow_preferences"),
+                        file = ProfileFiles.preferences(context, StoreScope.PROFILE_SETTINGS, "chorplay_preferences"),
                     ),
                 ),
             ),
@@ -40,10 +40,6 @@ internal val Context.devicePreferencesDataStore: DataStore<Preferences> by safeP
     },
 )
 
-/**
- * Copies the device keys that are set in each source into the device store, once. The sources keep their values,
- * so an older build still finds them; nothing in this build reads them there again.
- */
 internal class DeviceKeysCopy(
     private val sources: List<Source>,
 ) : DataMigration<Preferences> {
@@ -62,7 +58,6 @@ internal class DeviceKeysCopy(
                 source.store.data
                     .first()
                     .asMap()
-            // The store reads back empty when its file can't be read; copying then would lose every value for good.
             if (stored.isEmpty() && source.file.length() > 0) throw IOException("${source.file.name} is unreadable, copying later")
             stored.forEach { (key, value) ->
                 if (key.name in source.names && !copied.asMap().containsKey(key)) copied.putUnchecked(key, value)

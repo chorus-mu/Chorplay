@@ -47,18 +47,18 @@ import io.github.pushkar.chorplay.ui.components.equalizer.EqResponseGraph
 import io.github.pushkar.chorplay.ui.components.equalizer.PanelRow
 import io.github.pushkar.chorplay.ui.components.equalizer.activePresetName
 import io.github.pushkar.chorplay.ui.components.equalizer.formatGain
-import io.github.pushkar.chorplay.ui.components.layout.flowBottomContentPadding
+import io.github.pushkar.chorplay.ui.components.layout.chorBottomContentPadding
 import io.github.pushkar.chorplay.ui.components.shared.ChorplayConnectedToggleGroup
-import io.github.pushkar.chorplay.ui.components.shared.FlowMaxContentWidth
-import io.github.pushkar.chorplay.ui.components.shared.FlowNavRow
-import io.github.pushkar.chorplay.ui.components.shared.FlowPaneState
-import io.github.pushkar.chorplay.ui.components.shared.FlowRowGroup
-import io.github.pushkar.chorplay.ui.components.shared.FlowSectionHeader
-import io.github.pushkar.chorplay.ui.components.shared.FlowSegmentedGap
+import io.github.pushkar.chorplay.ui.components.shared.ChorMaxContentWidth
+import io.github.pushkar.chorplay.ui.components.shared.ChorNavRow
+import io.github.pushkar.chorplay.ui.components.shared.ChorPaneState
+import io.github.pushkar.chorplay.ui.components.shared.ChorRowGroup
+import io.github.pushkar.chorplay.ui.components.shared.ChorSectionHeader
+import io.github.pushkar.chorplay.ui.components.shared.ChorSegmentedGap
 import io.github.pushkar.chorplay.ui.components.shared.ChorplaySidePanes
 import io.github.pushkar.chorplay.ui.components.shared.ChorplaySwitchRow
-import io.github.pushkar.chorplay.ui.components.shared.FlowToggleOption
-import io.github.pushkar.chorplay.ui.components.shared.flowRowGroupShape
+import io.github.pushkar.chorplay.ui.components.shared.ChorToggleOption
+import io.github.pushkar.chorplay.ui.components.shared.chorRowGroupShape
 
 private val ItemInset = 12.dp
 private val PhoneGraphHeight = 220.dp
@@ -78,18 +78,18 @@ internal fun EqualizerMainContent(
     viewModel: EqualizerViewModel,
     selectedBand: Int?,
     onSelectBand: (Int?) -> Unit,
-    panes: FlowPaneState,
+    panes: ChorPaneState,
     twoPane: Boolean,
     onOpenPresets: () -> Unit,
     onSaveAs: () -> Unit,
     onSystemEqualizer: (() -> Unit)?,
     modifier: Modifier = Modifier,
 ) {
-    val bottom = flowBottomContentPadding(BottomSpacing)
+    val bottom = chorBottomContentPadding(BottomSpacing)
     val list: @Composable (LazyListScope.() -> Unit) -> Unit = { content ->
         LazyColumn(
             modifier = Modifier.fillMaxSize(),
-            verticalArrangement = Arrangement.spacedBy(FlowSegmentedGap),
+            verticalArrangement = Arrangement.spacedBy(ChorSegmentedGap),
             contentPadding = PaddingValues(bottom = bottom),
             content = content,
         )
@@ -157,21 +157,21 @@ private class EqSections(
     fun LazyListScope.header() {
         item("header") {
             EqFramed(Modifier.padding(top = 8.dp)) {
-                FlowRowGroup {
+                ChorRowGroup {
                     ChorplaySwitchRow(
                         title = stringResource(R.string.equalizer),
                         checked = state.enabled,
                         onCheckedChange = viewModel::setEnabled,
                         leadingIcon = Icons.Rounded.GraphicEq,
-                        shape = flowRowGroupShape(0, 2),
+                        shape = chorRowGroupShape(0, 2),
                     )
                     val edited = state.isEdited
-                    FlowNavRow(
+                    ChorNavRow(
                         title = activePresetName(state),
                         supportingText = stringResource(if (edited) R.string.eq_edited else R.string.eq_presets),
                         onClick = onOpenPresets,
                         leadingIcon = Icons.Outlined.LibraryMusic,
-                        shape = flowRowGroupShape(1, 2),
+                        shape = chorRowGroupShape(1, 2),
                         trailingContent =
                             if (edited) {
                                 {
@@ -230,8 +230,8 @@ private class EqSections(
                 ChorplayConnectedToggleGroup(
                     options =
                         listOf(
-                            FlowToggleOption(EqMode.PARAMETRIC, stringResource(R.string.eq_mode_parametric), Icons.Rounded.Tune),
-                            FlowToggleOption(EqMode.GRAPHIC, stringResource(R.string.eq_mode_graphic), Icons.Rounded.Equalizer),
+                            ChorToggleOption(EqMode.PARAMETRIC, stringResource(R.string.eq_mode_parametric), Icons.Rounded.Tune),
+                            ChorToggleOption(EqMode.GRAPHIC, stringResource(R.string.eq_mode_graphic), Icons.Rounded.Equalizer),
                         ),
                     selected = state.mode,
                     onSelected = viewModel::setMode,
@@ -244,7 +244,7 @@ private class EqSections(
         item("bands-header") {
             EqFramed {
                 Row(verticalAlignment = Alignment.CenterVertically) {
-                    FlowSectionHeader(stringResource(R.string.eq_bands), Modifier.weight(1f))
+                    ChorSectionHeader(stringResource(R.string.eq_bands), Modifier.weight(1f))
                     Text(
                         text = stringResource(R.string.eq_band_count, bandList.size, EqLimits.MAX_BANDS),
                         style = MaterialTheme.typography.labelMedium,
@@ -259,7 +259,7 @@ private class EqSections(
                 EqBandRow(
                     index = index,
                     band = band,
-                    shape = flowRowGroupShape(index, bandList.size + 1),
+                    shape = chorRowGroupShape(index, bandList.size + 1),
                     selected = selectedBand == index,
                     onClick = { onSelectBand(index) },
                     onToggle = { viewModel.toggleBand(index) },
@@ -268,13 +268,13 @@ private class EqSections(
         }
         item("add-band") {
             EqFramed(Modifier.padding(horizontal = ItemInset)) {
-                FlowNavRow(
+                ChorNavRow(
                     title = stringResource(R.string.eq_add_band),
                     onClick = { viewModel.addBand()?.let(onSelectBand) },
                     leadingIcon = Icons.Rounded.Add,
                     showChevron = false,
                     enabled = bandList.size < EqLimits.MAX_BANDS,
-                    shape = flowRowGroupShape(bandList.size, bandList.size + 1),
+                    shape = chorRowGroupShape(bandList.size, bandList.size + 1),
                 )
             }
         }
@@ -321,22 +321,22 @@ private class EqSections(
         item("sound") {
             EqFramed {
                 Column {
-                    FlowSectionHeader(stringResource(R.string.eq_settings_section))
+                    ChorSectionHeader(stringResource(R.string.eq_settings_section))
                     val rows = if (state.autoPreamp) 2 else 3
-                    FlowRowGroup {
+                    ChorRowGroup {
                         ChorplaySwitchRow(
                             title = stringResource(R.string.eq_auto_preamp),
                             supportingText = autoPreampSummary(state),
                             checked = state.autoPreamp,
                             onCheckedChange = viewModel::setAutoPreamp,
-                            shape = flowRowGroupShape(0, rows),
+                            shape = chorRowGroupShape(0, rows),
                         )
                         if (!state.autoPreamp) {
-                            PanelRow(shape = flowRowGroupShape(1, rows)) {
+                            PanelRow(shape = chorRowGroupShape(1, rows)) {
                                 ManualPreamp(value = state.active.curve.preamp, onValueChange = viewModel::setPreamp)
                             }
                         }
-                        PanelRow(shape = flowRowGroupShape(rows - 1, rows)) {
+                        PanelRow(shape = chorRowGroupShape(rows - 1, rows)) {
                             EqBassBoostSlider(
                                 value = state.bassBoost,
                                 onValueChange = viewModel::setBassBoost,
@@ -353,14 +353,14 @@ private class EqSections(
         val open = onSystemEqualizer ?: return
         item("system") {
             EqFramed(Modifier.padding(top = 16.dp)) {
-                FlowRowGroup {
-                    FlowNavRow(
+                ChorRowGroup {
+                    ChorNavRow(
                         title = stringResource(R.string.eq_system),
                         supportingText = stringResource(R.string.eq_system_desc),
                         onClick = open,
                         leadingIcon = Icons.AutoMirrored.Outlined.OpenInNew,
                         showChevron = false,
-                        shape = flowRowGroupShape(0, 1),
+                        shape = chorRowGroupShape(0, 1),
                     )
                 }
             }
@@ -406,7 +406,7 @@ internal fun EqFramed(
     content: @Composable () -> Unit,
 ) {
     Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.TopCenter) {
-        Box(modifier = Modifier.widthIn(max = FlowMaxContentWidth).fillMaxWidth().then(modifier)) { content() }
+        Box(modifier = Modifier.widthIn(max = ChorMaxContentWidth).fillMaxWidth().then(modifier)) { content() }
     }
 }
 

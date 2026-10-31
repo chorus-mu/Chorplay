@@ -20,15 +20,15 @@ import io.github.pushkar.chorplay.player.QualityOption
 import io.github.pushkar.chorplay.player.SubtitleOption
 import io.github.pushkar.chorplay.player.state.SubtitleOrigin
 import io.github.pushkar.chorplay.player.stream.VideoCodecUtils
-import io.github.pushkar.chorplay.ui.components.shared.FlowNavRow
-import io.github.pushkar.chorplay.ui.components.shared.FlowRowGroup
-import io.github.pushkar.chorplay.ui.components.shared.FlowSelectionRow
+import io.github.pushkar.chorplay.ui.components.shared.ChorNavRow
+import io.github.pushkar.chorplay.ui.components.shared.ChorRowGroup
+import io.github.pushkar.chorplay.ui.components.shared.ChorSelectionRow
 import io.github.pushkar.chorplay.ui.components.shared.MediaAudioTrackRow
 import io.github.pushkar.chorplay.ui.components.shared.MediaPlaybackSpeedPicker
 import io.github.pushkar.chorplay.ui.components.shared.MediaQualitySelectorContent
 import io.github.pushkar.chorplay.ui.components.shared.MediaQualitySelectorOption
 import io.github.pushkar.chorplay.ui.components.shared.audioTrackFallbackLabel
-import io.github.pushkar.chorplay.ui.components.shared.flowRowGroupShape
+import io.github.pushkar.chorplay.ui.components.shared.chorRowGroupShape
 
 @Composable
 internal fun PlayerSettingsQualityPage(
@@ -106,13 +106,13 @@ internal fun PlayerSettingsAudioPage(
     currentAudioTrack: Int,
     onTrackSelected: (Int) -> Unit,
 ) {
-    FlowRowGroup {
+    ChorRowGroup {
         availableAudioTracks.forEachIndexed { index, track ->
             MediaAudioTrackRow(
                 label = audioTrackDisplayLabel(track, index),
                 supportingText = track.language.takeIf { it.isNotBlank() },
                 selected = index == currentAudioTrack,
-                shape = flowRowGroupShape(index, availableAudioTracks.size),
+                shape = chorRowGroupShape(index, availableAudioTracks.size),
                 onClick = { onTrackSelected(index) },
             )
         }
@@ -132,15 +132,15 @@ internal fun PlayerSettingsSubtitlesPage(
     onSubtitleOffsetChange: ((Long) -> Unit)? = null,
 ) {
     val rowCount = availableSubtitles.size + 1
-    FlowRowGroup {
-        FlowSelectionRow(
+    ChorRowGroup {
+        ChorSelectionRow(
             title = stringResource(R.string.off),
             selected = !subtitlesEnabled,
-            shape = flowRowGroupShape(0, rowCount),
+            shape = chorRowGroupShape(0, rowCount),
             onClick = onDisableSubtitles,
         )
         availableSubtitles.forEachIndexed { index, subtitle ->
-            FlowSelectionRow(
+            ChorSelectionRow(
                 title = subtitleRowTitle(subtitle, index),
                 supportingText =
                     when (subtitle.origin) {
@@ -158,7 +158,7 @@ internal fun PlayerSettingsSubtitlesPage(
                         }
                     },
                 selected = subtitle.url == selectedSubtitleUrl && subtitlesEnabled,
-                shape = flowRowGroupShape(index + 1, rowCount),
+                shape = chorRowGroupShape(index + 1, rowCount),
                 onClick = { onSubtitleSelected(index) },
             )
         }
@@ -169,19 +169,19 @@ internal fun PlayerSettingsSubtitlesPage(
     }
     Spacer(modifier = Modifier.height(SubtitleStyleRowSpacing))
     val navRows = if (onAddSubtitleFile != null) 2 else 1
-    FlowRowGroup {
+    ChorRowGroup {
         if (onAddSubtitleFile != null) {
-            FlowNavRow(
+            ChorNavRow(
                 title = stringResource(R.string.subtitle_add_file),
                 leadingIcon = Icons.Filled.FileOpen,
-                shape = flowRowGroupShape(0, navRows),
+                shape = chorRowGroupShape(0, navRows),
                 onClick = onAddSubtitleFile,
             )
         }
-        FlowNavRow(
+        ChorNavRow(
             title = stringResource(R.string.subtitle_style),
             leadingIcon = Icons.Filled.Tune,
-            shape = flowRowGroupShape(navRows - 1, navRows),
+            shape = chorRowGroupShape(navRows - 1, navRows),
             onClick = onShowStyleCustomizer,
         )
     }

@@ -3,7 +3,6 @@ package io.github.pushkar.chorplay.sync2.live
 import android.content.Context
 import android.media.AudioManager
 import dagger.hilt.android.qualifiers.ApplicationContext
-import io.github.pushkar.chorplay.player.EnhancedMusicPlayerManager
 import io.github.pushkar.chorplay.player.EnhancedPlayerManager
 import io.github.pushkar.chorplay.player.GlobalPlayerState
 import io.github.pushkar.chorplay.sync2.data.LinkedDatabase
@@ -11,7 +10,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.merge
@@ -46,11 +44,11 @@ class NowPlaying
         private var last: LiveMessage.Now? = null
         private var lastAt = 0L
 
-        /** Whether either player is playing, which keeps live running in the background. */
+        /** Whether the video player is playing, which keeps live running in the background. */
         val playing: Flow<Boolean> =
-            combine(GlobalPlayerState.playerState, EnhancedMusicPlayerManager.playerState) { video, music ->
-                video.isPlaying || music.isPlaying
-            }.distinctUntilChanged()
+            GlobalPlayerState.playerState
+                .map { it.isPlaying }
+                .distinctUntilChanged()
 
         /** Sends `now` until cancelled. */
         suspend fun run() =
@@ -60,9 +58,6 @@ class NowPlaying
                         GlobalPlayerState.currentVideo.map { it?.id },
                         GlobalPlayerState.playerState.map { it.isPlaying },
                         video.currentQueueIndexState,
-                        EnhancedMusicPlayerManager.currentTrack.map { it?.videoId },
-                        EnhancedMusicPlayerManager.playerState.map { it.isPlaying to it.position / SEEK_MS },
-                        EnhancedMusicPlayerManager.queue.map { it.size },
                     ).collect { publish(force = false) }
                 }
                 while (true) {
@@ -94,28 +89,11 @@ class NowPlaying
             return now.video != null && abs(now.pos - expected) > SEEK_MS
         }
 
-        /** The player in use: music while it plays or when the video player is idle, otherwise video. */
+        /** The currently playing video. */
         private fun current(): LiveMessage.Now {
-            val track = EnhancedMusicPlayerManager.currentTrack.value
-            val music = EnhancedMusicPlayerManager.playerState.value
-            val vol = volume()
-            if (track != null && (music.isPlaying || !GlobalPlayerState.playerState.value.isPlaying)) {
-                val queue = EnhancedMusicPlayerManager.queue.value
-                return LiveMessage.Now(
-                    video = track.videoId,
-                    title = track.title,
-                    by = track.artist,
-                    music = true,
-                    pos = music.position,
-                    dur = music.duration,
-                    state = if (music.isPlaying) LiveMessage.PLAYING else LiveMessage.PAUSED,
-                    vol = vol,
-                    queue = queue.take(LiveMessage.QUEUE_LIMIT).map { it.videoId },
-                    index = queue.indexOfFirst { it.videoId == track.videoId }.coerceAtLeast(0),
-                )
-            }
             val current = GlobalPlayerState.currentVideo.value ?: return LiveMessage.Now(video = null)
             val queue = video.queueVideos.value
+            val vol = volume()
             return LiveMessage.Now(
                 video = current.id,
                 title = current.title,

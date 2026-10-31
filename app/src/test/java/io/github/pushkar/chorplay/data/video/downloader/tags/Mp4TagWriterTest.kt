@@ -35,25 +35,18 @@ class Mp4TagWriterTest {
 
     private val tags =
         DownloadTags(
-            kind = DownloadKind.MUSIC,
+            kind = DownloadKind.VIDEO,
             videoId = "dQw4w9WgXcQ",
             title = "Never Gonna Give You Up",
-            artists = listOf("Rick Astley"),
             channelId = "UCuAXFkgsw1L7xaCfnd5JJOw",
             channelName = "Rick Astley - Topic",
-            album = "Whenever You Need Somebody",
-            albumId = "MPREb_album",
-            albumArtist = "Rick Astley",
-            trackNumber = 1,
-            trackTotal = 10,
             playlistId = "OLAK5uy_list",
             releaseDate = "1987-11-16",
             description = "Official audio",
-            sourceUrl = "https://music.youtube.com/watch?v=dQw4w9WgXcQ",
+            sourceUrl = "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
             viewCount = 1_500_000_000L,
             likeCount = 18_000_000L,
             thumbnailUrl = "https://i.ytimg.com/vi/dQw4w9WgXcQ/maxresdefault.jpg",
-            lyrics = "We're no strangers to love",
         )
 
     private val jpeg = byteArrayOf(0xFF.toByte(), 0xD8.toByte(), 0xFF.toByte(), 0xE0.toByte()) + ByteArray(256) { it.toByte() }
@@ -69,12 +62,9 @@ class Mp4TagWriterTest {
         val ilst = ilst(bytes)
         assertThat(Mp4Fixtures.ilstText(ilst, "©nam")).isEqualTo(tags.title)
         assertThat(Mp4Fixtures.ilstText(ilst, "©ART")).isEqualTo("Rick Astley")
-        assertThat(Mp4Fixtures.ilstText(ilst, "©alb")).isEqualTo(tags.album)
-        assertThat(Mp4Fixtures.ilstText(ilst, "aART")).isEqualTo(tags.albumArtist)
         assertThat(Mp4Fixtures.ilstText(ilst, "©day")).isEqualTo("1987-11-16")
         assertThat(Mp4Fixtures.ilstText(ilst, "©cmt")).isEqualTo(tags.sourceUrl)
         assertThat(Mp4Fixtures.ilstText(ilst, "desc")).isEqualTo(tags.description)
-        assertThat(Mp4Fixtures.ilstText(ilst, "©lyr")).isEqualTo(tags.lyrics)
         assertThat(Mp4Fixtures.ilstText(ilst, "©too")).isEqualTo("Chorplay")
         val trkn = Mp4Fixtures.ilstData(ilst, "trkn")!!
         assertThat(trkn.first).isEqualTo(0)
@@ -187,12 +177,10 @@ class Mp4TagWriterTest {
 
         val embedded = EmbeddedTags.fromEntries(entries)
 
-        assertThat(embedded.flow).isEqualTo(tags)
+        assertThat(embedded.chor).isEqualTo(tags)
         assertThat(embedded.title).isEqualTo(tags.title)
         assertThat(embedded.artist).isEqualTo("Rick Astley")
-        assertThat(embedded.album).isEqualTo(tags.album)
         assertThat(embedded.cover).isEqualTo(jpeg)
-        assertThat(embedded.lyrics).isEqualTo(tags.lyrics)
     }
 
     @Test

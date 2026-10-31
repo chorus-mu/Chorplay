@@ -1,9 +1,3 @@
-/*
- * Copyright: Pushkar (2026) under GPLv3
- *
- * This file is part of Chorplay (https://github.com/chorus-mu/Chorplay).
- */
-
 package io.github.pushkar.chorplay.data.recommendation.snapshot
 
 import io.github.pushkar.chorplay.data.model.Video
@@ -12,11 +6,6 @@ import io.github.pushkar.chorplay.data.recommendation.NeuroCoWatchStore
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JsonElement
 
-/**
- * One Home load as the engine saw it: the viewer's brain and stores, every candidate each lane
- * fetched, and the page that was shown. Replaying it runs the real ranking offline, so a report of
- * an off-topic feed can be measured instead of guessed at (#907).
- */
 @Serializable
 internal data class HomeSnapshot(
     val format: String = FORMAT,
@@ -37,7 +26,7 @@ internal data class HomeSnapshot(
     val shown: List<SnapshotShown> = emptyList(),
 ) {
     companion object {
-        const val FORMAT = "flow-home-snapshot/1"
+        const val FORMAT = "chorplay-home-snapshot/1"
     }
 }
 
@@ -64,7 +53,6 @@ internal data class SnapshotRelated(
     val hitCount: Int = 1,
 )
 
-/** A shown card: the lane it came from and whether it only filled a short lane. */
 @Serializable
 internal data class SnapshotCard(
     val id: String,
@@ -72,7 +60,6 @@ internal data class SnapshotCard(
     val padding: Boolean = false,
 )
 
-/** A card of the feed as the viewer scrolled it, load-more pages and late arrivals included. */
 @Serializable
 internal data class SnapshotShown(
     val video: SnapshotVideo,
@@ -98,7 +85,6 @@ internal data class SnapshotVideo(
     val badges: List<String> = emptyList(),
     val category: String? = null,
 ) {
-    /** The video as ranking reads it, with its age kept when the snapshot is replayed [shiftMs] later. */
     fun toVideo(shiftMs: Long = 0L): Video =
         Video(
             id = id,

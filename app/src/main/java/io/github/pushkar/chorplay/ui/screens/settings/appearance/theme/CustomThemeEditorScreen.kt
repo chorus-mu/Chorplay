@@ -47,7 +47,7 @@ import io.github.pushkar.chorplay.ui.components.settings.SettingsPage
 import io.github.pushkar.chorplay.ui.components.settings.nav
 import io.github.pushkar.chorplay.ui.components.settings.toggleGroup
 import io.github.pushkar.chorplay.ui.components.shared.ChorplayColorPickerDialog
-import io.github.pushkar.chorplay.ui.components.shared.FlowToggleOption
+import io.github.pushkar.chorplay.ui.components.shared.ChorToggleOption
 import io.github.pushkar.chorplay.ui.screens.settings.appearance.themeVariantLabel
 import io.github.pushkar.chorplay.ui.screens.settings.index.CustomThemeIndex
 import io.github.pushkar.chorplay.ui.theme.CustomTheme
@@ -94,7 +94,7 @@ internal fun CustomThemeEditorScreen(
 
     val savedMessage = stringResource(R.string.settings_custom_theme_saved)
     val useLabel = stringResource(R.string.settings_custom_theme_use)
-    val variantOptions = ThemeVariant.entries.map { FlowToggleOption(it, stringResource(themeVariantLabel(it))) }
+    val variantOptions = ThemeVariant.entries.map { ChorToggleOption(it, stringResource(themeVariantLabel(it))) }
     val colors = current?.colorsFor(editing)
     val scheme = remember(colors, editing) { colors?.toColorScheme(editing) }
 

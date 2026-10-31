@@ -7,7 +7,7 @@ import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.res.stringResource
 import io.github.pushkar.chorplay.BuildConfig
 import io.github.pushkar.chorplay.R
-import io.github.pushkar.chorplay.data.recommendation.FlowPersona
+import io.github.pushkar.chorplay.data.recommendation.ChorPersona
 import io.github.pushkar.chorplay.ui.components.settings.SettingsDestination
 import io.github.pushkar.chorplay.ui.components.settings.SettingsGroupScope
 import io.github.pushkar.chorplay.ui.components.settings.SettingsListScope
@@ -15,20 +15,18 @@ import io.github.pushkar.chorplay.ui.components.settings.SettingsTarget
 import io.github.pushkar.chorplay.ui.components.settings.nav
 import io.github.pushkar.chorplay.ui.components.settings.switch
 import io.github.pushkar.chorplay.ui.components.shared.DeepChorplayState
-import io.github.pushkar.chorplay.ui.components.shared.FlowNavRow
+import io.github.pushkar.chorplay.ui.components.shared.ChorNavRow
 import io.github.pushkar.chorplay.ui.components.shared.ChorplaySwitchRow
-import io.github.pushkar.chorplay.ui.components.shared.deepFlowStatus
+import io.github.pushkar.chorplay.ui.components.shared.deepChorStatus
 import io.github.pushkar.chorplay.ui.screens.settings.index.DestinationIndex
 import io.github.pushkar.chorplay.ui.screens.settings.index.HomeIndex
 
 @Immutable
 internal data class SettingsHomeState(
     val selected: SettingsDestination?,
-    val persona: FlowPersona?,
-    val deepFlow: DeepChorplayState,
-    /** Shown on the update row while a check the user started is running; null when idle. */
+    val persona: ChorPersona?,
+    val deepChor: DeepChorplayState,
     val updateCheckingLabel: String?,
-    /** Attached to the [selected] page's row, so a host can return focus to it. */
     val selectedRowFocus: FocusRequester? = null,
 )
 
@@ -38,12 +36,10 @@ internal class SettingsHomeActions(
     val onDeepChorplayChange: (Boolean) -> Unit,
     val onDurationClick: () -> Unit,
     val onSaveHistoryChange: (Boolean) -> Unit,
-    val onScrobbleChange: (Boolean) -> Unit,
     val onShowOnSearchChange: (Boolean) -> Unit,
     val onCheckForUpdates: () -> Unit,
 )
 
-/** The settings list when no search is running. */
 internal fun SettingsListScope.homeContent(
     state: SettingsHomeState,
     actions: SettingsHomeActions,
@@ -67,43 +63,36 @@ internal fun SettingsListScope.homeContent(
             modifier = state.selectedFocusModifier(destination),
         )
 
-    // TV Home has no logo to long-press.
-    val deepFlowHint = R.string.deep_flow_long_press_hint.takeUnless { onTv }
-    group(key = "home.engine", header = R.string.settings_flow_engine_header, footer = deepFlowHint) {
-        row(HomeIndex.deepFlow.key) { shape ->
+    val deepChorHint = R.string.deep_chor_long_press_hint.takeUnless { onTv }
+    group(key = "home.engine", header = R.string.settings_chor_engine_header, footer = deepChorHint) {
+        row(HomeIndex.deepChor.key) { shape ->
             ChorplaySwitchRow(
-                title = stringResource(HomeIndex.deepFlow.title),
-                supportingText = deepFlowStatus(state.deepFlow) ?: stringResource(R.string.deep_flow_mode_subtitle),
-                checked = state.deepFlow.active,
+                title = stringResource(HomeIndex.deepChor.title),
+                supportingText = deepChorStatus(state.deepChor) ?: stringResource(R.string.deep_chor_mode_subtitle),
+                checked = state.deepChor.active,
                 onCheckedChange = actions.onDeepChorplayChange,
                 leadingIcon = HomeRowIcons.DeepChorplay,
                 shape = shape,
             )
         }
-        row(HomeIndex.deepFlowDuration.key) { shape ->
-            FlowNavRow(
-                title = stringResource(HomeIndex.deepFlowDuration.title),
-                supportingText = deepFlowDurationLabel(state.deepFlow.expireHours),
+        row(HomeIndex.deepChorDuration.key) { shape ->
+            ChorNavRow(
+                title = stringResource(HomeIndex.deepChorDuration.title),
+                supportingText = deepChorDurationLabel(state.deepChor.expireHours),
                 onClick = actions.onDurationClick,
                 leadingIcon = HomeRowIcons.DeepChorplayDuration,
                 shape = shape,
             )
         }
         switch(
-            HomeIndex.deepFlowHistory,
-            checked = state.deepFlow.saveToHistory,
+            HomeIndex.deepChorHistory,
+            checked = state.deepChor.saveToHistory,
             onCheckedChange = actions.onSaveHistoryChange,
             icon = HomeRowIcons.DeepChorplayHistory,
         )
         switch(
-            HomeIndex.deepFlowScrobble,
-            checked = state.deepFlow.scrobble,
-            onCheckedChange = actions.onScrobbleChange,
-            icon = HomeRowIcons.DeepChorplayScrobble,
-        )
-        switch(
-            HomeIndex.deepFlowOnSearch,
-            checked = state.deepFlow.showOnSearch,
+            HomeIndex.deepChorOnSearch,
+            checked = state.deepChor.showOnSearch,
             onCheckedChange = actions.onShowOnSearchChange,
             icon = HomeRowIcons.DeepChorplayOnSearch,
         )

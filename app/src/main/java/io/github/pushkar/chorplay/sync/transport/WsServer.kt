@@ -18,8 +18,8 @@ import kotlinx.coroutines.launch
 /**
  * Show-QR/host role transport: an embedded Ktor **CIO** WebSocket server bound to `0.0.0.0:0`
  * (OS-assigned ephemeral port, read back for the QR). CIO is pure-Kotlin/coroutine so it runs on
- * Android. v1 handles a single 1↔1 session per server instance. [path] is FLOW-SYNC/1's unless
- * FLOW-SYNC/2 serves on its own; with [onConnection], every connection goes to it instead of [awaitConnection].
+ * Android. v1 handles a single 1↔1 session per server instance. [path] is CHOR-SYNC/1's unless
+ * CHOR-SYNC/2 serves on its own; with [onConnection], every connection goes to it instead of [awaitConnection].
  */
 class WsServer(
     private val path: String = QrPath.PATH,
@@ -75,7 +75,7 @@ class WsServer(
     }
 
     private object QrPath {
-        const val PATH = "/flow-sync"
+        const val PATH = "/chor-sync"
     }
 
     private companion object {

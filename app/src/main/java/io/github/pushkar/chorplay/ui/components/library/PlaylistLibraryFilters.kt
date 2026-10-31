@@ -66,7 +66,7 @@ internal fun PlaylistLibraryFilterRow(
         horizontalArrangement = Arrangement.spacedBy(8.dp),
     ) {
         items(
-            items = if (showKinds) MediaKind.entries else emptyList(),
+            items = if (showKinds && MediaKind.entries.size > 1) MediaKind.entries else emptyList(),
             key = { it.name },
         ) { kind ->
             ChorplayFilterChip(
@@ -101,11 +101,11 @@ internal fun PlaylistLibraryFilterRow(
                                     }
                                 } else {
                                     null
+                                }
+                                        onClick = {
+                                    ownershipExpanded = false
+                                    onOwnershipSelected(filter)
                                 },
-                            onClick = {
-                                ownershipExpanded = false
-                                onOwnershipSelected(filter)
-                            },
                         )
                     }
                 }

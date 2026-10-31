@@ -21,7 +21,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.dp
 import io.github.pushkar.chorplay.ui.components.shared.ChorplayConnectedToggleGroup
-import io.github.pushkar.chorplay.ui.components.shared.FlowToggleOption
+import io.github.pushkar.chorplay.ui.components.shared.ChorToggleOption
 
 private val ControlRowHorizontalPadding = 16.dp
 private val ControlRowVerticalPadding = 14.dp
@@ -36,7 +36,7 @@ private const val DISABLED_ALPHA = 0.4f
 @Composable
 fun <T> SettingsToggleGroupRow(
     title: String,
-    options: List<FlowToggleOption<T>>,
+    options: List<ChorToggleOption<T>>,
     selected: T,
     onSelected: (T) -> Unit,
     shape: Shape,

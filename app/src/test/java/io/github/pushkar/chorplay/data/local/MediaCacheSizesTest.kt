@@ -25,7 +25,6 @@ class MediaCacheSizesTest {
     @Test
     fun `the defaults are 500 MB per media cache and Coil's own artwork size`() {
         assertThat(MediaCacheLimits.DEFAULT.videoBytes).isEqualTo(500L * 1024 * 1024)
-        assertThat(MediaCacheLimits.DEFAULT.musicBytes).isEqualTo(500L * 1024 * 1024)
         assertThat(MediaCacheLimits.DEFAULT.artworkBytes).isNull()
     }
 

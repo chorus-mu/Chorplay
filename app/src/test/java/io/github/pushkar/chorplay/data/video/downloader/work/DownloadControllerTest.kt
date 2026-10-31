@@ -46,7 +46,7 @@ class DownloadControllerTest {
 
     private val request =
         DownloadRequest(
-            tags = DownloadTags(kind = DownloadKind.MUSIC, videoId = "song", title = "Intro", artists = listOf("A")),
+            tags = DownloadTags(kind = DownloadKind.VIDEO, videoId = "song", title = "Intro", artists = listOf("A")),
             durationSeconds = 60,
         )
 
@@ -82,7 +82,7 @@ class DownloadControllerTest {
 
             assertThat(controller.enqueue(request)).isEqualTo(EnqueueOutcome.QUEUED)
 
-            assertThat(row.captured.kind).isEqualTo(DownloadKind.MUSIC)
+            assertThat(row.captured.kind).isEqualTo(DownloadKind.VIDEO)
             assertThat(DownloadRequest.decode(row.captured.requestJson)).isEqualTo(request)
             assertThat(items.captured.single().status).isEqualTo(DownloadItemStatus.PENDING)
             assertThat(items.captured.single().filePath).startsWith(folder.root.path)

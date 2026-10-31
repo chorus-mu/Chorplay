@@ -401,7 +401,7 @@ function discoverAndInit() {
             .replace("\t", "\\t")
 
     companion object {
-        private const val TAG = "Flow_CipherWebView"
+        private const val TAG = "Chor_CipherWebView"
         private const val JS_INTERFACE = "CipherBridge"
         private const val CALL_TIMEOUT_MS = 5_000L
 

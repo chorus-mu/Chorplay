@@ -28,9 +28,9 @@ import androidx.compose.ui.unit.dp
 import io.github.pushkar.chorplay.data.update.NoteSpan
 import io.github.pushkar.chorplay.data.update.NoteText
 import io.github.pushkar.chorplay.data.update.ReleaseNotes
-import io.github.pushkar.chorplay.ui.components.shared.FlowSectionHeader
-import io.github.pushkar.chorplay.ui.components.shared.FlowSegmentedGap
-import io.github.pushkar.chorplay.ui.components.shared.flowSegmentShape
+import io.github.pushkar.chorplay.ui.components.shared.ChorSectionHeader
+import io.github.pushkar.chorplay.ui.components.shared.ChorSegmentedGap
+import io.github.pushkar.chorplay.ui.components.shared.chorSegmentShape
 
 private val LinePadding = 16.dp
 private val LineVerticalPadding = 12.dp
@@ -42,15 +42,15 @@ private val BadgeIconSize = 16.dp
 /** The release notes as list items: the intro paragraphs, then one segmented group per section. */
 internal fun LazyListScope.releaseNotes(notes: ReleaseNotes) {
     itemsIndexed(notes.intro, key = { index, _ -> "intro-$index" }) { _, text ->
-        NoteParagraph(text, Modifier.padding(vertical = FlowSegmentedGap * 2))
+        NoteParagraph(text, Modifier.padding(vertical = ChorSegmentedGap * 2))
     }
     notes.sections.forEachIndexed { sectionIndex, section ->
-        item(key = "section-$sectionIndex") { FlowSectionHeader(section.title) }
+        item(key = "section-$sectionIndex") { ChorSectionHeader(section.title) }
         itemsIndexed(section.items, key = { index, _ -> "section-$sectionIndex-$index" }) { index, text ->
             Surface(
-                shape = flowSegmentShape(index, section.items.size),
+                shape = chorSegmentShape(index, section.items.size),
                 color = MaterialTheme.colorScheme.surfaceContainerHigh,
-                modifier = Modifier.fillMaxWidth().padding(bottom = FlowSegmentedGap),
+                modifier = Modifier.fillMaxWidth().padding(bottom = ChorSegmentedGap),
             ) {
                 NoteParagraph(text, Modifier.padding(horizontal = LinePadding, vertical = LineVerticalPadding))
             }

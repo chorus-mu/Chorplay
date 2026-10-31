@@ -10,7 +10,6 @@ import androidx.compose.material.icons.automirrored.outlined.PlaylistPlay
 import androidx.compose.material.icons.outlined.Delete
 import androidx.compose.material.icons.outlined.FolderOff
 import androidx.compose.material.icons.outlined.Info
-import androidx.compose.material.icons.outlined.MusicNote
 import androidx.compose.material.icons.outlined.QueuePlayNext
 import androidx.compose.material.icons.outlined.Share
 import androidx.compose.runtime.Composable
@@ -41,7 +40,6 @@ import kotlinx.coroutines.withContext
 
 private enum class LocalMenuPage { Actions, Details }
 
-/** What the file menu can do; the screen owns queueing, sharing and deleting. */
 internal class LocalFileActions(
     val onPlayNext: (LocalMediaItem) -> Unit,
     val onAddToQueue: (LocalMediaItem) -> Unit,
@@ -51,7 +49,6 @@ internal class LocalFileActions(
     val deleteMovesToTrash: Boolean,
 )
 
-/** The long-press menu for a file: queue, share, details, hide its folder or delete it. */
 @Composable
 internal fun LocalFileMenu(
     item: LocalMediaItem,
@@ -82,12 +79,17 @@ internal fun LocalFileMenu(
                     .joinToString(" ${stringResource(R.string.metadata_separator)} "),
         ) {
             if (item.isVideo) {
-                LocalVideoThumbnail(item, isNew = false, modifier = Modifier, width = QuickActionsDefaults.VideoArtworkWidth)
+                LocalVideoThumbnail(
+                    item,
+                    isNew = false,
+                    modifier = Modifier,
+                    width = QuickActionsDefaults.VideoArtworkWidth
+                )
             } else {
                 ArtworkThumbnail(
                     thumbnailUrl = item.artworkUri,
                     size = QuickActionsDefaults.SquareArtworkSize,
-                    placeholder = Icons.Outlined.MusicNote,
+                    placeholder = Icons.Outlined.VideoLibrary,
                 )
             }
         }
@@ -123,9 +125,16 @@ internal fun LocalFileMenu(
             title = null,
             rows =
                 listOfNotNull(
-                    actionRow("details", Icons.Outlined.Info, stringResource(R.string.details_metadata)) { page = LocalMenuPage.Details },
+                    actionRow("details", Icons.Outlined.Info, stringResource(R.string.details_metadata)) {
+                        page = LocalMenuPage.Details
+                    },
                     item.folderName.takeIf { it.isNotBlank() }?.let { folder ->
-                        actionRow("hide_folder", Icons.Outlined.FolderOff, stringResource(R.string.local_menu_hide_folder), folder) {
+                        actionRow(
+                            "hide_folder",
+                            Icons.Outlined.FolderOff,
+                            stringResource(R.string.local_menu_hide_folder),
+                            folder
+                        ) {
                             sheet.hideThen { actions.onHideFolder(item) }
                         }
                     },
@@ -144,7 +153,6 @@ internal fun LocalFileMenu(
     }
 }
 
-/** Track details MediaStore doesn't keep, read from the file when the Details page opens. */
 private data class TrackDetails(
     val codec: String? = null,
     val frameRate: Int? = null,
@@ -154,7 +162,9 @@ private data class TrackDetails(
 @Composable
 private fun localFileDetails(item: LocalMediaItem): List<Pair<String, String>> {
     val context = LocalContext.current
-    val track by produceState(TrackDetails(), item.contentUri) { value = readTrackDetails(context, Uri.parse(item.contentUri)) }
+    val track by produceState(TrackDetails(), item.contentUri) {
+        value = readTrackDetails(context, Uri.parse(item.contentUri))
+    }
     val lines = mutableListOf<Pair<String, String?>>()
     lines += stringResource(R.string.title_label) to item.title
     lines += stringResource(R.string.local_detail_folder) to item.path.ifBlank { item.folderName }
@@ -163,7 +173,7 @@ private fun localFileDetails(item: LocalMediaItem): List<Pair<String, String>> {
     ) {
         lines +=
             stringResource(R.string.local_detail_resolution) to
-            stringResource(R.string.local_detail_resolution_value, item.width, item.height)
+                    stringResource(R.string.local_detail_resolution_value, item.width, item.height)
     }
     lines += stringResource(R.string.duration) to item.durationMs.takeIf { it > 0 }?.let(::formatDurationMillis)
     lines += stringResource(R.string.file_size) to Formatter.formatShortFileSize(context, item.sizeBytes)
@@ -171,9 +181,10 @@ private fun localFileDetails(item: LocalMediaItem): List<Pair<String, String>> {
     lines += stringResource(R.string.codec_label) to track.codec
     lines +=
         stringResource(R.string.local_detail_frame_rate) to
-        track.frameRate?.let { stringResource(R.string.local_detail_fps, it.toString()) }
+                track.frameRate?.let { stringResource(R.string.local_detail_fps, it.toString()) }
     lines += stringResource(R.string.bitrate_label) to track.bitrateKbps?.let { "$it ${stringResource(R.string.kbps)}" }
-    lines += stringResource(R.string.local_detail_added) to item.dateAddedMs.takeIf { it > 0 }?.let { formatYouTubeRelativeTime(it) }
+    lines += stringResource(R.string.local_detail_added) to item.dateAddedMs.takeIf { it > 0 }
+        ?.let { formatYouTubeRelativeTime(it) }
     if (!item.isVideo) {
         lines += stringResource(R.string.artist_label) to item.artist.takeIf(String::isNotBlank)
         lines += stringResource(R.string.album_label) to item.album.takeIf(String::isNotBlank)
@@ -205,7 +216,6 @@ private suspend fun readTrackDetails(
         }
     }
 
-/** Containers store rates as either an int or a float; read whichever this one used. */
 private fun MediaFormat.numberOrNull(key: String): Number? {
     if (!containsKey(key)) return null
     return runCatching { getInteger(key) }.getOrNull() ?: runCatching { getFloat(key) }.getOrNull()

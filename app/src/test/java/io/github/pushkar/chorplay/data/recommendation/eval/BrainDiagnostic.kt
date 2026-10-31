@@ -7,7 +7,7 @@
 
 package io.github.pushkar.chorplay.data.recommendation.eval
 
-import io.github.pushkar.chorplay.data.recommendation.FlowPersona
+import io.github.pushkar.chorplay.data.recommendation.ChorPersona
 import io.github.pushkar.chorplay.data.recommendation.NeuroClusters
 import io.github.pushkar.chorplay.data.recommendation.NeuroDiscovery
 import io.github.pushkar.chorplay.data.recommendation.NeuroMaintenance
@@ -104,7 +104,7 @@ internal object BrainDiagnostic {
         val brain = NeuroMaintenance.runIfNeeded(rawBrain, tokenizer)
         val discovery = NeuroDiscovery(NeuroTopicCatalog.TOPIC_CATEGORIES, tokenizer)
         val persona =
-            FlowPersona.entries.find { it.name == brain.lastPersona } ?: FlowPersona.EXPLORER
+            ChorPersona.entries.find { it.name == brain.lastPersona } ?: ChorPersona.EXPLORER
 
         // ── Clusters, exactly as production builds them ──
         val clusters =

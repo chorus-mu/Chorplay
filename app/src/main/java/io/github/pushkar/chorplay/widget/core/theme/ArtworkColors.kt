@@ -1,16 +1,16 @@
 package io.github.pushkar.chorplay.widget.core.theme
 
 import android.content.Context
+import androidx.compose.material3.ColorScheme
+import androidx.compose.material3.darkColorScheme
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.luminance
 import androidx.glance.color.ColorProviders
 import io.github.pushkar.chorplay.data.local.MusicPlayerBackgroundStyle
-import io.github.pushkar.chorplay.ui.components.musicplayer.common.paletteColorScheme
+import io.github.pushkar.chorplay.ui.components.shared.MediaPalette
 import io.github.pushkar.chorplay.ui.components.shared.mediaPaletteOf
 import io.github.pushkar.chorplay.widget.core.image.WidgetImageLoader
 
-/**
- * The music player's own artwork scheme, for player widgets while the player is set to take its
- * colours from the cover. Null keeps the app theme: the Default style, or no cover to read.
- */
 internal suspend fun artworkColorProviders(
     context: Context,
     artworkUrl: String?,
@@ -24,5 +24,23 @@ internal suspend fun artworkColorProviders(
     return androidx.glance.material3.ColorProviders(scheme)
 }
 
-// The same sample size the in-app player reads its palette from.
+private fun paletteColorScheme(
+    palette: MediaPalette,
+    error: Color,
+): ColorScheme {
+    val surface = palette.base
+    val onSurface = palette.onBase
+    val primary = palette.accent
+    val onPrimary = if (primary.luminance() < 0.45f) Color.White else Color(0xFF161616)
+    return darkColorScheme(
+        primary = primary,
+        onPrimary = onPrimary,
+        surface = surface,
+        onSurface = onSurface,
+        background = surface,
+        onBackground = onSurface,
+        error = error,
+    )
+}
+
 private const val PALETTE_SAMPLE_PX = 128

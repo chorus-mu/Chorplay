@@ -34,9 +34,5 @@ internal fun sortSubscriptions(
         }
     }
 
-/**
- * Video channels lead the quick-access row and music channels follow, so the two kinds stay
- * grouped no matter which sort the user picked.
- */
 internal fun quickAccessOrder(channels: List<Channel>): List<Channel> =
-    (channels.filterNot { it.isMusic } + channels.filter { it.isMusic }).distinctBy(Channel::id)
+    channels.distinctBy(Channel::id)

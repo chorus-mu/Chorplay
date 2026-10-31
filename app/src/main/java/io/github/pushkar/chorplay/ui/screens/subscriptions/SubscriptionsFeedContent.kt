@@ -38,7 +38,7 @@ import io.github.pushkar.chorplay.data.model.Video
 import io.github.pushkar.chorplay.data.shorts.queue.ShortsQueueSource
 import io.github.pushkar.chorplay.ui.components.FEED_MAX_AUTO_COLUMNS
 import io.github.pushkar.chorplay.ui.components.FeedCardMinWidth
-import io.github.pushkar.chorplay.ui.components.layout.flowBottomContentPadding
+import io.github.pushkar.chorplay.ui.components.layout.chorBottomContentPadding
 import io.github.pushkar.chorplay.ui.components.rememberFeedGridLayout
 import io.github.pushkar.chorplay.ui.components.shared.ChorplayFilterChip
 import io.github.pushkar.chorplay.ui.components.shared.ChorplayPullToRefreshBox
@@ -72,7 +72,6 @@ internal fun SubscriptionsFeedContent(
     onShortClick: (ShortsQueueSource) -> Unit,
     onChannelClick: (Channel) -> Unit,
     onViewAllClick: () -> Unit,
-    onMusicSubscriptionsClick: () -> Unit,
     onGroupSelected: (String?) -> Unit,
     onManageGroups: () -> Unit,
     onRetryFailedChannels: () -> Unit,
@@ -113,7 +112,7 @@ internal fun SubscriptionsFeedContent(
                 columns = plan.cells,
                 state = gridState,
                 modifier = Modifier.fillMaxSize().dpadFocusGroup(),
-                contentPadding = plan.contentPadding(top = FeedTopPadding, bottom = flowBottomContentPadding()),
+                contentPadding = plan.contentPadding(top = FeedTopPadding, bottom = chorBottomContentPadding()),
                 verticalArrangement = Arrangement.spacedBy(plan.rowSpacing),
             ) {
                 item(span = { GridItemSpan(maxLineSpan) }) {
@@ -122,7 +121,6 @@ internal fun SubscriptionsFeedContent(
                             channels = topChannels,
                             onChannelClick = onChannelClick,
                             onViewAllClick = onViewAllClick,
-                            onMusicClick = onMusicSubscriptionsClick,
                             modifier =
                                 Modifier
                                     .fillMaxWidth()
@@ -197,8 +195,6 @@ internal fun SubscriptionsFeedContent(
                         Column {
                             MediaShortsShelf(
                                 shorts = state.shorts,
-                                // The shelf shows one reel per channel; the queue behind it is
-                                // every subscription reel in date order (#823).
                                 onShortClick = { _, tapped ->
                                     onShortClick(ShortsQueueSource.Subscriptions(tapped.id))
                                 },

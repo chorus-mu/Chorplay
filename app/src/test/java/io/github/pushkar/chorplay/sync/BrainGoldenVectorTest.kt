@@ -22,10 +22,10 @@ import org.junit.Assert.assertTrue
 import org.junit.Test
 
 /**
- * The brain half of the shared FLOW-SYNC/1 anti-drift gate.
+ * The brain half of the shared CHOR-SYNC/1 anti-drift gate.
  *
  * [android_decodes_the_desktop_brain_fixture] reads the desktop's own golden fixture
- * (`src-tauri/tests/fixtures/sync/flow_neuro_brain.json`, mirrored verbatim into this module's test
+ * (`src-tauri/tests/fixtures/sync/chorplay_neuro_brain.json`, mirrored verbatim into this module's test
  * resources) and asserts that **every** field lands. That is the test that would have caught the
  * silent-drop bug: Android's canonical brain was a second, incompatible model, so once the
  * G-Counter parse failure was out of the way a "successful" brain sync transferred almost nothing.
@@ -35,8 +35,8 @@ import org.junit.Test
  */
 class BrainGoldenVectorTest {
     private fun fixture(): String =
-        checkNotNull(javaClass.getResourceAsStream("/sync/flow_neuro_brain.json")) {
-            "missing test resource sync/flow_neuro_brain.json"
+        checkNotNull(javaClass.getResourceAsStream("/sync/chorplay_neuro_brain.json")) {
+            "missing test resource sync/chorplay_neuro_brain.json"
         }.use { it.readBytes().toString(Charsets.UTF_8) }
 
     private val deviceA = "device-aaa"

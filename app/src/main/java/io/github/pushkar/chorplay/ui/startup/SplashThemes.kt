@@ -27,63 +27,63 @@ private val ExpressiveSplashes =
     mapOf(
         ".IconExpressiveScallop" to
             ExpressiveSplash(
-                R.style.Theme_Flow_Starting_Light_Expressive_Scallop,
-                R.style.Theme_Flow_Starting_Dark_Expressive_Scallop,
-                R.style.Theme_Flow_Starting_Black_Expressive_Scallop,
+                R.style.Theme_Chorplay_Starting_Light_Expressive_Scallop,
+                R.style.Theme_Chorplay_Starting_Dark_Expressive_Scallop,
+                R.style.Theme_Chorplay_Starting_Black_Expressive_Scallop,
             ),
         ".IconExpressiveSegmented" to
             ExpressiveSplash(
-                R.style.Theme_Flow_Starting_Light_Expressive_Segmented,
-                R.style.Theme_Flow_Starting_Dark_Expressive_Segmented,
-                R.style.Theme_Flow_Starting_Black_Expressive_Segmented,
+                R.style.Theme_Chorplay_Starting_Light_Expressive_Segmented,
+                R.style.Theme_Chorplay_Starting_Dark_Expressive_Segmented,
+                R.style.Theme_Chorplay_Starting_Black_Expressive_Segmented,
             ),
         ".IconExpressivePlay" to
             ExpressiveSplash(
-                R.style.Theme_Flow_Starting_Light_Expressive_Play,
-                R.style.Theme_Flow_Starting_Dark_Expressive_Play,
-                R.style.Theme_Flow_Starting_Black_Expressive_Play,
+                R.style.Theme_Chorplay_Starting_Light_Expressive_Play,
+                R.style.Theme_Chorplay_Starting_Dark_Expressive_Play,
+                R.style.Theme_Chorplay_Starting_Black_Expressive_Play,
             ),
         ".IconExpressiveSky" to
             ExpressiveSplash(
-                R.style.Theme_Flow_Starting_Light_Expressive_Sky,
-                R.style.Theme_Flow_Starting_Dark_Expressive_Sky,
-                R.style.Theme_Flow_Starting_Black_Expressive_Sky,
+                R.style.Theme_Chorplay_Starting_Light_Expressive_Sky,
+                R.style.Theme_Chorplay_Starting_Dark_Expressive_Sky,
+                R.style.Theme_Chorplay_Starting_Black_Expressive_Sky,
             ),
         ".IconExpressiveMint" to
             ExpressiveSplash(
-                R.style.Theme_Flow_Starting_Light_Expressive_Mint,
-                R.style.Theme_Flow_Starting_Dark_Expressive_Mint,
-                R.style.Theme_Flow_Starting_Black_Expressive_Mint,
+                R.style.Theme_Chorplay_Starting_Light_Expressive_Mint,
+                R.style.Theme_Chorplay_Starting_Dark_Expressive_Mint,
+                R.style.Theme_Chorplay_Starting_Black_Expressive_Mint,
             ),
         ".IconExpressiveCookie" to
             ExpressiveSplash(
-                R.style.Theme_Flow_Starting_Light_Expressive_Cookie,
-                R.style.Theme_Flow_Starting_Dark_Expressive_Cookie,
-                R.style.Theme_Flow_Starting_Black_Expressive_Cookie,
+                R.style.Theme_Chorplay_Starting_Light_Expressive_Cookie,
+                R.style.Theme_Chorplay_Starting_Dark_Expressive_Cookie,
+                R.style.Theme_Chorplay_Starting_Black_Expressive_Cookie,
             ),
         ".IconExpressiveOval" to
             ExpressiveSplash(
-                R.style.Theme_Flow_Starting_Light_Expressive_Oval,
-                R.style.Theme_Flow_Starting_Dark_Expressive_Oval,
-                R.style.Theme_Flow_Starting_Black_Expressive_Oval,
+                R.style.Theme_Chorplay_Starting_Light_Expressive_Oval,
+                R.style.Theme_Chorplay_Starting_Dark_Expressive_Oval,
+                R.style.Theme_Chorplay_Starting_Black_Expressive_Oval,
             ),
         ".IconExpressivePill" to
             ExpressiveSplash(
-                R.style.Theme_Flow_Starting_Light_Expressive_Pill,
-                R.style.Theme_Flow_Starting_Dark_Expressive_Pill,
-                R.style.Theme_Flow_Starting_Black_Expressive_Pill,
+                R.style.Theme_Chorplay_Starting_Light_Expressive_Pill,
+                R.style.Theme_Chorplay_Starting_Dark_Expressive_Pill,
+                R.style.Theme_Chorplay_Starting_Black_Expressive_Pill,
             ),
         ".IconMaterialSky" to
             ExpressiveSplash(
-                R.style.Theme_Flow_Starting_Light_Material_Sky,
-                R.style.Theme_Flow_Starting_Dark_Material_Sky,
-                R.style.Theme_Flow_Starting_Black_Material_Sky,
+                R.style.Theme_Chorplay_Starting_Light_Material_Sky,
+                R.style.Theme_Chorplay_Starting_Dark_Material_Sky,
+                R.style.Theme_Chorplay_Starting_Black_Material_Sky,
             ),
         ".IconMaterialMint" to
             ExpressiveSplash(
-                R.style.Theme_Flow_Starting_Light_Material_Mint,
-                R.style.Theme_Flow_Starting_Dark_Material_Mint,
-                R.style.Theme_Flow_Starting_Black_Material_Mint,
+                R.style.Theme_Chorplay_Starting_Light_Material_Mint,
+                R.style.Theme_Chorplay_Starting_Dark_Material_Mint,
+                R.style.Theme_Chorplay_Starting_Black_Material_Mint,
             ),
     )
 
@@ -106,33 +106,33 @@ fun splashThemeFor(
     return when (tone) {
         SplashTone.LIGHT -> {
             when (iconSuffix) {
-                ".IconFlowPlay" -> R.style.Theme_Flow_Starting_Light_Play
-                ".IconAmoled" -> R.style.Theme_Flow_Starting_Light_Amoled
-                ".IconMonochrome" -> R.style.Theme_Flow_Starting_Light_Monochrome
-                ".IconDynamic" -> R.style.Theme_Flow_Starting_Light_Dynamic
-                else -> R.style.Theme_Flow_Starting_Light
+                ".IconChorplayPlay" -> R.style.Theme_Chorplay_Starting_Light_Play
+                ".IconAmoled" -> R.style.Theme_Chorplay_Starting_Light_Amoled
+                ".IconMonochrome" -> R.style.Theme_Chorplay_Starting_Light_Monochrome
+                ".IconDynamic" -> R.style.Theme_Chorplay_Starting_Light_Dynamic
+                else -> R.style.Theme_Chorplay_Starting_Light
             }
         }
 
         SplashTone.DARK -> {
             when (iconSuffix) {
-                ".IconFlowPlay" -> R.style.Theme_Flow_Starting_Dark_Play
-                ".IconAmoled" -> R.style.Theme_Flow_Starting_Dark_Amoled
-                ".IconMonochrome" -> R.style.Theme_Flow_Starting_Dark_Monochrome
-                ".IconGhost" -> R.style.Theme_Flow_Starting_Dark_Ghost
-                ".IconDynamic" -> R.style.Theme_Flow_Starting_Dark_Dynamic
-                else -> R.style.Theme_Flow_Starting_Dark
+                ".IconChorplayPlay" -> R.style.Theme_Chorplay_Starting_Dark_Play
+                ".IconAmoled" -> R.style.Theme_Chorplay_Starting_Dark_Amoled
+                ".IconMonochrome" -> R.style.Theme_Chorplay_Starting_Dark_Monochrome
+                ".IconGhost" -> R.style.Theme_Chorplay_Starting_Dark_Ghost
+                ".IconDynamic" -> R.style.Theme_Chorplay_Starting_Dark_Dynamic
+                else -> R.style.Theme_Chorplay_Starting_Dark
             }
         }
 
         SplashTone.BLACK -> {
             when (iconSuffix) {
-                ".IconFlowPlay" -> R.style.Theme_Flow_Starting_Black_Play
-                ".IconAmoled" -> R.style.Theme_Flow_Starting_Black_Amoled
-                ".IconMonochrome" -> R.style.Theme_Flow_Starting_Black_Monochrome
-                ".IconGhost" -> R.style.Theme_Flow_Starting_Black_Ghost
-                ".IconDynamic" -> R.style.Theme_Flow_Starting_Black_Dynamic
-                else -> R.style.Theme_Flow_Starting_Black
+                ".IconChorplayPlay" -> R.style.Theme_Chorplay_Starting_Black_Play
+                ".IconAmoled" -> R.style.Theme_Chorplay_Starting_Black_Amoled
+                ".IconMonochrome" -> R.style.Theme_Chorplay_Starting_Black_Monochrome
+                ".IconGhost" -> R.style.Theme_Chorplay_Starting_Black_Ghost
+                ".IconDynamic" -> R.style.Theme_Chorplay_Starting_Black_Dynamic
+                else -> R.style.Theme_Chorplay_Starting_Black
             }
         }
     }

@@ -7,10 +7,10 @@ import android.net.wifi.WifiManager
 import android.os.Build
 import io.github.pushkar.chorplay.sync.crypto.SyncBytes
 
-private const val SERVICE_TYPE = "_flow._tcp"
+private const val SERVICE_TYPE = "_chorplay._tcp"
 
 /**
- * mDNS on Android (spec/live.md, Discovery): advertises `_flow._tcp` with `v=2` and this hour's tag, and
+ * mDNS on Android (spec/live.md, Discovery): advertises `_chorplay._tcp` with `v=2` and this hour's tag, and
  * finds the other services. Only the tag tells members apart; the instance name is random per start.
  */
 class LanDiscovery(
@@ -24,7 +24,7 @@ class LanDiscovery(
             context.applicationContext
                 .getSystemService(
                     WifiManager::class.java,
-                ).createMulticastLock("flow-linked")
+                ).createMulticastLock("chor-linked")
                 .apply { setReferenceCounted(false) }
         } else {
             null

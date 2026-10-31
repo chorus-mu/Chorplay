@@ -21,10 +21,10 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import io.github.pushkar.chorplay.ui.components.shared.FlowNavRow
-import io.github.pushkar.chorplay.ui.components.shared.FlowSelectionRow
+import io.github.pushkar.chorplay.ui.components.shared.ChorNavRow
+import io.github.pushkar.chorplay.ui.components.shared.ChorSelectionRow
 import io.github.pushkar.chorplay.ui.components.shared.ChorplaySwitchRow
-import io.github.pushkar.chorplay.ui.components.shared.FlowToggleOption
+import io.github.pushkar.chorplay.ui.components.shared.ChorToggleOption
 import io.github.pushkar.chorplay.ui.components.shared.LocalDpadNavigation
 import kotlinx.coroutines.flow.StateFlow
 
@@ -89,7 +89,7 @@ fun SettingsGroupScope.choice(
     icon: ImageVector? = null,
     valueText: @Composable () -> String?,
 ) = entryRow(entry) { shape ->
-    FlowNavRow(
+    ChorNavRow(
         title = stringResource(entry.title),
         supportingText = valueText() ?: entry.summaryText(),
         onClick = onClick,
@@ -117,7 +117,7 @@ fun SettingsGroupScope.nav(
     @DrawableRes iconRes: Int? = null,
     modifier: Modifier = Modifier,
 ) = entryRow(entry) { shape ->
-    FlowNavRow(
+    ChorNavRow(
         title = stringResource(entry.title),
         modifier = modifier,
         supportingText = valueText?.invoke() ?: value ?: entry.summaryText(),
@@ -185,7 +185,7 @@ fun SettingsGroupScope.option(
     supportingText: String? = null,
     enabled: Boolean = true,
 ) = row(key) { shape ->
-    FlowSelectionRow(
+    ChorSelectionRow(
         title = label,
         supportingText = supportingText,
         selected = selected,
@@ -198,7 +198,7 @@ fun SettingsGroupScope.option(
 /** A choice between two to four values, answered in place with a connected toggle group. */
 fun <T> SettingsGroupScope.toggleGroup(
     entry: SettingEntry,
-    options: List<FlowToggleOption<T>>,
+    options: List<ChorToggleOption<T>>,
     selected: T,
     onSelected: (T) -> Unit,
     enabled: Boolean = true,
@@ -220,7 +220,7 @@ fun <T> SettingsGroupScope.toggleGroup(
 /** A toggle group that collects its own [state]; see the state-backed [switch]. */
 fun <T> SettingsGroupScope.toggleGroup(
     entry: SettingEntry,
-    options: List<FlowToggleOption<T>>,
+    options: List<ChorToggleOption<T>>,
     state: StateFlow<T>,
     onSelected: (T) -> Unit,
     enabled: Boolean = true,

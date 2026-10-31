@@ -1,13 +1,3 @@
-/*
- * Copyright: Pushkar (2026) under GPLv3
- *
- * This file is part of Chorplay (https://github.com/chorus-mu/Chorplay).
- *
- * This recommendation algorithm (ChorplayNeuroEngine) is the intellectual property
- * of the Chorplay project. Any use of this code in other projects must
- * explicitly credit "Chorplay Android Client" and link back to the original repository.
- */
-
 package io.github.pushkar.chorplay.data.recommendation
 
 import android.content.Context
@@ -26,14 +16,6 @@ import kotlinx.serialization.json.Json
 import java.io.InputStream
 import java.io.OutputStream
 
-/**
- * Persistent per-video content index. Tags are only available when a video is
- * OPENED (full StreamInfo) — feed candidates arrive with bare titles. This store
- * keeps the tag-rich topic vector computed at watch time so that when the same
- * video reappears as a candidate it is scored on real content, not its title.
- * Representations accumulate from engagement — the SimClusters tweet-embedding
- * idea, miniaturized.
- */
 internal class NeuroContentStore(
     private val appContext: Context,
 ) {
@@ -82,7 +64,13 @@ internal class NeuroContentStore(
     private val contentDataStore: DataStore<ContentIndex> by lazy {
         DataStoreFactory.create(
             serializer = ContentSerializer,
-            produceFile = { ProfileFiles.dataStore(appContext, StoreScope.PROFILE_PRIVATE, "flow_neuro_content_v1.json") },
+            produceFile = {
+                ProfileFiles.dataStore(
+                    appContext,
+                    StoreScope.PROFILE_PRIVATE,
+                    "chorplay_neuro_content_v1.json"
+                )
+            },
         )
     }
 
@@ -96,7 +84,6 @@ internal class NeuroContentStore(
         withContext(Dispatchers.IO) {
             try {
                 val index = contentDataStore.data.first()
-                // Vectors keyed by an older key spec hold chance pairs; videos refill it as they are opened (#907).
                 if (index.keySpec < NeuroKeySpec.VERSION) {
                     vectors = emptyMap()
                     dirty = index.vectors.isNotEmpty()
@@ -109,12 +96,8 @@ internal class NeuroContentStore(
         }
     }
 
-    /** Fast, non-suspending read for the ranking hot path. */
     fun topicsFor(videoId: String): Map<String, Double>? = vectors[videoId]?.topics
-
     fun size(): Int = vectors.size
-
-    /** Records the tag-rich vector of an opened video, LRU-pruned by write time. */
     fun put(
         videoId: String,
         topics: Map<String, Double>,
@@ -140,7 +123,6 @@ internal class NeuroContentStore(
         dirty = true
     }
 
-    /** Persists the in-memory index if it changed; callers debounce. */
     suspend fun persistIfDirty() {
         if (!dirty) return
         dirty = false

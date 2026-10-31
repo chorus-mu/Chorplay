@@ -34,8 +34,8 @@ fun appFontFamily(
     loadCustom: (File) -> FontFamily?,
 ): FontFamily =
     when (font) {
-        AppFont.SYSTEM -> FlowFontFamily
+        AppFont.SYSTEM -> ChorFontFamily
         AppFont.CONDENSED -> FontFamily(CondensedWeights.map { Font(DeviceFontFamilyName("sans-serif-condensed"), it) })
         AppFont.SERIF -> FontFamily.Serif
-        AppFont.CUSTOM -> customFile?.takeIf { it.isFile }?.let(loadCustom) ?: FlowFontFamily
+        AppFont.CUSTOM -> customFile?.takeIf { it.isFile }?.let(loadCustom) ?: ChorFontFamily
     }

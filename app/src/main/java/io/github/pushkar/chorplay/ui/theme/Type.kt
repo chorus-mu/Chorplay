@@ -8,7 +8,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 
 /** The system font (Roboto on most devices); the app font when the user has not picked another. */
-val FlowFontFamily: FontFamily = FontFamily.Default
+val ChorFontFamily: FontFamily = FontFamily.Default
 
 /** Material's own scale, for the roles Chorplay keeps at their Material size. */
 private val MaterialScale = Typography()
@@ -132,7 +132,7 @@ private fun TextStyle.emphasized(weight: FontWeight = FontWeight.Bold): TextStyl
 
 /** The app's type scale, every role (and its emphasized form) set in [family]. */
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
-fun flowTypography(family: FontFamily): Typography {
+fun chorTypography(family: FontFamily): Typography {
     val base = baseTypography(family)
     return base.copy(
         displayLargeEmphasized = base.displayLarge.emphasized(FontWeight.ExtraBold),
@@ -154,4 +154,4 @@ fun flowTypography(family: FontFamily): Typography {
 }
 
 /** The type scale in the system font, for surfaces that cannot take the user's font (widgets). */
-val Typography: Typography = flowTypography(FlowFontFamily)
+val Typography: Typography = chorTypography(ChorFontFamily)

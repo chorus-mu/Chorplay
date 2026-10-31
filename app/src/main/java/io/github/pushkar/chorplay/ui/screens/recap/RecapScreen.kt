@@ -31,13 +31,13 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import io.github.pushkar.chorplay.R
 import io.github.pushkar.chorplay.data.stats.RecapPeriod
 import io.github.pushkar.chorplay.data.stats.RecapSummary
-import io.github.pushkar.chorplay.ui.components.layout.flowBottomContentPadding
+import io.github.pushkar.chorplay.ui.components.layout.chorBottomContentPadding
 import io.github.pushkar.chorplay.ui.components.layout.topbar.ChorplayTopBar
 import io.github.pushkar.chorplay.ui.components.shared.ChorplayConnectedToggleGroup
 import io.github.pushkar.chorplay.ui.components.shared.ChorplayEmptyState
 import io.github.pushkar.chorplay.ui.components.shared.ChorplayFilterChip
 import io.github.pushkar.chorplay.ui.components.shared.ChorplayLoadingIndicator
-import io.github.pushkar.chorplay.ui.components.shared.FlowToggleOption
+import io.github.pushkar.chorplay.ui.components.shared.ChorToggleOption
 import java.time.format.TextStyle
 import java.util.Locale
 
@@ -79,7 +79,7 @@ internal fun RecapScreen(
                     start = GridPadding,
                     top = GridPadding,
                     end = GridPadding,
-                    bottom = flowBottomContentPadding(GridPadding),
+                    bottom = chorBottomContentPadding(GridPadding),
                 ),
             verticalItemSpacing = GridSpacing,
             horizontalArrangement = Arrangement.spacedBy(GridSpacing),
@@ -124,65 +124,34 @@ private fun LazyStaggeredGridScope.recapCards(
         }
         return
     }
-    val source = state.source
     val period = summary.period
-    val showVideo = source != RecapSource.MUSIC && !summary.video.isEmpty
-    val showMusic = source != RecapSource.VIDEO && !summary.music.isEmpty
-    val activity =
-        when (source) {
-            RecapSource.ALL -> summary.combined
-            RecapSource.VIDEO -> summary.video.activity
-            RecapSource.MUSIC -> summary.music.activity
-        }
+    val activity = summary.video.activity
     val canPlay = period != RecapPeriod.AllTime
 
     item(key = "overview", span = StaggeredGridItemSpan.FullLine) {
-        OverviewCard(summary, activity, source, onPlayStory = if (canPlay) ({ onPlayStory(period, source) }) else null)
+        OverviewCard(summary, activity, state.source, onPlayStory = if (canPlay) ({ onPlayStory(period, state.source) }) else null)
     }
     if (summary.insights.isNotEmpty()) item(key = "insights") { InsightsCard(summary.insights) }
     item(key = "time") { TimeCard(period, activity, locale) }
-    item(key = "clock") { ClockCard(activity, key = period to source) }
+    item(key = "clock") { ClockCard(activity, key = period to state.source) }
     if (period is RecapPeriod.Month) item(key = "calendar") { CalendarCard(period.month, activity, locale) }
-    item(key = "weekdays") { WeekdayCard(activity, key = period to source, locale = locale) }
-    if (showVideo) {
-        val video = summary.video
-        if (video.topChannels.isNotEmpty()) {
-            item(
-                key = "channels",
-            ) { RankCard(stringResource(R.string.recap_top_channels), video.topChannels, { viewsLabel(it) }, portraits = true) }
-        }
-        if (video.topVideos.isNotEmpty()) {
-            item(key = "videos") { RankCard(stringResource(R.string.recap_top_videos), video.topVideos, { timesLabel(it) }) }
-        }
-        if (video.topTopics.isNotEmpty()) item(key = "topics") { TopicsCard(video) }
+    item(key = "weekdays") { WeekdayCard(activity, key = period to state.source, locale = locale) }
+    val video = summary.video
+    if (video.topChannels.isNotEmpty()) {
+        item(
+            key = "channels",
+        ) { RankCard(stringResource(R.string.recap_top_channels), video.topChannels, { viewsLabel(it) }, portraits = true) }
     }
-    if (showMusic) {
-        val music = summary.music
-        if (music.topArtists.isNotEmpty()) {
-            item(
-                key = "artists",
-            ) { RankCard(stringResource(R.string.recap_top_artists), music.topArtists, { playsLabel(it) }, portraits = true) }
-        }
-        if (music.topTracks.isNotEmpty()) {
-            item(key = "tracks") { RankCard(stringResource(R.string.recap_top_tracks), music.topTracks, { playsLabel(it) }) }
-        }
-        if (music.topAlbums.isNotEmpty()) {
-            item(key = "albums") { RankCard(stringResource(R.string.recap_top_albums), music.topAlbums, { playsLabel(it) }) }
-        }
-        if (music.topGenres.isNotEmpty()) {
-            item(key = "genres") { RankCard(stringResource(R.string.recap_top_genres), music.topGenres, { playsLabel(it) }) }
-        }
+    if (video.topVideos.isNotEmpty()) {
+        item(key = "videos") { RankCard(stringResource(R.string.recap_top_videos), video.topVideos, { timesLabel(it) }) }
     }
-    if (showVideo || showMusic) {
-        item(key = "formats") { FormatsCard(summary.video, summary.music.takeIf { showMusic }, key = period to source) }
-        item(key = "discoveries") { DiscoveriesCard(summary.video.takeIf { showVideo }, summary.music.takeIf { showMusic }) }
-        item(key = "passed") { PassedOnCard(summary.video.takeIf { showVideo }, summary.music.takeIf { showMusic }) }
-    }
-    if (showVideo) {
-        item(key = "library") { LibraryCard(summary.video) }
-        if (summary.video.sponsorSavedMs > 0L) item(key = "sponsor") { SponsorCard(summary.video) }
-    }
-    if (period == RecapPeriod.AllTime && state.history.isNotEmpty() && source != RecapSource.MUSIC) {
+    if (video.topTopics.isNotEmpty()) item(key = "topics") { TopicsCard(video) }
+    item(key = "formats") { FormatsCard(summary.video, key = period to state.source) }
+    item(key = "discoveries") { DiscoveriesCard(summary.video) }
+    item(key = "passed") { PassedOnCard(summary.video) }
+    item(key = "library") { LibraryCard(summary.video) }
+    if (summary.video.sponsorSavedMs > 0L) item(key = "sponsor") { SponsorCard(summary.video) }
+    if (period == RecapPeriod.AllTime && state.history.isNotEmpty()) {
         item(key = "history") { HistoryCard(state.history) }
     }
 }
@@ -202,15 +171,9 @@ private fun RecapControls(
         }
     val scopes =
         listOf(
-            FlowToggleOption(RecapScope.MONTH, stringResource(R.string.recap_period_month)),
-            FlowToggleOption(RecapScope.YEAR, stringResource(R.string.recap_period_year)),
-            FlowToggleOption(RecapScope.ALL, stringResource(R.string.recap_period_all)),
-        )
-    val sources =
-        listOf(
-            FlowToggleOption(RecapSource.ALL, stringResource(R.string.recap_source_all)),
-            FlowToggleOption(RecapSource.VIDEO, stringResource(R.string.recap_source_video)),
-            FlowToggleOption(RecapSource.MUSIC, stringResource(R.string.recap_source_music)),
+            ChorToggleOption(RecapScope.MONTH, stringResource(R.string.recap_period_month)),
+            ChorToggleOption(RecapScope.YEAR, stringResource(R.string.recap_period_year)),
+            ChorToggleOption(RecapScope.ALL, stringResource(R.string.recap_period_all)),
         )
     Column(verticalArrangement = Arrangement.spacedBy(ControlSpacing)) {
         ChorplayConnectedToggleGroup(options = scopes, selected = scope, onSelected = { selected ->
@@ -249,6 +212,5 @@ private fun RecapControls(
                 Unit
             }
         }
-        ChorplayConnectedToggleGroup(options = sources, selected = state.source, onSelected = onSource)
     }
 }

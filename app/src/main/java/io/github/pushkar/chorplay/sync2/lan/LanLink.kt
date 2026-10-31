@@ -38,7 +38,7 @@ private const val NONCE_SIZE = 32
 
 /**
  * A LAN session between two members (spec/live.md, Session), once the hello has checked both: each
- * frame is `u64(seq) ‖ Box(K, "FLOW-SYNC/2 lan" ‖ u64(seq), payload)`, counted strictly in each direction.
+ * frame is `u64(seq) ‖ Box(K, "CHOR-SYNC/2 lan" ‖ u64(seq), payload)`, counted strictly in each direction.
  */
 class LanLink internal constructor(
     private val connection: SyncConnection,

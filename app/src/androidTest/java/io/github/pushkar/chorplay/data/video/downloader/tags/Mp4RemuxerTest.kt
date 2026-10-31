@@ -21,10 +21,6 @@ import org.junit.runner.RunWith
 import java.io.File
 import java.nio.ByteBuffer
 
-/**
- * Remuxes streams encoded on the device (fragmented MP4 like YouTube's H.264/AAC DASH, WebM like
- * its VP9/Opus DASH), then checks the result through the platform extractor and retriever.
- */
 @RunWith(AndroidJUnit4::class)
 class Mp4RemuxerTest {
     private val context = InstrumentationRegistry.getInstrumentation().targetContext
@@ -33,18 +29,14 @@ class Mp4RemuxerTest {
 
     private val tags =
         DownloadTags(
-            kind = DownloadKind.MUSIC,
+            kind = DownloadKind.VIDEO,
             videoId = "dQw4w9WgXcQ",
             title = "Remux title",
-            artists = listOf("Artist One", "Artist Two"),
             channelId = "UC123",
-            album = "Remux album",
-            trackNumber = 2,
-            trackTotal = 9,
+            channelName = "Remux channel",
             releaseDate = "2020-01-31",
-            sourceUrl = "https://music.youtube.com/watch?v=dQw4w9WgXcQ",
+            sourceUrl = "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
             viewCount = 12L,
-            lyrics = "line one",
         )
 
     @Before
@@ -74,7 +66,7 @@ class Mp4RemuxerTest {
         assertEquals(listOf(MimeTypes.VIDEO_H264, MimeTypes.AUDIO_AAC), trackMimes(out))
         assertPlatformTags(out)
         val embedded = runBlocking { DownloadTagReader(context).read(Uri.fromFile(out)) }
-        assertEquals(tags, embedded?.flow)
+        assertEquals(tags, embedded?.chor)
         assertNotNull(embedded?.cover)
     }
 
@@ -150,19 +142,21 @@ class Mp4RemuxerTest {
         try {
             retriever.setDataSource(file.path)
             assertEquals(tags.title, retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_TITLE))
-            assertEquals("Artist One, Artist Two", retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ARTIST))
-            assertEquals(tags.album, retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ALBUM))
+            assertEquals(
+                tags.channelName,
+                retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ARTIST)
+            )
             assertNotNull(retriever.embeddedPicture)
         } finally {
             retriever.release()
         }
     }
 
-    /** Chunks of the two tracks alternate through mdat instead of one track following the other. */
     private fun assertInterleaved(file: File) {
         val perTrack = chunkOffsetsPerTrack(file.readBytes())
         assertEquals(2, perTrack.size)
-        val order = perTrack.flatMapIndexed { track, offsets -> offsets.map { it to track } }.sortedBy { it.first }.map { it.second }
+        val order = perTrack.flatMapIndexed { track, offsets -> offsets.map { it to track } }.sortedBy { it.first }
+            .map { it.second }
         val switches = order.zipWithNext().count { (a, b) -> a != b }
         assertTrue("expected interleaved chunks, got $switches track switches", switches >= 4)
     }
@@ -171,14 +165,14 @@ class Mp4RemuxerTest {
         val moov = boxes(bytes, 0, bytes.size).first { it.first == "moov" }
         return boxes(bytes, moov.second, moov.third).filter { it.first == "trak" }.map { trak ->
             var range = trak
-            for (type in listOf("mdia", "minf", "stbl")) range = boxes(bytes, range.second, range.third).first { it.first == type }
+            for (type in listOf("mdia", "minf", "stbl")) range =
+                boxes(bytes, range.second, range.third).first { it.first == type }
             val table = boxes(bytes, range.second, range.third).first { it.first == "stco" || it.first == "co64" }
             val buffer = ByteBuffer.wrap(bytes, table.second + 4, table.third - table.second - 4)
             List(buffer.int) { if (table.first == "co64") buffer.long else buffer.int.toLong() and 0xFFFFFFFFL }
         }
     }
 
-    /** (type, payload start, end) of each box in [from, to). */
     private fun boxes(
         bytes: ByteArray,
         from: Int,

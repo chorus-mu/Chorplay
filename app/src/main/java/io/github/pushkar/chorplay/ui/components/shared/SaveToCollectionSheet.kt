@@ -59,7 +59,7 @@ fun SaveToCollectionSheet(
     onCreateNew: () -> Unit,
     onDismiss: () -> Unit,
 ) {
-    val presenter = LocalFlowSheetPresenter.current
+    val presenter = LocalChorSheetPresenter.current
     if (presenter != null) {
         presenter.Present(onDismiss = onDismiss, onBack = null) {
             CollectionSheetContent(title, entries, placeholderIcon, createLabel, emptyLabel, onToggle, onCreateNew)
@@ -71,7 +71,7 @@ fun SaveToCollectionSheet(
 
     ModalBottomSheet(
         onDismissRequest = onDismiss,
-        sheetState = rememberFlowSheetState(),
+        sheetState = rememberChorSheetState(),
         containerColor = MaterialTheme.colorScheme.surface,
         dragHandle = { BottomSheetDefaults.DragHandle() },
     ) {

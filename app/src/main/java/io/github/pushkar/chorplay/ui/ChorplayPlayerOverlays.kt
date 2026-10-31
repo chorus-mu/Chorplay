@@ -29,21 +29,14 @@ import io.github.pushkar.chorplay.data.local.MiniBarSwipeAction
 import io.github.pushkar.chorplay.data.local.PlayerPreferences
 import io.github.pushkar.chorplay.data.model.Video
 import io.github.pushkar.chorplay.data.shorts.queue.ShortsQueueSource
-import io.github.pushkar.chorplay.player.EnhancedMusicPlayerManager
 import io.github.pushkar.chorplay.player.EnhancedPlayerManager
 import io.github.pushkar.chorplay.player.GlobalPlayerState
 import io.github.pushkar.chorplay.ui.components.equalizer.LocalEqualizerState
 import io.github.pushkar.chorplay.ui.components.layout.ChorplayBottomInsets
 import io.github.pushkar.chorplay.ui.components.layout.LocalChorplayBottomInsets
-import io.github.pushkar.chorplay.ui.components.music.sheet.LocalMusicMenus
-import io.github.pushkar.chorplay.ui.components.music.sheet.MusicMenuSheets
-import io.github.pushkar.chorplay.ui.components.music.sheet.MusicMenus
-import io.github.pushkar.chorplay.ui.components.musicplayer.sheet.MusicPlayerSheetState
-import io.github.pushkar.chorplay.ui.components.musicplayer.sheet.UnifiedMusicPlayerSheet
 import io.github.pushkar.chorplay.ui.components.shared.LocalMediaOpenOrigins
 import io.github.pushkar.chorplay.ui.components.shared.MediaMiniBarBounds
 import io.github.pushkar.chorplay.ui.components.shared.MediaOpenOrigins
-import io.github.pushkar.chorplay.ui.components.shared.PlayerHaptics
 import io.github.pushkar.chorplay.ui.components.shared.quickactions.QuickActionsHost
 import io.github.pushkar.chorplay.ui.components.shared.quickactions.sharedQuickActionsViewModel
 import io.github.pushkar.chorplay.ui.components.videoplayer.BackgroundQueueTransport
@@ -60,9 +53,8 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.withTimeoutOrNull
 
-/** Keeps the video sheet, its visibility and [GlobalPlayerState] in step with the playback session. */
 @Composable
-internal fun FlowPlayerSessionEffects(
+internal fun ChorPlayerSessionEffects(
     playerSheetState: PlayerDraggableState,
     playerViewModel: VideoPlayerViewModel,
     playerUiStateResult: State<VideoPlayerUiState>,
@@ -98,84 +90,99 @@ internal fun FlowPlayerSessionEffects(
         }
     }
 
-    LaunchedEffect(Unit) {
-        enhancedPlayerManager.queueAutoAdvanceEvent.collect {
-            keepMiniOnQueueAutoAdvance = playerSheetState.currentValue == PlayerSheetValue.Collapsed
+    LaunchedEffect(playerUiStateResult) {
+        var previousVideoId: String? = null
+        snapshotFlow { playerUiStateResult.value.cachedVideo?.id }.collect { videoId ->
+            if (videoId != null) {
+                if (videoId != previousVideoId) {
+                    val wasKeepMini = keepMiniOnQueueAutoAdvance
+                    keepMiniOnQueueAutoAdvance = false
+                    if (playerSheetState.currentValue == PlayerSheetValue.Collapsed && !wasKeepMini) {
+                        playerSheetState.snapTo(PlayerSheetValue.Expanded)
+                        GlobalPlayerState.expandMiniPlayer()
+                    }
+                }
+                playerVisible = true
+            }
+            previousVideoId = videoId
         }
     }
 
-    LaunchedEffect(playerViewModel) {
-        playerViewModel.expandPlayerRequest.collect {
-            val videoId = playerUiState.cachedVideo?.id
-            if (!playerVisible && videoId != null) {
-                playerSheetState.open(openOrigins.sheetOriginFor(videoId))
-            } else {
-                playerSheetState.expand()
-            }
-            playerVisible = true
+    val currentVideo = playerUiState.cachedVideo
+    LaunchedEffect(currentVideo?.id) {
+        if (currentVideo == null) {
+            playerVisible = false
+        } else {
+            GlobalPlayerState.setCurrentVideo(currentVideo)
         }
     }
 
-    LaunchedEffect(playerUiState.cachedVideo?.id, playerUiState.isBackgroundPlaybackMode) {
-        if (playerUiState.cachedVideo != null) {
-            if (playerUiState.isBackgroundPlaybackMode) {
-                playerSheetState.snapTo(PlayerSheetValue.Collapsed)
-                GlobalPlayerState.hideMiniPlayer()
-                playerVisible = false
-                return@LaunchedEffect
-            }
-            GlobalPlayerState.setExplicitBackgroundPlaybackActive(false)
-            val wasExpanded = playerVisible && playerSheetState.currentValue == PlayerSheetValue.Expanded
-            playerVisible = true
-            val isQueueAutoAdvanceInMiniPlayer =
-                keepMiniOnQueueAutoAdvance &&
-                    hasVideoQueue &&
-                    playerSheetState.currentValue == PlayerSheetValue.Collapsed
-
-            if (
-                playerUiState.isRestoredSession ||
-                playerUiState.resumedInMiniPlayer ||
-                isQueueAutoAdvanceInMiniPlayer
-            ) {
-                playerSheetState.collapse()
-            } else if (wasExpanded) {
-                playerSheetState.expand()
-            } else {
-                playerSheetState.open(openOrigins.sheetOriginFor(playerUiState.cachedVideo?.id))
-            }
-
-            keepMiniOnQueueAutoAdvance = false
+    LaunchedEffect(playerVisible) {
+        if (!playerVisible) {
+            playerSheetState.snapTo(PlayerSheetValue.Collapsed)
+            GlobalPlayerState.hideMiniPlayer()
         }
     }
 
-    val dismissRequested by GlobalPlayerState.dismissRequested.collectAsState()
-    LaunchedEffect(dismissRequested) {
-        if (dismissRequested) {
-            GlobalPlayerState.resetDismiss()
+    LaunchedEffect(GlobalPlayerState.dismissRequests) {
+        GlobalPlayerState.dismissRequests.collect {
+            playerVisible = false
+            playerSheetState.snapTo(PlayerSheetValue.Collapsed)
+            GlobalPlayerState.hideMiniPlayer()
+            playerViewModel.clearVideo()
+        }
+    }
+
+    LaunchedEffect(GlobalPlayerState.minimizeRequests) {
+        GlobalPlayerState.minimizeRequests.collect {
+            playerSheetState.snapTo(PlayerSheetValue.Collapsed)
             GlobalPlayerState.hideMiniPlayer()
             playerVisible = false
-            if (playerUiState.isRestoredSession) {
-                playerViewModel.dismissContinueWatching()
+        }
+    }
+
+    LaunchedEffect(GlobalPlayerState.miniPlayerExpansionRequests) {
+        GlobalPlayerState.miniPlayerExpansionRequests.collect {
+            if (playerVisible && playerSheetState.currentValue == PlayerSheetValue.Collapsed) {
+                playerSheetState.expand()
             }
-            playerViewModel.clearVideo()
-            if (currentIsInPipMode) {
-                activity?.moveTaskToBack(false)
+        }
+    }
+
+    LaunchedEffect(GlobalPlayerState.playerSheetSnapshots) {
+        GlobalPlayerState.playerSheetSnapshots.collect { targetValue ->
+            if (playerVisible) {
+                when (targetValue) {
+                    PlayerSheetValue.Expanded -> playerSheetState.expand()
+                    PlayerSheetValue.Collapsed -> playerSheetState.collapse()
+                }
             }
+        }
+    }
+
+    LaunchedEffect(currentIsInPipMode) {
+        if (currentIsInPipMode) {
+            playerVisible = false
+        }
+    }
+
+    LaunchedEffect(enhancedPlayerManager) {
+        var previousAutoPlayIndex = enhancedPlayerManager.playerState.value.autoPlayNextMediaItemIndex
+        enhancedPlayerManager.playerState.collect { state ->
+            val currentIndex = state.autoPlayNextMediaItemIndex
+            if (currentIndex != null && currentIndex != previousAutoPlayIndex && playerSheetState.currentValue == PlayerSheetValue.Collapsed) {
+                keepMiniOnQueueAutoAdvance = true
+            }
+            previousAutoPlayIndex = currentIndex
         }
     }
 }
 
-/**
- * The video player and the music player drawn over every page, with the menus and quick actions
- * that open on top of them. The video overlay takes the settled [bottomPadding], not an animated
- * value: it only uses the padding to pick the mini player's resting bounds, and an animated Dp
- * parameter recomposed the whole overlay on every frame of the nav bar animation.
- */
-@UnstableApi
+@OptIn(UnstableApi::class)
 @Composable
 internal fun ChorplayPlayerOverlays(
+    mediaNavigator: MediaNavigator,
     navController: NavHostController,
-    mediaNavigator: FlowMediaNavigator,
     playerViewModel: VideoPlayerViewModel,
     playerUiStateResult: State<VideoPlayerUiState>,
     playerVisibleState: MutableState<Boolean>,
@@ -187,13 +194,10 @@ internal fun ChorplayPlayerOverlays(
     miniPlayerScale: Float,
     miniPlayerShowSkipControls: Boolean,
     miniPlayerShowNextPrevControls: Boolean,
-    showMusicSheet: Boolean,
     showVideoBar: Boolean,
-    musicPlayerSheetState: MusicPlayerSheetState,
     containerWidth: Dp,
     containerHeight: Dp,
     miniBarBounds: MediaMiniBarBounds,
-    musicMenus: MusicMenus,
     equalizerState: StateFlow<EqState>,
     bottomInsets: ChorplayBottomInsets,
     openOrigins: MediaOpenOrigins,
@@ -202,12 +206,10 @@ internal fun ChorplayPlayerOverlays(
     val density = LocalDensity.current
     val playerUiState by playerUiStateResult
     var playerVisible by playerVisibleState
-    val currentMusicTrack by EnhancedMusicPlayerManager.currentTrack.collectAsStateWithLifecycle()
     val context = LocalContext.current
     val playerPreferences = remember(context) { PlayerPreferences(context) }
     val swipeLeftAction by playerPreferences.miniBarSwipeLeftAction.collectAsState(initial = MiniBarSwipeAction.CLOSE)
     val swipeRightAction by playerPreferences.miniBarSwipeRightAction.collectAsState(initial = MiniBarSwipeAction.CLOSE)
-    val playerHaptics by playerPreferences.playerHapticsEnabled.collectAsState(initial = true)
     val quickActions = sharedQuickActionsViewModel()
     val removedFromQueue = stringResource(R.string.removed_from_queue)
     val scope = rememberCoroutineScope()
@@ -230,7 +232,6 @@ internal fun ChorplayPlayerOverlays(
     CompositionLocalProvider(
         *mediaNavigationLocals(mediaNavigator),
         LocalMediaOpenOrigins provides openOrigins,
-        LocalMusicMenus provides musicMenus,
         LocalEqualizerState provides equalizerState,
         LocalChorplayBottomInsets provides bottomInsets,
     ) {
@@ -264,8 +265,6 @@ internal fun ChorplayPlayerOverlays(
 
         val barVideo = playerUiState.cachedVideo
         var showBarQueue by remember { mutableStateOf(false) }
-        // The grown bar stays over the player while it builds. The player opens from the bar's spot
-        // over a full ground, so its first frames match the bar and the bar can simply step aside.
         var barHandoffId by remember { mutableStateOf<String?>(null) }
         LaunchedEffect(barHandoffId) {
             if (barHandoffId == null) return@LaunchedEffect
@@ -295,7 +294,6 @@ internal fun ChorplayPlayerOverlays(
             )
         }
         if (showVideoBar && showBarQueue) {
-            // The service layer keeps a background video audio-only when the queue moves on.
             PlayerQueueSheetHost(
                 asSidePanel = false,
                 expandedHeight = null,
@@ -306,39 +304,9 @@ internal fun ChorplayPlayerOverlays(
         }
         LaunchedEffect(showVideoBar) { if (!showVideoBar) showBarQueue = false }
 
-        val track = currentMusicTrack
-        if (showMusicSheet && track != null) {
-            PlayerHaptics(enabled = playerHaptics) {
-                UnifiedMusicPlayerSheet(
-                    state = musicPlayerSheetState,
-                    containerWidth = containerWidth,
-                    containerHeight = containerHeight,
-                    miniBounds = miniBarBounds,
-                    restingBottomPx = { bottomInsets.miniPlayerBaselinePx(density) },
-                    track = track,
-                    swipeLeftAction = swipeLeftAction,
-                    swipeRightAction = swipeRightAction,
-                    onDismiss = {
-                        EnhancedMusicPlayerManager.stop()
-                        EnhancedMusicPlayerManager.clearCurrentTrack()
-                    },
-                )
-            }
-        }
-
-        MusicMenuSheets(musicMenus)
         QuickActionsHost(snackbarHostState)
     }
 }
 
 private const val BAR_HANDOFF_TIMEOUT_MS = 2_500L
-
-/** Frames the bar waits after the player starts opening, so the player has drawn under it. */
 private const val BAR_HANDOFF_FRAMES = 2
-
-/** The tapped thumbnail for [videoId] when one is in view, else the player rises from below. */
-private fun MediaOpenOrigins.sheetOriginFor(videoId: String?): SheetOpenOrigin =
-    videoId
-        ?.let(::originFor)
-        ?.let { SheetOpenOrigin.Thumbnail(it.windowBounds, it.cornerRadiusPx, it.imageKey, it.coversWindow) }
-        ?: SheetOpenOrigin.BelowScreen

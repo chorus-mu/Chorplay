@@ -21,10 +21,10 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import io.github.pushkar.chorplay.R
 import io.github.pushkar.chorplay.ui.components.shared.ChorplayBottomSheet
-import io.github.pushkar.chorplay.ui.components.shared.FlowSegmentedGap
+import io.github.pushkar.chorplay.ui.components.shared.ChorSegmentedGap
 import io.github.pushkar.chorplay.ui.components.shared.ChorplaySheetHeader
 import io.github.pushkar.chorplay.ui.components.shared.defaultSheetExpandedHeight
-import io.github.pushkar.chorplay.ui.components.shared.flowSegmentShape
+import io.github.pushkar.chorplay.ui.components.shared.chorSegmentShape
 import io.github.pushkar.chorplay.ui.components.shared.rememberChorplayBottomSheetState
 import io.github.pushkar.chorplay.ui.components.shared.rememberMediaArtworkTint
 import io.github.pushkar.chorplay.utils.formatDurationMillis
@@ -112,7 +112,7 @@ fun ChorplayChaptersBottomSheet(
                     .fillMaxWidth()
                     .weight(1f),
             contentPadding = PaddingValues(start = 12.dp, end = 12.dp, top = 12.dp, bottom = 24.dp),
-            verticalArrangement = Arrangement.spacedBy(FlowSegmentedGap),
+            verticalArrangement = Arrangement.spacedBy(ChorSegmentedGap),
         ) {
             itemsIndexed(
                 chapters,
@@ -141,7 +141,7 @@ fun ChorplayChaptersBottomSheet(
                     progress = progress,
                     durationSeconds = durationSeconds,
                     thumbnailUrl = chapter.previewUrl?.takeIf { it.isNotBlank() } ?: thumbnailUrl,
-                    shape = flowSegmentShape(index, chapters.size),
+                    shape = chorSegmentShape(index, chapters.size),
                     tint = tint,
                     onClick = {
                         pendingChapterIndex = index

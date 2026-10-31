@@ -8,12 +8,11 @@
     <string name="shorts">ショート</string>
     <string name="nav_home">ホーム</string>
     <string name="nav_shorts">ショート</string>
-    <string name="nav_music">音楽</string>
+
     <string name="nav_subs">登録チャンネル</string>
     <string name="nav_library">ライブラリ</string>
     <string name="tab_videos">動画</string>
-    <string name="tab_music">音楽</string>
-    <string name="tab_shorts">ショート</string>
+<string name="tab_shorts">ショート</string>
     <string name="tab_live">ライブ</string>
     <string name="tab_playlists">再生リスト</string>
     <string name="tab_about">チャンネルについて</string>
@@ -40,13 +39,13 @@
     <string name="history_tab_shorts">ショート</string>
     <string name="library_liked_videos_label">高く評価した動画</string>
     <string name="liked">高評価</string>
-    <string name="liked_music">高く評価した音楽</string>
+
     <string name="liked_videos">高く評価した動画</string>
     <string name="empty_liked">まだ高く評価したアイテムはありません</string>
     <string name="empty_liked_body">高く評価した動画がここに表示されます</string>
     <string name="empty_liked_videos">高く評価した動画はありません</string>
-    <string name="empty_liked_music">高く評価した音楽はありません</string>
-    <string name="empty_liked_music_body">高く評価した音楽がここに表示されます</string>
+
+
     <string name="like">高評価</string>
     <string name="likes">高評価数</string>
     <string name="dislikes">低評価</string>
@@ -77,12 +76,12 @@
     <string name="total_hours_template">合計: %s 時間</string>
     <string name="duration_hours_minutes">%1$d 時間 %2$d 分</string>
     <string name="duration_hours_short">%1$d時間</string>
-    <string name="deep_flow_duration_2h">2 時間</string>
-    <string name="deep_flow_duration_4h">4 時間</string>
-    <string name="deep_flow_duration_6h">6 時間</string>
-    <string name="deep_flow_duration_8h">8 時間</string>
-    <string name="deep_flow_duration_12h">12 時間</string>
-    <string name="deep_flow_duration_24h">24 時間</string>
+    <string name="deep_chor_duration_2h">2 時間</string>
+    <string name="deep_chor_duration_4h">4 時間</string>
+    <string name="deep_chor_duration_6h">6 時間</string>
+    <string name="deep_chor_duration_8h">8 時間</string>
+    <string name="deep_chor_duration_12h">12 時間</string>
+    <string name="deep_chor_duration_24h">24 時間</string>
     <string name="notif_interval_2h">2 時間</string>
     <string name="notif_interval_3h">3 時間</string>
     <string name="ago">前</string>
@@ -94,7 +93,7 @@
     <string name="watch_later">後で見る</string>
     <string name="tv_library_watch_later">後で見る</string>
     <string name="library_playlists_label">再生リスト</string>
-    <string name="library_music_playlists_label">音楽の再生リスト</string>
+
     <string name="playlist_creation_menu_open">再生リストを作成</string>
     <string name="create_new_playlist">新しい再生リスト</string>
     <string name="playlist_name">タイトル</string>
@@ -155,13 +154,13 @@
     <string name="empty_offline_body">あなたがダウンロードした%1$sがここに表示されます。\nインターネットがなくてもコンテンツを楽しめます。</string>
     <string name="status_downloaded">ダウンロード済み</string>
     <string name="downloads_section_downloaded">ダウンロード済み</string>
-    <string name="liked_music_playlist">高く評価した音楽</string>
-    <string name="liked_music_empty_title">まだ高く評価した音楽がありません</string>
+
+
     <string name="notifications">通知</string>
     <string name="dont_show_channel">チャンネルを表示しない</string>
     <string name="go_to_channel">チャンネルを表示</string>
     <string name="search_channel_go_to">チャンネルを表示</string>
-    <string name="deep_flow_duration_1h">1 時間</string>
+    <string name="deep_chor_duration_1h">1 時間</string>
     <string name="shuffle">シャッフル</string>
     <string name="filter_newest">新しい順</string>
     <string name="filter_timed">時間指定</string>
@@ -181,7 +180,7 @@
     <string name="onboarding_channels_search_placeholder">チャンネルを検索…</string>
     <string name="onboarding_import_title">データのインポート</string>
     <string name="onboarding_import_subtitle">他のアプリから、チャンネル登録や再生履歴を引き継ぐことができます。スキップすることもできます。</string>
-    <string name="onboarding_import_source_flow">Chorplay バックアップ</string>
+    <string name="onboarding_import_source_chorplay">Chorplay バックアップ</string>
     <string name="onboarding_import_source_youtube">YouTube</string>
     <string name="onboarding_import_footnote">ここに表示されているものはオプションで、スキップできます。設定からもインポートできます。</string>
     <string name="onboarding_btn_skip">スキップ</string>
@@ -235,7 +234,7 @@
     <string name="section_charts_in">%1$s のチャート</string>
     <string name="section_top_artists_in">%1$s で人気のアーティスト</string>
     <string name="similar_to">似ているかも</string>
-    <string name="music_home_your_subscriptions">登録チャンネル</string>
+
     <string name="player_settings_ambient_mode">アンビエント モード</string>
     <string name="home_load_more_failed">より多くのビデオを読み込むことができません</string>
     <string name="home_load_more_failed_body">接続を確認する</string>
@@ -265,7 +264,7 @@
     <string name="streamed_date_template">ストリーミング %1$s</string>
     <string name="channel_and_more_template">%1$s と %2$d より</string>
     <string name="library_section_header">あなたのコンテンツ</string>
-    <string name="library_music_playlists_subtitle">あなたの音楽コレクション</string>
+
     <string name="library_saved_shorts_label">保存されたショートパンツ</string>
     <string name="local_media_rescan">再読み込み</string>
     <string name="local_media_scanning">デバイスをスキャンしています…</string>

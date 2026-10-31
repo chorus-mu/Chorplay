@@ -25,7 +25,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
 import io.github.pushkar.chorplay.ui.components.shared.ChorplaySheetHeader
-import io.github.pushkar.chorplay.ui.components.shared.rememberFlowSheetState
+import io.github.pushkar.chorplay.ui.components.shared.rememberChorSheetState
 
 private val OptionHorizontalPadding = 24.dp
 private val OptionVerticalPadding = 12.dp
@@ -50,7 +50,7 @@ fun <T> SettingsPreviewSheet(
 ) {
     ModalBottomSheet(
         onDismissRequest = onDismiss,
-        sheetState = rememberFlowSheetState(),
+        sheetState = rememberChorSheetState(),
         containerColor = MaterialTheme.colorScheme.surface,
     ) {
         ChorplaySheetHeader(title = title, subtitle = subtitle, onClose = onDismiss, showDragHandle = false)

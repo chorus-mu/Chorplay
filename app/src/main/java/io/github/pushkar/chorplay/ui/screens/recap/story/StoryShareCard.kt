@@ -30,7 +30,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import io.github.pushkar.chorplay.R
 import io.github.pushkar.chorplay.data.stats.RecapSummary
-import io.github.pushkar.chorplay.ui.components.shared.FlowMorphingPortrait
+import io.github.pushkar.chorplay.ui.components.shared.ChorMorphingPortrait
 import io.github.pushkar.chorplay.ui.components.stats.spentTimeLabel
 import io.github.pushkar.chorplay.ui.screens.recap.labels
 import io.github.pushkar.chorplay.ui.screens.recap.readable
@@ -82,9 +82,9 @@ internal fun StoryShareCard(
             )
             Text(periodLabel, style = MaterialTheme.typography.headlineMedium, color = ink, fontWeight = FontWeight.Black)
             Row(verticalAlignment = Alignment.CenterVertically) {
-                channel?.let { FlowMorphingPortrait(it.imageUrl, it.name, PortraitSize, tint.raised, tint.onContainer) }
+                channel?.let { ChorMorphingPortrait(it.imageUrl, it.name, PortraitSize, tint.raised, tint.onContainer) }
                 artist?.let {
-                    FlowMorphingPortrait(
+                    ChorMorphingPortrait(
                         imageUrl = it.imageUrl,
                         fallback = it.name,
                         diameter = PortraitSize,

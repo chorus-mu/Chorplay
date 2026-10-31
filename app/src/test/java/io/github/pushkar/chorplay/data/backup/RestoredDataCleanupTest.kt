@@ -32,12 +32,12 @@ class RestoredDataCleanupTest {
         val kept =
             listOf(
                 file(filesDir, "profile_settings/study/datastore/player_preferences.preferences_pb"),
-                file(filesDir, "profile_library/study/databases/flow_database"),
+                file(filesDir, "profile_library/study/databases/chorplay_database"),
                 file(noBackupFilesDir, "profiles/study/datastore/music_queue.preferences_pb"),
                 file(sharedPrefsDir, "youtube_identity_study.xml"),
             )
         file(filesDir, "profile_settings/gone/datastore/player_preferences.preferences_pb")
-        file(filesDir, "profile_library/gone/databases/flow_database")
+        file(filesDir, "profile_library/gone/databases/chorplay_database")
         file(noBackupFilesDir, "profiles/gone/datastore/music_queue.preferences_pb")
         file(sharedPrefsDir, "youtube_identity_gone.xml")
 
@@ -56,7 +56,7 @@ class RestoredDataCleanupTest {
                 file(filesDir, "datastore/player_preferences.preferences_pb"),
                 file(noBackupFilesDir, "neuro/home_snapshots/home_1.json.gz"),
                 file(sharedPrefsDir, "youtube_identity.xml"),
-                file(sharedPrefsDir, "flow_language_prefs.xml"),
+                file(sharedPrefsDir, "chorplay_language_prefs.xml"),
             )
 
         val removed = RestoredDataCleanup.deleteUnlistedProfiles(folders, setOf("default"))

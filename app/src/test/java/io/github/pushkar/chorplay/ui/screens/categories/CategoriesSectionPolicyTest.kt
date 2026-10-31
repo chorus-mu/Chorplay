@@ -14,7 +14,6 @@ class CategoriesSectionPolicyTest {
             .containsExactly(
                 ExploreDestination.LIVE,
                 ExploreDestination.GAMING,
-                ExploreDestination.MUSIC,
                 ExploreDestination.NEWS,
                 ExploreDestination.SPORTS,
                 ExploreDestination.LEARNING,
@@ -27,7 +26,6 @@ class CategoriesSectionPolicyTest {
         assertThat(ExploreDestination.LIVE.kind).isEqualTo(ExploreSectionKind.SHELVES)
         assertThat(ExploreDestination.NEWS.kind).isEqualTo(ExploreSectionKind.SHELVES)
         assertThat(ExploreDestination.GAMING.kind).isEqualTo(ExploreSectionKind.GRID)
-        assertThat(ExploreDestination.MUSIC.kind).isEqualTo(ExploreSectionKind.CHART)
     }
 
     @Test
@@ -35,12 +33,6 @@ class CategoriesSectionPolicyTest {
         assertThat(ExploreDestination.GAMING.params).isEqualTo("Egh0cmVuZGluZw%3D%3D")
         assertThat(CATEGORY_TABS.map { it.destination }.filter { it.params != null })
             .containsExactly(ExploreDestination.GAMING)
-    }
-
-    @Test
-    fun `music reads youtube music charts, not the rate limited analytics host`() {
-        assertThat(ExploreDestination.MUSIC.browseId).isEqualTo("FEmusic_charts")
-        assertThat(CATEGORY_TABS.map { it.destination.browseId }).doesNotContain("FEmusic_analytics_charts_home")
     }
 
     @Test

@@ -62,7 +62,7 @@ import io.github.pushkar.chorplay.ui.components.layout.topbar.ChorplayTopBar
 import io.github.pushkar.chorplay.ui.components.shared.ChorplayEmptyState
 import io.github.pushkar.chorplay.ui.components.shared.ChorplayLoadingIndicator
 import io.github.pushkar.chorplay.ui.components.shared.ChorplayLogo
-import io.github.pushkar.chorplay.ui.components.shared.FlowMaxContentWidth
+import io.github.pushkar.chorplay.ui.components.shared.ChorMaxContentWidth
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
@@ -132,12 +132,12 @@ fun UpdateScreen(
                 }
 
                 release == null -> {
-                    ChorplayEmptyState(title = stringResource(R.string.flow_is_up_to_date), icon = Icons.Outlined.Verified)
+                    ChorplayEmptyState(title = stringResource(R.string.chorplay_is_up_to_date), icon = Icons.Outlined.Verified)
                 }
 
                 else -> {
                     LazyColumn(
-                        modifier = Modifier.widthIn(max = FlowMaxContentWidth).fillMaxWidth(),
+                        modifier = Modifier.widthIn(max = ChorMaxContentWidth).fillMaxWidth(),
                         contentPadding = ContentPadding,
                     ) {
                         item(key = "header") { ReleaseHeader(release) }

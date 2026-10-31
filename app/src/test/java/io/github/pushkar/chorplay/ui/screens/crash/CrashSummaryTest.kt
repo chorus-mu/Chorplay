@@ -2,14 +2,14 @@ package io.github.pushkar.chorplay.ui.screens.crash
 
 import com.google.common.truth.Truth.assertThat
 import io.github.pushkar.chorplay.utils.ChorplayCrashReportFormatter
-import io.github.pushkar.chorplay.utils.FlowCrashReportSnapshot
+import io.github.pushkar.chorplay.utils.ChorCrashReportSnapshot
 import org.junit.Test
 import java.time.LocalDateTime
 
 class CrashSummaryTest {
     private val report =
         ChorplayCrashReportFormatter.build(
-            FlowCrashReportSnapshot(
+            ChorCrashReportSnapshot(
                 timestampMs = 0,
                 threadName = "main",
                 threadId = 2,
@@ -73,7 +73,7 @@ class CrashSummaryTest {
     fun `a wrapped cause names the title, as with a saved state too large to send (1338)`() {
         val wrapped =
             ChorplayCrashReportFormatter.build(
-                FlowCrashReportSnapshot(
+                ChorCrashReportSnapshot(
                     timestampMs = 0,
                     threadName = "main",
                     threadId = 2,

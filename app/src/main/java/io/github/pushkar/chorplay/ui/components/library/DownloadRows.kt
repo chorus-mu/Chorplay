@@ -16,7 +16,6 @@ import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material.icons.outlined.Close
 import androidx.compose.material.icons.outlined.Delete
-import androidx.compose.material.icons.outlined.MusicNote
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
@@ -40,12 +39,8 @@ import androidx.compose.ui.unit.dp
 import io.github.pushkar.chorplay.R
 import io.github.pushkar.chorplay.data.local.entity.DownloadItemStatus
 import io.github.pushkar.chorplay.data.local.entity.DownloadWithItems
-import io.github.pushkar.chorplay.data.music.DownloadedTrack
 import io.github.pushkar.chorplay.data.video.DownloadProgressUpdate
 import io.github.pushkar.chorplay.data.video.DownloadedVideo
-import io.github.pushkar.chorplay.ui.components.music.sheet.LocalMusicMenus
-import io.github.pushkar.chorplay.ui.components.shared.ArtworkThumbnail
-import io.github.pushkar.chorplay.ui.components.shared.ExplicitBadge
 import io.github.pushkar.chorplay.ui.components.shared.ChorplayEmptyState
 import io.github.pushkar.chorplay.ui.components.shared.MediaKind
 import io.github.pushkar.chorplay.ui.components.shared.MediaRow
@@ -62,7 +57,6 @@ private const val UNKNOWN_QUALITY = "Unknown"
 private const val EMPTY_ACTION_WIDTH_FRACTION = 0.55f
 private val EmptyActionHeight: Dp = 48.dp
 
-/** "1080p · 482 MB · 2 days ago": what a finished download is, how big, and when it arrived. */
 @Composable
 internal fun downloadSupportingLine(
     quality: String?,
@@ -78,7 +72,6 @@ internal fun downloadSupportingLine(
     ).joinToString(" $separator ")
 }
 
-/** A finished video download as a row, or as a card in a grid. Long press opens its menu. */
 @Composable
 internal fun VideoDownloadItem(
     video: DownloadedVideo,
@@ -145,39 +138,6 @@ internal fun VideoDownloadItem(
     }
 }
 
-/** A finished song download. Long press opens the song menu. */
-@Composable
-internal fun MusicDownloadRow(
-    downloadedTrack: DownloadedTrack,
-    selectionMode: Boolean,
-    selected: Boolean,
-    onClick: () -> Unit,
-    modifier: Modifier = Modifier,
-) {
-    val musicMenus = LocalMusicMenus.current
-    MediaRow(
-        title = downloadedTrack.track.title,
-        modifier = modifier,
-        subtitle = downloadedTrack.track.artist,
-        supporting = downloadSupportingLine(null, downloadedTrack.fileSize, downloadedTrack.downloadedAt),
-        supportingColor = MaterialTheme.colorScheme.onSurfaceVariant,
-        titleMaxLines = 1,
-        selected = selected,
-        onClick = onClick,
-        onLongClick = if (selectionMode) null else ({ musicMenus.openSong(downloadedTrack.track) }),
-        leading = if (selectionMode) ({ Checkbox(checked = selected, onCheckedChange = { onClick() }) }) else null,
-        subtitleLeading =
-            if (downloadedTrack.track.isExplicit == true) {
-                { ExplicitBadge(modifier = Modifier.padding(end = 4.dp)) }
-            } else {
-                null
-            },
-    ) {
-        ArtworkThumbnail(thumbnailUrl = downloadedTrack.track.thumbnailUrl, placeholder = Icons.Outlined.MusicNote)
-    }
-}
-
-/** A download still running, paused or stopped, with what can be done about it. */
 @Composable
 internal fun ActiveDownloadRow(
     download: DownloadWithItems,
@@ -210,7 +170,12 @@ internal fun ActiveDownloadRow(
         when {
             isMerging -> stringResource(R.string.download_merging_audio_video)
             status == DownloadItemStatus.PENDING -> stringResource(R.string.download_status_queued)
-            isPaused -> stringResource(R.string.download_status_paused_template, percent, stringResource(R.string.download_status_paused))
+            isPaused -> stringResource(
+                R.string.download_status_paused_template,
+                percent,
+                stringResource(R.string.download_status_paused)
+            )
+
             status == DownloadItemStatus.FAILED -> stringResource(R.string.download_status_failed)
             status == DownloadItemStatus.CANCELLED -> stringResource(R.string.download_status_cancelled)
             bytes != null -> "$bytes $separator ${stringResource(R.string.download_progress_percent, percent)}"
@@ -275,10 +240,6 @@ internal fun ActiveDownloadRow(
     }
 }
 
-/**
- * Beside a 152 dp thumbnail, two 48 dp buttons leave a phone's title only a few letters wide, so
- * on a narrow row (or with a large font) the buttons move under the text instead.
- */
 internal fun downloadActionsBelowText(
     rowWidth: Dp,
     fontScale: Float,
@@ -295,7 +256,7 @@ private val MinTitleWidth = 160.dp
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 internal fun DownloadsEmptyState(
-    kind: MediaKind,
+    kind: MediaKind = MediaKind.Videos,
     onHomeClick: () -> Unit,
 ) {
     val label = stringResource(kind.labelRes)

@@ -32,7 +32,7 @@ import io.github.pushkar.chorplay.utils.foldForSearch
 
 /** One option of a [ChorplayChoiceDialog]. */
 @Immutable
-data class FlowChoice<T>(
+data class ChorChoice<T>(
     val value: T,
     val label: String,
     val supportingText: String? = null,
@@ -53,7 +53,7 @@ private val DescriptionSpacing = 12.dp
 @Composable
 fun <T> ChorplayChoiceDialog(
     title: String,
-    options: List<FlowChoice<T>>,
+    options: List<ChorChoice<T>>,
     selected: T?,
     onSelect: (T) -> Unit,
     onDismiss: () -> Unit,
@@ -106,7 +106,7 @@ fun <T> ChorplayChoiceDialog(
                     modifier = Modifier.heightIn(max = listMaxHeight),
                 ) {
                     items(visible, key = { it.value.toString() }) { option ->
-                        FlowSelectionRow(
+                        ChorSelectionRow(
                             title = option.label,
                             supportingText = option.supportingText,
                             selected = option.value == selected,
@@ -129,7 +129,7 @@ fun <T> ChorplayChoiceDialog(
     )
 }
 
-private fun FlowChoice<*>.matches(query: String): Boolean {
+private fun ChorChoice<*>.matches(query: String): Boolean {
     val needle = query.foldForSearch()
     return label.foldForSearch().contains(needle) ||
         supportingText?.foldForSearch()?.contains(needle) == true ||

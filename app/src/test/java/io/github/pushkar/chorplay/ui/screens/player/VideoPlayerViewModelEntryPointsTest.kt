@@ -2,7 +2,6 @@ package io.github.pushkar.chorplay.ui.screens.player
 
 import app.cash.turbine.test
 import com.google.common.truth.Truth.assertThat
-import io.github.pushkar.chorplay.data.music.model.MusicTrack
 import io.github.pushkar.chorplay.player.EnhancedMusicPlayerManager
 import io.github.pushkar.chorplay.player.GlobalPlayerState
 import io.github.pushkar.chorplay.player.state.EnhancedPlayerState
@@ -29,11 +28,6 @@ import org.junit.After
 import org.junit.Before
 import org.junit.Test
 
-/**
- * Pins the observable behaviour of the non-network entry points: construction, restored sessions,
- * local playback, background-mode flags, clearing, and the preference toggles. As with the fetch
- * count tests, these record today's behaviour rather than a spec.
- */
 @OptIn(ExperimentalCoroutinesApi::class)
 class VideoPlayerViewModelEntryPointsTest {
     private val testDispatcher = StandardTestDispatcher()
@@ -66,7 +60,17 @@ class VideoPlayerViewModelEntryPointsTest {
             verify { harness.repository wasNot Called }
             coVerify(exactly = 0) { InnerTubeVideoStreamExtractor.extract(any(), any()) }
             coVerify(exactly = 1) { harness.viewHistory.getLatestUnfinishedVideo() }
-            coVerify(exactly = 0) { harness.viewHistory.touchHistoryEntry(any(), any(), any(), any(), any(), any(), any()) }
+            coVerify(exactly = 0) {
+                harness.viewHistory.touchHistoryEntry(
+                    any(),
+                    any(),
+                    any(),
+                    any(),
+                    any(),
+                    any(),
+                    any()
+                )
+            }
             verify(exactly = 0) { harness.playerManager.pause() }
             verify(exactly = 0) { harness.playerManager.clearAll() }
             verify(exactly = 0) { harness.playerManager.startBackgroundService(any(), any(), any(), any()) }
@@ -76,14 +80,9 @@ class VideoPlayerViewModelEntryPointsTest {
         }
 
     @Test
-    fun `construction skips the history read when continue watching is disabled or music is playing`() =
+    fun `construction skips the history read when continue watching is disabled`() =
         runTest {
             harness.continueWatchingEnabled.value = false
-            newViewModel()
-            coVerify(exactly = 0) { harness.viewHistory.getLatestUnfinishedVideo() }
-
-            harness.continueWatchingEnabled.value = true
-            harness.musicCurrentTrack.value = mockk<MusicTrack>(relaxed = true)
             newViewModel()
             coVerify(exactly = 0) { harness.viewHistory.getLatestUnfinishedVideo() }
         }
@@ -95,8 +94,8 @@ class VideoPlayerViewModelEntryPointsTest {
             coEvery { harness.viewHistory.getLatestUnfinishedVideo() } returns entity
             val queue = listOf(video("a"), entity.toVideo(), video("b"))
             coEvery { harness.videoQueueStore.load() } returns
-                io.github.pushkar.chorplay.data.video
-                    .SavedVideoQueue(queue, 1, "Weekend builds")
+                    io.github.pushkar.chorplay.data.video
+                        .SavedVideoQueue(queue, 1, "Weekend builds")
             val viewModel = newViewModel()
             advanceUntilIdle()
 
@@ -170,7 +169,12 @@ class VideoPlayerViewModelEntryPointsTest {
                 harness.playerManager.clearAll()
                 EnhancedMusicPlayerManager.stop()
                 EnhancedMusicPlayerManager.clearCurrentTrack()
-                harness.playerManager.startBackgroundService("local_1", video.title, video.channelName, video.thumbnailUrl)
+                harness.playerManager.startBackgroundService(
+                    "local_1",
+                    video.title,
+                    video.channelName,
+                    video.thumbnailUrl
+                )
                 harness.playerManager.initialize(harness.context)
                 harness.playerManager.playLocalFile("local_1", "content://media/external/video/1", any(), any(), any())
                 harness.playerManager.play()
@@ -180,7 +184,17 @@ class VideoPlayerViewModelEntryPointsTest {
             verify { harness.repository wasNot Called }
             coVerify(exactly = 0) { InnerTubeVideoStreamExtractor.extract(any(), any()) }
             coVerify(exactly = 1) { harness.viewHistory.getSavedPosition("local_1") }
-            coVerify(exactly = 0) { harness.viewHistory.touchHistoryEntry(any(), any(), any(), any(), any(), any(), any()) }
+            coVerify(exactly = 0) {
+                harness.viewHistory.touchHistoryEntry(
+                    any(),
+                    any(),
+                    any(),
+                    any(),
+                    any(),
+                    any(),
+                    any()
+                )
+            }
         }
 
     @Test
@@ -194,7 +208,15 @@ class VideoPlayerViewModelEntryPointsTest {
             advanceUntilIdle()
 
             verify { harness.playerManager.armStartPaused("local_1") }
-            verify { harness.playerManager.playLocalFile("local_1", "content://media/external/video/1", any(), any(), any()) }
+            verify {
+                harness.playerManager.playLocalFile(
+                    "local_1",
+                    "content://media/external/video/1",
+                    any(),
+                    any(),
+                    any()
+                )
+            }
             verify(exactly = 0) { harness.playerManager.play() }
         }
 
@@ -312,7 +334,12 @@ class VideoPlayerViewModelEntryPointsTest {
             assertThat(background.shouldDismissPlayer).isTrue()
             assertThat(background.isBackgroundPlaybackMode).isTrue()
             verifyOrder {
-                harness.playerManager.startBackgroundService("vid_a", video.title, video.channelName, video.thumbnailUrl)
+                harness.playerManager.startBackgroundService(
+                    "vid_a",
+                    video.title,
+                    video.channelName,
+                    video.thumbnailUrl
+                )
                 GlobalPlayerState.setExplicitBackgroundPlaybackActive(true)
                 harness.playerManager.continueVideoPlaybackInBackground()
             }
@@ -354,7 +381,8 @@ class VideoPlayerViewModelEntryPointsTest {
             viewModel.playLocalVideo(video, "content://media/1")
             advanceUntilIdle()
             viewModel.startBackgroundPlayback()
-            harness.playerState.value = EnhancedPlayerState(currentVideoId = "vid_a", isPrepared = true, isPlaying = true)
+            harness.playerState.value =
+                EnhancedPlayerState(currentVideoId = "vid_a", isPrepared = true, isPlaying = true)
             advanceUntilIdle()
 
             viewModel.expandPlayerRequest.test {
@@ -383,7 +411,12 @@ class VideoPlayerViewModelEntryPointsTest {
 
             viewModel.clearVideo()
 
-            assertThat(viewModel.uiState.value).isEqualTo(VideoPlayerUiState(autoplayEnabled = true, isAdaptiveMode = false))
+            assertThat(viewModel.uiState.value).isEqualTo(
+                VideoPlayerUiState(
+                    autoplayEnabled = true,
+                    isAdaptiveMode = false
+                )
+            )
             verifyOrder {
                 harness.playerManager.stop()
                 harness.playerManager.stopBackgroundService()

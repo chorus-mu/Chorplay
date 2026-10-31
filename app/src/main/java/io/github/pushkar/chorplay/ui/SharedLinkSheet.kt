@@ -11,7 +11,6 @@ import androidx.compose.runtime.setValue
 import androidx.navigation.NavController
 import io.github.pushkar.chorplay.data.local.PlayerPreferences
 import io.github.pushkar.chorplay.data.local.SharedLinkAction
-import io.github.pushkar.chorplay.player.EnhancedMusicPlayerManager
 import io.github.pushkar.chorplay.player.GlobalPlayerState
 import io.github.pushkar.chorplay.ui.components.shared.quickactions.QuickActionsViewModel
 import io.github.pushkar.chorplay.ui.components.shared.quickactions.VideoQuickActionsBottomSheet
@@ -31,8 +30,8 @@ internal fun sharedLinkAsks(
         SharedLinkAction.ALWAYS_ASK -> true
     }
 
-/** A video or a song is loaded, so playing a shared video would replace it and its queue. */
-internal fun mediaLoaded(): Boolean = GlobalPlayerState.currentVideo.value != null || EnhancedMusicPlayerManager.currentTrack.value != null
+/** A video is loaded, so playing a shared video would replace it and its queue. */
+internal fun mediaLoaded(): Boolean = GlobalPlayerState.currentVideo.value != null
 
 /**
  * Plays a video or short handed in from outside, except that a video shared to Chorplay may first open

@@ -51,7 +51,7 @@ class WebDavGroupTest {
             assertTrue(conditional)
             val record = checkNotNull(db.groups().group())
             assertEquals(WEBDAV_STORE + dav.url, record.storeUrl)
-            assertEquals("""{"format":"FLOW-SYNC/2","group":"${record.groupId}"}""", dav.file("store.json")?.decodeToString())
+            assertEquals("""{"format":"CHOR-SYNC/2","group":"${record.groupId}"}""", dav.file("store.json")?.decodeToString())
             assertEquals(1, FileLayout(dav.store(), "").rosterAfter(-1).size)
 
             val error = runCatching { createWebDavGroup(emptyDb(), dav.store(), newMember(), meta, LINK) }.exceptionOrNull()

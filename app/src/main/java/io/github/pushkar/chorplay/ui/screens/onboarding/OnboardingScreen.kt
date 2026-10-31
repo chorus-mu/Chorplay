@@ -38,7 +38,7 @@ import io.github.pushkar.chorplay.R
 import io.github.pushkar.chorplay.data.backup.BackupOperation
 import io.github.pushkar.chorplay.data.backup.ImportKind
 import io.github.pushkar.chorplay.ui.components.shared.ChorplayConfirmDialog
-import io.github.pushkar.chorplay.ui.components.shared.FlowMaxContentWidth
+import io.github.pushkar.chorplay.ui.components.shared.ChorMaxContentWidth
 import io.github.pushkar.chorplay.ui.utils.LocalWindowSizeClass
 import io.github.pushkar.chorplay.ui.utils.isExpandedWidth
 import kotlinx.coroutines.launch
@@ -129,7 +129,7 @@ fun OnboardingScreen(
                 val besideList = LocalWindowSizeClass.current.isExpandedWidth && state.step.showsProgress
                 Box(Modifier.fillMaxWidth(), contentAlignment = if (besideList) Alignment.CenterEnd else Alignment.Center) {
                     OnboardingBottomBar(
-                        modifier = Modifier.widthIn(max = FlowMaxContentWidth),
+                        modifier = Modifier.widthIn(max = ChorMaxContentWidth),
                         state = state,
                         onBack = { viewModel.back() },
                         onNext = {

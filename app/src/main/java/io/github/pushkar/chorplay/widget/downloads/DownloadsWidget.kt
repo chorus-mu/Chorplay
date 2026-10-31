@@ -27,7 +27,6 @@ import androidx.glance.layout.fillMaxSize
 import androidx.glance.layout.padding
 import androidx.glance.text.Text
 import io.github.pushkar.chorplay.R
-import io.github.pushkar.chorplay.ui.musicPlayerRoute
 import io.github.pushkar.chorplay.utils.formatDuration
 import io.github.pushkar.chorplay.widget.core.action.WidgetDeepLink
 import io.github.pushkar.chorplay.widget.core.component.WidgetEmptyState
@@ -52,11 +51,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.withContext
 
-/** Downloaded videos and songs, newest first, with how many are still downloading. */
 class DownloadsWidget : GlanceAppWidget() {
     override val sizeMode = SizeMode.Exact
-
-    // Exact sizing has no size of its own in the picker, so the preview names the one it draws.
     override val previewSizeMode = SizeMode.Responsive(setOf(DpSize(320.dp, 260.dp)))
 
     override suspend fun providePreview(
@@ -66,7 +62,12 @@ class DownloadsWidget : GlanceAppWidget() {
         val downloads = withContext(Dispatchers.IO) { widgetEntryPoint(context).downloadsSource().load() }
         val colors = widgetColorsFlow(context).first()
         provideContent {
-            ChorplayGlanceTheme(colors) { DownloadsContent(downloads.items.map { it.toItem(context, emptyMap()) }, downloads.inProgress) }
+            ChorplayGlanceTheme(colors) {
+                DownloadsContent(
+                    downloads.items.map { it.toItem(context, emptyMap()) },
+                    downloads.inProgress
+                )
+            }
         }
     }
 
@@ -78,7 +79,6 @@ class DownloadsWidget : GlanceAppWidget() {
         val corner = bakedCornerRadiusPx(context)
         val specs =
             downloads.items.mapIndexed { index, download ->
-                // The newest also fills the 2x2 layout, so it loads at hero size.
                 val thumb = if (download.isMusic) WidgetRowSquareThumb else WidgetRowThumb
                 val scale = if (index == 0) HERO_SCALE else 1f
                 WidgetImageSpec(
@@ -112,7 +112,7 @@ private fun WidgetDownload.toItem(
     subtitle = subtitle,
     open =
         actionStartActivity(
-            if (isMusic) WidgetDeepLink.openRoute(context, musicPlayerRoute(id)) else WidgetDeepLink.playVideo(context, id),
+            WidgetDeepLink.playVideo(context, id),
         ),
     thumbnail = images[id],
     badge = durationSeconds.takeIf { it > 0 && !isMusic }?.let { formatDuration(it.toInt()) },
@@ -166,7 +166,11 @@ private fun InProgressChip(count: Int) {
                 .padding(horizontal = 10.dp, vertical = WidgetDimens.SmallGap),
     ) {
         Text(
-            text = LocalContext.current.resources.getQuantityString(R.plurals.widget_downloads_in_progress, count, count),
+            text = LocalContext.current.resources.getQuantityString(
+                R.plurals.widget_downloads_in_progress,
+                count,
+                count
+            ),
             style = WidgetText.labelMedium(GlanceTheme.colors.onSecondaryContainer),
             maxLines = 1,
         )

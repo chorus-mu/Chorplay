@@ -12,7 +12,7 @@ import androidx.compose.ui.unit.dp
 import io.github.pushkar.chorplay.R
 import io.github.pushkar.chorplay.ui.components.library.LibraryNavigationRow
 import io.github.pushkar.chorplay.ui.components.library.LibrarySection
-import io.github.pushkar.chorplay.ui.components.shared.FlowMaxContentWidth
+import io.github.pushkar.chorplay.ui.components.shared.ChorMaxContentWidth
 
 @Composable
 internal fun LibrarySectionList(
@@ -20,7 +20,7 @@ internal fun LibrarySectionList(
     counts: LibraryCounts?,
     onOpenSection: (LibrarySection) -> Unit,
 ) {
-    Column(modifier = Modifier.widthIn(max = FlowMaxContentWidth).padding(horizontal = 16.dp)) {
+    Column(modifier = Modifier.widthIn(max = ChorMaxContentWidth).padding(horizontal = 16.dp)) {
         LibrarySectionHeader(stringResource(R.string.library_section_header))
         sections.forEach { section ->
             LibrarySectionRow(section, counts) { onOpenSection(section) }

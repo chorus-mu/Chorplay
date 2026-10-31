@@ -23,7 +23,7 @@ class BackupAndTopicsHelpersTest {
     @Test
     fun `folder names drop the storage volume`() {
         assertEquals("Documents/Backups", folderDisplayName("primary:Documents/Backups"))
-        assertEquals("Chorplay", folderDisplayName("1A2B-3C4D:Flow/"))
+        assertEquals("Chorplay", folderDisplayName("1A2B-3C4D:Chorplay/"))
         assertNull(folderDisplayName("primary:"))
         assertNull(folderDisplayName(null))
     }
@@ -31,8 +31,8 @@ class BackupAndTopicsHelpersTest {
     @Test
     fun `export file names keep their historical shapes`() {
         val now = Instant.ofEpochMilli(1_700_000_000_000)
-        assertEquals("flow_master_backup_1700000000000.zip", ExportKind.MASTER.fileName(now))
-        assertEquals("flow-watch-history.json", ExportKind.WATCH_HISTORY.fileName(now))
+        assertEquals("chorplay_master_backup_1700000000000.zip", ExportKind.MASTER.fileName(now))
+        assertEquals("chorplay-watch-history.json", ExportKind.WATCH_HISTORY.fileName(now))
     }
 
     @Test

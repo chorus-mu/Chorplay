@@ -21,9 +21,9 @@ import io.github.pushkar.chorplay.ui.components.settings.SettingsPage
 import io.github.pushkar.chorplay.ui.components.settings.choice
 import io.github.pushkar.chorplay.ui.components.settings.info
 import io.github.pushkar.chorplay.ui.components.settings.switch
-import io.github.pushkar.chorplay.ui.components.shared.FlowChoice
+import io.github.pushkar.chorplay.ui.components.shared.ChorChoice
 import io.github.pushkar.chorplay.ui.components.shared.ChorplayChoiceDialog
-import io.github.pushkar.chorplay.ui.components.shared.FlowNavRow
+import io.github.pushkar.chorplay.ui.components.shared.ChorNavRow
 import io.github.pushkar.chorplay.ui.screens.settings.index.LocalMediaIndex
 
 /** What Local media leaves out: voice notes and recordings, short audio, and folders the viewer hid. */
@@ -55,7 +55,7 @@ internal fun LocalMediaSettingsScreen(
             } else {
                 hidden.forEach { folder ->
                     row("local_media.folder.${folder.id}") { shape ->
-                        FlowNavRow(
+                        ChorNavRow(
                             title = folder.name,
                             onClick = { viewModel.showFolder(folder.id) },
                             leadingIcon = Icons.Outlined.FolderOff,
@@ -75,7 +75,7 @@ internal fun LocalMediaSettingsScreen(
     if (pickingMinimum) {
         ChorplayChoiceDialog(
             title = stringResource(R.string.local_setting_min_audio),
-            options = LocalMediaSettings.MIN_AUDIO_CHOICES.map { FlowChoice(it, minimumLabel(it)) },
+            options = LocalMediaSettings.MIN_AUDIO_CHOICES.map { ChorChoice(it, minimumLabel(it)) },
             selected = settings.minAudioSeconds,
             onSelect = viewModel::setMinAudioSeconds,
             onDismiss = { pickingMinimum = false },

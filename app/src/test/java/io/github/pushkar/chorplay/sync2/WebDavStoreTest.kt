@@ -75,7 +75,7 @@ class WebDavStoreTest {
             val ignoring = serve(WebDavStandIn(ifNoneMatch = false))
             assertFalse(ignoring.store().probe())
             assertTrue("the probe cleans up", ignoring.files.keys.none { it.contains("probe/") })
-            assertTrue("and leaves the store's folder made", "flow/" in ignoring.folders)
+            assertTrue("and leaves the store's folder made", "chorplay/" in ignoring.folders)
         }
 
     @Test

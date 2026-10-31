@@ -8,7 +8,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import io.github.pushkar.chorplay.BuildConfig
 import io.github.pushkar.chorplay.data.local.PlayerPreferences
 import io.github.pushkar.chorplay.data.recommendation.ChorplayNeuroEngine
-import io.github.pushkar.chorplay.data.recommendation.FlowPersona
+import io.github.pushkar.chorplay.data.recommendation.ChorPersona
 import io.github.pushkar.chorplay.data.update.AppRelease
 import io.github.pushkar.chorplay.data.update.UpdateRepository
 import io.github.pushkar.chorplay.player.DeepChorplayManager
@@ -23,7 +23,6 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-/** The update check the settings list runs on request; github builds only. */
 sealed interface UpdateCheckState {
     data object Idle : UpdateCheckState
 
@@ -40,81 +39,78 @@ sealed interface UpdateCheckState {
 
 @HiltViewModel
 class SettingsHomeViewModel
-    @Inject
-    constructor(
-        @ApplicationContext private val context: Context,
-        private val playerPreferences: PlayerPreferences,
-        private val updates: UpdateRepository,
-    ) : ViewModel() {
-        val deepFlow: StateFlow<DeepChorplayState> =
-            combine(
-                playerPreferences.deepFlowActive,
-                playerPreferences.deepFlowActivatedAt,
-                playerPreferences.deepFlowExpireHours,
-                playerPreferences.deepFlowSaveToHistory,
-                playerPreferences.deepFlowScrobble,
-            ) { active, activatedAt, expireHours, saveToHistory, scrobble ->
-                DeepChorplayState(active, activatedAt, expireHours, saveToHistory, scrobble)
-            }.combine(playerPreferences.deepFlowOnSearch) { state, onSearch ->
-                state.copy(showOnSearch = onSearch)
-            }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(STOP_TIMEOUT_MS), DeepChorplayState())
+@Inject
+constructor(
+    @ApplicationContext private val context: Context,
+    private val playerPreferences: PlayerPreferences,
+    private val updates: UpdateRepository,
+) : ViewModel() {
+    val deepChor: StateFlow<DeepChorplayState> =
+        combine(
+            playerPreferences.deepChorActive,
+            playerPreferences.deepChorActivatedAt,
+            playerPreferences.deepChorExpireHours,
+            playerPreferences.deepChorSaveToHistory,
+        ) { active, activatedAt, expireHours, saveToHistory ->
+            DeepChorplayState(active, activatedAt, expireHours, saveToHistory)
+        }.combine(playerPreferences.deepChorOnSearch) { state, onSearch ->
+            state.copy(showOnSearch = onSearch)
+        }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(STOP_TIMEOUT_MS), DeepChorplayState())
 
-        private val _persona = MutableStateFlow<FlowPersona?>(null)
-        val persona: StateFlow<FlowPersona?> = _persona.asStateFlow()
+    private val _persona = MutableStateFlow<ChorPersona?>(null)
+    val persona: StateFlow<ChorPersona?> = _persona.asStateFlow()
 
-        private val _updateCheck = MutableStateFlow<UpdateCheckState>(UpdateCheckState.Idle)
-        val updateCheck: StateFlow<UpdateCheckState> = _updateCheck.asStateFlow()
+    private val _updateCheck = MutableStateFlow<UpdateCheckState>(UpdateCheckState.Idle)
+    val updateCheck: StateFlow<UpdateCheckState> = _updateCheck.asStateFlow()
 
-        init {
-            refreshPersona()
-        }
+    init {
+        refreshPersona()
+    }
 
-        /** Re-reads the persona; the engine exposes no stream, so the list refreshes it when shown. */
-        fun refreshPersona() {
-            viewModelScope.launch {
-                _persona.value = runCatching { ChorplayNeuroEngine.getPersona(ChorplayNeuroEngine.getBrainSnapshot()) }.getOrNull()
-            }
-        }
-
-        fun setDeepChorplayEnabled(enabled: Boolean) {
-            viewModelScope.launch { DeepChorplayManager.setEnabled(context, enabled) }
-        }
-
-        fun setDeepChorplayExpireHours(hours: Int) {
-            viewModelScope.launch { playerPreferences.setDeepChorplayExpireHours(hours) }
-        }
-
-        fun setDeepChorplaySaveToHistory(enabled: Boolean) {
-            viewModelScope.launch { playerPreferences.setDeepChorplaySaveToHistory(enabled) }
-        }
-
-        fun setDeepChorplayScrobble(enabled: Boolean) {
-            viewModelScope.launch { playerPreferences.setDeepChorplayScrobble(enabled) }
-        }
-
-        fun setDeepChorplayOnSearch(enabled: Boolean) {
-            viewModelScope.launch { playerPreferences.setDeepChorplayOnSearch(enabled) }
-        }
-
-        fun checkForUpdates() {
-            if (!BuildConfig.UPDATER_ENABLED || _updateCheck.value == UpdateCheckState.Checking) return
-            _updateCheck.value = UpdateCheckState.Checking
-            viewModelScope.launch {
-                val result =
-                    runCatching { updates.fetch() }
-                        .fold(
-                            onSuccess = { info -> info?.let { UpdateCheckState.Available(it) } ?: UpdateCheckState.UpToDate },
-                            onFailure = { UpdateCheckState.Failed },
-                        )
-                _updateCheck.value = result
-            }
-        }
-
-        fun consumeUpdateCheck() {
-            _updateCheck.update { if (it == UpdateCheckState.Checking) it else UpdateCheckState.Idle }
-        }
-
-        private companion object {
-            const val STOP_TIMEOUT_MS = 5_000L
+    fun refreshPersona() {
+        viewModelScope.launch {
+            _persona.value =
+                runCatching { ChorplayNeuroEngine.getPersona(ChorplayNeuroEngine.getBrainSnapshot()) }.getOrNull()
         }
     }
+
+    fun setDeepChorplayEnabled(enabled: Boolean) {
+        viewModelScope.launch { DeepChorplayManager.setEnabled(context, enabled) }
+    }
+
+    fun setDeepChorplayExpireHours(hours: Int) {
+        viewModelScope.launch { playerPreferences.setDeepChorplayExpireHours(hours) }
+    }
+
+    fun setDeepChorplaySaveToHistory(enabled: Boolean) {
+        viewModelScope.launch { playerPreferences.setDeepChorplaySaveToHistory(enabled) }
+    }
+
+    fun setDeepChorplayOnSearch(enabled: Boolean) {
+        viewModelScope.launch { playerPreferences.setDeepChorplayOnSearch(enabled) }
+    }
+
+    fun checkForUpdates() {
+        if (!BuildConfig.UPDATER_ENABLED || _updateCheck.value == UpdateCheckState.Checking) return
+        _updateCheck.value = UpdateCheckState.Checking
+        viewModelScope.launch {
+            val result =
+                runCatching { updates.fetch() }
+                    .fold(
+                        onSuccess = { info ->
+                            info?.let { UpdateCheckState.Available(it) } ?: UpdateCheckState.UpToDate
+                        },
+                        onFailure = { UpdateCheckState.Failed },
+                    )
+            _updateCheck.value = result
+        }
+    }
+
+    fun consumeUpdateCheck() {
+        _updateCheck.update { if (it == UpdateCheckState.Checking) it else UpdateCheckState.Idle }
+    }
+
+    private companion object {
+        const val STOP_TIMEOUT_MS = 5_000L
+    }
+}

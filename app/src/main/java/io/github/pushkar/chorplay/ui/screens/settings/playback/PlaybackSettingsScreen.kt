@@ -17,7 +17,6 @@ import io.github.pushkar.chorplay.notification.BackgroundWorkPolicy
 import io.github.pushkar.chorplay.ui.components.settings.SettingsPage
 import io.github.pushkar.chorplay.ui.components.settings.SettingsTarget
 
-/** The pickers Player & playback opens over itself. */
 internal enum class PlaybackDialog {
     AUTOPLAY_COUNTDOWN,
     LONG_PRESS_SPEED,
@@ -28,13 +27,8 @@ internal enum class PlaybackDialog {
     AUDIO_LANGUAGE,
     SUBTITLE_LANGUAGE,
     SHORTS_MODE,
-    LYRICS,
 }
 
-/**
- * What the players do: autoplay, speeds, gestures, the buttons on the player, captions, the watch
- * page, the Shorts player and music. How the players look is Appearance › Player appearance.
- */
 @Composable
 internal fun PlaybackSettingsScreen(
     onBack: (() -> Unit)?,
@@ -46,7 +40,6 @@ internal fun PlaybackSettingsScreen(
     val customSpeeds by viewModel.customSpeeds.collectAsStateWithLifecycle()
     val doubleTapSeek by viewModel.doubleTapSeek.collectAsStateWithLifecycle()
     val speedSwipeSide by viewModel.speedSwipeSide.collectAsStateWithLifecycle()
-    val musicSideSwipes by viewModel.musicSideSwipes.collectAsStateWithLifecycle()
     val comments by viewModel.comments.collectAsStateWithLifecycle()
     val shortsContent by viewModel.shortsContent.collectAsStateWithLifecycle()
     val disableShortsPlayer by viewModel.disableShortsPlayer.collectAsStateWithLifecycle()
@@ -71,7 +64,6 @@ internal fun PlaybackSettingsScreen(
                     customSpeeds,
                     doubleTapSeek > 0,
                     speedSwipeSide,
-                    musicSideSwipes,
                     comments,
                     shortsContent,
                     disableShortsPlayer,
@@ -88,13 +80,11 @@ internal fun PlaybackSettingsScreen(
     }
 }
 
-/** The values that decide which rows exist or are enabled; every other row reads its own state. */
 internal data class PlaybackStructure(
     val loopAll: Boolean,
     val customSpeeds: Boolean,
     val doubleTapSeek: Boolean,
     val speedSwipeSide: SpeedSwipeSide,
-    val musicSideSwipes: Boolean,
     val comments: Boolean,
     val shortsContent: Boolean,
     val disableShortsPlayer: Boolean,

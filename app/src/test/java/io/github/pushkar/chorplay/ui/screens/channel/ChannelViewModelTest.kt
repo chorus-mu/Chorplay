@@ -110,13 +110,13 @@ class ChannelViewModelTest {
     fun `setChannelInGroup adds the channel to the stored member list`() =
         runTest {
             coEvery { subscriptionGroupDao.getAllGroupsOnce() } returns
-                listOf(SubscriptionGroupEntity(name = "Music", channelIds = "UC1", sortOrder = 0))
+                listOf(SubscriptionGroupEntity(name = "Tech", channelIds = "UC1", sortOrder = 0))
 
-            viewModel.setChannelInGroup("Music", "UC2", inGroup = true)
+            viewModel.setChannelInGroup("Tech", "UC2", inGroup = true)
 
             coVerify(timeout = GROUP_WRITE_TIMEOUT_MS) {
                 subscriptionGroupDao.updateGroup(
-                    SubscriptionGroupEntity(name = "Music", channelIds = "UC1,UC2", sortOrder = 0),
+                    SubscriptionGroupEntity(name = "Tech", channelIds = "UC1,UC2", sortOrder = 0),
                 )
             }
         }
@@ -125,13 +125,13 @@ class ChannelViewModelTest {
     fun `setChannelInGroup removes the channel when it is already a member`() =
         runTest {
             coEvery { subscriptionGroupDao.getAllGroupsOnce() } returns
-                listOf(SubscriptionGroupEntity(name = "Music", channelIds = "UC1,UC2", sortOrder = 0))
+                listOf(SubscriptionGroupEntity(name = "Tech", channelIds = "UC1,UC2", sortOrder = 0))
 
-            viewModel.setChannelInGroup("Music", "UC2", inGroup = false)
+            viewModel.setChannelInGroup("Tech", "UC2", inGroup = false)
 
             coVerify(timeout = GROUP_WRITE_TIMEOUT_MS) {
                 subscriptionGroupDao.updateGroup(
-                    SubscriptionGroupEntity(name = "Music", channelIds = "UC1", sortOrder = 0),
+                    SubscriptionGroupEntity(name = "Tech", channelIds = "UC1", sortOrder = 0),
                 )
             }
         }
@@ -150,11 +150,11 @@ class ChannelViewModelTest {
     @Test
     fun `createGroupWithChannel refuses a name that already exists`() =
         runTest {
-            coEvery { subscriptionGroupDao.exists("Music") } returns true
+            coEvery { subscriptionGroupDao.exists("Tech") } returns true
 
-            viewModel.createGroupWithChannel("Music", "UC2")
+            viewModel.createGroupWithChannel("Tech", "UC2")
 
-            coVerify(timeout = GROUP_WRITE_TIMEOUT_MS) { subscriptionGroupDao.exists("Music") }
+            coVerify(timeout = GROUP_WRITE_TIMEOUT_MS) { subscriptionGroupDao.exists("Tech") }
             coVerify(exactly = 0) { subscriptionGroupDao.insertGroup(any()) }
         }
 

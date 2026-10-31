@@ -262,7 +262,7 @@ class ServerStore private constructor(
             Request
                 .Builder()
                 .url(url("v1/live"))
-                .header("Sec-WebSocket-Protocol", "flow-sync.v1, bearer.${token(renew = true)}")
+                .header("Sec-WebSocket-Protocol", "chor-sync.v1, bearer.${token(renew = true)}")
                 .build()
         return client
             .newBuilder()

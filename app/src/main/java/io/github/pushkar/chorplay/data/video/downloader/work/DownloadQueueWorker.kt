@@ -83,7 +83,7 @@ class DownloadQueueWorker(
         }
 
     companion object {
-        const val UNIQUE_NAME = "flow_download_queue"
+        const val UNIQUE_NAME = "chorplay_download_queue"
         const val TAG = "DownloadQueueWorker"
     }
 }

@@ -249,7 +249,7 @@ RECAP AND PRIVACY
 - Chorplay Recap: a private record of your watching and listening, with charts for any month, year or all time
 - A monthly and yearly Recap story, shareable as a poster
 - Digital wellbeing reads watch time from Recap once it covers a full week
-- Deep Chorplay keeps a session private: nothing goes to Recap, feed memory or scrobbling. Long press the CHORPLAY wordmark or logo to switch it (#1228)
+- Deep Chorplay keeps a session private: nothing goes to Recap, or feed memory. Long press the CHORPLAY wordmark or logo to switch it (#1228)
 - An optional Deep Chorplay switch above recent searches, turned on in Settings (#706)
 
 IMPORTS, SYNC AND UPDATES

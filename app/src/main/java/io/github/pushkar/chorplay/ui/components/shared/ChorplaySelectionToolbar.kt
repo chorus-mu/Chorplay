@@ -19,7 +19,7 @@ import io.github.pushkar.chorplay.ui.components.layout.LocalChorplayBottomInsets
 import io.github.pushkar.chorplay.ui.components.layout.floatAboveBottomChrome
 
 /** One button in a select mode's toolbar. */
-class FlowSelectionAction(
+class ChorSelectionAction(
     val icon: ImageVector,
     val label: String,
     val onClick: () -> Unit,
@@ -34,7 +34,7 @@ class FlowSelectionAction(
 fun ChorplaySelectionToolbar(
     visible: Boolean,
     summary: String,
-    actions: List<FlowSelectionAction>,
+    actions: List<ChorSelectionAction>,
     modifier: Modifier = Modifier,
 ) {
     val bottomInsets = LocalChorplayBottomInsets.current

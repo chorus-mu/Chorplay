@@ -41,9 +41,6 @@ import org.schabi.newpipe.extractor.stream.VideoStream
 import java.io.File
 import java.util.Locale
 
-/**
- * Handles media loading and resolution.
- */
 @UnstableApi
 class MediaLoader(
     private val appContext: Context,
@@ -55,24 +52,13 @@ class MediaLoader(
         private const val TAG = "MediaLoader"
 
         init {
-            // TrackGroup derives its type from MimeTypes.getTrackType(sampleMimeType), so without
-            // this an srv3 track group reports TRACK_TYPE_UNKNOWN and every `groups.filter { it.type
-            // == C.TRACK_TYPE_TEXT }` lookup - including EnhancedPlayerManager's track-id override -
-            // silently stops finding it. Registration is idempotent and keyed by MIME type, and
-            // the empty codec prefix is right: srv3 never appears in a Format's codec string.
             MimeTypes.registerCustomMimeType(Srv3SubtitleParser.MIME_TYPE, "", C.TRACK_TYPE_TEXT)
         }
 
-        private const val SUBTITLE_TRACK_ID_PREFIX = "flow-subtitle-"
+        private const val SUBTITLE_TRACK_ID_PREFIX = "chorplay-subtitle-"
         private val SubtitleTrackIdPattern = Regex("""(?:^|:)$SUBTITLE_TRACK_ID_PREFIX(\d+)$""")
 
         internal fun subtitleTrackId(index: Int): String = "$SUBTITLE_TRACK_ID_PREFIX$index"
-
-        /**
-         * The caption index a track's format id names, or null for a track Chorplay did not add.
-         * Merging sources prefix every format id with the source's position, so the id is matched
-         * at its end.
-         */
         internal fun subtitleTrackIndex(formatId: String?): Int? =
             formatId
                 ?.let { SubtitleTrackIdPattern.find(it) }
@@ -84,31 +70,11 @@ class MediaLoader(
     private var activeSabrOrchestrator: SabrOrchestrator? = null
     private var lastSourceWasSabr = false
 
-    /** Whether the media last loaded is a quality ladder that Media3 adapts over by itself. */
     var lastSourceWasAdaptiveLadder = false
         private set
     var onSabrFallbackNeeded: (() -> Unit)? = null
-
-    /** Invoked with a subtitle track's index and display label once its fetch has finally given up. */
     var onSubtitleLoadFailed: ((Int, String) -> Unit)? = null
 
-    /**
-     * Load media with video and audio streams.
-     *
-     * @param player ExoPlayer instance
-     * @param context Application context
-     * @param videoStream Video stream to load (can be null for audio-only)
-     * @param audioStream Audio stream to load
-     * @param availableVideoStreams All available video streams for fallback
-     * @param currentVideoStream Current video stream reference
-     * @param dashManifestUrl Optional DASH manifest URL
-     * @param durationSeconds Duration in seconds
-     * @param preservePosition Position to seek to after loading
-     * @param localFilePath Optional local file path for offline playback
-     * @param currentDurationSeconds Fallback duration from stream info
-     * @param audioOnly When true, never selects video streams or video manifests.
-     * @param playWhenReady Whether playback should start after the source is prepared.
-     */
     fun loadMedia(
         player: ExoPlayer?,
         context: Context?,
@@ -144,16 +110,18 @@ class MediaLoader(
 
         player?.let { exoPlayer ->
             try {
-                // Reattach surface before loading
+
                 if (!audioOnly) {
                     reattachSurface(exoPlayer)
                 }
 
                 Log.d(
                     TAG,
-                    "Preparing media: video=${videoStream?.let(
-                        VideoCodecUtils::qualityHeightFromStream,
-                    ) ?: -1}p audioOnly=$audioOnly surfaceReady=${surfaceManager?.isSurfaceReady}",
+                    "Preparing media: video=${
+                        videoStream?.let(
+                            VideoCodecUtils::qualityHeightFromStream,
+                        ) ?: -1
+                    }p audioOnly=$audioOnly surfaceReady=${surfaceManager?.isSurfaceReady}",
                 )
 
                 val ctx = context ?: throw IllegalStateException("Context not initialized")
@@ -201,8 +169,6 @@ class MediaLoader(
                     exoPlayer.prepare()
                     stateFlow.value = stateFlow.value.copy(isPrepared = true)
 
-                    // SABR sessions already start fetching at the position; seeking the
-                    // unseekable progressive pipe would restart extraction.
                     if (preservePosition != null && preservePosition > 0 && !lastSourceWasSabr) {
                         exoPlayer.seekTo(preservePosition)
                         Log.d(TAG, "Seeking to preserved position: ${preservePosition}ms")
@@ -220,7 +186,12 @@ class MediaLoader(
             } catch (e: Exception) {
                 Log.e(TAG, "Error loading media", e)
                 stateFlow.value =
-                    stateFlow.value.copy(error = appContext.getString(R.string.error_failed_to_load_media, e.message.orEmpty()))
+                    stateFlow.value.copy(
+                        error = appContext.getString(
+                            R.string.error_failed_to_load_media,
+                            e.message.orEmpty()
+                        )
+                    )
                 return false
             }
         }
@@ -311,13 +282,13 @@ class MediaLoader(
             videoId = mediaId,
             urls =
                 availableVideoStreams.map { it.content } +
-                    listOfNotNull(videoStream?.content, currentVideoStream?.content, audioStream?.content) +
-                    innerTubeVideoFormats.map { it.url } +
-                    innerTubeAudioFormats.map { it.url },
+                        listOfNotNull(videoStream?.content, currentVideoStream?.content, audioStream?.content) +
+                        innerTubeVideoFormats.map { it.url } +
+                        innerTubeAudioFormats.map { it.url },
         )
         val sabrAvailable =
             sabrInfo != null && sabrInfo.streamingUrl.isNotEmpty() &&
-                sabrVideoId != null && sabrInfo.audioItag > 0 && sabrInfo.videoItag > 0
+                    sabrVideoId != null && sabrInfo.audioItag > 0 && sabrInfo.videoItag > 0
 
         val overridesDefaultAudio = StreamProcessor.overridesDefaultAudioTrack(audioStream)
 
@@ -386,11 +357,15 @@ class MediaLoader(
                     }
                 Log.d(
                     TAG,
-                    "Passing ${selectedStreams.size} stream(s) to resolver: ${selectedStreams.map {
-                        "${VideoCodecUtils.qualityHeightFromStream(
-                            it,
-                        )}p"
-                    }}",
+                    "Passing ${selectedStreams.size} stream(s) to resolver: ${
+                        selectedStreams.map {
+                            "${
+                                VideoCodecUtils.qualityHeightFromStream(
+                                    it,
+                                )
+                            }p"
+                        }
+                    }",
                 )
                 resolver
                     .resolve(
@@ -507,8 +482,6 @@ class MediaLoader(
                 SingleSampleMediaSource
                     .Factory(factory)
                     .setLoadErrorHandlingPolicy(SubtitleLoadErrorHandlingPolicy(caption.isTranslated))
-                    // Stays true: a propagated subtitle error would surface as a fatal
-                    // ExoPlaybackException and stop the video over a failed sidecar text track.
                     .setTreatLoadErrorsAsEndOfStream(true)
                     .createMediaSource(subtitleConfig, C.TIME_UNSET)
                     .also { source ->
@@ -533,20 +506,12 @@ class MediaLoader(
     }
 }
 
-/**
- * Retry policy for sidecar subtitle fetches.
- *
- * YouTube throttles `timedtext` requests that carry `&tlang=` far more aggressively than plain
- * caption fetches — a 429 on a translated track while the untranslated one loads fine from the same
- * IP seconds later is routine. The default three quick attempts frequently fall inside one throttle
- * window, so translated captions get one shot and then look permanently broken; backing off further
- * usually rides it out. Statuses that retrying cannot fix are given up on immediately.
- */
 @UnstableApi
 private class SubtitleLoadErrorHandlingPolicy(
     private val isTranslated: Boolean,
 ) : DefaultLoadErrorHandlingPolicy() {
-    override fun getMinimumLoadableRetryCount(dataType: Int): Int = if (isTranslated) TRANSLATED_MAX_ATTEMPTS else MAX_ATTEMPTS
+    override fun getMinimumLoadableRetryCount(dataType: Int): Int =
+        if (isTranslated) TRANSLATED_MAX_ATTEMPTS else MAX_ATTEMPTS
 
     override fun getRetryDelayMsFor(loadErrorInfo: LoadErrorHandlingPolicy.LoadErrorInfo): Long {
         val status =
@@ -564,10 +529,6 @@ private class SubtitleLoadErrorHandlingPolicy(
         const val MAX_ATTEMPTS = 6
         const val INITIAL_BACKOFF_MS = 500L
         const val MAX_BACKOFF_MS = 8_000L
-
-        // A tlang fetch is not rate-limited, it is refused by Google's abuse interstitial: no
-        // Retry-After, and it hardens against the IP as attempts continue. Fewer, slower tries
-        // give the block time to lapse while the caller falls back to the source track.
         const val TRANSLATED_MAX_ATTEMPTS = 3
         const val TRANSLATED_INITIAL_BACKOFF_MS = 2_000L
         const val TRANSLATED_MAX_BACKOFF_MS = 20_000L

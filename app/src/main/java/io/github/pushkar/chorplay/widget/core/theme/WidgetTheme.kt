@@ -12,7 +12,7 @@ import io.github.pushkar.chorplay.data.local.LocalDataManager
 import io.github.pushkar.chorplay.ui.theme.CustomTheme
 import io.github.pushkar.chorplay.ui.theme.ThemeMode
 import io.github.pushkar.chorplay.ui.theme.ThemeVariant
-import io.github.pushkar.chorplay.ui.theme.resolveFlowColorScheme
+import io.github.pushkar.chorplay.ui.theme.resolveChorColorScheme
 import io.github.pushkar.chorplay.ui.theme.resolveChorplayThemeSlot
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
@@ -94,7 +94,7 @@ fun widgetThemeSignatureFlow(context: Context): Flow<WidgetThemeSignature> {
 
 /**
  * The app's active color scheme as Glance color providers, resolved through the same
- * [resolveFlowColorScheme] the in-app theme uses — widgets always match the app.
+ * [resolveChorColorScheme] the in-app theme uses — widgets always match the app.
  */
 fun widgetColorsFlow(context: Context): Flow<ColorProviders> {
     val appContext = context.applicationContext
@@ -102,7 +102,7 @@ fun widgetColorsFlow(context: Context): Flow<ColorProviders> {
         if (signature.followsSystemPalette) return@map DynamicThemeColorProviders
         androidx.glance.material3.ColorProviders(
             light =
-                resolveFlowColorScheme(
+                resolveChorColorScheme(
                     context = appContext,
                     isSystemDark = false,
                     themeMode = signature.themeMode,
@@ -113,7 +113,7 @@ fun widgetColorsFlow(context: Context): Flow<ColorProviders> {
                     systemDarkThemeVariant = signature.systemDarkThemeVariant,
                 ),
             dark =
-                resolveFlowColorScheme(
+                resolveChorColorScheme(
                     context = appContext,
                     isSystemDark = true,
                     themeMode = signature.themeMode,

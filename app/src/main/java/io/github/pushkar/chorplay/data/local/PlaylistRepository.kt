@@ -157,9 +157,7 @@ class PlaylistRepository
                 entities.map { it.toDomain() }
             }
 
-        fun getVideoOnlyWatchLaterFlow(): Flow<List<Video>> = getWatchLaterVideosFlow().map { list -> list.filter { !it.isMusic } }
-
-        fun getMusicOnlyWatchLaterFlow(): Flow<List<Video>> = getWatchLaterVideosFlow().map { list -> list.filter { it.isMusic } }
+        fun getVideoOnlyWatchLaterFlow(): Flow<List<Video>> = getWatchLaterVideosFlow()
 
         fun getWatchLaterIdsFlow(): Flow<Set<String>> =
             playlistDao.getVideosForPlaylist(WATCH_LATER_ID).map { entities ->
@@ -271,32 +269,6 @@ class PlaylistRepository
             playlistDao.insertPlaylist(entity)
         }
 
-        suspend fun saveExternalMusicPlaylist(
-            id: String,
-            name: String,
-            description: String,
-            thumbnailUrl: String,
-        ) {
-            val entity =
-                PlaylistEntity(
-                    id = id,
-                    name = name,
-                    description = description,
-                    thumbnailUrl = thumbnailUrl,
-                    isPrivate = false,
-                    createdAt = System.currentTimeMillis(),
-                    isMusic = true,
-                    isUserCreated = false,
-                )
-            playlistDao.insertPlaylist(entity)
-        }
-
-        /** Moves a stored playlist to the music library, or back to the video library. */
-        suspend fun moveToLibrary(
-            playlistId: String,
-            isMusic: Boolean,
-        ) = playlistDao.setPlaylistIsMusic(playlistId, isMusic)
-
         suspend fun unsaveExternalPlaylist(playlistId: String) {
             val entity = playlistDao.getPlaylist(playlistId)
             if (entity != null && !entity.isUserCreated) {
@@ -405,14 +377,6 @@ class PlaylistRepository
         fun getSavedVideoPlaylistsFlow(): Flow<List<PlaylistInfo>> =
             playlistDao.getSavedVideoPlaylistsWithCount().map { items -> items.map(PlaylistWithCount::toPlaylistInfo) }
 
-        fun getMusicPlaylistsFlow(): Flow<List<PlaylistInfo>> =
-            playlistDao.getMusicPlaylistsWithCount().map { items -> items.map(PlaylistWithCount::toPlaylistInfo) }
-
-        fun getUserCreatedMusicPlaylistsFlow(): Flow<List<PlaylistInfo>> =
-            playlistDao.getUserCreatedMusicPlaylistsWithCount().map { items -> items.map(PlaylistWithCount::toPlaylistInfo) }
-
-        fun getSavedMusicPlaylistsFlow(): Flow<List<PlaylistInfo>> =
-            playlistDao.getSavedMusicPlaylistsWithCount().map { items -> items.map(PlaylistWithCount::toPlaylistInfo) }
 
         suspend fun getSavedVideoPlaylistVideos(): List<Video> = playlistDao.getSavedVideoPlaylistVideos().map { it.toDomain() }
 

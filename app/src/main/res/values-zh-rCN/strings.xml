@@ -29,8 +29,8 @@
     <string name="library_section_header">您的内容</string>
     <string name="library_history_label">历史</string>
     <string name="library_playlists_label">播放列表</string>
-    <string name="library_music_playlists_label">音乐播放列表</string>
-    <string name="library_music_playlists_subtitle">您的音乐收藏</string>
+
+
     <string name="library_liked_videos_label">点赞</string>
     <string name="library_saved_shorts_label">已保存 Shorts</string>
     <string name="library_watch_later_label">稍后观看</string>
@@ -66,17 +66,16 @@
     <string name="history_tab_videos">视频</string>
     <string name="history_tab_shorts">Shorts</string>
     <string name="history_tab_local_videos">本地视频</string>
-    <string name="history_tab_local_music">本地音乐</string>
+
     <string name="liked">已点赞</string>
-    <string name="liked_music">已点赞的音乐</string>
+
     <string name="liked_videos">点赞</string>
-    <string name="share_song">分享歌曲</string>
     <string name="empty_liked">暂无点赞</string>
     <string name="empty_liked_body">您点赞的内容将出现在这里</string>
     <string name="empty_liked_videos">暂无已点赞视频</string>
-    <string name="empty_liked_music">暂无已点赞音乐</string>
-    <string name="empty_liked_music_body">您点赞的歌曲会显示在这里</string>
-    <string name="song">歌曲</string>
+
+
+
     <string name="video">视频</string>
     <string name="share">分享</string>
     <string name="downloaded">已下载</string>
@@ -116,7 +115,6 @@
     <string name="remove">删除</string>
     <string name="related_content">相关内容</string>
     <string name="no_related_content">没有找到相关内容</string>
-    <string name="share_message_template">看看这首歌：%1$s，作者：%2$s\nhttps://music.youtube.com/watch?v=%3$s</string>
     <string name="hz">赫兹</string>
     <string name="kbps">千比特/秒</string>
     <string name="filter_discover">发现</string>
@@ -149,13 +147,12 @@
     <string name="play_mode_suggestion_title">播放模式建议</string>
     <string name="play_mode_suggestion_body">此视频不足 2 分钟。要切换到专用播放器吗？</string>
     <string name="shorts_player">Shorts 播放器</string>
-    <string name="music_player">音乐播放器</string>
+
     <plurals name="channels_count">
         <item quantity="other">%d 个频道</item>
     </plurals>
     <string name="tab_videos">视频</string>
-    <string name="tab_music">音乐</string>
-    <string name="empty_offline_title">离线 %1$s</string>
+<string name="empty_offline_title">离线 %1$s</string>
     <string name="empty_offline_body">您下载的 %1$s 将出现在这里。\n即使没有互联网也可以享受您的内容。</string>
     <string name="action_go_to_home">回到首页</string>
     <string name="action_delete">删除</string>
@@ -213,12 +210,12 @@
     <string name="copied_to_clipboard">已复制 %1$s</string>
     <string name="unknown">未知</string>
     <string name="subscriptions_video_section_title">视频订阅</string>
-    <string name="subscriptions_music_section_title">音乐订阅</string>
+
     <string name="subscriptions_quick_access_title">快速访问</string>
     <string name="subscriptions_compact_header">跳转到您最新订阅的频道。</string>
-    <string name="subscriptions_compact_header_with_music">音乐频道会以内联标记显示，使信息流保持紧凑。</string>
-    <string name="subscriptions_music_chip_label">音乐</string>
-    <string name="subscriptions_music_badge_cd">音乐订阅</string>
+
+
+
     <string name="no_subscriptions_found">未找到订阅</string>
     <string name="live_chat">实时聊天</string>
     <string name="live_chat_connecting">正在连接实时聊天...</string>
@@ -243,11 +240,11 @@
     <string name="new_update_available">有新更新</string>
     <string name="update_available_template">%1$s 现已可用</string>
     <string name="release_notes">发行说明</string>
-    <string name="update_flow">更新Chorplay</string>
+    <string name="update_chorplay">更新Chorplay</string>
     <string name="maybe_later">也许稍后</string>
     <string name="nav_home">首页</string>
     <string name="nav_shorts">Shorts</string>
-    <string name="nav_music">音乐</string>
+
     <string name="nav_subs">订阅</string>
     <string name="nav_library">媒体库</string>
     <string name="notifications">通知</string>
@@ -267,7 +264,6 @@
     <string name="add_to_playlist">添加到播放列表</string>
     <string name="playback_header">播放</string>
     <string name="play_next">播放下一个</string>
-    <string name="play_next_desc">添加到队列开头</string>
     <string name="add_to_queue">添加到队列</string>
     <string name="add_to_queue_desc">添加到队列末尾</string>
     <string name="similar_content">类似内容</string>
@@ -281,8 +277,6 @@
     <string name="audio_effects">音频效果</string>
     <string name="more_header">更多</string>
     <string name="view_artist">查看艺术家</string>
-    <string name="view_album">查看专辑</string>
-    <string name="album_art">专辑封面</string>
     <string name="close_player">关闭播放器</string>
     <string name="views_template">%1$s 浏览次数</string>
     <string name="chapters">章节</string>
@@ -316,7 +310,6 @@
     <string name="search_hint">搜索</string>
     <string name="search_videos_channels_placeholder">搜索视频、频道...</string>
     <string name="recent_searches">最近的搜索</string>
-    <string name="search_empty_prompt">搜索视频、音乐等</string>
     <string name="trending">热门</string>
     <string name="channels_header">频道</string>
     <string name="videos_header">视频</string>
@@ -370,9 +363,9 @@
     <string name="channel_search_open">在频道中搜索</string>
     <string name="channel_search_close">关闭搜索</string>
     <string name="channel_search_no_results">没有找到“%1$s”的结果</string>
-    <string name="music_history">音乐播放历史</string>
+
     <string name="remove_from_history">从历史记录中删除</string>
-    <string name="share_song_chooser">分享歌曲</string>
+
     <string name="time_today">今天</string>
     <string name="time_yesterday">昨天</string>
     <string name="time_earlier">早些时候</string>
@@ -382,35 +375,35 @@
     <string name="peace_and_quiet">一片安静</string>
     <string name="notifications_empty_body">都处理完了！订阅的新动态会显示在这里。</string>
     <string name="settings_title">设置</string>
-    <string name="settings_flow_engine_header">Chorplay 引擎</string>
+    <string name="settings_chor_engine_header">Chorplay 引擎</string>
     <string name="settings_active_learning">主动学习</string>
     <string name="settings_reset_brain_title">重置 Chorplay 个性画像？</string>
     <string name="settings_reset_brain_body">这会彻底清除您的“Chorplay Brain”兴趣画像。\n\n• 所有已学习的主题都会被遗忘。\n• 个性特征会重置为中性。\n• 推荐会恢复为默认状态。\n\n此操作无法撤销。</string>
     <string name="settings_reset_everything">全部重置</string>
     <string name="settings_analyzing_interactions">正在分析您的互动...</string>
     <string name="settings_view_analytics">查看分析</string>
-    <string name="deep_flow_mode_title">Deep Chorplay 模式</string>
-    <string name="deep_flow_mode_subtitle">暂停学习——浏览而不影响您的画像</string>
-    <string name="deep_flow_learning_paused">已暂停学习</string>
-    <string name="deep_flow_expires_in">将在 %s 后结束</string>
-    <string name="deep_flow_expire_duration_title">之后自动禁用</string>
-    <string name="deep_flow_expire_duration_subtitle">%s 后自动恢复学习</string>
-    <string name="deep_flow_save_history_title">保存观看历史记录</string>
-    <string name="deep_flow_save_history_subtitle">将观看的视频保留在历史记录中（有进度）。引擎仍然不会向他们学习。关闭 = 未保存任何内容。</string>
-    <string name="deep_flow_dialog_title">暂停时间</string>
-    <string name="deep_flow_dialog_body">学习应该暂停多久？</string>
-    <string name="deep_flow_enabled_message">已启用 Deep Chorplay</string>
-    <string name="deep_flow_disabled_message">已关闭 Deep Chorplay</string>
-    <string name="deep_flow_expired_message">Deep Chorplay 计时已结束</string>
-    <string name="deep_flow_active_until_disabled">Deep Chorplay 会保持启用，直到您将其关闭</string>
-    <string name="deep_flow_duration_never">永不</string>
-    <string name="deep_flow_duration_1h">1小时</string>
-    <string name="deep_flow_duration_2h">2小时</string>
-    <string name="deep_flow_duration_4h">4小时</string>
-    <string name="deep_flow_duration_6h">6小时</string>
-    <string name="deep_flow_duration_8h">8小时</string>
-    <string name="deep_flow_duration_12h">12小时</string>
-    <string name="deep_flow_duration_24h">24小时</string>
+    <string name="deep_chor_mode_title">Deep Chorplay 模式</string>
+    <string name="deep_chor_mode_subtitle">暂停学习——浏览而不影响您的画像</string>
+    <string name="deep_chor_learning_paused">已暂停学习</string>
+    <string name="deep_chor_expires_in">将在 %s 后结束</string>
+    <string name="deep_chor_expire_duration_title">之后自动禁用</string>
+    <string name="deep_chor_expire_duration_subtitle">%s 后自动恢复学习</string>
+    <string name="deep_chor_save_history_title">保存观看历史记录</string>
+    <string name="deep_chor_save_history_subtitle">将观看的视频保留在历史记录中（有进度）。引擎仍然不会向他们学习。关闭 = 未保存任何内容。</string>
+    <string name="deep_chor_dialog_title">暂停时间</string>
+    <string name="deep_chor_dialog_body">学习应该暂停多久？</string>
+    <string name="deep_chor_enabled_message">已启用 Deep Chorplay</string>
+    <string name="deep_chor_disabled_message">已关闭 Deep Chorplay</string>
+    <string name="deep_chor_expired_message">Deep Chorplay 计时已结束</string>
+    <string name="deep_chor_active_until_disabled">Deep Chorplay 会保持启用，直到您将其关闭</string>
+    <string name="deep_chor_duration_never">永不</string>
+    <string name="deep_chor_duration_1h">1小时</string>
+    <string name="deep_chor_duration_2h">2小时</string>
+    <string name="deep_chor_duration_4h">4小时</string>
+    <string name="deep_chor_duration_6h">6小时</string>
+    <string name="deep_chor_duration_8h">8小时</string>
+    <string name="deep_chor_duration_12h">12小时</string>
+    <string name="deep_chor_duration_24h">24小时</string>
     <string name="settings_header_appearance">外观</string>
     <string name="settings_header_content_playback">内容与播放</string>
     <string name="settings_header_data_management">数据管理</string>
@@ -554,9 +547,9 @@
     <string name="app_icon_picker_subtitle">选择启动器图标样式。更改立即生效，启动器将短暂刷新。</string>
     <string name="app_icon_picker_warning">注意：切换图标使用 Android 系统机制，可能会暂时从主屏幕上删除应用程序快捷方式。如果需要，长按启动器可将其添加回来。</string>
     <string name="app_icon_apply_toast">图标已更新 - 您的启动器将刷新</string>
-    <string name="icon_name_flow_red">Chorplay 红色</string>
-    <string name="icon_name_flow_light">Chorplay Light</string>
-    <string name="icon_name_flow_play">Chorplay Play</string>
+    <string name="icon_name_chorplay_red">Chorplay 红色</string>
+    <string name="icon_name_chorplay_light">Chorplay Light</string>
+    <string name="icon_name_chorplay_play">Chorplay Play</string>
     <string name="icon_name_amoled">AMOLED 深色</string>
     <string name="icon_name_monochrome">单色</string>
     <string name="icon_name_ghost">幽灵</string>
@@ -567,13 +560,12 @@
     <string name="player_appearance_header">自定义播放器控件</string>
     <string name="player_appearance_style_title">音乐进度条风格</string>
     <string name="player_appearance_style_subtitle">选择进度条的视觉样式</string>
-    <string name="player_background_style_title">音乐播放器背景</string>
     <string name="player_background_style_blur_gradient">模糊+渐变</string>
     <string name="player_background_style_blur">模糊封面</string>
     <string name="player_background_style_gradient">封面调色板渐变</string>
     <string name="player_background_style_default">默认表面</string>
-    <string name="player_appearance_hide_music_artwork_title">隐藏音乐播放器图稿</string>
-    <string name="player_appearance_hide_music_artwork_subtitle">在提取的图稿颜色上显示应用程序图标</string>
+
+
     <string name="player_appearance_shorts_ui_title">Shorts 播放器 UI</string>
     <string name="player_appearance_shorts_ui_subtitle">选择 Shorts 叠加层的可见程度</string>
     <string name="shorts_player_ui_default">默认</string>
@@ -626,8 +618,8 @@
     <string name="player_fullscreen_seekbar_width_default">默认</string>
     <string name="player_fullscreen_seekbar_width_custom">定制</string>
     <string name="player_fullscreen_seekbar_width_value">%1$d dp</string>
-    <string name="lyrics_provider_title">歌词提供者</string>
-    <string name="lyrics_provider_subtitle">选择您喜欢的歌词来源</string>
+
+
     <string name="lyrics_provider_lrclib">LrcLib</string>
     <string name="lyrics_provider_better_lyrics">Better Lyrics</string>
     <string name="lyrics_provider_simpmusic">SimpMusic</string>
@@ -696,13 +688,11 @@
     <string name="content_settings_layout_grid">网格</string>
     <string name="content_settings_layout_list">列表</string>
     <string name="content_settings_grid_size_title">网格项目大小</string>
-    <string name="content_settings_grid_size_subtitle">控制专辑封面和内容卡的大小</string>
     <string name="content_settings_grid_big_title">大</string>
     <string name="content_settings_grid_big_desc">更大的缩略图</string>
     <string name="content_settings_grid_small_title">小号</string>
     <string name="content_settings_grid_small_desc">紧凑视图</string>
     <string name="content_settings_header_preview">预览</string>
-    <string name="content_settings_preview_album_art">专辑艺术预览</string>
     <string name="content_settings_preview_big">大 - 128dp 缩略图</string>
     <string name="content_settings_preview_small">小 - 104dp 缩略图</string>
     <string name="content_settings_dynamic_components">动态组件</string>
@@ -735,8 +725,8 @@
     <string name="content_settings_show_app_logo_title">显示应用程序徽标图标</string>
     <string name="content_settings_show_app_logo_subtitle">在主屏幕顶部栏中应用程序名称旁边显示 Chorplay 徽标图标</string>
     <string name="content_settings_header_content_components">内容组成部分</string>
-    <string name="content_settings_restored_music_mini_player_title">显示恢复的音乐迷你播放器</string>
-    <string name="content_settings_restored_music_mini_player_subtitle">恢复后自动显示您最后的音乐会话</string>
+
+
     <string name="content_settings_hide_watched_home_title">在首页隐藏已观看视频</string>
     <string name="content_settings_hide_watched_home_subtitle">过滤您在主页中已观看过的视频</string>
     <string name="content_settings_hide_watched_subscriptions_title">隐藏订阅中观看的视频</string>
@@ -781,8 +771,8 @@
     <string name="settings_home_shorts_shelf_subtitle">在首页显示横向 Shorts 内容栏。</string>
     <string name="settings_shorts_nav_tab_title">导航中的 Shorts 选项卡</string>
     <string name="settings_shorts_nav_tab_subtitle">在底部导航栏中显示 Shorts 选项卡。</string>
-    <string name="settings_music_nav_tab_title">导航中的音乐选项卡</string>
-    <string name="settings_music_nav_tab_subtitle">在底部导航栏中显示“音乐”选项卡。</string>
+
+
     <string name="settings_search_nav_tab_title">导航中的搜索选项卡</string>
     <string name="settings_search_nav_tab_subtitle">在底部导航栏中显示快速访问“搜索”选项卡。</string>
     <string name="nav_search">搜索</string>
@@ -947,11 +937,11 @@
     <string name="video_quality_warning">更高的质量使用更多的数据</string>
     <string name="video_quality_wifi_header">Wi-Fi 清晰度</string>
     <string name="video_quality_cellular_header">蜂窝质量</string>
-    <string name="music_quality_header">音乐音质</string>
-    <string name="music_quality_auto">自动</string>
-    <string name="music_quality_high">高</string>
-    <string name="music_quality_medium">中等</string>
-    <string name="music_quality_low">低</string>
+
+
+
+
+
     <string name="quality_144p">144p</string>
     <string name="quality_240p">240p</string>
     <string name="quality_360p">360p</string>
@@ -1067,7 +1057,7 @@
     <string name="sleep_timer_custom_label">自定义时间</string>
     <string name="sleep_timer_unit">分钟</string>
     <string name="sleep_timer_input_error">输入 1 到 1440 之间的值</string>
-    <string name="sleep_timer_end_of_song">歌曲/视频结束</string>
+    <string name="sleep_timer_end_of_video">歌曲/视频结束</string>
     <string name="sleep_timer_start">开始</string>
     <string name="sleep_timer_stops_in">将在以下时间后停止</string>
     <string name="sleep_timer_end_of_media">当前歌曲结束</string>
@@ -1098,12 +1088,12 @@
     <string name="period_six_months">6个月</string>
     <string name="period_one_year">1年</string>
     <string name="import_data_title">导入数据</string>
-    <string name="import_flow_backup_success">Chorplay 备份导入成功</string>
-    <string name="import_flow_backup_failed_template">无法导入 Chorplay 备份：%1$s</string>
+    <string name="import_chorplay_backup_success">Chorplay 备份导入成功</string>
+    <string name="import_chorplay_backup_failed_template">无法导入 Chorplay 备份：%1$s</string>
     <string name="import_newpipe_failed_template">无法导入 NewPipe 备份：%1$s</string>
     <string name="import_youtube_failed_template">无法导入 YouTube 备份：%1$s</string>
-    <string name="import_flow_backup_item_title">导入Chorplay备份</string>
-    <string name="import_flow_backup_desc">从 Chorplay 备份文件恢复您的历史记录、设置和订阅。</string>
+    <string name="import_chorplay_backup_item_title">导入Chorplay备份</string>
+    <string name="import_chorplay_backup_desc">从 Chorplay 备份文件恢复您的历史记录、设置和订阅。</string>
     <string name="import_from_newpipe">从 NewPipe 导入</string>
     <string name="import_from_newpipe_desc">从 NewPipe 导出文件 (JSON) 导入订阅。</string>
     <string name="import_from_libretube">从 LibreTube 导入</string>
@@ -1116,10 +1106,10 @@
     <string name="import_libretube_playlists_desc">从备份 JSON 文件导入 LibreTube 本地播放列表。</string>
     <string name="import_yt_takeout_all">从 Google Takeout 导入</string>
     <string name="import_yt_takeout_all_desc">从 Google Takeout ZIP 文件一次性导入您的 YouTube 订阅、观看历史记录和播放列表。</string>
-    <string name="import_music_apps_section_title">音乐应用程序</string>
-    <string name="import_music_apps_section_subtitle">从其他播放器导入您的音乐库</string>
-    <string name="import_from_metrolist">从 Metrolist 导入</string>
-    <string name="import_from_metrolist_desc">从 Metrolist 备份文件 (.zip) 导入音乐播放列表。播放列表出现在您的音乐库中。</string>
+
+
+
+
     <string name="import_from_youtube">从 YouTube 导入</string>
     <string name="import_from_youtube_desc">从 YouTube Takeout (CSV) 导入订阅。</string>
     <string name="import_subscriptions_section_title">订阅</string>
@@ -1134,8 +1124,6 @@
     <string name="import_yt_watch_history_desc">从 YouTube Takeout (watch-history.html) 导入您的观看历史记录。</string>
     <string name="import_yt_playlist">导入 YouTube 播放列表</string>
     <string name="import_yt_playlist_desc">从 YouTube Takeout CSV（Playlist-&lt;名称&gt;.csv）导入播放列表。</string>
-    <string name="import_yt_music_playlist">导入 YouTube Music 播放列表</string>
-    <string name="import_yt_music_playlist_desc">从 YouTube Music Takeout CSV 导入音乐播放列表，并显示在“音乐播放列表”中。</string>
     <string name="import_yt_history_failed_template">导入观看记录失败：%1$s</string>
     <string name="import_yt_playlist_failed_template">导入播放列表失败：%1$s</string>
     <string name="import_yt_history_empty_error">在此文件中找不到观看历史记录条目。确保它是 YouTube Takeout watch-history.html 文件。</string>
@@ -1157,7 +1145,7 @@
     <string name="total_space_template">总计：%1$s</string>
     <string name="location_label">位置</string>
     <string name="video_download_location_label">视频下载位置</string>
-    <string name="music_download_location_label">音乐下载位置</string>
+
     <string name="internal_app_storage_label">内部应用程序存储</string>
     <string name="preferences_header">偏好设置</string>
     <string name="default_video_quality_label">默认视频质量</string>
@@ -1188,9 +1176,9 @@
     <string name="location_badge_active">活跃</string>
     <string name="select_threads_count_desc">选择线程数 (1-8)：</string>
     <string name="support_donations_title">支持与捐赠</string>
-    <string name="support_flow_dev_title">支持Chorplay开发</string>
-    <string name="support_flow_dev_desc">如果您发现 Chorplay 有用并愿意支持其开发，您可以在 Patreon 上支持它或通过下面的加密地址进行捐赠。您的支持有助于使项目保持活力！</string>
-    <string name="support_flow_patreon">在 Patreon 上支持 Chorplay</string>
+    <string name="support_chorplay_dev_title">支持Chorplay开发</string>
+    <string name="support_chorplay_dev_desc">如果您发现 Chorplay 有用并愿意支持其开发，您可以在 Patreon 上支持它或通过下面的加密地址进行捐赠。您的支持有助于使项目保持活力！</string>
+    <string name="support_chorplay_patreon">在 Patreon 上支持 Chorplay</string>
     <string name="thank_you_support_message">感谢您的支持！ ❤️</string>
     <string name="address_copied_toast">地址已复制到剪贴板</string>
     <string name="donation_address_clip_label">捐款地址</string>
@@ -1208,7 +1196,7 @@
     <string name="newpipe_extractor_subtitle">核心提取库</string>
     <string name="about_license">许可证</string>
     <string name="about_changelog">变更日志</string>
-    <string name="whats_new_in_flow">Chorplay 的新功能</string>
+    <string name="whats_new_in_chorplay">Chorplay 的新功能</string>
     <string name="about_device_info">设备信息</string>
     <string name="gnu_license_full_title">GNU 通用公共许可证</string>
     <string name="loading_ellipsis">加载中...</string>
@@ -1258,7 +1246,7 @@
     <string name="playlist_sort_date_published_oldest">发布日期（最旧）</string>
     <string name="remove_selected_playlist_text">它们将从该播放列表中删除。</string>
     <string name="remove_selected_watch_later_text">它们将从“稍后观看”中移除。</string>
-    <string name="welcome_to_flow">欢迎来到Chorplay</string>
+    <string name="welcome_to_chorplay">欢迎来到Chorplay</string>
     <string name="onboarding_subtitle">告诉我们您对什么感兴趣</string>
     <string name="onboarding_instructions">选择至少 3 个主题来个性化您的体验</string>
     <string name="onboarding_interests_title">你喜欢什么？</string>
@@ -1295,7 +1283,7 @@
     <string name="category_creative">创意</string>
     <string name="category_science_nature">科学与自然</string>
     <string name="category_news_current_events">新闻与时事</string>
-    <string name="flow_control_center">Chorplay 控制中心</string>
+    <string name="chorplay_control_center">Chorplay 控制中心</string>
     <string name="action_refresh">刷新</string>
     <string name="loading_neural_matrix">正在加载神经矩阵...</string>
     <string name="neural_interest_map_subtitle">你的神经兴趣图</string>
@@ -1339,12 +1327,9 @@
     <string name="stats_topics">主题</string>
     <string name="empty_bubble_cloud_message">观看一些视频来填充您的兴趣星云！</string>
     <string name="export_profile_data">导出画像数据</string>
-    <string name="flow_neural_profile_export_subject">Chorplay 神经画像导出</string>
-    <string name="screen_title_music_library">音乐库</string>
+    <string name="chorplay_neural_profile_export_subject">Chorplay 神经画像导出</string>
+
     <string name="header_your_collection">您的收藏</string>
-    <string name="subtitle_liked_music">你喜欢的歌曲</string>
-    <string name="subtitle_history">你听过的歌曲</string>
-    <string name="empty_music_playlists">还没有音乐播放列表</string>
     <string name="rename_playlist_title">重命名播放列表</string>
     <string name="action_rename">重命名</string>
     <string name="link_copied">链接已复制</string>
@@ -1382,8 +1367,8 @@
     <string name="action_add_to_favorites">添加到收藏夹</string>
     <string name="action_listen_now">立即收听</string>
     <string name="action_play_all">播放全部</string>
-    <string name="loading_music">正在加载音乐...</string>
-    <string name="screen_title_music">音乐</string>
+
+
     <string name="section_listen_again">再听一遍</string>
     <string name="section_daily_discover">您的每日发现</string>
     <string name="section_quick_picks">快速选择</string>
@@ -1397,8 +1382,8 @@
     <string name="daily_discover_for_fans_of">献给 %1$s 的粉丝</string>
     <string name="section_recommended">推荐</string>
     <string name="section_recently_played">最近播放</string>
-    <string name="section_music_videos">音乐视频</string>
-    <string name="section_music_videos_for_you">为您推荐的音乐视频</string>
+
+
     <string name="section_live_performances">现场表演</string>
     <string name="section_new_releases">新发布</string>
     <string name="subtitle_single_template">单曲 · %1$s</string>
@@ -1409,14 +1394,12 @@
     <string name="section_from_the_community">来自社区</string>
     <string name="daily_discover_subtitle">来自您的聆听的新鲜精选</string>
     <string name="genre_mix_template">%1$s 混合歌单</string>
-    <string name="section_top_albums">热门专辑</string>
     <string name="similar_to">类似于</string>
     <string name="section_similar_to">类似于 %1$s</string>
     <string name="subtitle_similar_to">根据您的收听历史记录</string>
     <string name="section_vibe_vibes">%1$s 氛围</string>
     <string name="subtitle_community_playlists">社区播放列表</string>
     <string name="playlist_author_community">社区播放列表</string>
-    <string name="playlist_description_community">来自我们社区的 %1$s 音乐精选播放列表</string>
     <string name="radio">电台</string>
     <string name="audio_settings_title">音频设置</string>
     <string name="label_preset">预设</string>
@@ -1432,32 +1415,26 @@
     <string name="template_gain">%1$.1fdB</string>
     <string name="template_q">%1$.1f</string>
     <string name="now_playing">正在播放</string>
-    <string name="voice_search_prompt">说话搜索音乐</string>
-    <string name="search_music_placeholder">搜索音乐</string>
+
     <string name="voice_search_cd">语音搜索</string>
-    <string name="filter_albums">专辑</string>
-    <string name="filter_songs">歌曲</string>
+
     <string name="filter_community_playlists">社区播放列表</string>
     <string name="section_top_result">最佳结果</string>
-    <string name="subtitle_song_prefix">歌曲•%1$s</string>
+
     <string name="subtitle_artist">艺术家</string>
-    <string name="subtitle_album_template">专辑•%1$s</string>
     <string name="subtitle_playlist_template">播放列表 • %1$s</string>
     <string name="plays_count_template">• %1$s 次播放</string>
-    <string name="album_year_template">专辑•%1$s•%2$s</string>
     <string name="search_source_template">搜索：%1$s</string>
     <string name="artist_source_template">艺术家：%1$s</string>
     <string name="top_picks_for_you">您的热门精选</string>
     <string name="no_results_found">没有找到结果</string>
     <string name="no_tracks_available">没有可用曲目</string>
     <string name="tab_favorites">收藏夹</string>
-    <string name="create_playlist_subtitle">整理你的音乐</string>
     <string name="empty_playlists_title">还没有播放列表</string>
     <string name="empty_playlists_subtitle">创建您的第一个播放列表来整理您最喜爱的曲目</string>
     <string name="empty_favorites_title">还没有收藏夹</string>
     <string name="empty_favorites_subtitle">点击任意曲目上的心形图标即可将其添加到您的收藏夹</string>
     <string name="empty_history_title">还没有历史记录</string>
-    <string name="empty_history_subtitle">在这里开始听音乐以查看您的历史记录</string>
     <string name="empty_downloads_title">尚未下载</string>
     <string name="empty_downloads_subtitle">下载曲目以供离线播放</string>
     <string name="total_size">总大小</string>
@@ -1547,7 +1524,7 @@
     <string name="check_for_updates">检查更新</string>
     <string name="check_for_updates_subtitle">点击查看最新版本</string>
     <string name="checking_for_updates">正在检查更新...</string>
-    <string name="flow_is_up_to_date">Chorplay 已更新！</string>
+    <string name="chorplay_is_up_to_date">Chorplay 已更新！</string>
     <string name="update_check_failed">无法检查更新。检查您的连接。</string>
     <string name="export_engine_data">导出引擎画像</string>
     <string name="export_engine_data_subtitle">备份您的 AI 个性和学习数据</string>
@@ -1623,7 +1600,7 @@
     <string name="sync_error_peer_also_receive">另一个设备也设置为接收。将其设置为发送，然后再次扫描。</string>
     <string name="sync_error_qr_expired">此 QR 码已过期。请让另一台设备显示新代码。</string>
     <string name="sync_error_qr_wrong_version">其他设备上的应用程序版本不兼容。</string>
-    <string name="sync_error_qr_not_flow">这看起来不像 Chorplay 同步代码。</string>
+    <string name="sync_error_qr_not_chorplay">这看起来不像 Chorplay 同步代码。</string>
     <string name="sync_error_qr_bad_address">同步代码缺少有效的网络地址。</string>
     <string name="auto_backup_title">自动备份</string>
     <string name="auto_backup_subtitle">安排自动备份到文件夹</string>
@@ -1696,10 +1673,10 @@
     <string name="error_extraction_failed_hint">YouTube 可能已更新其格式。 Chorplay 即将更新，请稍后重试。</string>
     <string name="error_generic">视频加载失败</string>
     <string name="error_generic_hint">发生未知错误。请再试一次。</string>
-    <string name="music_playback_warning_forbidden">音乐流访问被拒绝。 YouTube可能正在限制该IP；尝试重新加载或切换网络/VPN。</string>
-    <string name="music_playback_warning_network">由于网络问题，音乐流失败。检查您的连接或尝试其他网络。</string>
-    <string name="music_playback_warning_final">这首歌曲多次重试后仍无法加载。如果歌曲一直失败，请尝试其他网络或 VPN。</string>
-    <string name="music_playback_warning_generic">音乐播放失败。如果这种情况持续发生，请重试或切换网络。</string>
+
+
+
+
     <string name="player_lock_controls">锁定控制</string>
     <string name="player_unlock_controls">解锁控制</string>
     <string name="player_settings_overlay_controls">叠加控件</string>
@@ -1870,28 +1847,24 @@
     <string name="history_delete_shorts">从历史记录中删除 Shorts</string>
     <string name="history_delete_shorts_title">删除Shorts？</string>
     <string name="history_delete_shorts_body">这将从您的观看历史记录中删除所有 Shorts。其他视频均保留。</string>
-    <string name="recognize_music">识别音乐</string>
+
     <string name="recognition_history">识别历史</string>
-    <string name="tap_to_recognize">点按即可识别</string>
+
     <string name="listening">正在听……</string>
     <string name="processing">正在处理…</string>
     <string name="no_match_found">未找到匹配项</string>
     <string name="recognition_error">识别失败</string>
     <string name="try_again">再试一次</string>
-    <string name="search_in_flow">搜索Chorplay</string>
-    <string name="recognition_search_history">搜索已识别的歌曲</string>
-    <string name="recognition_history_empty">已识别的歌曲将出现在此处</string>
+    <string name="search_in_chorplay">搜索Chorplay</string>
     <string name="recognition_clear_history">清除历史记录？</string>
-    <string name="recognition_clear_history_body">这将删除所有已识别的歌曲。此操作无法撤消。</string>
     <string name="close_popup_player">关闭弹出播放器</string>
     <string name="widget_now_playing_label">正在播放</string>
-    <string name="widget_now_playing_description">控制 Chorplay 中正在播放的音乐</string>
     <string name="widget_quick_actions_label">快捷操作</string>
     <string name="widget_quick_actions_description">搜索 Chorplay 并跳转至下载、历史记录或识别</string>
-    <string name="widget_recognize_label">识别音乐</string>
-    <string name="widget_recognize_description">一键识别您周围正在播放的歌曲</string>
-    <string name="widget_turntable_label">转盘</string>
-    <string name="widget_turntable_description">你的音乐就像一张旋转的唱片</string>
+
+
+
+
     <string name="widget_recently_played_label">最近播放</string>
     <string name="widget_recently_played_description">从上次停下的地方继续</string>
     <string name="widget_downloads_label">下载</string>
@@ -1904,14 +1877,13 @@
     <string name="widget_next">下一曲</string>
     <string name="widget_previous">上一曲</string>
     <string name="widget_like">点赞</string>
-    <string name="widget_artwork">专辑封面</string>
     <string name="widget_open_downloads">打开下载</string>
     <string name="widget_open_history">打开历史记录</string>
     <string name="widget_no_recent">您观看的视频将出现在此处</string>
     <string name="widget_no_downloads">您的下载将显示在此处</string>
     <string name="content_settings_hide_unplayable_subscriptions_title">将无法播放视频从订阅中隐藏</string>
-    <string name="discord_presence_connect_action">连接</string>
-    <string name="discord_presence_risk_accept">我理解，连接</string>
+
+
     <string name="subscriptions_failed_channels_body">订阅_失败_频道_正文</string>
     <string name="comment_edited">编辑</string>
     <string name="notif_background_restricted_title">背景调查已经被限制</string>
@@ -1938,24 +1910,24 @@
     <string name="player_brightness_auto">自动</string>
     <string name="player_replay">重新播放</string>
     <string name="topic_score_prefix">主题证据</string>
-    <string name="discord_presence_enable">分享播放</string>
-    <string name="discord_presence_enable_description">在暂停和后台播放期间保持连接状态</string>
-    <string name="discord_presence_off">关闭</string>
-    <string name="discord_presence_not_connected">无连接</string>
-    <string name="discord_presence_ready">连接并准备</string>
-    <string name="discord_presence_connected">已连接</string>
-    <string name="discord_presence_connected_as">已连接作为 %1$s</string>
-    <string name="discord_presence_connected_account">Discord account: %1$s</string>
-    <string name="discord_presence_unavailable">在此构建中不可用</string>
-    <string name="discord_presence_connection_error">连接错误</string>
-    <string name="discord_presence_linking">等待Discord登录…</string>
-    <string name="discord_presence_connecting">连接到Discord…</string>
-    <string name="discord_presence_connect">连接Discord账号</string>
-    <string name="discord_presence_disconnect">断开连接并取消链接</string>
-    <string name="discord_presence_unlink_action">取消链接</string>
-    <string name="discord_presence_retry">重试连接</string>
-    <string name="discord_presence_connection_section">连接</string>
-    <string name="discord_presence_account">Discord账号</string>
-    <string name="discord_presence_privacy_section">隐私和账号风险</string>
-    <string name="discord_presence_privacy_title">隐私</string>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </resources>

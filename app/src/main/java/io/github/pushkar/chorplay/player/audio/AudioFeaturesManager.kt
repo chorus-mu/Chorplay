@@ -8,25 +8,11 @@ import androidx.media3.common.util.UnstableApi
 import androidx.media3.exoplayer.ExoPlayer
 import io.github.pushkar.chorplay.data.local.PlayerPreferences
 import io.github.pushkar.chorplay.player.state.EnhancedPlayerState
-import io.github.pushkar.chorplay.service.Media3MusicService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import kotlin.math.log10
 
-/**
- * Manages audio-related features like skip silence and playback speed.
- *
- * Uses ExoPlayer's built-in [ExoPlayer.setSkipSilenceEnabled] instead of a manual
- * [SilenceSkippingAudioProcessor] to avoid audio-video desync. The built-in API
- * correctly adjusts the media clock when silence is removed, keeping audio and
- * video in perfect sync.
- *
- * **External Audio Processor Compatibility:**
- * This manager works with external audio processors like James DSP.
- * The audio session ID is exposed via [Media3MusicService.currentAudioSessionId]
- * which external apps can use to apply audio effects to Chorplay's output.
- */
 @UnstableApi
 class AudioFeaturesManager(
     private val scope: CoroutineScope,
@@ -35,13 +21,7 @@ class AudioFeaturesManager(
     companion object {
         private const val TAG = "AudioFeaturesManager"
 
-        /**
-         * Get the current audio session ID for external audio processors.
-         * Returns 0 if no active session exists.
-         *
-         * External apps like James DSP can use this to target Chorplay's audio output.
-         */
-        fun getAudioSessionId(): Int = Media3MusicService.currentAudioSessionId
+        fun getAudioSessionId(): Int = 0
     }
 
     private var playerRef: ExoPlayer? = null
@@ -53,24 +33,13 @@ class AudioFeaturesManager(
     private var userVolume: Float = 1f
     private var normalizationEnabled: Boolean = true
 
-    // Keyed by media id, so a queue item the screen never loaded plays at full level rather than
-    // inheriting the gain of the video before it.
     private var loudness: Pair<String, Float>? = null
 
-    /**
-     * Set the player reference. Must be called after ExoPlayer is created.
-     * Applies any pending skip-silence state that was set before the player was ready.
-     */
     fun setPlayer(player: ExoPlayer) {
         this.playerRef = player
         if (desiredPlaybackSpeed != 1.0f) {
             player.setPlaybackParameters(PlaybackParameters(desiredPlaybackSpeed))
-            // Published as well as applied. Releasing the player resets the state flow to its
-            // defaults while this manager keeps the speed the viewer chose, so re-applying it to the
-            // new player without saying so left everything reading the state at 1x while the audio
-            // genuinely ran faster: the speed pill showed the wrong figure, and the long-press boost
-            // compared against 1x and stepped to a speed the player was already at, so holding did
-            // nothing until the speed was picked from the menu again (#867).
+
             stateFlow.value = stateFlow.value.copy(playbackSpeed = desiredPlaybackSpeed)
             Log.d(TAG, "Re-applied playback speed on new player: ${desiredPlaybackSpeed}x")
         }
@@ -82,7 +51,6 @@ class AudioFeaturesManager(
         applyVolume(player)
     }
 
-    /** Moves the gain onto the player's audio session, which ExoPlayer reports only after build. */
     fun onAudioSessionChanged() {
         val player = playerRef ?: return
         loudnessEnhancer?.release()
@@ -90,19 +58,12 @@ class AudioFeaturesManager(
         applyLoudnessGain(player)
     }
 
-    /**
-     * Clear the player reference (call on release).
-     */
     fun clearPlayer() {
         loudnessEnhancer?.release()
         loudnessEnhancer = null
         playerRef = null
     }
 
-    /**
-     * Set skip silence state internally (without persisting).
-     * Uses ExoPlayer's built-in skipSilenceEnabled for correct A/V sync.
-     */
     fun setSkipSilenceInternal(isEnabled: Boolean) {
         val player = playerRef
         if (player != null) {
@@ -114,9 +75,6 @@ class AudioFeaturesManager(
         stateFlow.value = stateFlow.value.copy(isSkipSilenceEnabled = isEnabled)
     }
 
-    /**
-     * Toggle skip silence and persist the preference.
-     */
     fun toggleSkipSilence(
         isEnabled: Boolean,
         context: Context?,
@@ -129,9 +87,6 @@ class AudioFeaturesManager(
         }
     }
 
-    /**
-     * Set playback speed.
-     */
     fun setPlaybackSpeed(
         player: ExoPlayer?,
         speed: Float,
@@ -147,14 +102,6 @@ class AudioFeaturesManager(
         }
     }
 
-    /**
-     * Sets playback gain, including above unity.
-     *
-     * ExoPlayer's own volume is documented as 0..1 and constrains anything above it, so a boost
-     * factor set there was silently dropped and the slider moved without the audio changing
-     * (#1051). Everything up to unity stays on the player; the part above it becomes amplifier gain
-     * on the session, which is what LoudnessEnhancer is for.
-     */
     fun setVolumeBoost(
         player: ExoPlayer?,
         volume: Float,
@@ -167,7 +114,6 @@ class AudioFeaturesManager(
         Log.d(TAG, "Volume set to: $volume (player=${exoPlayer.volume}, boost=${boostGainMb}mB)")
     }
 
-    /** YouTube's loudness for [mediaId], applied while that item is the one playing. */
     fun setLoudness(
         mediaId: String,
         gainDb: Float?,
@@ -188,9 +134,6 @@ class AudioFeaturesManager(
         player.volume = userVolume.coerceIn(0f, 1f) * LoudnessGain.volume(gainDb)
     }
 
-    /**
-     * Observe skip silence preference changes.
-     */
     fun observeSkipSilencePreference(
         context: Context,
         observerScope: CoroutineScope,
@@ -257,13 +200,8 @@ class AudioFeaturesManager(
     }
 }
 
-/** Ceiling for the boost gain, a little over the 2x the boost slider can ask for. */
 private const val MAX_GAIN_MB = 2000
 
-/**
- * The amplitude factor a boost asks for, as amplifier gain. A factor of 2.0 is +6.02 dB, which the
- * effect takes in hundredths of a decibel.
- */
 internal fun boostGainMillibels(volume: Float): Int =
     if (volume <= 1f) {
         0

@@ -46,7 +46,7 @@ class PlaylistFileCodecTest {
             PlaylistFileCodec.decode(
                 PlaylistFileCodec.encode("Mix", "", listOf(video("dQw4w9WgXcQ")), exportedAt = 1L, isMusic = true),
             )
-        val old = PlaylistFileCodec.decode("""{"format":"flow-playlist","version":1,"exportedAt":1,"playlist":{"name":"x"},"videos":[]}""")
+        val old = PlaylistFileCodec.decode("""{"format":"chorplay-playlist","version":1,"exportedAt":1,"playlist":{"name":"x"},"videos":[]}""")
 
         assertThat((music as PlaylistFileRead.Read).file.playlist.isMusic).isTrue()
         assertThat((old as PlaylistFileRead.Read).file.playlist.isMusic).isFalse()
@@ -65,7 +65,7 @@ class PlaylistFileCodecTest {
     fun `malformed and repeated ids are dropped on import`() {
         val text =
             """
-            {"format":"flow-playlist","version":1,"exportedAt":1,"playlist":{"name":"x"},
+            {"format":"chorplay-playlist","version":1,"exportedAt":1,"playlist":{"name":"x"},
              "videos":[{"id":"dQw4w9WgXcQ"},{"id":"'; DROP TABLE"},{"id":""},{"id":"dQw4w9WgXcQ"}]}
             """.trimIndent()
 
@@ -76,7 +76,7 @@ class PlaylistFileCodecTest {
 
     @Test
     fun `a video without a thumbnail gets YouTube's`() {
-        val text = """{"format":"flow-playlist","version":1,"exportedAt":1,"playlist":{"name":"x"},"videos":[{"id":"dQw4w9WgXcQ"}]}"""
+        val text = """{"format":"chorplay-playlist","version":1,"exportedAt":1,"playlist":{"name":"x"},"videos":[{"id":"dQw4w9WgXcQ"}]}"""
 
         val video =
             (PlaylistFileCodec.decode(text) as PlaylistFileRead.Read)
@@ -97,7 +97,7 @@ class PlaylistFileCodecTest {
 
     @Test
     fun `a file from a newer format is refused rather than half read`() {
-        val text = """{"format":"flow-playlist","version":99,"exportedAt":1,"playlist":{"name":"x"},"videos":[]}"""
+        val text = """{"format":"chorplay-playlist","version":99,"exportedAt":1,"playlist":{"name":"x"},"videos":[]}"""
 
         assertThat(PlaylistFileCodec.decode(text)).isEqualTo(PlaylistFileRead.TooNew)
     }
@@ -105,7 +105,7 @@ class PlaylistFileCodecTest {
     @Test
     fun `file names drop characters file systems reject`() {
         assertThat(PlaylistFileCodec.fileName("Mix: 80s/90s?")).isEqualTo("Mix_ 80s_90s_.json")
-        assertThat(PlaylistFileCodec.fileName("   ")).isEqualTo("flow-playlist.json")
+        assertThat(PlaylistFileCodec.fileName("   ")).isEqualTo("chorplay-playlist.json")
         assertThat(PlaylistFileCodec.fileName("a".repeat(200))).hasLength(80 + ".json".length)
     }
 }

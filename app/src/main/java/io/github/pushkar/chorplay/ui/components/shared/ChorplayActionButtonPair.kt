@@ -21,7 +21,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.Dp
 
 /** One half of a [ChorplayActionButtonPair]. */
-class FlowPairAction(
+class ChorPairAction(
     val icon: ImageVector,
     val label: String,
     val onClick: () -> Unit,
@@ -34,8 +34,8 @@ class FlowPairAction(
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun ChorplayActionButtonPair(
-    primary: FlowPairAction,
-    secondary: FlowPairAction,
+    primary: ChorPairAction,
+    secondary: ChorPairAction,
     modifier: Modifier = Modifier,
 ) {
     val height = ButtonDefaults.MediumContainerHeight

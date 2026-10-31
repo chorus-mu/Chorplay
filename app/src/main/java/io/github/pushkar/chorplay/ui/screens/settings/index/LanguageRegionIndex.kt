@@ -17,7 +17,7 @@ internal object LanguageRegionIndex {
     val contentLanguage =
         SettingEntry(
             key = "language_region.content_language",
-            title = R.string.music_content_language_title,
+            title = R.string.content_language_title,
             summary = R.string.settings_content_language_summary,
             keywords = R.string.settings_keywords_language,
             destination = page,
@@ -25,7 +25,7 @@ internal object LanguageRegionIndex {
     val contentCountry =
         SettingEntry(
             key = "language_region.content_country",
-            title = R.string.music_content_country_title,
+            title = R.string.content_country_title,
             summary = R.string.settings_content_country_summary,
             keywords = R.string.settings_keywords_region,
             destination = page,

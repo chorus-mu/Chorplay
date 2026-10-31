@@ -18,16 +18,11 @@ data class MasterManifest(
     val included: List<String>,
 ) {
     companion object {
-        const val FORMAT = "flow-master"
+        const val FORMAT = "chorplay-master"
         const val VERSION = 1
     }
 }
 
-/**
- * Lays out a master backup. Default's slice stays at the root under the names an older app restores, so an older
- * app still restores Default and ignores the rest; every other profile's slice goes under `profiles/<id>/`, photos
- * under `profile_avatars/`, and [MANIFEST] says what is there.
- */
 internal object MasterBackupZip {
     const val MANIFEST = "manifest.json"
     const val PROFILES_DIR = "profiles/"
@@ -39,7 +34,6 @@ internal object MasterBackupZip {
             ignoreUnknownKeys = true
         }
 
-    /** The manifest of [zip], or null for a master backup from before profiles, which holds one profile at its root. */
     fun readManifest(zip: File): MasterManifest? =
         ZipInputStream(zip.inputStream().buffered()).use { input ->
             var entry = input.nextEntry
@@ -57,7 +51,6 @@ internal object MasterBackupZip {
             null
         }
 
-    /** One profile's slice out of [zip]: Default's from the root when [profileId] is null, another's from its folder. */
     fun extractSlice(
         zip: File,
         profileId: String?,
@@ -85,7 +78,6 @@ internal object MasterBackupZip {
         return found
     }
 
-    /** [profileId]'s photo out of [zip] into [target]; false when the backup has none. */
     fun extractAvatar(
         zip: File,
         profileId: String,

@@ -30,8 +30,8 @@ class ProfileFoldersTest {
     private fun profileFiles(id: String) =
         listOf(
             file("files/profile_settings/$id/datastore/player_preferences.preferences_pb"),
-            file("files/profile_library/$id/databases/flow_database"),
-            file("no_backup/profiles/$id/datastore/flow_neuro_brain_v10.json"),
+            file("files/profile_library/$id/databases/chorplay_database"),
+            file("no_backup/profiles/$id/datastore/chorplay_neuro_brain_v10.json"),
             file("app_webview_$id/Default/Cookies"),
             file("shared_prefs/youtube_identity_$id.xml"),
             file("shared_prefs/music_home_cache_prefs_$id.xml"),
@@ -42,7 +42,7 @@ class ProfileFoldersTest {
         get() =
             listOf(
                 file("files/datastore/player_preferences.preferences_pb"),
-                file("databases/flow_database"),
+                file("databases/chorplay_database"),
                 file("no_backup/neuro/home_snapshots/home_1.json.gz"),
                 file("app_webview/Default/Cookies"),
                 file("shared_prefs/youtube_identity.xml"),

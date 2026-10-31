@@ -17,8 +17,8 @@
     <string name="library_section_header">Ваш контент</string>
     <string name="library_history_label">История</string>
     <string name="library_playlists_label">Плейлисты</string>
-    <string name="library_music_playlists_label">Музыкальные плейлисты</string>
-    <string name="library_music_playlists_subtitle">Ваши музыкальные коллекции</string>
+
+
     <string name="library_liked_videos_label">Нравится</string>
     <string name="library_saved_shorts_label">Сохраненные Shorts</string>
     <string name="library_watch_later_label">Смотреть позже</string>
@@ -36,12 +36,11 @@
     <string name="empty_watch_history">История просмотра пуста</string>
     <string name="empty_watch_history_body">Здесь появятся просмотренные видео</string>
     <string name="liked">Нравится</string>
-    <string name="liked_music">Понравившаяся музыка</string>
+
     <string name="liked_videos">Нравится</string>
-    <string name="share_song">Поделиться треком</string>
     <string name="empty_liked">Нет отметок «Нравится»</string>
     <string name="empty_liked_body">Здесь появится понравившийся вам контент</string>
-    <string name="song">Трек</string>
+
     <string name="video">Видео</string>
     <string name="share">Поделиться</string>
     <string name="downloaded">Скачано</string>
@@ -70,7 +69,6 @@
     <string name="remove">Удалить</string>
     <string name="related_content">Связанный контент</string>
     <string name="no_related_content">Связанный контент не найден</string>
-    <string name="share_message_template">Послушай этот трек: %1$s от %2$s\nhttps://music.youtube.com/watch?v=%3$s</string>
     <string name="hz">Гц</string>
     <string name="kbps">кбит/с</string>
     <string name="filter_discover">Обзор</string>
@@ -100,7 +98,7 @@
     <string name="play_mode_suggestion_title">Предложение режима воспроизведения</string>
     <string name="play_mode_suggestion_body">Это видео длится менее 2 минут. Хотите переключиться на специализированный плеер?</string>
     <string name="shorts_player">Shorts-плеер</string>
-    <string name="music_player">Музыкальный плеер</string>
+
     <plurals name="channels_count">
         <item quantity="one">%d канал</item>
         <item quantity="few">%d канала</item>
@@ -108,8 +106,7 @@
         <item quantity="other">%d каналов</item>
     </plurals>
     <string name="tab_videos">Видео</string>
-    <string name="tab_music">Музыка</string>
-    <string name="empty_offline_title">%1$s офлайн</string>
+<string name="empty_offline_title">%1$s офлайн</string>
     <string name="empty_offline_body">Здесь появятся ваши загрузки.\nНаслаждайтесь контентом даже без интернета.</string>
     <string name="action_go_to_home">На главную</string>
     <string name="action_delete">Удалить</string>
@@ -166,11 +163,11 @@
     <string name="new_update_available">Доступно обновление</string>
     <string name="update_available_template">Версия %1$s уже доступна</string>
     <string name="release_notes">ПРИМЕЧАНИЯ К ВЫПУСКУ</string>
-    <string name="update_flow">Обновить Chorplay</string>
+    <string name="update_chorplay">Обновить Chorplay</string>
     <string name="maybe_later">Может быть, позже</string>
     <string name="nav_home">Главная</string>
     <string name="nav_shorts">Shorts</string>
-    <string name="nav_music">Музыка</string>
+
     <string name="nav_subs">Подписки</string>
     <string name="nav_library">Библиотека</string>
     <string name="notifications">Уведомления</string>
@@ -187,14 +184,11 @@
     <string name="add_to_playlist">Добавить в плейлист</string>
     <string name="playback_header">Воспроизведение</string>
     <string name="play_next">Воспроизвести следующим</string>
-    <string name="play_next_desc">Воспроизводить после текущей песни</string>
     <string name="add_to_queue">Добавить в очередь</string>
     <string name="add_to_queue_desc">Добавить в конец очереди</string>
     <string name="audio_effects">Аудиоэффекты</string>
     <string name="more_header">Еще</string>
     <string name="view_artist">Посмотреть исполнителя</string>
-    <string name="view_album">Посмотреть альбом</string>
-    <string name="album_art">Обложка альбома</string>
     <string name="close_player">Закрыть плеер</string>
     <string name="views_template">%1$s просмотров</string>
     <string name="chapters">Главы</string>
@@ -257,9 +251,9 @@
     <string name="no_playlists_found">Плейлисты не найдены</string>
     <string name="subscribers_count_template">%1$s подписчиков</string>
     <string name="views_count_short_template">%1$s просмотров</string>
-    <string name="music_history">История музыки</string>
+
     <string name="remove_from_history">Удалить из истории</string>
-    <string name="share_song_chooser">Поделиться треком</string>
+
     <string name="time_today">Сегодня</string>
     <string name="time_yesterday">Вчера</string>
     <string name="time_earlier">Ранее</string>
@@ -269,7 +263,7 @@
     <string name="peace_and_quiet">Тишина и покой</string>
     <string name="notifications_empty_body">Вы все посмотрели! Здесь появятся новые видео из ваших подписок.</string>
     <string name="settings_title">Настройки</string>
-    <string name="settings_flow_engine_header">Движок Chorplay</string>
+    <string name="settings_chor_engine_header">Движок Chorplay</string>
     <string name="settings_active_learning">АКТИВНОЕ ОБУЧЕНИЕ</string>
     <string name="settings_reset_brain_title">Сбросить профиль рекомендаций Chorplay?</string>
     <string name="settings_reset_brain_body">Это сотрет ваш профиль Chorplay Brain.\n\n• Выученные темы забываются.\n• Сброс личностных качеств.\n• Рекомендации возвращаются к значениям по умолчанию.\n\nЭто невозможно отменить.</string>
@@ -351,7 +345,7 @@
     <string name="app_icon_picker_subtitle">Выберите стиль значка. Изменения вступят в силу сразу, а рабочий стол перезапустится.</string>
     <string name="app_icon_picker_warning">Изменение значка может на мгновение удалит Chorplay с главного экрана. При необходимости добавьте его обратно из панели приложений.</string>
     <string name="app_icon_apply_toast">Иконка обновлена - рабочий стол обновится</string>
-    <string name="icon_name_flow_red">Chorplay Red</string>
+    <string name="icon_name_chorplay_red">Chorplay Red</string>
     <string name="icon_name_amoled">AMOLED Dark</string>
     <string name="icon_name_monochrome">Монохром</string>
     <string name="icon_name_ghost">Призрак</string>
@@ -379,8 +373,8 @@
     <string name="skip_button_subtitle">Показывать кнопки перемотки на 10 сек в мини-плеере</string>
     <string name="player_nav_btn_title">Кнопки переключения</string>
     <string name="player_nav_btn_subtitle">Показывать кнопки переключения видео в мини-плеере</string>
-    <string name="lyrics_provider_title">Источник текстов песен</string>
-    <string name="lyrics_provider_subtitle">Выбор основного источника текстов песен</string>
+
+
     <string name="lyrics_provider_lrclib">LrcLib</string>
     <string name="lyrics_provider_better_lyrics">Better Lyrics</string>
     <string name="lyrics_provider_simpmusic">SimpMusic</string>
@@ -442,13 +436,11 @@
     <string name="content_settings_layout_grid">Сетка</string>
     <string name="content_settings_layout_list">Список</string>
     <string name="content_settings_grid_size_title">Размер элементов сетки</string>
-    <string name="content_settings_grid_size_subtitle">Управляет размером обложек и карточек контента</string>
     <string name="content_settings_grid_big_title">Крупный</string>
     <string name="content_settings_grid_big_desc">Большие миниатюры</string>
     <string name="content_settings_grid_small_title">Маленький</string>
     <string name="content_settings_grid_small_desc">Компактный вид</string>
     <string name="content_settings_header_preview">Предпросмотр</string>
-    <string name="content_settings_preview_album_art">Предпросмотр обложек</string>
     <string name="content_settings_preview_big">Крупный - миниатюры 128dp</string>
     <string name="content_settings_preview_small">Маленький - миниатюры 104dp</string>
     <string name="content_settings_dynamic_components">Динамические компоненты</string>
@@ -474,8 +466,8 @@
     <string name="settings_home_shorts_shelf_subtitle">Показывать горизонтальную полку Shorts на главном экране.</string>
     <string name="settings_shorts_nav_tab_title">Вкладка «Shorts» в навигации</string>
     <string name="settings_shorts_nav_tab_subtitle">Показывать вкладку «Shorts» в нижней панели навигации.</string>
-    <string name="settings_music_nav_tab_title">Вкладка «Музыка» в навигации</string>
-    <string name="settings_music_nav_tab_subtitle">Показывать вкладку «Музыка» в нижней панели навигации.</string>
+
+
     <string name="settings_search_nav_tab_title">Вкладка «Поиск» в навигации</string>
     <string name="settings_search_nav_tab_subtitle">Показывать вкладку быстрого поиска в нижней панели навигации</string>
     <string name="nav_search">Поиск</string>
@@ -700,25 +692,25 @@
     <string name="channel_search_open">Поиск по каналу</string>
     <string name="channel_search_close">Закрыть поиск</string>
     <string name="channel_search_no_results">Результаты поиска для %1$s не найдена</string>
-    <string name="deep_flow_mode_subtitle">Приостановить обучение во время просмотра</string>
-    <string name="deep_flow_learning_paused">НА ПАУЗЕ</string>
-    <string name="deep_flow_expires_in">Истекает через %s</string>
-    <string name="deep_flow_expire_duration_title">Автоматическое отключение</string>
-    <string name="deep_flow_expire_duration_subtitle">Обучение возобновится автоматически через: %s</string>
-    <string name="deep_flow_dialog_title">Продолжительность паузы</string>
-    <string name="deep_flow_dialog_body">На какое время приостановить обучение?</string>
-    <string name="deep_flow_enabled_message">Включена функция Deep Chorplay</string>
-    <string name="deep_flow_disabled_message">Функция Deep Chorplay отключена</string>
-    <string name="deep_flow_expired_message">Истекло время таймера Deep Chorplay</string>
-    <string name="deep_flow_active_until_disabled">Deep Chorplay остается активным, пока вы его не выключите</string>
-    <string name="deep_flow_duration_never">Никогда</string>
-    <string name="deep_flow_duration_1h">1 час</string>
-    <string name="deep_flow_duration_2h">2 часа</string>
-    <string name="deep_flow_duration_4h">4 часа</string>
-    <string name="deep_flow_duration_6h">6 часов</string>
-    <string name="deep_flow_duration_8h">8 часов</string>
-    <string name="deep_flow_duration_12h">12 часов</string>
-    <string name="deep_flow_duration_24h">24 часа</string>
+    <string name="deep_chor_mode_subtitle">Приостановить обучение во время просмотра</string>
+    <string name="deep_chor_learning_paused">НА ПАУЗЕ</string>
+    <string name="deep_chor_expires_in">Истекает через %s</string>
+    <string name="deep_chor_expire_duration_title">Автоматическое отключение</string>
+    <string name="deep_chor_expire_duration_subtitle">Обучение возобновится автоматически через: %s</string>
+    <string name="deep_chor_dialog_title">Продолжительность паузы</string>
+    <string name="deep_chor_dialog_body">На какое время приостановить обучение?</string>
+    <string name="deep_chor_enabled_message">Включена функция Deep Chorplay</string>
+    <string name="deep_chor_disabled_message">Функция Deep Chorplay отключена</string>
+    <string name="deep_chor_expired_message">Истекло время таймера Deep Chorplay</string>
+    <string name="deep_chor_active_until_disabled">Deep Chorplay остается активным, пока вы его не выключите</string>
+    <string name="deep_chor_duration_never">Никогда</string>
+    <string name="deep_chor_duration_1h">1 час</string>
+    <string name="deep_chor_duration_2h">2 часа</string>
+    <string name="deep_chor_duration_4h">4 часа</string>
+    <string name="deep_chor_duration_6h">6 часов</string>
+    <string name="deep_chor_duration_8h">8 часов</string>
+    <string name="deep_chor_duration_12h">12 часов</string>
+    <string name="deep_chor_duration_24h">24 часа</string>
     <string name="notif_master_toggle">Включить уведомления</string>
     <string name="notif_master_toggle_subtitle">Позвольте Chorplay проверять наличие новых видео в фоновом режиме</string>
     <string name="notif_check_interval_disabled">Проверка уведомлений в фоновом режиме отключена</string>
@@ -742,7 +734,7 @@
     <string name="appearance_role_on_background">На фоне</string>
     <string name="appearance_role_surface">Поверхность</string>
     <string name="appearance_role_on_surface">На поверхности</string>
-    <string name="deep_flow_mode_title">Режим Deep Chorplay</string>
+    <string name="deep_chor_mode_title">Режим Deep Chorplay</string>
     <string name="done">Готово</string>
     <string name="next_up">Следующий</string>
     <string name="cast_to_tv">Транслировать на ТВ</string>
@@ -764,7 +756,7 @@
     <string name="appearance_system_defaults_subtitle">Выберите, какая тема будет использоваться при переключении устройства между светлым и темным режимами.</string>
     <string name="appearance_system_light_theme">Тема в светлом режиме</string>
     <string name="appearance_system_dark_theme">Тема в темном режиме</string>
-    <string name="icon_name_flow_light">Chorplay Light</string>
+    <string name="icon_name_chorplay_light">Chorplay Light</string>
     <string name="icon_name_material_sky">Material Sky</string>
     <string name="icon_name_material_mint">Material Mint</string>
     <string name="player_appearance_brightness_gesture_title">Жест яркости</string>
@@ -789,8 +781,8 @@
     <string name="history_tab_videos">Видео</string>
     <string name="history_tab_shorts">Шортсы</string>
     <string name="empty_liked_videos">Нет понравившихся видео</string>
-    <string name="empty_liked_music">Нет понравившейся музыки</string>
-    <string name="empty_liked_music_body">Здесь появятся понравившиеся вам треки</string>
+
+
     <string name="hide_channel_shorts">Скрывать Shorts с этого канала</string>
     <string name="show_channel_shorts">Показывать Shorts с этого канала</string>
     <string name="appearance_role_on_primary">На первичном</string>
@@ -839,8 +831,7 @@
     <string name="label_description_optional">Описание (Опционально)</string>
     <string name="now_playing">СЕЙЧАС ИГРАЕТ</string>
     <string name="voice_search_cd">Голосовой поиск</string>
-    <string name="filter_albums">Альбомы</string>
-    <string name="filter_songs">Треки</string>
+
     <string name="filter_community_playlists">Плейлисты сообщества</string>
     <string name="section_top_result">Лучший результат</string>
     <string name="subtitle_artist">Исполнитель</string>
@@ -853,7 +844,7 @@
     <string name="status_playing">Играет</string>
     <string name="status_downloaded">Скачано</string>
     <string name="downloading_template">Скачивается %1$s...</string>
-    <string name="search_music_placeholder">Искать музыку</string>
+
     <string name="search_history_title">Поиск и история</string>
     <string name="save_search_history_title">Сохранять историю поиска</string>
     <string name="save_searches_subtitle">Сохраняйте историю поиска для быстрого доступа</string>
@@ -887,12 +878,12 @@
     <string name="error_not_available">Видео недоступен</string>
     <string name="error_not_available_hint">Возможно, это видео удалено, скрыто автором или заблокировано YouTube.</string>
     <string name="subscriptions_video_section_title">Видео</string>
-    <string name="subscriptions_music_section_title">Музыка</string>
+
     <string name="upcoming_video_reminder_action">Напомнить</string>
     <string name="upcoming_video_overlay_title">Видео запланировано. Просмотр станет доступен после начала трансляции.</string>
     <string name="subscriptions_quick_access_title">Быстрый доступ</string>
-    <string name="subscriptions_music_chip_label">Музыка</string>
-    <string name="subscriptions_music_badge_cd">Музыка (подписка)</string>
+
+
     <string name="no_subscriptions_found">Подписки не найдены</string>
     <string name="player_appearance_remember_brightness_title">Запоминать уровень яркости</string>
     <string name="player_appearance_remember_brightness_subtitle">Сохраните установленный уровень яркости для следующего видео</string>
@@ -935,18 +926,18 @@
     <string name="copy_video_link">Скопировать ссылку на видео</string>
     <string name="player_settings_display">Отображение</string>
     <string name="category_gaming">Видеоигры</string>
-    <string name="screen_title_music">МУЗЫКА</string>
+
     <string name="speed_normal">Обычная</string>
     <string name="player_background_style_blur_gradient">Размытие + Градиент</string>
     <string name="player_settings_video_codec_auto_desc">Авто (предпочтительно H.264)</string>
-    <string name="music_quality_auto">Авто</string>
-    <string name="music_quality_header">Качество аудио</string>
-    <string name="music_quality_high">Высокое</string>
-    <string name="music_quality_medium">Среднее</string>
-    <string name="music_quality_low">Низкое</string>
+
+
+
+
+
     <string name="player_settings_video_codec_dialog_title">Видеокодек по умолчанию</string>
     <string name="player_settings_video_codec">Видеокодек по умолчанию</string>
-    <string name="sleep_timer_end_of_song">По окончании трека / видео</string>
+    <string name="sleep_timer_end_of_video">По окончании трека / видео</string>
     <string name="sleep_timer_duration">Продолжительность</string>
     <string name="sleep_timer_min_label">5 мин</string>
     <string name="sleep_timer_max_label">120 мин</string>
@@ -1000,14 +991,12 @@
     <string name="similar_content">Похожий контент</string>
     <string name="shorts_player_ui_default">По умолчанию</string>
     <string name="recognition_clear_history">Очистить историю?</string>
-    <string name="recognition_clear_history_body">Это действие удалит все распознанные треки. Отменить его будет нельзя.</string>
-    <string name="recognition_history_empty">Здесь появятся распознанные треки</string>
     <string name="local_media_rescan">Пересканировать</string>
     <string name="local_media_scanning">Сканирование устройства…</string>
     <string name="local_media_empty_title">Медиафайлы не найдены</string>
     <string name="local_media_permission_body">Разрешите доступ к медиа, чтобы Chorplay мог находить и воспроизводить локальные видео и музыку.</string>
     <string name="history_tab_local_videos">Видео на устройстве</string>
-    <string name="history_tab_local_music">Музыка на устройстве</string>
+
     <string name="share_link_only_template">https://youtube.com/watch?v=%1$s</string>
     <string name="live_chat_hide">Скрыть чат</string>
     <string name="live_chat_jump_to_latest">Переход к последнему сообщению</string>
@@ -1053,12 +1042,12 @@
     <string name="period_six_months">6 месяцев</string>
     <string name="period_one_year">1 год</string>
     <string name="import_data_title">Импорт данных</string>
-    <string name="import_flow_backup_success">Резервная копия Chorplay импортирована</string>
-    <string name="import_flow_backup_failed_template">Ошибка импорта резервной копии Chorplay: %1$s</string>
+    <string name="import_chorplay_backup_success">Резервная копия Chorplay импортирована</string>
+    <string name="import_chorplay_backup_failed_template">Ошибка импорта резервной копии Chorplay: %1$s</string>
     <string name="import_newpipe_failed_template">Ошибка импорта резервной копии NewPipe: %1$s»</string>
     <string name="import_youtube_failed_template">Ошибка импорта резервной копии YouTube: %1$s»</string>
-    <string name="import_flow_backup_item_title">Импорт резервной копии Chorplay</string>
-    <string name="import_flow_backup_desc">Восстановление истории, настроек и подписок из файла резервной копии Chorplay.</string>
+    <string name="import_chorplay_backup_item_title">Импорт резервной копии Chorplay</string>
+    <string name="import_chorplay_backup_desc">Восстановление истории, настроек и подписок из файла резервной копии Chorplay.</string>
     <string name="import_from_newpipe">Импорт из NewPipe</string>
     <string name="import_from_newpipe_desc">Импорт подписок из файла экспорта NewPipe (JSON).</string>
     <string name="import_from_libretube">Импорт из LibreTube</string>
@@ -1130,7 +1119,7 @@
     <string name="category_creative">Творчество</string>
     <string name="category_science_nature">Наука и природа</string>
     <string name="category_news_current_events">Новости и события</string>
-    <string name="flow_control_center">Центр управления Chorplay</string>
+    <string name="chorplay_control_center">Центр управления Chorplay</string>
     <string name="loading_neural_matrix">Загрузка нейроматрицы...</string>
     <string name="neural_interest_map_subtitle">Ваша нейрокарта предпочтений</string>
     <string name="cognitive_fingerprint">Когнитивный профиль</string>
@@ -1145,12 +1134,9 @@
     <string name="stats_interactions">Взаимодействия</string>
     <string name="stats_topics">Темы</string>
     <string name="empty_bubble_cloud_message">Смотрите видео, чтобы сформировать карту предпочтений!</string>
-    <string name="flow_neural_profile_export_subject">Экспорт нейропрофиля Chorplay</string>
-    <string name="screen_title_music_library">Музыкальная библиотека</string>
+    <string name="chorplay_neural_profile_export_subject">Экспорт нейропрофиля Chorplay</string>
+
     <string name="header_your_collection">Ваша коллекция</string>
-    <string name="subtitle_liked_music">Понравившиеся треки</string>
-    <string name="subtitle_history">Вы слушали</string>
-    <string name="empty_music_playlists">Музыкальных плейлистов пока нет</string>
     <string name="rename_playlist_title">Переименовать плейлист</string>
     <string name="link_copied">Ссылка скопирована</string>
     <string name="section_singles">Синглы</string>
@@ -1158,8 +1144,8 @@
     <string name="section_fans_also_like">Слушателям также нравится</string>
     <string name="artist_views_template">%1$s • %2$s просмотров</string>
     <string name="empty_moods_genres">Нет доступных жанров и настроений</string>
-    <string name="section_music_videos">Клипы</string>
-    <string name="section_music_videos_for_you">Клипы для вас</string>
+
+
     <string name="section_live_performances">Живые выступления</string>
     <string name="subtitle_single_template">Сингл · %1$s</string>
     <string name="section_popular_artists">Популярные исполнители</string>
@@ -1169,18 +1155,15 @@
     <string name="radio">Радио</string>
     <string name="label_preset">Пресет</string>
     <string name="label_parametric_equalizer">Параметрический эквалайзер</string>
-    <string name="voice_search_prompt">Скажите, что хотите послушать</string>
     <string name="top_picks_for_you">Лучшее для вас</string>
     <string name="no_results_found">Ничего не найдено</string>
     <string name="no_tracks_available">Нет доступных треков</string>
     <string name="tab_favorites">Избранное</string>
-    <string name="create_playlist_subtitle">Организуйте свою музыку</string>
     <string name="empty_playlists_title">Здесь пока нет плейлистов</string>
     <string name="empty_playlists_subtitle">Создай свой первый плейлист, чтобы собрать любимые треки</string>
     <string name="empty_favorites_title">В избранном пока пусто</string>
     <string name="empty_favorites_subtitle">Нажмите на иконку сердечка у любого трека, чтобы добавить его в избранное</string>
     <string name="empty_history_title">Здесь пока нет истории</string>
-    <string name="empty_history_subtitle">Начните слушать музыку, чтобы здесь появилась история прослушиваний</string>
     <string name="empty_downloads_title">Здесь пока нет скачанных треков</string>
     <string name="empty_downloads_subtitle">Скачивайте треки, чтобы слушать их без интернета</string>
     <string name="total_size">Общий размер</string>
@@ -1197,7 +1180,7 @@
     <string name="remove_incomplete_downloads">Удалить незавершенные загрузки</string>
     <string name="cast_connected">Трансляция</string>
     <string name="cast_disconnected">Трансляция отключена</string>
-    <string name="flow_is_up_to_date">Установлена последняя версия Chorplay!</string>
+    <string name="chorplay_is_up_to_date">Установлена последняя версия Chorplay!</string>
     <string name="sync_collection_subscriptions">Подписки</string>
     <string name="sync_collection_settings">Настройки</string>
     <string name="sync_collection_recommendation_profile">Профиль рекомендаций</string>
@@ -1262,8 +1245,8 @@
     <string name="error_playback_failed">Не удалось воспроизвести</string>
     <string name="error_playback_failed_hint">Произошла непредвиденная ошибка плеера. Повторите попытку.</string>
     <string name="error_extraction_failed">Не удалось обработать данные видео</string>
-    <string name="music_playback_warning_final">Не удалось загрузить трек после нескольких попыток. Если сбои повторяются, попробуйте другую сеть или VPN.</string>
-    <string name="music_playback_warning_generic">Не удалось воспроизвести музыку. Повторите попытку или смените сеть, если это повторится.</string>
+
+
     <string name="time_window_afternoon">12:00 - 18:00</string>
     <string name="time_window_evening">18:00 – 00:00</string>
     <string name="blocked_channels_header">Заблокированные каналы</string>
@@ -1273,9 +1256,9 @@
     <string name="reset_profile_dialog_message">Это очистит локальный профиль рекомендаций и начнет обучение заново.</string>
     <string name="taste_chart_now">Сейчас</string>
     <string name="history_delete_shorts_body">Это действие удалит все Shorts из истории просмотра. Другие видео останутся.</string>
-    <string name="recognize_music">Распознать музыку</string>
+
     <string name="recognition_history">История распознавания</string>
-    <string name="tap_to_recognize">Нажмите, чтобы распознать</string>
+
     <string name="no_match_found">Совпадений не найдено</string>
     <string name="try_again">Попробуйте снова</string>
     <string name="donation_prompt_message">Chorplay бесплатен, имеет открытый исходный код и не содержит рекламы. Если оно заслужило место на вашем телефоне, небольшая поддержка сохранит его.</string>
@@ -1283,15 +1266,14 @@
     <string name="import_yt_history_empty_error">В этом файле не найдена история просмотра. Убедитесь, что это файл watch-history.html из YouTube Архиватора.</string>
     <string name="import_yt_playlist_empty_error">Файл CSV не содержит данных о видео. Убедитесь, что это CSV-файл плейлиста из YouTube Архиватора.</string>
     <string name="error_extraction_failed_hint">Возможно, YouTube обновил свой формат. Chorplay скоро обновится – попробуйте повторить попытку позже.</string>
-    <string name="music_playback_warning_forbidden">Доступ к музыкальному потоку запрещен. Возможно, YouTube ограничил вашу IP-адрес. Попробуйте обновить страницу или сменить сеть/VPN.</string>
-    <string name="import_from_metrolist_desc">Импорт музыкальных плейлистов из резервной копии Metrolist (.zip). Плейлисты появятся в вашей музыкальной библиотеке.</string>
-    <string name="music_playback_warning_network">Не удалось получить музыкальный поток: проблема с сетью. Проверьте соединение или смените точку доступа.</string>
+
+
+
     <string name="sync_error_peer_also_send">На другом устройстве также выбран режим «Отправка». Переключите его в режим «Получение» и попробуйте снова.</string>
     <string name="sync_error_peer_also_receive">На другом устройстве также выбран режим «Прием». Переключите его в режим «Передача» и попробуйте снова.</string>
     <string name="stats_disclaimer">На основе вашей истории просмотра в Chorplay. Фактическое использование может отличаться.</string>
     <string name="sync_send_show_qr_hint">Другое устройство сканирует этот код.</string>
     <string name="sync_error_qr_expired">Срок действия этого кода истек. Попросите другое устройство создать новый код. Если коды продолжают сразу же становиться недействительными, проверьте, правильно ли установлены дата и время на обоих устройствах.</string>
-    <string name="import_yt_music_playlist_desc">Импорт плейлиста из CSV-файла YouTube Music Архиватора. Он отобразится в разделе «Музыкальные плейлисты».</string>
     <string name="import_master_backup_desc">Восстановите данные приложения и движка из единого файла полной резервной копии</string>
     <string name="sync_error_no_network">Нет подключения к Wi-Fi/LAN. Подключите оба устройства к одной сети или точке доступа.</string>
     <string name="export_watch_history_desc">Экспорт истории просмотра YouTube в JSON-файл (импорт в LibreTube и Chorplay)</string>
@@ -1318,18 +1300,17 @@
     <string name="play_next_video_desc">Воспроизводить после текущего видео</string>
     <string name="add_video_to_queue_desc">Добавить в конец очереди</string>
     <string name="support_donations_title">Поддержка и донаты</string>
-    <string name="support_flow_dev_title">Поддержка разработки Chorplay</string>
-    <string name="support_flow_dev_desc">Если Chorplay вам полезен, вы можете поддержать его на Open Collective, Patreon или с помощью криптовалюты ниже. Спасибо!</string>
-    <string name="support_flow_patreon">Поддержать Chorplay на Patreon</string>
+    <string name="support_chorplay_dev_title">Поддержка разработки Chorplay</string>
+    <string name="support_chorplay_dev_desc">Если Chorplay вам полезен, вы можете поддержать его на Open Collective, Patreon или с помощью криптовалюты ниже. Спасибо!</string>
+    <string name="support_chorplay_patreon">Поддержать Chorplay на Patreon</string>
     <string name="thank_you_support_message">Спасибо за вашу поддержку! ❤️</string>
-    <string name="deep_flow_save_history_subtitle">Сохранять историю просмотров, не используя её для формирования рекомендаций</string>
-    <string name="deep_flow_save_history_title">Записывать историю просмотра</string>
-    <string name="player_background_style_title">Фон музыкального плеера</string>
+    <string name="deep_chor_save_history_subtitle">Сохранять историю просмотров, не используя её для формирования рекомендаций</string>
+    <string name="deep_chor_save_history_title">Записывать историю просмотра</string>
     <string name="player_background_style_default">Поверхность по умолчанию</string>
     <string name="player_background_style_gradient">Палитра градиентов</string>
     <string name="player_background_style_blur">Размытая обложка</string>
-    <string name="player_appearance_hide_music_artwork_title">Скрыть обложку музыкального плеера</string>
-    <string name="player_appearance_hide_music_artwork_subtitle">Отображать вместо этого значок приложения в цвете извлеченной обложки</string>
+
+
     <string name="player_appearance_shorts_ui_title">Интерфейс Shorts-плеера</string>
     <string name="shorts_player_ui_simple">Простой</string>
     <string name="shorts_player_ui_impressive">Подробный</string>
@@ -1418,7 +1399,7 @@
     <string name="internal_storage_label">Внутреннее хранилище</string>
     <string name="location_label">Расположение</string>
     <string name="video_download_location_label">Место загрузки видео</string>
-    <string name="music_download_location_label">Место загрузки музыки</string>
+
     <string name="preferences_header">Настройки</string>
     <string name="default_video_quality_label">Качество видео по умолчанию</string>
     <string name="default_download_codec_auto_subtitle">Использует ваш последний выбор или кодек текущего видео</string>
@@ -1440,7 +1421,6 @@
     <string name="address_copied_toast">Адрес скопирован в буфер обмена</string>
     <string name="donation_address_clip_label">Адрес для пожертвований</string>
     <string name="similar_to">Похоже на</string>
-    <string name="section_top_albums">Лучшие альбомы</string>
     <string name="section_similar_to">Похоже на %1$s</string>
     <string name="subtitle_similar_to">На основе вашей истории прослушивания</string>
     <string name="subtitle_community_playlists">Плейлисты сообщества</string>
@@ -1463,11 +1443,11 @@
     <string name="playlist_sort_date_published_oldest">Дата публикации (сначала старые)</string>
     <string name="remove_selected_playlist_text">Они будут удалены из этого плейлиста.</string>
     <string name="remove_selected_watch_later_text">Они будут удалены из «Смотреть позже».</string>
-    <string name="welcome_to_flow">Добро пожаловать в Chorplay</string>
+    <string name="welcome_to_chorplay">Добро пожаловать в Chorplay</string>
     <string name="onboarding_subtitle">Расскажите нам о ваших предпочтениях</string>
     <string name="onboarding_instructions">Выберите как минимум 3 темы для персонализации</string>
     <string name="onboarding_interests_title">Что вам нравится?</string>
-    <string name="import_music_apps_section_subtitle">Импорт музыкальной библиотеки из других плееров</string>
+
     <string name="shorts_saved">Short сохранен</string>
     <string name="shorts_unsaved">Short не сохранен</string>
     <string name="max_history_size_title">Максимальный размер истории</string>
@@ -1491,8 +1471,8 @@
     <string name="import_master_backup_title">Импорт полной резервной копии</string>
     <string name="import_master_backup_success">Полная резервная копия успешно восстановлена</string>
     <string name="import_master_backup_failed">Не удалось импортировать полную резервную копию</string>
-    <string name="import_music_apps_section_title">Музыкальные приложения</string>
-    <string name="import_from_metrolist">Импорт из Metrolist</string>
+
+
     <string name="import_from_youtube">Импорт из YouTube</string>
     <string name="import_from_youtube_desc">Импорт подписок из YouTube Архиватора (CSV).</string>
     <string name="import_subscriptions_section_title">Подписки</string>
@@ -1507,7 +1487,6 @@
     <string name="import_yt_watch_history_desc">Импорт истории просмотра из YouTube Архиватора (watch-history.html).</string>
     <string name="import_yt_playlist_desc">Импорт плейлиста из CSV-файла YouTube Архиватора (Playlist-&lt;name&gt;.csv).</string>
     <string name="import_yt_playlist">Импорт плейлиста YouTube</string>
-    <string name="import_yt_music_playlist">Импорт плейлиста YouTube Music</string>
     <string name="import_yt_history_failed_template">Не удалось импортировать историю просмотра: %1$s</string>
     <string name="import_yt_playlist_failed_template">Не удалось импортировать плейлист: %1$s</string>
     <string name="onboarding_backup_restore_section">Резервное копирование и восстановление</string>
@@ -1570,10 +1549,8 @@
     <string name="no_watch_data">Данных о просмотрах пока нет</string>
     <string name="error_private_video">Видео с ограниченным доступом</string>
     <string name="download_no_compatible_audio">Нет совместимого аудиопотока – загрузка невозможна</string>
-    <string name="subtitle_song_prefix">Трек • %1$s</string>
-    <string name="recognition_search_history">Поиск распознанных треков</string>
     <string name="daily_discover_sounds_like">Звучит как %1$s</string>
-    <string name="sync_error_qr_not_flow">Это не похоже на корректные данные для подключения Chorplay.</string>
+    <string name="sync_error_qr_not_chorplay">Это не похоже на корректные данные для подключения Chorplay.</string>
     <string name="appearance_customizer_variant_title">%1$s пользовательская тема</string>
     <string name="appearance_variant_amoled">AMOLED</string>
     <string name="appearance_role_primary_container">Первичный контейнер</string>
@@ -1606,7 +1583,7 @@
     <string name="appearance_color_alpha">Непрозрачность</string>
     <string name="appearance_navigate_back">Вернуться назад</string>
     <string name="appearance_selected">Выбрано</string>
-    <string name="icon_name_flow_play">Chorplay Play</string>
+    <string name="icon_name_chorplay_play">Chorplay Play</string>
     <string name="player_fullscreen_seekbar_width_value">%1$d dp</string>
     <string name="lyrics_provider_lyrics_plus">LyricsPlus</string>
     <string name="currently_blocked">В данный момент заблокировано</string>
@@ -1640,7 +1617,7 @@
     <string name="newpipe_extractor_subtitle">Основная библиотека парсинга</string>
     <string name="about_license">Лицензия</string>
     <string name="about_changelog">Список изменений</string>
-    <string name="whats_new_in_flow">Что нового в Chorplay</string>
+    <string name="whats_new_in_chorplay">Что нового в Chorplay</string>
     <string name="about_device_info">Информация об устройстве</string>
     <string name="app_logo_desc">Логотип приложения</string>
     <string name="board_label">Аппаратная платформа: %1$s</string>
@@ -1673,7 +1650,7 @@
     <string name="placeholder_playlist_name">Мой потрясающий плейлист</string>
     <string name="placeholder_playlist_desc">Мои любимые треки...</string>
     <string name="title_add_to_playlist">Добавить в плейлист</string>
-    <string name="loading_music">Загрузка музыки...</string>
+
     <string name="section_listen_again">Послушать еще раз</string>
     <string name="section_daily_discover">Открытия дня</string>
     <string name="section_quick_picks">Рекомендации</string>
@@ -1689,14 +1666,11 @@
     <string name="section_new_releases">Новинки</string>
     <string name="genre_mix_template">Микс: %1$s</string>
     <string name="section_vibe_vibes">Настроение: %1$s</string>
-    <string name="playlist_description_community">Подборка %1$s музыки от нашего сообщества</string>
     <string name="template_freq">%1$dHz</string>
     <string name="template_gain">%1$.1fdB</string>
     <string name="template_q">%1$.1f</string>
-    <string name="subtitle_album_template">Альбом • %1$s</string>
     <string name="subtitle_playlist_template">Плейлист • %1$s</string>
     <string name="plays_count_template">• %1$s прослушиваний</string>
-    <string name="album_year_template">Альбом • %1$s • %2$s</string>
     <string name="search_source_template">Поиск: %1$s</string>
     <string name="artist_source_template">Исполнитель: %1$s</string>
     <string name="fullscreen">Полный экран</string>
@@ -1750,7 +1724,7 @@
     <string name="upcoming_waiting_count">В ожидании: %1$s</string>
     <string name="upcoming_video_starts_in">Начало через</string>
     <string name="subscriptions_compact_header">Перейти к каналам, на которые вы недавно подписались.</string>
-    <string name="subscriptions_compact_header_with_music">Музыкальные каналы сгруппированы в строке, чтобы лента оставалась компактной.</string>
+
     <string name="content_settings_shorts_player_prompt_title">Предлагать Shorts-плеер</string>
     <string name="content_settings_shorts_player_prompt_subtitle">Спросите, прежде чем открывать видео продолжительностью менее 2 минут в виде коротких видео.</string>
     <string name="common_topics_to_block">Часто блокируемые темы</string>
@@ -1835,7 +1809,7 @@
     <string name="listening">Слушаю…</string>
     <string name="processing">Обработка…</string>
     <string name="recognition_error">Не удалось распознать</string>
-    <string name="search_in_flow">Поиск в Chorplay</string>
+    <string name="search_in_chorplay">Поиск в Chorplay</string>
     <string name="close_popup_player">Закрыть всплывающий плеер</string>
     <string name="topic_score_prefix">Оценка</string>
     <string name="channel_sort_latest">Новые</string>
@@ -1856,7 +1830,6 @@
     <string name="logs_copy_failed">Не удалось скопировать отчет</string>
     <string name="channel_error_log_clip_label">Отчет об ошибке Chorplay</string>
     <string name="add_comment_placeholder">Оставьте комментарий...</string>
-    <string name="search_empty_prompt">Поиск видео, музыки и не только</string>
     <string name="channel_search_failed">Не удалось выполнить поиск по каналу</string>
     <string name="player_portrait_seekbar_width_title">Ширина прогресс-бара в портретном режиме</string>
     <string name="player_portrait_seekbar_width_spaced">С отступами</string>
@@ -1884,13 +1857,12 @@
     <string name="content_settings_hide_watched_subscriptions_subtitle">Скрыть просмотренные видео из подписок</string>
     <string name="desc_more">...еще</string>
     <string name="widget_now_playing_label">Сейчас играет</string>
-    <string name="widget_now_playing_description">Управление воспроизведением в Chorplay</string>
     <string name="widget_quick_actions_label">Быстрые действия</string>
     <string name="widget_quick_actions_description">Поиск в Chorplay и быстрый переход к загрузкам, истории или распознаванию</string>
-    <string name="widget_recognize_label">Распознать музыку</string>
-    <string name="widget_recognize_description">Узнайте одним касанием, какая песня играет рядом</string>
-    <string name="widget_turntable_description">Ваша музыка в виде вращающейся пластинки</string>
-    <string name="widget_turntable_label">Пластинка</string>
+
+
+
+
     <string name="widget_recently_played_label">Продолжить просмотр</string>
     <string name="widget_recently_played_description">Продолжить просмотр видео с того места, где остановились</string>
     <string name="widget_recently_played">Продолжить просмотр</string>
@@ -1903,7 +1875,6 @@
     <string name="widget_next">Следующий трек</string>
     <string name="widget_previous">Предыдущий трек</string>
     <string name="widget_like">Нравится</string>
-    <string name="widget_artwork">Обложка альбома</string>
     <string name="widget_open_downloads">Открыть загрузки</string>
     <string name="widget_open_history">Открыть историю</string>
     <string name="widget_no_recent">Здесь появятся просмотренные видео</string>
@@ -1912,8 +1883,8 @@
     <string name="playlist_filter_owned">Создано</string>
     <string name="playlist_creation_menu_open">Создать плейлист</string>
     <string name="playlist_creation_menu_close">Закрыть меню создания плейлиста</string>
-    <string name="content_settings_restored_music_mini_player_title">Восстанавливать мини-плеер с музыкой</string>
-    <string name="content_settings_restored_music_mini_player_subtitle">Покажите свой последний музыкальный сеанс после его восстановления</string>
+
+
     <string name="content_settings_hide_unplayable_subscriptions_title">Скрывать неподдерживаемые видео из подписок</string>
     <string name="content_settings_hide_unplayable_subscriptions_subtitle">Скрыть частные, удаленные и ограниченные видео, которые не воспроизводятся</string>
     <string name="about_creator_name">Pushkar</string>
@@ -1924,54 +1895,54 @@
     <string name="equalizer">Эквалайзер</string>
     <string name="action_save_preset">Сохранить пресет</string>
     <string name="label_preset_name">Название пресета</string>
-    <string name="discord_presence_title">Статус в Discord</string>
-    <string name="discord_presence_enable">Делиться статусом воспроизведения</string>
-    <string name="discord_presence_enable_description">Сохранять подключение во время пауз и в фоновом режиме</string>
-    <string name="discord_presence_off">Отключено</string>
-    <string name="discord_presence_not_connected">Нет подключения</string>
-    <string name="discord_presence_ready">Подключено и готово к работе</string>
-    <string name="discord_presence_ready_as">Подключено как %1$s · активно при воспроизведении</string>
-    <string name="discord_presence_connected">Подключено</string>
-    <string name="discord_presence_connected_as">Подключено как %1$s</string>
-    <string name="discord_presence_connected_account">Аккаунт Discord: %1$s</string>
-    <string name="discord_presence_unavailable">Не поддерживается в этой сборке</string>
-    <string name="discord_presence_connection_error">Ошибка подключения</string>
-    <string name="discord_presence_linking">Ожидание авторизации в Discord…</string>
-    <string name="discord_presence_connecting">Подключение к Discord…</string>
-    <string name="discord_presence_connect">Подключить аккаунт Discord</string>
-    <string name="discord_presence_connect_action">Подключить</string>
-    <string name="discord_presence_disconnect">Отключить и отвязать аккаунт</string>
-    <string name="discord_presence_unlink_action">Отвязать</string>
-    <string name="discord_presence_retry">Повторить попытку</string>
-    <string name="discord_presence_description">Показывайте, во что вы играете, в своём статусе в Discord.</string>
-    <string name="discord_presence_connection_section">Подключение</string>
-    <string name="discord_presence_account">Аккаунт Discord</string>
-    <string name="discord_presence_privacy_section">Конфиденциальность и риски</string>
-    <string name="discord_presence_privacy_title">Конфиденциальность</string>
-    <string name="discord_presence_privacy_body">Функция Chorplay передает информацию о том, во что вы играете: название, автора, иллюстрации и ваш игровой прогресс. По умолчанию отключена. Ваш токен Discord зашифрован и никогда не сохраняется в логах.</string>
-    <string name="discord_presence_gateway_warning">Этот способ выполняет вход с использованием вашего токена Discord вместо стандартной процедуры авторизации. Это нарушает Условия использования Discord и может привести к ограничению или блокировке вашего аккаунта.</string>
-    <string name="discord_presence_risk_dialog_title">Принять риски для аккаунта Discord?</string>
-    <string name="discord_presence_risk_dialog_body">При подключении вы предоставляете приложению Chorplay свой токен Discord. Он хранится на этом устройстве в зашифрованном виде и передается только в Discord. Этот способ нарушает Условия использования Discord, поэтому ваш аккаунт может быть ограничен или заблокирован.</string>
-    <string name="discord_presence_risk_accept">Я понимаю риски, подключить</string>
-    <string name="discord_error_not_initialized">Статус Discord не инициализирован.</string>
-    <string name="discord_error_enable_before_connect">Включите статус Discord перед подключением аккаунта.</string>
-    <string name="discord_error_unavailable">Статус Discord недоступен в этой сборке.</string>
-    <string name="discord_error_open_flow">Откройте Chorplay перед подключением к Discord.</string>
-    <string name="discord_error_connection_in_progress">Подключение к Discord уже выполняется.</string>
-    <string name="discord_error_login_timeout">Время авторизации в Discord истекло.</string>
-    <string name="discord_error_login_cancelled">Подключение к Discord отменено.</string>
-    <string name="discord_error_connection_incomplete">Не удалось завершить подключение к Discord.</string>
-    <string name="discord_error_empty_token">От Discord получен пустой токен сессии.</string>
-    <string name="discord_error_missing_application_id">В этой сборке отсутствует идентификатор приложения Discord.</string>
-    <string name="discord_error_gateway_timeout">Время подключения к шлюзу Discord истекло.</string>
-    <string name="discord_error_gateway_reconnect">Discord запросил повторное подключение.</string>
-    <string name="discord_error_session_rejected">Сессия Discord отклонена. Подключите аккаунт заново.</string>
-    <string name="discord_error_gateway_failed">Не удалось подключиться к шлюзу Discord.</string>
-    <string name="discord_error_heartbeat_unacknowledged">Шлюз Discord не ответил на запрос связи.</string>
-    <string name="discord_error_heartbeat_failed">Не удалось проверить связь со шлюзом Discord.</string>
-    <string name="discord_account_fallback">Пользователь Discord</string>
-    <string name="discord_presence_playing_fallback">Играет в Chorplay</string>
-    <string name="discord_presence_by_creator">от %1$s</string>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <string name="settings_item_interface_mode">Режим интерфейса</string>
     <string name="settings_item_interface_mode_subtitle">Мобильный, ТВ или автовыбор</string>
     <string name="interface_mode_title">Режим интерфейса</string>
@@ -2034,7 +2005,7 @@
     <string name="tv_music_no_lyrics">Текст песни не найден</string>
     <string name="tv_music_radio">Радио</string>
     <string name="tv_settings_appearance">Внешний вид</string>
-    <string name="tv_settings_flow_engine">Движок Chorplay</string>
+    <string name="tv_settings_chor_engine">Движок Chorplay</string>
     <string name="tv_settings_sync">Синхронизация устройств</string>
     <string name="tv_sync_qr_session_active">Код действителен, пока открыт этот экран.</string>
     <string name="tv_remote_guide_title">Справка по пульту и клавиатуре</string>
@@ -2070,11 +2041,11 @@
     <string name="ui_navigate">Навигация</string>
     <string name="ui_selected">Выбрано</string>
     <string name="ui_options">Параметры</string>
-    <string name="ui_flow_logo">Логотип Chorplay</string>
+    <string name="ui_chorplay_logo">Логотип Chorplay</string>
     <string name="ui_grid_view">Сетка</string>
     <string name="ui_list_view">Список</string>
     <string name="ui_back">Назад</string>
-    <string name="ui_add_songs">Добавить треки</string>
+
     <string name="ui_close_search">Закрыть поиск</string>
     <string name="ui_save_to_library">Сохранить в библиотеку</string>
     <string name="ui_remove_from_library">Удалить из библиотеки</string>
@@ -2083,9 +2054,9 @@
     <string name="ui_added">Добавлено</string>
     <string name="ui_sync_lyrics">Синхронизация текста</string>
     <string name="ui_downloading_playlist">Скачивание плейлиста</string>
-    <string name="ui_no_songs_found">Треки не найдены</string>
-    <string name="ui_search_songs_to_add">Поиск треков для добавления…</string>
-    <string name="ui_add_songs_to_playlist">Добавить треки в плейлист</string>
+
+
+
     <string name="ui_try_sabr_download">Попробуйте скачать через SABR</string>
     <string name="ui_audio_only">Только аудио</string>
     <string name="ui_no_crash_logs">Журнал ошибок пуст</string>
@@ -2130,7 +2101,7 @@
     <string name="toast_failed_to_add_track">Не удалось добавить трек</string>
     <string name="toast_removed_from_playlist">Удалено из плейлиста</string>
     <string name="toast_failed_to_remove_track">Не удалось удалить трек</string>
-    <string name="toast_saved_playlist_to_music_library">Плейлист добавлен в вашу библиотеку</string>
+
     <string name="toast_failed_to_save_playlist">Не удалось сохранить плейлист</string>
     <string name="toast_removed_playlist_from_library">Плейлист удален из библиотеки</string>
     <string name="toast_failed_to_merge_playlist">Не удалось объединить плейлисты</string>
@@ -2150,16 +2121,14 @@
     <string name="notification_channel_downloads_description">Показывает ход и завершение скачивания</string>
     <string name="notification_channel_new_videos_description">Уведомления о новых видео на каналах, на которые вы подписаны</string>
     <string name="notification_channel_video_playback_description">Управление воспроизведением видео</string>
-    <string name="notification_channel_music_playback_description">Управление воспроизведением музыки</string>
-    <string name="notification_download_progress_description">Прогресс скачивания видео и аудио</string>
+<string name="notification_download_progress_description">Прогресс скачивания видео и аудио</string>
     <string name="notification_channel_general_description">Общие уведомления приложения</string>
     <string name="notification_channel_break_reminders_description">Напоминания о перерывах и сне</string>
     <string name="notification_channel_updates_description">Уведомления об обновлениях приложения</string>
     <string name="notification_channel_import_description">Показывать прогресс импорта подписок или истории просмотра</string>
     <string name="notification_channel_new_videos">Новые видео</string>
     <string name="notification_channel_video_playback">Воспроизведение видео</string>
-    <string name="notification_channel_music_playback">Воспроизведение музыки</string>
-    <string name="notification_channel_general">Общие</string>
+<string name="notification_channel_general">Общие</string>
     <string name="notification_channel_reminders">Напоминания</string>
     <string name="tv_guide_key_edit">Настройка кнопок</string>
     <string name="tv_guide_key_voice">Микрофон</string>
@@ -2218,7 +2187,6 @@
     <string name="fallback_unknown_title">Название неизвестно</string>
     <string name="fallback_unknown_channel">Неизвестный автор</string>
     <string name="fallback_unknown_playlist">Неизвестный плейлист</string>
-    <string name="fallback_unknown_album">Неизвестный альбом</string>
     <string name="fallback_unknown_artist">Неизвестный исполнитель</string>
     <string name="fallback_unknown_video">Неизвестное видео</string>
     <string name="fallback_local_video">Видео на устройстве</string>
@@ -2384,7 +2352,7 @@
     <string name="metadata_separator">·</string>
     <string name="player_time_separator">/</string>
     <string name="search_voice_prompt">Говорите…</string>
-    <plurals name="deep_flow_duration_hours">
+    <plurals name="deep_chor_duration_hours">
         <item quantity="one">%1$d час</item>
         <item quantity="few">%1$d часа</item>
         <item quantity="many">%1$d часов</item>
@@ -2429,18 +2397,8 @@
         <item quantity="many">Подобрано %1$d видео специально для вас</item>
         <item quantity="other">Подобрано %1$d видео специально для вас</item>
     </plurals>
-    <plurals name="songs_count_template">
-        <item quantity="one">%1$d трек</item>
-        <item quantity="few">%1$d трека</item>
-        <item quantity="many">%1$d треков</item>
-        <item quantity="other">%1$d треков</item>
-    </plurals>
-    <plurals name="lyrics_providers_enabled">
-        <item quantity="one">Включен %1$d источник из %2$d</item>
-        <item quantity="few">Включено %1$d источника из %2$d</item>
-        <item quantity="many">Включено %1$d источников из %2$d</item>
-        <item quantity="other">Включено %1$d источников из %2$d</item>
-    </plurals>
+
+
     <plurals name="player_settings_shorts_playback_mode_auto_interval_summary">
         <item quantity="one">Автопрокрутка через %1$d секунду</item>
         <item quantity="few">Автопрокрутка через %1$d секунды</item>
@@ -2575,7 +2533,6 @@
     <string name="copy_channel_name">Скопировать название канала</string>
     <string name="channel_name_clip_label">Название канала</string>
     <string name="start_radio">Включить радио</string>
-    <string name="start_radio_desc">Запустить станцию на основе этой песни</string>
     <string name="transcript">Расшифровка</string>
     <string name="transcript_show">Показать расшифровку</string>
     <string name="transcript_subtitle">Читать расшифровку во время просмотра.</string>
@@ -2762,11 +2719,9 @@
         <item quantity="other">Это удалит %d уведомлений. Отменить это действие будет невозможно.</item>
     </plurals>
     <string name="notifications_clear_confirm">Очистить всё</string>
-    <string name="deep_flow_scrobble_title">Скробблить во время Deep Chorplay</string>
-    <string name="taste_learning_paused">Deep Chorplay включен, обучение приостановлено</string>
-    <string name="deep_flow_scrobble_subtitle">Продолжайте отправлять данные о прослушиваниях в Last.fm, Libre.fm и ListenBrainz</string>
-    <string name="deep_flow_on_search_title">Показать в результатах поиска</string>
-    <string name="deep_flow_on_search_subtitle">Переключатель Deep Chorplay над списком недавних поисковых запросов</string>
+<string name="taste_learning_paused">Deep Chorplay включен, обучение приостановлено</string>
+<string name="deep_chor_on_search_title">Показать в результатах поиска</string>
+    <string name="deep_chor_on_search_subtitle">Переключатель Deep Chorplay над списком недавних поисковых запросов</string>
     <string name="notif_type_shorts">Шортсы</string>
     <string name="notif_check_interval_off_new_videos">Выключено, пока функция «Новые видео» отключена</string>
     <string name="icon_name_expressive_scallop">Волнистый</string>
@@ -2837,8 +2792,8 @@
     <string name="content_settings_channel_shorts_tab_subtitle">Сохраняйте вкладку «Шортс» на канале, пока короткие видео скрыты.</string>
     <string name="content_settings_hide_watched_shorts_title">Скрыть просмотренные шортсы</string>
     <string name="content_settings_hide_watched_shorts_subtitle">Храните отработанные шортсы вне полок и лотка для подачи шортс</string>
-    <string name="settings_open_music_player_on_play_title">Открыть полноэкранный плеер, чтобы прослушать новые песни</string>
-    <string name="settings_open_music_player_on_play_summary">Функция Off сохраняет новую песню в мини-плеере</string>
+
+
     <string name="content_settings_live_chat_enabled_title">Онлайн-чат</string>
     <string name="content_settings_live_chat_enabled_subtitle">Отображение чата в прямых трансляциях</string>
     <string name="content_settings_subs_collaborations_title">Колоборации</string>
@@ -2850,9 +2805,7 @@
     <string name="category_news">Новости</string>
     <string name="category_sports">Шортсы</string>
     <string name="category_learning">Обучение</string>
-    <string name="category_fashion">Мода</string>
-    <string name="categories_chart_source">Музыкальные чарты YouTube</string>
-    <plurals name="categories_rate_limited">
+    <string name="category_fashion">Мода</string>    <plurals name="categories_rate_limited">
         <item quantity="one">В данный момент YouTube ограничивает количество запросов. Попробуйте ещё раз через несколько минут.</item>
     </plurals>
     <string name="categories_shelf_see_all">Посмотреть все</string>
@@ -2896,8 +2849,7 @@
     <string name="cache_group_header">Кэш</string>
     <string name="cache_in_use">%1$s используются</string>
     <string name="cache_videos">Видеоролики</string>
-    <string name="cache_songs">Песни</string>
-    <string name="cache_artwork">Произведения</string>
+<string name="cache_artwork">Произведения</string>
     <string name="cache_other">Остальное</string>
     <string name="cache_used_of_limit">%1$s из %2$s</string>
     <string name="cache_used_no_limit">%1$s, без ограничений</string>
@@ -2905,8 +2857,7 @@
     <string name="cache_other_summary">Тексты песен и сеть, %1$s</string>
     <string name="cache_measuring">Измерение…</string>
     <string name="cache_videos_size_title">Размер видеокэша</string>
-    <string name="cache_songs_size_title">Размер кэша песен</string>
-    <string name="cache_artwork_size_title">Размер кэша произведений</string>
+<string name="cache_artwork_size_title">Размер кэша произведений</string>
     <string name="cache_size_applies_on_restart">Применяется при следующем запуске Chorplay</string>
     <string name="shorts_linked_video">Тематические видео</string>
     <string name="import_label_newpipe_subscriptions">Подписки NewPipe</string>
@@ -2916,7 +2867,6 @@
     <string name="import_label_freetube_watch_history">История просмотров на FreeTube</string>
     <string name="import_label_newpipe_watch_history">История просмотров NewPipe</string>
     <string name="import_label_libretube_subscriptions">Подписки на LibreTube</string>
-    <string name="import_label_metrolist_playlists">плейлисты музыки Metrolist</string>
     <string name="import_label_newpipe_playlists">Плейлисты NewPipe</string>
     <string name="import_label_libretube_playlists">Плейлисты LibreTube</string>
     <string name="import_label_youtube_takeout">YouTube Takeout</string>
@@ -2944,14 +2894,7 @@
         <item quantity="many">%1$d плейлистов( %2$d видео)</item>
         <item quantity="other">%1$d плейлистов( %2$d видео)</item>
     </plurals>
-    <plurals name="import_takeout_part_music_library">
-        <item quantity="one">%d Песня из библиотеки YouTube Music</item>
-        <item quantity="few">%d Песни из библиотеки YouTube Music</item>
-        <item quantity="many">%d Песен из библиотеки YouTube Music</item>
-        <item quantity="other">%d Песен из библиотеки YouTube Music</item>
-    </plurals>
-    <string name="import_takeout_music_library_name">Музыкальная библиотека YouTube</string>
-    <plurals name="import_takeout_part_searches">
+<plurals name="import_takeout_part_searches">
         <item quantity="one">%d поиск</item>
         <item quantity="few">%d поиска</item>
         <item quantity="many">%d поисков</item>
@@ -2968,7 +2911,7 @@
     <string name="concurrent_downloads_title">Загрузок за один раз</string>
     <string name="concurrent_downloads_summary">Сколько файлов загрузить одновременно</string>
     <string name="download_location_not_writable">Сохранить там невозможно. Использовать %1$s</string>
-    <string name="support_flow_open_collective">Поддержка Chorplay на Open Collective</string>
+    <string name="support_chorplay_open_collective">Поддержка Chorplay на Open Collective</string>
     <string name="about_notices">Уведомления об открытом исходном коде</string>
     <string name="about_notices_summary">Списки слов и код из других проектов.</string>
     <string name="playlist_downloading_template">Загрузка: %1$s</string>
@@ -2977,7 +2920,7 @@
     <string name="onboarding_step_interests">Интересное</string>
     <string name="onboarding_step_channels">Каналы</string>
     <string name="onboarding_step_import">Импорт</string>
-    <string name="onboarding_import_source_flow">Резервное копирование Chorplay</string>
+    <string name="onboarding_import_source_chorplay">Резервное копирование Chorplay</string>
     <string name="onboarding_import_source_youtube">YouTube</string>
     <string name="onboarding_import_footnote">Здесь всё опционально. В настройках импорт осуществляется тем же способом.</string>
     <string name="onboarding_import_done">Импортировано</string>
@@ -3015,10 +2958,10 @@
     <string name="section_deep_cuts">Редкие композиции</string>
     <string name="section_rotation_night">Ваша ночная ротация</string>
     <string name="source_your_rotation">Ваша ротация</string>
-    <string name="music_genre_affinity_title">Жанры и настроения</string>
-    <string name="music_watch_video">Смотрите видео</string>
-    <string name="music_video_failed">Не удалось загрузить музыкальное видео</string>
-    <string name="music_video_unavailable">У этой песни нет музыкального видео</string>
+
+
+
+
     <string name="channel_add_to_group">Добавить в группу</string>
     <string name="music_player_lyrics_full_screen">Текст песни на весь экран</string>
     <string name="player_appearance_artwork_control_colors_title">Адаптивный цвет кнопок</string>
@@ -3051,7 +2994,7 @@
     <string name="equalizer_frequency_label">F</string>
     <string name="equalizer_gain_label">G</string>
     <string name="equalizer_q_label">Q</string>
-    <string name="section_on_repeat">Повторить</string>
+
     <string name="section_daily_mix_title">%1$s Микс</string>
     <string name="section_daily_mix_label">Ежедневный микс</string>
     <string name="daily_mix_page_description">Подборка из треков, которые вы слушаете вместе. Сохраните, чтобы сохранить сегодняшний микс.</string>
@@ -3065,33 +3008,33 @@
     <string name="section_rotation_morning">Ваша утреняя ротация</string>
     <string name="section_rotation_afternoon">Ваша дневная ротация</string>
     <string name="section_rotation_evening">Ваша дневная ротация</string>
-    <string name="music_genre_affinity_subtitle">Сформировано на основе жанров и настроений, которые вы реально включаете</string>
+
     <string name="recommendations_header">Рекомендации</string>
     <string name="not_interested_desc">На время показывать меньше материалов от этого исполнителя</string>
     <string name="dont_recommend_artist">Не рекомендовать %1$s</string>
     <string name="dont_recommend_artist_desc">Никогда больше не рекомендуйте этого Артиста</string>
     <string name="feedback_not_interested_applied">Вы будете видеть меньше %1$s</string>
     <string name="feedback_artist_blocked">%1$s больше не будет рекомендоватся</string>
-    <string name="music_prefs_section_title">Рекомендации по музыке</string>
-    <string name="music_endless_radio_title">Бесконечное радио</string>
-    <string name="music_endless_radio_desc">Добавить похожие песни после окончания очереди</string>
-    <string name="settings_music_video_switch_title">Переключение песни и видео</string>
-    <string name="settings_music_video_switch_summary">Переключайтесь между песней и её музыкальным видео в плеере</string>
+
+
+
+
+
     <string name="music_player_mode_song">Песня</string>
     <string name="music_player_mode_video">Видео</string>
-    <string name="settings_pause_music_muted_title">Приостановить воспроизведение музыки при отключении звука</string>
-    <string name="music_content_language_follow_app">Следовать указаниям языка приложения</string>
-    <string name="music_persona_maturity_warming">Разогрев</string>
-    <string name="music_persona_maturity_mature">Взрослое</string>
-    <string name="music_metric_total_plays_detail">Более 50% прослушиваний</string>
-    <string name="music_listening_patterns_subtitle">Когда вы действительно слушаете — опираясь на временные метки реального воспроизведения</string>
-    <string name="music_bucket_weekday_morning">Утром в будние дни</string>
-    <string name="music_bucket_weekday_afternoon">Днём в будни</string>
-    <string name="music_bucket_weekday_evening">Вечера в будние дни</string>
-    <string name="music_bucket_weekday_night">Ночью в будние дни</string>
-    <string name="music_bucket_weekend_morning">Утры выходных дней</string>
-    <string name="music_bucket_weekend_evening">Вечера в выходные</string>
-    <string name="music_bucket_plays">%1$d прослушиваний</string>
+
+    <string name="content_language_follow_app">Следовать указаниям языка приложения</string>
+
+
+
+
+
+
+
+
+
+
+
     <string name="eq_preset_rock">Рок</string>
     <string name="eq_preset_vocal">Вокал и подкасты</string>
     <string name="eq_not_saved">Не сохранено</string>
@@ -3160,9 +3103,9 @@
     <string name="eq_settings_summary">Импорт пресетов, полос и AutoEQ</string>
     <string name="eq_settings_keywords">эквалайзер, EQ, низкие частоты, высокие частоты, автоэквалайзер, предусилитель, звук</string>
     <string name="eq_reset_done">Сброс кривой</string>
-    <string name="music_search_section_artists">Артисты</string>
-    <string name="music_search_section_playlists">Плейлисты</string>
-    <string name="music_search_section_episodes">Эпизоды</string>
+
+
+
     <plurals name="favorites_count_template">
         <item quantity="one">%1$d любимый трек</item>
         <item quantity="few">%1$d любимых треков</item>
@@ -3225,8 +3168,7 @@
     <string name="subtitle_edge_depressed">пониженный</string>
     <string name="subtitle_edge_color">Цвет края</string>
     <string name="subtitle_custom_color">Пользовательский цвет</string>
-    <string name="sync_collection_music_profile">Профиль музыкальных предпочтений</string>
-    <string name="sync_enter_connection_data">Введите данные для подключения вручную</string>
+<string name="sync_enter_connection_data">Введите данные для подключения вручную</string>
     <string name="sync_enter_connection_data_hint">Вставьте данные для подключения с другого устройства.</string>
     <string name="sync_connection_data_label">Данные о подключении</string>
     <string name="sync_connection_data_security_note">Содержит временный ключ. Передавайте его только тому устройству, с которым выполняете синхронизацию.</string>
@@ -3253,8 +3195,7 @@
         <item quantity="many">Выбрано %1$d из %2$d</item>
         <item quantity="other">Выбрано %1$d из %2$d</item>
     </plurals>
-    <string name="sync_collection_music_profile_body">Что Chorplay узнал о том, что вы слушаете.</string>
-    <plurals name="export_newpipe_subs_skipped">
+<plurals name="export_newpipe_subs_skipped">
         <item quantity="one">Экспортировано, но %1$d канал без идентификатора канала не был включен</item>
         <item quantity="few">Экспортировано, но %1$d канала без идентификатора канала не были включены</item>
         <item quantity="many">Экспортировано, но %1$d каналов без идентификатора канала не были включены</item>
@@ -3265,7 +3206,7 @@
     <string name="error_bot_wall_hint">Попробуйте другую сеть или отключите VPN.</string>
     <string name="error_login_required">Требуется вход</string>
     <string name="error_login_required_hint">YouTube воспроизводит это видео только для вошедших в систему аккаунтов.</string>
-    <string name="music_playback_warning_unavailable">Эта песня больше не доступна на YouTube.</string>
+
     <string name="player_seek_seconds_forward">+%1$d</string>
     <string name="player_seek_seconds_back">-%1$d</string>
     <string name="player_settings_overlay_sponsorblock">Кнопка SponsorBlock</string>
@@ -3293,10 +3234,10 @@
     <string name="tv_guide_search_field">В поле поиска откройте экранную клавиатуру телевизора, чтобы вводить текст на любом языке.</string>
     <string name="tv_guide_search_down">Перейти из строки поиска к подсказкам и результатам.</string>
     <string name="tv_guide_search_open">Открыть выбранное предложение или результат.</string>
-    <string name="widget_on_repeat_label">На повторе</string>
-    <string name="widget_on_repeat">На повторе</string>
-    <string name="widget_on_repeat_description">Песни, к которым ты постоянно возвращаешься</string>
-    <string name="widget_no_on_repeat">Здесь будут отображаться песни, которые вы часто слушаете повторно</string>
+
+
+
+
     <string name="widget_unlike">Убрать из понравившегося</string>
     <string name="widget_open_player">Открыть плеер</string>
     <string name="widget_short_badge">Шортс</string>
@@ -3314,8 +3255,8 @@
     </plurals>
     <string name="widget_browse_downloads">Просмотр загрузок</string>
     <string name="widget_shuffle">Перемешать</string>
-    <string name="widget_identify_song">Определить песню</string>
-    <string name="widget_open_music">Открыть Музыку</string>
+
+
     <string name="widget_config_shortcuts">Сочетания клавиш</string>
     <string name="widget_config_shortcuts_footer">Выберите до четырёх вариантов. Поиск доступен всегда.</string>
     <string name="widget_playlist_label">Плейлист</string>
@@ -3324,12 +3265,7 @@
     <string name="widget_config_playlist">Ваши плейлисты</string>
     <string name="widget_playlist_empty">Здесь пока ничего нет</string>
     <string name="widget_refresh">Обновить</string>
-    <plurals name="widget_playlist_songs">
-        <item quantity="one">%d песня</item>
-        <item quantity="few">%d песни</item>
-        <item quantity="many">%d песен</item>
-        <item quantity="other">%d песен</item>
-    </plurals>
+
     <plurals name="widget_playlist_videos">
         <item quantity="one">%d видео</item>
         <item quantity="few">%d видео</item>
@@ -3470,12 +3406,7 @@
         <item quantity="many">%1$d видеороликов</item>
         <item quantity="other">%1$d видеороликов</item>
     </plurals>
-    <plurals name="local_songs_count">
-        <item quantity="one">%1$d песня</item>
-        <item quantity="few">%1$d песни</item>
-        <item quantity="many">%1$d песен</item>
-        <item quantity="other">%1$d песен</item>
-    </plurals>
+
     <string name="local_menu_hide_folder">Скрыть эту папку</string>
     <string name="local_menu_delete_trash">Переместить в корзину на 30 дней</string>
     <string name="local_menu_delete_permanent">Удалит это с данного устройства</string>
@@ -3532,64 +3463,57 @@
     <string name="settings_quality_wifi">Через Wi-Fi</string>
     <string name="settings_quality_mobile">через мобильный интернет</string>
     <string name="queue_swipe_left">Очередь проведите пальцем по экрану</string>
-    <plurals name="import_takeout_part_music_playlists">
-        <item quantity="one">%d плейлист в Музыке</item>
-        <item quantity="few">%d плейлиста в Музыке</item>
-        <item quantity="many">%d плейлистов в Музыке</item>
-        <item quantity="other">%d плейлистов в Музыке</item>
-    </plurals>
+
     <string name="notif_type_shorts_subtitle">Включать Шортсы в уведомления о новых видео от каналов, на которые вы подписаны</string>
     <string name="note_title">примечание</string>
     <string name="note_edit">Редактировать примечание</string>
     <string name="notes_library_subtitle">Ваши заметки о видео и каналах</string>
     <string name="notes_sort_custom">Свой порядок</string>
-    <string name="music_normalize_volume_title">Нормализовать громкость</string>
+
     <string name="note_add">Добавить примечание</string>
     <string name="note_at_time">Примечание по адресу %1$s</string>
     <string name="note_channel_title">Примечание об этом канале</string>
-    <string name="import_music_brain_title">Импорт данных музыкального движка</string>
-    <string name="music_discovery_appetite">Склонность к исследованиям</string>
-    <string name="music_content_language_dialog_title">Выберать язык контента</string>
+
+
+    <string name="content_language_dialog_title">Выберать язык контента</string>
     <string name="eq_preset_acoustic">Акустический</string>
-    <string name="music_content_country_title">Страна контента</string>
-    <string name="music_normalize_volume_desc">Привести громкость всех треков к единому стандарту YouTube Music</string>
+    <string name="content_country_title">Страна контента</string>
+
     <string name="section_other_versions">Другие версии</string>
-    <string name="music_blocked_artists_title">Заблокированные артисты</string>
-    <string name="music_blocked_artists_empty">Не заблокированные артисты</string>
-    <string name="music_unblock">Разблокировать</string>
-    <string name="export_music_brain_title">Экспорт данных музыкального движка</string>
-    <string name="export_music_brain_desc">Сохранить свой профиль музыкальных предпочтений в виде JSON-файла</string>
-    <string name="import_music_brain_desc">Восстановить профиль музыкальных предпочтений из JSON-файла</string>
-    <string name="music_brain_export_success">Данные музыкального движка экспортированы</string>
-    <string name="music_brain_export_failed">Не удалось выполнить экспорт музыкального движка</string>
+
+
+
+
+
+
+
+
     <string name="eq_preset_hip_hop">Хип-хоп</string>
-    <string name="music_brain_import_success">Данные музыкального движка импортированы</string>
-    <string name="music_brain_import_failed">Не удалось импортировать музыкальный движок</string>
-    <string name="music_persona_overview_title">Музыкальный вкус</string>
-    <string name="music_persona_overview_subtitle">Чему музыкальный движок научился на основе того, что вы слушали</string>
-    <string name="music_persona_maturity_cold">Холодный запуск</string>
+
+
+
+
+
     <string name="eq_auto_preamp_active">%1$s защищает пик %2$s</string>
-    <string name="music_metric_total_plays">Учтённые воспроизведения</string>
-    <string name="music_metric_artists">Артисты</string>
+
+
     <string name="player_appearance_animated_artwork_title">Анимированное произведение</string>
-    <string name="music_metric_artists_detail">с развитым вкусом</string>
-    <string name="player_appearance_animated_artwork_subtitle">Зациклить анимацию обложки альбома, если она есть</string>
-    <string name="music_metric_tracks">Отслеживаемые треки</string>
+
     <string name="eq_preset_flat">Плоский</string>
-    <string name="music_metric_tracks_detail">повторяющиеся в истории</string>
+
     <string name="player_appearance_animated_artwork_wifi_subtitle">Сохранение изображения в мобильном режиме при передаче данных</string>
-    <string name="music_metric_on_repeat">На повтор</string>
-    <string name="music_content_language_title">Язык контента</string>
-    <string name="music_metric_on_repeat_detail">сейчас популярно</string>
+
+    <string name="content_language_title">Язык контента</string>
+
     <string name="note_unknown_video">Видео</string>
-    <string name="music_discovery_appetite_detail">В каком объёме движок добавляет новую музыку</string>
-    <string name="music_top_artists_title">Лучшие Артисты</string>
-    <string name="music_top_artists_subtitle">То, к чему вас сейчас больше всего тянет</string>
-    <string name="music_top_artist_plays">%1$d прослушиваний</string>
-    <string name="music_listening_patterns_title">Ритм слушания</string>
-    <string name="music_bucket_weekend_afternoon">днем в выходные</string>
-    <string name="music_bucket_weekend_night">Ночь в выходные</string>
-    <string name="music_blocked_artists_subtitle">Артисты, которых алгоритм никогда не порекомендует</string>
+
+
+
+
+
+
+
+
     <string name="auto_tab_for_you">Для вас</string>
     <string name="auto_tab_queue">Очередь</string>
     <string name="section_charts_in">Чарты в %1$s</string>
@@ -3645,7 +3569,7 @@
     <string name="downloads_sort_largest">Самый большой</string>
     <string name="thumbnail_quality_medium_desc">Чёткое изображение на телефонах, объём данных — примерно вдвое меньше</string>
     <string name="queue_after_this_template">%1$s после этого</string>
-    <string name="settings_music_artwork_size_title">Размер музыкального произведения</string>
+
     <string name="duration_hours_decimal">%1$.1fч</string>
     <string name="notification_download_saved_elsewhere">Сохранено в %1$s. Выбранная папка недоступна для использования.</string>
     <string name="font_system_only_note">Виджеты и уведомления сохраняют системный шрифт.</string>
@@ -3658,7 +3582,7 @@
     <string name="local_filter_length_any">Любая длина</string>
     <string name="settings_navigation_bar_summary">Вкладки, их порядок и вкладка по умолчанию</string>
     <string name="font_preview_body">2,4 млн просмотров · 3 недели назад</string>
-    <string name="settings_section_music_player">Музыкальный плеер</string>
+
     <string name="local_filter_length_short">Менее 4 мин</string>
     <string name="local_filter_length_long">Более 20 мин</string>
     <string name="removed_from_queue">Удалено из очереди</string>
@@ -3688,7 +3612,7 @@
     <string name="downloads_storage_free">%1$s бесплатно</string>
     <string name="font_serif">\"Шериф\"</string>
     <string name="settings_section_thumbnails">Миниатюры</string>
-    <string name="downloads_storage_music">Музыка %1$s</string>
+    <string name="downloads_storage_audio">Музыка %1$s</string>
     <string name="downloads_section_downloaded">Загружено</string>
     <string name="settings_value_pair">%1$s · %2$s</string>
     <string name="settings_section_language_captions">Язык и субтитры</string>
@@ -3725,7 +3649,7 @@
     <string name="settings_network_title">Сеть</string>
     <string name="settings_speed_preset_hint">напр, 1.35</string>
     <string name="settings_group_watching">Наблюдение</string>
-    <string name="settings_quality_tab_music">Музыка</string>
+
     <string name="settings_group_data">Ваши данные</string>
     <string name="font_custom">Пользовательский шрифт</string>
     <string name="settings_group_system">Система</string>
@@ -3761,7 +3685,7 @@
     <string name="settings_section_speed">Скорость</string>
     <string name="settings_keywords_language">локаль, перевод, заголовки</string>
     <string name="settings_section_watch_page">Страница просмотра</string>
-    <string name="settings_section_music">Музыка</string>
+
     <string name="thumbnail_quality_off">Выключен</string>
     <string name="settings_keywords_autoplay">следующее видео, далее, непрерывное воспроизведение</string>
     <string name="settings_keywords_captions">субтитры, cc, скрытые субтитры</string>
@@ -3772,7 +3696,6 @@
     <string name="settings_quality_tab_shorts">Шортс</string>
     <string name="thumbnail_quality_high">Высокий</string>
     <string name="thumbnail_quality_medium">Середина</string>
-    <string name="queue_swipe_subtitle">Для песен из раздела «На очереди»</string>
     <string name="lyrics_provider_lrc_red_desc">Синхронизация слов · сопоставление с записью</string>
     <string name="lyrics_provider_kugou_desc">Линейная синхронизация · сильная для китайских песен</string>
     <string name="queue_move_to_end">Перейти в конец</string>
@@ -3791,16 +3714,16 @@
     <string name="lyrics_provider_youtube_captions_desc">Линейная синхронизация · титры к видео</string>
     <string name="lyrics_provider_youtube_music_desc">Обычный текст · вкладка «Тексты»</string>
     <string name="dearrow_random_frame">Используйте видеокадр</string>
-    <string name="settings_pause_music_muted_summary">Возобновите, когда громкость вернется.</string>
-    <string name="music_watch_video_desc">Откройте музыкальное видео в видеоплеере.</string>
+
+
     <string name="player_appearance_animated_artwork_wifi_title">Анимированные изображения доступны только по Wi-Fi.</string>
-    <string name="music_persona_empty">Включите музыку — и Engine начнёт учиться.</string>
+
     <string name="section_top_artists_in">Лучшие артисты в %1$s</string>
     <string name="eq_band_title">"Группа  %1$d"</string>
     <string name="note_placeholder">"Написать  примечание для себя…"</string>
-    <string name="playlist_move_to_music">перейти в музыку</string>
+
     <string name="playlist_move_to_videos">перенести в видео</string>
-    <string name="playlist_moved_to_music">Перенесено в раздел «Музыка»</string>
+
     <string name="playlist_moved_to_videos">Перенесено в раздел «Видео»</string>
     <plurals name="local_setting_seconds">
         <item quantity="one">%1$d секунда</item>
@@ -3810,12 +3733,12 @@
     </plurals>
     <string name="download_failed_unavailable">Это видео сейчас нельзя скачать.</string>
     <string name="download_failed_unreadable">Загруженный файл не удалось прочитать.</string>
-    <string name="music_search_no_results">Результаты поиска по запросу \"%1$s\" отсутствуют.</string>
+
     <string name="settings_keywords_sponsorblock">пропускать спонсоров, рекламу, отдельные сегменты, вступление, концовку</string>
     <string name="settings_backup_source_youtube">YouTube и Google Takeout</string>
     <string name="settings_quick_download_quality">Качество для быстрой загрузки</string>
-    <string name="settings_music_download_quality_summary">Используется для песен, альбомов и музыкальных плейлистов</string>
-    <string name="settings_music_folder_label">Музыка/ Chorplay</string>
+
+
     <string name="settings_keywords_downloads">сохранить для офлайн доступа, папка, хранилище, sd карта</string>
     <string name="settings_section_resolution">Разрешение</string>
     <string name="settings_keywords_hide_watched">просмотрено, уже просмотрено, фильтр</string>
@@ -3830,12 +3753,12 @@
     <string name="content_settings_shared_links_title">Поделиться ссылками</string>
     <string name="settings_storage_access_summary">Также позволяет локальным медиаресурсам отображать файлы, сохранённые другими приложениями</string>
     <string name="settings_keywords_codec">h264, avc, vp9, av1, аппаратное декодирование</string>
-    <string name="settings_music_download_quality">Качество загружаемых песен</string>
+
     <string name="download_retag_title">Теги для более старых загрузок</string>
     <string name="error_video_decoder_failed">Видеодекодер перестал работать</string>
     <string name="settings_section_codec">Кодек</string>
     <string name="settings_section_proxy_server">Сервер</string>
-    <string name="settings_music_quality_auto_summary">Преимущественно через Wi-Fi, в умеренном объёме — через мобильный интернет</string>
+
     <string name="settings_backup_full">Полное резервное копирование</string>
     <string name="settings_quality_preferred_codec">Предпочтительный кодек</string>
     <string name="settings_backup_exporting">Экспорт…</string>
@@ -3857,12 +3780,12 @@
     <string name="settings_topics_your_topics">Ваши темы</string>
     <string name="settings_keywords_topics">интересы, не интересует, скрыть, заблокировать, отключить, рекомендации</string>
     <string name="settings_keywords_dearrow">кликбейт, заголовки, миниатюры</string>
-    <string name="settings_keywords_discord">расширенный статус, «сейчас играет», статус</string>
+
     <string name="settings_truncated">%1$s…</string>
     <string name="settings_backup_tab_export">Экспорт</string>
     <string name="settings_backup_tab_auto">Автоматически</string>
     <string name="settings_backup_tab_import">Импорт</string>
-    <string name="settings_backup_restore_flow">Восстановить из Chorplay</string>
+    <string name="settings_backup_restore_chorplay">Восстановить из Chorplay</string>
     <string name="settings_backup_one_copy">Каждая резервная копия заменяет предыдущую в папке.</string>
     <string name="settings_backup_needs_folder">Сначала выберите папку</string>
     <string name="settings_keywords_backup">экспорт, импорт, восстановление, миграция, перенос, выгрузка данных, NewPipe, LibreTube, FreeTube</string>
@@ -3896,8 +3819,8 @@
     <string name="error_bot_wall_network_hint">Попробуйте другую сеть, например мобильный интернет.</string>
     <string name="error_bot_wall_session">YouTube хочет убедиться, что вы не робот</string>
     <string name="error_bot_wall_session_hint">Сбросьте сеанс YouTube, затем попробуйте снова.</string>
-    <string name="music_playback_warning_rate_limited">YouTube ограничивает эту сеть. Попробуйте позже.</string>
-    <string name="music_playback_warning_members_or_paid">Для прослушивания этой песни на YouTube требуется подписка или покупка.</string>
+
+
     <string name="settings_keywords_style">темный режим, ночной режим, светлый режим, AMOLED, чистый черный, OLED</string>
     <string name="settings_keywords_original_titles">непереведенный, автоматический перевод, перевод, оригинальный язык, заголовки, описания</string>
     <string name="thumbnail_quality_high_desc">Самый острый, использует больше всего данных.</string>
@@ -3906,7 +3829,7 @@
     <string name="settings_backup_source_newpipe">NewPipe</string>
     <string name="settings_backup_source_libretube">LibreTube</string>
     <string name="settings_backup_source_freetube">FreeTube</string>
-    <string name="settings_backup_source_metrolist">Metrolist</string>
+
     <string name="settings_keywords_network">прокси, SOCKS, HTTP, VPN, соединение</string>
     <string name="settings_diagnostics_android">Версия для Android</string>
     <string name="settings_diagnostics_model">модель</string>
@@ -3929,7 +3852,7 @@
     <string name="font_import_not_font">Выберите файл .ttf или .otf</string>
     <string name="font_import_unreadable">Не удалось прочитать этот файл как шрифт</string>
     <string name="settings_custom_theme_summary">Создавайте, импортируйте и делитесь своими темами</string>
-    <string name="settings_music_artwork_size_summary">Размер обложек альбомов и карточек на музыкальных страницах</string>
+
     <string name="device_info_resolution_value">%1$d × %2$d</string>
     <string name="settings_changelog_prerelease">Предрелизная версия</string>
     <string name="device_info_density">Плотность</string>
@@ -3997,10 +3920,10 @@
     <string name="notifications_save_to_watch_later">Сохранить для просмотра позже</string>
     <string name="player_settings_normalize_volume">Нормализовать громкость</string>
     <string name="player_settings_normalize_volume_summary">Сделайте громкие видео тише — до уровня громкости YouTube</string>
-    <string name="settings_music_resume_title">Возобновить воспроизведение подкастов и длинных треков</string>
-    <string name="settings_music_resume_summary">Воспроизведение треков продолжительностью более 10 минут начинается с того места, где вы остановились</string>
-    <string name="settings_music_side_swipes_title">Жесты для управления скоростью и громкостью</string>
-    <string name="settings_music_side_swipes_summary">Проведите по левой стороне для регулировки скорости, по правой — для громкости</string>
+
+
+
+
     <string name="taste_hidden_artists">Артисты</string>
     <string name="diagnostics_engine_header">Сведения о \"Engine\"</string>
     <string name="recap_title">Обзор Chorplay</string>
@@ -4034,9 +3957,7 @@
         <item quantity="many">%1$d Импортированых тем</item>
         <item quantity="other">%1$d Импортированых тем</item>
     </plurals>
-    <string name="taste_reset_music_body">Это удаляет данные, которые Chorplay собрал на основе вашей музыки, и позволяет начать всё с нуля. Ваш итог (рекап) при этом сохраняется.</string>
-    <string name="recap_source_music">Музыка</string>
-    <plurals name="recap_videos_count">
+<plurals name="recap_videos_count">
         <item quantity="one">%d видеоролик</item>
         <item quantity="few">%d видеоролика</item>
         <item quantity="many">%d видеороликов</item>
@@ -4072,7 +3993,7 @@
     <string name="recap_weekdays_title">По дням недели</string>
     <string name="settings_theme_roles_text">Текст и линии</string>
     <string name="settings_theme_roles_status">Статус</string>
-    <string name="taste_reset_music_title">Сбросить музыкальный профиль?</string>
+
     <string name="settings_theme_role_primary">Основное ударение</string>
     <string name="settings_theme_role_on_primary">Текст на основном элементе</string>
     <string name="settings_theme_role_background">Фон приложения</string>
@@ -4114,7 +4035,7 @@
     <string name="taste_evidence_often">Часто просматриваемый</string>
     <string name="taste_hidden_none">Ничего скрытого</string>
     <string name="taste_unblock_item">Разблокировать %1$s</string>
-    <string name="taste_import_music">Импортировать музыкальный профиль</string>
+
     <string name="recap_blocked">Заблокировано</string>
     <string name="recap_active_days">Дни активности</string>
     <string name="recap_daily_title">Время в день</string>
@@ -4133,11 +4054,9 @@
     <string name="taste_trait_now">Сейчас %1$s</string>
     <string name="taste_topic_block_named">Блок %1$s</string>
     <string name="taste_channel_block">Заблокировать канал</string>
-    <string name="taste_music_header">Музыкальный вкус</string>
+
     <string name="recap_summary_top_artist">Ведущий артист</string>
-    <string name="taste_music_stage">Этап обучения</string>
-    <string name="recap_story_songs">Песни, к которым вы постоянно возвращались</string>
-    <string name="taste_hidden_title">Скрыто от вас</string>
+<string name="taste_hidden_title">Скрыто от вас</string>
     <string name="recap_period_month">Месяц</string>
     <string name="recap_history_title">Из истории просмотров</string>
     <string name="taste_hidden_summary">Заблокированные темы, каналы и исполнители</string>
@@ -4159,15 +4078,14 @@
     <string name="taste_import_video">Импорт видеопрофиля</string>
     <string name="taste_reset_video">Сбросить видеопрофиль</string>
     <string name="recap_story_passed">То, что вы передали</string>
-    <string name="taste_export_music">Экспорт музыкального профиля</string>
-    <string name="taste_reset_music">Сбросить музыкальный профиль</string>
+
+
     <string name="taste_reset_video_body">Chorplay «забывает» то, что узнал из ваших видео и поисковых запросов. История просмотров, отметки «Нравится», плейлисты и скрытые элементы сохраняются — раздел «Главная» по-прежнему их учитывает.</string>
     <string name="recap_period_year">Год</string>
     <string name="taste_reset_done">Сброс профиля</string>
     <string name="diagnostics_engine_queries_none">Пока нет</string>
     <string name="recap_plays">Прозвучавшие песни</string>
-    <string name="recap_format_music">Музыка</string>
-    <string name="recap_likes">Нравится</string>
+<string name="recap_likes">Нравится</string>
     <string name="taste_starter_searches">Базовые поисковые запросы</string>
     <string name="taste_starter_searches_detail">%1$s. Используется, пока Chorplay не узнает, что вы смотрите.</string>
     <string name="recap_summary">Что вы смотрели и слушали — месяц за месяцем</string>
@@ -4259,109 +4177,58 @@
     <string name="playlist_search_no_results">По запросу «%1$s» видео не найдены</string>
     <string name="export_playlist_action">Сохранить как файл</string>
     <string name="import_playlist_action">Импорт из файла</string>
-    <string name="removed_from_liked_music">Удалено из раздела «Понравившиеся треки»</string>
+
     <plurals name="liked_videos_removed">
         <item quantity="one">Убрана отметка «Нравится» у %d видео</item>
         <item quantity="few">Убрана отметка «Нравится» у %d видеоролика</item>
         <item quantity="many">Убрана отметка «Нравится» у %d видеороликов</item>
         <item quantity="other">Убрана отметка «Нравится» у %d видеороликов</item>
     </plurals>
-    <string name="liked_music_empty_title">Пока нет понравившихся песен</string>
+
     <string name="liked_video_template">Понравилось: %1$s</string>
-    <string name="liked_music_empty_body">Здесь отображаются песни, которые вам нравятся, — из тех, что есть в музыкальном плеере</string>
-    <plurals name="songs_downloading">
-        <item quantity="one">Скачать %d песню</item>
-        <item quantity="few">Скачать %d песни</item>
-        <item quantity="many">Скачать %d песен</item>
-        <item quantity="other">Скачать %d песен</item>
-    </plurals>
+
     <string name="home_chip_watched">Просмотрено</string>
     <string name="home_theme_travel">Путешествия</string>
-    <string name="scrobbling_sign_in_failed">Не удалось войти</string>
-    <string name="scrobbling_sign_out_body">Ожидающие отправки сообщения отбрасываются.</string>
     <string name="keyboard_shortcut_slower">Помедленнее</string>
     <string name="save_as_playlist">Сохранить как плейлист</string>
     <string name="home_origin_subscription">С канала, на который вы подписаны</string>
     <string name="playlists_reorder">Изменить порядок плейлистов</string>
-    <plurals name="music_playlist_imported">
-        <item quantity="one">Импортировано: %1$s, %2$d композиция</item>
-        <item quantity="few">Импортировано: %1$s, %2$d композиции</item>
-        <item quantity="many">Импортировано: %1$s, %2$d композиции</item>
-        <item quantity="other">Импортировано: %1$s, %2$d композиции</item>
-    </plurals>
+
     <string name="home_origin_search">В результате поиска по запросу %1$s</string>
     <string name="taste_remembered_clear">Очистка памяти каналов</string>
     <string name="home_mix_title">Микс - %1$s</string>
-    <string name="music_collection_no_matches">Нет песен, соответствующих «%1$s»</string>
-    <string name="scrobbling_send_now">Отправить ожидающие запросы на прослушивание</string>
     <string name="home_reason_channel_memory">С канала, который вы смотрите</string>
     <string name="favourite_artists_remove">Удалить %1$s</string>
     <string name="keyboard_shortcuts_player">Игрок</string>
     <string name="details_why_shown">Почему вы это видите</string>
     <string name="home_origin_neighbour">Канал, подобный %1$s</string>
-    <string name="scrobbling_import_later">Не сейчас</string>
     <string name="home_theme_film">Кино и анимация</string>
     <string name="keyboard_shortcut_exit_fullscreen">Выйти из полноэкранного режима</string>
-    <string name="music_sort_title">Заголовок</string>
+
     <string name="daily_mix_saved_as_playlist">Сохранено в ваши плейлисты: %1$s</string>
-    <string name="music_sort_shortest">Сначала самые короткие</string>
-    <string name="scrobbling_token">Токен пользователя</string>
+    <string name="playlist_sort_shortest">Сначала самые короткие</string>
     <string name="home_origin_neighbour_pair">%1$s и %2$s</string>
     <string name="taste_remembered_empty">Если посмотреть какой-либо канал несколько раз, не подписываясь на него, он появится здесь.</string>
     <string name="playlists_sort_name">Имя</string>
     <string name="home_origin_search_unnamed">На основе поиска по вашим интересам</string>
     <string name="home_chip_live">в прямом эфире</string>
     <string name="home_chip_recently_uploaded">Недавно загруженные</string>
-    <string name="scrobbling_own_key">Используйте собственный API-ключ</string>
-    <string name="music_sort_album_order">Порядок альбома</string>
     <string name="playlists_sort_newest">Новейшие</string>
-    <string name="scrobbling_account">Аккаунт</string>
-    <plurals name="songs_removed_from_playlist">
-        <item quantity="one">Удалена %d песня</item>
-        <item quantity="few">Удалена %d песни</item>
-        <item quantity="many">Удалена %d песен</item>
-        <item quantity="other">Удалена %d песен</item>
-    </plurals>
-    <string name="select_songs">Выберите песни</string>
-    <string name="music_sort_artist">Артист</string>
     <string name="home_theme_nonprofits">Некоммерческие организации</string>
-    <string name="music_home_lastfm_discover_subtitle">Выбрано слушателями Last.fm на основе того, что вы часто слушаете</string>
+
     <string name="settings_auto_download_likes_title">Скачать понравившиеся песни</string>
-    <string name="music_sort_recently_liked">Недавно понравилось</string>
+
     <string name="home_chip_all">Все</string>
     <string name="playlists_sort_oldest">Старейший</string>
     <string name="home_theme_howto">Инструкции и стиль</string>
-    <string name="scrobbling_options">Параметры</string>
-    <plurals name="songs_download_queued">
-        <item quantity="one">%d песня добавлена в очередь на скачивание</item>
-        <item quantity="few">%d песни добавлены в очередь на скачивание</item>
-        <item quantity="many">%d песен добавлено в очередь на скачивание</item>
-        <item quantity="other">%d песен добавлено в очередь на скачивание</item>
-    </plurals>
-    <string name="music_home_shelf_similar">Ежедневные подборки и похожие исполнители</string>
     <string name="favourite_artists_title">Любимые артисты</string>
     <string name="home_origin_channel_memory">С канала, который вы часто смотрите</string>
-    <string name="library_music_playlists">Музыкальные плейлисты</string>
+
     <string name="auto_download_queued">Сохранение для работы офлайн</string>
-    <string name="music_home_lastfm_discover">Открывайте новое вместе с Last.fm</string>
+
     <string name="home_theme_comedy">Комедия</string>
-    <string name="music_kind_album">Альбом</string>
-    <string name="music_kind_saved">Сохранено в вашу библиотеку</string>
-    <string name="scrobbling_signed_in">Вы вошли в систему</string>
     <string name="favourite_artists_picked">Ваш выбор</string>
-    <string name="music_sort_longest">Сначала самые длинные</string>
-    <string name="songs_download_nothing_new">Всё, что здесь есть, уже скачано или недоступно</string>
-    <string name="music_playlist_empty_title">Этот плейлист пуст</string>
-    <string name="music_playlist_empty_body">Добавляйте песни через меню в верхней части</string>
-    <plurals name="songs_unliked">
-        <item quantity="one">Убрана отметка «нравится» у %d песни</item>
-        <item quantity="few">Убрана отметка «нравится» у %d песен</item>
-        <item quantity="many">Убрана отметка «нравится» у %d песен</item>
-        <item quantity="other">Убрана отметка «нравится» у %d песен</item>
-    </plurals>
-    <string name="music_sort_collection">Порядок в плейлисте</string>
-    <string name="music_sort_album">Альбом</string>
-    <string name="scrobbling_summary">Отправляйте данные о том, что вы слушаете, в Last.fm, Libre.fm или ListenBrainz</string>
+    <string name="playlist_sort_longest">Сначала самые длинные</string>
     <string name="home_origin_related">Относится к %1$s</string>
     <string name="discover_channels_title">Открывайте для себя каналы</string>
     <string name="home_origin_related_watched">Связано с видео, которое вы посмотрели</string>
@@ -4369,12 +4236,8 @@
     <string name="discover_channels_summary">Ищите каналы и подписывайтесь на них — так же, как при первоначальной настройке</string>
     <string name="home_origin_neighbour_unnamed">Канал, похожий на те, на которые вы подписаны</string>
     <string name="taste_remembered_footer">Новые видео с этих каналов время от времени появляются на главной странице. Если вы подпишетесь на канал или удалите его, он исчезнет из этого списка.</string>
-    <string name="scrobbling_local_summary">Использует теги исполнителя и названия из каждого файла</string>
-    <string name="scrobbling_import_failed">Не удалось считать список ваших любимых исполнителей</string>
     <string name="taste_remembered_header">Каналы, которые вы продолжаете смотреть</string>
-    <string name="scrobbling_own_key_summary">При изменении этого параметра вы выйдете из системы Last.fm</string>
     <string name="home_theme_autos">Автомобили и транспортные средства</string>
-    <string name="recap_top_albums">Лучшие альбомы</string>
     <string name="taste_remembered_remove">Удалять</string>
     <string name="playlists_show_grid">Показать в виде сетки</string>
     <string name="taste_remembered_remove_item">Удалить %1$s</string>
@@ -4383,25 +4246,18 @@
     <string name="home_theme_science">Наука и технологии</string>
     <string name="home_theme_pets">Домашние животные и другие животные</string>
     <string name="home_chip_empty_body">Прокрутите вниз, чтобы посмотреть позже.</string>
-    <string name="scrobbling_import_offer_body">Chorplay добавляет 20 исполнителей, которых вы слушали чаще всего за последний год, в список ваших любимых исполнителей. Впоследствии вы сможете удалить любого из них.</string>
     <string name="home_chip_failed">Не удалось загрузить это прямо сейчас.</string>
     <string name="library_video_playlists">Видеоплейлисты</string>
     <string name="playlists_sort_custom">Свой порядок</string>
     <string name="playlists_show_list">Показать списком</string>
-    <string name="scrobbling_sign_out">выход</string>
-    <string name="settings_separate_playlists_title">Раздельные плейлисты для видео и музыки</string>
     <string name="settings_separate_playlists_summary">Отобразить их как две записи в библиотеке</string>
-    <string name="music_home_your_playlists">Ваши плейлисты</string>
-    <string name="settings_music_normal_speed_title">Воспроизводить музыку с обычной скоростью</string>
+
+
     <string name="keyboard_shortcut_volume_up">Громкость выше</string>
-    <string name="settings_music_normal_speed_summary">Музыкальные видеоклипы начинаются с 1x</string>
-    <string name="settings_music_home_title">Музыка — главная</string>
+
+
     <string name="settings_speed_per_channel_title">Помните о скорости для каждого канала</string>
-    <string name="scrobbling_signed_in_as">Вошёл как %1$s</string>
-    <string name="scrobbling_hide_secret">Скрывать</string>
     <string name="settings_speed_per_channel_summary">Каждый канал запускается со скоростью, которую вы выбрали в прошлый раз</string>
-    <string name="music_collection_suggestions">Предложения</string>
-    <string name="favourite_artists_summary">Выбирайте артистов, которые сформируют ваше звучание</string>
     <string name="discover_channels_suggested_footer">Каналы, которые вы смотрели несколько раз, не подписываясь на них.</string>
     <string name="discover_channels_like_yours">Каналы, подобные вашему</string>
     <string name="onboarding_artists_subtitle">Ваша подборка музыки начинается с них. Можете пропустить, если хотите.</string>
@@ -4409,25 +4265,14 @@
     <string name="keyboard_shortcut_volume_down">Уменьшить громкость</string>
     <string name="favourite_artists_search">Поиск исполнителей</string>
     <string name="favourite_artists_popular">Сейчас популярно</string>
-    <string name="scrobbling_needs_key">Введите ниже свой API-ключ, чтобы войти в систему</string>
     <string name="favourite_artists_results">Результаты</string>
     <string name="favourite_artists_none">Артисты не найдены</string>
     <string name="favourite_artists_add">Добавить %1$s</string>
-    <string name="scrobbling_sign_in">Войти</string>
-    <plurals name="scrobbling_import_done">
-        <item quantity="one">В избранное добавлен %d артист</item>
-        <item quantity="few">В избранное добавлен %d артиста</item>
-        <item quantity="many">В избранное добавлен %d артистов</item>
-        <item quantity="other">В избранное добавлен %d артистов</item>
-    </plurals>
     <string name="settings_auto_download_likes_summary">Понравившиеся песни сохраняются для прослушивания офлайн</string>
     <string name="settings_auto_download_opened_title">Скачивайте видео, которые открываете</string>
-    <string name="music_home_your_subscriptions">Ваши подписки</string>
-    <string name="music_home_shelf_charts">Графики</string>
-    <string name="scrobbling_own_key_values">Ключ API и секретный ключ</string>
     <string name="settings_auto_download_opened_summary">Использует ваши настройки качества и кодек по умолчанию</string>
-    <string name="music_home_shelf_rotation">Подборка для разного времени суток</string>
-    <string name="settings_music_home_summary">Выберите разделы, которые отображаются на главной странице раздела «Музыка»</string>
+
+
     <string name="onboarding_artists_search_placeholder">Поиск исполнителей</string>
     <plurals name="onboarding_ready_artists">
         <item quantity="one">%d артист</item>
@@ -4435,43 +4280,17 @@
         <item quantity="many">%d артистов</item>
         <item quantity="other">%d артистов</item>
     </plurals>
-    <string name="scrobbling_own_key_missing">Не задано</string>
-    <string name="scrobbling_password">Пароль</string>
     <string name="auto_download_wifi">Через Wi-Fi</string>
-    <string name="music_home_shelf_genres">Смешение жанров</string>
-    <string name="settings_music_home_sections">Разделы</string>
+
+
     <string name="auto_download_always">Всегда</string>
-    <string name="music_home_shelf_more">Ещё от YouTube Music</string>
+
     <string name="settings_library_summary">Выберите разделы, которые отображаются в библиотеке</string>
-    <string name="scrobbling_title">Скробблинг</string>
-    <string name="scrobbling_send_likes_summary">Отметки «нравится» отображаются как прослушанные треки на Last.fm и Libre.fm</string>
     <string name="onboarding_artists_title">Выберите несколько исполнителей</string>
-    <string name="scrobbling_lastfm">Last.fm</string>
-    <string name="scrobbling_now_playing_summary">Сервисы распознают песню во время её воспроизведения</string>
-    <string name="scrobbling_librefm">Libre.fm</string>
-    <string name="scrobbling_not_signed_in">Вы не вошли в систему</string>
-    <string name="scrobbling_now_playing">Показать текущий контент</string>
-    <string name="scrobbling_local">Скробблить файлы на этом устройстве</string>
-    <string name="scrobbling_password_note">Ваш пароль отправляется один раз и никогда не сохраняется.</string>
-    <string name="scrobbling_sign_out_title">Выйти из %1$s?</string>
-    <string name="scrobbling_own_key_dialog_title">Ваш API-ключ Last.fm</string>
-    <string name="scrobbling_import">Импортируйте своих любимых исполнителей</string>
     <string name="keyboard_shortcut_seek_forward">Вперед</string>
-    <string name="scrobbling_sign_in_title">Войдите в %1$s</string>
-    <string name="scrobbling_token_note">Скопируйте это с сайта listenbrainz.org/settings.</string>
-    <string name="scrobbling_own_key_dialog_body">Создайте его бесплатно на сайте last.fm/api/account/create.</string>
     <string name="keyboard_shortcut_play_pause">Воспроизведение или пауза</string>
-    <string name="scrobbling_user_name">Имя пользователя</string>
-    <string name="scrobbling_api_key">API-ключ</string>
-    <string name="scrobbling_secret">Общий секрет</string>
-    <string name="scrobbling_show_secret">Показывать</string>
-    <string name="scrobbling_send_likes">Нравятся понравившиеся песни</string>
-    <string name="scrobbling_import_summary">Добавляет ваших самых прослушиваемых исполнителей в избранное</string>
-    <string name="scrobbling_import_none">Новых исполнителей для добавления нет</string>
     <string name="keyboard_shortcut_seek_back">Назад</string>
     <string name="keyboard_shortcut_faster">Быстрее</string>
-    <string name="scrobbling_import_offer_title">Создавайте свою музыку с помощью %1$s?</string>
-    <string name="scrobbling_import_action">Импорт</string>
     <string name="diagnostics_no_home_snapshot">Показ c вашим снимком в начале.</string>
     <string name="settings_theme_role_surface">Surface</string>
     <string name="taste_interests_footer">Повысьте приоритет темы, чтобы видеть её чаще, или заблокируйте её, чтобы не видеть совсем.</string>
@@ -4492,14 +4311,6 @@
     </plurals>
     <string name="home_chip_description">Показать %1$s на главной странице</string>
     <string name="home_chip_empty_title">Здесь сейчас ничего нет.</string>
-    <string name="settings_keywords_scrobbling">scrobble scrobbling last.fm lastfm libre.fm librefm listenbrainz</string>
-    <string name="scrobbling_listenbrainz">ListenBrainz</string>
-    <plurals name="scrobbling_waiting">
-        <item quantity="one">%d в ожидании</item>
-        <item quantity="few">%d в ожидании</item>
-        <item quantity="many">%d в ожидании</item>
-        <item quantity="other">%d в ожидании</item>
-    </plurals>
     <string name="content_settings_remove_watched_watch_later_title">Удалить просмотренные видео</string>
     <string name="content_settings_remove_watched_watch_later_subtitle">Удаляйте видео из раздела «Смотреть позже» после того, как досмотрите их.</string>
     <plurals name="watch_later_watched_removed">
@@ -4509,7 +4320,7 @@
         <item quantity="other">Удалено %d просмотренных видео</item>
     </plurals>
     <string name="liked_videos_playlist">Понравившиеся видео</string>
-    <string name="liked_music_playlist">Понравилась музыка</string>
+
     <string name="liked_videos_empty_title">Пока нет понравившихся видео</string>
     <string name="liked_videos_empty_body">Здесь отображаются видео, которые вам понравились</string>
     <string name="remove_selected_likes_text">Их не будут любить.</string>

@@ -19,7 +19,6 @@ internal fun LibrarySettingsScreen(
     viewModel: LibrarySettingsViewModel = hiltViewModel(),
 ) {
     val hidden by viewModel.hidden.collectAsStateWithLifecycle()
-    val separatePlaylists by viewModel.separatePlaylists.collectAsStateWithLifecycle()
     val shortsContent by viewModel.shortsContent.collectAsStateWithLifecycle()
     val notes by viewModel.notes.collectAsStateWithLifecycle()
 
@@ -32,7 +31,7 @@ internal fun LibrarySettingsScreen(
 
     SettingsPage(title = stringResource(R.string.library), onBack = onBack, highlight = highlight) {
         group(key = "library.content", header = R.string.library_section_header) {
-            LibrarySection.content(separatePlaylists).forEach { section ->
+            LibrarySection.content().forEach { section ->
                 switch(
                     LibrarySectionsIndex.entry(section),
                     checked = section !in hidden,

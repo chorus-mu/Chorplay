@@ -9,11 +9,9 @@ import io.github.pushkar.chorplay.data.local.dao.CacheDao
 import io.github.pushkar.chorplay.data.local.dao.DownloadCollectionDao
 import io.github.pushkar.chorplay.data.local.dao.DownloadDao
 import io.github.pushkar.chorplay.data.local.dao.HomeFeedCacheDao
-import io.github.pushkar.chorplay.data.local.dao.MusicGraphDao
 import io.github.pushkar.chorplay.data.local.dao.NoteDao
 import io.github.pushkar.chorplay.data.local.dao.NotificationDao
 import io.github.pushkar.chorplay.data.local.dao.PlaylistDao
-import io.github.pushkar.chorplay.data.local.dao.RecognitionHistoryDao
 import io.github.pushkar.chorplay.data.local.dao.SubscriptionGroupDao
 import io.github.pushkar.chorplay.data.local.dao.SyncLogDao
 import io.github.pushkar.chorplay.data.local.dao.SyncPeerDao
@@ -24,26 +22,16 @@ import io.github.pushkar.chorplay.data.local.entity.DownloadCollectionItemEntity
 import io.github.pushkar.chorplay.data.local.entity.DownloadEntity
 import io.github.pushkar.chorplay.data.local.entity.DownloadItemEntity
 import io.github.pushkar.chorplay.data.local.entity.HomeFeedCacheEntity
-import io.github.pushkar.chorplay.data.local.entity.MusicGraphAlbumEntity
-import io.github.pushkar.chorplay.data.local.entity.MusicGraphArtistEntity
-import io.github.pushkar.chorplay.data.local.entity.MusicGraphEdgeEntity
-import io.github.pushkar.chorplay.data.local.entity.MusicGraphPlaylistEntity
-import io.github.pushkar.chorplay.data.local.entity.MusicGraphTrackEntity
-import io.github.pushkar.chorplay.data.local.entity.MusicHomeCacheEntity
-import io.github.pushkar.chorplay.data.local.entity.MusicHomeChipEntity
 import io.github.pushkar.chorplay.data.local.entity.NoteEntity
 import io.github.pushkar.chorplay.data.local.entity.NotificationEntity
 import io.github.pushkar.chorplay.data.local.entity.PlaylistEntity
 import io.github.pushkar.chorplay.data.local.entity.PlaylistVideoCrossRef
-import io.github.pushkar.chorplay.data.local.entity.RecognitionHistoryEntity
 import io.github.pushkar.chorplay.data.local.entity.SubscriptionFeedEntity
 import io.github.pushkar.chorplay.data.local.entity.SubscriptionGroupEntity
 import io.github.pushkar.chorplay.data.local.entity.SyncLogEntity
 import io.github.pushkar.chorplay.data.local.entity.SyncPeerEntity
 import io.github.pushkar.chorplay.data.local.entity.VideoEntity
 import io.github.pushkar.chorplay.data.local.entity.WatchHistoryEntity
-import io.github.pushkar.chorplay.data.local.migrations.MIGRATIONS
-import io.github.pushkar.chorplay.data.local.migrations.Migration24To25
 import io.github.pushkar.chorplay.data.profile.ProfileFiles
 
 @Database(
@@ -53,37 +41,18 @@ import io.github.pushkar.chorplay.data.profile.ProfileFiles
         PlaylistVideoCrossRef::class,
         NotificationEntity::class,
         SubscriptionFeedEntity::class,
-        MusicHomeCacheEntity::class,
-        MusicHomeChipEntity::class,
         DownloadEntity::class,
         DownloadItemEntity::class,
         WatchHistoryEntity::class,
         HomeFeedCacheEntity::class,
         SubscriptionGroupEntity::class,
-        RecognitionHistoryEntity::class,
         SyncLogEntity::class,
         SyncPeerEntity::class,
-        MusicGraphTrackEntity::class,
-        MusicGraphArtistEntity::class,
-        MusicGraphAlbumEntity::class,
-        MusicGraphPlaylistEntity::class,
-        MusicGraphEdgeEntity::class,
         NoteEntity::class,
         DownloadCollectionEntity::class,
         DownloadCollectionItemEntity::class,
     ],
-    autoMigrations = [
-        AutoMigration(from = 24, to = 25, spec = Migration24To25::class),
-        AutoMigration(from = 25, to = 26),
-        AutoMigration(from = 26, to = 27),
-        AutoMigration(from = 27, to = 28),
-        AutoMigration(from = 28, to = 29),
-        AutoMigration(from = 29, to = 30),
-        AutoMigration(from = 30, to = 31),
-        AutoMigration(from = 31, to = 32),
-        AutoMigration(from = 32, to = 33),
-    ],
-    version = 33,
+    version = 1,
     exportSchema = true,
 )
 abstract class AppDatabase : RoomDatabase() {
@@ -107,16 +76,12 @@ abstract class AppDatabase : RoomDatabase() {
 
     abstract fun subscriptionGroupDao(): SubscriptionGroupDao
 
-    abstract fun recognitionHistoryDao(): RecognitionHistoryDao
-
     abstract fun syncLogDao(): SyncLogDao
 
     abstract fun syncPeerDao(): SyncPeerDao
 
-    abstract fun musicGraphDao(): MusicGraphDao
-
     companion object {
-        const val DEFAULT_NAME = "flow_database"
+        const val DEFAULT_NAME = "chorplay_database"
 
         @Volatile
         private var deviceDatabase: AppDatabase? = null
@@ -124,7 +89,6 @@ abstract class AppDatabase : RoomDatabase() {
         @Volatile
         private var profileDatabase: AppDatabase? = null
 
-        /** Default's file, which also holds the download tables every profile shares. */
         fun device(context: Context): AppDatabase =
             deviceDatabase ?: synchronized(this) {
                 deviceDatabase ?: open(context.applicationContext, DEFAULT_NAME).also { deviceDatabase = it }
@@ -135,7 +99,12 @@ abstract class AppDatabase : RoomDatabase() {
             profileDatabase ?: synchronized(this) {
                 profileDatabase ?: ProfileFiles
                     .database(context, DEFAULT_NAME)
-                    .let { name -> if (name == DEFAULT_NAME) device(context) else open(context.applicationContext, name) }
+                    .let { name ->
+                        if (name == DEFAULT_NAME) device(context) else open(
+                            context.applicationContext,
+                            name
+                        )
+                    }
                     .also { profileDatabase = it }
             }
 
@@ -144,8 +113,7 @@ abstract class AppDatabase : RoomDatabase() {
             name: String,
         ): AppDatabase =
             databaseBuilder(context, AppDatabase::class.java, name)
-                .addMigrations(*MIGRATIONS)
-                .fallbackToDestructiveMigration(false)
+                .fallbackToDestructiveMigration(true)
                 .build()
     }
 }

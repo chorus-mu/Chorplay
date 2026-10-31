@@ -35,7 +35,7 @@ import io.github.pushkar.chorplay.ui.components.shared.ChorplayColorPickerDialog
 import io.github.pushkar.chorplay.ui.components.shared.ChorplayConnectedToggleGroup
 import io.github.pushkar.chorplay.ui.components.shared.ChorplayFilterChip
 import io.github.pushkar.chorplay.ui.components.shared.ChorplaySwitch
-import io.github.pushkar.chorplay.ui.components.shared.FlowToggleOption
+import io.github.pushkar.chorplay.ui.components.shared.ChorToggleOption
 import io.github.pushkar.chorplay.ui.theme.SubtitleBackgroundSwatches
 import io.github.pushkar.chorplay.ui.theme.SubtitleEdgeSwatches
 import io.github.pushkar.chorplay.ui.theme.SubtitleTextSwatches
@@ -100,8 +100,8 @@ fun SubtitleCustomizer(
             ChorplayConnectedToggleGroup(
                 options =
                     listOf(
-                        FlowToggleOption(value = false, label = stringResource(R.string.subtitle_fullscreen_landscape)),
-                        FlowToggleOption(value = true, label = stringResource(R.string.subtitle_fullscreen_vertical)),
+                        ChorToggleOption(value = false, label = stringResource(R.string.subtitle_fullscreen_landscape)),
+                        ChorToggleOption(value = true, label = stringResource(R.string.subtitle_fullscreen_vertical)),
                     ),
                 selected = editingVertical,
                 onSelected = { editingVertical = it },

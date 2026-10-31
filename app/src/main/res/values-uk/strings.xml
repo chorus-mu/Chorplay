@@ -16,7 +16,7 @@
     <string name="library_section_header">Ваш контент</string>
     <string name="library_history_label">Історія</string>
     <string name="library_playlists_label">Списки відтворення</string>
-    <string name="library_music_playlists_subtitle">Ваші музичні колекції</string>
+
     <string name="library_liked_videos_label">Вподобані відео</string>
     <string name="library_saved_shorts_label">Збережені Shorts</string>
     <string name="library_watch_later_label">Подивитися пізніше</string>
@@ -33,12 +33,11 @@
     <string name="empty_watch_history">Історія перегляду відсутня</string>
     <string name="empty_watch_history_body">Відео які ви подивитесь опиняться тут</string>
     <string name="liked">Вподобано</string>
-    <string name="liked_music">Вподобана музика</string>
+
     <string name="liked_videos">Вподобані відео</string>
-    <string name="share_song">Поширити пісню</string>
     <string name="empty_liked">Немає вподобаних відео</string>
     <string name="empty_liked_body">Ваш уподобаний уміст з’явиться тут</string>
-    <string name="song">Пісня</string>
+
     <string name="video">Відео</string>
     <string name="share">Поширити</string>
     <string name="downloaded">Завантажено</string>
@@ -68,10 +67,9 @@
     <string name="video_marked_not_interested">Відео позначено як нецікаве</string>
     <string name="play_mode_suggestion_body">Це відео триває менше 2 хвилин. Бажаєте перемкнутись на спеціалізований програвач?</string>
     <string name="shorts_player">Програвач Shorts</string>
-    <string name="music_player">Музичний програвач</string>
+
     <string name="tab_videos">Відео</string>
-    <string name="tab_music">Музика</string>
-    <string name="action_delete">Видалити</string>
+<string name="action_delete">Видалити</string>
     <string name="downloads_title">Завантаження</string>
     <string name="download_deleted">Завантаження видалено</string>
     <string name="cd_delete_download">Видалити %1$s</string>
@@ -105,9 +103,9 @@
     <string name="pinned_by_creator">Закріплено автором</string>
     <string name="new_update_available">Нове оновлення доступне</string>
     <string name="release_notes">ПРИМІТКИ ДО ВИПУСКУ</string>
-    <string name="update_flow">Оновити Chorplay</string>
+    <string name="update_chorplay">Оновити Chorplay</string>
     <string name="maybe_later">Можливо пізніше</string>
-    <string name="nav_music">Музика</string>
+
     <string name="nav_library">Бібліотека</string>
     <string name="search">Пошук</string>
     <string name="settings">Налаштування</string>
@@ -132,10 +130,7 @@
     <string name="select_artist">Виберіть виконавця</string>
     <string name="playback_header">Відтворення</string>
     <string name="play_next">Відтворити наступне</string>
-    <string name="play_next_desc">Відтворюється після поточної пісні</string>
     <string name="view_artist">Переглянути виконавця</string>
-    <string name="view_album">Переглянути альбом</string>
-    <string name="album_art">Обкладинка альбому</string>
     <string name="close_player">Закрити програвач</string>
     <string name="views_template">%1$s переглядів</string>
     <string name="artist">Виконавець</string>
@@ -192,11 +187,11 @@
     <string name="subscribers_count_template">%1$s підписників</string>
     <string name="views_count_short_template">%1$s переглядів</string>
     <string name="remove_from_history">Видалити з історії</string>
-    <string name="share_song_chooser">Поширити пісню</string>
+
     <string name="time_today">Сьогодні</string>
     <string name="time_yesterday">Вчора</string>
     <string name="time_earlier">Раніше</string>
-    <string name="icon_name_flow_red">Червоний Chorplay</string>
+    <string name="icon_name_chorplay_red">Червоний Chorplay</string>
     <string name="icon_name_amoled">Темний AMOLED</string>
     <string name="icon_name_monochrome">Монохром</string>
     <string name="icon_name_ghost">Привид</string>
@@ -213,7 +208,7 @@
     <string name="dismiss">Відхилити</string>
     <string name="peace_and_quiet">Мир і тиша</string>
     <string name="settings_title">Налаштування</string>
-    <string name="settings_flow_engine_header">Рушій Chorplay</string>
+    <string name="settings_chor_engine_header">Рушій Chorplay</string>
     <string name="settings_active_learning">АКТИВНЕ НАВЧАННЯ</string>
     <string name="settings_reset_everything">Скинути все</string>
     <string name="settings_view_analytics">Переглянути аналітику</string>
@@ -246,7 +241,7 @@
     <string name="settings_item_app_icon">Значок застосунку</string>
     <string name="settings_item_app_icon_subtitle">Налаштуйте значок запускача</string>
     <string name="settings_item_content_prefs">Налаштування контенту</string>
-    <string name="library_music_playlists_label">Списки музики</string>
+
     <string name="empty_description">Опис відсутній</string>
     <string name="like">Лайк</string>
     <string name="previous">Попереднє</string>
@@ -281,7 +276,6 @@
     <string name="category_movies">Фільми</string>
     <string name="category_live">Ефір</string>
     <string name="continue_watching_title">Продовжити перегляд</string>
-    <string name="share_message_template">Послухайте цю пісню: %1$s від %2$s\nhttps://music.youtube.com/watch?v=%3$s</string>
     <string name="kbps">кбіт/с</string>
     <string name="filter_deep_cuts">Маловідомі пісні</string>
     <string name="track_details">Деталі треку</string>
@@ -383,9 +377,9 @@
     <string name="channel_search_open">Пошук в каналі</string>
     <string name="channel_search_close">Закрити пошук</string>
     <string name="channel_search_no_results">Результати пошуку відсутні для %1$s</string>
-    <string name="deep_flow_mode_title">Режим Deep Chorplay</string>
-    <string name="deep_flow_mode_subtitle">Призупинити навчання, поки переглядаєте вебсторінки</string>
-    <string name="deep_flow_learning_paused">НАВЧАННЯ ПРИЗУПИНЕНЕ</string>
+    <string name="deep_chor_mode_title">Режим Deep Chorplay</string>
+    <string name="deep_chor_mode_subtitle">Призупинити навчання, поки переглядаєте вебсторінки</string>
+    <string name="deep_chor_learning_paused">НАВЧАННЯ ПРИЗУПИНЕНЕ</string>
     <string name="settings_item_proxy_subtitle">Спрямувати віддалений трафік через HTTP або SOCKS5</string>
     <string name="settings_item_app_language">Мова застосунку</string>
     <string name="settings_item_app_language_subtitle">Використати мову пристрою або вибрати вручну</string>
@@ -430,8 +424,8 @@
     <string name="player_appearance_fullscreen_header">Повний екран</string>
     <string name="player_show_title_title">Показати назву відео</string>
     <string name="player_show_title_subtitle">Показувати назву відео під верхньою панеллю у повноекранному режимі</string>
-    <string name="lyrics_provider_title">Постачальник тексту пісень</string>
-    <string name="lyrics_provider_subtitle">Виберіть бажане джерело тексту пісень</string>
+
+
     <string name="lyrics_provider_lrclib">LrcLib</string>
     <string name="lyrics_provider_better_lyrics">Better Lyrics</string>
     <string name="lyrics_provider_simpmusic">SimpMusic</string>
@@ -570,20 +564,20 @@
     <string name="buffer_profile_custom_desc">Налаштувати розміри буферів вручну</string>
     <string name="buffer_custom_mode_desc">Більші буфери рідше зависають, але довше запускаються.</string>
     <string name="saved">Збережено</string>
-    <string name="deep_flow_dialog_title">Тривалість зупинки</string>
-    <string name="deep_flow_dialog_body">На який час потрібно зупинити навчання?</string>
-    <string name="deep_flow_enabled_message">Deep Chorplay увімкнено</string>
-    <string name="deep_flow_disabled_message">Deep Chorplay вимкнено</string>
-    <string name="deep_flow_expired_message">Таймер Deep Chorplay закінчився</string>
-    <string name="deep_flow_active_until_disabled">Deep Chorplay буде активним доки ви його не вимкнете</string>
-    <string name="deep_flow_duration_never">Ніколи</string>
-    <string name="deep_flow_duration_1h">1 година</string>
-    <string name="deep_flow_duration_2h">2 години</string>
-    <string name="deep_flow_duration_4h">4 години</string>
-    <string name="deep_flow_duration_6h">6 годин</string>
-    <string name="deep_flow_duration_8h">8 годин</string>
-    <string name="deep_flow_duration_12h">12 годин</string>
-    <string name="deep_flow_duration_24h">24 години</string>
+    <string name="deep_chor_dialog_title">Тривалість зупинки</string>
+    <string name="deep_chor_dialog_body">На який час потрібно зупинити навчання?</string>
+    <string name="deep_chor_enabled_message">Deep Chorplay увімкнено</string>
+    <string name="deep_chor_disabled_message">Deep Chorplay вимкнено</string>
+    <string name="deep_chor_expired_message">Таймер Deep Chorplay закінчився</string>
+    <string name="deep_chor_active_until_disabled">Deep Chorplay буде активним доки ви його не вимкнете</string>
+    <string name="deep_chor_duration_never">Ніколи</string>
+    <string name="deep_chor_duration_1h">1 година</string>
+    <string name="deep_chor_duration_2h">2 години</string>
+    <string name="deep_chor_duration_4h">4 години</string>
+    <string name="deep_chor_duration_6h">6 годин</string>
+    <string name="deep_chor_duration_8h">8 годин</string>
+    <string name="deep_chor_duration_12h">12 годин</string>
+    <string name="deep_chor_duration_24h">24 години</string>
     <string name="settings_item_proxy">Налаштування проксі сервера</string>
     <string name="settings_language_system_default">Мова системи</string>
     <string name="appearance_customize_theme">Редагуйте тему</string>
@@ -602,10 +596,10 @@
     <string name="play_mode_suggestion_title">Пропозиція режиму відтворення</string>
     <string name="filter_top">Найпопулярніше</string>
     <string name="no_groups_yet">Групи відсутні. Створіть, щоб фільтрувати вашу стрічку</string>
-    <string name="music_history">Історія прослуховувань</string>
-    <string name="deep_flow_expires_in">Термін дії закінчується через %s</string>
-    <string name="deep_flow_expire_duration_title">Автовимкнення через</string>
-    <string name="deep_flow_expire_duration_subtitle">Навчання автоматично відновиться після %s</string>
+
+    <string name="deep_chor_expires_in">Термін дії закінчується через %s</string>
+    <string name="deep_chor_expire_duration_title">Автовимкнення через</string>
+    <string name="deep_chor_expire_duration_subtitle">Навчання автоматично відновиться після %s</string>
     <string name="notif_type_general_subtitle">Інші сповіщення та анонси</string>
     <string name="appearance_customizer_subtitle">Налаштовуйте кожну колірну роль Material 3 та миттєво переглядайте зміни</string>
     <string name="appearance_customizer_format_hint">Формат HEX: #RRGGBB або #AARRGGBB</string>
@@ -616,13 +610,11 @@
     <string name="content_settings_layout_grid">Сітка</string>
     <string name="content_settings_layout_list">Список</string>
     <string name="content_settings_grid_size_title">Розмір елементів сітки</string>
-    <string name="content_settings_grid_size_subtitle">Налаштування розміру обкладинок альбомів та карток контенту</string>
     <string name="content_settings_grid_big_title">Великий</string>
     <string name="content_settings_grid_big_desc">Великі обкладинки</string>
     <string name="content_settings_grid_small_title">Малий</string>
     <string name="content_settings_grid_small_desc">Компактний перегляд</string>
     <string name="content_settings_header_preview">Передперегляд</string>
-    <string name="content_settings_preview_album_art">Перегляд обкладинки</string>
     <string name="content_settings_preview_big">Великі обкладинки — 128dp</string>
     <string name="content_settings_preview_small">Малі обкладинки — 104dp</string>
     <string name="content_settings_dynamic_components">Динамічні компоненти</string>
@@ -659,7 +651,7 @@
     <string name="settings_subs_shorts_shelf_title">Блок Shorts у підписках</string>
     <string name="settings_home_shorts_shelf_title">Блок Shorts на головній</string>
     <string name="settings_shorts_nav_tab_subtitle">Показувати вкладку Shorts на нижній панелі навігації.</string>
-    <string name="settings_music_nav_tab_subtitle">Показувати вкладку музики на нижній панелі навігації.</string>
+
     <string name="settings_search_nav_tab_subtitle">Додати вкладку «Пошук» на панель навігації</string>
     <string name="categories_switch_to_grid">Перемкнути на перегляд сіткою</string>
     <string name="categories_switch_to_list">Перемкнути на перегляд списком</string>
@@ -787,7 +779,7 @@
     <string name="sleep_timer_custom_label">Власний час</string>
     <string name="sleep_timer_unit">хв</string>
     <string name="sleep_timer_input_error">Вкажіть значення між 1 та 1440</string>
-    <string name="sleep_timer_end_of_song">Кінець пісні / відео</string>
+    <string name="sleep_timer_end_of_video">Кінець пісні / відео</string>
     <string name="sleep_timer_start">Початок</string>
     <string name="sleep_timer_stops_in">Зупиниться через</string>
     <string name="sleep_timer_end_of_media">Кінець поточної пісні</string>
@@ -839,7 +831,7 @@
     <string name="settings_subs_shorts_shelf_subtitle">Показувати розділ Shorts у стрічці підписок</string>
     <string name="settings_home_shorts_shelf_subtitle">Показувати горизонтальний блок shorts на головній.</string>
     <string name="settings_shorts_nav_tab_title">Вкладка Shorts в навігації</string>
-    <string name="settings_music_nav_tab_title">Вкладка музики в навігації</string>
+
     <string name="settings_search_nav_tab_title">Вкладка пошуку в навігації</string>
     <string name="settings_categories_nav_tab_title">Вкладка «Дослідити» в навігації</string>
     <string name="player_settings_mini_player_continue_watching_title">Продовжити перегляд в мініпрогравачі</string>
@@ -858,12 +850,12 @@
     <string name="period_six_months">6 місяців</string>
     <string name="period_one_year">1 рік</string>
     <string name="import_data_title">Імпортувати дані</string>
-    <string name="import_flow_backup_success">Резервна копію Chorplay успішно імпортована</string>
-    <string name="import_flow_backup_failed_template">Не вдалось імпортувтаи резервну копію Chorplay: %1$s</string>
+    <string name="import_chorplay_backup_success">Резервна копію Chorplay успішно імпортована</string>
+    <string name="import_chorplay_backup_failed_template">Не вдалось імпортувтаи резервну копію Chorplay: %1$s</string>
     <string name="import_newpipe_failed_template">Не вдалось імпортувати резервну копію NewPipe: %1$s</string>
     <string name="import_youtube_failed_template">Не вдалось імпортувати резервну копію YouTube: %1$s</string>
-    <string name="import_flow_backup_item_title">Імпортувати резервну копію Chorplay</string>
-    <string name="import_flow_backup_desc">Відновіть історію, налаштування та підписки з файлу резервної копії Chorplay.</string>
+    <string name="import_chorplay_backup_item_title">Імпортувати резервну копію Chorplay</string>
+    <string name="import_chorplay_backup_desc">Відновіть історію, налаштування та підписки з файлу резервної копії Chorplay.</string>
     <string name="import_from_newpipe">Імпорт з NewPipe</string>
     <string name="import_from_newpipe_desc">Імпортувати підписки з файлу експорту NewPipe (JSON).</string>
     <string name="import_from_libretube">Імпорт з LibreTube</string>
@@ -876,10 +868,10 @@
     <string name="import_libretube_playlists_desc">Імпортуйте ваші локальні плейлісти LibreTube з JSON файлу.</string>
     <string name="import_yt_takeout_all">Імпорт з Google Takeout</string>
     <string name="import_yt_takeout_all_desc">Підписки, історія, пошукові запити, списки відтворення, вподобання та ваша бібліотека YouTube Music із Google Takeout. Виберіть усі ZIP-архіви експорту.</string>
-    <string name="import_music_apps_section_title">Музичні застосунки</string>
-    <string name="import_music_apps_section_subtitle">Імпортуйте свою музичну бібліотеку з інших плеєрів</string>
-    <string name="import_from_metrolist">Імпорт з Metrolist</string>
-    <string name="import_from_metrolist_desc">Імпортуйте музичні списки відтворення з файлу резервної копії Metrolist (.zip). Вони з’являться у вашій музичній бібліотеці.</string>
+
+
+
+
     <string name="import_from_youtube">Імпорт з YouTube</string>
     <string name="import_from_youtube_desc">Імпортуйте підписки з YouTube Takeout (CSV).</string>
     <string name="import_yt_data_section_title">Дані YouTube</string>
@@ -888,8 +880,6 @@
     <string name="import_yt_watch_history_desc">Імпортуйте історію переглядів із YouTube Takeout (watch-history.html).</string>
     <string name="import_yt_playlist">Імпорт списків відтворення YouTube</string>
     <string name="import_yt_playlist_desc">Імпортуйте плейліст із YouTube Takeout CSV (Playlist-&lt;назва&gt;.csv).</string>
-    <string name="import_yt_music_playlist">Імопртувати списки відтворення YouTube Music</string>
-    <string name="import_yt_music_playlist_desc">Імпортуйте музичний список відтворення із YouTube Music Takeout CSV. Він з’явиться у розділі «Списки музики».</string>
     <string name="resume">Продовжити</string>
     <string name="permissions_header">Дозволи</string>
     <string name="files_access_title">Доступ до файлів</string>
@@ -935,9 +925,9 @@
     <string name="location_badge_active">Активно</string>
     <string name="select_threads_count_desc">Виберіть кількість потоків (1–8):</string>
     <string name="support_donations_title">Підтримка та пожертви</string>
-    <string name="support_flow_dev_title">Підтримайте розробку Chorplay</string>
-    <string name="support_flow_dev_desc">Якщо Chorplay вам корисний, ви можете підтримати його на Patreon або криптовалютою нижче. Дякуємо!</string>
-    <string name="support_flow_patreon">Підтримайте Chorplay на Patreon</string>
+    <string name="support_chorplay_dev_title">Підтримайте розробку Chorplay</string>
+    <string name="support_chorplay_dev_desc">Якщо Chorplay вам корисний, ви можете підтримати його на Patreon або криптовалютою нижче. Дякуємо!</string>
+    <string name="support_chorplay_patreon">Підтримайте Chorplay на Patreon</string>
     <string name="thank_you_support_message">Дякую вам за вашу підтримку! ❤️</string>
     <string name="address_copied_toast">Адреса скопійована до буферу обміну</string>
     <string name="donation_address_clip_label">Адреса для пожертв</string>
@@ -948,7 +938,7 @@
     <string name="newpipe_extractor_subtitle">Основна бібліотека витягування</string>
     <string name="about_license">Ліцензія</string>
     <string name="about_changelog">Список змін</string>
-    <string name="whats_new_in_flow">Що нового у Chorplay</string>
+    <string name="whats_new_in_chorplay">Що нового у Chorplay</string>
     <string name="about_device_info">Інформація про пристрій</string>
     <string name="gnu_license_full_title">GNU General Public License</string>
     <string name="loading_ellipsis">Завантаження...</string>
@@ -989,7 +979,7 @@
     <string name="playlist_empty_desc">Додавайте відео прямо з програвача,\nщоб створити свій список відтворення</string>
     <string name="delete_playlist_dialog_title">Видалити список відтворення?</string>
     <string name="delete_playlist_dialog_text">Це назавжди видалить «%1$s» і всі його відео.</string>
-    <string name="welcome_to_flow">Вітаємо у Chorplay</string>
+    <string name="welcome_to_chorplay">Вітаємо у Chorplay</string>
     <string name="onboarding_subtitle">Розкажіть нам, що вас цікавить</string>
     <string name="onboarding_instructions">Оберіть принаймні 3 теми, щоб персоналізувати досвід</string>
     <string name="btn_skip_for_now">Пропустити</string>
@@ -1006,7 +996,7 @@
     <string name="category_creative">Творчість</string>
     <string name="category_science_nature">Наука і природа</string>
     <string name="category_news_current_events">Новини та події</string>
-    <string name="flow_control_center">Центр керування Chorplay</string>
+    <string name="chorplay_control_center">Центр керування Chorplay</string>
     <string name="action_refresh">Оновити</string>
     <string name="loading_neural_matrix">Завантаження нейронної матриці...</string>
     <string name="neural_interest_map_subtitle">Ваша нейронна карта інтересів</string>
@@ -1030,12 +1020,9 @@
     <string name="stats_topics">Теми</string>
     <string name="empty_bubble_cloud_message">Перегляньте кілька відео, щоб сформувати ваш профіль інтересів!</string>
     <string name="export_profile_data">Експортувати дані профілю</string>
-    <string name="flow_neural_profile_export_subject">Експорт нейронного профілю Chorplay</string>
-    <string name="screen_title_music_library">Музична бібліотека</string>
+    <string name="chorplay_neural_profile_export_subject">Експорт нейронного профілю Chorplay</string>
+
     <string name="header_your_collection">Ваша колекція</string>
-    <string name="subtitle_liked_music">Вподобані пісні</string>
-    <string name="subtitle_history">Пісні, які ви слухали</string>
-    <string name="empty_music_playlists">Списки музики відсутні</string>
     <string name="rename_playlist_title">Перейменувати список відтворення</string>
     <string name="action_rename">Перейменувати</string>
     <string name="link_copied">Посилання скопійоване</string>
@@ -1073,27 +1060,25 @@
     <string name="action_add_to_favorites">Додати до обраного</string>
     <string name="action_listen_now">Слухати зараз</string>
     <string name="action_play_all">Відтворити все</string>
-    <string name="loading_music">Завантаження музики...</string>
-    <string name="screen_title_music">МУЗИКА</string>
+
+
     <string name="section_listen_again">Слухати знову</string>
     <string name="section_quick_picks">Швидкий вибір</string>
     <string name="section_recommended">Рекомендовано</string>
     <string name="section_recently_played">Нещодавні</string>
-    <string name="section_music_videos">Музичні відео</string>
+
     <string name="section_new_releases">Нові випуски</string>
     <string name="subtitle_single_template">Сингл · %1$s</string>
     <string name="section_popular_artists">Популярні виконавці</string>
     <string name="section_mixed_for_you">Ваш мікс</string>
     <string name="section_moods_and_genres">Настрої та жанри</string>
     <string name="genre_mix_template">%1$s мікс</string>
-    <string name="section_top_albums">Найкращі альбоми</string>
     <string name="similar_to">Схоже з</string>
     <string name="section_similar_to">Схоже з %1$s</string>
     <string name="subtitle_similar_to">На основі прослуховувань</string>
     <string name="section_vibe_vibes">Атмосфера: %1$s</string>
     <string name="subtitle_community_playlists">Списки спільноти</string>
     <string name="playlist_author_community">Списки спільноти</string>
-    <string name="playlist_description_community">Список відтворення %1$s від спільноти</string>
     <string name="radio">Радіо</string>
     <string name="audio_settings_title">Налаштування аудіо</string>
     <string name="label_preset">Шаблон</string>
@@ -1109,32 +1094,26 @@
     <string name="template_gain">%1$.1fдБ</string>
     <string name="template_q">%1$.1f</string>
     <string name="now_playing">ЗАРАЗ ГРАЄ</string>
-    <string name="voice_search_prompt">Говоріть, щоб знайти музику</string>
-    <string name="search_music_placeholder">Пошук музики</string>
+
     <string name="voice_search_cd">Голосовий пошук</string>
-    <string name="filter_albums">Альбоми</string>
-    <string name="filter_songs">Пісні</string>
+
     <string name="filter_community_playlists">Списки спільноти</string>
     <string name="section_top_result">Найращі результати</string>
-    <string name="subtitle_song_prefix">Пісня • %1$s</string>
+
     <string name="subtitle_artist">Виконавець</string>
-    <string name="subtitle_album_template">Альбом • %1$s</string>
     <string name="subtitle_playlist_template">Список відтворення • %1$s</string>
     <string name="plays_count_template">• %1$s грає</string>
-    <string name="album_year_template">Альбом • %1$s • %2$s</string>
     <string name="search_source_template">Пошук: %1$s</string>
     <string name="artist_source_template">Виконавець: %1$s</string>
     <string name="top_picks_for_you">Найкраще для вас</string>
     <string name="no_results_found">Результати відсутні</string>
     <string name="no_tracks_available">Пісні відсутні</string>
     <string name="tab_favorites">Обране</string>
-    <string name="create_playlist_subtitle">Впорядкуйте музику</string>
     <string name="empty_playlists_title">Списки відтворення відсутні</string>
     <string name="empty_playlists_subtitle">Створіть ваш перший список, щоб впорядкувати ваші обрані пісні</string>
     <string name="empty_favorites_title">Обрані пісні відсутні</string>
     <string name="empty_favorites_subtitle">Тисни на «значок серця», щоб додати пісню до «Обраного»</string>
     <string name="empty_history_title">Історія відсутня</string>
-    <string name="empty_history_subtitle">Почніть прослуховувати музику, щоб побачити історію тут</string>
     <string name="empty_downloads_title">Завантаження відсутні</string>
     <string name="empty_downloads_subtitle">Завантажте пісні для офлайн прослуховування</string>
     <string name="total_size">Загальний розмір</string>
@@ -1193,7 +1172,7 @@
     <string name="check_for_updates">Перевірити оновлення</string>
     <string name="check_for_updates_subtitle">Натисніть для перевірки оновлень</string>
     <string name="checking_for_updates">Перевірка оновлень…</string>
-    <string name="flow_is_up_to_date">Chorplay оновлено!</string>
+    <string name="chorplay_is_up_to_date">Chorplay оновлено!</string>
     <string name="update_check_failed">Не вдалося перевірити оновлення. Перевірте з’єднання.</string>
     <string name="export_engine_data">Експортувати профіль рушія</string>
     <string name="export_engine_data_subtitle">Резервна копія особистості та даних навчання ШІ</string>
@@ -1235,15 +1214,15 @@
     <string name="history_tab_videos">Відео</string>
     <string name="history_tab_shorts">Shorts</string>
     <string name="empty_liked_videos">Немає вподобаних відео</string>
-    <string name="empty_liked_music">Немає вподобаної музики</string>
-    <string name="empty_liked_music_body">Вподобані пісні з’являться тут</string>
+
+
     <string name="hide_channel_shorts">Сховати Shorts з цього каналу</string>
     <string name="show_channel_shorts">Показати Shorts з цього каналу</string>
     <string name="appearance_system_defaults_title">Тема системи</string>
     <string name="appearance_system_defaults_subtitle">Виберіть тему, яка використовуватиметься під час перемикання пристрою між світлим і темним режимами.</string>
     <string name="appearance_system_light_theme">Світла тема</string>
     <string name="appearance_system_dark_theme">Темна тема</string>
-    <string name="icon_name_flow_light">Світлий Chorplay</string>
+    <string name="icon_name_chorplay_light">Світлий Chorplay</string>
     <string name="icon_name_material_sky">Material Sky</string>
     <string name="icon_name_material_mint">Material Mint</string>
     <string name="player_adaptive_size_subtitle">Збільшити відеопрогравач для вертикальних відео. Якщо вимкнути цей параметр, формат залишиться 16:9.</string>
@@ -1322,11 +1301,11 @@
     <string name="upcoming_video_reminder_enabled">Нагадування встановлено</string>
     <string name="upcoming_video_reminder_badge">Нагадування увімкнено</string>
     <string name="subscriptions_video_section_title">Відеопідписки</string>
-    <string name="subscriptions_music_section_title">Музичні підписки</string>
+
     <string name="subscriptions_quick_access_title">Швидкий доступ</string>
-    <string name="subscriptions_compact_header_with_music">Музичні канали позначені вбудованими, тому стрічка залишається компактною.</string>
-    <string name="subscriptions_music_chip_label">Музика</string>
-    <string name="subscriptions_music_badge_cd">Музичні підписки</string>
+
+
+
     <string name="no_subscriptions_found">Підписок не знайдено</string>
     <string name="player_appearance_remember_brightness_title">Запам’ятати яскравість</string>
     <string name="player_appearance_remember_brightness_subtitle">Зберігати останній рівень яскравості для наступного відео</string>
@@ -1366,12 +1345,11 @@
     <string name="daily_discover_because_you_listen_to">Тому що ви прослухали %1$s</string>
     <string name="daily_discover_similar_to">Схожий до %1$s</string>
     <string name="daily_discover_for_fans_of">Для фанатів %1$s</string>
-    <string name="section_music_videos_for_you">Музичні кліпи для вас</string>
+
     <string name="section_from_the_community">Від спільноти</string>
     <string name="error_not_available">Відео недоступне</string>
     <string name="error_not_available_hint">Це відео було видалене, позначене як приватне або видалено модерацією Youtube.</string>
     <string name="subscriptions_compact_header">Переходьте до останніх каналів, на які ви підписалися.</string>
-    <string name="player_background_style_title">Фон музичного програвача</string>
     <string name="player_background_style_blur_gradient">Розмиття + градієнт</string>
     <string name="player_background_style_blur">Розмиті ілюстрації</string>
     <string name="player_background_style_default">Стандартна поверхня</string>
@@ -1411,18 +1389,18 @@
     <string name="player_settings_overlay_cc_subtitle">Показувати кнопку субтитрів на наклаланні програвача</string>
     <string name="player_settings_auto_pip_subtitle">Переходити у режим «картинка в картинці» при виході із застосунку</string>
     <string name="player_settings_overlay_autoplay">Перемикач автовідтворення</string>
-    <string name="music_quality_header">Якість звуку музики</string>
-    <string name="music_quality_auto">Авто</string>
-    <string name="music_quality_high">Висока</string>
-    <string name="music_quality_medium">Середня</string>
-    <string name="music_quality_low">Низька</string>
+
+
+
+
+
     <string name="player_settings_overlay_speed_indicator_subtitle">Показувати поточну швидкість в накладанні відеопрогравача</string>
     <string name="player_action_background">Фон</string>
     <string name="player_action_copy_link">Копіювати посилання</string>
-    <string name="music_playback_warning_forbidden">Доступ до аудіопотоку відхилено. YouTube може обмежувати цю IP-адресу; спробуйте оновити сторінку або змінити мережу/VPN.</string>
-    <string name="music_playback_warning_network">Збій аудіопотоку через проблеми з мережею. Перевірте з’єднання або змініть мережу.</string>
-    <string name="music_playback_warning_final">Не вдалося завантажити пісню після кількох спроб. Спробуйте іншу мережу або VPN, якщо помилка повторюється.</string>
-    <string name="music_playback_warning_generic">Збій відтворення музики. Спробуйте ще раз або змініть мережу, якщо помилка повторюється.</string>
+
+
+
+
     <string name="player_settings_overlay_autoplay_subtitle">Показувати перемикач автовідтворення в накладанні програвача</string>
     <string name="player_settings_overlay_sleep_timer">Кнопка таймера сну</string>
     <string name="player_settings_overlay_sleep_timer_subtitle">Показувати кнопку таймера сну в накладанні програвача</string>
@@ -1550,7 +1528,7 @@
     <string name="discovery_status_subtitle">Запити та обмеження, що визначають поточне дослідження</string>
     <string name="discovery_queries">Запити</string>
     <string name="video_download_location_label">Місце завантаження відео</string>
-    <string name="music_download_location_label">Місце завантаження музики</string>
+
     <string name="refresh_lyrics">Перезавантажити текст пісні</string>
     <string name="settings_item_datetime">Дата і час</string>
     <string name="settings_item_datetime_subtitle">Налаштувати спосіб показу дат завантаження</string>
@@ -1627,13 +1605,13 @@
     <string name="local_media_permission_body">Надайте доступ до медіафайлів, щоб Chorplay міг знаходити та відтворювати локальні відео й музику.</string>
     <string name="local_media_grant">Надати доступ</string>
     <string name="history_tab_local_videos">Локальні відео</string>
-    <string name="history_tab_local_music">Локальна музика</string>
+
     <string name="share_link_only_template">https://youtube.com/watch?v=%1$s</string>
     <string name="content_settings_share_without_text_title">Поділитися посиланням без тексту</string>
     <string name="content_settings_share_without_text_subtitle">Поділіться лише посиланням на відео, без повідомлення «Подивись це відео»</string>
-    <string name="deep_flow_save_history_title">Зберегти в історію переглядів</string>
-    <string name="deep_flow_save_history_subtitle">Зберігати історію переглядів без рекомендацій на основі навчання</string>
-    <string name="icon_name_flow_play">Chorplay Play</string>
+    <string name="deep_chor_save_history_title">Зберегти в історію переглядів</string>
+    <string name="deep_chor_save_history_subtitle">Зберігати історію переглядів без рекомендацій на основі навчання</string>
+    <string name="icon_name_chorplay_play">Chorplay Play</string>
     <string name="player_appearance_controls_while_loading_title">Керування під час завантаження</string>
     <string name="player_appearance_controls_while_loading_subtitle">Показувати елементи керування до завершення завантаження відео</string>
     <string name="player_settings_autoplay_countdown_title">Затримка автовідтворення</string>
@@ -1654,19 +1632,16 @@
     <string name="content_settings_navbar_hide_on_scroll_subtitle">Приховувати панель навігації під час гортання вниз</string>
     <string name="player_settings_queue_autoplay">Автовідтворення відео в черзі</string>
     <string name="player_settings_queue_autoplay_subtitle">Відтворити наступне відео зі списку відтворення або зі списку «Переглянути пізніше»</string>
-    <string name="recognize_music">Розпізнати музику</string>
+
     <string name="recognition_history">Історія розпізнавання</string>
-    <string name="tap_to_recognize">Натисніть, щоб розпізнати</string>
+
     <string name="listening">Слухаю…</string>
     <string name="processing">Обробка…</string>
     <string name="no_match_found">Збігів не знайдено</string>
     <string name="recognition_error">Не вдалося розпізнати</string>
     <string name="try_again">Спробувати ще раз</string>
-    <string name="search_in_flow">Знайти у Chorplay</string>
-    <string name="recognition_search_history">Пошук розпізнаних пісень</string>
-    <string name="recognition_history_empty">Розпізнані пісні з’являться тут</string>
+    <string name="search_in_chorplay">Знайти у Chorplay</string>
     <string name="recognition_clear_history">Очистити історію?</string>
-    <string name="recognition_clear_history_body">Це видалить усі розпізнані пісні. Цю дію неможливо скасувати.</string>
     <string name="player_settings_display">Дисплей</string>
     <string name="player_settings_ambient_mode">Ambient режим</string>
     <string name="player_settings_ambient_mode_subtitle">М’яке сяйво кольорів відео навколо нього</string>
@@ -1735,7 +1710,7 @@
     <string name="sync_error_peer_also_receive">Інший пристрій також налаштовано на отримання. Переведіть його в режим надсилання та спробуйте знову.</string>
     <string name="sync_error_qr_expired">Термін дії цього коду минув. Попросіть інший пристрій створити новий код. Якщо термін дії кодів постійно закінчується майже одразу, перевірте, чи правильно встановлено дату й час на обох пристроях.</string>
     <string name="sync_error_qr_wrong_version">Версія програми на іншому пристрої несумісна.</string>
-    <string name="sync_error_qr_not_flow">Це не схоже на коректні дані з’єднання Chorplay.</string>
+    <string name="sync_error_qr_not_chorplay">Це не схоже на коректні дані з’єднання Chorplay.</string>
     <string name="sync_error_qr_bad_address">У даних з\'єднання відсутня дійсна мережева адреса.</string>
     <string name="player_settings_overlay_comments">Кнопка коментарів</string>
     <string name="player_settings_overlay_comments_subtitle">Відкривати коментарі на бічній панелі на весь екран</string>
@@ -1743,8 +1718,8 @@
     <string name="upcoming_waiting_count">%1$s очікує</string>
     <string name="upcoming_video_starts_in">Початок через</string>
     <string name="sb_skip_segment">Пропустити %1$s</string>
-    <string name="player_appearance_hide_music_artwork_title">Приховати обкладинку музичного програвача</string>
-    <string name="player_appearance_hide_music_artwork_subtitle">Використовувати колір обкладинки як фон для значка застосунку</string>
+
+
     <string name="player_settings_header_video">Відео</string>
     <string name="default_download_codec_label">Типовий кодек завантаження</string>
     <string name="default_download_codec_auto_subtitle">Використовує ваш останній вибір або кодек поточного відео</string>
@@ -1849,7 +1824,6 @@
     <string name="playlist_creation_menu_close">Закрити меню створення списку відтворення</string>
     <string name="add_comment_placeholder">Додайте коментар...</string>
     <string name="playlist_visibility_metadata">%1$s • %2$s</string>
-    <string name="search_empty_prompt">Шукайте відео, музику та інше</string>
     <string name="search_filter_all">Усе</string>
     <string name="search_toggle_view_mode">Перемкнути вигляд результатів пошуку</string>
     <string name="channel_sort_latest">Останні</string>
@@ -1863,8 +1837,8 @@
     <string name="player_portrait_seekbar_width_spaced">З інтервалом</string>
     <string name="content_settings_home_reselect_refresh_title">Оновлювати «Головну» при повторному виборі</string>
     <string name="content_settings_home_reselect_refresh_subtitle">Торкніться «Головної» вгорі ще раз, щоби перезавантажити сторінку</string>
-    <string name="content_settings_restored_music_mini_player_title">Показати відновлений мініпрогравач музики</string>
-    <string name="content_settings_restored_music_mini_player_subtitle">Показувати останній музичний сеанс після його відновлення</string>
+
+
     <string name="content_settings_hide_watched_home_title">Приховати переглянуті відео на «Головній»</string>
     <string name="content_settings_hide_watched_home_subtitle">Приховати з головної сторінки відео, які ви вже переглянули</string>
     <string name="content_settings_hide_watched_subscriptions_title">Приховати переглянуті відео з підписок</string>
@@ -1892,13 +1866,12 @@
     <string name="subtitle_reset_default">Скинути до типових</string>
     <string name="desc_more">...більше</string>
     <string name="widget_now_playing_label">Зараз відтворюється</string>
-    <string name="widget_now_playing_description">Керуйте музикою, що відтворюється у Chorplay</string>
     <string name="widget_quick_actions_label">Швидкі дії</string>
     <string name="widget_quick_actions_description">Шукайте у Chorplay та переходьте до завантажень, історії або розпізнавання</string>
-    <string name="widget_recognize_label">Розпізнати музику</string>
-    <string name="widget_recognize_description">Розпізнавайте пісню, що лунає поруч, одним дотиком</string>
-    <string name="widget_turntable_label">Платівка</string>
-    <string name="widget_turntable_description">Ваша музика як платівка, що обертається</string>
+
+
+
+
     <string name="widget_recently_played_label">Продовжити перегляд</string>
     <string name="widget_recently_played_description">Продовжуйте відео з того місця, де зупинилися</string>
     <string name="widget_downloads_label">Завантаження</string>
@@ -1911,7 +1884,6 @@
     <string name="widget_next">Наступний трек</string>
     <string name="widget_previous">Попередній трек</string>
     <string name="widget_like">Подобається</string>
-    <string name="widget_artwork">Обкладинка альбому</string>
     <string name="widget_open_downloads">Відкрити завантажене</string>
     <string name="widget_open_history">Відкрити історію</string>
     <string name="widget_no_recent">Відео, які ви переглянете, з’являться тут</string>
@@ -1924,39 +1896,39 @@
     <string name="equalizer">Еквалайзер</string>
     <string name="action_save_preset">Зберегти передустановку</string>
     <string name="label_preset_name">Назва передустановки</string>
-    <string name="discord_presence_title">Розширена активність Discord</string>
-    <string name="discord_presence_enable">Показувати активність відтворення</string>
-    <string name="discord_presence_enable_description">Підтримує з’єднання під час пауз та фонового відтворення</string>
-    <string name="discord_presence_off">Вимк</string>
-    <string name="discord_presence_not_connected">Не під’єднано</string>
-    <string name="discord_presence_ready">Зв’язок встановлено і готовий</string>
-    <string name="discord_presence_ready_as">Пов’язано як %1$s · під’єднується під час відтворення</string>
-    <string name="discord_presence_connected">Під’єднано</string>
-    <string name="discord_presence_connected_as">Під’єднано як %1$s</string>
-    <string name="discord_presence_connected_account">Обліковий запис Discord: %1$s</string>
-    <string name="discord_presence_unavailable">Недоступно в цій збірці</string>
-    <string name="discord_presence_connection_error">Помилка з’єднання</string>
-    <string name="discord_presence_linking">Очікуємо авторизації в Discord…</string>
-    <string name="discord_presence_connecting">З’єднання з Discord…</string>
-    <string name="discord_presence_connect">Прив’язати обліковий запис Discord</string>
-    <string name="discord_presence_connect_action">Прив’язати</string>
-    <string name="discord_presence_gateway_warning">Це здійснює вхід за допомогою вашого токена Discord замість офіційного входу. Це порушує Умови використання Discord і може призвести до обмеження або блокування вашого облікового запису.</string>
-    <string name="discord_presence_risk_dialog_body">З’єднання передає Chorplay ваш токен Discord. Він зберігається в зашифрованому вигляді на цьому пристрої та надсилається лише до Discord. Цей спосіб порушує Умови надання послуг Discord, тож ваш обліковий запис можуть обмежити або заблокувати.</string>
-    <string name="discord_error_not_initialized">Розширену активність Discord не ініціалізовано.</string>
-    <string name="discord_presence_disconnect">Відключити та від\'єднати</string>
-    <string name="discord_presence_unlink_action">Від\'єднати</string>
-    <string name="discord_presence_retry">Повторити спробу підключення</string>
-    <string name="discord_presence_description">Показувати, у що ви граєте, у своєму статусі Discord.</string>
-    <string name="discord_presence_connection_section">З\'єднання</string>
-    <string name="discord_presence_account">Акаунт Discord</string>
-    <string name="discord_presence_privacy_section">Ризик конфіденційності та облікового запису</string>
-    <string name="discord_presence_privacy_title">Конфіденційність</string>
-    <string name="discord_presence_privacy_body">Chorplay показує назву, автора, обкладинку та прогрес того, що ви відтворюєте. По стандарту вимкнено. Ваш токен Discord зашифровано й ніколи не записується в журнали.</string>
-    <string name="discord_presence_risk_dialog_title">Приймати ризик для облікового запису Discord?</string>
-    <string name="discord_presence_risk_accept">Я розумію, під\'єднати</string>
-    <string name="discord_error_open_flow">Відкрийте Chorplay перед з\'єднанням з Discord.</string>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <string name="interface_mode_tv">ТВ</string>
-    <string name="discord_account_fallback">Користувач Discord</string>
+
     <string name="settings_item_interface_mode">Режим інтерфейсу</string>
     <string name="settings_item_interface_mode_subtitle">Виберіть автоматичний, мобільний або розкладу ТВ</string>
     <string name="interface_mode_title">Режим інтерфейсу</string>
@@ -1980,28 +1952,28 @@
     <string name="ui_queued_for_download">В черзі завантажень</string>
     <string name="ui_downloading">Завантаження</string>
     <string name="ui_in_library">В бібліотеці</string>
-    <string name="ui_flow_logo">Логотип Chorplay</string>
+    <string name="ui_chorplay_logo">Логотип Chorplay</string>
     <string name="about_creator_name">Pushkar</string>
     <string name="about_website_address">github.com/chorus-mu/Chorplay</string>
     <string name="about_reddit">Reddit</string>
     <string name="about_reddit_subtitle">r/Chorplay_Official</string>
     <string name="about_license_name">GNU GPL v3</string>
-    <string name="discord_error_enable_before_connect">Увімкніть Розширену активність у Discord перед прив’язуванням облікового запису.</string>
-    <string name="discord_error_unavailable">Розширена активність у Discord недоступна у цій збірці.</string>
-    <string name="discord_error_connection_in_progress">З’єднання з Discord уже встановлюється.</string>
-    <string name="discord_error_login_timeout">Час очікування входу в Discord вичерпано.</string>
-    <string name="discord_error_login_cancelled">З’єднання з Discord було скасовано.</string>
-    <string name="discord_error_connection_incomplete">З’єднання з Discord не було завершено.</string>
-    <string name="discord_error_empty_token">Discord повернув порожній токен сеансу.</string>
-    <string name="discord_error_missing_application_id">У цій збірці відсутній ID застосунку Discord.</string>
-    <string name="discord_error_gateway_timeout">Час очікування з’єднання з Discord Gateway вичерпано.</string>
-    <string name="discord_error_gateway_reconnect">Discord запитав повторне з’єднання.</string>
-    <string name="discord_error_session_rejected">Discord відхилив сеанс. Перепід’єднайте обліковий запис.</string>
-    <string name="discord_error_gateway_failed">Не вдалося з’єднатися з Discord Gateway.</string>
-    <string name="discord_error_heartbeat_unacknowledged">Сигнал «heartbeat» Discord Gateway не було підтверджено.</string>
-    <string name="discord_error_heartbeat_failed">Помилка сигналу «heartbeat» Discord Gateway.</string>
-    <string name="discord_presence_playing_fallback">Відтворюється у Chorplay</string>
-    <string name="discord_presence_by_creator">від %1$s</string>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <string name="interface_mode_automatic_summary">Інтерфейс для телевізорів — на телевізорах, мобільний інтерфейс — на всьому іншому</string>
     <string name="interface_mode_mobile_summary">Завжди використовувати інтерфейс для телефонів та планшетів</string>
     <string name="interface_mode_tv_summary">Завжди використовувати зручний для дистанційного керування телевізійний інтерфейс</string>
@@ -2038,7 +2010,7 @@
     <string name="tv_music_no_lyrics">Текст не знацдео</string>
     <string name="tv_music_radio">Радіо</string>
     <string name="tv_settings_appearance">Вигляд</string>
-    <string name="tv_settings_flow_engine">Chorplay Engine</string>
+    <string name="tv_settings_chor_engine">Chorplay Engine</string>
     <string name="tv_settings_sync">Синхронізувати пристрої</string>
     <string name="tv_guide_navigation_title">Навігація</string>
     <string name="tv_guide_playback_title">Відтворення</string>
@@ -2048,7 +2020,7 @@
     <string name="ui_list_view">Перегляд списком</string>
     <string name="ui_grid_view">Перегляд сіткою</string>
     <string name="ui_back">Назад</string>
-    <string name="ui_add_songs">Додати пісні</string>
+
     <string name="ui_close_search">Закрити пошуй</string>
     <string name="ui_save_to_library">Зберегти до бібліотеки</string>
     <string name="ui_remove_from_library">Видалити з бібліотеки</string>
@@ -2109,9 +2081,9 @@
     <string name="ui_added">Додано</string>
     <string name="ui_sync_lyrics">Синхронізація тексту</string>
     <string name="ui_downloading_playlist">Завантаження списку відтворення</string>
-    <string name="ui_no_songs_found">Жодної пісні не знайдено</string>
-    <string name="ui_search_songs_to_add">Шукайте пісні, щоб додати…</string>
-    <string name="ui_add_songs_to_playlist">Додати пісні до списку відтворення</string>
+
+
+
     <string name="ui_show_less">Менше</string>
     <string name="ui_show_more">Більше</string>
     <string name="ui_try_sabr_download">Спробувати завантажити SABR</string>
@@ -2157,7 +2129,7 @@
     <string name="toast_failed_to_add_track">Не вдалося додати трек</string>
     <string name="toast_removed_from_playlist">Видалено зі списку відтворення</string>
     <string name="toast_failed_to_remove_track">Не вдалося видалити трек</string>
-    <string name="toast_saved_playlist_to_music_library">Список відтворення збережено у вашій музичній бібліотеці</string>
+
     <string name="toast_failed_to_save_playlist">Не вдалося зберегти список відтворення</string>
     <string name="toast_removed_playlist_from_library">Список відтворення видалено з бібліотеки</string>
     <string name="toast_failed_to_merge_playlist">Не вдалося об\'єднати список</string>
@@ -2177,8 +2149,7 @@
     <string name="notification_channel_downloads_description">Показує перебіг та завершення завантаження</string>
     <string name="notification_channel_new_videos_description">Сповіщення про завантаження нових відео на канали, на які ви підписані</string>
     <string name="notification_channel_video_playback_description">Елементи керування відтворенням відео</string>
-    <string name="notification_channel_music_playback_description">Елементи керування відтворенням музики</string>
-    <string name="notification_download_progress_description">Процес завантаження відео та аудіо</string>
+<string name="notification_download_progress_description">Процес завантаження відео та аудіо</string>
     <string name="notification_channel_general_description">Загальні сповіщення додатка</string>
     <string name="notification_channel_break_reminders_description">Нагадування про час сну та перерву</string>
     <string name="notification_channel_updates_description">Сповіщення про оновлення додатка</string>
@@ -2186,8 +2157,7 @@
     <string name="notification_channel_downloads">Завантаження</string>
     <string name="notification_channel_new_videos">Нові відео</string>
     <string name="notification_channel_video_playback">Відтворення відео</string>
-    <string name="notification_channel_music_playback">Відтворення музики</string>
-    <string name="notification_channel_general">Загальні</string>
+<string name="notification_channel_general">Загальні</string>
     <string name="notification_channel_reminders">Нагадування</string>
     <string name="notification_channel_updates">Оновлення застосунку</string>
     <string name="notification_channel_imports">Імпорт даних</string>
@@ -2247,7 +2217,6 @@
     <string name="fallback_unknown_channel">Невідомий канал</string>
     <string name="fallback_unknown_playlist">Невідомий список відтворення</string>
     <string name="fallback_unknown_artist">Невідомий виконавець</string>
-    <string name="fallback_unknown_album">Невідомий альбом</string>
     <string name="fallback_unknown_video">Невідоме відео</string>
     <string name="fallback_local_video">Локальне відео</string>
     <string name="fallback_local_audio">Локальне аудіо</string>
@@ -2359,7 +2328,7 @@
         <item quantity="other">%1$d завантажень призупинено</item>
     </plurals>
     <string name="download_stream_blocked_403">Стрим заблоковано або термін дії посилання закінчився (HTTP 403). Спробуйте іншу якість чи кодек або повторіть спробу пізніше.</string>
-    <string name="music_search_no_results">Немає результатів для «%1$s»</string>
+
     <plurals name="subscriptions_refresh_progress_template">
         <item quantity="one">Оновлено %1$d з %2$d каналу</item>
         <item quantity="few">Оновлено %1$d з %2$d каналів</item>
@@ -2401,7 +2370,7 @@
     <string name="lyrics_adjust_sync">Налаштувати зміщення синхронізації</string>
     <string name="lyrics_sync_offset_value">%1$s с</string>
     <string name="import_success">%1$s успішно імпортовано</string>
-    <plurals name="deep_flow_duration_hours">
+    <plurals name="deep_chor_duration_hours">
         <item quantity="one">%1$d година</item>
         <item quantity="few">%1$d години</item>
         <item quantity="many">%1$d годин</item>
@@ -2417,12 +2386,7 @@
     <string name="style_thick">Товстий</string>
     <string name="style_compact">Компактний</string>
     <string name="style_wavy">Хвилястий</string>
-    <plurals name="lyrics_providers_enabled">
-        <item quantity="one">Увімкнено %1$d постачальник з %2$d</item>
-        <item quantity="few">Увімкнено %1$d постачальники з %2$d</item>
-        <item quantity="many">Увімкнено %1$d постачальників з %2$d</item>
-        <item quantity="other">Увімкнено %1$d постачальників з %2$d</item>
-    </plurals>
+
     <plurals name="player_settings_shorts_playback_mode_auto_interval_summary">
         <item quantity="one">Автогортання кожну %1$d секунду</item>
         <item quantity="few">Автогортання кожні %1$d секунди</item>
@@ -2523,7 +2487,6 @@
     <string name="import_label_freetube_watch_history">Історія переглядів FreeTube</string>
     <string name="import_label_newpipe_watch_history">Історія переглядів NewPipe</string>
     <string name="import_label_libretube_subscriptions">Підписки LibreTube</string>
-    <string name="import_label_metrolist_playlists">Музичні списки відтворення Metrolist</string>
     <string name="import_label_newpipe_playlists">Списки відтворення NewPipe</string>
     <string name="import_label_libretube_playlists">Списки відтворення LibreTube</string>
     <string name="import_label_youtube_takeout">YouTube Takeout</string>
@@ -2581,12 +2544,7 @@
         <item quantity="many">%1$d відео</item>
         <item quantity="other">%1$d відео</item>
     </plurals>
-    <plurals name="songs_count_template">
-        <item quantity="one">%1$d пісня</item>
-        <item quantity="few">%1$d пісні</item>
-        <item quantity="many">%1$d пісень</item>
-        <item quantity="other">%1$d пісень</item>
-    </plurals>
+
     <string name="metadata_separator">·</string>
     <string name="player_time_separator">/</string>
     <string name="you">Ви</string>
@@ -2619,7 +2577,7 @@
     <string name="equalizer_frequency_label">F</string>
     <string name="equalizer_gain_label">G</string>
     <string name="equalizer_q_label">Q</string>
-    <string name="section_on_repeat">На повторі</string>
+
     <string name="section_daily_mix_title">Мікс %1$s</string>
     <string name="section_daily_mix_label">Щоденний мікс</string>
     <string name="daily_mix_page_description">Створено на основі виконавців, яких ви слухаєте разом. Збережіть цей мікс, щоби не втратити сьогоднішню добірку.</string>
@@ -2636,31 +2594,31 @@
     <string name="section_rotation_evening">Ваша вечірня рутина</string>
     <string name="section_rotation_night">Ваша нічна рутина</string>
     <string name="source_your_rotation">Ваша рутина</string>
-    <string name="music_genre_affinity_title">Жанри та настрій</string>
-    <string name="music_genre_affinity_subtitle">Вивчено на основі жанрів та настроїв, які ви насправді слухаєте</string>
+
+
     <string name="recommendations_header">Рекомендації</string>
     <string name="not_interested_desc">Показувати менше цього виконавця деякий час</string>
     <string name="dont_recommend_artist">Не рекомендувати %1$s</string>
     <string name="dont_recommend_artist_desc">Ніколи не пропонувати цього виконавця</string>
     <string name="feedback_not_interested_applied">Ви бачитимете менше %1$s</string>
     <string name="feedback_artist_blocked">%1$s більше не рекомендуватиметься</string>
-    <string name="music_prefs_section_title">Музичні рекомендації</string>
-    <string name="music_endless_radio_title">Нескінченне радіо</string>
-    <string name="music_endless_radio_desc">Додавати схожі пісні, коли черга закінчиться</string>
-    <string name="music_content_language_title">Мова вмісту</string>
-    <string name="music_content_language_follow_app">Як у застосунку</string>
-    <string name="music_content_language_dialog_title">Вибрати мову вмісту</string>
-    <string name="music_content_country_title">Країна вмісту</string>
-    <string name="music_normalize_volume_title">Нормалізувати гучність</string>
-    <string name="music_normalize_volume_desc">Вирівнювати гучність кожного треку відповідно до цільового показника гучності YouTube Music</string>
+
+
+
+    <string name="content_language_title">Мова вмісту</string>
+    <string name="content_language_follow_app">Як у застосунку</string>
+    <string name="content_language_dialog_title">Вибрати мову вмісту</string>
+    <string name="content_country_title">Країна вмісту</string>
+
+
     <string name="section_other_versions">Інші версії</string>
-    <string name="music_blocked_artists_title">Заблоковані виконавці</string>
-    <string name="music_blocked_artists_empty">Немає заблокованих виконавців</string>
-    <string name="music_unblock">Розблокувати</string>
-    <string name="export_music_brain_title">Експортувати дані музичного рушія</string>
-    <string name="export_music_brain_desc">Зберегти профіль музичних уподобань як файл JSON</string>
-    <string name="import_music_brain_title">Імпортувати дані музичного рушія</string>
-    <string name="import_music_brain_desc">Відновити профіль музичних уподобань із файлу JSON</string>
+
+
+
+
+
+
+
     <string name="audio_bitrate_kbps_template">%1$d кбіт / с</string>
     <string name="filter_timed">За часом</string>
     <string name="no_timed_comments">Коментарів із міткою часу поки немає</string>
@@ -2685,39 +2643,39 @@
     <string name="content_settings_home_columns_title">Карток у рядку</string>
     <string name="content_settings_home_columns_subtitle">Автоматично підлаштовується під ваш екран. Виберіть число, щоб зафіксувати його.</string>
     <string name="content_settings_home_columns_auto">Авто</string>
-    <string name="music_brain_export_success">Дані музичного рушія експортовано</string>
-    <string name="music_brain_export_failed">Не вдалося експортувати дані музичного рушія</string>
-    <string name="music_brain_import_success">Дані музичного рушія імпортовано</string>
-    <string name="music_brain_import_failed">Не вдалося імпортувати дані музичного рушія</string>
-    <string name="music_persona_overview_title">Музичний смак</string>
-    <string name="music_persona_overview_subtitle">Чого музичний рушій навчився з вашого прослуховування</string>
-    <string name="music_persona_maturity_cold">Холодний пуск</string>
-    <string name="music_persona_maturity_warming">Розминка</string>
-    <string name="music_persona_maturity_mature">Зрілий</string>
-    <string name="music_metric_total_plays">Кількість відтворень</string>
-    <string name="music_metric_total_plays_detail">50%+ прослуховувань</string>
-    <string name="music_metric_artists">Виконавці</string>
-    <string name="music_metric_artists_detail">зі сформованим смаком</string>
-    <string name="music_metric_tracks">Відстежені треки</string>
-    <string name="music_metric_tracks_detail">повторень історії</string>
-    <string name="music_metric_on_repeat">На повторі</string>
-    <string name="music_metric_on_repeat_detail">зараз у тренді</string>
-    <string name="music_discovery_appetite">Жага до відкриттів</string>
-    <string name="music_discovery_appetite_detail">Скільки нової музики додає рушій</string>
-    <string name="music_top_artists_title">Найкращі виконавці</string>
-    <string name="music_top_artists_subtitle">Ваші найсильніші схильності наразі</string>
-    <string name="music_top_artist_plays">%1$d відтворень</string>
-    <string name="music_listening_patterns_title">Слуховий ритм</string>
-    <string name="music_listening_patterns_subtitle">Коли ви насправді слухаєте, за мітками часу реального відтворення</string>
-    <string name="music_bucket_weekday_morning">Будні вранці</string>
-    <string name="music_bucket_weekday_afternoon">Будні вдень</string>
-    <string name="music_bucket_weekday_evening">Будні ввечері</string>
-    <string name="music_bucket_weekday_night">Будні вночі</string>
-    <string name="music_bucket_weekend_morning">Вихідні вранці</string>
-    <string name="music_bucket_weekend_afternoon">Вихідні вдень</string>
-    <string name="music_bucket_weekend_evening">Вихідні ввечері</string>
-    <string name="music_bucket_weekend_night">Вихідні вночі</string>
-    <string name="music_bucket_plays">%1$d відтворень</string>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <string name="player_seek_seconds_back">-%1$d</string>
     <string name="player_seek_chevron_forward">&gt;</string>
     <string name="player_seek_chevron_back">&lt;</string>
@@ -2734,10 +2692,10 @@
         <item quantity="many">%1$d тем у глобальному векторі</item>
         <item quantity="other">%1$d тем у глобальному векторі</item>
     </plurals>
-    <string name="widget_on_repeat_label">На повторі</string>
-    <string name="widget_on_repeat">На повторі</string>
-    <string name="widget_on_repeat_description">Пісні, до яких ви постійно повертаєтеся</string>
-    <string name="widget_no_on_repeat">Пісні, які ви часто переслухуєте, з’являться тут</string>
+
+
+
+
     <plurals name="ui_downloading_videos">
         <item quantity="one">Завантаження %1$d відео…</item>
         <item quantity="few">Завантаження %1$d відео…</item>
@@ -2778,8 +2736,8 @@
         <item quantity="many">%1$d частин</item>
         <item quantity="other">%1$d частин</item>
     </plurals>
-    <string name="music_blocked_artists_subtitle">Виконавці, яких система ніколи не порекомендує</string>
-    <string name="music_persona_empty">Увімкніть музику, і рушій почне навчання</string>
+
+
     <string name="section_charts_in">Чарти в %1$s</string>
     <string name="section_charts_global">Глобальні чарти</string>
     <string name="section_top_artists_in">Найпопулярніші виконавці в %1$s</string>
@@ -2816,8 +2774,7 @@
         <item quantity="many">Видалити %1$d призупинених, невдалих або часткових завантажень? Завершені завантаження не будуть зачеплені.</item>
         <item quantity="other">Видалити %1$d призупинених, невдалих або часткових завантажень? Завершені завантаження не будуть зачеплені.</item>
     </plurals>
-    <string name="sync_collection_music_profile">Профіль музичних смаків</string>
-    <string name="sync_enter_connection_data">Ввести дані з’єднання вручну</string>
+<string name="sync_enter_connection_data">Ввести дані з’єднання вручну</string>
     <string name="sync_enter_connection_data_hint">Вставте дані з’єднання з іншого пристрою.</string>
     <string name="sync_connection_data_label">Дані з’єднання</string>
     <string name="sync_paste_connection_data">Вставити дані з’єднання</string>
@@ -2832,8 +2789,7 @@
         <item quantity="many">Вибрано %1$d з %2$d</item>
         <item quantity="other">Вибрано %1$d з %2$d</item>
     </plurals>
-    <string name="sync_collection_music_profile_body">Що Chorplay дізнався про те, що ви слухаєте.</string>
-    <string name="player_seek_seconds_forward">+%1$d</string>
+<string name="player_seek_seconds_forward">+%1$d</string>
     <string name="scheduled_for_prefix">Заплановано на %1$s</string>
     <string name="live_in_prefix">Наживо %1$s</string>
     <string name="search_filter_movies">Фільми</string>
@@ -2908,7 +2864,6 @@
     <string name="next_frame">Наступний кадр</string>
     <string name="subtitle_translation_unavailable">Переклад недоступний: показується %1$s</string>
     <string name="start_radio">Запустити радіо</string>
-    <string name="start_radio_desc">Запустити станцію на основі цієї пісні</string>
     <plurals name="playlists_count_template">
         <item quantity="one">%1$d список відтворення</item>
         <item quantity="few">%1$d списки відтворення</item>
@@ -2976,7 +2931,7 @@
     <string name="theme_desc_caffeine">Кавові відтінки, збалансовані вершками та еспресо.</string>
     <string name="theme_desc_claude">Теплі глиняні акценти на поверхнях, що нагадують папір.</string>
     <string name="onboarding_channels_results_header">Канали</string>
-    <string name="onboarding_import_source_flow">Резервна копія Chorplay</string>
+    <string name="onboarding_import_source_chorplay">Резервна копія Chorplay</string>
     <string name="onboarding_import_source_youtube">YouTube</string>
     <string name="onboarding_import_footnote">Тут усе необов’язкове. У налаштуваннях такий самий список імпортів.</string>
     <string name="onboarding_import_done">Імпортовано</string>
@@ -3099,7 +3054,7 @@
     <string name="settings_section_layout">Макет</string>
     <string name="settings_section_video_cards">Відеокартки</string>
     <string name="settings_section_more">Більше</string>
-    <string name="settings_music_artwork_size_title">Розмір обкладинки музичного твору</string>
+
     <string name="music_player_tab_up_next">Далі</string>
     <string name="music_player_tab_lyrics">Текст пісні</string>
     <string name="music_player_lyrics_full_screen">Текст пісні на весь екран</string>
@@ -3123,8 +3078,8 @@
     <string name="quick_action_failed">Це не спрацювало. Спробуйте ще раз.</string>
     <string name="content_settings_hide_watched_shorts_title">Приховати переглянуті Shorts</string>
     <string name="content_settings_hide_watched_shorts_subtitle">Приховувати завершені Shorts із полиць і стрічки Shorts</string>
-    <string name="settings_open_music_player_on_play_title">Відкрити повний програвач для нових пісень</string>
-    <string name="settings_open_music_player_on_play_summary">Вимкнення залишає нову пісню в мініпрогравачі</string>
+
+
     <string name="concurrent_downloads_title">Одночасних завантажень</string>
     <string name="concurrent_downloads_summary">Скільки файлів завантажувати одночасно</string>
     <string name="download_location_not_writable">Не вдається зберегти. Використовується %1$s</string>
@@ -3218,9 +3173,9 @@
     <string name="eq_settings_summary">Імпорт передустановлень, діапазонів і AutoEQ</string>
     <string name="eq_settings_keywords">еквалайзер, баси, високі частоти, автоеквалайзер, передпідсилення, звук</string>
     <string name="eq_reset_done">Скидання кривої</string>
-    <string name="music_search_section_artists">Виконавці</string>
-    <string name="music_search_section_playlists">Списки відтворення</string>
-    <string name="music_search_section_episodes">Епізоди</string>
+
+
+
     <plurals name="export_newpipe_subs_skipped">
         <item quantity="one">Експортовано, але %1$d канал без ідентифікатора каналу пропущено</item>
         <item quantity="few">Експортовано, але %1$d канали без ідентифікатора каналу пропущено</item>
@@ -3249,8 +3204,8 @@
     </plurals>
     <string name="widget_browse_downloads">Переглянути завантаження</string>
     <string name="widget_shuffle">Перемішати</string>
-    <string name="widget_identify_song">Визначити пісню</string>
-    <string name="widget_open_music">Відкрити «Музика»</string>
+
+
     <string name="widget_config_shortcuts">Ярлики</string>
     <string name="widget_config_shortcuts_footer">Виберіть до чотирьох. Пошук завжди доступний.</string>
     <string name="widget_playlist_label">Список відтворення</string>
@@ -3259,12 +3214,7 @@
     <string name="widget_config_playlist">Ваш список відтворення</string>
     <string name="widget_playlist_empty">Тут іще нічого немає</string>
     <string name="widget_refresh">Оновити</string>
-    <plurals name="widget_playlist_songs">
-        <item quantity="one">%d пісня</item>
-        <item quantity="few">%d пісні</item>
-        <item quantity="many">%d пісень</item>
-        <item quantity="other">%d пісень</item>
-    </plurals>
+
     <plurals name="widget_playlist_videos">
         <item quantity="one">%d відео</item>
         <item quantity="few">%d відео</item>
@@ -3325,12 +3275,7 @@
         <item quantity="many">%1$d відео</item>
         <item quantity="other">%1$d відео</item>
     </plurals>
-    <plurals name="local_songs_count">
-        <item quantity="one">%1$d пісня</item>
-        <item quantity="few">%1$d пісні</item>
-        <item quantity="many">%1$d пісень</item>
-        <item quantity="other">%1$d пісень</item>
-    </plurals>
+
     <string name="local_menu_hide_folder">Приховати цю теку</string>
     <string name="local_menu_delete_trash">Переміщує до смітника на 30 днів</string>
     <string name="local_menu_delete_permanent">Видаляє з цього пристрою</string>
@@ -3386,7 +3331,7 @@
     <string name="downloads_storage_used">%1$s у Chorplay</string>
     <string name="downloads_storage_free">%1$s вільно</string>
     <string name="downloads_storage_videos">%1$s відео</string>
-    <string name="downloads_storage_music">%1$s музики</string>
+    <string name="downloads_storage_audio">%1$s музики</string>
     <string name="downloads_section_in_progress">Виконується</string>
     <string name="downloads_section_downloaded">Завантажено</string>
     <string name="download_bytes_progress">%1$s з %2$s</string>
@@ -3403,7 +3348,7 @@
     <string name="notification_download_saved_elsewhere">Збережено в %1$s. Вибрану теку не можна використовувати.</string>
     <string name="removed_from_queue">Видалено з черги</string>
     <string name="queue_after_this_template">%1$s після цього</string>
-    <string name="settings_music_artwork_size_summary">Розмір обкладинки альбому та карток на музичних сторінках</string>
+
     <string name="settings_section_tabs">Вкладки</string>
     <string name="settings_section_tab_order">Порядок і типова вкладка</string>
     <string name="settings_theme_follow_system">Як у системі</string>
@@ -3464,14 +3409,13 @@
     <string name="cache_size_2gb">2 ГБ</string>
     <string name="cache_size_5gb">5 ГБ</string>
     <string name="shorts_linked_video">Пов’язане відео</string>
-    <string name="settings_music_video_switch_title">Перемикач пісні та відео</string>
-    <string name="settings_music_video_switch_summary">Перемикайтеся між піснею та її відеокліпом у програвачі</string>
+
+
     <string name="music_player_mode_song">Пісня</string>
     <string name="music_player_mode_video">Відео</string>
-    <string name="music_video_unavailable">На цю пісню немає відеокліпа</string>
-    <string name="music_video_failed">Не вдалося завантажити відеокліп</string>
+
+
     <string name="player_appearance_animated_artwork_title">Анімаційна ілюстрація</string>
-    <string name="player_appearance_animated_artwork_subtitle">Зациклювати анімоване оформлення альбому, якщо воно є</string>
     <string name="player_appearance_animated_artwork_wifi_title">Анімовані ілюстрації лише через Wi-Fi</string>
     <string name="player_appearance_animated_artwork_wifi_subtitle">Не завантажувати ілюстрації через мобільні дані</string>
     <string name="subtitle_forced">примусово</string>
@@ -3502,7 +3446,7 @@
     <string name="subtitle_custom_color">Власний колір</string>
     <string name="settings_custom_group_outline">Контур і розсіювач</string>
     <string name="settings_section_seek_bar">Смуга перемотування</string>
-    <string name="settings_section_music_player">Музичний програвач</string>
+
     <string name="settings_section_video_player">Відеопрогравач</string>
     <string name="settings_section_mini_player">Мініпрогравач</string>
     <string name="settings_seekbar_custom_width">Власна ширина</string>
@@ -3516,7 +3460,7 @@
     <string name="settings_section_language_captions">Мова та субтитри</string>
     <string name="settings_section_watch_page">Сторінка перегляду</string>
     <string name="settings_section_shorts_player">Програвач Shorts</string>
-    <string name="settings_section_music">Музика</string>
+
     <string name="settings_section_advanced">Розширені</string>
     <string name="settings_keywords_autoplay">наступне відео, далі, безперервне відтворення</string>
     <string name="settings_keywords_captions">субтитри, CC, субтитри для людей із вадами слуху</string>
@@ -3525,10 +3469,10 @@
     <string name="settings_speed_preset_add">Додати передустановлення</string>
     <string name="settings_buffer_min">Мінімальний буфер</string>
     <string name="settings_buffer_max">Максимальний буфер</string>
-    <string name="music_watch_video">Дивитися відео</string>
-    <string name="settings_pause_music_muted_title">Призупиняти музику, коли звук вимкнено</string>
-    <string name="settings_pause_music_muted_summary">Відновити відтворення, коли звук знову з’явиться</string>
-    <string name="music_watch_video_desc">Відкрити музичне відео у відеопрогравачі</string>
+
+
+
+
     <string name="settings_buffer_start">Буферизація перед початком відтворення</string>
     <string name="settings_buffer_rebuffer">Буфер після зависання</string>
     <string name="settings_buffer_profiles">Профіль</string>
@@ -3536,12 +3480,12 @@
     <string name="settings_seconds_value">%1$s с</string>
     <string name="settings_quality_tab_video">Відео</string>
     <string name="settings_quality_tab_shorts">Shorts</string>
-    <string name="settings_quality_tab_music">Музика</string>
+
     <string name="settings_quality_wifi">Через Wi-Fi</string>
     <string name="settings_quality_mobile">Через мобільні дані</string>
     <string name="settings_section_resolution">Роздільність</string>
     <string name="settings_section_codec">Кодек</string>
-    <string name="settings_music_quality_auto_summary">Висока швидкість через Wi-Fi, середня — через мобільні дані</string>
+
     <string name="settings_keywords_quality">роздільність, 1080p, 4K, HD, використання даних</string>
     <string name="settings_keywords_codec">H.264, AVC, VP9, AV1, апаратне декодування</string>
     <string name="settings_quality_preferred_codec">Бажаний кодек</string>
@@ -3556,7 +3500,7 @@
     <string name="settings_keywords_topics">інтереси, не цікавить, приховати, заблокувати, вимкнути звук, рекомендації</string>
     <string name="settings_keywords_sponsorblock">Пропускати спонсорські вставки, реклама, сегменти, вступ, завершення</string>
     <string name="settings_keywords_dearrow">клікбейт, заголовки, мініатюри</string>
-    <string name="settings_keywords_discord">детальний статус, зараз відтворюється, статус</string>
+
     <string name="settings_segment_colour">Колір для %1$s</string>
     <string name="settings_truncated">%1$s…</string>
     <string name="settings_backup_exporting">Експортування…</string>
@@ -3565,19 +3509,19 @@
     <string name="settings_backup_tab_auto">Автоматично</string>
     <string name="settings_backup_full">Повна резервна копія</string>
     <string name="settings_backup_individual">Індивідуальні експорти</string>
-    <string name="settings_backup_restore_flow">Відновити з Chorplay</string>
+    <string name="settings_backup_restore_chorplay">Відновити з Chorplay</string>
     <string name="settings_backup_source_youtube">YouTube і Google Takeout</string>
     <string name="settings_backup_source_newpipe">NewPipe</string>
     <string name="settings_backup_source_libretube">LibreTube</string>
     <string name="settings_backup_source_freetube">FreeTube</string>
-    <string name="settings_backup_source_metrolist">Metrolist</string>
+
     <string name="settings_backup_one_copy">Кожна резервна копія замінює попередню у теці.</string>
     <string name="settings_backup_needs_folder">Спершу оберіть теку</string>
     <string name="settings_keywords_backup">експортувати, імпортувати, відновити, перенести, передати, takeout, NewPipe, LibreTube, FreeTube</string>
     <string name="settings_quick_download_quality">Якість швидкого завантаження</string>
     <string name="settings_quick_download_quality_summary">Використовується, коли ви завантажуєте безпосередньо з відеокарти</string>
-    <string name="settings_music_download_quality">Якість завантаження пісні</string>
-    <string name="settings_music_download_quality_summary">Використовується для пісень, альбомів і музичних списках відтворення</string>
+
+
     <string name="download_retag_title">Теги для старіших завантажень</string>
     <string name="download_retag_waiting">Очікування початку</string>
     <string name="download_retag_progress">Додавання тегів, %1$d із %2$d</string>
@@ -3587,7 +3531,7 @@
     <string name="settings_storage_access_summary">Також дозволяє локальним медіафайлам показувати файли, збережені іншими застосунками</string>
     <string name="settings_storage_usage">Вільно %1$s з %2$s</string>
     <string name="settings_location_default">Типово</string>
-    <string name="settings_music_folder_label">Музика / Chorplay</string>
+
     <string name="settings_keywords_downloads">зберегти без інтернету, тека, сховище, SD-карта</string>
     <string name="settings_section_notification_types">Сповіщати мене про</string>
     <string name="settings_keywords_notifications">оповіщення, push-повідомлення, нові вивантаження, перевірки у фоновому режимі, shorts</string>
@@ -3719,8 +3663,8 @@
     <string name="taste_channels_header">Улюблені канали</string>
     <string name="taste_channel_block">Заблокувати канал</string>
     <string name="taste_item_actions">Більше параметрів для %1$s</string>
-    <string name="taste_music_header">Музичний смак</string>
-    <string name="taste_music_stage">Етап навчання</string>
+
+
     <string name="taste_hidden_title">Приховано від вас</string>
     <string name="taste_hidden_summary">Заблоковані теми, канали та виконавці</string>
     <plurals name="taste_hidden_count">
@@ -3741,12 +3685,12 @@
     <string name="taste_export_video">Експортувати відеопрофіль</string>
     <string name="taste_import_video">Імпортувати відеопрофіль</string>
     <string name="taste_reset_video">Скинути відеопрофіль</string>
-    <string name="taste_export_music">Експортувати музичний профіль</string>
-    <string name="taste_import_music">Імпортувати музичний профіль</string>
-    <string name="taste_reset_music">Скинути музичний профіль</string>
+
+
+
     <string name="taste_reset_video_body">Видаляє все, що Chorplay дізнався з ваших відео, і починає з нуля. Ваші підсумок і приховані канали, теми та відео залишаться.</string>
-    <string name="taste_reset_music_title">Скинути музичний профіль?</string>
-    <string name="taste_reset_music_body">Видаляє все, чого Chorplay навчився на основі вашої музики, і починає спочатку. Ваш підсумок залишається.</string>
+
+
     <string name="taste_trait_now">Наразі %1$s</string>
     <string name="taste_reset_done">Скинути профіль</string>
     <string name="diagnostics_engine_header">Подробиці рушія</string>
@@ -3759,8 +3703,7 @@
     <string name="recap_period_all">Увесь час</string>
     <string name="recap_source_all">Усі</string>
     <string name="recap_source_video">Відео</string>
-    <string name="recap_source_music">Музика</string>
-    <string name="recap_total_time">Час у Chorplay</string>
+<string name="recap_total_time">Час у Chorplay</string>
     <string name="recap_delta_up">На %1$s більше, ніж минулого разу</string>
     <string name="recap_delta_down">На %1$s менше, ніж минулого разу</string>
     <string name="recap_delta_same">Приблизно так само, як і минулого разу</string>
@@ -3811,8 +3754,7 @@
     <string name="recap_format_long">Відео</string>
     <string name="recap_format_shorts">Shorts</string>
     <string name="recap_format_live">Наживо</string>
-    <string name="recap_format_music">Музика</string>
-    <string name="recap_format_share">%1$s · %2$s</string>
+<string name="recap_format_share">%1$s · %2$s</string>
     <string name="recap_discoveries_title">Нове для вас</string>
     <plurals name="recap_new_channels">
         <item quantity="one">%d новий канал</item>
@@ -3891,8 +3833,7 @@
     <string name="recap_story_streak_body">Вашим найзавантаженішим днем був %1$s, із %2$s</string>
     <string name="recap_story_artist">Ваш найулюбленіший виконавець</string>
     <string name="recap_story_artist_body">%1$s, %2$d %% від усього, що ви відтворили</string>
-    <string name="recap_story_songs">Пісні, до яких ви знову й знову поверталися</string>
-    <string name="recap_story_new">Нове для вас</string>
+<string name="recap_story_new">Нове для вас</string>
     <string name="recap_story_passed">Те, що ви минаєте</string>
     <string name="recap_story_formats">Як ви дивитеся</string>
     <string name="recap_story_sponsor">Час, заощаджений зі SponsorBlock</string>
@@ -3937,65 +3878,27 @@
         <item quantity="other">Видалено %d переглянутих відео</item>
     </plurals>
     <string name="liked_videos_playlist">Відео, які сподобалися</string>
-    <string name="liked_music_playlist">Музика, яка сподобалася</string>
+
     <string name="liked_videos_empty_title">Відео, які вам сподобалися, поки відсутні</string>
     <string name="liked_videos_empty_body">Тут з’являтимуться відео, які вам подобаються</string>
     <string name="remove_selected_likes_text">Позначки «Подобається» будуть зняті.</string>
-    <string name="removed_from_liked_music">Видалено з музики, що сподобалася</string>
+
     <string name="liked_video_template">%1$s сподобалося</string>
-    <string name="liked_music_empty_title">Поки що немає пісень, які сподобалися</string>
-    <string name="liked_music_empty_body">Тут показуватимуться пісні, які вам подобаються, у музичному програвачі</string>
+
+
     <plurals name="liked_videos_removed">
         <item quantity="one">Знято «Подобається» з %d відео</item>
         <item quantity="few">Знято «Подобається» з %d відео</item>
         <item quantity="many">Знято «Подобається» з %d відео</item>
         <item quantity="other">Знято «Подобається» з %d відео</item>
     </plurals>
-    <string name="music_kind_album">Альбом</string>
-    <string name="music_kind_saved">Збережено до вашої бібліотеки</string>
-    <string name="music_playlist_empty_title">Цей список відтворення порожній</string>
-    <string name="music_playlist_empty_body">Додавайте пісні з меню угорі</string>
-    <plurals name="songs_removed_from_playlist">
-        <item quantity="one">Видалено %d пісню</item>
-        <item quantity="few">Видалено %d пісні</item>
-        <item quantity="many">Видалено %d пісень</item>
-        <item quantity="other">Видалено %d пісень</item>
-    </plurals>
-    <plurals name="songs_unliked">
-        <item quantity="one">Знято «Подобається» з %d пісні</item>
-        <item quantity="few">Знято «Подобається» з %d пісень</item>
-        <item quantity="many">Знято «Подобається» з %d пісень</item>
-        <item quantity="other">Знято «Подобається» з %d пісень</item>
-    </plurals>
-    <string name="music_sort_collection">Порядок списку відтворення</string>
-    <string name="music_sort_album_order">Порядок альбому</string>
-    <string name="music_sort_recently_liked">Нещодавно вподобане</string>
-    <string name="music_sort_title">Назва</string>
-    <string name="music_sort_artist">Виконавець</string>
-    <string name="music_sort_album">Альбом</string>
-    <string name="music_sort_longest">Спочатку найдовші</string>
-    <string name="music_sort_shortest">Спочатку найкоротші</string>
-    <string name="music_collection_no_matches">Пісень за запитом «%1$s» не знайдено</string>
-    <string name="select_songs">Вибрати пісні</string>
-    <plurals name="music_playlist_imported">
-        <item quantity="one">Імпортовано %1$s, %2$d пісня</item>
-        <item quantity="few">Імпортовано %1$s, %2$d пісні</item>
-        <item quantity="many">Імпортовано %1$s, %2$d пісень</item>
-        <item quantity="other">Імпортовано %1$s, %2$d пісень</item>
-    </plurals>
-    <plurals name="songs_downloading">
-        <item quantity="one">Завантаження %d пісні</item>
-        <item quantity="few">Завантаження %d пісень</item>
-        <item quantity="many">Завантаження %d пісень</item>
-        <item quantity="other">Завантаження %d пісень</item>
-    </plurals>
-    <plurals name="songs_download_queued">
-        <item quantity="one">%d пісня очікує на завантаження</item>
-        <item quantity="few">%d пісні очікують на завантаження</item>
-        <item quantity="many">%d пісень очікує на завантаження</item>
-        <item quantity="other">%d пісень очікує на завантаження</item>
-    </plurals>
-    <string name="songs_download_nothing_new">Усе завантажено або недоступне</string>
+
+
+    <string name="playlist_sort_longest">Спочатку найдовші</string>
+    <string name="playlist_sort_shortest">Спочатку найкоротші</string>
+
+
+
     <string name="save_as_playlist">Зберегти як список відтворення</string>
     <string name="daily_mix_saved_as_playlist">%1$s збережено до вашого списку відтворення</string>
     <string name="home_reason_channel_memory">З каналу, який ви дивитеся</string>
@@ -4017,7 +3920,7 @@
     <string name="home_chip_failed">Не вдалося завантажити це зараз.</string>
     <string name="home_mix_title">Мікси: %1$s</string>
     <string name="library_video_playlists">Відеодобірки</string>
-    <string name="library_music_playlists">Музичні добірки</string>
+
     <string name="playlists_sort_newest">Найновіші</string>
     <string name="playlists_sort_oldest">Найстаріші</string>
     <string name="playlists_sort_name">Назва</string>
@@ -4025,16 +3928,14 @@
     <string name="playlists_reorder">Змінити порядок списків відтворення</string>
     <string name="playlists_show_list">Показати списком</string>
     <string name="playlists_show_grid">Показати сіткою</string>
-    <string name="settings_separate_playlists_title">Окремі списки відтворення відео та музики</string>
     <string name="settings_separate_playlists_summary">Показати їх як два записи в бібліотеці</string>
-    <string name="music_home_your_playlists">Ваші списки відтворення</string>
-    <string name="settings_music_normal_speed_title">Відтворювати музику зі звичайною швидкістю</string>
-    <string name="settings_music_normal_speed_summary">Музичні відео починаються з 1x</string>
+
+
+
     <string name="settings_speed_per_channel_title">Пам’ятати про швидкість на канал</string>
     <string name="settings_speed_per_channel_summary">Кожен канал запускається на швидкості, яку ви вибрали востаннє</string>
-    <string name="music_collection_suggestions">Пропозиції</string>
+
     <string name="favourite_artists_title">Улюблені виконавці</string>
-    <string name="favourite_artists_summary">Виберіть виконавців, які формуватимуть вашу музику</string>
     <string name="favourite_artists_search">Знайти виконавців</string>
     <string name="favourite_artists_picked">Ваш вибір</string>
     <string name="favourite_artists_popular">Популярне зараз</string>
@@ -4044,16 +3945,15 @@
     <string name="favourite_artists_remove">Видалити %1$s</string>
     <string name="settings_auto_download_likes_title">Завантажити вподобані пісні</string>
     <string name="settings_auto_download_likes_summary">Улюблені пісні збережено для прослуховування без інтернету</string>
-    <string name="recap_top_albums">Найкращі альбоми</string>
-    <string name="music_home_your_subscriptions">Ваші підписки</string>
-    <string name="music_home_shelf_rotation">Мікс часу доби</string>
-    <string name="music_home_shelf_similar">Щоденні мікси та схожі виконавці</string>
-    <string name="music_home_shelf_genres">Жанр міксів</string>
-    <string name="music_home_shelf_more">Більше з YouTube Music</string>
-    <string name="music_home_shelf_charts">Чарти</string>
-    <string name="settings_music_home_title">Головна «Музики»</string>
-    <string name="settings_music_home_summary">Виберіть розділи, які показує головна сторінка «Музики»</string>
-    <string name="settings_music_home_sections">Розділи</string>
+
+
+
+
+
+
+
+
+
     <string name="onboarding_step_artists">Виконавці</string>
     <string name="onboarding_artists_title">Оберіть кілька виконавців</string>
     <string name="onboarding_artists_subtitle">Ваші музичні рекомендації починаються з них. За бажання можете пропустити.</string>
@@ -4064,68 +3964,6 @@
         <item quantity="many">%d виконавців</item>
         <item quantity="other">%d виконавців</item>
     </plurals>
-    <string name="scrobbling_title">Скроблінґ</string>
-    <string name="scrobbling_summary">Надсилайте те, що ви слухаєте, до Last.fm, Libre.fm або ListenBrainz</string>
-    <string name="settings_keywords_scrobbling">скробліть скроблінґ last.fm lastfm libre.fm librefm listenbrainz</string>
-    <string name="scrobbling_lastfm">Last.fm</string>
-    <string name="scrobbling_librefm">Libre.fm</string>
-    <string name="scrobbling_listenbrainz">ListenBrainz</string>
-    <string name="scrobbling_account">Обліковий запис</string>
-    <string name="scrobbling_signed_in_as">Ви ввійшли як %1$s</string>
-    <string name="scrobbling_signed_in">Вхід виконано</string>
-    <string name="scrobbling_not_signed_in">Вхід не виконано</string>
-    <string name="scrobbling_needs_key">Введіть нижче власний API-ключ, щоб увійти</string>
-    <string name="scrobbling_own_key">Використовуйте власний API-ключ</string>
-    <string name="scrobbling_own_key_summary">Якщо змінити це, ви вийдете з Last.fm</string>
-    <string name="scrobbling_own_key_values">API-ключ і секретний ключ</string>
-    <string name="scrobbling_own_key_missing">Не встановлено</string>
-    <string name="scrobbling_options">Налаштування</string>
-    <string name="scrobbling_now_playing">Показати, що зараз грає</string>
-    <string name="scrobbling_now_playing_summary">Сервіси бачать пісню, поки вона грає</string>
-    <string name="scrobbling_local">Скроблити файли на цьому пристрої</string>
-    <string name="scrobbling_local_summary">Використовує теги виконавця й назви з кожного файлу</string>
-    <string name="scrobbling_send_now">Надіслати очікувані прослуховування</string>
-    <plurals name="scrobbling_waiting">
-        <item quantity="one">%d очікує</item>
-        <item quantity="few">%d очікує</item>
-        <item quantity="many">%d очікує</item>
-        <item quantity="other">%d очікує</item>
-    </plurals>
-    <string name="scrobbling_sign_in_title">Увійти до %1$s</string>
-    <string name="scrobbling_user_name">Ім’я користувача</string>
-    <string name="scrobbling_password">Пароль</string>
-    <string name="scrobbling_password_note">Ваш пароль надсилається один раз і ніколи не зберігається.</string>
-    <string name="scrobbling_token">Токен користувача</string>
-    <string name="scrobbling_token_note">Скопіюйте це з listenbrainz.org/settings.</string>
-    <string name="scrobbling_sign_in">Увійти</string>
-    <string name="scrobbling_sign_in_failed">Не вдалося ввійти</string>
-    <string name="scrobbling_sign_out_title">Вийти з %1$s?</string>
-    <string name="scrobbling_sign_out_body">Очікувальні на відправлення списки відхиляються.</string>
-    <string name="scrobbling_sign_out">Вийти</string>
-    <string name="scrobbling_own_key_dialog_title">Ваш API-ключ Last.fm</string>
-    <string name="scrobbling_own_key_dialog_body">Створіть безлатний обліковий запис на last.fm/api/account/create.</string>
-    <string name="scrobbling_api_key">API-ключ</string>
-    <string name="scrobbling_secret">Спільний секретний ключ</string>
-    <string name="scrobbling_show_secret">Показати</string>
-    <string name="scrobbling_hide_secret">Приховати</string>
-    <string name="scrobbling_send_likes">Улюблені вподобані пісні</string>
-    <string name="scrobbling_send_likes_summary">Уподобані треки показуються як улюблені на Last.fm і Libre.fm</string>
-    <string name="scrobbling_import">Імпортувати своїх найулюбленіших виконавців</string>
-    <string name="scrobbling_import_summary">Додає виконавців, яких ви слухаєте найчастіше, до улюблених</string>
-    <string name="scrobbling_import_offer_title">Сформувати ваші музичні рекомендації за допомогою %1$s?</string>
-    <string name="scrobbling_import_offer_body">Chorplay додає 20 виконавців, яких ви найчастіше слухали протягом минулого року, до списку улюблених. Пізніше ви можете видалити будь-кого з них.</string>
-    <string name="scrobbling_import_action">Імпортувати</string>
-    <string name="scrobbling_import_later">Не зараз</string>
-    <plurals name="scrobbling_import_done">
-        <item quantity="one">Додано %d виконавця до улюблених</item>
-        <item quantity="few">Додано %d виконавців до улюблених</item>
-        <item quantity="many">Додано %d виконавців до улюблених</item>
-        <item quantity="other">Додано %d виконавців до улюблених</item>
-    </plurals>
-    <string name="scrobbling_import_none">Немає нових виконавців для додавання</string>
-    <string name="scrobbling_import_failed">Не вдалося завантажити список ваших найулюбленіших виконавців</string>
-    <string name="music_home_lastfm_discover">Відкривайте для себе музику з Last.fm</string>
-    <string name="music_home_lastfm_discover_subtitle">Вибрано слухачами Last.fm із вашого списку «На повторі»</string>
     <string name="remove_from_saved_shorts">Видалити зі збережених Shorts</string>
     <string name="content_settings_channel_shorts_tab_title">Вкладка Shorts на каналах</string>
     <string name="content_settings_channel_shorts_tab_subtitle">Зберегти вкладку каналів Shorts, навіть коли Shorts приховано</string>
@@ -4223,10 +4061,8 @@
     <string name="discover_channels_title">Відкрийте для себе канали</string>
     <string name="discover_channels_summary">Знайдіть канали та підпишіться, як під час налаштування</string>
     <string name="discover_channels_suggested_footer">Канали, які ви переглядали кілька разів, не підписуючись на них.</string>
-    <string name="deep_flow_scrobble_title">Скроблити під час Deep Chorplay</string>
-    <string name="taste_learning_paused">Deep Chorplay увімкнено, навчання призупинено</string>
-    <string name="deep_flow_scrobble_subtitle">Продовжувати надсилати прослуховування до Last.fm, Libre.fm і ListenBrainz</string>
-    <string name="mini_player_show">Показати меніпрогравач</string>
+<string name="taste_learning_paused">Deep Chorplay увімкнено, навчання призупинено</string>
+<string name="mini_player_show">Показати меніпрогравач</string>
     <string name="player_settings_double_tap_seek_off">Вимк</string>
     <string name="player_settings_seek_zone_width">Ширина зони пошуку</string>
     <string name="player_settings_seek_zone_width_dialog_body">На скільки перемотує подвійний дотик у кожен бік.</string>
@@ -4242,8 +4078,7 @@
     <string name="cache_group_header">Кеш</string>
     <string name="cache_in_use">%1$s використовується</string>
     <string name="cache_videos">Відео</string>
-    <string name="cache_songs">Пісні</string>
-    <string name="cache_artwork">Обкладинки</string>
+<string name="cache_artwork">Обкладинки</string>
     <string name="cache_other">Інше</string>
     <string name="cache_used_of_limit">%1$s з %2$s</string>
     <string name="cache_used_no_limit">%1$s, без обмежень</string>
@@ -4251,8 +4086,7 @@
     <string name="cache_other_summary">Тексти пісень і мережа, %1$s</string>
     <string name="cache_measuring">Вимірювання…</string>
     <string name="cache_videos_size_title">Розмір кешу відео</string>
-    <string name="cache_songs_size_title">Розмір кешу пісень</string>
-    <string name="cache_artwork_size_title">Розмір кешу обладинок</string>
+<string name="cache_artwork_size_title">Розмір кешу обладинок</string>
     <string name="cache_size_applies_on_restart">Застосовується під час наступного запуску Chorplay.</string>
     <string name="settings_font_title">Шрифт</string>
     <string name="settings_font_summary">Шрифт, що використовується в Chorplay</string>
@@ -4292,9 +4126,7 @@
     <string name="mini_bar_swipe_right">Провести вправо</string>
     <string name="mini_bar_swipe_subtitle">Для панелі музики та панелі фонового відео</string>
     <string name="mini_bar_nothing_next">Далі нічого немає</string>
-    <string name="mini_bar_nothing_previous">Нічого перед цим</string>
-    <string name="categories_chart_source">Чарти YouTube Music</string>
-    <plurals name="categories_rate_limited">
+    <string name="mini_bar_nothing_previous">Нічого перед цим</string>    <plurals name="categories_rate_limited">
         <item quantity="one">YouTube наразі обмежує кількість запитів. Спробуйте ще раз за кілька хвилин.</item>
     </plurals>
     <string name="import_takeout_step_history">Історія перегляду</string>
@@ -4318,14 +4150,7 @@
         <item quantity="many">%1$d списків відтворення (%2$d відео)</item>
         <item quantity="other">%1$d списків відтворення (%2$d відео)</item>
     </plurals>
-    <plurals name="import_takeout_part_music_library">
-        <item quantity="one">%d пісня з бібліотеки YouTube Music</item>
-        <item quantity="few">%d пісні з бібліотеки YouTube Music</item>
-        <item quantity="many">%d пісень з бібліотеки YouTube Music</item>
-        <item quantity="other">%d пісень з бібліотеки YouTube Music</item>
-    </plurals>
-    <string name="import_takeout_music_library_name">Бібліотека YouTube Music</string>
-    <plurals name="import_takeout_part_searches">
+<plurals name="import_takeout_part_searches">
         <item quantity="one">%d пошук</item>
         <item quantity="few">%d пошуки</item>
         <item quantity="many">%d пошуків</item>
@@ -4345,7 +4170,7 @@
     <string name="sync_error_declined">Злиття відхилено. Нічого не було передано.</string>
     <string name="sync_error_protocol">Два пристрої не змогли узгодити кроки синхронізації. Оновіть Chorplay на обох пристроях і спробуйте ще раз.</string>
     <string name="sync_error_peer">Інший пристрій повідомив про проблему: %1$s</string>
-    <string name="music_playback_warning_unavailable">Ця пісня більше недоступна на YouTube.</string>
+
     <string name="home_load_more_failed">Не вдалося завантажити інші відео</string>
     <string name="home_load_more_failed_body">Перевірте своє з’єднання</string>
     <string name="home_refresh_failed">Не вдалося оновити стрічку</string>
@@ -4378,15 +4203,14 @@
     <plurals name="search_watch_empty_unwatched">
         <item quantity="one">Тут немає непереглянутих відео</item>
     </plurals>
-    <string name="deep_flow_on_search_title">Показати у результатах пошуку</string>
-    <string name="deep_flow_on_search_subtitle">Перемикач «Deep Chorplay» над останніми пошуковими запитами</string>
+    <string name="deep_chor_on_search_title">Показати у результатах пошуку</string>
+    <string name="deep_chor_on_search_subtitle">Перемикач «Deep Chorplay» над останніми пошуковими запитами</string>
     <string name="lyrics_auto_romanize_japanese">Наразі недоступно японською</string>
     <string name="notifications_already_in_watch_later">Уже в «Переглянути пізніше»</string>
     <string name="notifications_save_to_watch_later">Зберегти в «Переглянути пізніше»</string>
     <string name="notif_check_interval_off_new_videos">Вимкнено, коли функція «Нові відео» вимкнена</string>
     <string name="queue_swipe_left">Проведіть пальцем вліво по черзі</string>
     <string name="queue_swipe_right">Проведіть пальцем вправо по черзі</string>
-    <string name="queue_swipe_subtitle">Для пісень у розділі «Далі»</string>
     <string name="queue_move_to_end">Перейти до кінця</string>
     <string name="lyrics_provider_lrc_red">lrc.red</string>
     <string name="lyrics_provider_kugou">KuGou</string>

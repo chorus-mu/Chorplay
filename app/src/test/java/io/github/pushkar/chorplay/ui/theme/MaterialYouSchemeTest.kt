@@ -17,7 +17,7 @@ class MaterialYouSchemeTest {
     private val context: Application get() = ApplicationProvider.getApplicationContext()
 
     private fun resolve(variant: ThemeVariant) =
-        resolveFlowColorScheme(
+        resolveChorColorScheme(
             context = context,
             isSystemDark = variant != ThemeVariant.LIGHT,
             themeMode = ThemeMode.MATERIAL_YOU,

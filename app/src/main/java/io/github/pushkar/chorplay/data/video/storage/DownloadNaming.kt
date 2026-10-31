@@ -39,24 +39,8 @@ object DownloadNaming {
         title: String,
         fallback: String,
         extension: String,
-        trackNumber: Int? = null,
-        trackTotal: Int? = null,
-    ): String {
-        val base = sanitize(title, fallback)
-        val numbered =
-            if (trackNumber != null && trackNumber > 0) {
-                val width =
-                    (trackTotal ?: trackNumber)
-                        .coerceAtLeast(trackNumber)
-                        .toString()
-                        .length
-                        .coerceAtLeast(2)
-                "${trackNumber.toString().padStart(width, '0')} - $base"
-            } else {
-                base
-            }
-        return "${truncateToBytes(numbered, MAX_NAME_BYTES - SUFFIX_RESERVE_BYTES)}.${extension.trimStart('.')}"
-    }
+    ): String =
+        "${truncateToBytes(sanitize(title, fallback), MAX_NAME_BYTES - SUFFIX_RESERVE_BYTES)}.${extension.trimStart('.')}"
 
     /** A collection's folder: "Artist - Album" for an album, the playlist's own title otherwise. */
     fun folderName(

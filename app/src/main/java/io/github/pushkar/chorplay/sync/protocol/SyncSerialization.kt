@@ -2,14 +2,12 @@ package io.github.pushkar.chorplay.sync.protocol
 
 import io.github.pushkar.chorplay.sync.canonical.CanonicalBrain
 import io.github.pushkar.chorplay.sync.canonical.CanonicalLike
-import io.github.pushkar.chorplay.sync.canonical.CanonicalMusicBrain
 import io.github.pushkar.chorplay.sync.canonical.CanonicalNote
 import io.github.pushkar.chorplay.sync.canonical.CanonicalPlaylist
 import io.github.pushkar.chorplay.sync.canonical.CanonicalSetting
 import io.github.pushkar.chorplay.sync.canonical.CanonicalSubscribedChannel
 import io.github.pushkar.chorplay.sync.canonical.CanonicalSubscriptionGroup
 import io.github.pushkar.chorplay.sync.canonical.CanonicalWatchHistory
-import io.github.pushkar.chorplay.sync.merge.MusicBrainMerger
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonArray
@@ -77,7 +75,7 @@ object SyncSerialization {
             }
         }
 
-    /** Compact, sorted-key canonical JSON, shared by FLOW-SYNC/1 records and FLOW-SYNC/2 messages. */
+    /** Compact, sorted-key canonical JSON, shared by CHOR-SYNC/1 records and CHOR-SYNC/2 messages. */
     fun canonicalJson(element: JsonElement): String = json.encodeToString(JsonElement.serializer(), canonicalize(element))
 
     private fun <T> enc(
@@ -142,18 +140,6 @@ object SyncSerialization {
     /** One line per device snapshot, the sender's own carrying the shared CRDT state. */
     fun encodeBrain(snapshots: List<CanonicalBrain>) = wire(snapshots.sortedBy { it.deviceId }, CanonicalBrain.serializer())
 
-    // --- music brain ---
-    fun encodeMusicBrain(brain: CanonicalMusicBrain): CollectionWire {
-        val line = enc(CanonicalMusicBrain.serializer(), brain)
-        return CollectionWire(listOf(line), 1, sha256Hex(line))
-    }
-
-    /** Fold every record (one snapshot per device the peer knows) so a third device converges. */
-    fun decodeMusicBrain(lines: List<String>): CanonicalMusicBrain? =
-        lines
-            .filter { it.isNotBlank() }
-            .map { json.decodeFromString(CanonicalMusicBrain.serializer(), it) }
-            .reduceOrNull(MusicBrainMerger::merge)
 
     /**
      * Every record, kept apart: the desktop ships one snapshot per device it knows about

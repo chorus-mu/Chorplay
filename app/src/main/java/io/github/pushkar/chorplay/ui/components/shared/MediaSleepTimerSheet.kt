@@ -183,7 +183,7 @@ fun MediaSleepTimerSheet(
     }
 
     if (asBottomSheet) {
-        FlowSleepTimerBottomSheet(
+        ChorSleepTimerBottomSheet(
             onDismiss = onDismiss,
             expandedHeight = expandedHeight,
             collapsedHeight = collapsedHeight,
@@ -236,7 +236,7 @@ private fun ColumnScope.SleepTimerColumn(
 }
 
 @Composable
-private fun FlowSleepTimerBottomSheet(
+private fun ChorSleepTimerBottomSheet(
     onDismiss: () -> Unit,
     expandedHeight: Dp?,
     collapsedHeight: Dp,

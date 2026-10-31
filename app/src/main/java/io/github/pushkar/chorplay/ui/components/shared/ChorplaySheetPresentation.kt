@@ -10,7 +10,7 @@ import androidx.compose.runtime.staticCompositionLocalOf
  * surface, so Android TV provides one that opens the same content as a side panel.
  */
 @Stable
-interface FlowSheetPresenter {
+interface ChorSheetPresenter {
     /** With [onBack] set, Back returns to the sheet's previous page instead of closing it. */
     @Composable
     fun Present(
@@ -21,4 +21,4 @@ interface FlowSheetPresenter {
 }
 
 /** Null on phones and tablets, where sheets stay M3 bottom sheets. */
-val LocalFlowSheetPresenter = staticCompositionLocalOf<FlowSheetPresenter?> { null }
+val LocalChorSheetPresenter = staticCompositionLocalOf<ChorSheetPresenter?> { null }

@@ -14,7 +14,7 @@ import io.github.pushkar.chorplay.data.recommendation.GraphSeedSource
 import kotlinx.coroutines.test.runTest
 import org.junit.Test
 
-/** Coverage for the feed assembly pipeline that used to be inline in `loadFlowFeed`. */
+/** Coverage for the feed assembly pipeline that used to be inline in `loadChorFeed`. */
 class HomeFeedAssemblyTest {
     private val now = 1_000_000_000L
     private val hour = 60L * 60L * 1000L

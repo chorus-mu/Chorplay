@@ -72,12 +72,12 @@ fun DonationsScreen(onNavigateBack: () -> Unit) {
                     modifier = Modifier.size(HeroIconSize),
                 )
                 Text(
-                    text = stringResource(R.string.support_flow_dev_title),
+                    text = stringResource(R.string.support_chorplay_dev_title),
                     style = MaterialTheme.typography.titleLarge,
                     textAlign = TextAlign.Center,
                 )
                 Text(
-                    text = stringResource(R.string.support_flow_dev_desc),
+                    text = stringResource(R.string.support_chorplay_dev_desc),
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                     textAlign = TextAlign.Center,
@@ -89,7 +89,7 @@ fun DonationsScreen(onNavigateBack: () -> Unit) {
                 ) {
                     Icon(IconOpenCollective, contentDescription = null, modifier = Modifier.size(ButtonDefaults.IconSize))
                     Spacer(Modifier.size(ButtonDefaults.IconSpacing))
-                    Text(stringResource(R.string.support_flow_open_collective))
+                    Text(stringResource(R.string.support_chorplay_open_collective))
                 }
                 FilledTonalButton(
                     onClick = { runCatching { uriHandler.openUri(PATREON_URL) } },
@@ -98,7 +98,7 @@ fun DonationsScreen(onNavigateBack: () -> Unit) {
                 ) {
                     Icon(IconPatreon, contentDescription = null, modifier = Modifier.size(ButtonDefaults.IconSize))
                     Spacer(Modifier.size(ButtonDefaults.IconSpacing))
-                    Text(stringResource(R.string.support_flow_patreon))
+                    Text(stringResource(R.string.support_chorplay_patreon))
                 }
             }
         }

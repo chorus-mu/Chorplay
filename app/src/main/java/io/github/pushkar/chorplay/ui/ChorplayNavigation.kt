@@ -12,16 +12,12 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import io.github.pushkar.chorplay.data.local.PlaylistRepository
 import io.github.pushkar.chorplay.data.localmedia.LocalMediaIds
-import io.github.pushkar.chorplay.data.localmedia.toMusicTrack
 import io.github.pushkar.chorplay.data.localmedia.toVideo
 import io.github.pushkar.chorplay.data.model.Video
-import io.github.pushkar.chorplay.data.music.model.toMusicTrack
-import io.github.pushkar.chorplay.data.music.model.toVideo
 import io.github.pushkar.chorplay.data.shorts.queue.ShortsQueueSource
 import io.github.pushkar.chorplay.player.GlobalPlayerState
 import io.github.pushkar.chorplay.ui.components.layout.LocalChorplayBottomInsets
 import io.github.pushkar.chorplay.ui.components.layout.navigation.MediaNavigator
-import io.github.pushkar.chorplay.ui.components.musicplayer.sheet.MusicPlayerSheetState
 import io.github.pushkar.chorplay.ui.components.settings.SettingsDestination
 import io.github.pushkar.chorplay.ui.components.settings.SettingsTarget
 import io.github.pushkar.chorplay.ui.components.videoplayer.PlayerDraggableState
@@ -31,7 +27,6 @@ import io.github.pushkar.chorplay.ui.screens.history.HistoryScreen
 import io.github.pushkar.chorplay.ui.screens.home.HomeScreen
 import io.github.pushkar.chorplay.ui.screens.home.HomeViewModel
 import io.github.pushkar.chorplay.ui.screens.library.LibraryScreen
-import io.github.pushkar.chorplay.ui.screens.music.sharedMusicPlayerViewModel
 import io.github.pushkar.chorplay.ui.screens.notifications.NotificationScreen
 import io.github.pushkar.chorplay.ui.screens.onboarding.OnboardingScreen
 import io.github.pushkar.chorplay.ui.screens.player.VideoPlayerViewModel
@@ -55,14 +50,12 @@ fun NavGraphBuilder.chorplayAppGraph(
     mediaNavigator: MediaNavigator,
     currentRoute: MutableState<String>,
     playerSheetState: PlayerDraggableState,
-    musicPlayerSheetState: MusicPlayerSheetState,
     homeViewModel: HomeViewModel,
     playerViewModel: VideoPlayerViewModel,
     playerUiStateResult: State<VideoPlayerUiState>,
     playerVisibleState: MutableState<Boolean>,
     disableShortsPlayer: Boolean = false,
     defaultStartRoute: String = "home",
-    onMusicStarted: () -> Unit = {},
     openDownloads: () -> Unit = {},
 ) {
     // =============================================
@@ -154,12 +147,7 @@ fun NavGraphBuilder.chorplayAppGraph(
 
     composable("subscriptions") { backStackEntry ->
         currentRoute.value = "subscriptions"
-        val openMusic by backStackEntry.savedStateHandle
-            .getStateFlow(OPEN_MUSIC_SUBSCRIPTIONS, false)
-            .collectAsStateWithLifecycle()
         SubscriptionsScreen(
-            openMusicSubscriptions = openMusic,
-            onMusicSubscriptionsOpened = { backStackEntry.savedStateHandle[OPEN_MUSIC_SUBSCRIPTIONS] = false },
             onVideoClick = { video ->
                 navController.openVideoOrShorts(video, disableShortsPlayer) {
                     playerViewModel.playVideo(it)
@@ -170,18 +158,13 @@ fun NavGraphBuilder.chorplayAppGraph(
                 navController.openShortsOrPlayer(source, disableShortsPlayer)
             },
             onChannelClick = { channel ->
-                if (channel.isMusic && channel.id.isNotBlank()) {
-                    mediaNavigator.openArtist(channel.id)
-                } else {
-                    mediaNavigator.openChannel(channel.url.ifBlank { channel.id })
-                }
+                mediaNavigator.openChannel(channel.url.ifBlank { channel.id })
             },
         )
     }
 
     composable("library") {
         currentRoute.value = "library"
-        val musicPlayerViewModel = sharedMusicPlayerViewModel()
         val downloadsSourceName =
             androidx.compose.ui.res.stringResource(
                 io.github.pushkar.chorplay.R.string.library_downloads_label,
@@ -196,9 +179,6 @@ fun NavGraphBuilder.chorplayAppGraph(
             },
             onNavigateToLikedVideos = {
                 navController.navigate("playlist/${PlaylistRepository.LIKED_VIDEOS_ID}")
-            },
-            onNavigateToLikedMusic = {
-                mediaNavigator.openMusicPlaylist(PlaylistRepository.LIKED_MUSIC_ID)
             },
             onNavigateToWatchLater = {
                 navController.navigate("playlist/${PlaylistRepository.WATCH_LATER_ID}")
@@ -219,26 +199,13 @@ fun NavGraphBuilder.chorplayAppGraph(
             onVideoClick = { video ->
                 navController.openVideoOrShorts(video, disableShortsPlayer) { playerViewModel.playVideo(it) }
             },
-            onMusicClick = { track, queue, sourceName ->
-                musicPlayerViewModel.loadAndPlayTrack(track, queue, sourceName)
-                onMusicStarted()
-            },
             onPlaylistClick = { playlistId ->
                 navController.navigate("playlist/$playlistId")
-            },
-            onMusicPlaylistClick = { playlistId ->
-                mediaNavigator.openMusicPlaylist(playlistId)
             },
             onDownloadedVideoClick = { videos, index ->
                 val videoList = videos.map { it.video }
                 playerViewModel.playPlaylist(videoList, index, downloadsSourceName)
                 GlobalPlayerState.setCurrentVideo(videoList[index])
-            },
-            onDownloadedMusicClick = { tracks, index ->
-                val musicTracks = tracks.map { it.track }
-                val selectedTrack = musicTracks[index]
-                musicPlayerViewModel.loadAndPlayTrack(selectedTrack, musicTracks, downloadsSourceName)
-                onMusicStarted()
             },
             onSavedShortClick = { video ->
                 navController.openShortsOrPlayer(ShortsQueueSource.Saved(video.id), disableShortsPlayer)
@@ -394,7 +361,6 @@ fun NavGraphBuilder.chorplayAppGraph(
     // History Screen
     composable("history") {
         currentRoute.value = "history"
-        val musicPlayerViewModel = sharedMusicPlayerViewModel()
         HistoryScreen(
             onVideoClick = { track ->
                 val deviceFile = LocalMediaIds.videoUri(track.videoId)
@@ -417,10 +383,6 @@ fun NavGraphBuilder.chorplayAppGraph(
             },
             onShortsQueue = { source ->
                 navController.openShortsOrPlayer(source, disableShortsPlayer)
-            },
-            onMusicClick = { track, queue ->
-                musicPlayerViewModel.loadAndPlayTrack(track, queue, "History")
-                onMusicStarted()
             },
             onBackClick = { navController.popBackStack() },
         )
@@ -450,28 +412,16 @@ fun NavGraphBuilder.chorplayAppGraph(
             onVideoPlaylistClick = { playlist ->
                 navController.navigate("playlist/${playlist.id}")
             },
-            onMusicPlaylistClick = { playlist ->
-                mediaNavigator.openMusicPlaylist(playlist.id)
-            },
         )
     }
 
     // Playlist Detail Screen
     composable("playlist/{playlistId}") { _ ->
         currentRoute.value = "playlist"
-        val musicPlayerViewModel = sharedMusicPlayerViewModel()
         PlaylistDetailScreen(
             onNavigateBack = { navController.popBackStack() },
             onPlayPlaylist = { videos, index, shuffle, title ->
-                val start = videos[index]
-                if (start.isMusic) {
-                    // A YouTube Music playlist plays in the music player, like any other song list.
-                    val tracks = videos.filter { it.isMusic }.map { it.toMusicTrack() }
-                    musicPlayerViewModel.loadAndPlayTrack(start.toMusicTrack(), tracks, title)
-                    onMusicStarted()
-                } else {
-                    playerViewModel.playPlaylist(videos, index, title, shuffle)
-                }
+                playerViewModel.playPlaylist(videos, index, title, shuffle)
             },
         )
     }
@@ -496,7 +446,6 @@ fun NavGraphBuilder.chorplayAppGraph(
     }
     composable("localMedia") {
         currentRoute.value = "localMedia"
-        val musicPlayerViewModel = sharedMusicPlayerViewModel()
         val localTitle =
             androidx.compose.ui.res
                 .stringResource(io.github.pushkar.chorplay.R.string.local_media_title)
@@ -505,23 +454,15 @@ fun NavGraphBuilder.chorplayAppGraph(
             onPlayVideos = { items, index, shuffle ->
                 playerViewModel.playPlaylist(items.map { it.toVideo() }, index, localTitle, shuffle)
             },
-            onPlayMusic = { items, index, shuffle ->
-                val tracks = items.map { it.toMusicTrack() }.let { if (shuffle) it.shuffled() else it }
-                val start = if (shuffle) tracks.first() else tracks[index]
-                musicPlayerViewModel.loadAndPlayTrack(start, tracks, localTitle)
-                onMusicStarted()
-            },
             onOpenSettings = {
                 navController.navigate("settings?target=${SettingsTarget(SettingsDestination.LOCAL_MEDIA).encode()}")
             },
         )
     }
 
-    downloadsRoutes(navController, mediaNavigator, currentRoute, playerViewModel, onMusicStarted)
+    downloadsRoutes(navController, mediaNavigator, currentRoute, playerViewModel)
 
-    musicRoutes(navController, mediaNavigator, currentRoute, playerViewModel, defaultStartRoute, onMusicStarted)
-
-    widgetPlaybackRoutes(navController, currentRoute, defaultStartRoute, playerViewModel, onMusicStarted)
+    widgetPlaybackRoutes(navController, currentRoute, defaultStartRoute, playerViewModel)
 
     linkPlaybackRoutes(
         navController = navController,
@@ -531,6 +472,5 @@ fun NavGraphBuilder.chorplayAppGraph(
         playerSheetState = playerSheetState,
         playerVisibleState = playerVisibleState,
         defaultStartRoute = defaultStartRoute,
-        onMusicStarted = onMusicStarted,
     )
 }

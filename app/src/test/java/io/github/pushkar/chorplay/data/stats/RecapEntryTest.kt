@@ -7,24 +7,23 @@ import org.junit.Test
 
 class RecapEntryTest {
     private fun gate(
-        deepFlow: Boolean,
+        deepChor: Boolean,
         historyPaused: Boolean,
     ) = PrivacyGate(
-        deepFlowActive = { deepFlow },
+        deepChorActive = { deepChor },
         watchHistoryPaused = { historyPaused },
-        scrobbleDuringDeepChorplay = { false },
     )
 
     @Test
     fun `everything is recorded when nothing is paused`() =
         runTest {
-            RecapEntry.entries.forEach { assertThat(it.allowed(gate(deepFlow = false, historyPaused = false))).isTrue() }
+            RecapEntry.entries.forEach { assertThat(it.allowed(gate(deepChor = false, historyPaused = false))).isTrue() }
         }
 
     @Test
     fun `Deep Chorplay keeps searches, actions and views out`() =
         runTest {
-            val gate = gate(deepFlow = true, historyPaused = false)
+            val gate = gate(deepChor = true, historyPaused = false)
 
             assertThat(RecapEntry.ACTIVITY.allowed(gate)).isFalse()
             assertThat(RecapEntry.VIEW.allowed(gate)).isFalse()
@@ -33,7 +32,7 @@ class RecapEntryTest {
     @Test
     fun `paused watch history keeps views out but still counts searches`() =
         runTest {
-            val gate = gate(deepFlow = false, historyPaused = true)
+            val gate = gate(deepChor = false, historyPaused = true)
 
             assertThat(RecapEntry.VIEW.allowed(gate)).isFalse()
             assertThat(RecapEntry.ACTIVITY.allowed(gate)).isTrue()
@@ -42,6 +41,6 @@ class RecapEntryTest {
     @Test
     fun `forgetting stored data always goes through`() =
         runTest {
-            assertThat(RecapEntry.FORGET.allowed(gate(deepFlow = true, historyPaused = true))).isTrue()
+            assertThat(RecapEntry.FORGET.allowed(gate(deepChor = true, historyPaused = true))).isTrue()
         }
 }

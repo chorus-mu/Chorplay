@@ -113,10 +113,6 @@ internal fun SubscriptionGroupsManagerDialog(
     )
 }
 
-/**
- * The library needs each move applied before its callback returns, so the order is held here and
- * saved once a drag ends. Writing every step to Room let the library repeat a step and undo it.
- */
 @Composable
 private fun SubscriptionGroupsReorderList(
     groups: List<SubscriptionGroup>,
@@ -176,7 +172,12 @@ private fun SubscriptionGroupsReorderList(
                                 .semantics {
                                     customActions =
                                         buildList {
-                                            if (index > 0) add(CustomAccessibilityAction(moveUpLabel) { move(index, index - 1) })
+                                            if (index > 0) add(CustomAccessibilityAction(moveUpLabel) {
+                                                move(
+                                                    index,
+                                                    index - 1
+                                                )
+                                            })
                                             if (index < ordered.lastIndex) {
                                                 add(CustomAccessibilityAction(moveDownLabel) { move(index, index + 1) })
                                             }
@@ -315,7 +316,7 @@ internal fun SubscriptionCreateEditGroupDialog(
                                 modifier =
                                     Modifier
                                         .size(ChannelAvatarSize)
-                                        .clip(subscriptionAvatarShape(channel.isMusic))
+                                        .clip(subscriptionAvatarShape())
                                         .background(MaterialTheme.colorScheme.surfaceVariant),
                             )
                             Spacer(modifier = Modifier.width(ContentSpacing))
@@ -346,10 +347,6 @@ internal fun SubscriptionCreateEditGroupDialog(
     )
 }
 
-/**
- * The group manager and the create or edit dialog it hands off to, as one flow: shown while the user
- * manages groups, and [onDismiss] once they leave it.
- */
 @Composable
 internal fun SubscriptionGroupDialogsHost(
     viewModel: SubscriptionsViewModel,

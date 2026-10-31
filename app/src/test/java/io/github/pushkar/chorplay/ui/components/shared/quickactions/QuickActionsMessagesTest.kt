@@ -8,13 +8,10 @@ import io.github.pushkar.chorplay.data.engagement.VideoFeedbackUseCase
 import io.github.pushkar.chorplay.data.local.PlaylistRepository
 import io.github.pushkar.chorplay.data.local.entity.PlaylistVideoCrossRef
 import io.github.pushkar.chorplay.data.model.Video
-import io.github.pushkar.chorplay.data.music.model.MusicTrack
-import io.github.pushkar.chorplay.data.music.video.MusicVideoVersions
 import io.github.pushkar.chorplay.data.video.AutoDownloadTrigger
 import io.github.pushkar.chorplay.data.video.VideoDownloadOptions
 import io.github.pushkar.chorplay.data.video.VideoDownloadOptionsLoader
 import io.github.pushkar.chorplay.innertube.models.Artist
-import io.github.pushkar.chorplay.innertube.models.SongItem
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.every
@@ -64,9 +61,6 @@ class QuickActionsMessagesTest {
         unmockkAll()
     }
 
-    private var videoSearch: suspend (String) -> List<SongItem> = { emptyList() }
-    private val song = MusicTrack("song", "Anti-Hero", "Taylor Swift", "", 201, channelId = "ts")
-
     private val playlistRepository: PlaylistRepository = mockk(relaxed = true)
     private val autoDownloads = MutableSharedFlow<String>(extraBufferCapacity = 1)
     private val autoDownload: AutoDownloadTrigger = mockk(relaxed = true) { every { queued } returns autoDownloads }
@@ -81,7 +75,6 @@ class QuickActionsMessagesTest {
             downloadOptions = loader,
             likedMedia = mockk(relaxed = true),
             playerManager = { mockk(relaxed = true) },
-            musicVideos = MusicVideoVersions { videoSearch(it) },
             autoDownload = autoDownload,
         )
 
@@ -105,35 +98,6 @@ class QuickActionsMessagesTest {
             viewModel.undo(messages.single().undo!!)
             testDispatcher.scheduler.advanceUntilIdle()
             verify(exactly = 1) { autoDownload.undo(video.id) }
-        }
-
-    @Test
-    fun `Watch video opens the song's official video`() =
-        runTest(testDispatcher) {
-            videoSearch =
-                { listOf(SongItem("video", "Anti-Hero", listOf(Artist("Taylor Swift", "ts")), musicVideoType = OMV, thumbnail = "")) }
-            val opened = mutableListOf<String>()
-
-            viewModel().watchVideo(song) { opened += it }
-            testDispatcher.scheduler.advanceUntilIdle()
-
-            assertThat(opened).containsExactly("video")
-        }
-
-    @Test
-    fun `Watch video says so when the song has no video or the search fails`() =
-        runTest(testDispatcher) {
-            val viewModel = viewModel()
-            val messages = messagesOf(viewModel)
-            testDispatcher.scheduler.advanceUntilIdle()
-
-            viewModel.watchVideo(song) { error("nothing to open") }
-            testDispatcher.scheduler.advanceUntilIdle()
-            videoSearch = { throw java.io.IOException("offline") }
-            viewModel.watchVideo(song.copy(videoId = "other")) { error("nothing to open") }
-            testDispatcher.scheduler.advanceUntilIdle()
-
-            assertThat(messages.map { it.text }).containsExactly(R.string.music_video_unavailable, R.string.music_video_failed).inOrder()
         }
 
     @Test

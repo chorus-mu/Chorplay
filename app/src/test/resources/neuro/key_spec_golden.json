@@ -1,6 +1,6 @@
 {
   "keySpec": 3,
-  "about": "NeuroKeySpec stages 1 to 6 and 8 (stems): each input's chunks, model pairs and formats, read with the viewer's language profile (en unless a case names one) and the stop lists in resources/neuro/stop. Flow Desktop checks the same cases. Hand-reviewed. Chinese cases are read with a dictionary word breaker such as ICU4J (the JDK breaker does not split Chinese); they also hold merged (the candidate runs of Han characters) and singles (the single Han characters), and a Chinese key is Simplified. Japanese and Thai are checked on a device.",
+  "about": "NeuroKeySpec stages 1 to 6 and 8 (stems): each input's chunks, model pairs and formats, read with the viewer's language profile (en unless a case names one) and the stop lists in resources/neuro/stop. Chorplay Desktop checks the same cases. Hand-reviewed. Chinese cases are read with a dictionary word breaker such as ICU4J (the JDK breaker does not split Chinese); they also hold merged (the candidate runs of Han characters) and singles (the single Han characters), and a Chinese key is Simplified. Japanese and Thai are checked on a device.",
   "cases": [
     {"input": "Why Big Tech's Privacy Promises Are Lies", "chunks": [["big", "tech", "privaci", "promises"], ["lie"]], "modelPairs": [], "formats": []},
     {"input": "Why Big Tech’s Privacy Promises Are Lies", "chunks": [["big", "tech", "privaci", "promises"], ["lie"]], "modelPairs": [], "formats": []},

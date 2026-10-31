@@ -33,7 +33,7 @@ import io.github.pushkar.chorplay.ui.components.settings.SettingsDestination
 import io.github.pushkar.chorplay.ui.components.settings.SettingsPage
 import io.github.pushkar.chorplay.ui.components.settings.SettingsTarget
 import io.github.pushkar.chorplay.ui.components.shared.ChorplayAlertDialog
-import io.github.pushkar.chorplay.ui.components.shared.FlowChoice
+import io.github.pushkar.chorplay.ui.components.shared.ChorChoice
 import io.github.pushkar.chorplay.ui.components.shared.ChorplayChoiceDialog
 import io.github.pushkar.chorplay.ui.components.shared.ChorplaySearchField
 import io.github.pushkar.chorplay.ui.screens.settings.index.DestinationIndex
@@ -42,10 +42,6 @@ import io.github.pushkar.chorplay.ui.screens.settings.index.SettingsSearch
 
 private val SearchFieldBottomPadding = 8.dp
 
-/**
- * The settings list: search, the persona card, Deep Chorplay, and one row per settings page grouped
- * the way people look for them. Beside a detail pane, [selected] marks the page open next to it.
- */
 @Composable
 internal fun SettingsHomeScreen(
     selected: SettingsDestination?,
@@ -57,7 +53,7 @@ internal fun SettingsHomeScreen(
     viewModel: SettingsHomeViewModel = hiltViewModel(),
 ) {
     val context = LocalContext.current
-    val deepFlow by viewModel.deepFlow.collectAsStateWithLifecycle()
+    val deepChor by viewModel.deepChor.collectAsStateWithLifecycle()
     val persona by viewModel.persona.collectAsStateWithLifecycle()
     val updateCheck by viewModel.updateCheck.collectAsStateWithLifecycle()
     val snackbarHostState = remember { SnackbarHostState() }
@@ -119,7 +115,7 @@ internal fun SettingsHomeScreen(
                     SettingsHomeState(
                         selected = selected,
                         persona = persona,
-                        deepFlow = deepFlow,
+                        deepChor = deepChor,
                         updateCheckingLabel = checkingLabel.takeIf { updateCheck == UpdateCheckState.Checking },
                         selectedRowFocus = selectedRowFocus,
                     ),
@@ -130,8 +126,7 @@ internal fun SettingsHomeScreen(
                         onDeepChorplayChange = viewModel::setDeepChorplayEnabled,
                         onDurationClick = { showDurationDialog = true },
                         onSaveHistoryChange = viewModel::setDeepChorplaySaveToHistory,
-                        onScrobbleChange = viewModel::setDeepChorplayScrobble,
-                        onShowOnSearchChange = viewModel::setDeepChorplayOnSearch,
+                                    onShowOnSearchChange = viewModel::setDeepChorplayOnSearch,
                         onCheckForUpdates = viewModel::checkForUpdates,
                     ),
             )
@@ -140,11 +135,11 @@ internal fun SettingsHomeScreen(
 
     if (showDurationDialog) {
         ChorplayChoiceDialog(
-            title = stringResource(R.string.deep_flow_dialog_title),
-            description = stringResource(R.string.deep_flow_dialog_body),
+            title = stringResource(R.string.deep_chor_dialog_title),
+            description = stringResource(R.string.deep_chor_dialog_body),
             icon = Icons.Outlined.Timer,
-            options = DeepChorplayDurations.map { FlowChoice(it, deepFlowDurationLabel(it)) },
-            selected = deepFlow.expireHours,
+            options = DeepChorplayDurations.map { ChorChoice(it, deepChorDurationLabel(it)) },
+            selected = deepChor.expireHours,
             onSelect = viewModel::setDeepChorplayExpireHours,
             onDismiss = { showDurationDialog = false },
         )
@@ -164,7 +159,7 @@ private fun UpdateCheckFeedback(
     snackbarHostState: SnackbarHostState,
     onConsumed: () -> Unit,
 ) {
-    val upToDate = stringResource(R.string.flow_is_up_to_date)
+    val upToDate = stringResource(R.string.chorplay_is_up_to_date)
     val failed = stringResource(R.string.update_check_failed)
     LaunchedEffect(state) {
         val message =

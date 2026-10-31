@@ -4,7 +4,6 @@ import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.YearMonth
 
-/** The span a recap covers. */
 sealed interface RecapPeriod {
     data class Month(
         val month: YearMonth,
@@ -16,7 +15,6 @@ sealed interface RecapPeriod {
 
     data object AllTime : RecapPeriod
 
-    /** The span before this one, for "compared with last month". */
     fun previous(): RecapPeriod? =
         when (this) {
             is Month -> Month(month.minusMonths(1))
@@ -32,23 +30,18 @@ sealed interface RecapPeriod {
         }
 }
 
-/** What a ranked row stands for, which decides where tapping it goes. */
 enum class RankedKind { CHANNEL, VIDEO, ARTIST, TRACK, ALBUM, OTHER }
 
-/** One row of a ranked list: a channel, video, artist, track, album, topic or genre. */
 data class RankedItem(
     val id: String,
     val name: String,
     val count: Int,
     val durationMs: Long = 0L,
-    /** A secondary line: the channel of a video, or the artist of a track. */
     val detail: String = "",
-    /** A portrait for the item: a channel avatar, video thumbnail or track artwork; blank when unknown. */
     val imageUrl: String = "",
     val kind: RankedKind = RankedKind.OTHER,
 )
 
-/** The album a played track belongs to, as the local music graph knows it. */
 data class TrackAlbum(
     val id: String,
     val title: String,
@@ -56,20 +49,14 @@ data class TrackAlbum(
     val imageUrl: String,
 )
 
-/** Watching or listening folded over a period, down to the day. */
 data class ActivityPattern(
     val totalMs: Long,
     val dayMs: Map<LocalDate, Long>,
-    /** Counted views or plays per hour of day, 0..23. */
     val hourCounts: List<Int>,
-    /** Counted views or plays per weekday, Monday first. */
     val weekdayCounts: List<Int>,
 ) {
     val activeDays: Int get() = dayMs.count { it.value > 0L }
-
     val busiestDay: Pair<LocalDate, Long>? get() = dayMs.maxByOrNull { it.value }?.toPair()
-
-    /** The longest run of consecutive days with any activity. */
     val longestStreak: Int
         get() {
             val days = dayMs.filterValues { it > 0L }.keys.sorted()
@@ -100,7 +87,6 @@ data class VideoRecap(
     val topChannels: List<RankedItem>,
     val topVideos: List<RankedItem>,
     val topTopics: List<RankedItem>,
-    /** Topics in this period's top list that were absent from the previous period. */
     val newTopics: List<String>,
     val discoveredChannels: List<RankedItem>,
     val skippedVideos: List<RankedItem>,
@@ -114,35 +100,14 @@ data class VideoRecap(
     val isEmpty: Boolean get() = views == 0 && activity.totalMs == 0L
 }
 
-data class MusicRecap(
-    val plays: Int,
-    val sessions: Int,
-    val activity: ActivityPattern,
-    val topArtists: List<RankedItem>,
-    val topTracks: List<RankedItem>,
-    val topAlbums: List<RankedItem> = emptyList(),
-    val topGenres: List<RankedItem>,
-    val discoveredArtists: List<RankedItem>,
-    val skippedTracks: List<RankedItem>,
-    val skippedArtists: List<RankedItem>,
-    val dislikedArtists: List<RankedItem>,
-    val blockedArtists: List<RankedItem>,
-) {
-    val isEmpty: Boolean get() = plays == 0 && activity.totalMs == 0L
-}
-
-/** Traits a recap can honestly claim from its own numbers. */
 enum class RecapInsight { NIGHT_OWL, EARLY_BIRD, WEEKEND_WATCHER, LOYAL, EXPLORER, MARATHON, TIME_SAVER }
 
 data class RecapSummary(
     val period: RecapPeriod,
     val video: VideoRecap,
-    val music: MusicRecap,
-    /** Both sources together, for the headline numbers, the clock and the calendar. */
     val combined: ActivityPattern,
-    /** The previous period's combined time, or null when there is nothing to compare with. */
     val previousTotalMs: Long?,
     val insights: List<RecapInsight>,
 ) {
-    val isEmpty: Boolean get() = video.isEmpty && music.isEmpty
+    val isEmpty: Boolean get() = video.isEmpty
 }

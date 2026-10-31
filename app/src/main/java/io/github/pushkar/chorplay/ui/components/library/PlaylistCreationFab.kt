@@ -4,7 +4,6 @@ import androidx.activity.compose.BackHandler
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Close
-import androidx.compose.material.icons.filled.MusicNote
 import androidx.compose.material.icons.filled.VideoLibrary
 import androidx.compose.material.icons.outlined.FileOpen
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
@@ -28,14 +27,12 @@ import io.github.pushkar.chorplay.R
 
 internal enum class PlaylistCreationTarget {
     Video,
-    Music,
 }
 
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 internal fun PlaylistCreationFabMenu(
     onCreateVideo: () -> Unit,
-    onCreateMusic: () -> Unit,
     onImport: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -75,14 +72,6 @@ internal fun PlaylistCreationFabMenu(
             },
             icon = { Icon(Icons.Default.VideoLibrary, contentDescription = null) },
             text = { Text(stringResource(R.string.video)) },
-        )
-        FloatingActionButtonMenuItem(
-            onClick = {
-                expanded = false
-                onCreateMusic()
-            },
-            icon = { Icon(Icons.Default.MusicNote, contentDescription = null) },
-            text = { Text(stringResource(R.string.tab_music)) },
         )
         FloatingActionButtonMenuItem(
             onClick = {

@@ -49,8 +49,6 @@ private const val YOUTUBE_PACKAGE = "com.google.android.youtube"
 
 fun youtubeShortsUrl(videoId: String): String = "https://youtube.com/shorts/$videoId"
 
-fun youtubeMusicWatchUrl(videoId: String): String = "https://music.youtube.com/watch?v=$videoId"
-
 /**
  * The chooser intent every "share this video" affordance raises. [linkOnly] is the user's
  * "share without text" preference: on, the payload is the bare link; off, it is the link under a
@@ -71,23 +69,6 @@ fun shareVideoIntent(
             else -> context.getString(R.string.check_out_video_template, title, videoId)
         }
     return textShareChooser(shareText, title.takeUnless { linkOnly }, context.getString(R.string.share_video))
-}
-
-/** The song counterpart of [shareVideoIntent], linking to YouTube Music. */
-fun shareSongIntent(
-    context: Context,
-    videoId: String,
-    title: String,
-    artist: String,
-    linkOnly: Boolean,
-): Intent {
-    val shareText =
-        if (linkOnly) {
-            youtubeMusicWatchUrl(videoId)
-        } else {
-            context.getString(R.string.share_message_template, title, artist, videoId)
-        }
-    return textShareChooser(shareText, title.takeUnless { linkOnly }, context.getString(R.string.share_song))
 }
 
 /** Shares a YouTube playlist's link, with its [title] as the subject unless only the link is shared. */

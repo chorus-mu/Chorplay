@@ -17,8 +17,8 @@
     <string name="library_section_header">Vaš sadržaj</string>
     <string name="library_history_label">Historija</string>
     <string name="library_playlists_label">Liste za reprodukciju</string>
-    <string name="library_music_playlists_label">Muzičke liste</string>
-    <string name="library_music_playlists_subtitle">Vaše muzičke kolekcije</string>
+
+
     <string name="library_liked_videos_label">Videzapisi koji ti se sviđaju</string>
     <string name="library_saved_shorts_label">Sačuvani Shorts</string>
     <string name="library_watch_later_label">Gledaj kasnije</string>
@@ -36,12 +36,11 @@
     <string name="empty_watch_history">Nema historije gledanja</string>
     <string name="empty_watch_history_body">Videozapisi koje pogledate pojavit će se ovdje</string>
     <string name="liked">"Sviđa mi se "</string>
-    <string name="liked_music">Omiljena muzika</string>
+
     <string name="liked_videos">Omiljeni videi</string>
-    <string name="share_song">Podijeli pjesmu</string>
     <string name="empty_liked">Nema omiljenih videa</string>
     <string name="empty_liked_body">Videi koje voliš pojavit će se ovdje</string>
-    <string name="song">Pjesma</string>
+
     <string name="video">Video</string>
     <string name="share">Podijeli</string>
     <string name="downloaded">Preuzeto</string>
@@ -70,7 +69,6 @@
     <string name="remove">Ukloni</string>
     <string name="related_content">Srodni sadržaj</string>
     <string name="no_related_content">Nema pronađenog srodnog sadržaja</string>
-    <string name="share_message_template">Poslušaj ovu pjesmu: %1$s od %2$s\nhttps://music.youtube.com/watch?v=%3$s</string>
     <string name="hz">Hz</string>
     <string name="kbps">kbps</string>
     <string name="filter_discover">Otkrij</string>
@@ -100,15 +98,14 @@
     <string name="play_mode_suggestion_title">Sugerirani mod sviranja</string>
     <string name="play_mode_suggestion_body">Ovaj videozapis traje manje od 2 minute. Želite li prebaciti na specijalizirani player?</string>
     <string name="shorts_player">Player za Shorts</string>
-    <string name="music_player">Player za muziku</string>
+
     <plurals name="channels_count">
         <item quantity="one">%d kanal</item>
         <item quantity="few">%d kanala</item>
         <item quantity="other">%d kanala</item>
     </plurals>
     <string name="tab_videos">Videi</string>
-    <string name="tab_music">Muzika</string>
-    <string name="empty_offline_title">Izvanmrežno %1$s</string>
+<string name="empty_offline_title">Izvanmrežno %1$s</string>
     <string name="empty_offline_body">Vaše preuzimanje %1$s pojavit će se ovdje.\nUživajte u svom sadržaju čak i bez interneta.</string>
     <string name="action_go_to_home">Idi na početnu stranicu</string>
     <string name="action_delete">Izbriši</string>
@@ -165,11 +162,11 @@
     <string name="new_update_available">Novo ažuriranje dostupno</string>
     <string name="update_available_template">%1$s je sada dostupno</string>
     <string name="release_notes">Bilješke o izdanju</string>
-    <string name="update_flow">Ažuriraj Chorplay</string>
+    <string name="update_chorplay">Ažuriraj Chorplay</string>
     <string name="maybe_later">Možda kasnije</string>
     <string name="nav_home">Početna</string>
     <string name="nav_shorts">Shorts</string>
-    <string name="nav_music">Muzika</string>
+
     <string name="nav_subs">Pretplate</string>
     <string name="nav_library">Biblioteka</string>
     <string name="notifications">Obavijesti</string>
@@ -186,14 +183,11 @@
     <string name="add_to_playlist">Dodaj u listu za reprodukciju</string>
     <string name="playback_header">Reprodukcija</string>
     <string name="play_next">Reproduciraj sljedeće</string>
-    <string name="play_next_desc">Dodaj na početak redoslijeda</string>
     <string name="add_to_queue">Dodaj u redoslijed</string>
     <string name="add_to_queue_desc">Dodaj na kraj redoslijeda</string>
     <string name="audio_effects">Audio efekti</string>
     <string name="more_header">Više</string>
     <string name="view_artist">Pogledaj izvođača</string>
-    <string name="view_album">Pogledaj album</string>
-    <string name="album_art">Naslovnica albuma</string>
     <string name="close_player">Zatvori player</string>
     <string name="views_template">%1$s pregleda</string>
     <string name="chapters">Poglavlja</string>
@@ -256,9 +250,9 @@
     <string name="no_playlists_found">Nema pronađenih lista za reprodukciju</string>
     <string name="subscribers_count_template">%1$s pretplatnika</string>
     <string name="views_count_short_template">%1$s pregleda</string>
-    <string name="music_history">HIstorija muzike</string>
+
     <string name="remove_from_history">Ukloni iz historije</string>
-    <string name="share_song_chooser">Podijeli pjesmu</string>
+
     <string name="time_today">Danas</string>
     <string name="time_yesterday">Jučer</string>
     <string name="time_earlier">Ranije</string>
@@ -268,28 +262,28 @@
     <string name="peace_and_quiet">Mir i tišina</string>
     <string name="notifications_empty_body">Pregledali ste sve! Nova ažuriranja iz vaših pretplata pojavit će se ovdje.</string>
     <string name="settings_title">Postavke</string>
-    <string name="settings_flow_engine_header">Chorplay Engine</string>
+    <string name="settings_chor_engine_header">Chorplay Engine</string>
     <string name="settings_active_learning">AKTIVNO UČENJE</string>
     <string name="settings_reset_brain_title">Resetiraj osobinu Chorplay-a?</string>
     <string name="settings_reset_brain_body">Ovo će potpuno obrisati vaš profil interesa \'Chorplay Brain\'.\n\n• Sve naučene teme će biti zaboravljene.\n• Osobine ličnosti će biti resetovane na neutralno.\n• Preporuke će se vratiti na zadane vrijednosti.\n\nOva radnja se ne može poništiti.</string>
     <string name="settings_reset_everything">Resetuj sve</string>
     <string name="settings_analyzing_interactions">Analizirajući vaše interakcije...</string>
     <string name="settings_view_analytics">Pregled analitike</string>
-    <string name="deep_flow_mode_title">Deep Chorplay Modus</string>
-    <string name="deep_flow_mode_subtitle">Pauziraj učenje — pregledaj bez utjecaja na svoj profil</string>
-    <string name="deep_flow_learning_paused">Učenje je obustavljeno</string>
-    <string name="deep_flow_expires_in">Ističe za %s</string>
-    <string name="deep_flow_expire_duration_title">Automatsko onemogućavanje nakon</string>
-    <string name="deep_flow_expire_duration_subtitle">Učenje se automatski nastavlja nakon %s</string>
-    <string name="deep_flow_dialog_title">Trajanje pauze</string>
-    <string name="deep_flow_dialog_body">Koliko dugo učenje treba ostati pauzirano?</string>
-    <string name="deep_flow_duration_1h">1 sat</string>
-    <string name="deep_flow_duration_2h">2 sata</string>
-    <string name="deep_flow_duration_4h">4 sata</string>
-    <string name="deep_flow_duration_6h">6 sati</string>
-    <string name="deep_flow_duration_8h">8 sati</string>
-    <string name="deep_flow_duration_12h">12 sati</string>
-    <string name="deep_flow_duration_24h">24 sata</string>
+    <string name="deep_chor_mode_title">Deep Chorplay Modus</string>
+    <string name="deep_chor_mode_subtitle">Pauziraj učenje — pregledaj bez utjecaja na svoj profil</string>
+    <string name="deep_chor_learning_paused">Učenje je obustavljeno</string>
+    <string name="deep_chor_expires_in">Ističe za %s</string>
+    <string name="deep_chor_expire_duration_title">Automatsko onemogućavanje nakon</string>
+    <string name="deep_chor_expire_duration_subtitle">Učenje se automatski nastavlja nakon %s</string>
+    <string name="deep_chor_dialog_title">Trajanje pauze</string>
+    <string name="deep_chor_dialog_body">Koliko dugo učenje treba ostati pauzirano?</string>
+    <string name="deep_chor_duration_1h">1 sat</string>
+    <string name="deep_chor_duration_2h">2 sata</string>
+    <string name="deep_chor_duration_4h">4 sata</string>
+    <string name="deep_chor_duration_6h">6 sati</string>
+    <string name="deep_chor_duration_8h">8 sati</string>
+    <string name="deep_chor_duration_12h">12 sati</string>
+    <string name="deep_chor_duration_24h">24 sata</string>
     <string name="settings_header_appearance">Izgled</string>
     <string name="settings_header_content_playback">Sadržaj i reprodukcija</string>
     <string name="settings_header_data_management">Upravljanje podacima</string>
@@ -366,11 +360,11 @@
     <string name="channel_search_open">Pretraži Kanal</string>
     <string name="channel_search_close">Zatvori pretragu</string>
     <string name="channel_search_no_results">Nisu pronađeni rezultati za %1$s</string>
-    <string name="deep_flow_enabled_message">Deep Chorplay uključen</string>
-    <string name="deep_flow_disabled_message">Deep Chorplay isključen</string>
-    <string name="deep_flow_expired_message">Deep Chorplay tajmer je istekao</string>
-    <string name="deep_flow_active_until_disabled">Deep Chorplay ostaje aktivan dok ga ne isključite</string>
-    <string name="deep_flow_duration_never">Nikad</string>
+    <string name="deep_chor_enabled_message">Deep Chorplay uključen</string>
+    <string name="deep_chor_disabled_message">Deep Chorplay isključen</string>
+    <string name="deep_chor_expired_message">Deep Chorplay tajmer je istekao</string>
+    <string name="deep_chor_active_until_disabled">Deep Chorplay ostaje aktivan dok ga ne isključite</string>
+    <string name="deep_chor_duration_never">Nikad</string>
     <string name="settings_export_failed">Izvoz je propao: %1$s</string>
     <string name="appearance_title">Izgled</string>
     <string name="appearance_subtitle">Personalizirajte svoje Chorplay iskustvo</string>
@@ -404,7 +398,7 @@
     <string name="app_icon_picker_subtitle">Odaberite stil ikone pokretača. Promjena stupa na snagu odmah i pokretač će se nakratko osvježiti.</string>
     <string name="app_icon_picker_warning">⚠ Oprez: promjena ikona koristi mehanizam Android sistema koji može nakratko ukloniti prečac aplikacije s početnog ekrana. Dugo pritisnite launcher da ga vratite ako je potrebno.</string>
     <string name="app_icon_apply_toast">Ikona je ažurirana — vaš launcher će se osvježiti</string>
-    <string name="icon_name_flow_red">Chorplay Crvena</string>
+    <string name="icon_name_chorplay_red">Chorplay Crvena</string>
     <string name="icon_name_amoled">AMOLED Tamna</string>
     <string name="icon_name_monochrome">Monochrome</string>
     <string name="icon_name_ghost">Duh</string>
@@ -458,10 +452,10 @@
     <string name="history_tab_videos">Videi</string>
     <string name="history_tab_shorts">Shorts</string>
     <string name="history_tab_local_videos">Lokalni videi</string>
-    <string name="history_tab_local_music">Lokalna muzika</string>
+
     <string name="empty_liked_videos">Nema omiljenih videa</string>
-    <string name="empty_liked_music">Nema omiljene muzike</string>
-    <string name="empty_liked_music_body">Pjesme koje volite će se ovdje pojaviti</string>
+
+
     <string name="download_all">Preuzmi sve</string>
     <string name="subscriptions_sort_default">zadano</string>
     <string name="about_creator_name">Pushkar</string>

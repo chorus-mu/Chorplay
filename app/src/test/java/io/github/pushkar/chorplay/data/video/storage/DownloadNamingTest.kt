@@ -38,7 +38,7 @@ class DownloadNamingTest {
     }
 
     @Test
-    fun `album folders carry the artist, playlist folders only their title`() {
+    fun `playlist folders carry their title`() {
         assertThat(DownloadNaming.folderName("Album", "Artist", isAlbum = true, fallback = "MPREb")).isEqualTo("Artist - Album")
         assertThat(DownloadNaming.folderName("Road Trip", "Me", isAlbum = false, fallback = "PL")).isEqualTo("Road Trip")
         assertThat(DownloadNaming.folderName("", null, isAlbum = false, fallback = "PL123")).isEqualTo("PL123")

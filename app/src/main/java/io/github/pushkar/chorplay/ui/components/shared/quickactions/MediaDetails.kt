@@ -29,7 +29,7 @@ import io.github.pushkar.chorplay.R
 import io.github.pushkar.chorplay.data.newmusic.InnertubeMusicService
 import io.github.pushkar.chorplay.innertube.models.MediaInfo
 import io.github.pushkar.chorplay.ui.components.shared.ChorplayLoadingIndicator
-import io.github.pushkar.chorplay.ui.components.shared.FlowNavRow
+import io.github.pushkar.chorplay.ui.components.shared.ChorNavRow
 import io.github.pushkar.chorplay.ui.components.shared.rememberDateDisplaySettings
 import io.github.pushkar.chorplay.utils.DateContext
 import io.github.pushkar.chorplay.utils.formatDuration
@@ -119,7 +119,7 @@ fun MediaDetailRows(
         rows =
             details.map { (label, value) ->
                 QuickActionRow(key = label) { shape ->
-                    FlowNavRow(
+                    ChorNavRow(
                         title = value,
                         supportingText = label,
                         onClick = {

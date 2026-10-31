@@ -51,7 +51,6 @@ private fun heroShape(step: OnboardingStep): RoundedPolygon =
         OnboardingStep.WELCOME -> MaterialShapes.SoftBurst
         OnboardingStep.INTERESTS -> MaterialShapes.Clover4Leaf
         OnboardingStep.CHANNELS -> MaterialShapes.Cookie9Sided
-        OnboardingStep.ARTISTS -> MaterialShapes.Cookie6Sided
         OnboardingStep.ALERTS -> MaterialShapes.Sunny
         OnboardingStep.IMPORT -> MaterialShapes.Cookie4Sided
         OnboardingStep.READY -> MaterialShapes.Cookie12Sided
@@ -62,19 +61,18 @@ private fun backdropShapes(step: OnboardingStep): Pair<RoundedPolygon, RoundedPo
         OnboardingStep.WELCOME -> MaterialShapes.Flower to MaterialShapes.Cookie6Sided
         OnboardingStep.INTERESTS -> MaterialShapes.Clover8Leaf to MaterialShapes.Cookie4Sided
         OnboardingStep.CHANNELS -> MaterialShapes.Cookie9Sided to MaterialShapes.Sunny
-        OnboardingStep.ARTISTS -> MaterialShapes.Cookie6Sided to MaterialShapes.Burst
         OnboardingStep.ALERTS -> MaterialShapes.Burst to MaterialShapes.Cookie12Sided
         OnboardingStep.IMPORT -> MaterialShapes.Cookie4Sided to MaterialShapes.Clover4Leaf
         OnboardingStep.READY -> MaterialShapes.SoftBurst to MaterialShapes.Flower
     }.let { (near, far) -> near.normalized() to far.normalized() }
 
-private val PetalMorph: Morph by lazy { Morph(MaterialShapes.Clover4Leaf.normalized(), MaterialShapes.Clover8Leaf.normalized()) }
+private val PetalMorph: Morph by lazy {
+    Morph(
+        MaterialShapes.Clover4Leaf.normalized(),
+        MaterialShapes.Clover8Leaf.normalized()
+    )
+}
 
-/**
- * The step's shape with its icon inside. It morphs from [fromStep]'s shape when the step appears,
- * and on Interests grows from four leaves to eight as [petals] goes from 0 to 1. Every value is
- * read while drawing, and nothing runs once the shape has settled.
- */
 @Composable
 internal fun OnboardingHero(
     step: OnboardingStep,
@@ -135,22 +133,22 @@ private fun HeroMark(step: OnboardingStep) {
             OnboardingStep.WELCOME -> null
             OnboardingStep.INTERESTS -> Icons.Outlined.Interests
             OnboardingStep.CHANNELS -> Icons.Outlined.Subscriptions
-            OnboardingStep.ARTISTS -> Icons.Outlined.LibraryMusic
             OnboardingStep.ALERTS -> Icons.Outlined.NotificationsActive
             OnboardingStep.IMPORT -> Icons.Outlined.MoveToInbox
             OnboardingStep.READY -> Icons.Rounded.Check
         }
     if (icon != null) {
-        Icon(icon, contentDescription = null, tint = tint, modifier = Modifier.fillMaxWidth(HERO_ICON_SHARE).aspectRatio(1f))
+        Icon(
+            icon,
+            contentDescription = null,
+            tint = tint,
+            modifier = Modifier.fillMaxWidth(HERO_ICON_SHARE).aspectRatio(1f)
+        )
     } else {
         ChorplayLogo(Modifier.fillMaxWidth(LOGO_SHARE))
     }
 }
 
-/**
- * Two large shapes behind the whole setup that morph from [fromStep]'s pair into [step]'s as
- * [progress] runs, drawn in a solid container colour.
- */
 internal fun Modifier.onboardingBackdrop(
     fromStep: OnboardingStep,
     step: OnboardingStep,

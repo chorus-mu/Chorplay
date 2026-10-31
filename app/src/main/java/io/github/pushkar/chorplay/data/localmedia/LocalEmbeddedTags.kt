@@ -152,7 +152,7 @@ class LocalEmbeddedTags
                     all[item.id]?.takeIf { it.stamp == item.fileStamp }?.let { item.withEmbeddedText(it.text, it.titleless == true) }
                         ?: item
                 }
-            return library.copy(videos = library.videos.applied(), music = library.music.applied())
+            return library.copy(videos = library.videos.applied())
         }
 
         private suspend fun read(uri: Uri): EmbeddedText =
@@ -210,4 +210,4 @@ class LocalEmbeddedTags
         }
     }
 
-private fun LocalLibrary.items(): List<LocalMediaItem> = videos + music
+private fun LocalLibrary.items(): List<LocalMediaItem> = videos

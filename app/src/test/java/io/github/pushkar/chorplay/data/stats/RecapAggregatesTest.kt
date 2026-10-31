@@ -1,7 +1,6 @@
 package io.github.pushkar.chorplay.data.stats
 
 import com.google.common.truth.Truth.assertThat
-import io.github.pushkar.chorplay.data.recommendation.music.MusicStatsStorage
 import org.junit.Test
 import java.time.LocalDate
 import java.time.YearMonth
@@ -38,27 +37,22 @@ class RecapAggregatesTest {
     private fun video(vararg months: Pair<YearMonth, VideoMonthRecord>) =
         VideoStatsSnapshot(months = months.associate { LedgerTime.monthKey(it.first) to it.second })
 
-    private fun music(vararg months: Pair<YearMonth, MusicStatsStorage.SerializableMonth>) =
-        MusicStatsStorage.SerializableStats(months = months.associate { LedgerTime.monthKey(it.first) to it.second })
-
     @Test
     fun `a month shows only its own numbers and compares with the month before`() {
         val summary =
             RecapAggregates.summarize(
                 RecapPeriod.Month(september),
                 video(september to videoMonth(views = 5, watchedMs = 3_000_000L), august to videoMonth(views = 2, watchedMs = 1_000_000L)),
-                music(september to MusicStatsStorage.SerializableMonth(plays = 4, listenedMs = 600_000L)),
             )
 
         assertThat(summary.video.views).isEqualTo(5)
-        assertThat(summary.music.plays).isEqualTo(4)
-        assertThat(summary.combined.totalMs).isEqualTo(3_600_000L)
+        assertThat(summary.combined.totalMs).isEqualTo(3_000_000L)
         assertThat(summary.previousTotalMs).isEqualTo(1_000_000L)
     }
 
     @Test
     fun `a first month has nothing to compare with`() {
-        val summary = RecapAggregates.summarize(RecapPeriod.Month(september), video(september to videoMonth(views = 1)), music())
+        val summary = RecapAggregates.summarize(RecapPeriod.Month(september), video(september to videoMonth(views = 1)))
         assertThat(summary.previousTotalMs).isNull()
     }
 
@@ -72,7 +66,6 @@ class RecapAggregatesTest {
                     september to videoMonth(views = 4, channelViews = mapOf("UCa" to 1, "UCb" to 3)),
                     YearMonth.of(2025, 12) to videoMonth(views = 9, channelViews = mapOf("UCz" to 9)),
                 ),
-                music(),
             )
 
         assertThat(summary.video.views).isEqualTo(7)
@@ -93,7 +86,6 @@ class RecapAggregatesTest {
                     august to videoMonth(dayMs = mapOf(30 to 60_000L, 31 to 60_000L)),
                     september to videoMonth(dayMs = mapOf(1 to 60_000L, 2 to 60_000L, 5 to 60_000L)),
                 ),
-                music(),
             )
 
         assertThat(summary.combined.longestStreak).isEqualTo(4)
@@ -114,19 +106,6 @@ class RecapAggregatesTest {
     }
 
     @Test
-    fun `older music months spread their time over the days they have plays on`() {
-        val summary =
-            RecapAggregates.summarize(
-                RecapPeriod.Month(september),
-                video(),
-                music(september to MusicStatsStorage.SerializableMonth(plays = 4, listenedMs = 400_000L, dayPlays = mapOf(1 to 3, 2 to 1))),
-            )
-
-        assertThat(summary.music.activity.dayMs[LocalDate.of(2026, 9, 1)]).isEqualTo(300_000L)
-        assertThat(summary.music.activity.dayMs[LocalDate.of(2026, 9, 2)]).isEqualTo(100_000L)
-    }
-
-    @Test
     fun `topics new this month are the top ones last month never had`() {
         val summary =
             RecapAggregates.summarize(
@@ -135,7 +114,6 @@ class RecapAggregatesTest {
                     august to videoMonth(topicViews = mapOf("space" to 5)),
                     september to videoMonth(topicViews = mapOf("space" to 4, "cooking" to 2)),
                 ),
-                music(),
             )
 
         assertThat(summary.video.newTopics).containsExactly("cooking")
@@ -149,7 +127,7 @@ class RecapAggregatesTest {
                 september to videoMonth(queries = mapOf("new" to 1)),
             )
 
-        val kept = RecapAggregates.summarize(RecapPeriod.Year(2026), snapshot, music(), queriesSince = september)
+        val kept = RecapAggregates.summarize(RecapPeriod.Year(2026), snapshot, queriesSince = september)
         assertThat(kept.video.topQueries.map { it.id }).containsExactly("new")
     }
 
@@ -160,9 +138,8 @@ class RecapAggregatesTest {
             RecapAggregates.summarize(
                 RecapPeriod.Month(september),
                 video(september to videoMonth(hourViews = mapOf(23 to 2))),
-                music(),
             )
-        val owl = RecapAggregates.summarize(RecapPeriod.Month(september), video(september to videoMonth(hourViews = late)), music())
+        val owl = RecapAggregates.summarize(RecapPeriod.Month(september), video(september to videoMonth(hourViews = late)))
 
         assertThat(quiet.insights).doesNotContain(RecapInsight.NIGHT_OWL)
         assertThat(owl.insights).contains(RecapInsight.NIGHT_OWL)
@@ -174,7 +151,6 @@ class RecapAggregatesTest {
             RecapAggregates.summarize(
                 RecapPeriod.Month(september),
                 video(september to videoMonth(sponsor = mapOf("sponsor" to 400_000L, "intro" to 200_000L))),
-                music(),
             )
 
         assertThat(summary.video.sponsorSavedMs).isEqualTo(600_000L)
@@ -182,14 +158,10 @@ class RecapAggregatesTest {
     }
 
     @Test
-    fun `available months come from both ledgers, newest first`() {
+    fun `available months come from the ledger, newest first`() {
         val months =
             RecapAggregates.availableMonths(
-                video(august to videoMonth(views = 1)),
-                music(
-                    september to MusicStatsStorage.SerializableMonth(plays = 1),
-                    august to MusicStatsStorage.SerializableMonth(plays = 1),
-                ),
+                video(september to videoMonth(views = 2), august to videoMonth(views = 1)),
             )
 
         assertThat(months).containsExactly(september, august).inOrder()
@@ -197,7 +169,7 @@ class RecapAggregatesTest {
 
     @Test
     fun `nothing recorded is an empty recap`() {
-        assertThat(RecapAggregates.summarize(RecapPeriod.AllTime, video(), music()).isEmpty).isTrue()
+        assertThat(RecapAggregates.summarize(RecapPeriod.AllTime, video()).isEmpty).isTrue()
     }
 
     @Test
@@ -214,16 +186,6 @@ class RecapAggregatesTest {
                             videoViews = mapOf("vid1" to 2),
                         ),
                 ),
-                music(
-                    september to
-                        MusicStatsStorage.SerializableMonth(
-                            plays = 1,
-                            artistPlays = mapOf("a1" to 1),
-                            artistArt = mapOf("a1" to "https://art/a1"),
-                            trackPlays = mapOf("t1" to 1),
-                            trackArt = mapOf("t1" to "https://art/t1"),
-                        ),
-                ),
             )
 
         assertThat(
@@ -236,16 +198,6 @@ class RecapAggregatesTest {
                 .single()
                 .imageUrl,
         ).contains("vid1")
-        assertThat(
-            summary.music.topArtists
-                .single()
-                .imageUrl,
-        ).isEqualTo("https://art/a1")
-        assertThat(
-            summary.music.topTracks
-                .single()
-                .imageUrl,
-        ).isEqualTo("https://art/t1")
     }
 
     @Test

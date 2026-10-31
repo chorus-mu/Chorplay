@@ -209,8 +209,8 @@ class DownloadNotifier
             )
 
         companion object {
-            const val CHANNEL_ID = "flow_downloads"
-            private const val GROUP = "flow_download_group"
+            const val CHANNEL_ID = "chorplay_downloads"
+            private const val GROUP = "chorplay_download_group"
             const val SUMMARY_NOTIFICATION_ID = 724
 
             fun notificationId(videoId: String): Int =

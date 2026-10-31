@@ -15,13 +15,13 @@ import kotlinx.serialization.Serializable
 import okhttp3.OkHttpClient
 import java.util.Locale
 
-private const val PAIR_PATH = "/flow-sync/2/pair"
+private const val PAIR_PATH = "/chor-sync/2/pair"
 private const val CONNECT_TIMEOUT_MS = 3_000L
 private const val CLOSE_WAIT_MS = 5_000L
 private const val POLL_INTERVAL_MS = 2_000L
 internal const val SLOT_LIFETIME_MS = 180_000L
 
-/** Addresses a code lists, best first, as many as FLOW-SYNC/1 codes carry. */
+/** Addresses a code lists, best first, as many as CHOR-SYNC/1 codes carry. */
 private const val LAN_ADDRESSES = 3
 internal const val KEY_SIZE = 32
 

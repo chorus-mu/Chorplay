@@ -32,8 +32,8 @@ class SlicePartTest {
             settings =
                 SettingsBackup(
                     strings = mapOf("app_icon_suffix" to "Red", "theme_mode" to "DARK", "upcoming_video_reminders" to "[]"),
-                    booleans = mapOf("onboarding_done" to true, "deep_flow_active" to true, "autoplay_enabled" to false),
-                    longs = mapOf("deep_flow_activated_at" to 5L),
+                    booleans = mapOf("onboarding_done" to true, "deep_chor_active" to true, "autoplay_enabled" to false),
+                    longs = mapOf("deep_chor_activated_at" to 5L),
                     stringSets =
                         mapOf(
                             "hidden_library_sections" to setOf("notes"),

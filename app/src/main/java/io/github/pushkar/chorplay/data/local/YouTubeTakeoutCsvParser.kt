@@ -18,14 +18,6 @@ internal data class TakeoutPlaylistInfo(
     val createdAt: Long?,
 )
 
-/** A song saved to the YouTube Music library; [artists] are joined for display. */
-internal data class TakeoutLibrarySong(
-    val videoId: String,
-    val title: String,
-    val album: String,
-    val artists: String,
-)
-
 internal sealed interface YouTubeTakeoutCsvContent {
     data class Subscriptions(
         val rows: List<YouTubeTakeoutSubscription>,
@@ -39,10 +31,6 @@ internal sealed interface YouTubeTakeoutCsvContent {
         val playlists: List<TakeoutPlaylistInfo>,
     ) : YouTubeTakeoutCsvContent
 
-    data class MusicLibrarySongs(
-        val songs: List<TakeoutLibrarySong>,
-    ) : YouTubeTakeoutCsvContent
-
     data object Unsupported : YouTubeTakeoutCsvContent
 }
 
@@ -53,7 +41,6 @@ private const val MAX_IMPORTED_NAME_CHARACTERS = 1_000
 private const val MAX_TAKEOUT_ENTRY_NAME_CHARACTERS = 4_096
 private const val MAX_TAKEOUT_LEAF_NAME_CHARACTERS = 512
 private const val MAX_TAKEOUT_PLAYLISTS = 2_000
-private val LIBRARY_COLUMNS = 3..8
 
 internal fun isYouTubeTakeoutCsvEntry(entryName: String): Boolean =
     youTubeTakeoutSegments(entryName)?.last()?.endsWith(".csv", ignoreCase = true) == true
@@ -115,7 +102,6 @@ internal fun readYouTubeTakeoutCsv(
     val firstSubscription = firstData.fields.toSubscription()
     val firstPlaylistVideo = firstData.fields.toPlaylistVideoId()
     val firstPlaylist = firstData.fields.toPlaylistInfo()
-    val firstSong = firstData.fields.toLibrarySong()
 
     return when {
         header.fields.size >= 3 && header.fields.toSubscription() == null && firstSubscription != null -> {
@@ -142,15 +128,6 @@ internal fun readYouTubeTakeoutCsv(
                 weight = { it.id.length + it.title.length },
                 parse = { fields -> fields.toPlaylistInfo() },
                 build = { playlists -> YouTubeTakeoutCsvContent.PlaylistMetadata(playlists) },
-            )
-        }
-
-        header.fields.size in LIBRARY_COLUMNS && header.fields.toLibrarySong() == null && firstSong != null -> {
-            csvReader.readRows(
-                first = firstSong,
-                weight = { it.videoId.length + it.title.length + it.album.length + it.artists.length },
-                parse = { fields -> fields.toLibrarySong() },
-                build = { songs -> YouTubeTakeoutCsvContent.MusicLibrarySongs(songs) },
             )
         }
 
@@ -283,65 +260,4 @@ private fun List<String>.toPlaylistInfo(): TakeoutPlaylistInfo? {
     return TakeoutPlaylistInfo(playlistId, title, createdAt)
 }
 
-/**
- * A row of the YouTube Music library's songs file: the video id, then the title, album and artists.
- * The account's own uploads (`video metadata`) also start with a video id, but run longer and carry
- * timestamps and channel ids, which no library row does.
- */
-private fun List<String>.toLibrarySong(): TakeoutLibrarySong? {
-    if (size !in LIBRARY_COLUMNS) return null
-    val videoId = this[0].trim().trimStart('\uFEFF')
-    if (!youtubeVideoIdPattern.matches(videoId)) return null
-    val rest = drop(1).map(String::trim)
-    if (rest.any { youtubeChannelIdPattern.matches(it) || runCatching { OffsetDateTime.parse(it) }.isSuccess }) return null
-    val title = rest[0].validatedTakeoutName() ?: return null
-    return TakeoutLibrarySong(
-        videoId = videoId,
-        title = title,
-        album = rest.getOrNull(1)?.validatedTakeoutName().orEmpty(),
-        artists = rest.drop(2).mapNotNull { it.validatedTakeoutName() }.joinToString(", "),
-    )
-}
 
-private fun String.validatedTakeoutName(): String? =
-    trim().takeIf { value ->
-        value.isNotEmpty() &&
-            value.length <= MAX_IMPORTED_NAME_CHARACTERS &&
-            value.none { character ->
-                character.isISOControl() || character == '\u2028' || character == '\u2029'
-            }
-    }
-
-private fun String.normalizedTakeoutName(): String =
-    Normalizer
-        .normalize(this, Normalizer.Form.NFKC)
-        .lowercase(Locale.ROOT)
-        .filter(Char::isTakeoutNameCharacter)
-
-private fun Char.isTakeoutNameCharacter(): Boolean =
-    isLetterOrDigit() ||
-        Character.isSurrogate(this) ||
-        when (Character.getType(this)) {
-            Character.MATH_SYMBOL.toInt(),
-            Character.CURRENCY_SYMBOL.toInt(),
-            Character.MODIFIER_SYMBOL.toInt(),
-            Character.OTHER_SYMBOL.toInt(),
-            -> true
-
-            else -> false
-        }
-
-private fun String.takeoutLeafStem(): String {
-    val leaf = replace('\\', '/').substringAfterLast('/')
-    return leaf.substringBeforeLast('.', leaf)
-}
-
-private fun String.withoutEnglishVideosSuffix(): String = if (endsWith("-videos", ignoreCase = true)) dropLast(7) else this
-
-private fun String.fallbackTakeoutPlaylistName(fallbackPlaylistName: String): String {
-    val fallback =
-        takeoutLeafStem()
-            .withoutEnglishVideosSuffix()
-            .trim { it.isWhitespace() || it == '-' || it == '_' }
-    return fallback.validatedTakeoutName() ?: fallbackPlaylistName
-}

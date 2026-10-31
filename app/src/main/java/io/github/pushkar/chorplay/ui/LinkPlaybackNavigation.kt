@@ -14,13 +14,11 @@ import androidx.navigation.navArgument
 import io.github.pushkar.chorplay.data.model.Video
 import io.github.pushkar.chorplay.player.GlobalPlayerState
 import io.github.pushkar.chorplay.ui.components.videoplayer.PlayerDraggableState
-import io.github.pushkar.chorplay.ui.screens.music.sharedMusicPlayerViewModel
 import io.github.pushkar.chorplay.ui.screens.player.VideoPlayerViewModel
 import io.github.pushkar.chorplay.ui.screens.player.state.VideoPlayerUiState
 import io.github.pushkar.chorplay.ui.screens.player.state.shouldExpandInsteadOfPlaying
 import io.github.pushkar.chorplay.ui.screens.playlists.LinkedPlaylistViewModel
 
-/** Routes a link from another app opens to start playback; each plays, then leaves at once. */
 internal fun NavGraphBuilder.linkPlaybackRoutes(
     navController: NavHostController,
     currentRoute: MutableState<String>,
@@ -29,9 +27,7 @@ internal fun NavGraphBuilder.linkPlaybackRoutes(
     playerSheetState: PlayerDraggableState,
     playerVisibleState: MutableState<Boolean>,
     defaultStartRoute: String,
-    onMusicStarted: () -> Unit,
 ) {
-    // A YouTube Music link: the song plays in the music player, and this route leaves at once.
     composable(
         route = MUSIC_PLAYER_ROUTE_PATTERN,
         arguments =
@@ -44,28 +40,17 @@ internal fun NavGraphBuilder.linkPlaybackRoutes(
                 },
             ),
     ) { backStackEntry ->
-        currentRoute.value = "musicPlayer"
-        val musicPlayerViewModel = sharedMusicPlayerViewModel()
-        val links: LinkedPlaylistViewModel = hiltViewModel()
         val videoId = backStackEntry.arguments?.getString(MUSIC_PLAYER_ROUTE_ARG).orEmpty()
-        val playlistId = backStackEntry.arguments?.getString(MUSIC_PLAYER_LIST_ARG)
 
-        LaunchedEffect(videoId, playlistId) {
-            // The music player stays hidden while a video is loaded, so a music link closes it first.
-            if (playerViewModel.uiState.value.cachedVideo != null) GlobalPlayerState.requestDismiss()
-            val queue = playlistId?.takeUnless(::isMix)?.let { links.musicQueue(videoId, it) }
-            if (queue != null) {
-                musicPlayerViewModel.loadAndPlayTrack(queue.items[queue.startIndex], queue.items)
-            } else {
-                musicPlayerViewModel.playFromLink(videoId)
-            }
-            onMusicStarted()
+        LaunchedEffect(videoId) {
+            val video = linkedVideo(videoId)
+            playerViewModel.playVideo(video)
+            GlobalPlayerState.setCurrentVideo(video)
             withFrameNanos { }
             navController.popTransientRouteOrNavigateStart(defaultStartRoute)
         }
     }
 
-    // A video linked from inside a playlist: it plays with the playlist as its queue, then this route leaves.
     composable(
         route = LINKED_PLAYLIST_ROUTE_PATTERN,
         arguments =
@@ -132,7 +117,6 @@ internal fun linkedPlaylistRoute(
     videoId: String,
 ): String = "linkedPlaylist/${Uri.encode(playlistId)}/${Uri.encode(videoId)}"
 
-/** A video known only by the id a link carries; the player fills in the rest as it loads. */
 internal fun linkedVideo(videoId: String) =
     Video(
         id = videoId,

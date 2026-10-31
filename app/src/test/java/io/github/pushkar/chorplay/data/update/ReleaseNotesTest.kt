@@ -17,7 +17,7 @@ class ReleaseNotesTest {
 
         ## New features
 
-        - Discord RPC support by @PastaHimself
+        - Video playback improvements by @PastaHimself
         - Play Shorts as one queue #823
         * A **bold** claim
 

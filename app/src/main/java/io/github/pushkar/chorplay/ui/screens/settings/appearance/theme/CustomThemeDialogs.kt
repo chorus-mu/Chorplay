@@ -18,9 +18,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import io.github.pushkar.chorplay.R
 import io.github.pushkar.chorplay.ui.components.shared.ChorplayAlertDialog
-import io.github.pushkar.chorplay.ui.components.shared.FlowChoice
+import io.github.pushkar.chorplay.ui.components.shared.ChorChoice
 import io.github.pushkar.chorplay.ui.components.shared.ChorplayChoiceDialog
-import io.github.pushkar.chorplay.ui.components.shared.FlowNavRow
+import io.github.pushkar.chorplay.ui.components.shared.ChorNavRow
 import io.github.pushkar.chorplay.ui.theme.CustomTheme
 import io.github.pushkar.chorplay.ui.theme.ThemeCatalog
 import io.github.pushkar.chorplay.ui.theme.ThemeCatalogEntry
@@ -59,7 +59,7 @@ internal fun ThemeNameDialog(
                     modifier = Modifier.fillMaxWidth(),
                 )
                 if (palettes != null) {
-                    FlowNavRow(
+                    ChorNavRow(
                         title = stringResource(R.string.settings_custom_theme_start_from),
                         supportingText = stringResource(ThemeCatalog.nameRes(base)),
                         leadingIcon = Icons.Outlined.Palette,
@@ -78,7 +78,7 @@ internal fun ThemeNameDialog(
     if (pickingBase && palettes != null) {
         ChorplayChoiceDialog(
             title = stringResource(R.string.settings_custom_theme_start_from),
-            options = palettes.map { FlowChoice(it.mode, stringResource(it.nameRes), stringResource(it.descriptionRes)) },
+            options = palettes.map { ChorChoice(it.mode, stringResource(it.nameRes), stringResource(it.descriptionRes)) },
             selected = base,
             onSelect = { base = it },
             onDismiss = { pickingBase = false },

@@ -47,11 +47,6 @@ interface PlaylistDao {
     fun getAllPlaylistsWithCount(): Flow<List<PlaylistWithCount>>
 
     @Query(
-        "SELECT playlists.*, COUNT(playlist_video_cross_ref.videoId) as video_count FROM playlists LEFT JOIN playlist_video_cross_ref ON playlists.id = playlist_video_cross_ref.playlistId WHERE isMusic = 1 GROUP BY playlists.id ORDER BY createdAt DESC",
-    )
-    fun getMusicPlaylistsWithCount(): Flow<List<PlaylistWithCount>>
-
-    @Query(
         "SELECT playlists.*, COUNT(playlist_video_cross_ref.videoId) as video_count FROM playlists LEFT JOIN playlist_video_cross_ref ON playlists.id = playlist_video_cross_ref.playlistId WHERE isMusic = 0 AND playlists.id NOT IN ('watch_later', 'saved_shorts') GROUP BY playlists.id ORDER BY createdAt DESC",
     )
     fun getVideoPlaylistsWithCount(): Flow<List<PlaylistWithCount>>
@@ -66,33 +61,14 @@ interface PlaylistDao {
     )
     fun getSavedVideoPlaylistsWithCount(): Flow<List<PlaylistWithCount>>
 
-    @Query(
-        "SELECT playlists.*, COUNT(playlist_video_cross_ref.videoId) as video_count FROM playlists LEFT JOIN playlist_video_cross_ref ON playlists.id = playlist_video_cross_ref.playlistId WHERE isMusic = 1 AND isUserCreated = 1 GROUP BY playlists.id ORDER BY createdAt DESC",
-    )
-    fun getUserCreatedMusicPlaylistsWithCount(): Flow<List<PlaylistWithCount>>
-
-    @Query(
-        "SELECT playlists.*, COUNT(playlist_video_cross_ref.videoId) as video_count FROM playlists LEFT JOIN playlist_video_cross_ref ON playlists.id = playlist_video_cross_ref.playlistId WHERE isMusic = 1 AND isUserCreated = 0 GROUP BY playlists.id ORDER BY createdAt DESC",
-    )
-    fun getSavedMusicPlaylistsWithCount(): Flow<List<PlaylistWithCount>>
-
     @Query("SELECT * FROM playlists ORDER BY createdAt DESC")
     fun getAllPlaylists(): Flow<List<PlaylistEntity>>
-
-    @Query("SELECT * FROM playlists WHERE isMusic = 1 ORDER BY createdAt DESC")
-    fun getMusicPlaylists(): Flow<List<PlaylistEntity>>
 
     @Query("SELECT * FROM playlists WHERE isMusic = 0 ORDER BY createdAt DESC")
     fun getVideoPlaylists(): Flow<List<PlaylistEntity>>
 
     @Query("SELECT * FROM playlists WHERE id = :id")
     suspend fun getPlaylist(id: String): PlaylistEntity?
-
-    @Query("UPDATE playlists SET isMusic = :isMusic WHERE id = :id")
-    suspend fun setPlaylistIsMusic(
-        id: String,
-        isMusic: Boolean,
-    )
 
     @Query("SELECT * FROM playlists WHERE id = :id")
     fun observePlaylist(id: String): Flow<PlaylistEntity?>

@@ -18,9 +18,9 @@ import io.github.pushkar.chorplay.ui.components.settings.choice
 import io.github.pushkar.chorplay.ui.components.settings.nav
 import io.github.pushkar.chorplay.ui.components.settings.switch
 import io.github.pushkar.chorplay.ui.components.settings.toggleGroup
-import io.github.pushkar.chorplay.ui.components.shared.FlowNavRow
+import io.github.pushkar.chorplay.ui.components.shared.ChorNavRow
 import io.github.pushkar.chorplay.ui.components.shared.ChorplaySwitchRow
-import io.github.pushkar.chorplay.ui.components.shared.FlowToggleOption
+import io.github.pushkar.chorplay.ui.components.shared.ChorToggleOption
 import io.github.pushkar.chorplay.ui.screens.settings.index.DestinationIndex
 import io.github.pushkar.chorplay.ui.screens.settings.index.PlaybackGesturesIndex
 import io.github.pushkar.chorplay.ui.screens.settings.index.PlaybackIndex
@@ -39,7 +39,7 @@ internal fun SettingsListScope.playbackSections(
         switch(PlaybackIndex.keepPlayingAfterSwipe, viewModel.keepPlayingAfterSwipe, viewModel::setKeepPlayingAfterSwipe)
         if (state.backgroundRestricted) {
             row("playback.background_restricted") { shape ->
-                FlowNavRow(
+                ChorNavRow(
                     title = stringResource(R.string.playback_background_restricted_title),
                     supportingText = stringResource(R.string.playback_background_restricted_subtitle),
                     leadingIcon = Icons.Outlined.BatteryAlert,
@@ -72,7 +72,6 @@ internal fun SettingsListScope.playbackSections(
     }
     group(key = "playback.speed", header = R.string.settings_section_speed) {
         switch(PlaybackIndex.rememberSpeed, viewModel.rememberSpeed, viewModel::setRememberSpeed)
-        switch(PlaybackIndex.musicNormalSpeed, viewModel.musicNormalSpeed, viewModel::setMusicNormalSpeed)
         switch(PlaybackIndex.speedPerChannel, viewModel.speedPerChannel, viewModel::setSpeedPerChannel)
         switch(PlaybackIndex.customSpeeds, viewModel.customSpeeds, viewModel::setCustomSpeeds)
         if (state.customSpeeds) {
@@ -116,7 +115,7 @@ internal fun SettingsListScope.playbackSections(
         choice(PlaybackGesturesIndex.speedSwipe, onClick = { openDialog(PlaybackDialog.SPEED_SWIPE_SIDE) }) {
             speedSwipeSideLabel(state.speedSwipeSide)
         }
-        if (state.speedSwipeSide != SpeedSwipeSide.OFF || state.musicSideSwipes) {
+        if (state.speedSwipeSide != SpeedSwipeSide.OFF) {
             choice(PlaybackGesturesIndex.speedSwipeStep, onClick = { openDialog(PlaybackDialog.SPEED_SWIPE_STEP) }) {
                 val step by viewModel.speedSwipeStep.collectAsStateWithLifecycle()
                 speedSwipeStepLabel(step)
@@ -141,8 +140,6 @@ internal fun SettingsListScope.playbackSections(
     group(key = "playback.pip", header = R.string.settings_section_pip) {
         switch(PlaybackIndex.autoPip, viewModel.autoPip, viewModel::setAutoPip)
         switch(PlaybackIndex.continueWatchingMiniPlayer, viewModel.continueWatchingMiniPlayer, viewModel::setContinueWatchingMiniPlayer)
-        switch(PlaybackIndex.restoreMusicMiniPlayer, viewModel.restoreMusicMiniPlayer, viewModel::setRestoreMusicMiniPlayer)
-        switch(PlaybackIndex.openMusicPlayerOnPlay, viewModel.openMusicPlayerOnPlay, viewModel::setOpenMusicPlayerOnPlay)
     }
     group(key = "playback.languages", header = R.string.settings_section_language_captions) {
         choice(PlaybackIndex.audioLanguage, onClick = { openDialog(PlaybackDialog.AUDIO_LANGUAGE) }) {
@@ -157,23 +154,6 @@ internal fun SettingsListScope.playbackSections(
     }
     watchPageSection(viewModel, state)
     shortsPlayerSection(viewModel, state, openDialog)
-    group(key = "playback.music", header = R.string.settings_section_music) {
-        switch(PlaybackIndex.endlessRadio, viewModel.endlessRadio, viewModel::setEndlessRadio)
-        switch(PlaybackIndex.pauseMusicWhenMuted, viewModel.pauseMusicWhenMuted, viewModel::setPauseMusicWhenMuted)
-        switch(PlaybackIndex.musicResume, viewModel.musicResume, viewModel::setMusicResume)
-        switch(PlaybackIndex.resumeFromHeadphones, viewModel.resumeFromHeadphones, viewModel::setResumeFromHeadphones)
-        switch(PlaybackIndex.musicSideSwipes, viewModel.musicSideSwipes, viewModel::setMusicSideSwipes)
-        switch(PlaybackIndex.musicVideoSwitch, viewModel.musicVideoSwitch, viewModel::setMusicVideoSwitch)
-        choice(PlaybackIndex.lyricsProviders, onClick = { openDialog(PlaybackDialog.LYRICS) }) {
-            val providers by viewModel.lyricsProviders.collectAsStateWithLifecycle()
-            pluralStringResource(
-                R.plurals.lyrics_providers_enabled,
-                providers.size,
-                providers.count { it.enabled },
-                providers.size,
-            )
-        }
-    }
     group(key = "playback.advanced", header = R.string.settings_section_advanced) {
         nav(DestinationIndex.entry(SettingsDestination.BUFFER), onClick = { onNavigate(SettingsTarget(SettingsDestination.BUFFER)) })
     }
@@ -191,8 +171,8 @@ private fun SettingsListScope.watchPageSection(
             summary = stringResource(R.string.content_settings_related_card_style_subtitle),
             options =
                 listOf(
-                    FlowToggleOption(PlayerRelatedCardStyle.COMPACT, stringResource(R.string.content_settings_related_card_compact)),
-                    FlowToggleOption(PlayerRelatedCardStyle.FULL_WIDTH, stringResource(R.string.content_settings_related_card_full_width)),
+                    ChorToggleOption(PlayerRelatedCardStyle.COMPACT, stringResource(R.string.content_settings_related_card_compact)),
+                    ChorToggleOption(PlayerRelatedCardStyle.FULL_WIDTH, stringResource(R.string.content_settings_related_card_full_width)),
                 ),
             selected = selected,
             onSelected = viewModel::setRelatedCardStyle,
@@ -206,10 +186,10 @@ private fun SettingsListScope.watchPageSection(
             summary = stringResource(R.string.content_settings_video_title_lines_subtitle),
             options =
                 listOf(
-                    FlowToggleOption(1, stringResource(R.string.content_settings_title_lines_1)),
-                    FlowToggleOption(2, stringResource(R.string.content_settings_title_lines_2)),
-                    FlowToggleOption(3, stringResource(R.string.content_settings_title_lines_3)),
-                    FlowToggleOption(UNLIMITED_TITLE_LINES, stringResource(R.string.content_settings_title_lines_unlimited)),
+                    ChorToggleOption(1, stringResource(R.string.content_settings_title_lines_1)),
+                    ChorToggleOption(2, stringResource(R.string.content_settings_title_lines_2)),
+                    ChorToggleOption(3, stringResource(R.string.content_settings_title_lines_3)),
+                    ChorToggleOption(UNLIMITED_TITLE_LINES, stringResource(R.string.content_settings_title_lines_unlimited)),
                 ),
             selected = selected,
             onSelected = viewModel::setTitleLines,

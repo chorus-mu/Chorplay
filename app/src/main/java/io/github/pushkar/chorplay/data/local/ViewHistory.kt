@@ -139,41 +139,6 @@ class ViewHistory private constructor(
 
     suspend fun getSavedDuration(videoId: String): Long = dao.getDuration(videoId) ?: 0L
 
-    /** Records that a song started without moving the place a long track was left at. */
-    suspend fun touchMusicEntry(
-        videoId: String,
-        duration: Long,
-        title: String,
-        thumbnailUrl: String,
-        channelName: String,
-        channelId: String,
-        isLocal: Boolean = LocalMediaIds.isLocal(videoId),
-    ) = savePlaybackPosition(
-        videoId = videoId,
-        position = dao.getPosition(videoId) ?: 0L,
-        duration = duration,
-        title = title,
-        thumbnailUrl = thumbnailUrl,
-        channelName = channelName,
-        channelId = channelId,
-        isMusic = true,
-        isLocal = isLocal,
-    )
-
-    /** Where a long track stopped. A row history already holds keeps its title, artist and time. */
-    suspend fun saveMusicPosition(
-        videoId: String,
-        position: Long,
-        duration: Long,
-        title: String,
-        thumbnailUrl: String,
-        channelName: String,
-    ) {
-        if (PlayerPreferences(context).isWatchHistorySavingBlocked()) return
-        if (dao.updateProgress(videoId, position, duration) > 0) return
-        savePlaybackPosition(videoId, position, duration, title, thumbnailUrl, channelName, isMusic = true)
-    }
-
     /**
      * Create-or-touch a history entry **without** overwriting an already-saved
      * playback position.  Call this on video open so the video appears in history
@@ -275,8 +240,6 @@ class ViewHistory private constructor(
     /** Video (non-music) history, newest first. */
     fun getVideoHistoryFlow(): Flow<List<VideoHistoryEntry>> = observeHistory(isMusic = 0, isLocal = 0)
 
-    /** Music history, newest first. */
-    fun getMusicHistoryFlow(): Flow<List<VideoHistoryEntry>> = observeHistory(isMusic = 1, isLocal = 0)
 
     /** Plays of files on the device, newest first: their progress and when they were last played. */
     fun getLocalHistoryFlow(): Flow<List<VideoHistoryEntry>> = observeHistory(isLocal = 1)

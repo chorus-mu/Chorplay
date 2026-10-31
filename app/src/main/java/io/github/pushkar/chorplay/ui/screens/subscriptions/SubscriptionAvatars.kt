@@ -14,7 +14,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowForward
-import androidx.compose.material.icons.filled.MusicNote
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -35,7 +34,6 @@ import io.github.pushkar.chorplay.R
 import io.github.pushkar.chorplay.data.model.Channel
 import io.github.pushkar.chorplay.ui.components.shared.ChannelAvatarImage
 import io.github.pushkar.chorplay.ui.components.shared.ChannelGroupBadge
-import io.github.pushkar.chorplay.ui.components.shared.chorplayArtistShape
 import io.github.pushkar.chorplay.ui.components.shared.focusLift
 import io.github.pushkar.chorplay.ui.components.shared.titleMarquee
 
@@ -46,12 +44,10 @@ private val BadgeIconSize = 12.dp
 private val BadgePadding = 4.dp
 private val LabelSpacing = 4.dp
 
-/**
- * Music subscriptions wear the artist shape used across the music surfaces; video channels stay
- * circular, so the two kinds stay distinguishable before the label is read.
  */
 @Composable
-internal fun subscriptionAvatarShape(isMusic: Boolean): Shape = if (isMusic) chorplayArtistShape() else CircleShape
+@Composable
+internal fun subscriptionAvatarShape(): Shape = CircleShape
 
 @Composable
 internal fun ChannelAvatarItem(
@@ -82,20 +78,10 @@ internal fun ChannelAvatarItem(
                 modifier =
                     Modifier
                         .size(AvatarSize)
-                        .clip(subscriptionAvatarShape(channel.isMusic))
+                        .clip(CircleShape)
                         .background(MaterialTheme.colorScheme.surfaceVariant),
             )
             ChannelGroupBadge(channelId = channel.id)
-            if (channel.isMusic) {
-                ChannelTypeBadge(
-                    icon = Icons.Default.MusicNote,
-                    contentDescription = stringResource(R.string.subscriptions_music_badge_cd),
-                    modifier =
-                        Modifier
-                            .align(Alignment.BottomEnd)
-                            .offset(x = BadgeOffset, y = BadgeOffset),
-                )
-            }
         }
         Spacer(modifier = Modifier.height(LabelSpacing))
         Text(

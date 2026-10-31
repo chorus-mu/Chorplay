@@ -31,7 +31,7 @@ import io.github.pushkar.chorplay.ui.components.settings.SettingsPage
 import io.github.pushkar.chorplay.ui.components.settings.choice
 import io.github.pushkar.chorplay.ui.components.settings.notice
 import io.github.pushkar.chorplay.ui.components.settings.switch
-import io.github.pushkar.chorplay.ui.components.shared.FlowChoice
+import io.github.pushkar.chorplay.ui.components.shared.ChorChoice
 import io.github.pushkar.chorplay.ui.components.shared.ChorplayChoiceDialog
 import io.github.pushkar.chorplay.ui.components.stats.spentTimeLabel
 import io.github.pushkar.chorplay.ui.screens.settings.index.WellbeingIndex
@@ -179,7 +179,7 @@ internal fun WellbeingScreen(
             ChorplayChoiceDialog(
                 title = stringResource(R.string.frequency_dialog_title),
                 description = stringResource(R.string.frequency_description),
-                options = BreakFrequencies.map { FlowChoice(it, pluralStringResource(R.plurals.every_minutes_template, it, it)) },
+                options = BreakFrequencies.map { ChorChoice(it, pluralStringResource(R.plurals.every_minutes_template, it, it)) },
                 selected = breakMinutes,
                 onSelect = viewModel::setBreakMinutes,
                 onDismiss = { dialog = null },

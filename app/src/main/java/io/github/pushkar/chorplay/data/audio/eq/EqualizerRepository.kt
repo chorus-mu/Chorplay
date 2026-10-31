@@ -27,7 +27,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 /**
- * The one equalizer state for music, video and Shorts. The UI changes it through [update]; every
+ * The one equalizer state for audio, video and Shorts. The UI changes it through [update]; every
  * player collects [processingSpec] in process and hands it to its own processor.
  */
 @Singleton

@@ -15,7 +15,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.ManageSearch
-import androidx.compose.material.icons.outlined.AudioFile
 import androidx.compose.material.icons.outlined.Folder
 import androidx.compose.material.icons.outlined.FolderSpecial
 import androidx.compose.material.icons.outlined.PermMedia
@@ -39,7 +38,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
@@ -50,10 +48,8 @@ import io.github.pushkar.chorplay.R
 import io.github.pushkar.chorplay.data.local.AutoDownloadMode
 import io.github.pushkar.chorplay.data.local.DownloadDialogStyle
 import io.github.pushkar.chorplay.data.local.MAX_CONCURRENT_DOWNLOADS
-import io.github.pushkar.chorplay.data.local.MusicAudioQuality
 import io.github.pushkar.chorplay.data.local.VideoCodec
 import io.github.pushkar.chorplay.data.repository.MediaCacheType
-import io.github.pushkar.chorplay.data.video.downloader.work.RetagStatus
 import io.github.pushkar.chorplay.data.video.storage.DownloadFiles
 import io.github.pushkar.chorplay.data.video.storage.DownloadLocation
 import io.github.pushkar.chorplay.data.video.storage.StorageAccess
@@ -66,23 +62,20 @@ import io.github.pushkar.chorplay.ui.components.settings.nav
 import io.github.pushkar.chorplay.ui.components.settings.slider
 import io.github.pushkar.chorplay.ui.components.settings.switch
 import io.github.pushkar.chorplay.ui.components.settings.toggleGroup
-import io.github.pushkar.chorplay.ui.components.shared.FlowChoice
 import io.github.pushkar.chorplay.ui.components.shared.ChorplayChoiceDialog
-import io.github.pushkar.chorplay.ui.components.shared.FlowToggleOption
+import io.github.pushkar.chorplay.ui.components.shared.ChorChoice
+import io.github.pushkar.chorplay.ui.components.shared.ChorToggleOption
 import io.github.pushkar.chorplay.ui.screens.settings.index.DestinationIndex
 import io.github.pushkar.chorplay.ui.screens.settings.index.DownloadsIndex
-import io.github.pushkar.chorplay.ui.screens.settings.quality.MusicQualities
 import io.github.pushkar.chorplay.ui.screens.settings.quality.VideoQualities
 import io.github.pushkar.chorplay.ui.screens.settings.quality.codecLabel
-import io.github.pushkar.chorplay.ui.screens.settings.quality.musicQualityLabel
 import io.github.pushkar.chorplay.ui.screens.settings.quality.videoQualityLabel
 
-private enum class DownloadPicker { QUALITY, CODEC, MUSIC_QUALITY, AUTO_DOWNLOAD }
+private enum class DownloadPicker { QUALITY, CODEC, AUTO_DOWNLOAD }
 
 private const val MAX_THREADS = 8
 private val UsageSpacing = 8.dp
 
-/** Where downloads are saved, how they are made, and the storage access that lists them. */
 @Composable
 internal fun DownloadSettingsScreen(
     onBack: (() -> Unit)?,
@@ -94,7 +87,6 @@ internal fun DownloadSettingsScreen(
     val context = LocalContext.current
     val locations by viewModel.locations.collectAsStateWithLifecycle()
     val quickQuality by viewModel.quickQuality.collectAsStateWithLifecycle()
-    val musicQuality by viewModel.musicQuality.collectAsStateWithLifecycle()
     val retagStatus by viewModel.retagStatus.collectAsStateWithLifecycle()
     val retagValue = retagStatus?.let { retagLabel(it) }
     val earlierDownloads by viewModel.earlierDownloads.collectAsStateWithLifecycle()
@@ -132,17 +124,24 @@ internal fun DownloadSettingsScreen(
             }
         }
     val mediaPermission =
-        rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission()) { access = StorageAccess.read(context) }
-    val legacyWrite = rememberLauncherForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { viewModel.refresh() }
+        rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission()) {
+            access = StorageAccess.read(context)
+        }
+    val legacyWrite =
+        rememberLauncherForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { viewModel.refresh() }
     LaunchedEffect(Unit) {
         if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.Q && !context.granted(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-            legacyWrite.launch(arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE))
+            legacyWrite.launch(
+                arrayOf(
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                    Manifest.permission.READ_EXTERNAL_STORAGE,
+                ),
+            )
         }
     }
 
     val storage = locations?.storage
     val videoPath = locations?.video?.label().orEmpty()
-    val musicPath = locations?.music?.label().orEmpty()
     val usage =
         storage?.let {
             stringResource(
@@ -158,8 +157,8 @@ internal fun DownloadSettingsScreen(
         stringResource(if (access.allFiles) R.string.files_access_granted_subtitle else R.string.files_access_denied_subtitle)
     val menuStyles =
         listOf(
-            FlowToggleOption(DownloadDialogStyle.FULL, stringResource(R.string.download_menu_style_classic)),
-            FlowToggleOption(DownloadDialogStyle.COMPACT, stringResource(R.string.download_menu_style_compact)),
+            ChorToggleOption(DownloadDialogStyle.FULL, stringResource(R.string.download_menu_style_classic)),
+            ChorToggleOption(DownloadDialogStyle.COMPACT, stringResource(R.string.download_menu_style_compact)),
         )
 
     SettingsPage(
@@ -168,12 +167,15 @@ internal fun DownloadSettingsScreen(
         highlight = highlight,
     ) {
         group(key = "downloads.storage", header = R.string.storage_header) {
-            nav(DownloadsIndex.videoLocation, value = videoPath, icon = Icons.Outlined.VideoFile, showChevron = false, onClick = {
-                locationTarget = DownloadTarget.VIDEO
-            })
-            nav(DownloadsIndex.musicLocation, value = musicPath, icon = Icons.Outlined.AudioFile, showChevron = false, onClick = {
-                locationTarget = DownloadTarget.MUSIC
-            })
+            nav(
+                DownloadsIndex.videoLocation,
+                value = videoPath,
+                icon = Icons.Outlined.VideoFile,
+                showChevron = false,
+                onClick = {
+                    locationTarget = DownloadTarget.VIDEO
+                },
+            )
             row(DownloadsIndex.usage.key) { shape -> StorageUsageRow(usage, storage?.usedFraction, shape) }
         }
         downloadCacheSection(cacheViewModel, onEditLimit = { cacheLimit = it })
@@ -182,9 +184,6 @@ internal fun DownloadSettingsScreen(
                 stringResource(videoQualityLabel(quickQuality))
             }
             choice(DownloadsIndex.codec, onClick = { picker = DownloadPicker.CODEC }) { codecLabel(codec) }
-            choice(DownloadsIndex.musicQuality, onClick = { picker = DownloadPicker.MUSIC_QUALITY }) {
-                stringResource(musicQualityLabel(musicQuality))
-            }
             toggleGroup(DownloadsIndex.menuStyle, menuStyles, menuStyle, viewModel::setMenuStyle)
             switch(DownloadsIndex.askEveryTime, viewModel.askEveryTime, viewModel::setAskEveryTime)
             switch(DownloadsIndex.autoDownloadLikes, viewModel.autoDownloadLikes, viewModel::setAutoDownloadLikes)
@@ -211,7 +210,11 @@ internal fun DownloadSettingsScreen(
                 onClick = viewModel::findEarlierDownloads,
             )
         }
-        group(key = "downloads.performance", header = R.string.performance_header, footer = R.string.performance_optimization_note) {
+        group(
+            key = "downloads.performance",
+            header = R.string.performance_header,
+            footer = R.string.performance_optimization_note,
+        ) {
             slider(
                 DownloadsIndex.concurrentDownloads,
                 value = concurrentDownloads.toFloat(),
@@ -269,7 +272,6 @@ internal fun DownloadSettingsScreen(
     val dialogLocation =
         when (dialogTarget) {
             DownloadTarget.VIDEO -> locations?.video
-            DownloadTarget.MUSIC -> locations?.music
             null -> null
         }
     cacheLimit?.let { type -> DownloadCacheLimitDialog(type, cacheViewModel, onDismiss = { cacheLimit = null }) }
@@ -290,7 +292,7 @@ internal fun DownloadSettingsScreen(
         DownloadPicker.QUALITY -> {
             ChorplayChoiceDialog(
                 title = stringResource(R.string.settings_quick_download_quality),
-                options = VideoQualities.drop(1).map { FlowChoice(it, stringResource(videoQualityLabel(it))) },
+                options = VideoQualities.drop(1).map { ChorChoice(it, stringResource(videoQualityLabel(it))) },
                 selected = quickQuality,
                 onSelect = viewModel::setQuickQuality,
                 onDismiss = { picker = null },
@@ -302,7 +304,7 @@ internal fun DownloadSettingsScreen(
                 title = stringResource(R.string.default_download_codec_label),
                 options =
                     VideoCodec.entries.map { codecOption ->
-                        FlowChoice(
+                        ChorChoice(
                             codecOption,
                             codecLabel(codecOption),
                             if (codecOption == VideoCodec.AUTO) stringResource(R.string.default_download_codec_auto_subtitle) else null,
@@ -314,26 +316,10 @@ internal fun DownloadSettingsScreen(
             )
         }
 
-        DownloadPicker.MUSIC_QUALITY -> {
-            ChorplayChoiceDialog(
-                title = stringResource(R.string.settings_music_download_quality),
-                options =
-                    MusicQualities.filter { it != MusicAudioQuality.AUTO }.map {
-                        FlowChoice(
-                            it,
-                            stringResource(musicQualityLabel(it)),
-                        )
-                    },
-                selected = musicQuality,
-                onSelect = viewModel::setMusicQuality,
-                onDismiss = { picker = null },
-            )
-        }
-
         DownloadPicker.AUTO_DOWNLOAD -> {
             ChorplayChoiceDialog(
                 title = stringResource(R.string.settings_auto_download_opened_title),
-                options = AutoDownloadMode.entries.map { FlowChoice(it, stringResource(autoDownloadLabel(it))) },
+                options = AutoDownloadMode.entries.map { ChorChoice(it, stringResource(autoDownloadLabel(it))) },
                 selected = autoDownloadOpened,
                 onSelect = viewModel::setAutoDownloadOpened,
                 onDismiss = { picker = null },
@@ -369,10 +355,12 @@ private fun StorageUsageRow(
     }
 }
 
-private fun Context.granted(permission: String) = ContextCompat.checkSelfPermission(this, permission) == PackageManager.PERMISSION_GRANTED
+private fun Context.granted(permission: String) =
+    ContextCompat.checkSelfPermission(this, permission) == PackageManager.PERMISSION_GRANTED
 
 private fun Context.openAllFilesAccess() {
-    val appPage = Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION, Uri.fromParts("package", packageName, null))
+    val appPage =
+        Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION, Uri.fromParts("package", packageName, null))
     runCatching { startActivity(appPage) }
         .onFailure { runCatching { startActivity(Intent(Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION)) } }
 }

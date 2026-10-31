@@ -228,13 +228,13 @@ class HomeViewModel
                         videos = HomeFeedCache.videos,
                         shorts = HomeFeedCache.shorts,
                         isLoading = false,
-                        isFlowFeed = true,
+                        isChorFeed = true,
                         lastRefreshTime = HomeFeedCache.timestamp,
                     )
                 }
             } else {
                 hydratePersistentHomeFeed()
-                loadFlowFeed(forceRefresh = true)
+                loadChorFeed(forceRefresh = true)
             }
         }
 
@@ -378,7 +378,7 @@ class HomeViewModel
             )
         }
 
-        private fun HomeUiState.isReadyForPrefetch(): Boolean = videos.isNotEmpty() && !isLoading && isFlowFeed && hasMorePages
+        private fun HomeUiState.isReadyForPrefetch(): Boolean = videos.isNotEmpty() && !isLoading && isChorFeed && hasMorePages
 
         private fun startHomePrefetch(request: FeedPrefetchRequest?) {
             request ?: return
@@ -538,7 +538,7 @@ class HomeViewModel
                     HomeFeedCache.update(videos, state.shorts)
                     state.copy(
                         videos = videos,
-                        isFlowFeed = true,
+                        isChorFeed = true,
                         error = null,
                         lastRefreshTime = System.currentTimeMillis(),
                     )
@@ -558,7 +558,7 @@ class HomeViewModel
             }
         }
 
-        fun loadFlowFeed(forceRefresh: Boolean = false) {
+        fun loadChorFeed(forceRefresh: Boolean = false) {
             if (_uiState.value.isLoading && !forceRefresh) return
 
             wave2Job?.cancel()
@@ -642,7 +642,7 @@ class HomeViewModel
                                     }.associate { it.channelId to it.channelThumbnail }
                             }.getOrElse { emptyMap() }
 
-                        // Extract shorts from all sources for the shelf, ranked by FlowNeuro
+                        // Extract shorts from all sources for the shelf, ranked by ChorNeuro
                         val now = System.currentTimeMillis()
                         val brain = ChorplayNeuroEngine.getBrainSnapshot()
                         val taste = feedTasteProfile(brain, ChorplayNeuroEngine.getPersona(brain))
@@ -802,7 +802,7 @@ class HomeViewModel
                                     isRefreshing = false,
                                     hasMorePages = true,
                                     loadMoreFailed = false,
-                                    isFlowFeed = true,
+                                    isChorFeed = true,
                                     lastRefreshTime = now,
                                 )
                             if (holdBack) {
@@ -1254,7 +1254,7 @@ class HomeViewModel
                 val rawVideos = searches.flatMap { it.second }
                 if (!homePrefetchQueue.isCurrent(generation)) return PrefetchAttempt(LoadMoreOutcome.EXHAUSTED)
 
-                // Extract shorts for shelf — rank through FlowNeuro
+                // Extract shorts for shelf — rank through ChorNeuro
                 val moreShorts =
                     rawVideos
                         .extractShorts()
@@ -1508,7 +1508,7 @@ class HomeViewModel
             cachedOnScreenIds = null
             var keptFeed = false
             _uiState.update {
-                keptFeed = it.isFlowFeed && it.videos.isNotEmpty()
+                keptFeed = it.isChorFeed && it.videos.isNotEmpty()
                 if (keptFeed) {
                     it.copy(isLoading = false, isRefreshing = false)
                 } else {
@@ -1516,7 +1516,7 @@ class HomeViewModel
                         isLoading = false,
                         isRefreshing = false,
                         hasMorePages = false,
-                        isFlowFeed = false,
+                        isChorFeed = false,
                         error = error,
                     )
                 }
@@ -1578,7 +1578,7 @@ class HomeViewModel
             wave2Job?.cancel()
             HomeFeedCache.clear()
             _uiState.update { it.copy(isRefreshing = true) }
-            loadFlowFeed(forceRefresh = true)
+            loadChorFeed(forceRefresh = true)
         }
 
         /**
@@ -1752,7 +1752,7 @@ class HomeViewModel
             _uiState.update { it.copy(pendingFeed = null) }
             resetHomePrefetch()
             wave2Job?.cancel()
-            loadFlowFeed(forceRefresh = true)
+            loadChorFeed(forceRefresh = true)
         }
 
         private fun cacheCandidates(

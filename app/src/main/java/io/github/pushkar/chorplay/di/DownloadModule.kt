@@ -44,15 +44,4 @@ object DownloadModule {
             context,
             maxCacheSizeBytes = PlayerCacheManager.configuredLimits(context).videoBytes,
         )
-
-    @Provides
-    @Singleton
-    @MusicCache
-    fun provideMusicCache(
-        @ApplicationContext context: Context,
-    ): SimpleCache =
-        SharedPlayerCacheProvider.getOrCreateMusic(
-            context,
-            maxCacheSizeBytes = PlayerCacheManager.configuredLimits(context).musicBytes,
-        )
 }

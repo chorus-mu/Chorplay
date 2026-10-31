@@ -10,22 +10,17 @@ import javax.inject.Singleton
  */
 @Singleton
 class PrivacyGate internal constructor(
-    private val deepFlowActive: suspend () -> Boolean,
+    private val deepChorActive: suspend () -> Boolean,
     private val watchHistoryPaused: suspend () -> Boolean,
-    private val scrobbleDuringDeepChorplay: suspend () -> Boolean,
 ) {
     @Inject
     constructor(preferences: PlayerPreferences) : this(
-        deepFlowActive = preferences::isDeepChorplayCurrentlyActive,
+        deepChorActive = preferences::isDeepChorplayCurrentlyActive,
         watchHistoryPaused = { preferences.watchHistoryPaused.first() },
-        scrobbleDuringDeepChorplay = { preferences.deepFlowScrobble.first() },
     )
 
     /** Deep Chorplay is on and its timer has not run out. */
-    suspend fun isDeepChorplayActive(): Boolean = deepFlowActive()
+    suspend fun isDeepChorplayActive(): Boolean = deepChorActive()
 
     suspend fun isWatchHistoryPaused(): Boolean = watchHistoryPaused()
-
-    /** Listens go to scrobbling services unless Deep Chorplay is on and the user kept them private. */
-    suspend fun allowsScrobbling(): Boolean = !deepFlowActive() || scrobbleDuringDeepChorplay()
 }

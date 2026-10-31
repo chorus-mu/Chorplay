@@ -56,7 +56,7 @@ private class MediaStoreSource(
 ) : LocalMediaSource {
     private val store = LocalMediaStore(context.contentResolver)
 
-    override suspend fun read(): LocalLibrary = embeddedTags.withKnown(LocalLibrary(videos = store.videos(), music = store.music()))
+    override suspend fun read(): LocalLibrary = embeddedTags.withKnown(LocalLibrary(videos = store.videos()))
 
     override suspend fun complete(read: LocalLibrary): LocalLibrary = embeddedTags.withAll(read)
 

@@ -82,7 +82,7 @@ class FileLayoutTest {
 
             server.requests.clear()
             storeB.download(SyncBytes.toHex(g.b.did), 0, objects = true)
-            assertTrue("an unchanged Nextcloud folder isn't read again", server.requests.none { it.startsWith("GET flow/dev/") })
+            assertTrue("an unchanged Nextcloud folder isn't read again", server.requests.none { it.startsWith("GET chorplay/dev/") })
         }
 
     @Test
@@ -144,7 +144,7 @@ class FileLayoutTest {
                 }
             assertEquals(SyncBytes.toHex(newcomer.did), did)
             assertTrue(did in FileLayout(server.store(), did).rosterAfter(-1).flatMap { it.add.orEmpty() }.map { it.did })
-            assertTrue("the slot is gone once pairing ends", server.files.keys.none { it.startsWith("flow/pair/") })
+            assertTrue("the slot is gone once pairing ends", server.files.keys.none { it.startsWith("chorplay/pair/") })
         }
 
     @Test

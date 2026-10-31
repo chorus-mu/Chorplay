@@ -39,9 +39,9 @@ import io.github.pushkar.chorplay.data.shorts.ShortVideoQuality
 import io.github.pushkar.chorplay.player.shorts.ShortsPlayerPool
 import io.github.pushkar.chorplay.player.stream.VideoCodecUtils
 import io.github.pushkar.chorplay.ui.components.shared.ChorplayBottomSheet
-import io.github.pushkar.chorplay.ui.components.shared.FlowNavRow
-import io.github.pushkar.chorplay.ui.components.shared.FlowRowGroup
-import io.github.pushkar.chorplay.ui.components.shared.FlowSectionHeader
+import io.github.pushkar.chorplay.ui.components.shared.ChorNavRow
+import io.github.pushkar.chorplay.ui.components.shared.ChorRowGroup
+import io.github.pushkar.chorplay.ui.components.shared.ChorSectionHeader
 import io.github.pushkar.chorplay.ui.components.shared.ChorplaySheetHeader
 import io.github.pushkar.chorplay.ui.components.shared.ChorplaySwitchRow
 import io.github.pushkar.chorplay.ui.components.shared.MediaAudioTrackRow
@@ -49,7 +49,7 @@ import io.github.pushkar.chorplay.ui.components.shared.MediaPlaybackSpeedPicker
 import io.github.pushkar.chorplay.ui.components.shared.audioTrackBitrateLabel
 import io.github.pushkar.chorplay.ui.components.shared.audioTrackFallbackLabel
 import io.github.pushkar.chorplay.ui.components.shared.defaultSheetExpandedHeight
-import io.github.pushkar.chorplay.ui.components.shared.flowRowGroupShape
+import io.github.pushkar.chorplay.ui.components.shared.chorRowGroupShape
 import io.github.pushkar.chorplay.ui.components.shared.playbackSpeedLabel
 import io.github.pushkar.chorplay.ui.components.shared.rememberChorplayBottomSheetState
 import io.github.pushkar.chorplay.ui.components.videoplayer.settings.PlayerSettingsQualityPage
@@ -243,73 +243,73 @@ private fun ShortsSettingsMainPage(
     onAudio: () -> Unit,
     onAmbientModeToggle: (Boolean) -> Unit,
 ) {
-    FlowSectionHeader(stringResource(R.string.shorts_settings_this_short))
-    FlowRowGroup {
-        FlowNavRow(
+    ChorSectionHeader(stringResource(R.string.shorts_settings_this_short))
+    ChorRowGroup {
+        ChorNavRow(
             leadingIcon = Icons.Rounded.ThumbUp,
             title = stringResource(R.string.action_want_more),
-            shape = flowRowGroupShape(0, THIS_SHORT_ROWS),
+            shape = chorRowGroupShape(0, THIS_SHORT_ROWS),
             onClick = onWantMore,
         )
-        FlowNavRow(
+        ChorNavRow(
             leadingIcon = Icons.Rounded.NotInterested,
             title = stringResource(R.string.action_not_interested),
-            shape = flowRowGroupShape(1, THIS_SHORT_ROWS),
+            shape = chorRowGroupShape(1, THIS_SHORT_ROWS),
             onClick = onNotInterested,
         )
-        FlowNavRow(
+        ChorNavRow(
             leadingIcon = Icons.Rounded.Block,
             title = stringResource(R.string.dont_show_channel),
             supportingText = stringResource(R.string.dont_show_channel_desc),
-            shape = flowRowGroupShape(2, THIS_SHORT_ROWS),
+            shape = chorRowGroupShape(2, THIS_SHORT_ROWS),
             onClick = onBlockChannel,
         )
-        FlowNavRow(
+        ChorNavRow(
             leadingIcon = Icons.Filled.Download,
             title = stringResource(R.string.download_video),
-            shape = flowRowGroupShape(3, THIS_SHORT_ROWS),
+            shape = chorRowGroupShape(3, THIS_SHORT_ROWS),
             onClick = onDownload,
         )
     }
 
-    FlowSectionHeader(stringResource(R.string.video))
-    FlowRowGroup {
-        FlowNavRow(
+    ChorSectionHeader(stringResource(R.string.video))
+    ChorRowGroup {
+        ChorNavRow(
             leadingIcon = Icons.Filled.HighQuality,
             title = stringResource(R.string.shorts_quality),
-            shape = flowRowGroupShape(0, 1),
+            shape = chorRowGroupShape(0, 1),
             onClick = onQuality,
         )
     }
 
-    FlowSectionHeader(stringResource(R.string.playback_header))
-    FlowRowGroup {
-        FlowNavRow(
+    ChorSectionHeader(stringResource(R.string.playback_header))
+    ChorRowGroup {
+        ChorNavRow(
             leadingIcon = Icons.Filled.Speed,
             title = stringResource(R.string.shorts_playback_speed),
             trailingText = playbackSpeedLabel(settings.playbackSpeed),
-            shape = flowRowGroupShape(0, 1),
+            shape = chorRowGroupShape(0, 1),
             onClick = onSpeed,
         )
     }
 
-    FlowSectionHeader(stringResource(R.string.audio_settings_title))
-    FlowRowGroup {
-        FlowNavRow(
+    ChorSectionHeader(stringResource(R.string.audio_settings_title))
+    ChorRowGroup {
+        ChorNavRow(
             leadingIcon = Icons.Filled.AudioFile,
             title = stringResource(R.string.shorts_audio_track),
-            shape = flowRowGroupShape(0, 1),
+            shape = chorRowGroupShape(0, 1),
             onClick = onAudio,
         )
     }
 
-    FlowSectionHeader(stringResource(R.string.player_settings_display))
-    FlowRowGroup {
+    ChorSectionHeader(stringResource(R.string.player_settings_display))
+    ChorRowGroup {
         ChorplaySwitchRow(
             leadingIcon = ImageVector.vectorResource(R.drawable.ic_ambient_mode),
             title = stringResource(R.string.player_settings_ambient_mode),
             checked = settings.ambientModeEnabled,
-            shape = flowRowGroupShape(0, 1),
+            shape = chorRowGroupShape(0, 1),
             onCheckedChange = onAmbientModeToggle,
         )
     }
@@ -356,13 +356,13 @@ private fun ShortsAudioPage(
         )
         return
     }
-    FlowRowGroup {
+    ChorRowGroup {
         tracks.forEachIndexed { index, track ->
             MediaAudioTrackRow(
                 label = track.label.ifBlank { audioTrackFallbackLabel(index) },
                 supportingText = audioTrackBitrateLabel(track.bitrate),
                 selected = index == state.selectedAudioIndex,
-                shape = flowRowGroupShape(index, tracks.size),
+                shape = chorRowGroupShape(index, tracks.size),
                 onClick = { onTrackSelected(index) },
             )
         }

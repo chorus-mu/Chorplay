@@ -21,7 +21,7 @@ internal object AboutIndex {
         destination = page,
     )
 
-    val changelog = entry("changelog", R.string.about_changelog, R.string.section_app, R.string.whats_new_in_flow)
+    val changelog = entry("changelog", R.string.about_changelog, R.string.section_app, R.string.whats_new_in_chorplay)
     val website = entry("website", R.string.about_website, R.string.section_contact, R.string.about_website_address)
     val github = entry("github", R.string.github_label, R.string.section_contact, R.string.github_subtitle)
     val reddit = entry("reddit", R.string.about_reddit, R.string.section_contact, R.string.about_reddit_subtitle)

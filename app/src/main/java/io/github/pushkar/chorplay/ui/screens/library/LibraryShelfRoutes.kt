@@ -10,8 +10,6 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import io.github.pushkar.chorplay.R
 import io.github.pushkar.chorplay.data.model.PlaylistInfo
 import io.github.pushkar.chorplay.data.model.Video
-import io.github.pushkar.chorplay.data.music.DownloadedTrack
-import io.github.pushkar.chorplay.data.music.model.MusicTrack
 import io.github.pushkar.chorplay.data.video.DownloadedVideo
 import io.github.pushkar.chorplay.ui.components.PlaylistCard
 import io.github.pushkar.chorplay.ui.components.PlaylistCardLayout
@@ -32,9 +30,7 @@ internal fun LibraryMediaShelfRoute(
     itemsFlow: StateFlow<List<LibraryMediaItem>?>,
     onTitleClick: () -> Unit,
     onVideoClick: (Video) -> Unit,
-    onMusicClick: (MusicTrack, List<MusicTrack>, String) -> Unit,
     onDownloadedVideoClick: (List<DownloadedVideo>, Int) -> Unit,
-    onDownloadedMusicClick: (List<DownloadedTrack>, Int) -> Unit,
     emptyMessage: String? = null,
 ) {
     val items by itemsFlow.collectAsStateWithLifecycle()
@@ -60,9 +56,7 @@ internal fun LibraryMediaShelfRoute(
                 sourceName = title,
                 onTitleClick = onTitleClick,
                 onVideoClick = onVideoClick,
-                onMusicClick = onMusicClick,
                 onDownloadedVideoClick = onDownloadedVideoClick,
-                onDownloadedMusicClick = onDownloadedMusicClick,
             )
         }
     }
@@ -72,20 +66,15 @@ internal fun LibraryMediaShelfRoute(
 internal fun LibraryPlaylistsShelf(
     section: LibrarySection,
     videoPlaylistsFlow: StateFlow<List<PlaylistInfo>?>?,
-    musicPlaylistsFlow: StateFlow<List<PlaylistInfo>?>?,
     onTitleClick: () -> Unit,
     onVideoPlaylistClick: (String) -> Unit,
-    onMusicPlaylistClick: (String) -> Unit,
 ) {
     val videoPlaylists = videoPlaylistsFlow?.collectAsStateWithLifecycle()?.value
-    val musicPlaylists = musicPlaylistsFlow?.collectAsStateWithLifecycle()?.value
     val title = section.title
 
-    if (videoPlaylists == null && musicPlaylists == null) {
         LibraryShelfPlaceholder(title = title, icon = section.icon)
         return
     }
-    if (videoPlaylists.isNullOrEmpty() && musicPlaylists.isNullOrEmpty()) return
 
     LibraryShelf(
         title = title,
@@ -105,15 +94,11 @@ internal fun LibraryPlaylistsShelf(
             )
         }
         items(
-            items = musicPlaylists.orEmpty(),
-            key = { "music-${it.id}" },
-            contentType = { "music-playlist" },
         ) { playlist ->
             LibraryAlbumCard(
                 title = playlist.name,
                 subtitle = stringResource(R.string.tracks_count_template, playlist.videoCount),
                 thumbnailUrl = playlist.thumbnailUrl,
-                onClick = { onMusicPlaylistClick(playlist.id) },
                 artworkSize = cardWidth * 9f / 16f,
             )
         }

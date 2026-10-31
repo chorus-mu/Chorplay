@@ -51,7 +51,7 @@ class LanGroupTest {
     private fun TestScope.device(): Device = emptyDb().let { Device(newMember(), it, heldStore(it)) }
 
     private suspend fun loopback(): Listening {
-        val server = WsServer("/flow-sync/2/pair")
+        val server = WsServer("/chor-sync/2/pair")
         return Listening(server, listOf(LanEndpoint("127.0.0.1", server.start())))
     }
 

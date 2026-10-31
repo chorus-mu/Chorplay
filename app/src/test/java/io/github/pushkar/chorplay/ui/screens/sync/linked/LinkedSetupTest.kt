@@ -71,12 +71,12 @@ class LinkedSetupTest {
         rule.onNodeWithText(text(R.string.linked_where_webdav)).performClick()
         val create = rule.onNodeWithText(text(R.string.linked_create))
         create.assertIsNotEnabled()
-        rule.onNodeWithText(text(R.string.linked_webdav_url)).performTextInput(" https://cloud.example.org/dav/flow/ ")
+        rule.onNodeWithText(text(R.string.linked_webdav_url)).performTextInput(" https://cloud.example.org/dav/chorplay/ ")
         rule.onNodeWithText(text(R.string.linked_webdav_user)).performTextInput("me")
         create.assertIsNotEnabled()
         rule.onNodeWithText(text(R.string.linked_webdav_password)).performTextInput("secret")
         create.assertIsEnabled().performClick()
-        assertEquals(listOf(listOf("https://cloud.example.org/dav/flow/", "me", "secret")), created)
+        assertEquals(listOf(listOf("https://cloud.example.org/dav/chorplay/", "me", "secret")), created)
     }
 
     @Test

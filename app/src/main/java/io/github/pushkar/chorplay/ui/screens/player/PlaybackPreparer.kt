@@ -340,35 +340,13 @@ internal class PlaybackPreparer(
         }
     }
 
-    /** The category can arrive after playback started; only a new override is worth a speed change then. */
-    suspend fun applyLateMusicSignal(speedContext: PlaybackSpeedContext) =
-        withContext(Dispatchers.Main) {
-            val decision = decideSpeed(speedContext.copy(knownMusic = true))
-            if (decision is SpeedDecision.Override) applySpeedOverride(decision.speed)
-        }
-
-    private fun applySpeedOverride(speed: Float) {
-        if (speedBeforeOverride == null) speedBeforeOverride = playerManager.playerState.value.playbackSpeed
-        playerManager.setPlaybackSpeed(speed)
-    }
-
     private suspend fun decideSpeed(speedContext: PlaybackSpeedContext): SpeedDecision {
         val channelSpeed =
             speedContext.channelId
                 ?.takeIf { it.isNotBlank() && playerPreferences.speedPerChannel.first() }
                 ?.let { playerPreferences.channelPlaybackSpeed(it) }
-        val musicAtNormalSpeed = playerPreferences.musicAtNormalSpeed.first()
-        val isMusic =
-            musicAtNormalSpeed &&
-                PlaybackSpeedPolicy.isMusic(
-                    musicVideoType = speedContext.musicVideoType,
-                    category = speedContext.videoId?.let(cachedCategory),
-                    openedAsMusic = speedContext.knownMusic,
-                )
         return PlaybackSpeedPolicy.decide(
-            isMusic = isMusic,
             channelSpeed = channelSpeed,
-            musicAtNormalSpeed = musicAtNormalSpeed,
             rememberSpeed = playerPreferences.rememberPlaybackSpeed.first(),
             rememberedSpeed = playerPreferences.playbackSpeed.first(),
         )

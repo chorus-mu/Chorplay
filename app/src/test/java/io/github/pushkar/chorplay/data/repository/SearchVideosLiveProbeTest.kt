@@ -7,13 +7,13 @@ import org.junit.Assume.assumeTrue
 import org.junit.Test
 
 /**
- * Runs the Home discovery search against the live API. Skipped unless `FLOW_LIVE_PROBE=1` is set,
+ * Runs the Home discovery search against the live API. Skipped unless `CHORPLAY_LIVE_PROBE=1` is set,
  * so CI and ordinary test runs never touch the network.
  */
 class SearchVideosLiveProbeTest {
     @Test
     fun `discovery queries return dated videos with channel ids`() {
-        assumeTrue("set FLOW_LIVE_PROBE=1 to run", System.getenv("FLOW_LIVE_PROBE") == "1")
+        assumeTrue("set CHORPLAY_LIVE_PROBE=1 to run", System.getenv("CHORPLAY_LIVE_PROBE") == "1")
         val repository = YouTubeRepository(mockk(relaxed = true))
 
         val results =

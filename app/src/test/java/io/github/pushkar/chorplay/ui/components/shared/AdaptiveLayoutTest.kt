@@ -17,32 +17,32 @@ import org.junit.Test
 class AdaptiveLayoutTest {
     @Test
     fun laneItemsFillAPhoneWithTheNextItemPeeking() {
-        val width = flowLaneItemWidthFor(windowWidth = 360.dp, maxWidth = 360.dp, peek = 48.dp)
+        val width = chorLaneItemWidthFor(windowWidth = 360.dp, maxWidth = 360.dp, peek = 48.dp)
         assertThat(width).isEqualTo(360.dp - 24.dp - 48.dp)
     }
 
     @Test
     fun laneItemsStopGrowingOnWideWindows() {
-        val width = flowLaneItemWidthFor(windowWidth = 1200.dp, maxWidth = 360.dp, peek = 48.dp)
+        val width = chorLaneItemWidthFor(windowWidth = 1200.dp, maxWidth = 360.dp, peek = 48.dp)
         assertThat(width).isEqualTo(360.dp)
     }
 
     @Test
     fun laneItemsNeverCollapseInANarrowWindow() {
-        val width = flowLaneItemWidthFor(windowWidth = 240.dp, maxWidth = 360.dp, peek = 48.dp)
+        val width = chorLaneItemWidthFor(windowWidth = 240.dp, maxWidth = 360.dp, peek = 48.dp)
         assertThat(width).isEqualTo(240.dp)
     }
 
     @Test
     fun gridCellsShareTheWindowMinusPaddingAndGaps() {
-        val width = flowGridCellWidthFor(windowWidth = 400.dp, columns = 2, gap = 8.dp)
+        val width = chorGridCellWidthFor(windowWidth = 400.dp, columns = 2, gap = 8.dp)
         assertThat(width).isEqualTo((400.dp - 24.dp - 8.dp) / 2)
     }
 
     @Test
     fun heroArtworkIsCappedOnTablets() {
-        assertThat(flowHeroArtworkSizeFor(360.dp)).isEqualTo(198.dp)
-        assertThat(flowHeroArtworkSizeFor(1200.dp)).isEqualTo(240.dp)
-        assertThat(flowHeroArtworkSizeFor(300.dp)).isEqualTo(180.dp)
+        assertThat(chorHeroArtworkSizeFor(360.dp)).isEqualTo(198.dp)
+        assertThat(chorHeroArtworkSizeFor(1200.dp)).isEqualTo(240.dp)
+        assertThat(chorHeroArtworkSizeFor(300.dp)).isEqualTo(180.dp)
     }
 }

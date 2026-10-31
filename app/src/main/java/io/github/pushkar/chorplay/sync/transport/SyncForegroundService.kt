@@ -49,7 +49,7 @@ class SyncForegroundService : Service() {
 
     companion object {
         /** The low-importance Device sync channel, which linked sync shares. */
-        const val CHANNEL_ID = "flow_device_sync"
+        const val CHANNEL_ID = "chorplay_device_sync"
         private const val NOTIF_ID = 4096
 
         fun start(context: Context) {

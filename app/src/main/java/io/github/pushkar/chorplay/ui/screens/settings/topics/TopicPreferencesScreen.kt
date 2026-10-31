@@ -24,8 +24,8 @@ import io.github.pushkar.chorplay.ui.components.settings.SettingsTabs
 import io.github.pushkar.chorplay.ui.components.settings.notice
 import io.github.pushkar.chorplay.ui.components.shared.ChorplayConnectedToggleGroup
 import io.github.pushkar.chorplay.ui.components.shared.ChorplayPillChip
-import io.github.pushkar.chorplay.ui.components.shared.FlowPillSection
-import io.github.pushkar.chorplay.ui.components.shared.FlowToggleOption
+import io.github.pushkar.chorplay.ui.components.shared.ChorPillSection
+import io.github.pushkar.chorplay.ui.components.shared.ChorToggleOption
 import io.github.pushkar.chorplay.ui.components.topicCategoryIcon
 import io.github.pushkar.chorplay.ui.components.topicCategoryNameRes
 import io.github.pushkar.chorplay.ui.screens.settings.index.TopicsIndex
@@ -58,12 +58,12 @@ internal fun TopicPreferencesScreen(
             ChorplayConnectedToggleGroup(
                 options =
                     listOf(
-                        FlowToggleOption(
+                        ChorToggleOption(
                             SettingsTabs.TOPICS_INTERESTS,
                             stringResource(R.string.settings_topics_tab_interests),
                             Icons.Outlined.Favorite,
                         ),
-                        FlowToggleOption(
+                        ChorToggleOption(
                             SettingsTabs.TOPICS_BLOCKED,
                             stringResource(R.string.settings_topics_tab_blocked),
                             Icons.Outlined.Block,
@@ -110,7 +110,7 @@ internal fun TopicPreferencesScreen(
             notice("topics.interests.notice", text = { stringResource(R.string.your_interests_desc) }, icon = Icons.Outlined.TipsAndUpdates)
             NeuroTopicCatalog.TOPIC_CATEGORIES.forEach { category ->
                 item("topics.category.${category.name}") {
-                    FlowPillSection(
+                    ChorPillSection(
                         title = stringResource(topicCategoryNameRes(category.name)),
                         icon = topicCategoryIcon(category.icon),
                         selectedCount = category.topics.count(interests::contains),

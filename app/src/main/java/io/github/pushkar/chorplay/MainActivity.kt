@@ -24,7 +24,6 @@ import io.github.pushkar.chorplay.data.playlist.PlaylistTransfer
 import io.github.pushkar.chorplay.data.recommendation.ChorplayNeuroEngine
 import io.github.pushkar.chorplay.data.repository.DeArrowRepository
 import io.github.pushkar.chorplay.data.repository.OriginalTitleRepository
-import io.github.pushkar.chorplay.discord.DiscordPresenceRuntime
 import io.github.pushkar.chorplay.platform.AppIconController
 import io.github.pushkar.chorplay.platform.AppUiRoot
 import io.github.pushkar.chorplay.platform.PlayerKeyboardShortcutHelp
@@ -83,7 +82,6 @@ class MainActivity : ComponentActivity() {
     lateinit var widgetContentSync: dagger.Lazy<io.github.pushkar.chorplay.widget.core.refresh.WidgetContentSync>
 
     @Inject
-    lateinit var nowPlayingWidgetPublisher: dagger.Lazy<io.github.pushkar.chorplay.widget.nowplaying.NowPlayingWidgetPublisher>
 
     private val incomingIntents by lazy { IncomingIntents(this, links, playlistTransfer) }
 
@@ -111,17 +109,17 @@ class MainActivity : ComponentActivity() {
         val playerState = playerManager.playerState.value
         val player = playerManager.getPlayer()
         return "interactive=${powerManager?.isInteractive} lifecycle=${lifecycle.currentState} " +
-            "pip=$isInPictureInPictureMode pendingAutoPip=$pendingAutoPip " +
-            "bgPref=${lifecyclePlaybackPreferences.settings.backgroundPlayEnabled} " +
-            "shortsBgPref=${lifecyclePlaybackPreferences.settings.shortsBackgroundPlay} " +
-            "explicitBg=${GlobalPlayerState.isExplicitBackgroundPlaybackActive.value} " +
-            "video=${playerState.currentVideoId} exo=${videoPlaybackStateName(player?.playbackState)} " +
-            "pwr=${player?.playWhenReady} playing=${player?.isPlaying} buffering=${playerState.isBuffering} " +
-            "pos=${player?.currentPosition}/${player?.duration} idx=${player?.currentMediaItemIndex} count=${player?.mediaItemCount}"
+                "pip=$isInPictureInPictureMode pendingAutoPip=$pendingAutoPip " +
+                "bgPref=${lifecyclePlaybackPreferences.settings.backgroundPlayEnabled} " +
+                "shortsBgPref=${lifecyclePlaybackPreferences.settings.shortsBackgroundPlay} " +
+                "explicitBg=${GlobalPlayerState.isExplicitBackgroundPlaybackActive.value} " +
+                "video=${playerState.currentVideoId} exo=${videoPlaybackStateName(player?.playbackState)} " +
+                "pwr=${player?.playWhenReady} playing=${player?.isPlaying} buffering=${playerState.isBuffering} " +
+                "pos=${player?.currentPosition}/${player?.duration} idx=${player?.currentMediaItemIndex} count=${player?.mediaItemCount}"
     }
 
     private fun videoLifecycleLog(message: String) {
-        Log.w("FlowVideoLifecycle", "$message | ${lifecyclePlaybackSnapshot()}")
+        Log.w("ChorVideoLifecycle", "$message | ${lifecyclePlaybackSnapshot()}")
     }
 
     override fun attachBaseContext(newBase: Context) {
@@ -132,7 +130,6 @@ class MainActivity : ComponentActivity() {
         splashController.install(installSplashScreen())
 
         super.onCreate(savedInstanceState)
-        DiscordPresenceRuntime.attachActivity(this)
 
         window.setSoftInputMode(android.view.WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING)
 
@@ -151,19 +148,13 @@ class MainActivity : ComponentActivity() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             window.isNavigationBarContrastEnforced = false
             window.isStatusBarContrastEnforced = false
-            // Some MIUI builds read force dark from the view rather than the theme (#1517).
             window.decorView.isForceDarkAllowed = false
         }
 
-        // Player setup reads DataStore and opens the media cache index, so it runs off the main
-        // thread and settles after the first frame instead of blocking onCreate.
         lifecycleScope.launch { GlobalPlayerState.initializeAsync(applicationContext) }
 
-        // Snapshot lives in the process, not the activity: onUserLeaveHint/onStop read it
-        // synchronously and must still see it after a recreation they run inside of (#817).
         lifecyclePlaybackPreferences.observeIn(lifecycleScope)
 
-        // Initialize Neuro Engine (Recommendation System)
         lifecycleScope.launch(Dispatchers.IO) {
             ChorplayNeuroEngine.initialize(applicationContext)
         }
@@ -176,12 +167,10 @@ class MainActivity : ComponentActivity() {
         }
         lifecycleScope.launch(Dispatchers.Default) {
             widgetContentSync.get().startIfPlaced()
-            nowPlayingWidgetPublisher.get().repairStalePlayback()
         }
 
         incomingIntents.handle(intent, isRestoringState = savedInstanceState != null)
 
-        // Read now, alongside the rest of startup, so the theme is usually known by the first composition.
         val storedTheme = MutableStateFlow<ThemeSettings?>(null)
         lifecycleScope.launch { dataManager.themeSettings(appFontPreferences).collect { storedTheme.value = it } }
 
@@ -200,20 +189,18 @@ class MainActivity : ComponentActivity() {
 
     override fun onStart() {
         super.onStart()
-        DiscordPresenceRuntime.setAppForeground(true)
         LinkedSyncWorker.syncOnOpen(this)
     }
 
     override fun onDestroy() {
         videoLifecycleLog("onDestroy")
-        DiscordPresenceRuntime.detachActivity(this)
         val playerManager =
             io.github.pushkar.chorplay.player.EnhancedPlayerManager
                 .getInstance()
         val playerState = playerManager.playerState.value
         val hasActiveVideo =
             playerState.currentVideoId != null &&
-                (playerState.playWhenReady || playerState.isPlaying || playerState.isBuffering)
+                    (playerState.playWhenReady || playerState.isPlaying || playerState.isBuffering)
         val shouldKeepBackgroundPlayback =
             BackgroundPlaybackPolicy.shouldKeepPlaybackInBackground(
                 backgroundPlaybackPreferenceEnabled = lifecyclePlaybackPreferences.settings.backgroundPlayEnabled,
@@ -254,8 +241,6 @@ class MainActivity : ComponentActivity() {
                     delay(350L)
                     val stillBackgrounded = !lifecycle.currentState.isAtLeast(Lifecycle.State.STARTED)
                     if (stillBackgrounded && !isInPictureInPictureMode) {
-                        // onStop ran while the window was still in PiP, so it skipped its pause (#1152).
-                        // Closing the window pauses like leaving the app does, and keeps the video (#1349).
                         if (cachedAppUiRoot == AppUiRoot.MOBILE) {
                             releaseOrientationLock()
                         }
@@ -305,9 +290,7 @@ class MainActivity : ComponentActivity() {
         super.onResume()
         ChorplayCrashHandler.recordPhase("activity", "onResume pip=$isInPictureInPictureMode")
         videoLifecycleLog("onResume")
-        // GlobalPlayerState outlives this Activity, so an instance destroyed straight out of PiP
-        // without an onPictureInPictureModeChanged(false) would leave the flag latched true for
-        // the rest of the process. Re-reading the real value here is the only reset path.
+
         GlobalPlayerState.setPipMode(isInPictureInPictureMode)
         pendingAutoPip = false
         pipDismissCheckJob?.cancel()
@@ -352,13 +335,12 @@ class MainActivity : ComponentActivity() {
     }
 
     override fun onStop() {
-        DiscordPresenceRuntime.setAppForeground(false)
         super.onStop()
         ChorplayCrashHandler.recordPhase(
             "activity",
             "onStop pip=$isInPictureInPictureMode " +
-                "backgroundPlay=${lifecyclePlaybackPreferences.settings.backgroundPlayEnabled} " +
-                "shortsBackground=${lifecyclePlaybackPreferences.settings.shortsBackgroundPlay}",
+                    "backgroundPlay=${lifecyclePlaybackPreferences.settings.backgroundPlayEnabled} " +
+                    "shortsBackground=${lifecyclePlaybackPreferences.settings.shortsBackgroundPlay}",
         )
         videoLifecycleLog("onStop")
         if (!isInPictureInPictureMode && !PictureInPictureHelper.isPopupActive) {
@@ -395,30 +377,26 @@ class MainActivity : ComponentActivity() {
         ChorplayCrashHandler.recordPhase(
             "activity",
             "onUserLeaveHint autoPip=${lifecyclePlaybackPreferences.settings.autoPipEnabled} " +
-                "explicitBackground=$explicitBackgroundPlaybackActive",
+                    "explicitBackground=$explicitBackgroundPlaybackActive",
         )
         videoLifecycleLog("onUserLeaveHint")
-        // Only enter PiP mode if video is playing and has progressed
-        // We use the EnhancedPlayerManager directly to get the immediate state
+
         val playerManager =
             io.github.pushkar.chorplay.player.EnhancedPlayerManager
                 .getInstance()
-        val musicManager = io.github.pushkar.chorplay.player.EnhancedMusicPlayerManager
 
         val isVideoPlaying =
             playerManager.playerState.value.isPlaying &&
-                playerManager.playerState.value.currentVideoId != null &&
-                playerManager.getCurrentPosition() > 500 // At least 0.5s in
-        val isMusicPlaying = musicManager.playerState.value.isPlaying
+                    playerManager.playerState.value.currentVideoId != null &&
+                    playerManager.getCurrentPosition() > 500 // At least 0.5s in
 
-        // Only enter PiP for video, not for music (which uses background service)
         val shouldEnterAutoPip =
             BackgroundPlaybackPolicy.shouldEnterAutoPip(
                 autoPipEnabled = lifecyclePlaybackPreferences.settings.autoPipEnabled,
                 isVideoPlaying = isVideoPlaying,
                 explicitBackgroundPlaybackActive = explicitBackgroundPlaybackActive,
             )
-        if (shouldEnterAutoPip && !isMusicPlaying) {
+        if (shouldEnterAutoPip) {
             enterPlayerPictureInPictureMode(
                 aspectRatio = PictureInPictureHelper.currentVideoAspectRatio,
                 isPlaying = true,
@@ -426,7 +404,7 @@ class MainActivity : ComponentActivity() {
             return
         }
 
-        if (!lifecyclePlaybackPreferences.settings.shortsPipEnabled || isMusicPlaying) return
+        if (!lifecyclePlaybackPreferences.settings.shortsPipEnabled) return
         val shortsPool =
             io.github.pushkar.chorplay.player.shorts.ShortsPlayerPool
                 .getInstance()
@@ -508,7 +486,7 @@ class MainActivity : ComponentActivity() {
         val playerState = playerManager.playerState.value
         val hasActiveVideo =
             playerState.currentVideoId != null &&
-                (playerState.playWhenReady || playerState.isPlaying || playerState.isBuffering)
+                    (playerState.playWhenReady || playerState.isPlaying || playerState.isBuffering)
 
         if (!hasActiveVideo) return
 

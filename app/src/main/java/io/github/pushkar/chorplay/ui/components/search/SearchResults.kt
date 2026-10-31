@@ -21,7 +21,7 @@ import io.github.pushkar.chorplay.data.paging.SearchShelfKind
 import io.github.pushkar.chorplay.ui.components.FeedGridLayout
 import io.github.pushkar.chorplay.ui.components.PlaylistCard
 import io.github.pushkar.chorplay.ui.components.PlaylistCardLayout
-import io.github.pushkar.chorplay.ui.components.layout.flowBottomContentPadding
+import io.github.pushkar.chorplay.ui.components.layout.chorBottomContentPadding
 import io.github.pushkar.chorplay.ui.components.shared.FeedGridTopPadding
 import io.github.pushkar.chorplay.ui.components.shared.FeedPagingFooter
 import io.github.pushkar.chorplay.ui.components.shared.MediaShortCard
@@ -70,7 +70,7 @@ fun SearchResults(
         columns = plan.cells,
         state = gridState,
         modifier = modifier.fillMaxSize().dismissKeyboardOnPress(actions.dismissKeyboard),
-        contentPadding = plan.contentPadding(top = FeedGridTopPadding, bottom = flowBottomContentPadding()),
+        contentPadding = plan.contentPadding(top = FeedGridTopPadding, bottom = chorBottomContentPadding()),
         verticalArrangement = Arrangement.spacedBy(plan.rowSpacing),
     ) {
         items(
@@ -158,7 +158,7 @@ fun SearchShortsGrid(
                 start = sidePadding,
                 end = sidePadding,
                 top = FeedGridTopPadding,
-                bottom = flowBottomContentPadding(),
+                bottom = chorBottomContentPadding(),
             ),
         horizontalArrangement = Arrangement.spacedBy(ShortCardDefaults.Spacing),
         verticalArrangement = Arrangement.spacedBy(ShortCardDefaults.Spacing),

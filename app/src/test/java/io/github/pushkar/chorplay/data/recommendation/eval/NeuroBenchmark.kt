@@ -9,7 +9,7 @@ package io.github.pushkar.chorplay.data.recommendation.eval
 
 import io.github.pushkar.chorplay.data.recommendation.ContentVector
 import io.github.pushkar.chorplay.data.recommendation.FeedEntry
-import io.github.pushkar.chorplay.data.recommendation.FlowPersona
+import io.github.pushkar.chorplay.data.recommendation.ChorPersona
 import io.github.pushkar.chorplay.data.recommendation.NeuroDiscovery
 import io.github.pushkar.chorplay.data.recommendation.NeuroScoring
 import io.github.pushkar.chorplay.data.recommendation.NeuroTokenizer
@@ -277,7 +277,7 @@ internal object NeuroBenchmark {
             // 1. Discovery decides what to search for (the real production selector),
             //    with cluster rotation advanced between refreshes as the engine does.
             val discoveryBrain = brain.copy(clusterRotation = clusterRotation)
-            val discoveryQueries = discovery.generateQueries(discoveryBrain, now) { FlowPersona.EXPLORER }.take(8)
+            val discoveryQueries = discovery.generateQueries(discoveryBrain, now) { ChorPersona.EXPLORER }.take(8)
             val queries =
                 discoveryQueries.map { it.query }.ifEmpty { universe.groups.take(4).map { it.topics[0] } }
             queriesPerRefresh += queries
@@ -408,7 +408,7 @@ internal object NeuroBenchmark {
         repeat(sessions) { round ->
             val discoveryBrain = brain.copy(clusterRotation = clusterRotation)
             // Round index doubles as tree depth — models refresh + successive pages.
-            val sessionResult = discovery.generateQueries(discoveryBrain, now, depth = round) { FlowPersona.EXPLORER }
+            val sessionResult = discovery.generateQueries(discoveryBrain, now, depth = round) { ChorPersona.EXPLORER }
             val queries = sessionResult.map { it.query }
             val servedClusters = sessionResult.mapNotNull { it.clusterKey }.toSet()
             if (servedClusters.isNotEmpty()) {

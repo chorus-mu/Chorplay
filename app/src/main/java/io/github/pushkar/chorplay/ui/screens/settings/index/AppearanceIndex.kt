@@ -42,27 +42,11 @@ internal object AppearanceIndex {
             section = R.string.settings_section_layout,
             destination = page,
         )
-    val musicArtworkSize =
-        SettingEntry(
-            key = "appearance.music_artwork_size",
-            title = R.string.settings_music_artwork_size_title,
-            summary = R.string.settings_music_artwork_size_summary,
-            section = R.string.settings_section_layout,
-            destination = page,
-        )
     val libraryPreviews =
         SettingEntry(
             key = "appearance.library_previews",
             title = R.string.content_settings_library_previews_title,
             summary = R.string.content_settings_library_previews_subtitle,
-            section = R.string.settings_section_layout,
-            destination = page,
-        )
-    val separatePlaylists =
-        SettingEntry(
-            key = "appearance.separate_playlists",
-            title = R.string.settings_separate_playlists_title,
-            summary = R.string.settings_separate_playlists_summary,
             section = R.string.settings_section_layout,
             destination = page,
         )
@@ -113,9 +97,7 @@ internal object AppearanceIndex {
             interfaceMode,
             homeViewMode,
             homeColumns,
-            musicArtworkSize,
             libraryPreviews,
-            separatePlaylists,
             appLogo,
             groupBadges,
             cardLikeButtons,
@@ -142,7 +124,6 @@ internal object NavigationBarIndex {
 
     val home = tab("home", R.string.settings_home_nav_tab_title, R.string.settings_home_nav_tab_subtitle)
     val shorts = tab("shorts", R.string.settings_shorts_nav_tab_title, R.string.settings_shorts_nav_tab_subtitle)
-    val music = tab("music", R.string.settings_music_nav_tab_title, R.string.settings_music_nav_tab_subtitle)
     val search = tab("search", R.string.settings_search_nav_tab_title, R.string.settings_search_nav_tab_subtitle)
     val explore = tab("explore", R.string.settings_categories_nav_tab_title, R.string.settings_categories_nav_tab_subtitle)
     val downloads = tab("downloads", R.string.settings_downloads_nav_tab_title, R.string.settings_downloads_nav_tab_subtitle)
@@ -164,7 +145,7 @@ internal object NavigationBarIndex {
             destination = page,
         )
 
-    val all = listOf(home, shorts, music, search, explore, downloads, hideOnScroll, order)
+    val all = listOf(home, shorts, search, explore, downloads, hideOnScroll, order)
 }
 
 internal object ThemeIndex {

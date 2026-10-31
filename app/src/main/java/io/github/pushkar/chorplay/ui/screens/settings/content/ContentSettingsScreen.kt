@@ -18,16 +18,12 @@ import io.github.pushkar.chorplay.ui.components.settings.SettingsTarget
 import io.github.pushkar.chorplay.ui.components.settings.choice
 import io.github.pushkar.chorplay.ui.components.settings.nav
 import io.github.pushkar.chorplay.ui.components.settings.switch
-import io.github.pushkar.chorplay.ui.components.shared.FlowChoice
+import io.github.pushkar.chorplay.ui.components.shared.ChorChoice
 import io.github.pushkar.chorplay.ui.components.shared.ChorplayChoiceDialog
 import io.github.pushkar.chorplay.ui.components.shared.ChorplaySwitchRow
 import io.github.pushkar.chorplay.ui.screens.settings.index.ContentIndex
 import io.github.pushkar.chorplay.ui.screens.settings.index.DestinationIndex
 
-/**
- * What shows up in the feeds. How it is laid out lives in Appearance, and what the players do in
- * Player & playback.
- */
 @Composable
 internal fun ContentSettingsScreen(
     onBack: (() -> Unit)?,
@@ -56,15 +52,14 @@ internal fun ContentSettingsScreen(
             switch(ContentIndex.homeFeed, viewModel.homeFeed, viewModel::setHomeFeed)
             switch(ContentIndex.refreshOnReselect, viewModel.refreshOnReselect, viewModel::setRefreshOnReselect)
             switch(ContentIndex.continueWatching, viewModel.continueWatching, viewModel::setContinueWatching)
-            switch(ContentIndex.homeShortsShelf, viewModel.homeShortsShelf, viewModel::setHomeShortsShelf, enabled = shortsContent)
+            switch(
+                ContentIndex.homeShortsShelf,
+                viewModel.homeShortsShelf,
+                viewModel::setHomeShortsShelf,
+                enabled = shortsContent
+            )
             switch(ContentIndex.homeSubscriptions, viewModel.homeSubscriptions, viewModel::setHomeSubscriptions)
             switch(ContentIndex.hideWatchedHome, viewModel.hideWatchedHome, viewModel::setHideWatchedHome)
-        }
-        group(key = "content.music", header = R.string.screen_title_music) {
-            nav(
-                DestinationIndex.entry(SettingsDestination.MUSIC_HOME),
-                onClick = { onNavigate(SettingsTarget(SettingsDestination.MUSIC_HOME)) },
-            )
         }
         group(key = "content.library", header = R.string.library) {
             nav(
@@ -75,12 +70,21 @@ internal fun ContentSettingsScreen(
         group(key = "content.subscriptions", header = R.string.settings_section_subscriptions) {
             switch(ContentIndex.subsVideos, viewModel.subsVideos, viewModel::setSubsVideos)
             switch(ContentIndex.subsShorts, viewModel.subsShorts, viewModel::setSubsShorts, enabled = shortsContent)
-            switch(ContentIndex.subsShortsShelf, viewModel.subsShortsShelf, viewModel::setSubsShortsShelf, enabled = shortsContent)
+            switch(
+                ContentIndex.subsShortsShelf,
+                viewModel.subsShortsShelf,
+                viewModel::setSubsShortsShelf,
+                enabled = shortsContent
+            )
             switch(ContentIndex.subsLive, viewModel.subsLive, viewModel::setSubsLive)
             switch(ContentIndex.subsCollaborations, viewModel.subsCollaborations, viewModel::setSubsCollaborations)
             switch(ContentIndex.hideWatchedSubs, viewModel.hideWatchedSubs, viewModel::setHideWatchedSubs)
             switch(ContentIndex.hideUnplayableSubs, viewModel.hideUnplayableSubs, viewModel::setHideUnplayableSubs)
-            switch(ContentIndex.subsRefreshOnStartup, viewModel.subsRefreshOnStartup, viewModel::setSubsRefreshOnStartup)
+            switch(
+                ContentIndex.subsRefreshOnStartup,
+                viewModel.subsRefreshOnStartup,
+                viewModel::setSubsRefreshOnStartup
+            )
             switch(ContentIndex.subsCheckedCount, viewModel.subsCheckedCount, viewModel::setSubsCheckedCount)
         }
         group(key = "content.shorts", header = R.string.content_settings_header_shorts) {
@@ -95,10 +99,19 @@ internal fun ContentSettingsScreen(
                     shape = shape,
                 )
             }
-            switch(ContentIndex.hideWatchedShorts, viewModel.hideWatchedShorts, viewModel::setHideWatchedShorts, enabled = shortsContent)
+            switch(
+                ContentIndex.hideWatchedShorts,
+                viewModel.hideWatchedShorts,
+                viewModel::setHideWatchedShorts,
+                enabled = shortsContent
+            )
         }
         group(key = "content.watch_later", header = R.string.watch_later) {
-            switch(ContentIndex.removeWatchedWatchLater, viewModel.removeWatchedWatchLater, viewModel::setRemoveWatchedWatchLater)
+            switch(
+                ContentIndex.removeWatchedWatchLater,
+                viewModel.removeWatchedWatchLater,
+                viewModel::setRemoveWatchedWatchLater
+            )
         }
         if (hideWatchedHome || hideWatchedSubs || hideWatchedShorts || removeWatchedWatchLater) {
             group(key = "content.watched", header = R.string.settings_section_watched) {
@@ -136,7 +149,7 @@ internal fun ContentSettingsScreen(
                     WatchedThreshold.PERCENT_99,
                     WatchedThreshold.PERCENT_95,
                     WatchedThreshold.PERCENT_90,
-                ).map { FlowChoice(it, watchedThresholdLabel(it)) },
+                ).map { ChorChoice(it, watchedThresholdLabel(it)) },
             selected = threshold,
             onSelect = viewModel::setWatchedThreshold,
             onDismiss = { showThresholdDialog = false },
@@ -148,7 +161,7 @@ internal fun ContentSettingsScreen(
         ChorplayChoiceDialog(
             title = stringResource(R.string.content_settings_shared_links_title),
             description = stringResource(R.string.content_settings_shared_links_dialog_body),
-            options = SharedLinkAction.entries.map { FlowChoice(it, sharedLinkActionLabel(it)) },
+            options = SharedLinkAction.entries.map { ChorChoice(it, sharedLinkActionLabel(it)) },
             selected = action,
             onSelect = viewModel::setSharedLinkAction,
             onDismiss = { showSharedLinksDialog = false },

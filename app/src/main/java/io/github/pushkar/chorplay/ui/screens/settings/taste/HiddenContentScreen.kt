@@ -26,7 +26,6 @@ import io.github.pushkar.chorplay.ui.components.settings.SettingsListScope
 import io.github.pushkar.chorplay.ui.components.settings.SettingsPage
 import io.github.pushkar.chorplay.ui.components.shared.ChorplayEmptyState
 
-/** Every topic, channel and artist blocked in either engine, each one tap from coming back. */
 @Composable
 internal fun HiddenContentScreen(
     onBack: (() -> Unit)?,
@@ -54,7 +53,6 @@ internal fun HiddenContentScreen(
             viewModel::unblockTopic,
         )
         hiddenChannels(hidden.channels, hidden.resolvingNames, viewModel::unblockChannel)
-        hiddenGroup("hidden.artists", R.string.taste_hidden_artists, hidden.artists, viewModel::unblockArtist)
     }
 }
 
@@ -78,7 +76,6 @@ private fun SettingsListScope.hiddenGroup(
     }
 }
 
-/** A channel without a name yet reads as loading while names are fetched, then as unknown with its id below. */
 private fun SettingsListScope.hiddenChannels(
     channels: List<NamedItem>,
     resolvingNames: Boolean,
@@ -98,7 +95,10 @@ private fun SettingsListScope.hiddenChannels(
                     name = label,
                     shape = shape,
                     actionLabel = stringResource(R.string.taste_unblock),
-                    actionDescription = stringResource(R.string.taste_unblock_item, if (unnamed) item.id else item.name),
+                    actionDescription = stringResource(
+                        R.string.taste_unblock_item,
+                        if (unnamed) item.id else item.name
+                    ),
                     supporting = item.id.takeIf { unnamed && !resolvingNames },
                     muted = unnamed,
                 ) { onUnblock(item.id) }
@@ -107,7 +107,6 @@ private fun SettingsListScope.hiddenChannels(
     }
 }
 
-/** One named item with a single text action, such as unblocking or removing it. */
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 internal fun TasteActionRow(

@@ -28,8 +28,8 @@ import io.github.pushkar.chorplay.ui.utils.LocalWindowSizeClass
 import io.github.pushkar.chorplay.ui.utils.isExpandedWidth
 import io.github.pushkar.chorplay.ui.utils.isMediumHeight
 
-const val FLOW_NAV_BAR_TAG = "flow_nav_bar"
-const val FLOW_NAV_RAIL_TAG = "flow_nav_rail"
+const val CHOR_NAV_BAR_TAG = "chor_nav_bar"
+const val CHOR_NAV_RAIL_TAG = "chor_nav_rail"
 
 object ChorplayNavigationDefaults {
     /**
@@ -45,7 +45,7 @@ object ChorplayNavigationDefaults {
  * even on a large display.
  */
 @Composable
-fun flowUsesNavigationRail(): Boolean = LocalWindowSizeClass.current.let { it.isExpandedWidth && it.isMediumHeight }
+fun chorUsesNavigationRail(): Boolean = LocalWindowSizeClass.current.let { it.isExpandedWidth && it.isMediumHeight }
 
 /**
  * The app's primary navigation around [content]: the bottom bar over it on compact and medium
@@ -66,7 +66,7 @@ fun ChorplayNavigationChrome(
     onRailWidthChanged: (Dp) -> Unit = {},
     content: @Composable BoxScope.() -> Unit,
 ) {
-    val usesRail = flowUsesNavigationRail()
+    val usesRail = chorUsesNavigationRail()
     val showRail = usesRail && railVisible
     val density = LocalDensity.current
     val railInsets = WideNavigationRailDefaults.windowInsets
@@ -79,7 +79,7 @@ fun ChorplayNavigationChrome(
                 onTabSelected = onTabSelected,
                 modifier =
                     Modifier
-                        .testTag(FLOW_NAV_RAIL_TAG)
+                        .testTag(CHOR_NAV_RAIL_TAG)
                         .onSizeChanged { onRailWidthChanged(with(density) { it.width.toDp() }) },
             )
         }
@@ -133,7 +133,7 @@ private fun BoxScope.NavigationBarSlot(
             onTabSelected = onTabSelected,
             modifier =
                 Modifier
-                    .testTag(FLOW_NAV_BAR_TAG)
+                    .testTag(CHOR_NAV_BAR_TAG)
                     .onSizeChanged { onHeightChanged(with(density) { (it.height - bottomInsetPx).toDp() }) },
         )
     }

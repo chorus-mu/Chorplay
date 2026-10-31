@@ -23,11 +23,11 @@ import androidx.compose.ui.res.vectorResource
 import io.github.pushkar.chorplay.R
 import io.github.pushkar.chorplay.player.EnhancedPlayerState
 import io.github.pushkar.chorplay.ui.components.equalizer.equalizerSummary
-import io.github.pushkar.chorplay.ui.components.shared.FlowNavRow
-import io.github.pushkar.chorplay.ui.components.shared.FlowRowGroup
-import io.github.pushkar.chorplay.ui.components.shared.FlowSectionHeader
+import io.github.pushkar.chorplay.ui.components.shared.ChorNavRow
+import io.github.pushkar.chorplay.ui.components.shared.ChorRowGroup
+import io.github.pushkar.chorplay.ui.components.shared.ChorSectionHeader
 import io.github.pushkar.chorplay.ui.components.shared.ChorplaySwitchRow
-import io.github.pushkar.chorplay.ui.components.shared.flowRowGroupShape
+import io.github.pushkar.chorplay.ui.components.shared.chorRowGroupShape
 import io.github.pushkar.chorplay.ui.components.shared.playbackSpeedLabel
 import io.github.pushkar.chorplay.utils.formatDurationMillis
 
@@ -62,9 +62,9 @@ internal fun PlayerSettingsMainPage(
     onAddNote: () -> Unit = {},
 ) {
     val playbackRows = if (sponsorBlockSegmentCount > 0) PLAYBACK_ROWS + 1 else PLAYBACK_ROWS
-    FlowSectionHeader(stringResource(R.string.video))
-    FlowRowGroup {
-        FlowNavRow(
+    ChorSectionHeader(stringResource(R.string.video))
+    ChorRowGroup {
+        ChorNavRow(
             leadingIcon = Icons.Filled.HighQuality,
             title = stringResource(R.string.quality),
             trailingText =
@@ -73,25 +73,25 @@ internal fun PlayerSettingsMainPage(
                 } else {
                     "${playerState.currentQuality}p"
                 },
-            shape = flowRowGroupShape(0, VIDEO_ROWS),
+            shape = chorRowGroupShape(0, VIDEO_ROWS),
             onClick = { onNavigateToPage(PlayerSettingsPage.Quality) },
         )
     }
 
-    FlowSectionHeader(stringResource(R.string.playback_header))
-    FlowRowGroup {
-        FlowNavRow(
+    ChorSectionHeader(stringResource(R.string.playback_header))
+    ChorRowGroup {
+        ChorNavRow(
             leadingIcon = Icons.Filled.Speed,
             title = stringResource(R.string.playback_speed),
             trailingText = playbackSpeedLabel(playerState.playbackSpeed),
-            shape = flowRowGroupShape(0, playbackRows),
+            shape = chorRowGroupShape(0, playbackRows),
             onClick = { onNavigateToPage(PlayerSettingsPage.Speed) },
         )
         ChorplaySwitchRow(
             leadingIcon = Icons.Rounded.Repeat,
             title = stringResource(R.string.loop_video),
             checked = playerState.isLooping,
-            shape = flowRowGroupShape(1, playbackRows),
+            shape = chorRowGroupShape(1, playbackRows),
             onCheckedChange = onLoopToggle,
         )
         ChorplaySwitchRow(
@@ -99,7 +99,7 @@ internal fun PlayerSettingsMainPage(
             title = stringResource(R.string.autoplay_next),
             checked = autoplayEnabled,
             enabled = !playerState.isLooping,
-            shape = flowRowGroupShape(2, playbackRows),
+            shape = chorRowGroupShape(2, playbackRows),
             onCheckedChange = onAutoplayToggle,
         )
         if (sponsorBlockSegmentCount > 0) {
@@ -109,27 +109,27 @@ internal fun PlayerSettingsMainPage(
                 supportingText =
                     pluralStringResource(R.plurals.sb_video_segments, sponsorBlockSegmentCount, sponsorBlockSegmentCount),
                 checked = !sponsorBlockOffForVideo,
-                shape = flowRowGroupShape(3, playbackRows),
+                shape = chorRowGroupShape(3, playbackRows),
                 onCheckedChange = { on -> onSponsorBlockToggle(!on) },
             )
         }
     }
 
     if (notePositionMs != null) {
-        FlowSectionHeader(stringResource(R.string.note_title))
-        FlowRowGroup {
-            FlowNavRow(
+        ChorSectionHeader(stringResource(R.string.note_title))
+        ChorRowGroup {
+            ChorNavRow(
                 leadingIcon = Icons.Outlined.MoreTime,
                 title = stringResource(R.string.note_at_time, formatDurationMillis(notePositionMs)),
-                shape = flowRowGroupShape(0, 1),
+                shape = chorRowGroupShape(0, 1),
                 onClick = onAddNote,
             )
         }
     }
 
-    FlowSectionHeader(stringResource(R.string.audio_settings_title))
-    FlowRowGroup {
-        FlowNavRow(
+    ChorSectionHeader(stringResource(R.string.audio_settings_title))
+    ChorRowGroup {
+        ChorNavRow(
             leadingIcon = Icons.Filled.AudioFile,
             title = stringResource(R.string.audio_track),
             trailingText =
@@ -137,83 +137,83 @@ internal fun PlayerSettingsMainPage(
                     playerState.availableAudioTracks.getOrNull(playerState.currentAudioTrack),
                     playerState.currentAudioTrack,
                 ),
-            shape = flowRowGroupShape(0, AUDIO_ROWS),
+            shape = chorRowGroupShape(0, AUDIO_ROWS),
             onClick = { onNavigateToPage(PlayerSettingsPage.Audio) },
         )
     }
 
-    FlowSectionHeader(stringResource(R.string.captions))
-    FlowRowGroup {
-        FlowNavRow(
+    ChorSectionHeader(stringResource(R.string.captions))
+    ChorRowGroup {
+        ChorNavRow(
             leadingIcon = Icons.Filled.Subtitles,
             title = stringResource(R.string.filter_subtitles),
             trailingText =
                 if (subtitlesEnabled) stringResource(R.string.on) else stringResource(R.string.off),
-            shape = flowRowGroupShape(0, CAPTION_ROWS),
+            shape = chorRowGroupShape(0, CAPTION_ROWS),
             onClick = { onNavigateToPage(PlayerSettingsPage.Subtitles) },
         )
-        FlowNavRow(
+        ChorNavRow(
             leadingIcon = Icons.Filled.Tune,
             title = stringResource(R.string.subtitle_style),
-            shape = flowRowGroupShape(1, CAPTION_ROWS),
+            shape = chorRowGroupShape(1, CAPTION_ROWS),
             onClick = onShowSubtitleStyle,
         )
     }
 
-    FlowSectionHeader(stringResource(R.string.player_settings_overlay_controls))
-    FlowRowGroup {
-        FlowNavRow(
+    ChorSectionHeader(stringResource(R.string.player_settings_overlay_controls))
+    ChorRowGroup {
+        ChorNavRow(
             leadingIcon = Icons.Filled.Cast,
             title = stringResource(R.string.cast_to_tv),
-            shape = flowRowGroupShape(0, OVERLAY_ROWS),
+            shape = chorRowGroupShape(0, OVERLAY_ROWS),
             onClick = onCastClick,
         )
-        FlowNavRow(
+        ChorNavRow(
             leadingIcon = Icons.Filled.PictureInPicture,
             title = stringResource(R.string.pip_mode),
-            shape = flowRowGroupShape(1, OVERLAY_ROWS),
+            shape = chorRowGroupShape(1, OVERLAY_ROWS),
             onClick = onPipClick,
         )
-        FlowNavRow(
+        ChorNavRow(
             leadingIcon = Icons.Filled.Bedtime,
             title = stringResource(R.string.sleep_timer),
-            shape = flowRowGroupShape(2, OVERLAY_ROWS),
+            shape = chorRowGroupShape(2, OVERLAY_ROWS),
             onClick = onSleepTimerClick,
         )
     }
 
-    FlowSectionHeader(stringResource(R.string.audio_effects))
-    FlowRowGroup {
-        FlowNavRow(
+    ChorSectionHeader(stringResource(R.string.audio_effects))
+    ChorRowGroup {
+        ChorNavRow(
             leadingIcon = Icons.Filled.Equalizer,
             title = stringResource(R.string.equalizer),
             trailingText = equalizerSummary(),
-            shape = flowRowGroupShape(0, EFFECT_ROWS),
+            shape = chorRowGroupShape(0, EFFECT_ROWS),
             onClick = { onNavigateToPage(PlayerSettingsPage.Equalizer) },
         )
         ChorplaySwitchRow(
             leadingIcon = Icons.Rounded.GraphicEq,
             title = stringResource(R.string.player_settings_skip_silence),
             checked = playerState.isSkipSilenceEnabled,
-            shape = flowRowGroupShape(1, EFFECT_ROWS),
+            shape = chorRowGroupShape(1, EFFECT_ROWS),
             onCheckedChange = onSkipSilenceToggle,
         )
         ChorplaySwitchRow(
             leadingIcon = Icons.AutoMirrored.Rounded.VolumeUp,
             title = stringResource(R.string.player_settings_normalize_volume),
             checked = playerState.isVolumeNormalizationEnabled,
-            shape = flowRowGroupShape(2, EFFECT_ROWS),
+            shape = chorRowGroupShape(2, EFFECT_ROWS),
             onCheckedChange = onVolumeNormalizationToggle,
         )
     }
 
-    FlowSectionHeader(stringResource(R.string.player_settings_display))
-    FlowRowGroup {
+    ChorSectionHeader(stringResource(R.string.player_settings_display))
+    ChorRowGroup {
         ChorplaySwitchRow(
             leadingIcon = ImageVector.vectorResource(R.drawable.ic_ambient_mode),
             title = stringResource(R.string.player_settings_ambient_mode),
             checked = ambientModeEnabled,
-            shape = flowRowGroupShape(0, DISPLAY_ROWS),
+            shape = chorRowGroupShape(0, DISPLAY_ROWS),
             onCheckedChange = onAmbientModeToggle,
         )
     }

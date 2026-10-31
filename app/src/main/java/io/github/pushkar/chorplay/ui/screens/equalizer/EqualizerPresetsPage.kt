@@ -37,13 +37,13 @@ import io.github.pushkar.chorplay.data.audio.eq.BuiltInEqPresets
 import io.github.pushkar.chorplay.data.audio.eq.EqMode
 import io.github.pushkar.chorplay.data.audio.eq.EqPreset
 import io.github.pushkar.chorplay.data.audio.eq.EqState
-import io.github.pushkar.chorplay.ui.components.layout.flowBottomContentPadding
-import io.github.pushkar.chorplay.ui.components.shared.FlowNavRow
-import io.github.pushkar.chorplay.ui.components.shared.FlowRowGroup
-import io.github.pushkar.chorplay.ui.components.shared.FlowSectionHeader
-import io.github.pushkar.chorplay.ui.components.shared.FlowSegmentedGap
-import io.github.pushkar.chorplay.ui.components.shared.FlowSelectionRow
-import io.github.pushkar.chorplay.ui.components.shared.flowRowGroupShape
+import io.github.pushkar.chorplay.ui.components.layout.chorBottomContentPadding
+import io.github.pushkar.chorplay.ui.components.shared.ChorNavRow
+import io.github.pushkar.chorplay.ui.components.shared.ChorRowGroup
+import io.github.pushkar.chorplay.ui.components.shared.ChorSectionHeader
+import io.github.pushkar.chorplay.ui.components.shared.ChorSegmentedGap
+import io.github.pushkar.chorplay.ui.components.shared.ChorSelectionRow
+import io.github.pushkar.chorplay.ui.components.shared.chorRowGroupShape
 
 private val ItemInset = 12.dp
 
@@ -59,42 +59,42 @@ internal fun EqualizerPresetsPage(
     onDialog: (EqDialog) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    val bottom = flowBottomContentPadding(32.dp)
+    val bottom = chorBottomContentPadding(32.dp)
     val selectedId = state.active.presetId
     LazyColumn(
         modifier = modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.spacedBy(FlowSegmentedGap),
+        verticalArrangement = Arrangement.spacedBy(ChorSegmentedGap),
         contentPadding = PaddingValues(top = 8.dp, bottom = bottom),
     ) {
         item("import") {
             EqFramed {
-                FlowRowGroup {
-                    FlowNavRow(
+                ChorRowGroup {
+                    ChorNavRow(
                         title = stringResource(R.string.eq_import_file),
                         supportingText = stringResource(R.string.eq_import_file_desc),
                         onClick = onImportFile,
                         leadingIcon = Icons.Outlined.UploadFile,
                         showChevron = false,
-                        shape = flowRowGroupShape(0, 2),
+                        shape = chorRowGroupShape(0, 2),
                     )
-                    FlowNavRow(
+                    ChorNavRow(
                         title = stringResource(R.string.eq_paste_text),
                         onClick = onPaste,
                         leadingIcon = Icons.Outlined.ContentPaste,
                         showChevron = false,
-                        shape = flowRowGroupShape(1, 2),
+                        shape = chorRowGroupShape(1, 2),
                     )
                 }
             }
         }
         if (state.userPresets.isNotEmpty()) {
-            item("yours-header") { EqFramed { FlowSectionHeader(stringResource(R.string.eq_your_presets)) } }
+            item("yours-header") { EqFramed { ChorSectionHeader(stringResource(R.string.eq_your_presets)) } }
             itemsIndexed(state.userPresets, key = { _, preset -> preset.id }) { index, preset ->
                 EqFramed(Modifier.padding(horizontal = ItemInset)) {
                     UserPresetRow(
                         preset = preset,
                         selected = preset.id == selectedId,
-                        shape = flowRowGroupShape(index, state.userPresets.size),
+                        shape = chorRowGroupShape(index, state.userPresets.size),
                         onClick = {
                             viewModel.selectPreset(preset.id)
                             onSelected()
@@ -107,17 +107,17 @@ internal fun EqualizerPresetsPage(
                 }
             }
         }
-        item("built-in-header") { EqFramed { FlowSectionHeader(stringResource(R.string.eq_built_in)) } }
+        item("built-in-header") { EqFramed { ChorSectionHeader(stringResource(R.string.eq_built_in)) } }
         itemsIndexed(BuiltInEqPresets.all, key = { _, preset -> preset.id }) { index, preset ->
             EqFramed(Modifier.padding(horizontal = ItemInset)) {
-                FlowSelectionRow(
+                ChorSelectionRow(
                     title = stringResource(preset.nameRes),
                     selected = preset.id == selectedId,
                     onClick = {
                         viewModel.selectPreset(preset.id)
                         onSelected()
                     },
-                    shape = flowRowGroupShape(index, BuiltInEqPresets.all.size),
+                    shape = chorRowGroupShape(index, BuiltInEqPresets.all.size),
                 )
             }
         }
@@ -141,7 +141,7 @@ private fun UserPresetRow(
             preset.mode == EqMode.GRAPHIC -> stringResource(R.string.eq_mode_graphic)
             else -> pluralStringResource(R.plurals.eq_band_total, preset.curve.bands.size, preset.curve.bands.size)
         }
-    FlowNavRow(
+    ChorNavRow(
         title = preset.name,
         supportingText = summary,
         onClick = onClick,

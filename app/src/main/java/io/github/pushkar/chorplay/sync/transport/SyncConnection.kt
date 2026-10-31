@@ -1,7 +1,7 @@
 package io.github.pushkar.chorplay.sync.transport
 
 /**
- * A single full-duplex binary message channel for one FLOW-SYNC/1 session, abstracting over the
+ * A single full-duplex binary message channel for one CHOR-SYNC/1 session, abstracting over the
  * OkHttp WebSocket client ([WsClient]) and the Ktor embedded server ([WsServer]). Each message is
  * one complete wire frame.
  */

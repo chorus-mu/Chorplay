@@ -2,15 +2,13 @@ name: Android CI/CD
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
     tags:
-      - 'v*'
+      - "v*"
   pull_request:
-    branches: [ main ]
+    branches: [main]
   workflow_dispatch:
 
-# Collapse superseded runs on branches and PRs. Tag runs publish the release
-# artifacts and must never be cancelled by a subsequent push.
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: ${{ !startsWith(github.ref, 'refs/tags/v') }}
@@ -19,17 +17,10 @@ permissions:
   contents: read
 
 env:
-  # Certificate of the official Chorplay release key. IzzyOnDroid and every
-  # installed client pin this value; an APK signed with anything else cannot
-  # be installed as an update. Changing it forces every user to reinstall.
   EXPECTED_SIGNER_SHA256: 4322294ed4caa2d4294140095818080ffe8acc1fbe3cdc76107df45c5286be40
-  # Certificate of the nightly key. Every nightly must carry it so each one
-  # installs over the previous nightly without an uninstall.
+
   EXPECTED_NIGHTLY_SIGNER_SHA256: e42225b5ab3ac68236e54567ef0c4878afbafcdd3d438fbaba343e2d70425bf0
 
-# checks, tests, lint and build run on separate runners at the same time, and
-# both publish jobs wait for all four. The CI Gradle properties replace the
-# --max-workers=1 that #1011 needed when everything shared one runner.
 jobs:
   checks:
     name: Checks
@@ -47,8 +38,8 @@ jobs:
       - name: Set up JDK 21
         uses: actions/setup-java@v6
         with:
-          java-version: '21'
-          distribution: 'temurin'
+          java-version: "21"
+          distribution: "temurin"
 
       - name: Use CI Gradle properties
         run: mkdir -p ~/.gradle && cp .github/ci-gradle.properties ~/.gradle/gradle.properties
@@ -93,8 +84,8 @@ jobs:
       - name: Set up JDK 21
         uses: actions/setup-java@v6
         with:
-          java-version: '21'
-          distribution: 'temurin'
+          java-version: "21"
+          distribution: "temurin"
 
       - name: Use CI Gradle properties
         run: mkdir -p ~/.gradle && cp .github/ci-gradle.properties ~/.gradle/gradle.properties
@@ -127,8 +118,8 @@ jobs:
       - name: Set up JDK 21
         uses: actions/setup-java@v6
         with:
-          java-version: '21'
-          distribution: 'temurin'
+          java-version: "21"
+          distribution: "temurin"
 
       - name: Use CI Gradle properties
         run: mkdir -p ~/.gradle && cp .github/ci-gradle.properties ~/.gradle/gradle.properties
@@ -170,8 +161,8 @@ jobs:
       - name: Set up JDK 21
         uses: actions/setup-java@v6
         with:
-          java-version: '21'
-          distribution: 'temurin'
+          java-version: "21"
+          distribution: "temurin"
 
       - name: Use CI Gradle properties
         run: mkdir -p ~/.gradle && cp .github/ci-gradle.properties ~/.gradle/gradle.properties
@@ -222,8 +213,6 @@ jobs:
             echo "Nightly keystore secret is not available. This run's nightly is debug-signed and is not published."
           fi
 
-      # GitHub release APKs are only published from tags, and nightly is
-      # initWith(release), so regular runs build nightly in their place.
       - name: Build CI APKs
         if: ${{ !startsWith(github.ref, 'refs/tags/v') }}
         run: >
@@ -251,11 +240,6 @@ jobs:
           LASTFM_API_KEY: ${{ secrets.LASTFM_API_KEY }}
           LASTFM_API_SECRET: ${{ secrets.LASTFM_API_SECRET }}
 
-      # Guards the IzzyOnDroid/F-Droid update path: a wrong or missing key here
-      # is unrecoverable for installed users, so fail the build rather than
-      # publish. Skipped when no keystore was available, e.g. on fork PRs.
-      # Regular runs have only the FOSS release APKs; the nightly is checked
-      # against its own key in the next step.
       - name: Verify release signing certificate
         if: ${{ steps.keystore.outputs.signed == 'true' }}
         run: |
@@ -298,8 +282,6 @@ jobs:
           done
           exit $status
 
-      # The run number in the file name is how the in-app updater tells
-      # nightlies apart (GitHubRelease.toNightlyReleaseIfNewer).
       - name: Verify and name nightly APK
         if: ${{ !startsWith(github.ref, 'refs/tags/v') }}
         env:
@@ -368,7 +350,6 @@ jobs:
             exit 1
           fi
 
-      # The universal APKs are the README's download for any device; IzzyOnDroid ships the FOSS arm64-v8a APK.
       - name: Upload GitHub universal APK
         if: ${{ startsWith(github.ref, 'refs/tags/v') }}
         uses: actions/upload-artifact@v7
@@ -522,10 +503,6 @@ jobs:
           path: dist/
           merge-multiple: true
 
-      # chorplay.apk and chorplay-foss.apk are the universal builds and are a public
-      # contract: IzzyOnDroid matches release assets by file name, and the
-      # README links to them directly. Do not rename or drop them without
-      # first updating the IzzyOnDroid entry for io.github.pushkar.chorplay.
       - name: Rename APKs for release
         run: |
           set -euo pipefail

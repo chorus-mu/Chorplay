@@ -7,7 +7,7 @@ import org.junit.Assert.assertTrue
 import org.junit.Test
 
 /**
- * FLOW-SYNC/1 §7 chunk framing. The header/body separator is mandatory, so an **empty** collection
+ * CHOR-SYNC/1 §7 chunk framing. The header/body separator is mandatory, so an **empty** collection
  * must still go on the wire as `header` + `\n` — emitting a bare header is what made a phone with
  * no likes / no history / an empty playlist die on the desktop with
  * `codec: chunk frame missing header newline`.

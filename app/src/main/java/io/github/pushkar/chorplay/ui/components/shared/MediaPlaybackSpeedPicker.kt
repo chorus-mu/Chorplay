@@ -45,12 +45,12 @@ fun MediaPlaybackSpeedPicker(
         remember(customSpeedsEnabled, customSpeedPresetsRaw) {
             playbackSpeedOptions(customSpeedsEnabled, customSpeedPresetsRaw)
         }
-    FlowRowGroup(modifier = modifier.fillMaxWidth()) {
+    ChorRowGroup(modifier = modifier.fillMaxWidth()) {
         speeds.forEachIndexed { index, speed ->
-            FlowSelectionRow(
+            ChorSelectionRow(
                 title = playbackSpeedLabel(speed),
                 selected = speed == currentSpeed,
-                shape = flowRowGroupShape(index, speeds.size),
+                shape = chorRowGroupShape(index, speeds.size),
                 onClick = {
                     onSpeedSelected(speed)
                     onSpeedRowSelected(speed)

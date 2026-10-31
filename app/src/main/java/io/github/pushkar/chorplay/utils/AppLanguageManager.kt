@@ -22,7 +22,7 @@ data class AppLanguageOption(
 
 object AppLanguageManager {
     const val SYSTEM_DEFAULT = "system"
-    private const val PREFS_FILE = "flow_language_prefs"
+    private const val PREFS_FILE = "chorplay_language_prefs"
     private const val PREFS_KEY = "app_language_tag"
     private const val HANDED_OVER_KEY = "app_language_handed_to_system"
 

@@ -32,10 +32,10 @@ import io.github.pushkar.chorplay.data.audio.eq.EqLimits
 import io.github.pushkar.chorplay.data.audio.eq.EqState
 import io.github.pushkar.chorplay.data.audio.eq.isEdited
 import io.github.pushkar.chorplay.ui.components.shared.ChorplayFilterChip
-import io.github.pushkar.chorplay.ui.components.shared.FlowNavRow
-import io.github.pushkar.chorplay.ui.components.shared.FlowRowGroup
+import io.github.pushkar.chorplay.ui.components.shared.ChorNavRow
+import io.github.pushkar.chorplay.ui.components.shared.ChorRowGroup
 import io.github.pushkar.chorplay.ui.components.shared.ChorplaySwitchRow
-import io.github.pushkar.chorplay.ui.components.shared.flowRowGroupShape
+import io.github.pushkar.chorplay.ui.components.shared.chorRowGroupShape
 import io.github.pushkar.chorplay.ui.screens.equalizer.EqualizerViewModel
 import kotlinx.coroutines.flow.StateFlow
 import kotlin.math.roundToInt
@@ -45,10 +45,6 @@ private val PreviewHeight = 112.dp
 private val PreviewPadding = PaddingValues(horizontal = 12.dp, vertical = 8.dp)
 private val RowPadding = PaddingValues(horizontal = 16.dp, vertical = 12.dp)
 
-/**
- * The equalizer as the players show it: on/off, a picture of the curve, presets one tap away, bass
- * boost, and the way into the full page. The music Audio sheet and the video settings sheet both use it.
- */
 @Composable
 internal fun EqQuickPanel(
     onEdit: () -> Unit,
@@ -56,16 +52,16 @@ internal fun EqQuickPanel(
     viewModel: EqualizerViewModel = hiltViewModel(),
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
-    FlowRowGroup(modifier = modifier) {
+    ChorRowGroup(modifier = modifier) {
         ChorplaySwitchRow(
             title = stringResource(R.string.equalizer),
             supportingText = presetSummary(state),
             checked = state.enabled,
             onCheckedChange = viewModel::setEnabled,
             leadingIcon = Icons.Rounded.GraphicEq,
-            shape = flowRowGroupShape(0, ROWS),
+            shape = chorRowGroupShape(0, ROWS),
         )
-        PanelRow(shape = flowRowGroupShape(1, ROWS), onClick = onEdit) {
+        PanelRow(shape = chorRowGroupShape(1, ROWS), onClick = onEdit) {
             EqResponseGraph(
                 bands = state.active.curve.bands,
                 bassBoost = state.bassBoost,
@@ -74,7 +70,7 @@ internal fun EqQuickPanel(
                 modifier = Modifier.fillMaxWidth().height(PreviewHeight).padding(PreviewPadding),
             )
         }
-        PanelRow(shape = flowRowGroupShape(2, ROWS)) {
+        PanelRow(shape = chorRowGroupShape(2, ROWS)) {
             LazyRow(
                 contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp),
                 horizontalArrangement = Arrangement.spacedBy(8.dp),
@@ -95,14 +91,18 @@ internal fun EqQuickPanel(
                 }
             }
         }
-        PanelRow(shape = flowRowGroupShape(3, ROWS)) {
-            EqBassBoostSlider(value = state.bassBoost, onValueChange = viewModel::setBassBoost, modifier = Modifier.padding(RowPadding))
+        PanelRow(shape = chorRowGroupShape(3, ROWS)) {
+            EqBassBoostSlider(
+                value = state.bassBoost,
+                onValueChange = viewModel::setBassBoost,
+                modifier = Modifier.padding(RowPadding)
+            )
         }
-        FlowNavRow(
+        ChorNavRow(
             title = stringResource(R.string.eq_edit),
             onClick = onEdit,
             leadingIcon = Icons.Rounded.Tune,
-            shape = flowRowGroupShape(4, ROWS),
+            shape = chorRowGroupShape(4, ROWS),
         )
     }
 }
@@ -115,7 +115,11 @@ internal fun EqBassBoostSlider(
 ) {
     Column(modifier = modifier.fillMaxWidth()) {
         Row(verticalAlignment = Alignment.CenterVertically) {
-            Text(stringResource(R.string.eq_bass_boost), style = MaterialTheme.typography.bodyLarge, modifier = Modifier.weight(1f))
+            Text(
+                stringResource(R.string.eq_bass_boost),
+                style = MaterialTheme.typography.bodyLarge,
+                modifier = Modifier.weight(1f)
+            )
             Text(
                 text = if (value > 0.0) formatGain(value) else stringResource(R.string.off),
                 style = MaterialTheme.typography.bodyMedium,
@@ -130,13 +134,8 @@ internal fun EqBassBoostSlider(
     }
 }
 
-/**
- * The equalizer state, provided once by the app shell. The player sheets read it for their summary
- * rows instead of creating a ViewModel, so they still render in previews and tests without Hilt.
- */
 val LocalEqualizerState = staticCompositionLocalOf<StateFlow<EqState>?> { null }
 
-/** For a row that links to the equalizer: the playing preset, Off, or nothing when no state is provided. */
 @Composable
 internal fun equalizerSummary(): String? {
     val flow = LocalEqualizerState.current ?: return null
@@ -144,7 +143,6 @@ internal fun equalizerSummary(): String? {
     return if (state.enabled) activePresetName(state) else stringResource(R.string.off)
 }
 
-/** The preset name, and "Edited" when the curve has moved away from it. */
 @Composable
 internal fun presetSummary(state: EqState): String {
     val name = activePresetName(state)
@@ -155,7 +153,6 @@ internal fun presetSummary(state: EqState): String {
     }
 }
 
-/** A free-form row inside a [FlowRowGroup], on the same container and shape as the kit's rows. */
 @Composable
 internal fun PanelRow(
     shape: Shape,

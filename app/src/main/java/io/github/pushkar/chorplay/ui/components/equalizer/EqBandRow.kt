@@ -18,7 +18,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import io.github.pushkar.chorplay.R
 import io.github.pushkar.chorplay.data.audio.eq.EqBand
-import io.github.pushkar.chorplay.ui.components.shared.FlowNavRow
+import io.github.pushkar.chorplay.ui.components.shared.ChorNavRow
 import io.github.pushkar.chorplay.ui.components.shared.ChorplaySwitch
 
 private val BadgeSize = 32.dp
@@ -37,7 +37,7 @@ internal fun EqBandRow(
     selected: Boolean = false,
 ) {
     val q = stringResource(R.string.eq_band_q, formatQ(band.q))
-    FlowNavRow(
+    ChorNavRow(
         title = stringResource(R.string.eq_band_line, stringResource(band.type.labelRes), formatFrequency(band.frequency)),
         supportingText = if (band.type.hasGain) stringResource(R.string.eq_band_line, formatGain(band.gain), q) else q,
         onClick = onClick,

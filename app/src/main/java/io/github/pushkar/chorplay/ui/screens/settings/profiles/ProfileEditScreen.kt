@@ -36,7 +36,7 @@ import io.github.pushkar.chorplay.ui.components.profiles.profilePhotoRequest
 import io.github.pushkar.chorplay.ui.components.settings.SettingsPage
 import io.github.pushkar.chorplay.ui.components.shared.ChorplayConnectedToggleGroup
 import io.github.pushkar.chorplay.ui.components.shared.ChorplaySwitchRow
-import io.github.pushkar.chorplay.ui.components.shared.FlowToggleOption
+import io.github.pushkar.chorplay.ui.components.shared.ChorToggleOption
 import io.github.pushkar.chorplay.ui.components.shared.LocalDpadNavigation
 
 private val PreviewSize = 88.dp
@@ -168,8 +168,8 @@ internal fun ProfileEditScreen(
                 ChorplayConnectedToggleGroup(
                     options =
                         listOf(
-                            FlowToggleOption(false, stringResource(R.string.profiles_start_fresh)),
-                            FlowToggleOption(true, stringResource(R.string.profiles_copy_from, runningName)),
+                            ChorToggleOption(false, stringResource(R.string.profiles_start_fresh)),
+                            ChorToggleOption(true, stringResource(R.string.profiles_copy_from, runningName)),
                         ),
                     selected = copying,
                     onSelected = { copying = it },

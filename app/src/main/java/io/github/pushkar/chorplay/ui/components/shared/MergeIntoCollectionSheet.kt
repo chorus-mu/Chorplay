@@ -63,7 +63,7 @@ fun MergeIntoCollectionSheet(
 ) {
     ModalBottomSheet(
         onDismissRequest = onDismiss,
-        sheetState = rememberFlowSheetState(),
+        sheetState = rememberChorSheetState(),
         containerColor = MaterialTheme.colorScheme.surface,
     ) {
         Column(

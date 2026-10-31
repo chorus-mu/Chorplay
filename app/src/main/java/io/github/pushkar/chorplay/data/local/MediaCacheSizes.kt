@@ -4,8 +4,6 @@ package io.github.pushkar.chorplay.data.local
 data class MediaCacheLimits(
     /** The video and Shorts cache; 0 means unlimited. */
     val videoBytes: Long,
-    /** The song and animated artwork cache; 0 means unlimited. */
-    val musicBytes: Long,
     /** The image cache; null leaves the size to Coil. */
     val artworkBytes: Long?,
 ) {
@@ -13,7 +11,6 @@ data class MediaCacheLimits(
         val DEFAULT =
             MediaCacheLimits(
                 videoBytes = MediaCacheSizes.mediaBytes(MediaCacheSizes.DEFAULT_MEDIA_MB),
-                musicBytes = MediaCacheSizes.mediaBytes(MediaCacheSizes.DEFAULT_MEDIA_MB),
                 artworkBytes = MediaCacheSizes.artworkBytes(MediaCacheSizes.ARTWORK_AUTOMATIC_MB),
             )
     }

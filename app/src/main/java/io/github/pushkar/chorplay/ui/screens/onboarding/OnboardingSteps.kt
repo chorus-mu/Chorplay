@@ -27,7 +27,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import io.github.pushkar.chorplay.data.backup.BackupOperation
 import io.github.pushkar.chorplay.data.backup.ImportKind
-import io.github.pushkar.chorplay.ui.components.shared.FlowMaxContentWidth
+import io.github.pushkar.chorplay.ui.components.shared.ChorMaxContentWidth
 import io.github.pushkar.chorplay.ui.utils.LocalWindowSizeClass
 import io.github.pushkar.chorplay.ui.utils.isExpandedWidth
 
@@ -36,7 +36,6 @@ private const val SIDE_PANE_WEIGHT = 0.4f
 private val StepPadding = PaddingValues(horizontal = 24.dp, vertical = 8.dp)
 private val PanePadding = PaddingValues(horizontal = 40.dp, vertical = 8.dp)
 
-/** What a step needs from the screen besides its state. */
 internal class StepActions(
     val viewModel: OnboardingViewModel,
     val onPick: (ImportKind) -> Unit,
@@ -44,10 +43,6 @@ internal class StepActions(
     val onInterestsRevealed: () -> Unit,
 )
 
-/**
- * The step on screen, sliding between steps while the hero flies from one to the next. From 840 dp
- * the middle steps put their hero, title and subtitle in a start pane beside the list.
- */
 @Composable
 internal fun SharedTransitionScope.OnboardingSteps(
     state: OnboardingUiState,
@@ -66,7 +61,7 @@ internal fun SharedTransitionScope.OnboardingSteps(
         transitionSpec = {
             val direction = if (targetState.index > initialState.index) 1 else -1
             (slideInHorizontally(slide) { direction * it / 4 } + fadeIn(fade)) togetherWith
-                (slideOutHorizontally(slide) { -direction * it / 4 } + fadeOut(fade))
+                    (slideOutHorizontally(slide) { -direction * it / 4 } + fadeOut(fade))
         },
         modifier = Modifier.fillMaxSize(),
         label = "onboardingStep",
@@ -104,7 +99,18 @@ internal fun SharedTransitionScope.OnboardingSteps(
                 Row(Modifier.fillMaxSize()) {
                     StepSidePane(hero, copy, Modifier.weight(SIDE_PANE_WEIGHT).fillMaxHeight())
                     Box(Modifier.weight(1f - SIDE_PANE_WEIGHT).fillMaxHeight()) {
-                        Readable { StepBody(step, state, importOperation, newVideoAlerts, interestsRevealed, actions, {}, PanePadding) }
+                        Readable {
+                            StepBody(
+                                step,
+                                state,
+                                importOperation,
+                                newVideoAlerts,
+                                interestsRevealed,
+                                actions,
+                                {},
+                                PanePadding
+                            )
+                        }
                     }
                 }
             }
@@ -161,9 +167,6 @@ private fun StepBody(
             )
         }
 
-        OnboardingStep.ARTISTS -> {
-            ArtistsStep(picker = viewModel.artists, header = header, contentPadding = contentPadding)
-        }
 
         OnboardingStep.ALERTS -> {
             AlertsStep(
@@ -191,11 +194,10 @@ private fun StepBody(
     }
 }
 
-/** Caps [content] at a readable width and centres it, for tablets and unfolded foldables. */
 @Composable
 private fun Readable(content: @Composable () -> Unit) {
     Box(Modifier.fillMaxSize(), contentAlignment = Alignment.TopCenter) {
-        Box(Modifier.widthIn(max = FlowMaxContentWidth).fillMaxSize()) { content() }
+        Box(Modifier.widthIn(max = ChorMaxContentWidth).fillMaxSize()) { content() }
     }
 }
 

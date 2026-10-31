@@ -64,7 +64,7 @@ internal class NeuroCategoryStore(
                 ProfileFiles.dataStore(
                     appContext,
                     StoreScope.PROFILE_PRIVATE,
-                    "flow_neuro_categories_v1.json"
+                    "chorplay_neuro_categories_v1.json"
                 )
             },
         )

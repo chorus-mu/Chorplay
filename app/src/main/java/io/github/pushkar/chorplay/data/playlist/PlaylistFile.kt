@@ -5,7 +5,7 @@ import io.github.pushkar.chorplay.utils.ThumbnailUrlResolver
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 
-private const val FORMAT = "flow-playlist"
+private const val FORMAT = "chorplay-playlist"
 private const val VERSION = 1
 private const val MAX_FILE_NAME_LENGTH = 80
 private val VideoIdPattern = Regex("^[A-Za-z0-9_-]{11}$")
@@ -61,16 +61,12 @@ data class PlaylistFileVideo(
         )
 }
 
-/** What reading a file found. */
 sealed interface PlaylistFileRead {
     data class Read(
         val file: PlaylistFile,
     ) : PlaylistFileRead
 
-    /** Not JSON, or JSON of some other kind. */
     data object NotAPlaylist : PlaylistFileRead
-
-    /** Written by a newer Chorplay in a format this one cannot read. */
     data object TooNew : PlaylistFileRead
 }
 
@@ -123,7 +119,7 @@ object PlaylistFileCodec {
             file == null || file.format != FORMAT -> PlaylistFileRead.NotAPlaylist
             file.version > VERSION -> PlaylistFileRead.TooNew
             else -> PlaylistFileRead.Read(file.copy(videos = file.videos.filter { VideoIdPattern.matches(it.id) }
-                                .distinctBy { it.id }))
+                .distinctBy { it.id }))
         }
     }
 

@@ -161,7 +161,7 @@ fun SearchScreen(
                     onFill = state.textFieldState::setTextAndPlaceCursorAtEnd,
                     onDeleteHistoryItem = state::deleteHistoryItem,
                     onClearHistory = state::clearHistory,
-                    deepFlow = state.deepFlow,
+                    deepChor = state.deepChor,
                     onDeepChorplayChange = state::setDeepChorplayEnabled,
                 )
                 return@Column

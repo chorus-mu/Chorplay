@@ -154,7 +154,7 @@ enum class InteractionType {
 
 // ── Persona ──
 
-enum class FlowPersona(
+enum class ChorPersona(
     @StringRes val titleRes: Int,
     @StringRes val descriptionRes: Int,
     val icon: String,

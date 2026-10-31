@@ -61,7 +61,7 @@ data class Received(
 )
 
 /**
- * One sync of this device's group, for the worker and for Sync now. Like FLOW-SYNC/1 it runs only
+ * One sync of this device's group, for the worker and for Sync now. Like CHOR-SYNC/1 it runs only
  * in the Default profile, and one at a time.
  */
 @Singleton

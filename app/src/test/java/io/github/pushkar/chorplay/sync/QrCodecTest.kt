@@ -29,7 +29,7 @@ class QrCodecTest {
         assertEquals("192.168.1.42", qr.ip)
         assertEquals(49210, qr.port)
         assertEquals("Chorplay Desktop (Windows)", qr.deviceName)
-        assertEquals(listOf("ws://192.168.1.42:49210/flow-sync"), qr.wsUrls)
+        assertEquals(listOf("ws://192.168.1.42:49210/chor-sync"), qr.wsUrls)
     }
 
     @Test
@@ -75,7 +75,7 @@ class QrCodecTest {
         val qr = (QrCodec.parse(text, nowEpochSeconds = 1L) as QrCodec.Result.Ok).qr
 
         assertEquals(
-            listOf("ws://192.168.1.4:5000/flow-sync", "ws://10.0.0.7:5000/flow-sync", "ws://[fd12::1]:5000/flow-sync"),
+            listOf("ws://192.168.1.4:5000/chor-sync", "ws://10.0.0.7:5000/chor-sync", "ws://[fd12::1]:5000/chor-sync"),
             qr.wsUrls,
         )
     }

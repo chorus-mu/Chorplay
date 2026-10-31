@@ -40,7 +40,7 @@ import io.github.pushkar.chorplay.player.EnhancedPlayerManager
 import io.github.pushkar.chorplay.player.PictureInPictureHelper
 import io.github.pushkar.chorplay.player.toDisplayAspectRatioOrNull
 import io.github.pushkar.chorplay.ui.components.shared.clipToCornerRadius
-import io.github.pushkar.chorplay.ui.components.shared.flowPlayerViewLayout
+import io.github.pushkar.chorplay.ui.components.shared.chorPlayerViewLayout
 import io.github.pushkar.chorplay.ui.components.videoplayer.ambient.VideoAmbientBackground
 import io.github.pushkar.chorplay.ui.components.videoplayer.ambient.rememberAmbientFrame
 
@@ -73,7 +73,7 @@ fun VideoPlayerSurface(
     val playerView =
         remember {
             Log.d("EnhancedVideoPlayer", "Creating shared PlayerView (sdk=${Build.VERSION.SDK_INT})")
-            (LayoutInflater.from(context).inflate(flowPlayerViewLayout(), null) as PlayerView).apply {
+            (LayoutInflater.from(context).inflate(chorPlayerViewLayout(), null) as PlayerView).apply {
                 layoutParams =
                     FrameLayout.LayoutParams(
                         ViewGroup.LayoutParams.MATCH_PARENT,

@@ -59,8 +59,8 @@ import io.github.pushkar.chorplay.ui.components.layout.topbar.ChorplayTopBar
 import io.github.pushkar.chorplay.ui.components.layout.topbar.ChorplayTopBarMenuItem
 import io.github.pushkar.chorplay.ui.components.layout.topbar.ChorplayTopBarOverflow
 import io.github.pushkar.chorplay.ui.components.shared.ChorplayModalSheetDefaults
-import io.github.pushkar.chorplay.ui.components.shared.rememberFlowPaneState
-import io.github.pushkar.chorplay.ui.components.shared.rememberFlowSheetState
+import io.github.pushkar.chorplay.ui.components.shared.rememberChorPaneState
+import io.github.pushkar.chorplay.ui.components.shared.rememberChorSheetState
 import io.github.pushkar.chorplay.utils.shareLink
 import kotlinx.coroutines.launch
 
@@ -87,7 +87,7 @@ fun EqualizerScreen(
     var dialog by remember { mutableStateOf<EqDialog?>(null) }
     val hasSystemEqualizer = remember { viewModel.systemEqualizerIntent() != null }
     val undoLabel = stringResource(R.string.undo)
-    val panes = rememberFlowPaneState()
+    val panes = rememberChorPaneState()
     val twoPane = !inSettings && panes.showsSidePane
 
     val openFile = rememberLauncherForActivityResult(ActivityResultContracts.OpenDocument()) { uri -> uri?.let(viewModel::importFromFile) }
@@ -223,7 +223,7 @@ private fun BandSheet(
 ) {
     ModalBottomSheet(
         onDismissRequest = onDismiss,
-        sheetState = rememberFlowSheetState(),
+        sheetState = rememberChorSheetState(),
         modifier = ChorplayModalSheetDefaults.modifier,
         contentWindowInsets = ChorplayModalSheetDefaults.contentWindowInsets,
     ) {

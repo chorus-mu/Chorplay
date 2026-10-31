@@ -14,16 +14,20 @@ internal class ProfileFolders(
     private val dataDir: File,
 ) {
     private val roots =
-        listOf(File(filesDir, "profile_settings"), File(filesDir, "profile_library"), File(noBackupFilesDir, "profiles"))
+        listOf(
+            File(filesDir, "profile_settings"),
+            File(filesDir, "profile_library"),
+            File(noBackupFilesDir, "profiles")
+        )
     private val sharedPrefsDir = File(dataDir, "shared_prefs")
 
     fun of(id: String): List<File> {
         require(isSafeProfileId(id)) { "Unsafe profile id" }
         val profile = RunningProfile(id = id, isDefault = false)
         return roots.map { File(it, id) } +
-            File(dataDir, "app_webview_$id") +
-            ProfileAvatarPhotos.fileIn(filesDir, id) +
-            PER_PROFILE_PREFS.map { File(sharedPrefsDir, "${ProfileFiles.sharedPreferencesName(profile, it)}.xml") }
+                File(dataDir, "app_webview_$id") +
+                ProfileAvatarPhotos.fileIn(filesDir, id) +
+                PER_PROFILE_PREFS.map { File(sharedPrefsDir, "${ProfileFiles.sharedPreferencesName(profile, it)}.xml") }
     }
 
     /** Deletes [id]'s files and returns what it removed. */
@@ -43,8 +47,7 @@ internal class ProfileFolders(
     }
 
     companion object {
-        /** SharedPreferences files named per profile through [ProfileFiles.sharedPreferencesName]. */
-        val PER_PROFILE_PREFS = listOf("youtube_identity", "music_home_cache_prefs")
+        val PER_PROFILE_PREFS = listOf("youtube_identity")
 
         fun of(context: Context): ProfileFolders =
             context.applicationContext.let { ProfileFolders(it.filesDir, it.noBackupFilesDir, it.dataDir) }

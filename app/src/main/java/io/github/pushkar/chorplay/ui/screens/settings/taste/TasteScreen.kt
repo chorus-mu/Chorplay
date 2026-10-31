@@ -28,15 +28,14 @@ import io.github.pushkar.chorplay.ui.components.settings.SettingsPage
 import io.github.pushkar.chorplay.ui.components.settings.SettingsTarget
 import io.github.pushkar.chorplay.ui.components.shared.ChorplayAlertDialog
 import io.github.pushkar.chorplay.ui.components.shared.ChorplayLoadingIndicator
-import io.github.pushkar.chorplay.ui.components.shared.deepFlowStatus
+import io.github.pushkar.chorplay.ui.components.shared.deepChorStatus
 import kotlinx.coroutines.launch
 import java.time.LocalDate
 
 private val LoadingHeight = 240.dp
 
-private enum class ResetKind { VIDEO, MUSIC }
+private enum class ResetKind { VIDEO }
 
-/** How Chorplay sees the viewer, with the levers that change it. */
 @Composable
 internal fun TasteScreen(
     onBack: (() -> Unit)?,
@@ -46,7 +45,7 @@ internal fun TasteScreen(
     viewModel: TasteViewModel = hiltViewModel(),
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
-    val deepFlow by viewModel.deepFlow.collectAsStateWithLifecycle()
+    val deepChor by viewModel.deepChor.collectAsStateWithLifecycle()
     val operation by viewModel.operation.collectAsStateWithLifecycle()
     val snackbarHostState = remember { SnackbarHostState() }
     val scope = rememberCoroutineScope()
@@ -64,7 +63,6 @@ internal fun TasteScreen(
             }
         viewModel.dismissOperation()
         viewModel.reload()
-        // Dismissing changes this effect's key, which would cancel a snackbar shown from here.
         scope.launch { snackbarHostState.showSnackbar(message) }
     }
     LaunchedEffect(notice) {
@@ -76,13 +74,19 @@ internal fun TasteScreen(
 
     val start: (Uri?, (Uri) -> Boolean) -> Unit = { uri, action -> if (uri != null && !action(uri)) notice = busy }
     val exportVideo =
-        rememberLauncherForActivityResult(ActivityResultContracts.CreateDocument(JSON)) { uri -> start(uri, viewModel::exportVideoProfile) }
-    val exportMusic =
-        rememberLauncherForActivityResult(ActivityResultContracts.CreateDocument(JSON)) { uri -> start(uri, viewModel::exportMusicProfile) }
+        rememberLauncherForActivityResult(ActivityResultContracts.CreateDocument(JSON)) { uri ->
+            start(
+                uri,
+                viewModel::exportVideoProfile
+            )
+        }
     val importVideo =
-        rememberLauncherForActivityResult(ActivityResultContracts.OpenDocument()) { uri -> start(uri, viewModel::importVideoProfile) }
-    val importMusic =
-        rememberLauncherForActivityResult(ActivityResultContracts.OpenDocument()) { uri -> start(uri, viewModel::importMusicProfile) }
+        rememberLauncherForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
+            start(
+                uri,
+                viewModel::importVideoProfile
+            )
+        }
     val hiddenLabel = hiddenCountLabel(state.hidden.count)
     val noQueriesLabel = stringResource(R.string.diagnostics_engine_queries_none)
     val startersLabel =
@@ -91,7 +95,7 @@ internal fun TasteScreen(
             ?.takeIf { it.isNotEmpty() }
             ?.let { stringResource(R.string.taste_starter_searches_detail, it.joinToString(", ")) }
     val pausedLabel = stringResource(R.string.taste_learning_paused)
-    val pausedStatus = deepFlowStatus(deepFlow)
+    val pausedStatus = deepChorStatus(deepChor)
 
     val actions =
         remember(viewModel) {
@@ -102,15 +106,11 @@ internal fun TasteScreen(
                 onForgetChannel = viewModel::forgetChannel,
                 onClearChannelMemory = viewModel::clearChannelMemory,
                 onOpenHidden = { onNavigate(SettingsTarget(SettingsDestination.HIDDEN_CONTENT)) },
-                onOpenFavouriteArtists = { onNavigate(SettingsTarget(SettingsDestination.FAVOURITE_ARTISTS)) },
                 onOpenDiscoverChannels = { onNavigate(SettingsTarget(SettingsDestination.DISCOVER_CHANNELS)) },
                 onOpenRecap = onOpenRecap,
-                onExportVideo = { exportVideo.launch("flow_video_profile_${LocalDate.now()}.json") },
+                onExportVideo = { exportVideo.launch("chorplay_video_profile_${LocalDate.now()}.json") },
                 onImportVideo = { importVideo.launch(arrayOf(JSON)) },
                 onResetVideo = { confirmReset = ResetKind.VIDEO },
-                onExportMusic = { exportMusic.launch("flow_music_profile_${LocalDate.now()}.json") },
-                onImportMusic = { importMusic.launch(arrayOf(JSON)) },
-                onResetMusic = { confirmReset = ResetKind.MUSIC },
             )
         }
 
@@ -130,8 +130,8 @@ internal fun TasteScreen(
 
     confirmReset?.let { kind ->
         val video = kind == ResetKind.VIDEO
-        val title = if (video) R.string.reset_profile_dialog_title else R.string.taste_reset_music_title
-        val body = if (video) R.string.taste_reset_video_body else R.string.taste_reset_music_body
+        val title = R.string.reset_profile_dialog_title
+        val body = R.string.taste_reset_video_body
         ChorplayAlertDialog(
             onDismissRequest = { confirmReset = null },
             title = { Text(stringResource(title)) },
@@ -139,7 +139,7 @@ internal fun TasteScreen(
             confirmButton = {
                 TextButton(
                     onClick = {
-                        if (video) viewModel.resetVideoProfile() else viewModel.resetMusicProfile()
+                        viewModel.resetVideoProfile()
                         confirmReset = null
                         notice = resetDone
                     },

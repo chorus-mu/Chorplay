@@ -12,18 +12,6 @@ import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 import kotlinx.serialization.json.JsonElement
 
-/**
- * Platform-neutral canonical records exchanged over FLOW-SYNC/1.
- *
- * Conventions: epoch **milliseconds** for all times; `progress` is a 0..1 fraction;
- * `durationSeconds` is integer seconds; deletions are **tombstones** (`deleted=true`), never
- * omissions; every mergeable record carries an `hlc` string. Android maps its
- * Room/DataStore/brain values to/from these in `sync/mapping`.
- *
- * These types are the unit the merge engine operates on, so they are deliberately decoupled
- * from both DB schemas. Keep field names in sync with the desktop `canonical.rs`.
- */
-
 @Serializable
 data class CanonicalWatchHistory(
     val videoId: String,
@@ -43,7 +31,6 @@ data class CanonicalWatchHistory(
 @Serializable
 data class CanonicalPlaylistItem(
     val videoId: String,
-    /** Ascending display rank (0-based).*/
     val position: Long = 0,
     val addedAtMs: Long = 0,
     val deleted: Boolean = false,
@@ -74,13 +61,10 @@ data class CanonicalPlaylist(
     companion object {
         const val ORIGIN_LOCAL = "local"
         const val ORIGIN_YOUTUBE = "youtube"
-
-        /** Reserved id for the cross-platform Watch Later playlist */
         const val RESERVED_WATCH_LATER = "reserved:watch-later"
     }
 }
 
-/** Minimal display metadata for a like (desktop §6.3 `meta`). `artist` ⇄ Android `channelName`. */
 @Serializable
 data class CanonicalLikeMeta(
     val title: String = "",
@@ -90,9 +74,9 @@ data class CanonicalLikeMeta(
 
 @Serializable
 data class CanonicalLike(
-    val kind: String, // "video" | "music"
+    val kind: String,
     val id: String,
-    val state: String, // "liked" | "disliked" | "none"
+    val state: String,
     val updatedAtMs: Long = 0,
     val hlc: String = "",
     val meta: CanonicalLikeMeta = CanonicalLikeMeta(),
@@ -109,7 +93,6 @@ data class CanonicalLike(
     }
 }
 
-/** A single synced setting. [value] is a typed JSON primitive; the mapper coerces per key. */
 @Serializable
 data class CanonicalSetting(
     val key: String,
@@ -142,7 +125,7 @@ data class CanonicalSubscriptionGroup(
     val sortOrder: Int = 0,
     val hlc: String = "",
     val deleted: Boolean = false,
-    /** Each channel's own stamp, so a removal can sync; `channelIds` stays the live list for apps without it. */
+
     @OptIn(ExperimentalSerializationApi::class)
     @EncodeDefault(EncodeDefault.Mode.NEVER)
     val members: List<CanonicalGroupMember> = emptyList(),
@@ -155,14 +138,6 @@ data class CanonicalGroupMember(
     val deleted: Boolean = false,
 )
 
-/**
- * One channel the user follows. Unsubscribing is a **tombstone** (`deleted=true`) carrying the
- * moment it happened, not an omission — otherwise the peer's copy simply re-subscribes the channel
- * on the next merge.
- *
- * Per-device concerns (notification opt-in, feed-fetch bookkeeping) are deliberately not on the
- * wire: whether a channel should buzz *this* phone is not a property of the subscription.
- */
 @Serializable
 data class CanonicalSubscribedChannel(
     val channelId: String,
@@ -174,15 +149,6 @@ data class CanonicalSubscribedChannel(
     val deleted: Boolean = false,
 )
 
-// --- Brain CRDT primitives (wire forms must match the desktop's `canonical.rs` byte for byte) ---
-
-/**
- * G-Counter: per-device sub-counts; value = sum; merge = per-device max.
- *
- * The **wire form is the `{device: count}` map itself** (desktop plan §6.5), not an object wrapping
- * it. Android used to emit `{"perDevice":{...}}`, which the desktop rejected outright with
- * `invalid type: map, expected u64` — the hard parse failure behind the "brain sync fails" reports.
- */
 @Serializable(with = GCounterSerializer::class)
 data class GCounter(
     val perDevice: Map<String, Long> = emptyMap(),
@@ -212,13 +178,6 @@ object GCounterSerializer : KSerializer<GCounter> {
     override fun deserialize(decoder: Decoder): GCounter = GCounter(delegate.deserialize(decoder))
 }
 
-/**
- * Observed-remove set: member to the HLC of its latest add / latest remove. A member is present iff
- * its add stamp is >= its remove stamp (add wins on tie).
- *
- * The tombstones are the point: a plain `Set<String>` can express "blocked" but has no way to say
- * "explicitly unblocked", so an unblock on one device could never propagate to the other.
- */
 @Serializable
 data class OrSet(
     val adds: Map<String, String> = emptyMap(),
@@ -260,7 +219,6 @@ data class OrSet(
     }
 }
 
-/** Last-write-wins register; the higher HLC wins, the device id inside it breaking ties. */
 @Serializable
 data class Lww<T>(
     val value: T,
@@ -269,13 +227,6 @@ data class Lww<T>(
     fun merge(other: Lww<T>): Lww<T> = if (Hlc.compareEncoded(other.hlc, hlc) > 0) other else this
 }
 
-// --- Brain ---
-
-/**
- * A topic vector plus its scalar "dimensions". The desktop models the scalars as a nested [dims]
- * map (`duration`/`pacing`/`complexity`/`isLive`, camelCase); Android used to inline them as
- * siblings of [topics], so serde dropped every one of them on ingest.
- */
 @Serializable
 data class CanonicalVector(
     val topics: Map<String, Double> = emptyMap(),
@@ -323,11 +274,6 @@ data class CanonicalFeedEntry(
     val showCount: Int = 0,
 )
 
-/**
- * Repeat-offender counter for a channel. Android's brain has no strike concept, so it ships this
- * map empty — but the field must exist, or a round-trip through a phone would silently erase the
- * desktop's strikes.
- */
 @Serializable
 data class CanonicalChannelStrike(
     val count: Int = 0,
@@ -335,10 +281,6 @@ data class CanonicalChannelStrike(
     val lastAt: Long = 0,
 )
 
-/**
- * [negativeSignals] is carried for wire parity with the desktop only: Android's on-disk brain does
- * not persist it (addendum §10), so Android always emits 0 and never reads it back.
- */
 @Serializable
 data class CanonicalTopicEvidence(
     val positiveSignals: Int = 0,
@@ -352,10 +294,6 @@ data class CanonicalTopicEvidence(
     val lastSeenAt: Long = 0,
 )
 
-/**
- * The blendable, experience-weighted learned vectors. [shortsVector] is null for a device that has
- * none (the desktop), which the blend must skip rather than average in as zeros.
- */
 @Serializable
 data class CanonicalBrainVectors(
     val globalVector: CanonicalVector = CanonicalVector(),
@@ -372,7 +310,6 @@ data class BrainCounters(
     val totalInteractions: GCounter = GCounter(),
 )
 
-/** Max-register merge per key. Android has no `watchSignalProgress`; it round-trips untouched. */
 @Serializable
 data class BrainPerVideo(
     val watchHistoryMap: Map<String, Float> = emptyMap(),
@@ -401,16 +338,6 @@ data class BrainFlags(
     val hasCompletedOnboarding: Boolean = false,
 )
 
-/**
- * The canonical brain — a field-for-field mirror of the desktop's `FlowNeuroBrainSnapshot`
- * (desktop plan §6.5). It is shipped as this device's contribution snapshot; the receiver merges it
- * into its own. Counters are G-Counters, sets are OR-Sets, `lwwMaps` entries are HLC-stamped
- * registers, and `perVideo` progress is a max-register.
- *
- * `seenShortsHistory` is deliberately **absent**: it is an Android-local dedup cache with no
- * desktop counterpart, which the desktop discarded silently. Cross-device shorts dedup needs a
- * spec change (a `perVideo` entry) before it can go back on the wire.
- */
 @Serializable
 data class CanonicalBrain(
     val schema: Int = 13,

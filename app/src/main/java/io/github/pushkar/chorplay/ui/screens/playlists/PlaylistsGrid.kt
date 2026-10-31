@@ -12,7 +12,6 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.grid.itemsIndexed
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.PlaylistPlay
-import androidx.compose.material.icons.filled.MusicNote
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -22,8 +21,7 @@ import io.github.pushkar.chorplay.R
 import io.github.pushkar.chorplay.data.model.PlaylistInfo
 import io.github.pushkar.chorplay.ui.components.PlaylistCard
 import io.github.pushkar.chorplay.ui.components.PlaylistCardLayout
-import io.github.pushkar.chorplay.ui.components.layout.flowBottomContentPadding
-import io.github.pushkar.chorplay.ui.components.library.MusicPlaylistLibraryCard
+import io.github.pushkar.chorplay.ui.components.layout.chorBottomContentPadding
 import io.github.pushkar.chorplay.ui.components.library.libraryGridLayoutFor
 import io.github.pushkar.chorplay.ui.components.shared.ChorplayEmptyState
 import io.github.pushkar.chorplay.ui.components.shared.MediaKind
@@ -36,18 +34,13 @@ private val GridTopPadding = 8.dp
 
 internal class PlaylistsGridActions(
     val onVideoClick: (PlaylistInfo) -> Unit,
-    val onMusicClick: (PlaylistInfo) -> Unit,
     val onVideoDelete: (PlaylistInfo) -> Unit,
-    val onMusicDownload: (PlaylistInfo) -> Unit,
-    val onMusicRename: (PlaylistInfo) -> Unit,
-    val onMusicDelete: (PlaylistInfo) -> Unit,
 )
 
 @Composable
 internal fun PlaylistsGrid(
     kind: MediaKind,
     playlists: List<PlaylistInfo>,
-    ownedMusicIds: Set<String>,
     compact: Boolean,
     actions: PlaylistsGridActions,
 ) {
@@ -74,63 +67,51 @@ internal fun PlaylistsGrid(
                     start = sidePadding,
                     top = GridTopPadding,
                     end = sidePadding,
-                    bottom = flowBottomContentPadding(),
+                    bottom = chorBottomContentPadding(),
                 ),
             verticalArrangement = Arrangement.spacedBy(if (compact) 0.dp else GridSpacing),
             horizontalArrangement = Arrangement.spacedBy(if (videoCards) videoGrid.spacing else GridSpacing),
         ) {
             when {
-                playlists.isEmpty() -> emptyPlaylists(kind)
-                compact -> compactPlaylists(kind, playlists, ownedMusicIds, actions)
-                kind == MediaKind.Videos -> videoPlaylistCards(playlists, videoCards, partialRows, actions)
-                else -> musicPlaylistCards(playlists, ownedMusicIds, actions)
+                playlists.isEmpty() -> emptyPlaylists()
+                compact -> compactPlaylists(playlists, actions)
+                else -> videoPlaylistCards(playlists, videoCards, partialRows, actions)
             }
         }
     }
 }
 
-private fun LazyGridScope.emptyPlaylists(kind: MediaKind) {
+private fun LazyGridScope.emptyPlaylists() {
     item(
-        key = if (kind == MediaKind.Videos) "empty-video-playlists" else "empty-music-playlists",
+        key = "empty-video-playlists",
         span = { GridItemSpan(maxLineSpan) },
         contentType = "empty",
     ) {
-        if (kind == MediaKind.Videos) {
-            ChorplayEmptyState(
-                title = stringResource(R.string.no_playlists_found),
-                icon = Icons.AutoMirrored.Outlined.PlaylistPlay,
-            )
-        } else {
-            ChorplayEmptyState(
-                title = stringResource(R.string.empty_music_playlists),
-                icon = Icons.Default.MusicNote,
-            )
-        }
+        ChorplayEmptyState(
+            title = stringResource(R.string.no_playlists_found),
+            icon = Icons.AutoMirrored.Outlined.PlaylistPlay,
+        )
     }
 }
 
 private fun LazyGridScope.compactPlaylists(
-    kind: MediaKind,
     playlists: List<PlaylistInfo>,
-    ownedMusicIds: Set<String>,
     actions: PlaylistsGridActions,
 ) {
-    val isMusic = kind == MediaKind.Music
     items(
         items = playlists,
-        key = { "${kind.name}-compact-${it.id}" },
+        key = { "compact-${it.id}" },
         contentType = { "compact-playlist" },
     ) { playlist ->
-        val isOwned = playlist.id in ownedMusicIds
         PlaylistCompactRow(
             playlist = playlist,
-            isMusic = isMusic,
-            onClick = { if (isMusic) actions.onMusicClick(playlist) else actions.onVideoClick(playlist) },
+            isMusic = false,
+            onClick = { actions.onVideoClick(playlist) },
             trailing = {
                 PlaylistRowMenuButton(
-                    onDownload = if (isMusic && isOwned) ({ actions.onMusicDownload(playlist) }) else null,
-                    onRename = if (isMusic && isOwned) ({ actions.onMusicRename(playlist) }) else null,
-                    onDelete = { if (isMusic) actions.onMusicDelete(playlist) else actions.onVideoDelete(playlist) },
+                    onDownload = null,
+                    onRename = null,
+                    onDelete = { actions.onVideoDelete(playlist) },
                 )
             },
         )
@@ -162,27 +143,6 @@ private fun LazyGridScope.videoPlaylistCards(
                     PlaylistCardLayout.LIST
                 },
             useInternalPadding = false,
-        )
-    }
-}
-
-private fun LazyGridScope.musicPlaylistCards(
-    playlists: List<PlaylistInfo>,
-    ownedMusicIds: Set<String>,
-    actions: PlaylistsGridActions,
-) {
-    items(
-        items = playlists,
-        key = { "music-${it.id}" },
-        contentType = { "music-playlist" },
-    ) { playlist ->
-        val isOwned = playlist.id in ownedMusicIds
-        MusicPlaylistLibraryCard(
-            playlist = playlist,
-            onClick = { actions.onMusicClick(playlist) },
-            onDownload = if (isOwned) ({ actions.onMusicDownload(playlist) }) else null,
-            onRename = if (isOwned) ({ actions.onMusicRename(playlist) }) else null,
-            onDelete = { actions.onMusicDelete(playlist) },
         )
     }
 }

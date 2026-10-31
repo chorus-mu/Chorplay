@@ -16,7 +16,7 @@ import io.github.pushkar.chorplay.ui.screens.settings.appearance.theme.ThemeScre
 import io.github.pushkar.chorplay.ui.screens.settings.backup.BackupScreen
 import io.github.pushkar.chorplay.ui.screens.settings.content.ContentSettingsScreen
 import io.github.pushkar.chorplay.ui.screens.settings.content.LibrarySettingsScreen
-import io.github.pushkar.chorplay.ui.screens.settings.content.MusicHomeSettingsScreen
+
 import io.github.pushkar.chorplay.ui.screens.settings.diagnostics.DiagnosticsScreen
 import io.github.pushkar.chorplay.ui.screens.settings.downloads.DownloadSettingsScreen
 import io.github.pushkar.chorplay.ui.screens.settings.history.HistorySettingsScreen
@@ -30,9 +30,9 @@ import io.github.pushkar.chorplay.ui.screens.settings.profiles.ProfileEditScreen
 import io.github.pushkar.chorplay.ui.screens.settings.profiles.ProfilesScreen
 import io.github.pushkar.chorplay.ui.screens.settings.quality.QualitySettingsScreen
 import io.github.pushkar.chorplay.ui.screens.settings.region.LanguageRegionScreen
-import io.github.pushkar.chorplay.ui.screens.settings.scrobbling.ScrobblingScreen
+
 import io.github.pushkar.chorplay.ui.screens.settings.taste.DiscoverChannelsScreen
-import io.github.pushkar.chorplay.ui.screens.settings.taste.FavouriteArtistsScreen
+
 import io.github.pushkar.chorplay.ui.screens.settings.taste.HiddenContentScreen
 import io.github.pushkar.chorplay.ui.screens.settings.taste.TasteScreen
 import io.github.pushkar.chorplay.ui.screens.settings.topics.TopicPreferencesScreen
@@ -71,10 +71,6 @@ internal fun SettingsDetail(
             HiddenContentScreen(onBack = onBack, highlight = target.highlight)
         }
 
-        SettingsDestination.FAVOURITE_ARTISTS -> {
-            FavouriteArtistsScreen(onBack = onBack, highlight = target.highlight)
-        }
-
         SettingsDestination.DISCOVER_CHANNELS -> {
             DiscoverChannelsScreen(onBack = onBack, highlight = target.highlight)
         }
@@ -105,10 +101,6 @@ internal fun SettingsDetail(
 
         SettingsDestination.CONTENT -> {
             ContentSettingsScreen(onBack = onBack, highlight = target.highlight, onNavigate = onNavigate)
-        }
-
-        SettingsDestination.MUSIC_HOME -> {
-            MusicHomeSettingsScreen(onBack = onBack, highlight = target.highlight)
         }
 
         SettingsDestination.LIBRARY -> {
@@ -149,10 +141,6 @@ internal fun SettingsDetail(
 
         SettingsDestination.INTEGRATIONS -> {
             IntegrationsScreen(onBack = onBack, highlight = target.highlight, onNavigate = onNavigate)
-        }
-
-        SettingsDestination.SCROBBLING -> {
-            ScrobblingScreen(onBack = onBack, highlight = target.highlight)
         }
 
         SettingsDestination.BACKUP -> {

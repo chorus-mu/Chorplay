@@ -30,7 +30,7 @@ import io.github.pushkar.chorplay.player.factory.LoadControlFactory
 /** Builds what the Shorts pool runs on: its players, the cached data source and the one media session. */
 @OptIn(UnstableApi::class)
 internal object ShortsPlayerFactory {
-    private const val SESSION_ID = "flow_shorts_session"
+    private const val SESSION_ID = "chorplay_shorts_session"
     private const val TAG = "ShortsPlayerPool"
 
     fun cachedDataSourceFactory(

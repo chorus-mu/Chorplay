@@ -6,39 +6,28 @@ import org.junit.Test
 
 class PrivacyGateTest {
     private fun gate(
-        deepFlow: Boolean,
+        deepChor: Boolean,
         historyPaused: Boolean = false,
-        scrobbleDuringDeepChorplay: Boolean = false,
     ) = PrivacyGate(
-        deepFlowActive = { deepFlow },
+        deepChorActive = { deepChor },
         watchHistoryPaused = { historyPaused },
-        scrobbleDuringDeepChorplay = { scrobbleDuringDeepChorplay },
     )
-
-    @Test
-    fun `scrobbling runs while Deep Chorplay is off`() =
-        runTest {
-            assertThat(gate(deepFlow = false).allowsScrobbling()).isTrue()
-        }
-
-    @Test
-    fun `Deep Chorplay stops scrobbling by default`() =
-        runTest {
-            assertThat(gate(deepFlow = true).allowsScrobbling()).isFalse()
-        }
-
-    @Test
-    fun `Deep Chorplay scrobbles when the user chose to`() =
-        runTest {
-            assertThat(gate(deepFlow = true, scrobbleDuringDeepChorplay = true).allowsScrobbling()).isTrue()
-        }
 
     @Test
     fun `the gate reports both settings as they are`() =
         runTest {
-            val gate = gate(deepFlow = true, historyPaused = true)
+            val gate = gate(deepChor = true, historyPaused = true)
 
             assertThat(gate.isDeepChorplayActive()).isTrue()
             assertThat(gate.isWatchHistoryPaused()).isTrue()
+        }
+
+    @Test
+    fun `the gate reports default settings when off`() =
+        runTest {
+            val gate = gate(deepChor = false, historyPaused = false)
+
+            assertThat(gate.isDeepChorplayActive()).isFalse()
+            assertThat(gate.isWatchHistoryPaused()).isFalse()
         }
 }

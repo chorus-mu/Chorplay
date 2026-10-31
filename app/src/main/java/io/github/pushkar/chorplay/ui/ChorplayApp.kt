@@ -30,7 +30,6 @@ import io.github.pushkar.chorplay.data.local.PlayerPreferences
 import io.github.pushkar.chorplay.data.profile.PendingSlice
 import io.github.pushkar.chorplay.data.recommendation.ChorplayNeuroEngine
 import io.github.pushkar.chorplay.player.DeepChorplayManager
-import io.github.pushkar.chorplay.player.EnhancedMusicPlayerManager
 import io.github.pushkar.chorplay.player.EnhancedPlayerManager
 import io.github.pushkar.chorplay.player.GlobalPlayerState
 import io.github.pushkar.chorplay.player.SleepTimerManager
@@ -42,16 +41,11 @@ import io.github.pushkar.chorplay.ui.components.layout.LocalChorplaySnackbarHost
 import io.github.pushkar.chorplay.ui.components.layout.navigation.ChorplayNavigationChrome
 import io.github.pushkar.chorplay.ui.components.layout.navigation.ChorplayNavigationDefaults
 import io.github.pushkar.chorplay.ui.components.layout.navigation.NavigationVisibility
-import io.github.pushkar.chorplay.ui.components.layout.navigation.flowUsesNavigationRail
+import io.github.pushkar.chorplay.ui.components.layout.navigation.chorUsesNavigationRail
 import io.github.pushkar.chorplay.ui.components.layout.navigation.rememberChorplayNavigationScrollState
 import io.github.pushkar.chorplay.ui.components.layout.navigation.resolveDefaultChorplayTab
 import io.github.pushkar.chorplay.ui.components.layout.navigation.visibleChorplayTabs
 import io.github.pushkar.chorplay.ui.components.layout.topbar.ProvideChorplayGlobalActions
-import io.github.pushkar.chorplay.ui.components.music.common.ProvideMusicPlaybackState
-import io.github.pushkar.chorplay.ui.components.music.sheet.LocalMusicMenus
-import io.github.pushkar.chorplay.ui.components.music.sheet.rememberMusicMenus
-import io.github.pushkar.chorplay.ui.components.musicplayer.common.canTurnLight
-import io.github.pushkar.chorplay.ui.components.musicplayer.sheet.rememberMusicPlayerSheetState
 import io.github.pushkar.chorplay.ui.components.shared.LocalMediaOpenOrigins
 import io.github.pushkar.chorplay.ui.components.shared.MediaMiniBarDefaults
 import io.github.pushkar.chorplay.ui.components.shared.MediaOpenOrigins
@@ -83,7 +77,6 @@ fun ChorplayApp(
     deeplinkVideoId: String? = null,
     isShort: Boolean = false,
     isSharedLink: Boolean = false,
-    openMusicPlayerRequest: Int = 0,
     onDeeplinkConsumed: () -> Unit = {},
     pendingRoute: String? = null,
     onPendingRouteConsumed: () -> Unit = {},
@@ -106,15 +99,10 @@ fun ChorplayApp(
     val preferences = remember { PlayerPreferences(context) }
     val isHomeNavigationEnabled by preferences.homeNavigationEnabled.collectAsState(initial = true)
     val isShortsNavigationEnabled by preferences.effectiveShortsNavigationEnabled.collectAsState(initial = true)
-    val isMusicNavigationEnabled by preferences.musicNavigationEnabled.collectAsState(initial = true)
     val isSearchNavigationEnabled by preferences.searchNavigationEnabled.collectAsState(initial = false)
     val isCategoriesNavigationEnabled by preferences.categoriesNavigationEnabled.collectAsState(initial = false)
     val isDownloadsNavigationEnabled by preferences.downloadsNavigationEnabled.collectAsState(initial = false)
     val disableShortsPlayer by preferences.effectiveDisableShortsPlayer.collectAsState(initial = false)
-    val musicPlayerBackgroundStyle by preferences.musicPlayerBackgroundStyle.collectAsState(
-        initial = io.github.pushkar.chorplay.data.local.MusicPlayerBackgroundStyle.BLUR_GRADIENT,
-    )
-    val musicPlayerFollowLightTheme by preferences.musicPlayerFollowLightTheme.collectAsState(initial = false)
     val navTabOrder by preferences.navTabOrder.collectAsState(initial = io.github.pushkar.chorplay.data.local.DEFAULT_NAV_TAB_ORDER)
     val defaultNavTabIndex by preferences.defaultNavTabIndex.collectAsState(initial = 0)
     val subscriptionRefreshOnStartup by preferences.subscriptionRefreshOnStartup.collectAsState(initial = false)
@@ -126,25 +114,23 @@ fun ChorplayApp(
         NavigationVisibility(
             home = isHomeNavigationEnabled,
             shorts = isShortsNavigationEnabled,
-            music = isMusicNavigationEnabled,
             search = isSearchNavigationEnabled,
             categories = isCategoriesNavigationEnabled,
             downloads = isDownloadsNavigationEnabled,
         )
-    val navigationTabs = remember(navTabOrder, navigationVisibility) { visibleChorplayTabs(navTabOrder, navigationVisibility) }
+    val navigationTabs =
+        remember(navTabOrder, navigationVisibility) { visibleChorplayTabs(navTabOrder, navigationVisibility) }
     val defaultTab = resolveDefaultChorplayTab(defaultNavTabIndex, navTabOrder, navigationVisibility)
     val defaultStartRoute = defaultTab.route
     val currentNavigationTabs by rememberUpdatedState(navigationTabs)
     val currentStartRoute by rememberUpdatedState(defaultStartRoute)
-    val openDownloads = remember(navController) { { navController.openDownloads(currentNavigationTabs, currentStartRoute) } }
+    val openDownloads =
+        remember(navController) { { navController.openDownloads(currentNavigationTabs, currentStartRoute) } }
 
     // Mini Player Customizations
     val miniPlayerScale by preferences.miniPlayerScale.collectAsState(initial = 0.45f)
     val miniPlayerShowSkipControls by preferences.miniPlayerShowSkipControls.collectAsState(initial = false)
     val miniPlayerShowNextPrevControls by preferences.miniPlayerShowNextPrevControls.collectAsState(initial = false)
-    val showRestoredMusicMiniPlayer by produceState<Boolean?>(initialValue = null, preferences) {
-        preferences.showRestoredMusicMiniPlayer.collect { value = it }
-    }
 
     // Offline Monitoring
     val currentRoute = remember { mutableStateOf(defaultStartRoute) }
@@ -156,7 +142,6 @@ fun ChorplayApp(
         PendingSlice.await()
         DeepChorplayManager.initialize(context)
         val bypass = activity?.intent?.getBooleanExtra(MainActivity.EXTRA_BENCHMARK_BYPASS_ONBOARDING, false) == true
-        // A viewer who is past onboarding never waits for the engine here; everyone else asks it (#1301).
         needsOnboarding =
             when {
                 bypass || preferences.onboardingDone.first() -> {
@@ -183,13 +168,13 @@ fun ChorplayApp(
 
     val currentEntry by navController.currentBackStackEntryAsState()
     val statusBarHero = remember { StatusBarHeroState() }
-    val currentTab = currentEntry?.flowTab()
+    val currentTab = currentEntry?.chorTab()
     val selectedTab by rememberSelectedChorplayTab(navController, defaultTab)
-    val usesNavigationRail = flowUsesNavigationRail()
+    val usesNavigationRail = chorUsesNavigationRail()
     var navigationRailWidth by remember { mutableStateOf(0.dp) }
     var navigationBarHeight by remember { mutableStateOf(ChorplayNavigationDefaults.BarHeight) }
 
-    FlowStartTabEffects(
+    ChorStartTabEffects(
         navController = navController,
         currentRoute = currentRoute,
         defaultTab = defaultTab,
@@ -226,19 +211,16 @@ fun ChorplayApp(
         val playerVisibleState = remember { mutableStateOf(false) }
         var playerVisible by playerVisibleState
 
-        val musicPlayerSheetState = rememberMusicPlayerSheetState()
-        val musicMenus = rememberMusicMenus()
         val collapseExpandedPlayers: () -> Unit =
-            remember(playerSheetState, musicPlayerSheetState) {
+            remember(playerSheetState) {
                 {
                     if (playerSheetState.currentValue == PlayerSheetValue.Expanded) playerSheetState.collapse()
-                    if (musicPlayerSheetState.isExpanded) musicPlayerSheetState.collapse()
                 }
             }
         val currentShortsExitRoute by rememberUpdatedState(shortsExitRoute(navigationTabs))
         val mediaNavigator =
             remember(navController, collapseExpandedPlayers) {
-                FlowMediaNavigator(navController, collapseExpandedPlayers) { currentShortsExitRoute }
+                ChorMediaNavigator(navController, collapseExpandedPlayers) { currentShortsExitRoute }
             }
         // A page opened from another app would otherwise land under an expanded player.
         HandlePendingRoute(
@@ -253,7 +235,7 @@ fun ChorplayApp(
 
         val activeVideo = playerUiState.cachedVideo
 
-        FlowPlayerSessionEffects(
+        ChorPlayerSessionEffects(
             playerSheetState = playerSheetState,
             playerViewModel = playerViewModel,
             playerUiStateResult = playerUiStateResult,
@@ -262,75 +244,7 @@ fun ChorplayApp(
             openOrigins = mediaOpenOrigins,
         )
 
-        val currentMusicTrack by EnhancedMusicPlayerManager.currentTrack.collectAsStateWithLifecycle()
-        var suppressMusicMiniAfterVideo by remember { mutableStateOf(false) }
-        val openMusicPlayerOnPlay = preferences.openMusicPlayerOnPlay.collectAsState(initial = false)
-        // Shows the player for a song that just started, without a route: a navigation here used to
-        // swap the page out and back for a frame, which the mini player now leaves in view.
-        val onMusicStarted: () -> Unit =
-            remember(musicPlayerSheetState, playerViewModel) {
-                {
-                    // One player at a time: a video still cached, even one playing in the
-                    // background, would keep the music from showing its own mini player.
-                    if (playerViewModel.uiState.value.cachedVideo != null) {
-                        playerVisible = false
-                        playerViewModel.clearVideo()
-                    }
-                    suppressMusicMiniAfterVideo = false
-                    if (openMusicPlayerOnPlay.value) {
-                        musicPlayerSheetState.expand()
-                    } else if (musicPlayerSheetState.isDismissed) {
-                        musicPlayerSheetState.collapse()
-                    }
-                }
-            }
-        var handledMusicPlayerRequest by remember { mutableIntStateOf(0) }
 
-        LaunchedEffect(activeVideo?.id) {
-            if (activeVideo != null) {
-                suppressMusicMiniAfterVideo = true
-            }
-        }
-
-        LaunchedEffect(currentMusicTrack?.videoId) {
-            if (currentMusicTrack == null) {
-                suppressMusicMiniAfterVideo = false
-            }
-        }
-
-        LaunchedEffect(currentRoute.value) {
-            if (currentRoute.value == "musicPlayer") {
-                suppressMusicMiniAfterVideo = false
-            }
-        }
-
-        LaunchedEffect(currentMusicTrack, showRestoredMusicMiniPlayer) {
-            if (currentMusicTrack != null &&
-                showRestoredMusicMiniPlayer == true &&
-                musicPlayerSheetState.isDismissed
-            ) {
-                musicPlayerSheetState.collapse()
-            } else if (currentMusicTrack == null) {
-                musicPlayerSheetState.dismiss()
-            }
-        }
-
-        LaunchedEffect(showRestoredMusicMiniPlayer) {
-            if (showRestoredMusicMiniPlayer == false && !musicPlayerSheetState.isExpanded) {
-                musicPlayerSheetState.dismiss()
-            }
-        }
-
-        LaunchedEffect(openMusicPlayerRequest, currentMusicTrack?.videoId) {
-            if (openMusicPlayerRequest > handledMusicPlayerRequest && currentMusicTrack != null) {
-                handledMusicPlayerRequest = openMusicPlayerRequest
-                suppressMusicMiniAfterVideo = false
-                if (playerVisible) {
-                    playerSheetState.collapse()
-                }
-                musicPlayerSheetState.expand()
-            }
-        }
 
         ApplyStatusBarStyle(
             themeMode = currentTheme,
@@ -338,16 +252,13 @@ fun ChorplayApp(
             systemLightThemeMode = systemLightThemeMode,
             systemDarkThemeMode = systemDarkThemeMode,
             isFullscreen = false,
-            isMusicPlayerImmersive = currentMusicTrack != null && musicPlayerSheetState.isImmersive,
-            musicPlayerFollowsTheme =
-                musicPlayerBackgroundStyle == io.github.pushkar.chorplay.data.local.MusicPlayerBackgroundStyle.DEFAULT ||
-                    (musicPlayerFollowLightTheme && musicPlayerBackgroundStyle.canTurnLight),
+            isMusicPlayerImmersive = false,
+            musicPlayerFollowsTheme = false,
             isShortsPlayer = isShortsPlayerRoute,
             videoPlayerExpanded = playerVisible && playerSheetState.currentValue == PlayerSheetValue.Expanded,
             heroUnderStatusBar =
                 statusBarHero.heroUnderStatusBar &&
-                    !musicPlayerSheetState.isExpanded &&
-                    playerSheetState.currentValue != PlayerSheetValue.Expanded,
+                        playerSheetState.currentValue != PlayerSheetValue.Expanded,
         )
 
         LaunchedEffect(isInPipMode) {
@@ -366,30 +277,21 @@ fun ChorplayApp(
                 videoVisible = playerVisible,
                 videoInBackground = playerUiState.isBackgroundPlaybackMode,
                 onShortsPlayer = isShortsPlayerRoute,
-                hasMusic = currentMusicTrack != null,
-                musicSuppressed = suppressMusicMiniAfterVideo,
             )
-        val isMusicSheetShown = activeMiniPlayer == ActiveMiniPlayer.Music
-        val isPlayerCoveringContent =
-            (playerVisible && playerSheetState.currentValue == PlayerSheetValue.Expanded) ||
-                (isMusicSheetShown && musicPlayerSheetState.isExpanded)
+        val isPlayerCoveringContent = playerVisible && playerSheetState.currentValue == PlayerSheetValue.Expanded
         val showBottomNav = !isInPipMode && currentTab.showsNavigationBar() && !isPlayerCoveringContent
         val isBottomNavShown = !usesNavigationRail && showBottomNav && navScrollState.isBarVisible
-        // The rail is hidden only where content goes truly full screen; the expanded players cover
-        // it instead, so opening them never re-lays out the page beneath.
         val currentDestinationRoute = currentEntry?.destination?.route
         val isNavigationRailVisible =
             !isInPipMode &&
-                needsOnboarding != null &&
-                currentDestinationRoute != "onboarding" &&
-                !(currentDestinationRoute == SHORTS_ROUTE_PATTERN && currentTab == null)
+                    needsOnboarding != null &&
+                    currentDestinationRoute != "onboarding" &&
+                    !(currentDestinationRoute == SHORTS_ROUTE_PATTERN && currentTab == null)
         val showVideoBar = activeMiniPlayer == ActiveMiniPlayer.VideoBar && !isInPipMode
-        val isMiniBarObscuringContent =
-            (isMusicSheetShown && !musicPlayerSheetState.isDismissed && !musicPlayerSheetState.isExpanded) || showVideoBar
+        val isMiniBarObscuringContent = showVideoBar
         val motionScheme = MaterialTheme.motionScheme
         val barFraction = remember { Animatable(if (isBottomNavShown) 1f else 0f) }
         LaunchedEffect(isBottomNavShown) {
-            // The same springs as the bar's own slide, so whatever rides on it stays glued to it.
             barFraction.animateTo(
                 targetValue = if (isBottomNavShown) 1f else 0f,
                 animationSpec = if (isBottomNavShown) motionScheme.defaultSpatialSpec() else motionScheme.fastSpatialSpec(),
@@ -406,7 +308,8 @@ fun ChorplayApp(
             )
         }
         val miniPlayerShownState = rememberUpdatedState(isMiniBarObscuringContent)
-        val miniPlayerHeightState = rememberUpdatedState(MediaMiniBarDefaults.Height + MediaMiniBarDefaults.BottomSpacer)
+        val miniPlayerHeightState =
+            rememberUpdatedState(MediaMiniBarDefaults.Height + MediaMiniBarDefaults.BottomSpacer)
         val miniPlayerBounds =
             with(density) {
                 mediaMiniBarBounds(
@@ -455,88 +358,80 @@ fun ChorplayApp(
             onBarHeightChanged = { navigationBarHeight = it },
             onRailWidthChanged = { navigationRailWidth = it },
         ) {
-            ProvideMusicPlaybackState(
-                surfacesVisible = !musicPlayerSheetState.isExpanded && playerSheetState.currentValue != PlayerSheetValue.Expanded,
-            ) {
-                Scaffold(
-                    modifier = Modifier.fillMaxSize(),
-                    containerColor =
-                        if (isInPipMode) {
-                            androidx.compose.ui.graphics.Color.Black
-                        } else {
-                            androidx.compose.material3.MaterialTheme.colorScheme.background
-                        },
-                    // Pages run under the bottom chrome and clear it themselves through LocalChorplayBottomInsets.
-                    contentWindowInsets = WindowInsets.systemBars.only(WindowInsetsSides.Top + WindowInsetsSides.Horizontal),
-                ) { paddingValues ->
-                    val layoutDirection = LocalLayoutDirection.current
-                    val contentPadding =
-                        if (
-                            isShortsPlayerRoute
-                        ) {
-                            PaddingValues(
-                                start = paddingValues.calculateStartPadding(layoutDirection),
-                                top = 0.dp,
-                                end = paddingValues.calculateEndPadding(layoutDirection),
-                                bottom = bottomInsets.systemBottom,
-                            )
-                        } else {
-                            paddingValues
-                        }
-                    Box(
-                        modifier =
-                            Modifier
-                                .padding(if (isInPipMode) PaddingValues(0.dp) else contentPadding)
-                                .nestedScroll(navScrollState.nestedScrollConnection),
+            Scaffold(
+                modifier = Modifier.fillMaxSize(),
+                containerColor =
+                    if (isInPipMode) {
+                        androidx.compose.ui.graphics.Color.Black
+                    } else {
+                        androidx.compose.material3.MaterialTheme.colorScheme.background
+                    },
+                contentWindowInsets = WindowInsets.systemBars.only(WindowInsetsSides.Top + WindowInsetsSides.Horizontal),
+            ) { paddingValues ->
+                val layoutDirection = LocalLayoutDirection.current
+                val contentPadding =
+                    if (
+                        isShortsPlayerRoute
                     ) {
-                        if (needsOnboarding != null) {
-                            val homeViewModel: HomeViewModel = hiltViewModel(activity!!)
-                            LaunchedEffect(homeViewModel) {
-                                homeViewModel.initialize(context.applicationContext)
-                            }
+                        PaddingValues(
+                            start = paddingValues.calculateStartPadding(layoutDirection),
+                            top = 0.dp,
+                            end = paddingValues.calculateEndPadding(layoutDirection),
+                            bottom = bottomInsets.systemBottom,
+                        )
+                    } else {
+                        paddingValues
+                    }
+                Box(
+                    modifier =
+                        Modifier
+                            .padding(if (isInPipMode) PaddingValues(0.dp) else contentPadding)
+                            .nestedScroll(navScrollState.nestedScrollConnection),
+                ) {
+                    if (needsOnboarding != null) {
+                        val homeViewModel: HomeViewModel = hiltViewModel(activity!!)
+                        LaunchedEffect(homeViewModel) {
+                            homeViewModel.initialize(context.applicationContext)
+                        }
 
-                            ProvideChorplayGlobalActions(
-                                unreadNotifications = notificationViewModel.unreadCount,
-                                onOpenNotifications = { navController.navigate("notifications") },
-                                onOpenSettings = { navController.navigate("settings") },
+                        ProvideChorplayGlobalActions(
+                            unreadNotifications = notificationViewModel.unreadCount,
+                            onOpenNotifications = { navController.navigate("notifications") },
+                            onOpenSettings = { navController.navigate("settings") },
+                        ) {
+                            CompositionLocalProvider(
+                                *mediaNavigationLocals(mediaNavigator),
+                                LocalMediaOpenOrigins provides mediaOpenOrigins,
+                                LocalEqualizerState provides equalizerViewModel.state,
+                                LocalChorplayBottomInsets provides bottomInsets,
+                                LocalChorplaySnackbarHostState provides snackbarHostState,
+                                LocalStatusBarHero provides statusBarHero,
                             ) {
-                                CompositionLocalProvider(
-                                    *mediaNavigationLocals(mediaNavigator),
-                                    LocalMediaOpenOrigins provides mediaOpenOrigins,
-                                    LocalMusicMenus provides musicMenus,
-                                    LocalEqualizerState provides equalizerViewModel.state,
-                                    LocalChorplayBottomInsets provides bottomInsets,
-                                    LocalChorplaySnackbarHostState provides snackbarHostState,
-                                    LocalStatusBarHero provides statusBarHero,
+                                if (needsOnboarding == false) SubscriptionBellAlerts(snackbarHostState)
+                                LinkedSyncAlerts(snackbarHostState)
+                                NavHost(
+                                    navController = navController,
+                                    startDestination = if (needsOnboarding == true) "onboarding" else defaultStartRoute,
+                                    enterTransition = ChorplayNavTransitions.enter,
+                                    exitTransition = ChorplayNavTransitions.exit,
+                                    popEnterTransition = ChorplayNavTransitions.popEnter,
+                                    popExitTransition = ChorplayNavTransitions.popExit,
+                                    predictivePopEnterTransition = ChorplayNavTransitions.predictivePopEnter,
+                                    predictivePopExitTransition = ChorplayNavTransitions.predictivePopExit,
                                 ) {
-                                    if (needsOnboarding == false) SubscriptionBellAlerts(snackbarHostState)
-                                    LinkedSyncAlerts(snackbarHostState)
-                                    NavHost(
+                                    chorplayAppGraph(
                                         navController = navController,
-                                        startDestination = if (needsOnboarding == true) "onboarding" else defaultStartRoute,
-                                        enterTransition = ChorplayNavTransitions.enter,
-                                        exitTransition = ChorplayNavTransitions.exit,
-                                        popEnterTransition = ChorplayNavTransitions.popEnter,
-                                        popExitTransition = ChorplayNavTransitions.popExit,
-                                        predictivePopEnterTransition = ChorplayNavTransitions.predictivePopEnter,
-                                        predictivePopExitTransition = ChorplayNavTransitions.predictivePopExit,
-                                    ) {
-                                        chorplayAppGraph(
-                                            navController = navController,
-                                            mediaNavigator = mediaNavigator,
-                                            currentRoute = currentRoute,
-                                            playerSheetState = playerSheetState,
-                                            musicPlayerSheetState = musicPlayerSheetState,
-                                            homeViewModel = homeViewModel,
-                                            playerViewModel = playerViewModel,
-                                            playerUiStateResult = playerUiStateResult,
-                                            playerVisibleState = playerVisibleState,
-                                            disableShortsPlayer = disableShortsPlayer,
-                                            defaultStartRoute = defaultStartRoute,
-                                            onMusicStarted = onMusicStarted,
-                                            openDownloads = openDownloads,
-                                        )
-                                    }
+                                        mediaNavigator = mediaNavigator,
+                                        currentRoute = currentRoute,
+                                        playerSheetState = playerSheetState,
+                                        homeViewModel = homeViewModel,
+                                        playerViewModel = playerViewModel,
+                                        playerUiStateResult = playerUiStateResult,
+                                        playerVisibleState = playerVisibleState,
+                                        disableShortsPlayer = disableShortsPlayer,
+                                        defaultStartRoute = defaultStartRoute,
+                                        openDownloads = openDownloads,
+                                    )
                                 }
                             }
                         }
@@ -565,13 +460,10 @@ fun ChorplayApp(
             miniPlayerScale = miniPlayerScale,
             miniPlayerShowSkipControls = miniPlayerShowSkipControls,
             miniPlayerShowNextPrevControls = miniPlayerShowNextPrevControls,
-            showMusicSheet = isMusicSheetShown,
             showVideoBar = showVideoBar,
-            musicPlayerSheetState = musicPlayerSheetState,
             containerWidth = maxWidth,
             containerHeight = with(density) { screenHeightPx.toDp() },
             miniBarBounds = miniPlayerBounds,
-            musicMenus = musicMenus,
             equalizerState = equalizerViewModel.state,
             bottomInsets = bottomInsets,
             openOrigins = mediaOpenOrigins,

@@ -4,7 +4,7 @@ DATE: 2026-08-28
 STATUS: RELEASE
 
 NEW FEATURES
-- Discord RPC support by @PastaHimself
+- Video playback improvements by @PastaHimself
 - TV UI support by @PastaHimself
 - Drag left or right on the video to seek, with a toggle in Player Appearance settings
 - Hide Shorts across the whole app with a single switch, without deleting your saved reels

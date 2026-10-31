@@ -2,7 +2,7 @@ package io.github.pushkar.chorplay.player
 
 import android.content.Context
 import io.github.pushkar.chorplay.R
-import io.github.pushkar.chorplay.data.local.DEEP_FLOW_NEVER_EXPIRES_HOURS
+import io.github.pushkar.chorplay.data.local.DEEP_CHOR_NEVER_EXPIRES_HOURS
 import io.github.pushkar.chorplay.data.local.PlayerPreferences
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -49,9 +49,9 @@ object DeepChorplayManager {
         val preferences = PlayerPreferences(appContext)
         observerJob = scope.launch {
             combine(
-                preferences.deepFlowActive,
-                preferences.deepFlowActivatedAt,
-                preferences.deepFlowExpireHours
+                preferences.deepChorActive,
+                preferences.deepChorActivatedAt,
+                preferences.deepChorExpireHours
             ) { active, activatedAt, expireHours ->
                 DeepChorplaySnapshot(active, activatedAt, expireHours)
             }.collectLatest { snapshot ->
@@ -63,7 +63,7 @@ object DeepChorplayManager {
                 }
                 lastKnownActive = snapshot.active
 
-                if (!snapshot.active || snapshot.activatedAt == 0L || snapshot.expireHours == DEEP_FLOW_NEVER_EXPIRES_HOURS) {
+                if (!snapshot.active || snapshot.activatedAt == 0L || snapshot.expireHours == DEEP_CHOR_NEVER_EXPIRES_HOURS) {
                     return@collectLatest
                 }
 
@@ -84,14 +84,14 @@ object DeepChorplayManager {
 
     suspend fun toggle(context: Context): Boolean {
         val preferences = PlayerPreferences(context.applicationContext)
-        val nextEnabled = !preferences.deepFlowActive.first()
+        val nextEnabled = !preferences.deepChorActive.first()
         setEnabled(context, nextEnabled)
         return nextEnabled
     }
 
     suspend fun setEnabled(context: Context, enabled: Boolean): Boolean {
         val preferences = PlayerPreferences(context.applicationContext)
-        val currentEnabled = preferences.deepFlowActive.first()
+        val currentEnabled = preferences.deepChorActive.first()
         if (currentEnabled == enabled) return enabled
 
         pendingDisableReason = if (enabled) null else DisableReason.Manual
@@ -111,9 +111,9 @@ object DeepChorplayManager {
 
     private fun Context.deepFlowMessage(active: Boolean, disableReason: DisableReason?): String {
         return when {
-            active -> getString(R.string.deep_flow_enabled_message)
-            disableReason == DisableReason.Timer -> getString(R.string.deep_flow_expired_message)
-            else -> getString(R.string.deep_flow_disabled_message)
+            active -> getString(R.string.deep_chor_enabled_message)
+            disableReason == DisableReason.Timer -> getString(R.string.deep_chor_expired_message)
+            else -> getString(R.string.deep_chor_disabled_message)
         }
     }
 }

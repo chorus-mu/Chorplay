@@ -68,16 +68,16 @@ class ChorplayNavigationChromeTest {
     fun `a phone window navigates from the bottom bar`() {
         setChrome(width = 411, height = 891)
 
-        rule.onNodeWithTag(FLOW_NAV_BAR_TAG).assertIsDisplayed()
-        rule.onNodeWithTag(FLOW_NAV_RAIL_TAG).assertDoesNotExist()
+        rule.onNodeWithTag(CHOR_NAV_BAR_TAG).assertIsDisplayed()
+        rule.onNodeWithTag(CHOR_NAV_RAIL_TAG).assertDoesNotExist()
     }
 
     @Test
     fun `an expanded window navigates from the rail`() {
         setChrome(width = 1280, height = 800)
 
-        rule.onNodeWithTag(FLOW_NAV_RAIL_TAG).assertIsDisplayed()
-        rule.onNodeWithTag(FLOW_NAV_BAR_TAG).assertDoesNotExist()
+        rule.onNodeWithTag(CHOR_NAV_RAIL_TAG).assertIsDisplayed()
+        rule.onNodeWithTag(CHOR_NAV_BAR_TAG).assertDoesNotExist()
     }
 
     @Test
@@ -98,7 +98,7 @@ class ChorplayNavigationChromeTest {
     fun `a hidden rail leaves no navigation surface`() {
         setChrome(width = 1280, height = 800, railVisible = false)
 
-        rule.onNodeWithTag(FLOW_NAV_RAIL_TAG).assertDoesNotExist()
-        rule.onNodeWithTag(FLOW_NAV_BAR_TAG).assertDoesNotExist()
+        rule.onNodeWithTag(CHOR_NAV_RAIL_TAG).assertDoesNotExist()
+        rule.onNodeWithTag(CHOR_NAV_BAR_TAG).assertDoesNotExist()
     }
 }

@@ -60,11 +60,11 @@ class VideoPlayerService : MediaSessionService() {
                 else -> "UNKNOWN(${player.playbackState})"
             }
         return "exo=$state pwr=${player?.playWhenReady} playing=${player?.isPlaying} " +
-            "pos=${player?.currentPosition}/${player?.duration} " +
-            "idx=${player?.currentMediaItemIndex} count=${player?.mediaItemCount} " +
-            "wakeHeld=${wakeLock?.isHeld} wifiHeld=${wifiLock?.isHeld} " +
-            "ongoing=${runCatching { isPlaybackOngoing() }.getOrDefault(false)} " +
-            "activeForLocks=${isPlaybackActiveForLocks()}"
+                "pos=${player?.currentPosition}/${player?.duration} " +
+                "idx=${player?.currentMediaItemIndex} count=${player?.mediaItemCount} " +
+                "wakeHeld=${wakeLock?.isHeld} wifiHeld=${wifiLock?.isHeld} " +
+                "ongoing=${runCatching { isPlaybackOngoing() }.getOrDefault(false)} " +
+                "activeForLocks=${isPlaybackActiveForLocks()}"
     }
 
     private fun serviceLog(message: String) {
@@ -109,16 +109,6 @@ class VideoPlayerService : MediaSessionService() {
                 serviceLog("playerState collect update")
                 updateLocks(isPlaybackActiveForLocks())
             }
-        }
-        lifecycleScope.launch {
-            // A headphone Play after a video must not start the saved music queue (#1450).
-            EnhancedPlayerManager
-                .getInstance()
-                .playerState
-                .map { it.isPlaying }
-                .distinctUntilChanged()
-                .filter { it }
-                .collect { HeadphoneResume.set(this@VideoPlayerService, allowed = false) }
         }
     }
 
@@ -174,8 +164,6 @@ class VideoPlayerService : MediaSessionService() {
 
         EnhancedPlayerManager.getInstance().stop()
         releaseLocks()
-        // Unlike a bare stopSelf(), this clears Media3's user-engaged state, so the pause cannot put
-        // the stopped service back into the foreground (#1025).
         pauseAllPlayersAndStopSelf()
     }
 
@@ -186,7 +174,6 @@ class VideoPlayerService : MediaSessionService() {
         lockReleaseJob?.cancel()
         lockReleaseJob = null
         releaseLocks()
-        // lifecycleScope is cancelled by super.onDestroy() dispatching ON_DESTROY.
         super.onDestroy()
     }
 
@@ -230,11 +217,11 @@ class VideoPlayerService : MediaSessionService() {
     private fun isPlaybackActiveForLocks(): Boolean {
         val player = EnhancedPlayerManager.getInstance().getPlayer() ?: return false
         return player.isPlaying ||
-            (
-                player.playWhenReady &&
-                    player.playbackState != Player.STATE_IDLE &&
-                    player.playbackState != Player.STATE_ENDED
-            )
+                (
+                        player.playWhenReady &&
+                                player.playbackState != Player.STATE_IDLE &&
+                                player.playbackState != Player.STATE_ENDED
+                        )
     }
 
     private fun releaseLocks() {

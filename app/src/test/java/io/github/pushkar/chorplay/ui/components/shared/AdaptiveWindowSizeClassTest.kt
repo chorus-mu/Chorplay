@@ -52,7 +52,7 @@ class AdaptiveWindowSizeClassTest {
             ) {
                 ProvideWindowSizeClass {
                     sizeClass = LocalWindowSizeClass.current
-                    gridColumns = flowGridColumns(compact = 2, medium = 3, expanded = 4)
+                    gridColumns = chorGridColumns(compact = 2, medium = 3, expanded = 4)
                 }
             }
         }

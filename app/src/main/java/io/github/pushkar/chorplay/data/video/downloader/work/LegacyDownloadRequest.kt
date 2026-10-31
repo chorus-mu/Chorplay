@@ -3,7 +3,6 @@ package io.github.pushkar.chorplay.data.video.downloader.work
 import io.github.pushkar.chorplay.data.local.entity.DownloadItemStatus
 import io.github.pushkar.chorplay.data.local.entity.DownloadWithItems
 import io.github.pushkar.chorplay.data.video.downloader.request.DownloadRequest
-import io.github.pushkar.chorplay.data.video.downloader.request.StoredArtist
 import io.github.pushkar.chorplay.data.video.downloader.request.sourceUrlFor
 import io.github.pushkar.chorplay.data.video.downloader.tags.DownloadKind
 import io.github.pushkar.chorplay.data.video.downloader.tags.DownloadTags
@@ -24,19 +23,14 @@ internal object LegacyDownloadRequest {
                 .firstOrNull()
                 ?.quality
                 .orEmpty()
-        val artists = StoredArtist.decode(entity.artistsJson)
         return DownloadRequest(
             tags =
                 DownloadTags(
                     kind = entity.kind,
                     videoId = entity.videoId,
                     title = entity.title,
-                    artists = artists.map { it.name },
                     channelId = entity.channelId.takeIf { it.isNotBlank() },
                     channelName = entity.uploader.takeIf { it.isNotBlank() },
-                    album = entity.album,
-                    albumId = entity.albumId,
-                    trackNumber = entity.trackNumber,
                     releaseDate = entity.releaseDate,
                     description = entity.description.takeIf { it.isNotBlank() },
                     sourceUrl = sourceUrlFor(entity.kind, entity.videoId),
@@ -44,7 +38,7 @@ internal object LegacyDownloadRequest {
                     likeCount = entity.likeCount.takeIf { it > 0 },
                     thumbnailUrl = entity.thumbnailUrl.takeIf { it.isNotBlank() },
                 ),
-            audioOnly = row.isAudioOnly || entity.kind == DownloadKind.MUSIC,
+            audioOnly = row.isAudioOnly,
             targetHeight =
                 HEIGHT
                     .find(quality)
@@ -53,7 +47,6 @@ internal object LegacyDownloadRequest {
                     ?.toIntOrNull(),
             videoCodec = codecIn(quality),
             durationSeconds = entity.duration.toInt(),
-            artists = artists,
         )
     }
 

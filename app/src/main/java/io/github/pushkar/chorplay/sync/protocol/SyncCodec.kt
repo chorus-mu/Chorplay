@@ -7,24 +7,11 @@ import java.io.IOException
 import java.util.zip.GZIPInputStream
 import java.util.zip.GZIPOutputStream
 
-/**
- * The FLOW-SYNC/1 wire envelope. Each WebSocket binary message is:
- *
- * ```
- * ver:u8 │ frame_type:u8 │ seq:u64 BE │ nonce:12 │ ciphertext ∥ tag(16)
- * ```
- *
- * The 10-byte cleartext header is authenticated by the AAD. The payload is gzip-compressed
- * before sealing. [seal] and [open] are pure transforms; sequence ordering is enforced by
- * the protocol layer ([SyncProtocol]).
- */
 object SyncCodec {
     const val VERSION: Byte = 0x01
-    const val HEADER_LEN = 10 // ver(1) + frame_type(1) + seq(8)
-    const val AAD_LEN = 26 // ver(1) + session_id(16) + frame_type(1) + seq(8)
-    val MIN_FRAME_LEN = HEADER_LEN + SyncCrypto.NONCE_LEN + SyncCrypto.TAG_LEN // 38
-
-    // --- gzip (RFC 1952), always-on in v1 ---
+    const val HEADER_LEN = 10
+    const val AAD_LEN = 26
+    val MIN_FRAME_LEN = HEADER_LEN + SyncCrypto.NONCE_LEN + SyncCrypto.TAG_LEN
 
     fun gzip(data: ByteArray): ByteArray {
         val bos = ByteArrayOutputStream(maxOf(32, data.size / 2))
@@ -32,11 +19,6 @@ object SyncCodec {
         return bos.toByteArray()
     }
 
-    /**
-     * Inflate one frame, refusing to grow past [MAX_INFLATED_BYTES]. Inflation only runs after the
-     * frame authenticated, but an unbounded `readBytes` would still let a buggy or hostile peer that
-     * holds the key exhaust memory with a small compressed frame. Same cap as the desktop.
-     */
     fun gunzip(data: ByteArray): ByteArray =
         GZIPInputStream(ByteArrayInputStream(data)).use { input ->
             val out = ByteArrayOutputStream(maxOf(32, data.size * 4))
@@ -54,8 +36,6 @@ object SyncCodec {
 
     private const val MAX_INFLATED_BYTES = 256L * 1024 * 1024
 
-    // --- AAD ---
-
     fun buildAad(
         sessionId: ByteArray,
         frameType: Byte,
@@ -70,9 +50,6 @@ object SyncCodec {
         return aad
     }
 
-    // --- seal / open ---
-
-    /** Build a full wire message: `gzip(plaintext)` → AES-256-GCM → `header ∥ nonce ∥ ct∥tag`. */
     fun seal(
         sealKey: ByteArray,
         sessionId: ByteArray,
@@ -100,11 +77,6 @@ object SyncCodec {
         val plaintext: ByteArray,
     )
 
-    /**
-     * Parse + decrypt + gunzip a wire message. Throws [IllegalArgumentException] for a malformed
-     * envelope and [javax.crypto.AEADBadTagException] when authentication fails (caller drops the
-     * socket). Does NOT enforce the expected sequence — that is the protocol layer's job.
-     */
     fun open(
         openKey: ByteArray,
         sessionId: ByteArray,
@@ -121,8 +93,6 @@ object SyncCodec {
         val plaintext = gunzip(compressed)
         return Opened(frameType, seq, plaintext)
     }
-
-    // --- big-endian u64 helpers ---
 
     fun writeLongBE(
         buf: ByteArray,

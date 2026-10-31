@@ -7,13 +7,12 @@ import android.net.Uri
 import android.os.Build
 import android.provider.MediaStore
 
-private val AlbumArtBase: Uri = Uri.parse("content://media/external/audio/albumart")
 private const val ROTATED_90 = 90
 private const val ROTATED_270 = 270
 private const val MILLIS_PER_SECOND = 1_000L
 
 /**
- * Reads the device's videos and songs from MediaStore. Every file is returned; what the library
+ * Reads the device's videos from MediaStore. Every file is returned; what the library
  * hides (voice notes, short clips, hidden folders) is decided later from the viewer's settings.
  */
 internal class LocalMediaStore(
@@ -70,88 +69,13 @@ internal class LocalMediaStore(
         }
     }
 
-    fun music(): List<LocalMediaItem> {
-        val collection = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI
-        val columns =
-            buildList {
-                add(MediaStore.Audio.Media._ID)
-                add(MediaStore.Audio.Media.TITLE)
-                add(MediaStore.Audio.Media.DISPLAY_NAME)
-                add(MediaStore.Audio.Media.ARTIST)
-                add(MediaStore.Audio.Media.ALBUM)
-                add(MediaStore.Audio.Media.ALBUM_ID)
-                add(MediaStore.Audio.Media.DURATION)
-                add(MediaStore.Audio.Media.SIZE)
-                add(MediaStore.Audio.Media.DATE_ADDED)
-                add(MediaStore.Audio.Media.DATE_MODIFIED)
-                add(MediaStore.Audio.Media.MIME_TYPE)
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                    add(MediaStore.Audio.Media.BUCKET_ID)
-                    add(MediaStore.Audio.Media.BUCKET_DISPLAY_NAME)
-                }
-                addAll(pathColumns())
-            }
-        return query(collection, columns, musicSelection()) { cursor ->
-            val id = cursor.long(MediaStore.Audio.Media._ID)
-            val size = cursor.long(MediaStore.Audio.Media.SIZE)
-            if (size <= 0L) return@query null
-            val albumId = cursor.long(MediaStore.Audio.Media.ALBUM_ID)
-            val fileName = cursor.string(MediaStore.Audio.Media.DISPLAY_NAME).orEmpty()
-            val title = cursor.title(MediaStore.Audio.Media.TITLE, MediaStore.Audio.Media.DISPLAY_NAME) ?: return@query null
-            LocalMediaItem(
-                id = id,
-                isVideo = false,
-                contentUri = ContentUris.withAppendedId(collection, id).toString(),
-                title = repairedTitle(title, fileName),
-                fileName = fileName,
-                durationMs = cursor.long(MediaStore.Audio.Media.DURATION),
-                sizeBytes = size,
-                dateAddedMs = cursor.long(MediaStore.Audio.Media.DATE_ADDED) * MILLIS_PER_SECOND,
-                modifiedMs = cursor.long(MediaStore.Audio.Media.DATE_MODIFIED) * MILLIS_PER_SECOND,
-                mimeType = cursor.string(MediaStore.Audio.Media.MIME_TYPE).orEmpty(),
-                folderId = cursor.stringOrNull(MediaStore.Audio.Media.BUCKET_ID).orEmpty(),
-                folderName = cursor.stringOrNull(MediaStore.Audio.Media.BUCKET_DISPLAY_NAME).orEmpty(),
-                path = cursor.folderPath(),
-                artist = cursor.tag(MediaStore.Audio.Media.ARTIST).orEmpty(),
-                album = cursor.tag(MediaStore.Audio.Media.ALBUM).orEmpty(),
-                artworkUri = songArtwork(collection, id, albumId),
-            )
-        }
-    }
-
-    /** Where MediaStore says each listed video and song is, as absolute paths. */
+    /** Where MediaStore says each listed video is, as absolute paths. */
     @Suppress("DEPRECATION")
     fun filePaths(): List<String> {
         val columns = listOf(MediaStore.MediaColumns.DATA)
         val read: (Cursor) -> String? = { cursor -> cursor.string(MediaStore.MediaColumns.DATA)?.takeIf(String::isNotBlank) }
-        return query(MediaStore.Video.Media.EXTERNAL_CONTENT_URI, columns, selection = null, read) +
-            query(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, columns, musicSelection(), read)
+        return query(MediaStore.Video.Media.EXTERNAL_CONTENT_URI, columns, selection = null, read)
     }
-
-    private fun musicSelection(): String =
-        buildList {
-            add("${MediaStore.Audio.Media.IS_MUSIC} != 0")
-            add("${MediaStore.Audio.Media.IS_NOTIFICATION} = 0")
-            add("${MediaStore.Audio.Media.IS_ALARM} = 0")
-            add("${MediaStore.Audio.Media.IS_RINGTONE} = 0")
-            add("${MediaStore.Audio.Media.IS_PODCAST} = 0")
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) add("${MediaStore.Audio.Media.IS_RECORDING} = 0")
-        }.joinToString(" AND ")
-
-    /**
-     * The song's own URI on Android 10 and later, where Coil loads it through `loadThumbnail`; the
-     * album-art path, deprecated there, only before that.
-     */
-    private fun songArtwork(
-        collection: Uri,
-        id: Long,
-        albumId: Long,
-    ): String? =
-        when {
-            Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q -> ContentUris.withAppendedId(collection, id).toString()
-            albumId > 0 -> ContentUris.withAppendedId(AlbumArtBase, albumId).toString()
-            else -> null
-        }
 
     private fun pathColumns(): List<String> =
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {

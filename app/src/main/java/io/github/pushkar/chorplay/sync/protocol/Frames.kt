@@ -5,7 +5,6 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.serializer
 
-/** FLOW-SYNC/1 frame type bytes */
 object FrameType {
     const val HELLO: Byte = 0x01
     const val HELLO_ACK: Byte = 0x02
@@ -38,42 +37,28 @@ object FrameType {
         }
 }
 
-/** Canonical collection identifiers exchanged over the wire */
 object SyncCollection {
     const val WATCH_HISTORY = "watch_history"
     const val PLAYLISTS = "playlists"
     const val LIKES = "likes"
     const val SETTINGS = "settings"
-    const val FLOW_NEURO_BRAIN = "flow_neuro_brain"
-    const val MUSIC_BRAIN = "music_brain"
-
-    /** The user's own notes on channels and videos. */
+    const val CHOR_NEURO_BRAIN = "chor_neuro_brain"
     const val NOTES = "notes"
-
-    /** Subscription **groups** (the folders), not the channels themselves. */
     const val SUBSCRIPTIONS = "subscriptions"
-
-    /** The channels the user actually follows. Separate from [SUBSCRIPTIONS] on the wire because a
-     * group only references channel ids — it can neither create a subscription that is in no group
-     * nor express an unsubscribe. */
     const val SUBSCRIBED_CHANNELS = "subscribed_channels"
 
-    /** Collections Android can exchange. */
     val ANDROID_SYNCABLE =
         listOf(
             WATCH_HISTORY,
             PLAYLISTS,
             LIKES,
             SETTINGS,
-            FLOW_NEURO_BRAIN,
-            MUSIC_BRAIN,
+            CHOR_NEURO_BRAIN,
             SUBSCRIBED_CHANNELS,
             SUBSCRIPTIONS,
             NOTES,
         )
 }
-
-// --- Control-frame payloads (JSON; gzip+sealed by SyncCodec) ---
 
 @Serializable
 data class Hello(
@@ -98,9 +83,7 @@ data class Capability(
     val schema: Int,
     val produce: Boolean,
     val consume: Boolean,
-    /** The key spec a collection's topic keys are written in; 0 when it has none or predates them (#907). */
     val keySpec: Int = 0,
-    /** The language those keys are stemmed for. */
     val keyLanguage: String = "",
 )
 
@@ -109,7 +92,6 @@ data class Capabilities(
     val collections: Map<String, Capability>,
 )
 
-/** Which collections this side will SEND and which it will ACCEPT */
 @Serializable
 data class Selection(
     val send: List<String> = emptyList(),
@@ -133,7 +115,6 @@ data class Manifest(
     val collections: Map<String, ManifestEntry>,
 )
 
-/** Header line that precedes the NDJSON body inside a CHUNK plaintext */
 @Serializable
 data class ChunkHeader(
     val collection: String,
@@ -141,18 +122,6 @@ data class ChunkHeader(
     val last: Boolean,
 )
 
-/**
- * CHUNK plaintext framing (addendum §7): the header line, a newline, then the `\n`-joined NDJSON
- * records.
- *
- * The header/body separator is **mandatory even when the body is empty** — an empty collection
- * must go on the wire as `header` + `\n`, not as a bare header. Emitting the bare form is what made
- * a phone with an empty likes/history/playlist fail the desktop's decoder with
- * `codec: chunk frame missing header newline`.
- *
- * [decode] stays deliberately lenient about a missing separator so a peer still speaking the old
- * bare-header form keeps working.
- */
 object ChunkFraming {
     private const val SEPARATOR = '\n'
 
@@ -218,9 +187,6 @@ data class ErrorFrame(
     @SerialName("message") val message: String,
 )
 
-/**
- * Shared JSON for control frames: compact output, lenient parsing
- */
 object FrameJson {
     val json =
         Json {
@@ -229,7 +195,9 @@ object FrameJson {
             isLenient = true
         }
 
-    inline fun <reified T> encode(value: T): ByteArray = json.encodeToString(serializer<T>(), value).toByteArray(Charsets.UTF_8)
+    inline fun <reified T> encode(value: T): ByteArray =
+        json.encodeToString(serializer<T>(), value).toByteArray(Charsets.UTF_8)
 
-    inline fun <reified T> decode(bytes: ByteArray): T = json.decodeFromString(serializer<T>(), String(bytes, Charsets.UTF_8))
+    inline fun <reified T> decode(bytes: ByteArray): T =
+        json.decodeFromString(serializer<T>(), String(bytes, Charsets.UTF_8))
 }

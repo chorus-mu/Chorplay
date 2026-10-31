@@ -29,9 +29,9 @@ import io.github.pushkar.chorplay.ui.components.settings.SettingsTarget
 import io.github.pushkar.chorplay.ui.components.settings.nav
 import io.github.pushkar.chorplay.ui.components.settings.switch
 import io.github.pushkar.chorplay.ui.components.settings.toggleGroup
-import io.github.pushkar.chorplay.ui.components.shared.FlowChoice
+import io.github.pushkar.chorplay.ui.components.shared.ChorChoice
 import io.github.pushkar.chorplay.ui.components.shared.ChorplayChoiceDialog
-import io.github.pushkar.chorplay.ui.components.shared.FlowToggleOption
+import io.github.pushkar.chorplay.ui.components.shared.ChorToggleOption
 import io.github.pushkar.chorplay.ui.screens.settings.index.AppearanceIndex
 import io.github.pushkar.chorplay.ui.screens.settings.index.DestinationIndex
 import io.github.pushkar.chorplay.ui.theme.AppFont
@@ -40,7 +40,6 @@ import io.github.pushkar.chorplay.ui.theme.ThemeCatalog
 import io.github.pushkar.chorplay.ui.theme.ThemeMode
 import kotlinx.coroutines.launch
 
-/** Everything about how Chorplay looks: theme, icon, layout, and the sub-pages for finer control. */
 @Composable
 internal fun AppearanceScreen(
     onBack: (() -> Unit)?,
@@ -58,7 +57,6 @@ internal fun AppearanceScreen(
     val homeColumns by viewModel.homeColumns.collectAsStateWithLifecycle()
     val gridItemSize by viewModel.gridItemSize.collectAsStateWithLifecycle()
     val libraryPreviews by viewModel.libraryPreviews.collectAsStateWithLifecycle()
-    val separatePlaylists by viewModel.separatePlaylists.collectAsStateWithLifecycle()
     val appLogo by viewModel.appLogo.collectAsStateWithLifecycle()
     val groupBadges by viewModel.groupBadges.collectAsStateWithLifecycle()
     val cardLikeButtons by viewModel.cardLikeButtons.collectAsStateWithLifecycle()
@@ -76,7 +74,11 @@ internal fun AppearanceScreen(
         } else {
             stringResource(
                 R.string.settings_value_pair,
-                customThemeName.takeIf { themeMode == ThemeMode.CUSTOM } ?: stringResource(ThemeCatalog.nameRes(themeMode)),
+                customThemeName.takeIf { themeMode == ThemeMode.CUSTOM } ?: stringResource(
+                    ThemeCatalog.nameRes(
+                        themeMode
+                    )
+                ),
                 stringResource(themeVariantLabel(themeVariant)),
             )
         }
@@ -85,8 +87,12 @@ internal fun AppearanceScreen(
     val interfaceSummary = stringResource(interfaceModeLabel(interfaceMode))
     val viewModeOptions =
         listOf(
-            FlowToggleOption(HomeViewMode.GRID, stringResource(R.string.content_settings_layout_grid), Icons.Outlined.GridView),
-            FlowToggleOption(
+            ChorToggleOption(
+                HomeViewMode.GRID,
+                stringResource(R.string.content_settings_layout_grid),
+                Icons.Outlined.GridView
+            ),
+            ChorToggleOption(
                 HomeViewMode.LIST,
                 stringResource(R.string.content_settings_layout_list),
                 Icons.AutoMirrored.Outlined.ViewList,
@@ -94,15 +100,15 @@ internal fun AppearanceScreen(
         )
     val columnOptions =
         HomeFeedColumns.entries.map { columns ->
-            FlowToggleOption(
+            ChorToggleOption(
                 columns,
                 columns.fixedCount?.toString() ?: stringResource(R.string.content_settings_home_columns_auto),
             )
         }
     val artworkOptions =
         listOf(
-            FlowToggleOption(GridItemSize.BIG, stringResource(R.string.content_settings_grid_big_title)),
-            FlowToggleOption(GridItemSize.SMALL, stringResource(R.string.content_settings_grid_small_title)),
+            ChorToggleOption(GridItemSize.BIG, stringResource(R.string.content_settings_grid_big_title)),
+            ChorToggleOption(GridItemSize.SMALL, stringResource(R.string.content_settings_grid_small_title)),
         )
 
     SettingsPage(
@@ -144,9 +150,7 @@ internal fun AppearanceScreen(
             if (homeViewMode == HomeViewMode.GRID) {
                 toggleGroup(AppearanceIndex.homeColumns, columnOptions, homeColumns, viewModel::setHomeColumns)
             }
-            toggleGroup(AppearanceIndex.musicArtworkSize, artworkOptions, gridItemSize, viewModel::setGridItemSize)
             switch(AppearanceIndex.libraryPreviews, libraryPreviews, viewModel::setLibraryPreviews)
-            switch(AppearanceIndex.separatePlaylists, separatePlaylists, viewModel::setSeparatePlaylists)
             switch(AppearanceIndex.appLogo, appLogo, viewModel::setAppLogo)
             switch(AppearanceIndex.groupBadges, groupBadges, viewModel::setGroupBadges)
         }
@@ -182,7 +186,11 @@ internal fun AppearanceScreen(
             title = stringResource(R.string.interface_mode_title),
             options =
                 AppUiMode.entries.map { mode ->
-                    FlowChoice(mode, stringResource(interfaceModeLabel(mode)), stringResource(interfaceModeSummary(mode)))
+                    ChorChoice(
+                        mode,
+                        stringResource(interfaceModeLabel(mode)),
+                        stringResource(interfaceModeSummary(mode))
+                    )
                 },
             selected = interfaceMode,
             onSelect = viewModel::setInterfaceMode,

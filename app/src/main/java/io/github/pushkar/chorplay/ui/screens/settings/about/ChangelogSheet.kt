@@ -57,10 +57,10 @@ import io.github.pushkar.chorplay.BuildConfig
 import io.github.pushkar.chorplay.R
 import io.github.pushkar.chorplay.ui.components.shared.ChorplayEmptyState
 import io.github.pushkar.chorplay.ui.components.shared.ChorplayLoadingIndicator
-import io.github.pushkar.chorplay.ui.components.shared.FlowSegmentedGap
+import io.github.pushkar.chorplay.ui.components.shared.ChorSegmentedGap
 import io.github.pushkar.chorplay.ui.components.shared.ChorplaySheetHeader
-import io.github.pushkar.chorplay.ui.components.shared.flowSegmentShape
-import io.github.pushkar.chorplay.ui.components.shared.rememberFlowSheetState
+import io.github.pushkar.chorplay.ui.components.shared.chorSegmentShape
+import io.github.pushkar.chorplay.ui.components.shared.rememberChorSheetState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.time.format.DateTimeFormatter
@@ -102,12 +102,12 @@ internal fun ChangelogSheet(onDismiss: () -> Unit) {
 
     ModalBottomSheet(
         onDismissRequest = onDismiss,
-        sheetState = rememberFlowSheetState(),
+        sheetState = rememberChorSheetState(),
         containerColor = MaterialTheme.colorScheme.surface,
     ) {
         ChorplaySheetHeader(
             title = stringResource(R.string.about_changelog),
-            subtitle = stringResource(R.string.whats_new_in_flow),
+            subtitle = stringResource(R.string.whats_new_in_chorplay),
             onClose = onDismiss,
             showDragHandle = false,
         )
@@ -133,7 +133,7 @@ internal fun ChangelogSheet(onDismiss: () -> Unit) {
                             loaded.firstOrNull { compareVersions(versionOf(it.version), installed) == 0 }?.version
                                 ?: loaded.first().version,
                         )
-                val shapes = loaded.indices.map { flowSegmentShape(index = it, count = loaded.size) }
+                val shapes = loaded.indices.map { chorSegmentShape(index = it, count = loaded.size) }
                 LazyColumn(
                     modifier = Modifier.fillMaxHeight(),
                     contentPadding =
@@ -196,7 +196,7 @@ private fun LazyListScope.releaseItems(
             expanded = expanded,
             shape = if (expanded) shape.withoutBottomCorners() else shape,
             onToggle = onToggle,
-            modifier = Modifier.animateItem().padding(top = if (first) 0.dp else FlowSegmentedGap),
+            modifier = Modifier.animateItem().padding(top = if (first) 0.dp else ChorSegmentedGap),
         )
     }
     if (!expanded) return

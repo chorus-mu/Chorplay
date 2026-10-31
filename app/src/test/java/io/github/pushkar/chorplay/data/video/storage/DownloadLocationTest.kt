@@ -78,35 +78,10 @@ class DownloadLocationTest {
     }
 
     @Test
-    fun `music follows the video location until it has its own`() {
-        val video = DownloadLocation(path = "/storage/emulated/0/Videos")
-        val music = DownloadLocation(path = "/storage/emulated/0/Songs")
-        assertEquals(video, DownloadLocation.forDownload(isMusic = true, video = video, music = DownloadLocation.DEFAULT))
-        assertEquals(music, DownloadLocation.forDownload(isMusic = true, video = video, music = music))
-        assertEquals(video, DownloadLocation.forDownload(isMusic = false, video = video, music = music))
-    }
-
-    @Test
-    fun `downloads started together each keep their own folder`() {
-        val videoFolder = File(temp.root, "Videos")
-        val musicFolder = File(temp.root, "Songs")
-        val video = DownloadLocation(path = videoFolder.path)
-        val music = DownloadLocation(path = musicFolder.path)
-        val results =
-            runBlocking(Dispatchers.Default) {
-                List(200) { index ->
-                    val isMusic = index % 2 == 0
-                    async { isMusic to resolve(DownloadLocation.forDownload(isMusic, video, music)).directory }
-                }.awaitAll()
-            }
-        results.forEach { (isMusic, directory) -> assertEquals(if (isMusic) musicFolder else videoFolder, directory) }
-    }
-
-    @Test
     fun `document ids map to their storage paths`() {
         val root = "/storage/emulated/0"
-        assertEquals("/storage/emulated/0/Movies/Flow", documentIdToPath("primary:Movies/Flow", root))
-        assertEquals("/storage/emulated/0/Flow/a b.mp4", documentIdToPath("primary:Flow/a b.mp4", root))
+        assertEquals("/storage/emulated/0/Movies/Chorplay", documentIdToPath("primary:Movies/Chorplay", root))
+        assertEquals("/storage/emulated/0/Chorplay/a b.mp4", documentIdToPath("primary:Chorplay/a b.mp4", root))
         assertEquals("/storage/emulated/0", documentIdToPath("primary:", "$root/"))
         assertEquals("/storage/1A2B-3C4D/Music", documentIdToPath("1A2B-3C4D:Music", root))
         assertEquals("/storage/emulated/0/Download/x.mp4", documentIdToPath("raw:/storage/emulated/0/Download/x.mp4", root))

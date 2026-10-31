@@ -1,7 +1,6 @@
 package io.github.pushkar.chorplay.ui.screens.recap.story
 
 import com.google.common.truth.Truth.assertThat
-import io.github.pushkar.chorplay.data.recommendation.music.MusicStatsStorage
 import io.github.pushkar.chorplay.data.stats.LedgerTime
 import io.github.pushkar.chorplay.data.stats.RecapAggregates
 import io.github.pushkar.chorplay.data.stats.RecapPeriod
@@ -26,7 +25,7 @@ class RecapStoryTest {
 
     @Test
     fun `an empty period still opens and closes the story`() {
-        val summary = RecapAggregates.summarize(RecapPeriod.Month(september), VideoStatsSnapshot(), MusicStatsStorage.SerializableStats())
+        val summary = RecapAggregates.summarize(RecapPeriod.Month(september), VideoStatsSnapshot())
         assertThat(storyPages(summary)).containsExactly(StoryPage.Intro, StoryPage.Summary).inOrder()
     }
 
@@ -46,7 +45,7 @@ class RecapStoryTest {
                 dayMs = mapOf(1 to 60_000L, 2 to 60_000L),
             )
         val video = VideoStatsSnapshot(months = mapOf(LedgerTime.monthKey(september) to month))
-        val pages = storyPages(RecapAggregates.summarize(RecapPeriod.Month(september), video, MusicStatsStorage.SerializableStats()))
+        val pages = storyPages(RecapAggregates.summarize(RecapPeriod.Month(september), video))
 
         assertThat(pages.first()).isEqualTo(StoryPage.Intro)
         assertThat(pages.last()).isEqualTo(StoryPage.Summary)
@@ -63,6 +62,5 @@ class RecapStoryTest {
                 .video.name,
         ).isEqualTo("Repeat me")
         assertThat(pages).containsAtLeast(StoryPage.Topics, StoryPage.Clock, StoryPage.Streak, StoryPage.Formats)
-        assertThat(pages.none { it is StoryPage.TopArtist }).isTrue()
     }
 }

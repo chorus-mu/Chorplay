@@ -78,21 +78,5 @@ class ShareVideoTest {
         assertThat(withText.getStringExtra(Intent.EXTRA_TEXT)).contains("https://youtube.com/shorts/abc123")
     }
 
-    @Test
-    fun `a song shared without text is the bare youtube music link`() {
-        val sent = payload(shareSongIntent(context, "abc123", "A song", "An artist", linkOnly = true))
-
-        assertThat(sent.getStringExtra(Intent.EXTRA_TEXT)).isEqualTo("https://music.youtube.com/watch?v=abc123")
-        assertThat(sent.hasExtra(Intent.EXTRA_SUBJECT)).isFalse()
-    }
-
-    @Test
-    fun `a song shared with text names the song and artist`() {
-        val sent = payload(shareSongIntent(context, "abc123", "A song", "An artist", linkOnly = false))
-
-        assertThat(sent.getStringExtra(Intent.EXTRA_TEXT))
-            .isEqualTo(context.getString(R.string.share_message_template, "A song", "An artist", "abc123"))
-        assertThat(sent.getStringExtra(Intent.EXTRA_TEXT)).contains("https://music.youtube.com/watch?v=abc123")
-        assertThat(sent.getStringExtra(Intent.EXTRA_SUBJECT)).isEqualTo("A song")
-    }
+    
 }

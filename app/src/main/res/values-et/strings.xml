@@ -5,8 +5,8 @@
     <string name="library_section_header">Sinu sisu</string>
     <string name="library_history_label">Ajalugu</string>
     <string name="library_playlists_label">Esitusloendid</string>
-    <string name="library_music_playlists_label">Muusika esitusloendid</string>
-    <string name="library_music_playlists_subtitle">Sinu muusiakogud</string>
+
+
     <string name="subscriptions_search_placeholder">Otsi tellimusi…</string>
     <string name="top_bar_subscriptions_title">Tellimused</string>
     <string name="view_all_button_label">Kõik</string>
@@ -28,7 +28,7 @@
     <string name="clear">Tühjenda</string>
     <string name="cancel">Katkesta</string>
     <string name="liked">"Meeldivaks märgitud "</string>
-    <string name="song">Lugu</string>
+
     <string name="video">Video</string>
     <string name="share">Jaga</string>
     <string name="downloaded">Allalaaaditud</string>
@@ -75,8 +75,7 @@
     <string name="unsubscribe">Loobu tellimusest</string>
     <string name="quality_auto">Automaatne</string>
     <string name="tab_videos">Videod</string>
-    <string name="tab_music">Muusika</string>
-    <string name="action_delete">Kustuta</string>
+<string name="action_delete">Kustuta</string>
     <string name="downloads_title">Allalaadimised</string>
     <string name="action_undo">Võta tegevus tagasi</string>
     <string name="playlist_private">Privaatne</string>
@@ -98,7 +97,7 @@
     <string name="reply">Vasta</string>
     <string name="nav_home">Avavaade</string>
     <string name="nav_shorts">Lühivideod</string>
-    <string name="nav_music">Muusika</string>
+
     <string name="nav_subs">Tellimused</string>
     <string name="nav_library">Meediakogu</string>
     <string name="notifications">Teavitused</string>
@@ -115,9 +114,8 @@
     <string name="playlist">Esitusloend</string>
     <string name="app_name_uppercase">CHORPLAY</string>
     <string name="notification_badge_9_plus">9+</string>
-    <string name="liked_music">Meeldivaks märgitud muusika</string>
+
     <string name="liked_videos">Meeldivaks märgitud videod</string>
-    <string name="share_song">Jaga lugu</string>
     <string name="empty_liked">Meeldivaks märgitud videoid pole</string>
     <string name="empty_liked_body">Sinu poolt meeldivaks märgitud videod saavad olema nähtavad siin</string>
     <string name="loading_track">Lugu on laadimisel...</string>
@@ -127,7 +125,6 @@
     <string name="lyrics_not_available">Laulusõnad pole saadaval</string>
     <string name="related_content">Teemakohane sisu</string>
     <string name="no_related_content">Teemakohast sisu ei leidu</string>
-    <string name="share_message_template">Vaata seda lugu: %1$s esitajalt %2$s\nhttps://music.youtube.com/watch?v=%3$s</string>
     <string name="track_details">Loo üksikasjad</string>
     <string name="video_id_label">Video tunnus</string>
     <string name="sample_rate_label">Diskreetimissagedus</string>
@@ -154,7 +151,7 @@
     <string name="shorts_audio_dubbed">Dubleeritud</string>
     <string name="shorts_quality_settings_title">Lühivideo kvaliteet</string>
     <string name="shorts_quality_settings_subtitle">Kvaliteet lühivideote vaatamisel</string>
-    <string name="music_player">Muusikaesitaja</string>
+
     <plurals name="channels_count">
         <item quantity="one">%d kanal</item>
         <item quantity="other">%d kanalit</item>
@@ -196,7 +193,7 @@
     <string name="tap_to_close">Sulgemiseks klõpsa</string>
     <string name="new_update_available">Saadaval on rakenduse uuendus</string>
     <string name="update_available_template">%1$s on nüüd saadaval</string>
-    <string name="update_flow">Uuenda rakendust Chorplay</string>
+    <string name="update_chorplay">Uuenda rakendust Chorplay</string>
     <string name="maybe_later">Võib-olla hiljem</string>
     <string name="select_artist">Vali esitaja</string>
     <string name="copy_description">Kopeeri kirjeldus</string>
@@ -205,13 +202,10 @@
     <string name="in_this_video">Selles videos</string>
     <string name="add_to_playlist">Lisa esitusloendisse</string>
     <string name="play_next">Esita järgmisena</string>
-    <string name="play_next_desc">Lisa esitusjärjekorra algusesse</string>
     <string name="add_to_queue">Lisa esitusjärjekorda</string>
     <string name="add_to_queue_desc">Lisa esitusjärjekorra lõppu</string>
     <string name="audio_effects">Heliefektid</string>
     <string name="view_artist">Vaata esitajat</string>
-    <string name="view_album">Vaata albumit</string>
-    <string name="album_art">Kaanepilt</string>
     <string name="close_player">Sulge meediaesitaja</string>
     <string name="views_template">%1$s vaatamist</string>
     <string name="personalized_feed">Sinu isiklik sisuvoog</string>
@@ -277,9 +271,9 @@
     <string name="channel_search_open">Otsi kanalist</string>
     <string name="channel_search_close">Sulge otsing</string>
     <string name="channel_search_no_results">Otsingule „%1$s“ ei leidu tulemusi</string>
-    <string name="music_history">Muusikakuulamise ajalugu</string>
+
     <string name="remove_from_history">Eemalda ajaloost</string>
-    <string name="share_song_chooser">Jaga lugu</string>
+
     <string name="time_today">Täna</string>
     <string name="time_yesterday">Eile</string>
     <string name="time_earlier">Varem</string>
@@ -298,7 +292,7 @@
     <string name="settings_item_diagnostics">Diagnostika</string>
     <string name="no_groups_yet">Gruppe veel pole. Oma sisuvoo filtreerimiseks loo mõni.</string>
     <string name="settings_title">Seadistused</string>
-    <string name="settings_flow_engine_header">Chorplay sisumootor</string>
+    <string name="settings_chor_engine_header">Chorplay sisumootor</string>
     <string name="settings_active_learning">AKTIIVÕPE</string>
     <string name="settings_reset_brain_title">Kas lähtestad Chorplay isiksuse?</string>
     <string name="settings_reset_brain_body">Järgnevaga kustutad täielikult su „Chorplay Brain“ huvide profiili.\n\n• Kõik õpitud teemad ununevad.\n• Isiksuseomadused taastuvad neutraalsele tasemele.\n• Soovitused taastuvad vaikimisi valikuteks.\n\nSeda toimingut ei saa tagasi võtta.</string>

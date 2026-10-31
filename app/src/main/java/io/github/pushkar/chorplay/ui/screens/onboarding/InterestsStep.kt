@@ -23,7 +23,7 @@ import androidx.compose.ui.unit.dp
 import io.github.pushkar.chorplay.data.recommendation.NeuroTopicCatalog
 import io.github.pushkar.chorplay.data.recommendation.TopicCategory
 import io.github.pushkar.chorplay.ui.components.shared.ChorplayPillChip
-import io.github.pushkar.chorplay.ui.components.shared.FlowPillSection
+import io.github.pushkar.chorplay.ui.components.shared.ChorPillSection
 import io.github.pushkar.chorplay.ui.components.topicCategoryIcon
 import io.github.pushkar.chorplay.ui.components.topicCategoryNameRes
 import kotlinx.coroutines.delay
@@ -85,7 +85,7 @@ private fun InterestCategorySection(
     selectedTopics: Set<String>,
     onTopicToggle: (String) -> Unit,
 ) {
-    FlowPillSection(
+    ChorPillSection(
         title = stringResource(topicCategoryNameRes(category.name)),
         icon = topicCategoryIcon(category.icon),
         selectedCount = category.topics.count(selectedTopics::contains),

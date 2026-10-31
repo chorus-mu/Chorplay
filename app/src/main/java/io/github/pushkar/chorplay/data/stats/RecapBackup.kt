@@ -1,6 +1,5 @@
 package io.github.pushkar.chorplay.data.stats
 
-import io.github.pushkar.chorplay.data.recommendation.music.MusicStatsStorage
 import kotlinx.serialization.Serializable
 
 /**
@@ -11,7 +10,6 @@ import kotlinx.serialization.Serializable
 internal data class RecapBackup(
     val version: Int = VERSION,
     val video: VideoStatsSnapshot? = null,
-    val music: MusicStatsStorage.SerializableStats? = null,
 ) {
     fun encode(): ByteArray = LedgerJson.encodeToString(serializer(), this).encodeToByteArray()
 

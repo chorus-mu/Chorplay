@@ -46,24 +46,21 @@ import androidx.lifecycle.compose.LifecycleResumeEffect
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import io.github.pushkar.chorplay.R
 import io.github.pushkar.chorplay.data.localmedia.LocalMediaItem
-import io.github.pushkar.chorplay.data.localmedia.toMusicTrack
 import io.github.pushkar.chorplay.data.localmedia.toVideo
 import io.github.pushkar.chorplay.ui.components.layout.topbar.ChorplayTopBar
 import io.github.pushkar.chorplay.ui.components.library.LibraryKindHeader
 import io.github.pushkar.chorplay.ui.components.library.LibrarySelection
 import io.github.pushkar.chorplay.ui.components.shared.ChorplayErrorState
 import io.github.pushkar.chorplay.ui.components.shared.ChorplayLoadingIndicator
-import io.github.pushkar.chorplay.ui.components.shared.FlowSelectionAction
+import io.github.pushkar.chorplay.ui.components.shared.ChorSelectionAction
 import io.github.pushkar.chorplay.ui.components.shared.ChorplaySelectionToolbar
 import io.github.pushkar.chorplay.ui.components.shared.ChorplaySidePanes
-import io.github.pushkar.chorplay.ui.components.shared.MediaKind
 import io.github.pushkar.chorplay.ui.components.shared.dismissKeyboardOnPress
-import io.github.pushkar.chorplay.ui.components.shared.flowGridColumns
+import io.github.pushkar.chorplay.ui.components.shared.chorGridColumns
 import io.github.pushkar.chorplay.ui.components.shared.quickactions.QuickActionUndo
 import io.github.pushkar.chorplay.ui.components.shared.quickactions.sharedQuickActionsViewModel
-import io.github.pushkar.chorplay.ui.components.shared.rememberFlowPaneState
+import io.github.pushkar.chorplay.ui.components.shared.rememberChorPaneState
 import io.github.pushkar.chorplay.ui.components.shared.shareMediaFiles
-import io.github.pushkar.chorplay.ui.screens.music.sharedMusicPlayerViewModel
 
 private val FolderPaneWidth = 360.dp
 
@@ -71,7 +68,6 @@ private val FolderPaneWidth = 360.dp
 fun LocalMediaScreen(
     onBackClick: () -> Unit,
     onPlayVideos: (items: List<LocalMediaItem>, startIndex: Int, shuffle: Boolean) -> Unit,
-    onPlayMusic: (items: List<LocalMediaItem>, startIndex: Int, shuffle: Boolean) -> Unit,
     onOpenSettings: () -> Unit,
     modifier: Modifier = Modifier,
     viewModel: LocalMediaViewModel = hiltViewModel(),
@@ -81,14 +77,10 @@ fun LocalMediaScreen(
     val context = LocalContext.current
     val focusManager = LocalFocusManager.current
     val quickActions = sharedQuickActionsViewModel()
-    val musicPlayer = sharedMusicPlayerViewModel()
-    val isVideos = state.selection.kind == MediaKind.Videos
 
     var accessCheck by remember { mutableIntStateOf(0) }
     var askedOnce by rememberSaveable { mutableStateOf(false) }
-    val videoAccess = remember(accessCheck) { context.videoAccess() }
-    val musicAccess = remember(accessCheck) { context.musicAccess() }
-    val access = if (isVideos) videoAccess else musicAccess
+    val access = remember(accessCheck) { context.videoAccess() }
     val permissionLauncher =
         rememberLauncherForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) {
             askedOnce = true
@@ -96,11 +88,10 @@ fun LocalMediaScreen(
             viewModel.refresh()
         }
     val askForAccess = { permissionLauncher.launch(localMediaPermissions()) }
-    LaunchedEffect(Unit) { if (videoAccess == MediaAccess.NONE && musicAccess == MediaAccess.NONE && !askedOnce) askForAccess() }
-    // Access granted in app settings arrives while this screen is paused; look again on return.
+    LaunchedEffect(Unit) { if (access == MediaAccess.NONE && !askedOnce) askForAccess() }
     LifecycleResumeEffect(Unit) {
-        val before = context.videoAccess() to context.musicAccess()
-        if (before != (videoAccess to musicAccess)) {
+        val before = context.videoAccess()
+        if (before != access) {
             accessCheck++
             viewModel.refresh()
         }
@@ -121,15 +112,22 @@ fun LocalMediaScreen(
                 exitSelection()
                 if (deleteMovesToTrash) {
                     quickActions.announce(
-                        context.resources.getQuantityString(R.plurals.local_files_trashed, pendingDelete.size, pendingDelete.size),
+                        context.resources.getQuantityString(
+                            R.plurals.local_files_trashed,
+                            pendingDelete.size,
+                            pendingDelete.size
+                        ),
                         QuickActionUndo.RestoreFromTrash(pendingDelete),
                     )
                 } else {
-                    // On Android 10 the prompt only grants access; the delete itself runs again now.
                     val outcome = context.contentResolver.requestDelete(pendingDelete.map(Uri::parse))
                     if (outcome is LocalDeleteOutcome.Deleted) {
                         quickActions.announce(
-                            context.resources.getQuantityString(R.plurals.local_files_deleted, outcome.count, outcome.count),
+                            context.resources.getQuantityString(
+                                R.plurals.local_files_deleted,
+                                outcome.count,
+                                outcome.count
+                            ),
                         )
                     }
                 }
@@ -145,7 +143,11 @@ fun LocalMediaScreen(
 
             is LocalDeleteOutcome.Deleted -> {
                 quickActions.announce(
-                    context.resources.getQuantityString(R.plurals.local_files_deleted, outcome.count, outcome.count),
+                    context.resources.getQuantityString(
+                        R.plurals.local_files_deleted,
+                        outcome.count,
+                        outcome.count
+                    ),
                 )
             }
 
@@ -167,8 +169,8 @@ fun LocalMediaScreen(
     }
     val fileActions =
         LocalFileActions(
-            onPlayNext = { if (it.isVideo) quickActions.playVideoNext(it.toVideo()) else musicPlayer.playNext(it.toMusicTrack()) },
-            onAddToQueue = { if (it.isVideo) quickActions.addVideoToQueue(it.toVideo()) else musicPlayer.addToQueue(it.toMusicTrack()) },
+            onPlayNext = { quickActions.playVideoNext(it.toVideo()) },
+            onAddToQueue = { quickActions.addVideoToQueue(it.toVideo()) },
             onShare = shareFiles,
             onHideFolder = { item ->
                 viewModel.hideFolder(item.folderId)
@@ -183,12 +185,11 @@ fun LocalMediaScreen(
         if (selectionMode) exitSelection() else viewModel.openFolder(null)
     }
 
-    val panes = rememberFlowPaneState()
+    val panes = rememberChorPaneState()
     val twoPaneFolders = state.selection.view == LocalView.FOLDERS && panes.showsSidePane
     val searching =
         state.selection.filters.query
             .isNotBlank()
-    // Beside the folder pane a search covers every folder, not the one opened for the viewer.
     LaunchedEffect(twoPaneFolders, state.folders, searching) {
         when {
             !twoPaneFolders -> Unit
@@ -196,8 +197,8 @@ fun LocalMediaScreen(
             openFolder == null -> state.folders.firstOrNull()?.let { viewModel.openFolder(it.id) }
         }
     }
-    val wideWindow = flowGridColumns(compact = 1, medium = 2, expanded = 2) > 1
-    val asGrid = isVideos && (state.settings.videosAsGrid ?: wideWindow)
+    val wideWindow = chorGridColumns(compact = 1, medium = 2, expanded = 2) > 1
+    val asGrid = state.settings.videosAsGrid ?: wideWindow
     val selection =
         LibrarySelection(selectionMode, selectedIds) { id ->
             selectedIds =
@@ -205,7 +206,7 @@ fun LocalMediaScreen(
         }
     val contentActions =
         LocalContentActions(
-            onPlay = { items, index, shuffle -> if (isVideos) onPlayVideos(items, index, shuffle) else onPlayMusic(items, index, shuffle) },
+            onPlay = { items, index, shuffle -> onPlayVideos(items, index, shuffle) },
             onLongClick = { menuItem = it },
             onOpenFolder = viewModel::openFolder,
             onManageHidden = onOpenSettings,
@@ -218,7 +219,12 @@ fun LocalMediaScreen(
             LocalMediaTopBar(
                 title =
                     when {
-                        selectionMode -> pluralStringResource(R.plurals.selected_count_template, selectedIds.size, selectedIds.size)
+                        selectionMode -> pluralStringResource(
+                            R.plurals.selected_count_template,
+                            selectedIds.size,
+                            selectedIds.size
+                        )
+
                         openFolder != null && !twoPaneFolders -> openFolder.name
                         else -> stringResource(R.string.local_media_title)
                     },
@@ -231,7 +237,7 @@ fun LocalMediaScreen(
                 },
                 selectionMode = selectionMode,
                 canSelect = state.items.isNotEmpty() && access != MediaAccess.NONE,
-                showGridToggle = isVideos && access != MediaAccess.NONE,
+                showGridToggle = access != MediaAccess.NONE,
                 asGrid = asGrid,
                 onSelect = { selectionMode = true },
                 onSelectAll = {
@@ -258,7 +264,7 @@ fun LocalMediaScreen(
                 )
                 if (access != MediaAccess.NONE) {
                     LocalMediaFilterBar(
-                        isVideos = isVideos,
+                        isVideos = true,
                         view = state.selection.view,
                         filters = state.selection.filters,
                         onViewChange = viewModel::selectView,
@@ -287,14 +293,15 @@ fun LocalMediaScreen(
                         }
 
                         state.failed -> {
-                            ChorplayErrorState(error = stringResource(R.string.local_load_failed), onRetry = viewModel::refresh)
+                            ChorplayErrorState(
+                                error = stringResource(R.string.local_load_failed),
+                                onRetry = viewModel::refresh
+                            )
                         }
 
                         else -> {
                             val banner: (@Composable () -> Unit)? =
-                                if (isVideos &&
-                                    access == MediaAccess.PARTIAL
-                                ) {
+                                if (access == MediaAccess.PARTIAL) {
                                     ({ PartialAccessBanner(onManage = askForAccess) })
                                 } else {
                                     null
@@ -315,7 +322,13 @@ fun LocalMediaScreen(
                                 ChorplaySidePanes(
                                     panes = panes,
                                     sidePaneWidth = FolderPaneWidth,
-                                    sidePane = { LocalFolderList(state, isVideos, onOpenFolder = viewModel::openFolder) },
+                                    sidePane = {
+                                        LocalFolderList(
+                                            state,
+                                            isVideos = true,
+                                            onOpenFolder = viewModel::openFolder
+                                        )
+                                    },
                                     mainPane = content,
                                 )
                             } else {
@@ -327,17 +340,24 @@ fun LocalMediaScreen(
             }
             ChorplaySelectionToolbar(
                 visible = selectionMode && selectedIds.isNotEmpty(),
-                summary = pluralStringResource(R.plurals.selected_count_template, selectedIds.size, selectedIds.size),
+                summary = pluralStringResource(
+                    R.plurals.selected_count_template,
+                    selectedIds.size,
+                    selectedIds.size
+                ),
                 actions =
                     listOf(
-                        FlowSelectionAction(Icons.Outlined.QueuePlayNext, stringResource(R.string.add_to_queue)) {
+                        ChorSelectionAction(
+                            Icons.Outlined.QueuePlayNext,
+                            stringResource(R.string.add_to_queue)
+                        ) {
                             state.items.filter { it.mediaId in selectedIds }.forEach(fileActions.onAddToQueue)
                             exitSelection()
                         },
-                        FlowSelectionAction(Icons.Outlined.Share, stringResource(R.string.share)) {
+                        ChorSelectionAction(Icons.Outlined.Share, stringResource(R.string.share)) {
                             shareFiles(state.items.filter { it.mediaId in selectedIds })
                         },
-                        FlowSelectionAction(Icons.Outlined.Delete, stringResource(R.string.action_delete)) {
+                        ChorSelectionAction(Icons.Outlined.Delete, stringResource(R.string.action_delete)) {
                             deleteFiles(state.items.filter { it.mediaId in selectedIds })
                         },
                     ),
@@ -386,7 +406,10 @@ private fun LocalMediaTopBar(
                 ) { Icon(Icons.Default.Checklist, contentDescription = stringResource(R.string.select_videos)) }
             }
             IconButton(onClick = onOpenSettings) {
-                Icon(Icons.Outlined.Settings, contentDescription = stringResource(R.string.settings_local_media_title))
+                Icon(
+                    Icons.Outlined.Settings,
+                    contentDescription = stringResource(R.string.settings_local_media_title)
+                )
             }
         },
     )

@@ -16,7 +16,6 @@ import io.github.pushkar.chorplay.data.local.entity.WatchHistoryEntity
 import io.github.pushkar.chorplay.data.localmedia.LocalSubtitles
 import io.github.pushkar.chorplay.data.model.Comment
 import io.github.pushkar.chorplay.data.model.Video
-import io.github.pushkar.chorplay.data.music.model.MusicTrack
 import io.github.pushkar.chorplay.data.recommendation.ChorplayNeuroEngine
 import io.github.pushkar.chorplay.data.repository.LiveChatRepository
 import io.github.pushkar.chorplay.data.repository.SponsorBlockRepository
@@ -50,14 +49,6 @@ import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.TestDispatcher
 import org.schabi.newpipe.extractor.Page
 
-/**
- * Characterisation harness for [VideoPlayerViewModel]: every constructor dependency is a relaxed
- * mock, every static object the ViewModel reaches is a mockk object spy, and every flow the init
- * block collects is backed by a real [MutableStateFlow]/[MutableSharedFlow] so tests can drive it.
- *
- * The defaults describe a healthy, online, empty device: no downloads, no restored session, no
- * music playing, RYD disabled, Auto quality. Individual tests override what they need.
- */
 internal class VideoPlayerViewModelHarness(
     private val testDispatcher: TestDispatcher,
 ) {
@@ -81,11 +72,6 @@ internal class VideoPlayerViewModelHarness(
     var openVideosFullscreen = false
     val videoStats: io.github.pushkar.chorplay.data.stats.VideoStatsRecorder = mockk(relaxed = true)
 
-    /**
-     * The real use case over the mocked repositories: every engagement assertion in the suite is
-     * written against [subscriptionRepository]/[likedVideosRepository], so the seam under test
-     * stays the repository call, not the use case.
-     */
     val engagement: VideoEngagementUseCase by lazy {
         VideoEngagementUseCase(
             subscriptionRepository = subscriptionRepository,
@@ -99,7 +85,6 @@ internal class VideoPlayerViewModelHarness(
     val playbackAbandonedEvent = MutableSharedFlow<Unit>(extraBufferCapacity = 1)
     val queueVideos = MutableStateFlow<List<Video>>(emptyList())
     val videoQueueStore = mockk<io.github.pushkar.chorplay.data.video.VideoQueueStore>(relaxed = true)
-    val musicCurrentTrack = MutableStateFlow<MusicTrack?>(null)
     val autoplayEnabled = MutableStateFlow(true)
     val continueWatchingEnabled = MutableStateFlow(true)
     val rytdEnabled = MutableStateFlow(false)
@@ -118,7 +103,6 @@ internal class VideoPlayerViewModelHarness(
         every { playerManager.isPreparedForPlayback(any()) } returns false
         every { playerManager.isReachedByQueueAdvance(any()) } returns false
 
-        // Reset the real singleton before spying it so the reset is not a recorded call.
         GlobalPlayerState.setCurrentVideo(null)
         GlobalPlayerState.setExplicitBackgroundPlaybackActive(false)
         GlobalPlayerState.hideMiniPlayer()

@@ -63,7 +63,7 @@ import io.github.pushkar.chorplay.ui.components.layout.rememberChorplayPaneScaff
 import io.github.pushkar.chorplay.ui.components.layout.topbar.ChorplayTopBar
 import io.github.pushkar.chorplay.ui.components.shared.ChorplayEmptyState
 import io.github.pushkar.chorplay.ui.components.shared.ChorplayNoteEditorDialog
-import io.github.pushkar.chorplay.ui.components.shared.FlowSelectionAction
+import io.github.pushkar.chorplay.ui.components.shared.ChorSelectionAction
 import io.github.pushkar.chorplay.ui.components.shared.ChorplaySelectionToolbar
 import kotlinx.coroutines.launch
 
@@ -261,9 +261,9 @@ internal fun NotesScreen(
                 summary = pluralStringResource(R.plurals.selected_count_template, selectedKeys.size, selectedKeys.size),
                 actions =
                     listOf(
-                        FlowSelectionAction(Icons.Outlined.Delete, stringResource(R.string.action_delete)) { delete(selectedNotes) },
-                        FlowSelectionAction(Icons.Outlined.Share, stringResource(R.string.action_share)) { share(selectedNotes) },
-                        FlowSelectionAction(Icons.Default.SwapVert, stringResource(R.string.notes_reorder)) {
+                        ChorSelectionAction(Icons.Outlined.Delete, stringResource(R.string.action_delete)) { delete(selectedNotes) },
+                        ChorSelectionAction(Icons.Outlined.Share, stringResource(R.string.action_share)) { share(selectedNotes) },
+                        ChorSelectionAction(Icons.Default.SwapVert, stringResource(R.string.notes_reorder)) {
                             exitSelection()
                             viewModel.startReordering()
                             reordering = true

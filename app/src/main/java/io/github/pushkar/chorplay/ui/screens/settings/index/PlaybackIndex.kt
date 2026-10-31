@@ -109,14 +109,6 @@ internal object PlaybackIndex {
             section = R.string.settings_section_speed,
             destination = page,
         )
-    val musicNormalSpeed =
-        SettingEntry(
-            key = "playback.music_normal_speed",
-            title = R.string.settings_music_normal_speed_title,
-            summary = R.string.settings_music_normal_speed_summary,
-            section = R.string.settings_section_speed,
-            destination = page,
-        )
     val speedPerChannel =
         SettingEntry(
             key = "playback.speed_per_channel",
@@ -263,22 +255,6 @@ internal object PlaybackIndex {
             section = R.string.settings_section_pip,
             destination = page,
         )
-    val restoreMusicMiniPlayer =
-        SettingEntry(
-            key = "playback.restore_music_mini_player",
-            title = R.string.content_settings_restored_music_mini_player_title,
-            summary = R.string.content_settings_restored_music_mini_player_subtitle,
-            section = R.string.settings_section_pip,
-            destination = page,
-        )
-    val openMusicPlayerOnPlay =
-        SettingEntry(
-            key = "playback.open_music_player_on_play",
-            title = R.string.settings_open_music_player_on_play_title,
-            summary = R.string.settings_open_music_player_on_play_summary,
-            section = R.string.settings_section_pip,
-            destination = page,
-        )
     val audioLanguage =
         SettingEntry(
             key = "playback.audio_language",
@@ -398,62 +374,6 @@ internal object PlaybackIndex {
             section = R.string.settings_section_shorts_player,
             destination = page,
         )
-    val endlessRadio =
-        SettingEntry(
-            key = "playback.endless_radio",
-            title = R.string.music_endless_radio_title,
-            summary = R.string.music_endless_radio_desc,
-            section = R.string.settings_section_music,
-            destination = page,
-        )
-    val pauseMusicWhenMuted =
-        SettingEntry(
-            key = "playback.pause_music_when_muted",
-            title = R.string.settings_pause_music_muted_title,
-            summary = R.string.settings_pause_music_muted_summary,
-            section = R.string.settings_section_music,
-            destination = page,
-        )
-    val musicResume =
-        SettingEntry(
-            key = "playback.music_resume",
-            title = R.string.settings_music_resume_title,
-            summary = R.string.settings_music_resume_summary,
-            section = R.string.settings_section_music,
-            destination = page,
-        )
-    val resumeFromHeadphones =
-        SettingEntry(
-            key = "playback.resume_from_headphones",
-            title = R.string.settings_resume_from_headphones_title,
-            summary = R.string.settings_resume_from_headphones_summary,
-            section = R.string.settings_section_music,
-            destination = page,
-        )
-    val musicSideSwipes =
-        SettingEntry(
-            key = "playback.music_side_swipes",
-            title = R.string.settings_music_side_swipes_title,
-            summary = R.string.settings_music_side_swipes_summary,
-            section = R.string.settings_section_music,
-            destination = page,
-        )
-    val musicVideoSwitch =
-        SettingEntry(
-            key = "playback.music_video_switch",
-            title = R.string.settings_music_video_switch_title,
-            summary = R.string.settings_music_video_switch_summary,
-            section = R.string.settings_section_music,
-            destination = page,
-        )
-    val lyricsProviders =
-        SettingEntry(
-            key = "playback.lyrics_providers",
-            title = R.string.lyrics_provider_title,
-            summary = R.string.lyrics_provider_subtitle,
-            section = R.string.settings_section_music,
-            destination = page,
-        )
 
     val all =
         listOf(
@@ -470,7 +390,6 @@ internal object PlaybackIndex {
             playDuringCalls,
             normalizeVolume,
             rememberSpeed,
-            musicNormalSpeed,
             speedPerChannel,
             customSpeeds,
             speedPresets,
@@ -491,8 +410,6 @@ internal object PlaybackIndex {
                 nextPrevButtons,
                 autoPip,
                 continueWatchingMiniPlayer,
-                restoreMusicMiniPlayer,
-                openMusicPlayerOnPlay,
                 audioLanguage,
                 subtitleLanguage,
                 autoCaptions,
@@ -508,12 +425,5 @@ internal object PlaybackIndex {
                 shortsBackgroundPlay,
                 shortsPip,
                 shortsContinueIntoFeed,
-                endlessRadio,
-                pauseMusicWhenMuted,
-                musicResume,
-                resumeFromHeadphones,
-                musicSideSwipes,
-                musicVideoSwitch,
-                lyricsProviders,
             )
 }

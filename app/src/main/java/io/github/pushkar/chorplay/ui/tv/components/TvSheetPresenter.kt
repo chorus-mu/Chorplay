@@ -9,13 +9,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
-import io.github.pushkar.chorplay.ui.components.shared.FlowSheetPresenter
+import io.github.pushkar.chorplay.ui.components.shared.ChorSheetPresenter
 
 /**
  * Opens the shared media sheets (quick actions, Save, the music menus) as a [TvSidePanelSurface] in
  * a dialog window, which keeps D-pad focus inside it and lays it over whatever screen opened it.
  */
-internal object TvSheetPresenter : FlowSheetPresenter {
+internal object TvSheetPresenter : ChorSheetPresenter {
     @Composable
     override fun Present(
         onDismiss: () -> Unit,

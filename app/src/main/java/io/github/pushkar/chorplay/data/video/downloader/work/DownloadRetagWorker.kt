@@ -48,7 +48,7 @@ class DownloadRetagWorker(
     }
 
     companion object {
-        const val UNIQUE_NAME = "flow_download_retag"
+        const val UNIQUE_NAME = "chorplay_download_retag"
         const val KEY_DONE = "done"
         const val KEY_TOTAL = "total"
         const val KEY_TAGGED = "tagged"

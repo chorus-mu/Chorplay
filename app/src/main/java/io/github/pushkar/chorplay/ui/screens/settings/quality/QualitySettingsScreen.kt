@@ -3,7 +3,6 @@ package io.github.pushkar.chorplay.ui.screens.settings.quality
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.DataUsage
-import androidx.compose.material.icons.outlined.MusicNote
 import androidx.compose.material.icons.outlined.Slideshow
 import androidx.compose.material.icons.outlined.SmartDisplay
 import androidx.compose.runtime.Composable
@@ -17,7 +16,6 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import io.github.pushkar.chorplay.R
-import io.github.pushkar.chorplay.data.local.MusicAudioQuality
 import io.github.pushkar.chorplay.data.local.ThumbnailQuality
 import io.github.pushkar.chorplay.data.local.VideoCodec
 import io.github.pushkar.chorplay.data.local.VideoQuality
@@ -25,11 +23,10 @@ import io.github.pushkar.chorplay.ui.components.settings.SettingsPage
 import io.github.pushkar.chorplay.ui.components.settings.SettingsTabs
 import io.github.pushkar.chorplay.ui.components.settings.nav
 import io.github.pushkar.chorplay.ui.components.settings.notice
-import io.github.pushkar.chorplay.ui.components.settings.option
-import io.github.pushkar.chorplay.ui.components.shared.FlowChoice
+import io.github.pushkar.chorplay.ui.components.shared.ChorChoice
 import io.github.pushkar.chorplay.ui.components.shared.ChorplayChoiceDialog
 import io.github.pushkar.chorplay.ui.components.shared.ChorplayConnectedToggleGroup
-import io.github.pushkar.chorplay.ui.components.shared.FlowToggleOption
+import io.github.pushkar.chorplay.ui.components.shared.ChorToggleOption
 import io.github.pushkar.chorplay.ui.screens.settings.index.QualityIndex
 
 private val TabsBottomPadding = 8.dp
@@ -45,7 +42,6 @@ private enum class QualityPicker {
     THUMBNAILS_MOBILE,
 }
 
-/** Default quality for regular videos, Shorts and music, one media kind at a time. */
 @Composable
 internal fun QualitySettingsScreen(
     onBack: (() -> Unit)?,
@@ -57,7 +53,6 @@ internal fun QualitySettingsScreen(
     val videoMobile by viewModel.videoMobile.collectAsStateWithLifecycle()
     val shortsWifi by viewModel.shortsWifi.collectAsStateWithLifecycle()
     val shortsMobile by viewModel.shortsMobile.collectAsStateWithLifecycle()
-    val music by viewModel.music.collectAsStateWithLifecycle()
     val codec by viewModel.codec.collectAsStateWithLifecycle()
     val fallbackCodec by viewModel.fallbackCodec.collectAsStateWithLifecycle()
     val thumbnailsWifi by viewModel.thumbnailsWifi.collectAsStateWithLifecycle()
@@ -67,9 +62,16 @@ internal fun QualitySettingsScreen(
 
     val tabs =
         listOf(
-            FlowToggleOption(SettingsTabs.QUALITY_VIDEO, stringResource(R.string.settings_quality_tab_video), Icons.Outlined.SmartDisplay),
-            FlowToggleOption(SettingsTabs.QUALITY_SHORTS, stringResource(R.string.settings_quality_tab_shorts), Icons.Outlined.Slideshow),
-            FlowToggleOption(SettingsTabs.QUALITY_MUSIC, stringResource(R.string.settings_quality_tab_music), Icons.Outlined.MusicNote),
+            ChorToggleOption(
+                SettingsTabs.QUALITY_VIDEO,
+                stringResource(R.string.settings_quality_tab_video),
+                Icons.Outlined.SmartDisplay
+            ),
+            ChorToggleOption(
+                SettingsTabs.QUALITY_SHORTS,
+                stringResource(R.string.settings_quality_tab_shorts),
+                Icons.Outlined.Slideshow
+            ),
         )
     val videoWifiLabel = stringResource(videoQualityLabel(videoWifi))
     val videoMobileLabel = stringResource(videoQualityLabel(videoMobile))
@@ -79,8 +81,6 @@ internal fun QualitySettingsScreen(
     val fallbackLabel = codecLabel(fallbackCodec)
     val thumbnailsWifiLabel = stringResource(thumbnailQualityLabel(thumbnailsWifi))
     val thumbnailsMobileLabel = stringResource(thumbnailQualityLabel(thumbnailsMobile))
-    val musicLabels = MusicQualities.associateWith { stringResource(musicQualityLabel(it)) }
-    val musicAutoSummary = stringResource(R.string.settings_music_quality_auto_summary)
 
     SettingsPage(
         title = stringResource(R.string.quality),
@@ -107,21 +107,11 @@ internal fun QualitySettingsScreen(
                             QualityPicker.SHORTS_MOBILE
                     })
                 }
-                notice("quality.shorts.notice", text = { stringResource(R.string.shorts_quality_warning) }, icon = Icons.Outlined.DataUsage)
-            }
-
-            SettingsTabs.QUALITY_MUSIC -> {
-                group(key = QualityIndex.music.key, header = R.string.music_quality_header) {
-                    MusicQualities.forEach { quality ->
-                        option(
-                            key = "quality.music.${quality.name}",
-                            label = musicLabels.getValue(quality),
-                            supportingText = musicAutoSummary.takeIf { quality == MusicAudioQuality.AUTO },
-                            selected = music == quality,
-                            onClick = { viewModel.setMusic(quality) },
-                        )
-                    }
-                }
+                notice(
+                    "quality.shorts.notice",
+                    text = { stringResource(R.string.shorts_quality_warning) },
+                    icon = Icons.Outlined.DataUsage
+                )
             }
 
             else -> {
@@ -138,7 +128,11 @@ internal fun QualitySettingsScreen(
                     })
                 }
                 group(key = "quality.video.codec", header = R.string.settings_section_codec) {
-                    nav(QualityIndex.codec, value = codecLabel, showChevron = false, onClick = { picker = QualityPicker.CODEC })
+                    nav(
+                        QualityIndex.codec,
+                        value = codecLabel,
+                        showChevron = false,
+                        onClick = { picker = QualityPicker.CODEC })
                     if (codec != VideoCodec.AUTO) {
                         nav(QualityIndex.fallbackCodec, value = fallbackLabel, showChevron = false, onClick = {
                             picker =
@@ -146,7 +140,11 @@ internal fun QualitySettingsScreen(
                         })
                     }
                 }
-                notice("quality.video.notice", text = { stringResource(R.string.video_quality_warning) }, icon = Icons.Outlined.DataUsage)
+                notice(
+                    "quality.video.notice",
+                    text = { stringResource(R.string.video_quality_warning) },
+                    icon = Icons.Outlined.DataUsage
+                )
                 group(key = "quality.thumbnails", header = R.string.settings_section_thumbnails) {
                     nav(QualityIndex.thumbnailsWifi, value = thumbnailsWifiLabel, showChevron = false, onClick = {
                         picker = QualityPicker.THUMBNAILS_WIFI
@@ -210,7 +208,7 @@ private fun QualityPickerDialog(
         onSelect: (VideoQuality) -> Unit,
     ) = ChorplayChoiceDialog(
         title = stringResource(title),
-        options = options.map { FlowChoice(it, stringResource(videoQualityLabel(it))) },
+        options = options.map { ChorChoice(it, stringResource(videoQualityLabel(it))) },
         selected = selected,
         onSelect = onSelect,
         onDismiss = onDismiss,
@@ -225,7 +223,11 @@ private fun QualityPickerDialog(
         title = stringResource(title),
         options =
             ThumbnailQualities.map {
-                FlowChoice(it, stringResource(thumbnailQualityLabel(it)), stringResource(thumbnailQualityDescription(it)))
+                ChorChoice(
+                    it,
+                    stringResource(thumbnailQualityLabel(it)),
+                    stringResource(thumbnailQualityDescription(it))
+                )
             },
         selected = selected,
         onSelect = onSelect,
@@ -262,7 +264,12 @@ private fun QualityPickerDialog(
             ChorplayChoiceDialog(
                 title = stringResource(R.string.player_settings_video_codec_dialog_title),
                 description = stringResource(R.string.player_settings_video_codec_dialog_body),
-                options = VideoCodec.entries.map { FlowChoice(it, codecLabel(it), autoDescription.takeIf { _ -> it == VideoCodec.AUTO }) },
+                options = VideoCodec.entries.map {
+                    ChorChoice(
+                        it,
+                        codecLabel(it),
+                        autoDescription.takeIf { _ -> it == VideoCodec.AUTO })
+                },
                 selected = state.codec,
                 onSelect = viewModel::setCodec,
                 onDismiss = onDismiss,
@@ -276,12 +283,12 @@ private fun QualityPickerDialog(
                 description = stringResource(R.string.player_settings_video_codec_fallback_dialog_body),
                 options =
                     fallbackCodecs(state.codec).map {
-                        FlowChoice(
+                        ChorChoice(
                             it,
                             codecLabel(it),
                             autoDescription.takeIf { _ ->
                                 it ==
-                                    VideoCodec.AUTO
+                                        VideoCodec.AUTO
                             },
                         )
                     },

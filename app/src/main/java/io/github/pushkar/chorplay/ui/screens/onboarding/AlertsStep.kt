@@ -36,10 +36,10 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.LifecycleEventEffect
 import io.github.pushkar.chorplay.R
 import io.github.pushkar.chorplay.notification.BackgroundWorkPolicy
-import io.github.pushkar.chorplay.ui.components.shared.FlowNavRow
-import io.github.pushkar.chorplay.ui.components.shared.FlowSegmentedGap
+import io.github.pushkar.chorplay.ui.components.shared.ChorNavRow
+import io.github.pushkar.chorplay.ui.components.shared.ChorSegmentedGap
 import io.github.pushkar.chorplay.ui.components.shared.ChorplaySwitchRow
-import io.github.pushkar.chorplay.ui.components.shared.flowRowGroupShape
+import io.github.pushkar.chorplay.ui.components.shared.chorRowGroupShape
 
 private val FootnotePadding = 16.dp
 
@@ -71,9 +71,9 @@ internal fun AlertsStep(
     LazyColumn(modifier = Modifier.fillMaxSize(), contentPadding = contentPadding) {
         header()
         item(key = "rows") {
-            Column(verticalArrangement = Arrangement.spacedBy(FlowSegmentedGap)) {
+            Column(verticalArrangement = Arrangement.spacedBy(ChorSegmentedGap)) {
                 if (asksPermission) {
-                    FlowNavRow(
+                    ChorNavRow(
                         title = stringResource(R.string.onboarding_alerts_allow),
                         supportingText =
                             if (notificationsAllowed) {
@@ -85,7 +85,7 @@ internal fun AlertsStep(
                             },
                         leadingIcon = Icons.Outlined.Notifications,
                         showChevron = !notificationsAllowed,
-                        shape = flowRowGroupShape(0, rowCount),
+                        shape = chorRowGroupShape(0, rowCount),
                         onClick = {
                             when {
                                 notificationsAllowed -> Unit
@@ -101,14 +101,14 @@ internal fun AlertsStep(
                     leadingIcon = Icons.Outlined.NewReleases,
                     checked = newVideoAlerts,
                     onCheckedChange = onNewVideoAlertsChange,
-                    shape = flowRowGroupShape(offset, rowCount),
+                    shape = chorRowGroupShape(offset, rowCount),
                 )
-                FlowNavRow(
+                ChorNavRow(
                     title = stringResource(R.string.onboarding_alerts_background),
                     supportingText = if (backgroundAllowed) allowedText else stringResource(R.string.onboarding_alerts_background_summary),
                     leadingIcon = Icons.Outlined.BatterySaver,
                     showChevron = !backgroundAllowed,
-                    shape = flowRowGroupShape(offset + 1, rowCount),
+                    shape = chorRowGroupShape(offset + 1, rowCount),
                     onClick = { if (!backgroundAllowed) BackgroundWorkPolicy.requestUnrestrictedBackgroundWork(context) },
                 )
             }

@@ -11,10 +11,6 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import io.github.pushkar.chorplay.data.local.safePreferencesDataStore
 import io.github.pushkar.chorplay.data.profile.StoreScope
 import io.github.pushkar.chorplay.widget.downloads.DownloadsSource
-import io.github.pushkar.chorplay.widget.onrepeat.OnRepeatSource
-import io.github.pushkar.chorplay.widget.playlist.PlaylistWidgetSource
-import io.github.pushkar.chorplay.widget.recent.RecentlyPlayedSource
-import io.github.pushkar.chorplay.widget.week.WeekSource
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -53,13 +49,9 @@ class WidgetContentSync
     @Inject
     constructor(
         @ApplicationContext private val context: Context,
-        recentlyPlayed: RecentlyPlayedSource,
         downloads: DownloadsSource,
-        onRepeat: OnRepeatSource,
-        playlists: PlaylistWidgetSource,
-        week: WeekSource,
     ) {
-        private val sources = listOf(recentlyPlayed, downloads, onRepeat, playlists, week)
+        private val sources = listOf(downloads)
         private val scope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
         private val placementChanged = MutableSharedFlow<Unit>(replay = 1).apply { tryEmit(Unit) }
         private val requests = MutableSharedFlow<WidgetContentKey>(extraBufferCapacity = 8)

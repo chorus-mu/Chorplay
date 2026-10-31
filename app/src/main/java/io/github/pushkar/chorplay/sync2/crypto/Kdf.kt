@@ -4,13 +4,13 @@ import io.github.pushkar.chorplay.sync.crypto.SyncCrypto
 import java.nio.ByteBuffer
 import java.security.MessageDigest
 
-private val PREFIX = "FLOW-SYNC/2 ".toByteArray(Charsets.US_ASCII)
+private val PREFIX = "CHOR-SYNC/2 ".toByteArray(Charsets.US_ASCII)
 private val SEPARATOR = byteArrayOf(0)
 
 /** The protocol prefix for labels used as AAD or signature context. */
 fun tag(label: String): ByteArray = PREFIX + label.toByteArray(Charsets.US_ASCII)
 
-/** `HKDF-Expand(HKDF-Extract(salt, ikm), "FLOW-SYNC/2 " ‖ label ‖ 0x00 ‖ context, length)`. */
+/** `HKDF-Expand(HKDF-Extract(salt, ikm), "CHOR-SYNC/2 " ‖ label ‖ 0x00 ‖ context, length)`. */
 fun derive(
     ikm: ByteArray,
     salt: ByteArray,

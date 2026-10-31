@@ -21,7 +21,7 @@ import io.github.pushkar.chorplay.R
 import io.github.pushkar.chorplay.ui.components.settings.SettingsPage
 import io.github.pushkar.chorplay.ui.components.settings.option
 import io.github.pushkar.chorplay.ui.components.settings.toggleGroup
-import io.github.pushkar.chorplay.ui.components.shared.FlowToggleOption
+import io.github.pushkar.chorplay.ui.components.shared.ChorToggleOption
 import io.github.pushkar.chorplay.ui.screens.settings.index.DateTimeIndex
 import io.github.pushkar.chorplay.utils.DateContext
 import io.github.pushkar.chorplay.utils.DateContextMode
@@ -82,10 +82,10 @@ internal fun DateTimeScreen(
         }
     val overrideOptions =
         listOf(
-            FlowToggleOption(DateContextMode.DEFAULT, stringResource(R.string.datetime_override_default)),
-            FlowToggleOption(DateContextMode.RELATIVE, stringResource(R.string.datetime_override_relative)),
-            FlowToggleOption(DateContextMode.EXACT, stringResource(R.string.datetime_override_exact)),
-            FlowToggleOption(DateContextMode.BOTH, stringResource(R.string.datetime_override_both)),
+            ChorToggleOption(DateContextMode.DEFAULT, stringResource(R.string.datetime_override_default)),
+            ChorToggleOption(DateContextMode.RELATIVE, stringResource(R.string.datetime_override_relative)),
+            ChorToggleOption(DateContextMode.EXACT, stringResource(R.string.datetime_override_exact)),
+            ChorToggleOption(DateContextMode.BOTH, stringResource(R.string.datetime_override_both)),
         )
 
     SettingsPage(

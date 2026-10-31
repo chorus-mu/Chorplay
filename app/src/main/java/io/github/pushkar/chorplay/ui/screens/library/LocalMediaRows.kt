@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.MusicNote
 import androidx.compose.material.icons.outlined.VideoLibrary
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.MaterialTheme
@@ -29,15 +28,19 @@ import io.github.pushkar.chorplay.utils.formatYouTubeRelativeTime
 
 private const val UHD_SHORT_SIDE = 2160
 
-/** "1080p · 3 days ago" for a video, "Album · 3:45" for a song. */
 @Composable
 internal fun localSupportingLine(item: LocalMediaItem): String {
     val separator = stringResource(R.string.metadata_separator)
     val parts =
         if (item.isVideo) {
-            listOfNotNull(resolutionLabel(item), item.dateAddedMs.takeIf { it > 0L }?.let { formatYouTubeRelativeTime(it) })
+            listOfNotNull(
+                resolutionLabel(item),
+                item.dateAddedMs.takeIf { it > 0L }?.let { formatYouTubeRelativeTime(it) })
         } else {
-            listOfNotNull(item.album.takeIf(String::isNotBlank), item.durationMs.takeIf { it > 0L }?.let(::formatDurationMillis))
+            listOfNotNull(
+                item.album.takeIf(String::isNotBlank),
+                item.durationMs.takeIf { it > 0L }?.let(::formatDurationMillis)
+            )
         }
     return parts.joinToString(" $separator ")
 }
@@ -48,7 +51,6 @@ private fun resolutionLabel(item: LocalMediaItem): String? {
     return if (shortSide >= UHD_SHORT_SIDE) stringResource(R.string.local_filter_quality_4k) else "${shortSide}p"
 }
 
-/** A file as a list row: a video with its frame, progress and New mark, or a song with its album art. */
 @Composable
 internal fun LocalMediaRow(
     item: LocalMediaItem,
@@ -75,12 +77,11 @@ internal fun LocalMediaRow(
         if (item.isVideo) {
             LocalVideoThumbnail(item, isNew, Modifier, thumbnailWidth)
         } else {
-            ArtworkThumbnail(thumbnailUrl = item.artworkUri, placeholder = Icons.Outlined.MusicNote)
+            ArtworkThumbnail(thumbnailUrl = item.artworkUri, placeholder = Icons.Outlined.VideoLibrary)
         }
     }
 }
 
-/** A video file as a grid card on wide windows. */
 @Composable
 internal fun LocalMediaCard(
     item: LocalMediaItem,

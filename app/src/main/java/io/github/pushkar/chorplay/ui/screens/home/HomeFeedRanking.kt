@@ -1,7 +1,7 @@
 package io.github.pushkar.chorplay.ui.screens.home
 
 import io.github.pushkar.chorplay.data.model.Video
-import io.github.pushkar.chorplay.data.recommendation.FlowPersona
+import io.github.pushkar.chorplay.data.recommendation.ChorPersona
 import io.github.pushkar.chorplay.data.recommendation.UserBrain
 import kotlinx.coroutines.flow.map
 
@@ -36,15 +36,15 @@ internal data class FeedTasteProfile(
 
 internal fun feedTasteProfile(
     brain: UserBrain,
-    persona: FlowPersona,
+    persona: ChorPersona,
 ): FeedTasteProfile {
     val comfort =
         when (persona) {
-            FlowPersona.DEEP_DIVER, FlowPersona.SCHOLAR,
-            FlowPersona.BINGER, FlowPersona.AUDIOPHILE,
+            ChorPersona.DEEP_DIVER, ChorPersona.SCHOLAR,
+            ChorPersona.BINGER, ChorPersona.AUDIOPHILE,
             -> 0
 
-            FlowPersona.SKIMMER -> DURATION_COMFORT_SKIMMER_SEC
+            ChorPersona.SKIMMER -> DURATION_COMFORT_SKIMMER_SEC
 
             else -> DURATION_COMFORT_DEFAULT_SEC
         }

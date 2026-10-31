@@ -99,11 +99,11 @@ val LocalChorplayBottomInsets = staticCompositionLocalOf { ChorplayBottomInsets.
 
 /** The end padding a scrolling page needs: the settled chrome plus [extra] breathing room. */
 @Composable
-fun flowBottomContentPadding(extra: Dp = 16.dp): Dp = LocalChorplayBottomInsets.current.contentBottom + extra
+fun chorBottomContentPadding(extra: Dp = 16.dp): Dp = LocalChorplayBottomInsets.current.contentBottom + extra
 
 /** [PaddingValues] for a scrolling page whose bottom must clear the app's bottom chrome. */
 @Composable
-fun flowContentPadding(
+fun chorContentPadding(
     horizontal: Dp = 0.dp,
     top: Dp = 0.dp,
     extraBottom: Dp = 16.dp,
@@ -112,7 +112,7 @@ fun flowContentPadding(
         start = horizontal,
         top = top,
         end = horizontal,
-        bottom = flowBottomContentPadding(extraBottom),
+        bottom = chorBottomContentPadding(extraBottom),
     )
 
 /**

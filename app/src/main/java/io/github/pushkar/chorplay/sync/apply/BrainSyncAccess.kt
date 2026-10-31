@@ -4,15 +4,11 @@ import android.content.Context
 import dagger.hilt.android.qualifiers.ApplicationContext
 import io.github.pushkar.chorplay.data.recommendation.ChorplayNeuroEngine
 import io.github.pushkar.chorplay.data.recommendation.NeuroKeySpec
-import io.github.pushkar.chorplay.data.recommendation.music.MusicBrainEngine
-import io.github.pushkar.chorplay.data.recommendation.music.MusicBrainStorage
 import io.github.pushkar.chorplay.sync.canonical.BrainCounters
 import io.github.pushkar.chorplay.sync.canonical.CanonicalBrain
-import io.github.pushkar.chorplay.sync.canonical.CanonicalMusicBrain
 import io.github.pushkar.chorplay.sync.canonical.GCounter
 import io.github.pushkar.chorplay.sync.identity.Hlc
 import io.github.pushkar.chorplay.sync.mapping.BrainMapper
-import io.github.pushkar.chorplay.sync.mapping.MusicBrainMapper
 import io.github.pushkar.chorplay.sync.merge.BrainCrdtState
 import io.github.pushkar.chorplay.sync.merge.BrainCrdtStore
 import io.github.pushkar.chorplay.sync.merge.BrainKeyRekey
@@ -20,9 +16,6 @@ import io.github.pushkar.chorplay.sync.merge.BrainMerger
 import io.github.pushkar.chorplay.sync.merge.BrainVectorBlend
 import io.github.pushkar.chorplay.sync.merge.CounterOwnership
 import io.github.pushkar.chorplay.sync.merge.DeviceVectors
-import io.github.pushkar.chorplay.sync.merge.MusicBrainCrdtState
-import io.github.pushkar.chorplay.sync.merge.MusicBrainCrdtStore
-import io.github.pushkar.chorplay.sync.merge.MusicBrainMerger
 import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
 import javax.inject.Inject
@@ -40,12 +33,10 @@ class BrainSyncAccess
     constructor(
         @ApplicationContext private val context: Context,
         private val brainCrdtStore: BrainCrdtStore,
-        private val musicBrainCrdtStore: MusicBrainCrdtStore,
-        private val musicBrainEngine: MusicBrainEngine,
     ) {
         private val neuroEngine: ChorplayNeuroEngine by lazy { ChorplayNeuroEngine.getInstance(context) }
 
-        // --- FlowNeuro ---
+        // --- ChorNeuro ---
 
         /** This device's snapshot, carrying the shared CRDT state, then one vector snapshot per peer. */
         suspend fun exportBrain(
@@ -134,13 +125,13 @@ class BrainSyncAccess
                     exported = neuroEngine.exportBrainToStream(bos)
                     bos.toByteArray()
                 }
-            if (!exported) throw IllegalStateException("could not read the local FlowNeuro brain")
+            if (!exported) throw IllegalStateException("could not read the local ChorNeuro brain")
             return bytes
         }
 
         private fun parseLocalBrain(bytes: ByteArray): BrainMapper.SBrain =
             runCatching { BrainMapper.parse(bytes) }
-                .getOrElse { throw IllegalStateException("the local FlowNeuro brain could not be parsed", it) }
+                .getOrElse { throw IllegalStateException("the local ChorNeuro brain could not be parsed", it) }
 
         /**
          * Fold everything that changed locally since the last sync into the sidecar: counter growth
@@ -171,67 +162,5 @@ class BrainSyncAccess
             )
         }
 
-        // --- music brain (the music twin of the neuro path; no learned vectors to blend) ---
 
-        suspend fun exportMusicBrain(
-            myNode: String,
-            hlc: String,
-        ): CanonicalMusicBrain {
-            val local = exportLocalMusicBrain()
-            val sidecar = attributeLocalMusic(musicBrainCrdtStore.load(), myNode, local, hlc)
-            musicBrainCrdtStore.save(sidecar)
-            return MusicBrainMapper.toCanonical(local, myNode, hlc, sidecar)
-        }
-
-        suspend fun mergeMusicBrain(
-            remote: CanonicalMusicBrain,
-            senderId: String,
-            myNode: String,
-            myDeviceId: String,
-            hlc: String,
-        ) {
-            val local = exportLocalMusicBrain()
-            val sidecar = attributeLocalMusic(musicBrainCrdtStore.load(), myNode, local, hlc)
-            val own = MusicBrainMapper.toCanonical(local, myNode, hlc, sidecar)
-            val merged =
-                CounterOwnership.music(
-                    merged = MusicBrainMerger.merge(own, remote),
-                    local = own,
-                    remote = remote,
-                    own = setOf(myNode, myDeviceId),
-                    sender = setOf(senderId, Hlc.nodeFromDeviceId(senderId)),
-                )
-            val mergedBrain = MusicBrainMapper.writeBack(merged, local)
-            musicBrainEngine.importBrainFromStream(ByteArrayInputStream(MusicBrainMapper.serialize(mergedBrain)))
-            musicBrainCrdtStore.save(MusicBrainCrdtState.afterMerge(merged))
-        }
-
-        private suspend fun exportLocalMusicBrain(): MusicBrainStorage.SerializableMusicBrain {
-            val bytes =
-                ByteArrayOutputStream().use { bos ->
-                    musicBrainEngine.exportBrainToStream(bos)
-                    bos.toByteArray()
-                }
-            return runCatching { MusicBrainMapper.parse(bytes) }
-                .getOrElse { throw IllegalStateException("the local music brain could not be parsed", it) }
-        }
-
-        private fun attributeLocalMusic(
-            state: MusicBrainCrdtState,
-            myNode: String,
-            brain: MusicBrainStorage.SerializableMusicBrain,
-            hlc: String,
-        ): MusicBrainCrdtState =
-            MusicBrainCrdtState.attributeLocal(
-                state = state,
-                myDevice = myNode,
-                totalPlaysScalar = brain.totalPlays.toLong(),
-                artistPlayScalars = brain.artistAffinity.mapValues { it.value.plays.toLong() },
-                artistScores = brain.artistAffinity.mapValues { it.value.score },
-                seenArtists = brain.seenArtists.toSet(),
-                blockedArtists = brain.blockedArtists.toSet(),
-                dislikedArtists = brain.dislikedArtists,
-                appetite = brain.discoveryAppetite,
-                hlc = hlc,
-            )
     }

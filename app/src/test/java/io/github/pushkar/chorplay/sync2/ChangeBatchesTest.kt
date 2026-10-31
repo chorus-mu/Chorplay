@@ -77,7 +77,7 @@ class ChangeBatchesTest {
     fun brains_go_out_at_most_every_six_hours_and_ignore_their_export_time() =
         runTest {
             val sent = MemorySent()
-            val brain = { hlc: String, weight: Int -> mapOf(SyncCollection.FLOW_NEURO_BRAIN to wire("""{"hlc":"$hlc","w":$weight}""")) }
+            val brain = { hlc: String, weight: Int -> mapOf(SyncCollection.CHOR_NEURO_BRAIN to wire("""{"hlc":"$hlc","w":$weight}""")) }
             val hour = 60 * 60 * 1000L
             assertEquals(1, sentLines(sent, brain("1", 1), nowMs = 0).size)
             assertEquals(0, sentLines(sent, brain("2", 1), nowMs = 7 * hour).size)

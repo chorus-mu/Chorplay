@@ -58,7 +58,7 @@ private const val DISABLED_CONTENT_ALPHA = 0.4f
  */
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
-fun FlowSelectionRow(
+fun ChorSelectionRow(
     title: String,
     selected: Boolean,
     onClick: () -> Unit,
@@ -100,7 +100,7 @@ fun FlowSelectionRow(
  */
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
-fun FlowNavRow(
+fun ChorNavRow(
     title: String,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
@@ -209,9 +209,9 @@ fun ChorplaySwitchRow(
     }
 }
 
-/** The section label above a group of [FlowSelectionRow]/[FlowNavRow]/[ChorplaySwitchRow]s. */
+/** The section label above a group of [ChorSelectionRow]/[ChorNavRow]/[ChorplaySwitchRow]s. */
 @Composable
-fun FlowSectionHeader(
+fun ChorSectionHeader(
     text: String,
     modifier: Modifier = Modifier,
 ) {
@@ -261,23 +261,23 @@ private fun rowLeadingContent(
  * the rest the small corners, with the gap the list-item tokens define between them.
  */
 @Composable
-fun FlowRowGroup(
+fun ChorRowGroup(
     modifier: Modifier = Modifier,
     content: @Composable ColumnScope.() -> Unit,
 ) {
     Column(
         modifier = modifier.padding(horizontal = GroupHorizontalPadding),
-        verticalArrangement = Arrangement.spacedBy(FlowSegmentedGap),
+        verticalArrangement = Arrangement.spacedBy(ChorSegmentedGap),
         content = content,
     )
 }
 
-/** The shape of row [index] of [count] inside a [FlowRowGroup]. */
+/** The shape of row [index] of [count] inside a [ChorRowGroup]. */
 @Composable
-fun flowRowGroupShape(
+fun chorRowGroupShape(
     index: Int,
     count: Int,
-): Shape = flowSegmentShape(index = index, count = count)
+): Shape = chorSegmentShape(index = index, count = count)
 
 /**
  * Colours for a row: a grouped row sits on its own container so the segmented group reads as one

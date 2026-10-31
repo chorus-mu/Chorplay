@@ -43,7 +43,7 @@ import io.github.pushkar.chorplay.ui.components.layout.navigation.ChorplayTab
 import io.github.pushkar.chorplay.ui.components.layout.topbar.ChorplayTopBar
 import io.github.pushkar.chorplay.ui.components.rememberFeedGridLayout
 import io.github.pushkar.chorplay.ui.components.shared.FeedGridSkeleton
-import io.github.pushkar.chorplay.ui.components.shared.FlowChoice
+import io.github.pushkar.chorplay.ui.components.shared.ChorChoice
 import io.github.pushkar.chorplay.ui.components.shared.ChorplayChoiceDialog
 import io.github.pushkar.chorplay.ui.components.shared.ChorplayErrorState
 import io.github.pushkar.chorplay.utils.RegionCatalog
@@ -73,7 +73,7 @@ fun CategoriesScreen(
     val gridState = rememberLazyGridState()
     OnTabReselected(ChorplayTab.Explore.route) {
         val isGridSection =
-            uiState.sectionKind == ExploreSectionKind.CHART || uiState.sectionKind == ExploreSectionKind.GRID
+            uiState.sectionKind == ExploreSectionKind.GRID
         if (uiState.openShelfTitle == null && isGridSection) gridState.animateScrollToItem(0) else shelfState.animateScrollToItem(0)
     }
 
@@ -135,17 +135,6 @@ fun CategoriesScreen(
                         ChorplayErrorState(error = uiState.error!!, onRetry = viewModel::refresh)
                     }
 
-                    uiState.sectionKind == ExploreSectionKind.CHART -> {
-                        CategoryChartGrid(
-                            entries = uiState.chartEntries,
-                            title = uiState.chartTitle,
-                            gridState = gridState,
-                            feedLayout = feedLayout,
-                            isListView = uiState.isListView,
-                            onVideoClick = onVideoClick,
-                        )
-                    }
-
                     uiState.sectionKind == ExploreSectionKind.GRID -> {
                         CategoryPagedGrid(
                             pagingItems = pagingItems,
@@ -175,7 +164,7 @@ fun CategoriesScreen(
     }
 
     if (showRegionDialog) {
-        val regionOptions = remember { RegionCatalog.sorted().map { (code, name) -> FlowChoice(code, name) } }
+        val regionOptions = remember { RegionCatalog.sorted().map { (code, name) -> ChorChoice(code, name) } }
         ChorplayChoiceDialog(
             title = stringResource(R.string.settings_region_dialog_title),
             options = regionOptions,

@@ -16,9 +16,8 @@
     <string name="codec_label">Akudak</string>
     <string name="channels_label">Ibuda</string>
     <string name="tab_videos">Tividyutin</string>
-    <string name="tab_music">Aẓawan</string>
-    <string name="action_delete">Kkes</string>
-    <string name="song">Tizlit</string>
+<string name="action_delete">Kkes</string>
+
     <string name="hz">Hz</string>
     <string name="downloads_title">Isidar</string>
     <string name="playlist_name">Isem</string>
@@ -28,7 +27,7 @@
     <string name="quality">Taɣara</string>
     <string name="unknown">Ur yettwassen ara</string>
     <string name="comments">Iwenniten</string>
-    <string name="nav_music">Aẓawan</string>
+
     <string name="search">Anadi</string>
     <string name="settings">Iɣewwaren</string>
     <string name="description">Aglam</string>

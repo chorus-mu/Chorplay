@@ -1,7 +1,7 @@
 package io.github.pushkar.chorplay.data.video.downloader.resolve
 
 import com.google.common.truth.Truth.assertThat
-import io.github.pushkar.chorplay.data.local.MusicAudioQuality
+import io.github.pushkar.chorplay.data.local.AudioStreamQuality
 import io.github.pushkar.chorplay.data.video.downloader.request.DownloadRequest
 import io.github.pushkar.chorplay.data.video.downloader.tags.DownloadKind
 import io.github.pushkar.chorplay.data.video.downloader.tags.DownloadTags
@@ -60,16 +60,16 @@ class DownloadStreamResolverTest {
 
         fun pick(
             request: DownloadRequest,
-            quality: MusicAudioQuality,
+            quality: AudioStreamQuality,
         ) = streams(
-            DownloadStreamResolver.select(request, result(LADDER, audio), emptySet(), defaults.copy(musicQuality = quality)),
+            DownloadStreamResolver.select(request, result(LADDER, audio), emptySet(), defaults.copy(audioQuality = quality)),
         ).audio.itag
-        val song = request(kind = DownloadKind.MUSIC, audioOnly = true)
+        val audioOnly = request(kind = DownloadKind.VIDEO, audioOnly = true)
 
-        assertThat(pick(song, MusicAudioQuality.HIGH)).isEqualTo(141)
-        assertThat(pick(song, MusicAudioQuality.MEDIUM)).isEqualTo(140)
-        assertThat(pick(song, MusicAudioQuality.LOW)).isEqualTo(139)
-        assertThat(pick(request(), MusicAudioQuality.LOW)).isEqualTo(141)
+        assertThat(pick(audioOnly, AudioStreamQuality.HIGH)).isEqualTo(141)
+        assertThat(pick(audioOnly, AudioStreamQuality.MEDIUM)).isEqualTo(140)
+        assertThat(pick(audioOnly, AudioStreamQuality.LOW)).isEqualTo(139)
+        assertThat(pick(request(), AudioStreamQuality.LOW)).isEqualTo(141)
     }
 
     @Test
@@ -113,7 +113,7 @@ class DownloadStreamResolverTest {
 
     @Test
     fun `songs and audio-only downloads fetch no video`() {
-        assertThat(streams(select(request(kind = DownloadKind.MUSIC))).video).isNull()
+        assertThat(streams(select(request(kind = DownloadKind.VIDEO))).video).isNull()
         assertThat(streams(select(request(audioOnly = true))).video).isNull()
     }
 

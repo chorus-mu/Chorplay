@@ -37,11 +37,6 @@ data class DownloadEntity(
     val viewCount: Long = 0L,
     @ColumnInfo(defaultValue = "0")
     val likeCount: Long = 0L,
-    val album: String? = null,
-    val albumId: String? = null,
-    /** JSON list of the track's artists, each a name and an optional channel id. */
-    val artistsJson: String? = null,
-    val trackNumber: Int? = null,
     /** The serialized request, so a retry or a resume after the app was killed asks for the same thing. */
     val requestJson: String? = null,
 )

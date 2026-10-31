@@ -22,7 +22,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import io.github.pushkar.chorplay.R
 import io.github.pushkar.chorplay.data.model.Video
-import io.github.pushkar.chorplay.ui.components.layout.flowBottomContentPadding
+import io.github.pushkar.chorplay.ui.components.layout.chorBottomContentPadding
 import io.github.pushkar.chorplay.ui.components.layout.topbar.ChorplayTopBar
 import io.github.pushkar.chorplay.ui.components.rememberFeedGridLayout
 import io.github.pushkar.chorplay.ui.components.shared.ChorplayEmptyState
@@ -67,7 +67,7 @@ fun SavedShortsGridScreen(
                             start = sidePadding,
                             top = GridPadding,
                             end = sidePadding,
-                            bottom = flowBottomContentPadding(GridPadding),
+                            bottom = chorBottomContentPadding(GridPadding),
                         ),
                     horizontalArrangement = Arrangement.spacedBy(ShortCardDefaults.Spacing),
                     verticalArrangement = Arrangement.spacedBy(ShortCardDefaults.Spacing),

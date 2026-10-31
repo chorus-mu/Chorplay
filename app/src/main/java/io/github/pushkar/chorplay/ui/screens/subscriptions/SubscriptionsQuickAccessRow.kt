@@ -29,7 +29,6 @@ internal fun SubscriptionsQuickAccessRow(
     channels: List<Channel>,
     onChannelClick: (Channel) -> Unit,
     onViewAllClick: () -> Unit,
-    onMusicClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(modifier = modifier) {
@@ -46,14 +45,6 @@ internal fun SubscriptionsQuickAccessRow(
                 style = MaterialTheme.typography.titleSmall,
                 fontWeight = FontWeight.SemiBold,
             )
-            if (channels.any { it.isMusic }) {
-                SubscriptionMusicPill(
-                    contentPadding = PaddingValues(horizontal = 10.dp, vertical = 6.dp),
-                    iconSize = 14.dp,
-                    textStyle = MaterialTheme.typography.labelMedium,
-                    onClick = onMusicClick,
-                )
-            }
         }
 
         LazyRow(

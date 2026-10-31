@@ -47,7 +47,7 @@ class ChorplayTypographyTest {
 
     @Test
     fun `every role and its emphasized form use the chosen family`() {
-        val roles = flowTypography(FontFamily.Serif).allRoles()
+        val roles = chorTypography(FontFamily.Serif).allRoles()
         assertThat(roles).hasSize(30)
         roles.forEach { assertThat(it.fontFamily).isEqualTo(FontFamily.Serif) }
     }
@@ -55,23 +55,23 @@ class ChorplayTypographyTest {
     @Test
     fun `display and headline small keep Material's metrics`() {
         val material = Typography()
-        val flow = flowTypography(FlowFontFamily)
-        assertThat(flow.displaySmall).isEqualTo(material.displaySmall.copy(fontFamily = FlowFontFamily))
-        assertThat(flow.headlineSmall).isEqualTo(material.headlineSmall.copy(fontFamily = FlowFontFamily))
-        assertThat(flow.displaySmall.fontSize).isEqualTo(36.sp)
-        assertThat(flow.headlineSmall.fontSize).isEqualTo(24.sp)
+        val chor = chorTypography(ChorFontFamily)
+        assertThat(chor.displaySmall).isEqualTo(material.displaySmall.copy(fontFamily = ChorFontFamily))
+        assertThat(chor.headlineSmall).isEqualTo(material.headlineSmall.copy(fontFamily = ChorFontFamily))
+        assertThat(chor.displaySmall.fontSize).isEqualTo(36.sp)
+        assertThat(chor.headlineSmall.fontSize).isEqualTo(24.sp)
     }
 
     @Test
     fun `the system font scale keeps today's values`() {
-        val flow = flowTypography(FlowFontFamily)
-        assertThat(flow.displayLarge.fontSize).isEqualTo(34.sp)
-        assertThat(flow.displayLarge.fontWeight).isEqualTo(FontWeight.Bold)
-        assertThat(flow.titleLarge.fontSize).isEqualTo(18.sp)
-        assertThat(flow.bodyMedium.letterSpacing).isEqualTo(0.25.sp)
-        assertThat(flow.labelSmall.fontSize).isEqualTo(11.sp)
-        assertThat(flow.displayLargeEmphasized.fontWeight).isEqualTo(FontWeight.ExtraBold)
-        assertThat(flow.bodyLargeEmphasized.fontWeight).isEqualTo(FontWeight.Medium)
-        assertThat(Typography).isEqualTo(flow)
+        val chor = chorTypography(ChorFontFamily)
+        assertThat(chor.displayLarge.fontSize).isEqualTo(34.sp)
+        assertThat(chor.displayLarge.fontWeight).isEqualTo(FontWeight.Bold)
+        assertThat(chor.titleLarge.fontSize).isEqualTo(18.sp)
+        assertThat(chor.bodyMedium.letterSpacing).isEqualTo(0.25.sp)
+        assertThat(chor.labelSmall.fontSize).isEqualTo(11.sp)
+        assertThat(chor.displayLargeEmphasized.fontWeight).isEqualTo(FontWeight.ExtraBold)
+        assertThat(chor.bodyLargeEmphasized.fontWeight).isEqualTo(FontWeight.Medium)
+        assertThat(Typography).isEqualTo(chor)
     }
 }

@@ -41,19 +41,15 @@ enum class HistoryContentFilter {
     All,
     Videos,
     Shorts,
-    Music,
     LocalVideos,
-    LocalMusic,
     ;
 
     fun matches(entry: VideoHistoryEntry): Boolean =
         when (this) {
             All -> !entry.isLocal
-            Videos -> !entry.isMusic && !entry.isShort && !entry.isLocal
-            Shorts -> !entry.isMusic && entry.isShort && !entry.isLocal
-            Music -> entry.isMusic && !entry.isLocal
-            LocalVideos -> entry.isLocal && !entry.isMusic
-            LocalMusic -> entry.isLocal && entry.isMusic
+            Videos -> !entry.isShort && !entry.isLocal
+            Shorts -> entry.isShort && !entry.isLocal
+            LocalVideos -> entry.isLocal
         }
 }
 
@@ -255,8 +251,7 @@ class HistoryViewModel
                         ?.toDomain()
                         ?.copy(
                             isShort = true,
-                            isMusic = entry.isMusic,
-                            timestamp = entry.timestamp,
+                                                        timestamp = entry.timestamp,
                         )?.let { entry.videoId to it }
                 }.toMap()
         }
@@ -299,7 +294,7 @@ class HistoryViewModel
                                             ),
                                         channelName = video.channelName,
                                         channelId = video.channelId,
-                                        isMusic = stub.isMusic,
+                                        isMusic = false,
                                         isShort = stub.isShort || video.isShort,
                                     ),
                                 )

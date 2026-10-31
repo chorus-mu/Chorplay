@@ -20,7 +20,7 @@ import io.github.pushkar.chorplay.data.local.CONTENT_LANGUAGE_FOLLOW_APP
 import io.github.pushkar.chorplay.ui.components.settings.SettingsPage
 import io.github.pushkar.chorplay.ui.components.settings.nav
 import io.github.pushkar.chorplay.ui.components.settings.switch
-import io.github.pushkar.chorplay.ui.components.shared.FlowChoice
+import io.github.pushkar.chorplay.ui.components.shared.ChorChoice
 import io.github.pushkar.chorplay.ui.components.shared.ChorplayChoiceDialog
 import io.github.pushkar.chorplay.ui.screens.settings.index.LanguageRegionIndex
 import io.github.pushkar.chorplay.utils.AppLanguageManager
@@ -42,7 +42,7 @@ internal fun LanguageRegionScreen(
     var dialog by rememberSaveable { mutableStateOf<LanguageRegionDialog?>(null) }
 
     val systemDefault = stringResource(R.string.settings_language_system_default)
-    val followApp = stringResource(R.string.music_content_language_follow_app)
+    val followApp = stringResource(R.string.content_language_follow_app)
     val appLanguages = remember { AppLanguageManager.getSupportedLanguages() }
     val normalizedAppLanguage = AppLanguageManager.normalizeLanguageTag(appLanguage)
     val appLanguageLabel =
@@ -98,14 +98,14 @@ internal fun LanguageRegionScreen(
                 title = stringResource(R.string.settings_language_dialog_title),
                 options =
                     listOf(
-                        FlowChoice(
+                        ChorChoice(
                             AppLanguageManager.SYSTEM_DEFAULT,
                             systemDefault,
                             stringResource(R.string.settings_item_app_language_subtitle),
                         ),
                     ) +
                         appLanguages.map { option ->
-                            FlowChoice(option.tag, option.nativeName, option.localizedName.takeIf { it != option.nativeName })
+                            ChorChoice(option.tag, option.nativeName, option.localizedName.takeIf { it != option.nativeName })
                         },
                 selected = normalizedAppLanguage,
                 onSelect = { tag ->
@@ -119,10 +119,10 @@ internal fun LanguageRegionScreen(
 
         LanguageRegionDialog.CONTENT_LANGUAGE -> {
             ChorplayChoiceDialog(
-                title = stringResource(R.string.music_content_language_dialog_title),
+                title = stringResource(R.string.content_language_dialog_title),
                 options =
-                    listOf(FlowChoice(CONTENT_LANGUAGE_FOLLOW_APP, followApp)) +
-                        viewModel.contentLanguages.map { FlowChoice(it.tag, it.nativeName, it.localizedName) },
+                    listOf(ChorChoice(CONTENT_LANGUAGE_FOLLOW_APP, followApp)) +
+                        viewModel.contentLanguages.map { ChorChoice(it.tag, it.nativeName, it.localizedName) },
                 selected = contentLanguage,
                 onSelect = viewModel::setContentLanguage,
                 onDismiss = { dialog = null },
@@ -132,7 +132,7 @@ internal fun LanguageRegionScreen(
         LanguageRegionDialog.CONTENT_COUNTRY -> {
             ChorplayChoiceDialog(
                 title = stringResource(R.string.settings_region_dialog_title),
-                options = remember { RegionCatalog.sorted().map { (code, name) -> FlowChoice(code, name) } },
+                options = remember { RegionCatalog.sorted().map { (code, name) -> ChorChoice(code, name) } },
                 selected = contentCountry,
                 onSelect = viewModel::setContentCountry,
                 onDismiss = { dialog = null },

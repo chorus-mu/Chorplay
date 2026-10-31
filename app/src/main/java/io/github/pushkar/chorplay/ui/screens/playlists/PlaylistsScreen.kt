@@ -10,8 +10,6 @@ import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.MusicNote
-import androidx.compose.material.icons.filled.VideoLibrary
 import androidx.compose.material.icons.rounded.GridView
 import androidx.compose.material.icons.rounded.SwapVert
 import androidx.compose.material.icons.rounded.ViewAgenda
@@ -23,7 +21,6 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -53,7 +50,6 @@ import io.github.pushkar.chorplay.ui.components.shared.CollectionEditDialog
 import io.github.pushkar.chorplay.ui.components.shared.DeleteCollectionDialog
 import io.github.pushkar.chorplay.ui.components.shared.MediaKind
 import io.github.pushkar.chorplay.ui.components.shared.quickactions.sharedQuickActionsViewModel
-import io.github.pushkar.chorplay.ui.screens.music.MusicPlaylistsViewModel
 import io.github.pushkar.chorplay.utils.PLAYLIST_FILE_MIME_TYPE
 import kotlinx.coroutines.launch
 
@@ -62,52 +58,32 @@ private val FabMenuPadding = 16.dp
 // Some file pickers label a .json file as plain text or a generic binary.
 private val PlaylistFileTypes = arrayOf(PLAYLIST_FILE_MIME_TYPE, "text/plain", "application/octet-stream")
 
-/** [fixedKind] opens the page on one kind only, for a Library that lists the two separately. */
+/** Opens the playlists page, video-only. [fixedKind] is kept for navigation compatibility but always treated as [MediaKind.Videos]. */
 @Composable
 fun PlaylistsScreen(
     onBackClick: () -> Unit,
     onVideoPlaylistClick: (PlaylistInfo) -> Unit,
-    onMusicPlaylistClick: (PlaylistInfo) -> Unit,
     modifier: Modifier = Modifier,
     fixedKind: MediaKind? = null,
     viewModel: PlaylistsViewModel = hiltViewModel(),
-    musicViewModel: MusicPlaylistsViewModel = hiltViewModel(),
 ) {
     val videoState by viewModel.uiState.collectAsStateWithLifecycle()
-    val musicState by musicViewModel.uiState.collectAsStateWithLifecycle()
     val listOrder by viewModel.listOrder.collectAsStateWithLifecycle()
     val compact by viewModel.compactLayout.collectAsStateWithLifecycle()
-    val rememberedShowMusic by viewModel.showMusic.collectAsStateWithLifecycle()
-    val contentKind: MediaKind? =
-        fixedKind ?: rememberedShowMusic?.let { showMusic -> if (showMusic) MediaKind.Music else MediaKind.Videos }
+    val contentKind: MediaKind = MediaKind.Videos
     var ownershipFilter by rememberSaveable { mutableStateOf(PlaylistOwnershipFilter.All) }
     var reordering by rememberSaveable { mutableStateOf(false) }
     var creationTarget by remember { mutableStateOf<PlaylistCreationTarget?>(null) }
     var videoToDelete by remember { mutableStateOf<PlaylistInfo?>(null) }
-    var musicToRename by remember { mutableStateOf<PlaylistInfo?>(null) }
-    var musicToDelete by remember { mutableStateOf<PlaylistInfo?>(null) }
 
-    val ownedPlaylists = if (contentKind == MediaKind.Music) musicState.playlists else videoState.playlists
-    val savedPlaylists = if (contentKind == MediaKind.Music) musicState.savedPlaylists else videoState.savedPlaylists
+    val ownedPlaylists = videoState.playlists
+    val savedPlaylists = videoState.savedPlaylists
     val visiblePlaylists =
         remember(ownedPlaylists, savedPlaylists, ownershipFilter, listOrder) {
             orderedPlaylists(ownedPlaylists, savedPlaylists, ownershipFilter, listOrder)
         }
-    val ownedMusicPlaylistIds =
-        remember(musicState.playlists) {
-            musicState.playlists.mapTo(HashSet(), PlaylistInfo::id)
-        }
-    val isLoading =
-        when (contentKind) {
-            MediaKind.Videos -> videoState.isLoading
-            MediaKind.Music -> musicState.isLoading
-            null -> true
-        }
+    val isLoading = videoState.isLoading
     val isReordering = reordering && listOrder == PlaylistListOrder.CUSTOM
-
-    fun selectKind(kind: MediaKind) {
-        viewModel.setShowMusic(kind == MediaKind.Music)
-    }
 
     val context = LocalContext.current
     val quickActions = sharedQuickActionsViewModel()
@@ -129,17 +105,10 @@ fun PlaylistsScreen(
                             isPrivate = true,
                             createdAt = System.currentTimeMillis(),
                         )
-                    if (fixedKind == null) selectKind(if (result.isMusic) MediaKind.Music else MediaKind.Videos)
-                    if (result.isMusic) onMusicPlaylistClick(info) else onVideoPlaylistClick(info)
+                    onVideoPlaylistClick(info)
                 }
             }
         }
-
-    LaunchedEffect(contentKind) {
-        if (contentKind == MediaKind.Music) {
-            musicViewModel.enrichMusicPlaylistStubs()
-        }
-    }
 
     BackHandler(enabled = isReordering) { reordering = false }
 
@@ -152,7 +121,6 @@ fun PlaylistsScreen(
                         when {
                             isReordering -> R.string.playlists_reorder
                             fixedKind == MediaKind.Videos -> R.string.library_video_playlists
-                            fixedKind == MediaKind.Music -> R.string.library_music_playlists
                             else -> R.string.library_playlists_label
                         },
                     ),
@@ -186,11 +154,11 @@ fun PlaylistsScreen(
                     .padding(paddingValues),
         ) {
             Column(modifier = Modifier.fillMaxSize()) {
-                if (!isReordering && contentKind != null) {
+                if (!isReordering) {
                     PlaylistLibraryFilterRow(
                         selectedKind = contentKind,
-                        onKindSelected = ::selectKind,
-                        showKinds = fixedKind == null,
+                        onKindSelected = {},
+                        showKinds = false,
                         selectedOwnership = ownershipFilter,
                         onOwnershipSelected = { ownershipFilter = it },
                         selectedOrder = listOrder,
@@ -200,7 +168,7 @@ fun PlaylistsScreen(
 
                 Box(modifier = Modifier.fillMaxSize()) {
                     when {
-                        isLoading || contentKind == null -> {
+                        isLoading -> {
                             CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
                         }
 
@@ -215,7 +183,7 @@ fun PlaylistsScreen(
                                             PlaylistListOrder.CUSTOM,
                                         )
                                     },
-                                isMusic = contentKind == MediaKind.Music,
+                                isMusic = false,
                                 onOrderChanged = viewModel::reorderPlaylists,
                             )
                         }
@@ -224,17 +192,12 @@ fun PlaylistsScreen(
                             PlaylistsGrid(
                                 kind = contentKind,
                                 playlists = visiblePlaylists,
-                                ownedMusicIds = ownedMusicPlaylistIds,
                                 compact = compact,
                                 actions =
-                                    remember(onVideoPlaylistClick, onMusicPlaylistClick) {
+                                    remember(onVideoPlaylistClick) {
                                         PlaylistsGridActions(
                                             onVideoClick = onVideoPlaylistClick,
-                                            onMusicClick = onMusicPlaylistClick,
                                             onVideoDelete = { videoToDelete = it },
-                                            onMusicDownload = musicViewModel::downloadPlaylist,
-                                            onMusicRename = { musicToRename = it },
-                                            onMusicDelete = { musicToDelete = it },
                                         )
                                     },
                             )
@@ -246,7 +209,6 @@ fun PlaylistsScreen(
             if (!isReordering) {
                 PlaylistCreationFabMenu(
                     onCreateVideo = { creationTarget = PlaylistCreationTarget.Video },
-                    onCreateMusic = { creationTarget = PlaylistCreationTarget.Music },
                     onImport = { importLauncher.launch(PlaylistFileTypes) },
                     modifier =
                         Modifier
@@ -259,21 +221,12 @@ fun PlaylistsScreen(
     }
 
     creationTarget?.let { target ->
-        val isVideo = target == PlaylistCreationTarget.Video
         CollectionEditDialog(
-            title =
-                stringResource(
-                    if (isVideo) R.string.create_new_playlist else R.string.new_playlist_button,
-                ),
+            title = stringResource(R.string.create_new_playlist),
             confirmLabel = stringResource(R.string.create),
-            icon = if (isVideo) Icons.Default.VideoLibrary else Icons.Default.MusicNote,
             onDismiss = { creationTarget = null },
             onConfirm = { name, description ->
-                if (isVideo) {
-                    viewModel.createPlaylist(name, description)
-                } else {
-                    musicViewModel.createPlaylist(name, description)
-                }
+                viewModel.createPlaylist(name, description)
                 creationTarget = null
             },
         )
@@ -286,31 +239,6 @@ fun PlaylistsScreen(
             onConfirm = {
                 viewModel.deletePlaylist(playlist.id)
                 videoToDelete = null
-            },
-        )
-    }
-
-    musicToDelete?.let { playlist ->
-        DeleteCollectionDialog(
-            collectionName = playlist.name,
-            onDismiss = { musicToDelete = null },
-            onConfirm = {
-                musicViewModel.deletePlaylist(playlist.id)
-                musicToDelete = null
-            },
-        )
-    }
-
-    musicToRename?.let { playlist ->
-        CollectionEditDialog(
-            title = stringResource(R.string.rename_playlist_title),
-            confirmLabel = stringResource(R.string.action_rename),
-            initialName = playlist.name,
-            showDescription = false,
-            onDismiss = { musicToRename = null },
-            onConfirm = { name, _ ->
-                musicViewModel.renamePlaylist(playlist.id, name)
-                musicToRename = null
             },
         )
     }

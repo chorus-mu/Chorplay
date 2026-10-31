@@ -5,40 +5,29 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Transaction
-import io.github.pushkar.chorplay.data.local.entity.MusicHomeCacheEntity
-import io.github.pushkar.chorplay.data.local.entity.MusicHomeChipEntity
 import io.github.pushkar.chorplay.data.local.entity.SubscriptionFeedEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface CacheDao {
-    // Subscriptions
     @Query("SELECT * FROM subscription_feed_cache ORDER BY timestamp DESC LIMIT 1500")
     fun getSubscriptionFeed(): Flow<List<SubscriptionFeedEntity>>
 
-    /** Returns how many rows are currently in the cache. */
     @Query("SELECT COUNT(*) FROM subscription_feed_cache")
     suspend fun getSubscriptionFeedCount(): Int
 
-    /** Returns the most-recent cachedAt timestamp, or null when the table is empty. */
     @Query("SELECT MAX(cachedAt) FROM subscription_feed_cache")
     suspend fun getLatestCachedAt(): Long?
 
-    /**
-     * A subscription group's rows, newest first, together with the collaborations found through its
-     * channels, so busy channels outside the group never push its rows past the feed's row limit.
-     */
     @Query(
         "SELECT * FROM subscription_feed_cache WHERE channelId IN (:channelIds) OR feedChannelId IN (:channelIds) " +
-            "ORDER BY timestamp DESC",
+                "ORDER BY timestamp DESC",
     )
     fun observeSubscriptionFeedForChannels(channelIds: List<String>): Flow<List<SubscriptionFeedEntity>>
 
-    /** Every channel with uploads stored, so a full refresh can drop the ones no longer followed. */
     @Query("SELECT DISTINCT channelId FROM subscription_feed_cache WHERE feedChannelId = ''")
     suspend fun subscriptionUploadChannelIds(): List<String>
 
-    /** Rows for the given channels only, so an incremental refresh can merge against them. */
     @Query("SELECT * FROM subscription_feed_cache WHERE channelId IN (:channelIds)")
     suspend fun getSubscriptionFeedForChannels(channelIds: List<String>): List<SubscriptionFeedEntity>
 
@@ -51,10 +40,6 @@ interface CacheDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertSubscriptionFeed(videos: List<SubscriptionFeedEntity>)
 
-    /**
-     * Adds rows without touching ones that already exist, so the background new-upload check can
-     * seed the feed without clobbering metadata the feed has since enriched.
-     */
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertSubscriptionFeedIfAbsent(videos: List<SubscriptionFeedEntity>)
 
@@ -94,10 +79,6 @@ interface CacheDao {
     @Query("DELETE FROM subscription_feed_cache WHERE channelId = :channelId OR feedChannelId = :channelId")
     suspend fun deleteSubscriptionFeedForChannel(channelId: String)
 
-    /**
-     * The channels' own uploads, ahead of an incremental refresh; their collaborations follow their
-     * own scan. Callers must chunk [channelIds] to stay under SQLite's bound-variable limit.
-     */
     @Query("DELETE FROM subscription_feed_cache WHERE channelId IN (:channelIds) AND feedChannelId = ''")
     suspend fun deleteSubscriptionFeedForChannels(channelIds: List<String>)
 
@@ -107,10 +88,6 @@ interface CacheDao {
     @Query("DELETE FROM subscription_feed_cache WHERE feedChannelId != ''")
     suspend fun deleteCollaborations()
 
-    /**
-     * Drops rows that have aged past the feed's lookback window. Upcoming items are kept because
-     * their timestamp is a future premiere date, not an upload date.
-     */
     @Query(
         """
         DELETE FROM subscription_feed_cache
@@ -122,7 +99,6 @@ interface CacheDao {
     @Query("DELETE FROM subscription_feed_cache")
     suspend fun clearSubscriptionFeed()
 
-    /** Swaps [feedChannelId]'s collaborations for [rows], leaving any video stored as an upload alone. */
     @Transaction
     suspend fun replaceCollaborations(
         feedChannelId: String,
@@ -132,23 +108,4 @@ interface CacheDao {
         insertSubscriptionFeedIfAbsent(rows)
     }
 
-    // Music
-    @Query("SELECT * FROM music_home_cache ORDER BY orderBy ASC")
-    fun getMusicHomeSections(): Flow<List<MusicHomeCacheEntity>>
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertMusicHomeSections(sections: List<MusicHomeCacheEntity>)
-
-    @Query("DELETE FROM music_home_cache")
-    suspend fun clearMusicHomeCache()
-
-    // Music Chips
-    @Query("SELECT * FROM music_home_chips_cache ORDER BY orderBy ASC")
-    fun getMusicHomeChips(): Flow<List<MusicHomeChipEntity>>
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertMusicHomeChips(chips: List<MusicHomeChipEntity>)
-
-    @Query("DELETE FROM music_home_chips_cache")
-    suspend fun clearMusicHomeChips()
 }

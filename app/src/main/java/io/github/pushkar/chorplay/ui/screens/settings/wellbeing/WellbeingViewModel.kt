@@ -6,8 +6,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import io.github.pushkar.chorplay.data.local.LocalDataManager
 import io.github.pushkar.chorplay.data.local.ViewHistory
-import io.github.pushkar.chorplay.data.recommendation.music.MusicBrainEngine
-import io.github.pushkar.chorplay.data.recommendation.music.MusicStatsStorage
 import io.github.pushkar.chorplay.data.stats.RecapAggregates
 import io.github.pushkar.chorplay.data.stats.VideoStatsRecorder
 import io.github.pushkar.chorplay.notification.ReminderManager
@@ -31,7 +29,6 @@ class WellbeingViewModel
         private val viewHistory: ViewHistory,
         private val localData: LocalDataManager,
         private val videoStats: VideoStatsRecorder,
-        private val musicBrain: MusicBrainEngine,
     ) : SettingsViewModel() {
         /**
          * Measured once per visit. The recap ledgers' real watching time is used once they cover the
@@ -43,8 +40,7 @@ class WellbeingViewModel
                 val video = runCatching { videoStats.snapshot() }.getOrNull()
                 val ledger =
                     video?.let {
-                        val music = runCatching { musicBrain.listeningStats() }.getOrDefault(MusicStatsStorage.SerializableStats())
-                        val days = RecapAggregates.dailyTime(it, music, today.minusDays((WEEK_DAYS - 1).toLong()), today)
+                        val days = RecapAggregates.dailyTime(it, today.minusDays((WEEK_DAYS - 1).toLong()), today)
                         summarizeLedgerTime(days, RecapAggregates.videoLedgerStart(it), today)
                     }
                 emit(

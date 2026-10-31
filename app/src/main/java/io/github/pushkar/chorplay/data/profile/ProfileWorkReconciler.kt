@@ -4,8 +4,6 @@ import android.content.Context
 import dagger.hilt.android.qualifiers.ApplicationContext
 import io.github.pushkar.chorplay.data.local.LocalDataManager
 import io.github.pushkar.chorplay.data.local.PlayerPreferences
-import io.github.pushkar.chorplay.data.scrobble.ScrobbleStore
-import io.github.pushkar.chorplay.data.scrobble.ScrobbleWorker
 import io.github.pushkar.chorplay.notification.UpcomingReminder
 import io.github.pushkar.chorplay.notification.UpcomingVideoReminderWorker
 import io.github.pushkar.chorplay.notification.WellbeingAlarms
@@ -21,19 +19,11 @@ class ProfileWorkReconciler
         @ApplicationContext private val context: Context,
         private val preferences: PlayerPreferences,
         private val settings: LocalDataManager,
-        private val scrobbleStore: ScrobbleStore,
     ) {
         suspend fun reconcile() {
             val (keep, drop) = remindersToRestore(preferences.upcomingReminders.first(), System.currentTimeMillis())
             keep.forEach { UpcomingVideoReminderWorker.restore(context, it) }
             drop.forEach { preferences.setUpcomingVideoReminder(it.videoId, enabled = false) }
-            if (scrobbleStore
-                    .current()
-                    .pending.values
-                    .sum() > 0
-            ) {
-                ScrobbleWorker.enqueue(context)
-            }
             WellbeingAlarms.arm(context, settings)
         }
 

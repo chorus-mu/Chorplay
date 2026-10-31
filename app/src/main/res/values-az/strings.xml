@@ -29,8 +29,8 @@
     <string name="library_section_header">Məzmununuz</string>
     <string name="library_history_label">Tarixçə</string>
     <string name="library_playlists_label">Pleylistlər</string>
-    <string name="library_music_playlists_label">Musiqi pleylistləri</string>
-    <string name="library_music_playlists_subtitle">Musiqi kolleksiyalarınız</string>
+
+
     <string name="library_liked_videos_label">Bəyənilənlər</string>
     <string name="library_saved_shorts_label">Yadda saxlanmış Shorts videoları</string>
     <string name="library_watch_later_label">Sonra bax</string>
@@ -66,17 +66,16 @@
     <string name="history_tab_videos">Videolar</string>
     <string name="history_tab_shorts">Shorts</string>
     <string name="history_tab_local_videos">Yerli videolar</string>
-    <string name="history_tab_local_music">Yerli musiqi</string>
+
     <string name="liked">Bəyənilənlər</string>
-    <string name="liked_music">Bəyənilən musiqilər</string>
+
     <string name="liked_videos">Bəyənilən videolar</string>
-    <string name="share_song">Mahnını paylaş</string>
     <string name="empty_liked">Bəyənilən məzmun yoxdur</string>
     <string name="empty_liked_body">Bəyəndiyiniz videolar burada görünəcək</string>
     <string name="empty_liked_videos">Bəyənilən video yoxdur</string>
-    <string name="empty_liked_music">Bəyənilən musiqi yoxdur</string>
-    <string name="empty_liked_music_body">Bəyəndiyiniz mahnılar burada görünəcək</string>
-    <string name="song">Mahnı</string>
+
+
+
     <string name="video">Video</string>
     <string name="share">Paylaş</string>
     <string name="downloaded">Endirildi</string>
@@ -116,7 +115,6 @@
     <string name="remove">Sil</string>
     <string name="related_content">Əlaqəli məzmun</string>
     <string name="no_related_content">Əlaqəli məzmun tapılmadı</string>
-    <string name="share_message_template">Bu mahnıya baxın: %1$s — %2$s\nhttps://music.youtube.com/watch?v=%3$s</string>
     <string name="hz">Hz</string>
     <string name="kbps">kbps</string>
     <string name="filter_discover">Kəşf et</string>
@@ -149,14 +147,13 @@
     <string name="play_mode_suggestion_title">Oxutma rejimi təklifi</string>
     <string name="play_mode_suggestion_body">Bu video 2 dəqiqədən qısadır. Xüsusi pleyerə keçmək istəyirsiniz?</string>
     <string name="shorts_player">Shorts pleyeri</string>
-    <string name="music_player">Musiqi pleyeri</string>
+
     <plurals name="channels_count">
         <item quantity="one">%d kanal</item>
         <item quantity="other">%d kanal</item>
     </plurals>
     <string name="tab_videos">Videolar</string>
-    <string name="tab_music">Musiqi</string>
-    <string name="empty_offline_title">Oflayn %1$s</string>
+<string name="empty_offline_title">Oflayn %1$s</string>
     <string name="empty_offline_body">Endirdiyiniz %1$s burada görünəcək.\nİnternet olmadan da məzmundan zövq alın.</string>
     <string name="action_go_to_home">Əsas səhifəyə keç</string>
     <string name="action_delete">Sil</string>
@@ -214,12 +211,12 @@
     <string name="copied_to_clipboard">%1$s kopyalandı</string>
     <string name="unknown">Naməlum</string>
     <string name="subscriptions_video_section_title">Video abunəlikləri</string>
-    <string name="subscriptions_music_section_title">Musiqi abunəlikləri</string>
+
     <string name="subscriptions_quick_access_title">Sürətli giriş</string>
     <string name="subscriptions_compact_header">Son abunə olduğunuz kanallara keçin.</string>
-    <string name="subscriptions_compact_header_with_music">Lentin yığcam qalması üçün musiqi kanalları sətir daxilində işarələnir.</string>
-    <string name="subscriptions_music_chip_label">Musiqi</string>
-    <string name="subscriptions_music_badge_cd">Musiqi abunəliyi</string>
+
+
+
     <string name="no_subscriptions_found">Abunəlik tapılmadı</string>
     <string name="live_chat">Canlı söhbət</string>
     <string name="live_chat_connecting">Canlı söhbətə qoşulur…</string>
@@ -244,11 +241,11 @@
     <string name="new_update_available">Yeni yeniləmə mövcuddur</string>
     <string name="update_available_template">%1$s artıq əlçatandır</string>
     <string name="release_notes">BURAXILIŞ QEYDLƏRİ</string>
-    <string name="update_flow">Chorplay-u yenilə</string>
+    <string name="update_chorplay">Chorplay-u yenilə</string>
     <string name="maybe_later">Bəlkə sonra</string>
     <string name="nav_home">Əsas səhifə</string>
     <string name="nav_shorts">Shorts</string>
-    <string name="nav_music">Musiqi</string>
+
     <string name="nav_subs">Abunəliklər</string>
     <string name="nav_library">Kitabxana</string>
     <string name="notifications">Bildirişlər</string>
@@ -268,7 +265,6 @@
     <string name="add_to_playlist">Pleylistə əlavə et</string>
     <string name="playback_header">Oxutma</string>
     <string name="play_next">Növbəti oxut</string>
-    <string name="play_next_desc">Növbənin əvvəlinə əlavə et</string>
     <string name="add_to_queue">Növbəyə əlavə et</string>
     <string name="add_to_queue_desc">Növbənin sonuna əlavə et</string>
     <string name="similar_content">Oxşar məzmun</string>
@@ -282,8 +278,6 @@
     <string name="audio_effects">Səs effektləri</string>
     <string name="more_header">Daha çox</string>
     <string name="view_artist">İfaçıya bax</string>
-    <string name="view_album">Alboma bax</string>
-    <string name="album_art">Albom üz qabığı</string>
     <string name="close_player">Pleyeri bağla</string>
     <string name="views_template">%1$s baxış</string>
     <string name="chapters">Fəsillər</string>
@@ -317,7 +311,6 @@
     <string name="search_hint">Axtar</string>
     <string name="search_videos_channels_placeholder">Video və kanal axtar...</string>
     <string name="recent_searches">Son axtarışlar</string>
-    <string name="search_empty_prompt">Video, musiqi və daha çoxunu axtarın</string>
     <string name="trending">Trenddə olanlar</string>
     <string name="channels_header">Kanallar</string>
     <string name="videos_header">Videolar</string>
@@ -371,9 +364,9 @@
     <string name="channel_search_open">Kanalda axtar</string>
     <string name="channel_search_close">Axtarışı bağla</string>
     <string name="channel_search_no_results">“%1$s” üçün nəticə tapılmadı</string>
-    <string name="music_history">Musiqi tarixçəsi</string>
+
     <string name="remove_from_history">Tarixçədən sil</string>
-    <string name="share_song_chooser">Mahnını paylaş</string>
+
     <string name="time_today">Bu gün</string>
     <string name="time_yesterday">Dünən</string>
     <string name="time_earlier">Daha əvvəl</string>
@@ -383,35 +376,35 @@
     <string name="peace_and_quiet">Sakitlik</string>
     <string name="notifications_empty_body">Hər şeyə baxmısınız! Abunəliklərinizdən gələn yeni yeniliklər burada görünəcək.</string>
     <string name="settings_title">Parametrlər</string>
-    <string name="settings_flow_engine_header">Chorplay mühərriki</string>
+    <string name="settings_chor_engine_header">Chorplay mühərriki</string>
     <string name="settings_active_learning">AKTİV ÖYRƏNMƏ</string>
     <string name="settings_reset_brain_title">Chorplay şəxsiyyəti sıfırlansın?</string>
     <string name="settings_reset_brain_body">Bu əməl “Chorplay beyni” maraq profilinizi tamamilə siləcək.\n\n• Öyrənilmiş bütün mövzular unudulacaq.\n• Şəxsiyyət xüsusiyyətləri neytral vəziyyətə qaytarılacaq.\n• Tövsiyələr defolt vəziyyətə qayıdacaq.\n\nBu əməli geri qaytarmaq mümkün deyil.</string>
     <string name="settings_reset_everything">Hər şeyi sıfırla</string>
     <string name="settings_analyzing_interactions">Fəaliyyətləriniz təhlil edilir...</string>
     <string name="settings_view_analytics">Analitikaya bax</string>
-    <string name="deep_flow_mode_title">Dərin Chorplay rejimi</string>
-    <string name="deep_flow_mode_subtitle">Öyrənməni dayandırın — profilinizə təsir etmədən gözdən keçirin</string>
-    <string name="deep_flow_learning_paused">ÖYRƏNMƏ DAYANDIRILIB</string>
-    <string name="deep_flow_expires_in">%s sonra bitir</string>
-    <string name="deep_flow_expire_duration_title">Avtomatik söndürülmə müddəti</string>
-    <string name="deep_flow_expire_duration_subtitle">Öyrənmə %s sonra avtomatik davam edir</string>
-    <string name="deep_flow_save_history_title">Baxış tarixçəsində saxla</string>
-    <string name="deep_flow_save_history_subtitle">Baxılmış videoları irəliləyişlə birlikdə tarixçədə saxlayın. Mühərrik yenə də onlardan öyrənməyəcək. Söndürülərsə, heç nə saxlanılmır.</string>
-    <string name="deep_flow_dialog_title">Dayandırma müddəti</string>
-    <string name="deep_flow_dialog_body">Öyrənmə nə qədər müddət dayandırılsın?</string>
-    <string name="deep_flow_enabled_message">Dərin Chorplay aktiv edildi</string>
-    <string name="deep_flow_disabled_message">Dərin Chorplay söndürüldü</string>
-    <string name="deep_flow_expired_message">Dərin Chorplay taymeri bitdi</string>
-    <string name="deep_flow_active_until_disabled">Dərin Chorplay siz söndürənədək aktiv qalır</string>
-    <string name="deep_flow_duration_never">Heç vaxt</string>
-    <string name="deep_flow_duration_1h">1 saat</string>
-    <string name="deep_flow_duration_2h">2 saat</string>
-    <string name="deep_flow_duration_4h">4 saat</string>
-    <string name="deep_flow_duration_6h">6 saat</string>
-    <string name="deep_flow_duration_8h">8 saat</string>
-    <string name="deep_flow_duration_12h">12 saat</string>
-    <string name="deep_flow_duration_24h">24 saat</string>
+    <string name="deep_chor_mode_title">Dərin Chorplay rejimi</string>
+    <string name="deep_chor_mode_subtitle">Öyrənməni dayandırın — profilinizə təsir etmədən gözdən keçirin</string>
+    <string name="deep_chor_learning_paused">ÖYRƏNMƏ DAYANDIRILIB</string>
+    <string name="deep_chor_expires_in">%s sonra bitir</string>
+    <string name="deep_chor_expire_duration_title">Avtomatik söndürülmə müddəti</string>
+    <string name="deep_chor_expire_duration_subtitle">Öyrənmə %s sonra avtomatik davam edir</string>
+    <string name="deep_chor_save_history_title">Baxış tarixçəsində saxla</string>
+    <string name="deep_chor_save_history_subtitle">Baxılmış videoları irəliləyişlə birlikdə tarixçədə saxlayın. Mühərrik yenə də onlardan öyrənməyəcək. Söndürülərsə, heç nə saxlanılmır.</string>
+    <string name="deep_chor_dialog_title">Dayandırma müddəti</string>
+    <string name="deep_chor_dialog_body">Öyrənmə nə qədər müddət dayandırılsın?</string>
+    <string name="deep_chor_enabled_message">Dərin Chorplay aktiv edildi</string>
+    <string name="deep_chor_disabled_message">Dərin Chorplay söndürüldü</string>
+    <string name="deep_chor_expired_message">Dərin Chorplay taymeri bitdi</string>
+    <string name="deep_chor_active_until_disabled">Dərin Chorplay siz söndürənədək aktiv qalır</string>
+    <string name="deep_chor_duration_never">Heç vaxt</string>
+    <string name="deep_chor_duration_1h">1 saat</string>
+    <string name="deep_chor_duration_2h">2 saat</string>
+    <string name="deep_chor_duration_4h">4 saat</string>
+    <string name="deep_chor_duration_6h">6 saat</string>
+    <string name="deep_chor_duration_8h">8 saat</string>
+    <string name="deep_chor_duration_12h">12 saat</string>
+    <string name="deep_chor_duration_24h">24 saat</string>
     <string name="settings_header_appearance">Görünüş</string>
     <string name="settings_header_content_playback">Məzmun və oxutma</string>
     <string name="settings_header_data_management">Məlumatların idarəsi</string>
@@ -555,9 +548,9 @@
     <string name="app_icon_picker_subtitle">Başladıcı nişanının üslubunu seçin. Dəyişiklik dərhal qüvvəyə minəcək və başladıcı qısa müddətə yenilənəcək.</string>
     <string name="app_icon_picker_warning">Diqqət: nişan dəyişdirilərkən Android sistem mexanizmi tətbiq qısayolunu əsas ekrandan qısa müddətə silə bilər. Lazım gələrsə, başladıcıya basıb saxlayaraq onu yenidən əlavə edin.</string>
     <string name="app_icon_apply_toast">Nişan yeniləndi — başladıcı yenilənəcək</string>
-    <string name="icon_name_flow_red">Chorplay qırmızısı</string>
-    <string name="icon_name_flow_light">Chorplay açıq</string>
-    <string name="icon_name_flow_play">Chorplay Play</string>
+    <string name="icon_name_chorplay_red">Chorplay qırmızısı</string>
+    <string name="icon_name_chorplay_light">Chorplay açıq</string>
+    <string name="icon_name_chorplay_play">Chorplay Play</string>
     <string name="icon_name_amoled">AMOLED tünd</string>
     <string name="icon_name_monochrome">Monoxrom</string>
     <string name="icon_name_ghost">Ruh</string>
@@ -568,13 +561,12 @@
     <string name="player_appearance_header">Pleyer idarəetmələrini fərdiləşdirin</string>
     <string name="player_appearance_style_title">Musiqi irəliləyiş çubuğunun üslubu</string>
     <string name="player_appearance_style_subtitle">İrəliləyiş çubuğunun vizual üslubunu seçin</string>
-    <string name="player_background_style_title">Musiqi pleyerinin arxa fonu</string>
     <string name="player_background_style_blur_gradient">Bulanıqlıq + qradiyent</string>
     <string name="player_background_style_blur">Bulanıq üz qabığı</string>
     <string name="player_background_style_gradient">Palitra qradiyenti</string>
     <string name="player_background_style_default">Defolt səth</string>
-    <string name="player_appearance_hide_music_artwork_title">Musiqi pleyerinin üz qabığını gizlət</string>
-    <string name="player_appearance_hide_music_artwork_subtitle">Əvəzində üz qabığından çıxarılan rəng üzərində tətbiq nişanını göstərin</string>
+
+
     <string name="player_appearance_shorts_ui_title">Shorts pleyer interfeysi</string>
     <string name="player_appearance_shorts_ui_subtitle">Shorts örtüyünün nə qədər hissəsinin görünəcəyini seçin</string>
     <string name="shorts_player_ui_default">Defolt</string>
@@ -627,8 +619,8 @@
     <string name="player_fullscreen_seekbar_width_default">Defolt</string>
     <string name="player_fullscreen_seekbar_width_custom">Fərdi</string>
     <string name="player_fullscreen_seekbar_width_value">%1$d dp</string>
-    <string name="lyrics_provider_title">Mahnı sözləri provayderi</string>
-    <string name="lyrics_provider_subtitle">Mahnı sözləri üçün üstünlük verdiyiniz mənbəni seçin</string>
+
+
     <string name="lyrics_provider_lrclib">LrcLib</string>
     <string name="lyrics_provider_better_lyrics">Better Lyrics</string>
     <string name="lyrics_provider_simpmusic">SimpMusic</string>
@@ -697,13 +689,11 @@
     <string name="content_settings_layout_grid">Tor</string>
     <string name="content_settings_layout_list">Siyahı</string>
     <string name="content_settings_grid_size_title">Tor elementinin ölçüsü</string>
-    <string name="content_settings_grid_size_subtitle">Albom üz qabıqları və məzmun kartlarının ölçüsünü idarə edir</string>
     <string name="content_settings_grid_big_title">Böyük</string>
     <string name="content_settings_grid_big_desc">Daha böyük miniatürlər</string>
     <string name="content_settings_grid_small_title">Kiçik</string>
     <string name="content_settings_grid_small_desc">Yığcam görünüş</string>
     <string name="content_settings_header_preview">Önbaxış</string>
-    <string name="content_settings_preview_album_art">Albom üz qabığı önbaxışı</string>
     <string name="content_settings_preview_big">Böyük — 128 dp miniatürlər</string>
     <string name="content_settings_preview_small">Kiçik — 104 dp miniatürlər</string>
     <string name="content_settings_dynamic_components">Dinamik komponentlər</string>
@@ -736,8 +726,8 @@
     <string name="content_settings_show_app_logo_title">Tətbiq loqosunu göstər</string>
     <string name="content_settings_show_app_logo_subtitle">Əsas ekranın yuxarı panelində tətbiq adının yanında Chorplay loqosunu göstərin</string>
     <string name="content_settings_header_content_components">Məzmun komponentləri</string>
-    <string name="content_settings_restored_music_mini_player_title">Bərpa edilmiş musiqi mini pleyerini göstər</string>
-    <string name="content_settings_restored_music_mini_player_subtitle">Son musiqi seansınız bərpa edildikdən sonra onu avtomatik göstərin</string>
+
+
     <string name="content_settings_hide_watched_home_title">Baxılmış videoları Əsas səhifədə gizlət</string>
     <string name="content_settings_hide_watched_home_subtitle">Artıq baxdığınız videoları əsas səhifə lentindən süzün</string>
     <string name="content_settings_hide_watched_subscriptions_title">Baxılmış videoları Abunəliklərdə gizlət</string>
@@ -782,8 +772,8 @@
     <string name="settings_home_shorts_shelf_subtitle">Əsas ekranda üfüqi Shorts bölməsini göstərin.</string>
     <string name="settings_shorts_nav_tab_title">Naviqasiyada Shorts tabı</string>
     <string name="settings_shorts_nav_tab_subtitle">Alt naviqasiya panelində Shorts tabını göstərin.</string>
-    <string name="settings_music_nav_tab_title">Naviqasiyada Musiqi tabı</string>
-    <string name="settings_music_nav_tab_subtitle">Alt naviqasiya panelində Musiqi tabını göstərin.</string>
+
+
     <string name="settings_search_nav_tab_title">Naviqasiyada Axtarış tabı</string>
     <string name="settings_search_nav_tab_subtitle">Alt naviqasiya panelində sürətli giriş üçün Axtarış tabını göstərin.</string>
     <string name="nav_search">Axtar</string>
@@ -948,11 +938,11 @@
     <string name="video_quality_warning">Yüksək keyfiyyət daha çox məlumat sərf edir</string>
     <string name="video_quality_wifi_header">Wi-Fi keyfiyyəti</string>
     <string name="video_quality_cellular_header">Mobil şəbəkə keyfiyyəti</string>
-    <string name="music_quality_header">Musiqi audio keyfiyyəti</string>
-    <string name="music_quality_auto">Avtomatik</string>
-    <string name="music_quality_high">Yüksək</string>
-    <string name="music_quality_medium">Orta</string>
-    <string name="music_quality_low">Aşağı</string>
+
+
+
+
+
     <string name="quality_144p">144p</string>
     <string name="quality_240p">240p</string>
     <string name="quality_360p">360p</string>
@@ -1068,7 +1058,7 @@
     <string name="sleep_timer_custom_label">Fərdi vaxt</string>
     <string name="sleep_timer_unit">dəqiqə</string>
     <string name="sleep_timer_input_error">1–1440 arasında dəyər daxil edin</string>
-    <string name="sleep_timer_end_of_song">Mahnının / videonun sonunda</string>
+    <string name="sleep_timer_end_of_video">Mahnının / videonun sonunda</string>
     <string name="sleep_timer_start">Başlat</string>
     <string name="sleep_timer_stops_in">Dayanmasına qalıb</string>
     <string name="sleep_timer_end_of_media">Cari mahnının sonunda</string>
@@ -1099,12 +1089,12 @@
     <string name="period_six_months">6 ay</string>
     <string name="period_one_year">1 il</string>
     <string name="import_data_title">Məlumatları idxal et</string>
-    <string name="import_flow_backup_success">Chorplay ehtiyat nüsxəsi uğurla idxal edildi</string>
-    <string name="import_flow_backup_failed_template">Chorplay ehtiyat nüsxəsini idxal etmək mümkün olmadı: %1$s</string>
+    <string name="import_chorplay_backup_success">Chorplay ehtiyat nüsxəsi uğurla idxal edildi</string>
+    <string name="import_chorplay_backup_failed_template">Chorplay ehtiyat nüsxəsini idxal etmək mümkün olmadı: %1$s</string>
     <string name="import_newpipe_failed_template">NewPipe ehtiyat nüsxəsini idxal etmək mümkün olmadı: %1$s</string>
     <string name="import_youtube_failed_template">YouTube ehtiyat nüsxəsini idxal etmək mümkün olmadı: %1$s</string>
-    <string name="import_flow_backup_item_title">Chorplay ehtiyat nüsxəsini idxal et</string>
-    <string name="import_flow_backup_desc">Tarixçənizi, parametrlərinizi və abunəliklərinizi Chorplay ehtiyat nüsxəsi faylından bərpa edin.</string>
+    <string name="import_chorplay_backup_item_title">Chorplay ehtiyat nüsxəsini idxal et</string>
+    <string name="import_chorplay_backup_desc">Tarixçənizi, parametrlərinizi və abunəliklərinizi Chorplay ehtiyat nüsxəsi faylından bərpa edin.</string>
     <string name="import_from_newpipe">NewPipe-dan idxal et</string>
     <string name="import_from_newpipe_desc">Abunəlikləri NewPipe ixrac faylından (JSON) idxal edin.</string>
     <string name="import_from_libretube">LibreTube-dan idxal et</string>
@@ -1117,10 +1107,10 @@
     <string name="import_libretube_playlists_desc">Yerli LibreTube pleylistlərinizi ehtiyat JSON faylından idxal edin.</string>
     <string name="import_yt_takeout_all">Google Takeout-dan idxal et</string>
     <string name="import_yt_takeout_all_desc">YouTube abunəliklərinizi, baxış tarixçənizi və pleylistlərinizi Google Takeout ZIP faylından bir dəfəyə idxal edin.</string>
-    <string name="import_music_apps_section_title">Musiqi tətbiqləri</string>
-    <string name="import_music_apps_section_subtitle">Musiqi kitabxananızı başqa pleyerlərdən idxal edin</string>
-    <string name="import_from_metrolist">Metrolist-dən idxal et</string>
-    <string name="import_from_metrolist_desc">Musiqi pleylistlərini Metrolist ehtiyat nüsxəsi faylından (.zip) idxal edin. Pleylistlər Musiqi kitabxanasında görünəcək.</string>
+
+
+
+
     <string name="import_from_youtube">YouTube-dan idxal et</string>
     <string name="import_from_youtube_desc">Abunəlikləri YouTube Takeout-dan (CSV) idxal edin.</string>
     <string name="import_subscriptions_section_title">Abunəliklər</string>
@@ -1135,8 +1125,6 @@
     <string name="import_yt_watch_history_desc">Baxış tarixçənizi YouTube Takeout-dan (watch-history.html) idxal edin.</string>
     <string name="import_yt_playlist">YouTube pleylistini idxal et</string>
     <string name="import_yt_playlist_desc">YouTube Takeout CSV faylından (Playlist-&lt;name&gt;.csv) pleylist idxal edin.</string>
-    <string name="import_yt_music_playlist">YouTube Music pleylistini idxal et</string>
-    <string name="import_yt_music_playlist_desc">YouTube Music Takeout CSV faylından musiqi pleylisti idxal edin. Musiqi pleylistləri bölməsində görünür.</string>
     <string name="import_yt_history_failed_template">Baxış tarixçəsini idxal etmək mümkün olmadı: %1$s</string>
     <string name="import_yt_playlist_failed_template">Pleylisti idxal etmək mümkün olmadı: %1$s</string>
     <string name="import_yt_history_empty_error">Bu faylda baxış tarixçəsi qeydi tapılmadı. Bunun YouTube Takeout watch-history.html faylı olduğuna əmin olun.</string>
@@ -1158,7 +1146,7 @@
     <string name="total_space_template">Cəmi: %1$s</string>
     <string name="location_label">Məkan</string>
     <string name="video_download_location_label">Video endirmə məkanı</string>
-    <string name="music_download_location_label">Musiqi endirmə məkanı</string>
+
     <string name="internal_app_storage_label">Tətbiqin daxili yaddaşı</string>
     <string name="preferences_header">Seçimlər</string>
     <string name="default_video_quality_label">Defolt video keyfiyyəti</string>
@@ -1189,9 +1177,9 @@
     <string name="location_badge_active">Aktiv</string>
     <string name="select_threads_count_desc">İş axınlarının sayını seçin (1–8):</string>
     <string name="support_donations_title">Dəstək və ianələr</string>
-    <string name="support_flow_dev_title">Chorplay-un hazırlanmasına dəstək olun</string>
-    <string name="support_flow_dev_desc">Chorplay-u faydalı hesab edir və hazırlanmasına dəstək olmaq istəyirsinizsə, Patreon-da dəstək verə və ya aşağıdakı kriptovalyuta ünvanlarına ianə göndərə bilərsiniz. Dəstəyiniz layihənin yaşamasına kömək edir!</string>
-    <string name="support_flow_patreon">Patreon-da Chorplay-u dəstəklə</string>
+    <string name="support_chorplay_dev_title">Chorplay-un hazırlanmasına dəstək olun</string>
+    <string name="support_chorplay_dev_desc">Chorplay-u faydalı hesab edir və hazırlanmasına dəstək olmaq istəyirsinizsə, Patreon-da dəstək verə və ya aşağıdakı kriptovalyuta ünvanlarına ianə göndərə bilərsiniz. Dəstəyiniz layihənin yaşamasına kömək edir!</string>
+    <string name="support_chorplay_patreon">Patreon-da Chorplay-u dəstəklə</string>
     <string name="thank_you_support_message">Dəstəyiniz üçün təşəkkürlər! ❤️</string>
     <string name="address_copied_toast">Ünvan mübadilə buferinə kopyalandı</string>
     <string name="donation_address_clip_label">İanə ünvanı</string>
@@ -1209,7 +1197,7 @@
     <string name="newpipe_extractor_subtitle">Əsas çıxarış kitabxanası</string>
     <string name="about_license">Lisenziya</string>
     <string name="about_changelog">Dəyişiklik jurnalı</string>
-    <string name="whats_new_in_flow">Chorplay-da yeniliklər</string>
+    <string name="whats_new_in_chorplay">Chorplay-da yeniliklər</string>
     <string name="about_device_info">Cihaz məlumatı</string>
     <string name="gnu_license_full_title">GNU Ümumi İctimai Lisenziyası</string>
     <string name="loading_ellipsis">Yüklənir...</string>
@@ -1259,7 +1247,7 @@
     <string name="playlist_sort_date_published_oldest">Yayımlanma tarixi (ən köhnə)</string>
     <string name="remove_selected_playlist_text">Onlar bu pleylistdən silinəcək.</string>
     <string name="remove_selected_watch_later_text">Onlar “Sonra bax”dan silinəcək.</string>
-    <string name="welcome_to_flow">Chorplay-a xoş gəlmisiniz</string>
+    <string name="welcome_to_chorplay">Chorplay-a xoş gəlmisiniz</string>
     <string name="onboarding_subtitle">Maraqlandığınız mövzuları bizə bildirin</string>
     <string name="onboarding_instructions">Təcrübənizi fərdiləşdirmək üçün ən azı 3 mövzu seçin</string>
     <string name="onboarding_interests_title">Nələrdən zövq alırsınız?</string>
@@ -1296,7 +1284,7 @@
     <string name="category_creative">Yaradıcılıq</string>
     <string name="category_science_nature">Elm və təbiət</string>
     <string name="category_news_current_events">Xəbərlər və gündəm</string>
-    <string name="flow_control_center">Chorplay idarəetmə mərkəzi</string>
+    <string name="chorplay_control_center">Chorplay idarəetmə mərkəzi</string>
     <string name="action_refresh">Yenilə</string>
     <string name="loading_neural_matrix">Neyron matrisi yüklənir...</string>
     <string name="neural_interest_map_subtitle">Neyron maraq xəritəniz</string>
@@ -1340,12 +1328,9 @@
     <string name="stats_topics">Mövzular</string>
     <string name="empty_bubble_cloud_message">Maraq dumanlığınızı doldurmaq üçün bir neçə videoya baxın!</string>
     <string name="export_profile_data">Profil məlumatlarını ixrac et</string>
-    <string name="flow_neural_profile_export_subject">Chorplay neyron profilinin ixracı</string>
-    <string name="screen_title_music_library">Musiqi kitabxanası</string>
+    <string name="chorplay_neural_profile_export_subject">Chorplay neyron profilinin ixracı</string>
+
     <string name="header_your_collection">Kolleksiyanız</string>
-    <string name="subtitle_liked_music">Bəyəndiyiniz mahnılar</string>
-    <string name="subtitle_history">Dinlədiyiniz mahnılar</string>
-    <string name="empty_music_playlists">Hələ musiqi pleylisti yoxdur</string>
     <string name="rename_playlist_title">Pleylistin adını dəyiş</string>
     <string name="action_rename">Adını dəyiş</string>
     <string name="link_copied">Keçid kopyalandı</string>
@@ -1383,8 +1368,8 @@
     <string name="action_add_to_favorites">Seçilmişlərə əlavə et</string>
     <string name="action_listen_now">İndi dinlə</string>
     <string name="action_play_all">Hamısını oxut</string>
-    <string name="loading_music">Musiqi yüklənir...</string>
-    <string name="screen_title_music">MUSİQİ</string>
+
+
     <string name="section_listen_again">Yenidən dinlə</string>
     <string name="section_daily_discover">Gündəlik kəşfiniz</string>
     <string name="section_quick_picks">Sürətli seçimlər</string>
@@ -1398,8 +1383,8 @@
     <string name="daily_discover_for_fans_of">%1$s pərəstişkarları üçün</string>
     <string name="section_recommended">Tövsiyə olunanlar</string>
     <string name="section_recently_played">Son oxudulanlar</string>
-    <string name="section_music_videos">Musiqi videoları</string>
-    <string name="section_music_videos_for_you">Sizin üçün musiqi videoları</string>
+
+
     <string name="section_live_performances">Canlı ifalar</string>
     <string name="section_new_releases">Yeni buraxılışlar</string>
     <string name="subtitle_single_template">Sinql · %1$s</string>
@@ -1410,14 +1395,12 @@
     <string name="section_from_the_community">İcmadan</string>
     <string name="daily_discover_subtitle">Dinləmələrinizdən təzə seçimlər</string>
     <string name="genre_mix_template">%1$s miksi</string>
-    <string name="section_top_albums">Ən yaxşı albomlar</string>
     <string name="similar_to">Oxşar</string>
     <string name="section_similar_to">%1$s ilə oxşar</string>
     <string name="subtitle_similar_to">Dinləmə tarixçənizə əsasən</string>
     <string name="section_vibe_vibes">%1$s ab-havası</string>
     <string name="subtitle_community_playlists">İcma pleylistləri</string>
     <string name="playlist_author_community">İcma pleylisti</string>
-    <string name="playlist_description_community">İcmamızın seçdiyi %1$s musiqilərindən ibarət pleylist</string>
     <string name="radio">Radio</string>
     <string name="audio_settings_title">Audio parametrləri</string>
     <string name="label_preset">Önayar</string>
@@ -1433,32 +1416,26 @@
     <string name="template_gain">%1$.1fdB</string>
     <string name="template_q">%1$.1f</string>
     <string name="now_playing">İNDİ OXUDULUR</string>
-    <string name="voice_search_prompt">Musiqi axtarmaq üçün danışın</string>
-    <string name="search_music_placeholder">Musiqi axtar</string>
+
     <string name="voice_search_cd">Səsli axtarış</string>
-    <string name="filter_albums">Albomlar</string>
-    <string name="filter_songs">Mahnılar</string>
+
     <string name="filter_community_playlists">İcma pleylistləri</string>
     <string name="section_top_result">Ən yaxşı nəticə</string>
-    <string name="subtitle_song_prefix">Mahnı • %1$s</string>
+
     <string name="subtitle_artist">İfaçı</string>
-    <string name="subtitle_album_template">Albom • %1$s</string>
     <string name="subtitle_playlist_template">Pleylist • %1$s</string>
     <string name="plays_count_template">• %1$s oxutma</string>
-    <string name="album_year_template">Albom • %1$s • %2$s</string>
     <string name="search_source_template">Axtarış: %1$s</string>
     <string name="artist_source_template">İfaçı: %1$s</string>
     <string name="top_picks_for_you">Sizin üçün ən yaxşı seçimlər</string>
     <string name="no_results_found">Nəticə tapılmadı</string>
     <string name="no_tracks_available">Əlçatan trek yoxdur</string>
     <string name="tab_favorites">Seçilmişlər</string>
-    <string name="create_playlist_subtitle">Musiqinizi nizamlayın</string>
     <string name="empty_playlists_title">Hələ pleylist yoxdur</string>
     <string name="empty_playlists_subtitle">Sevimli treklərinizi nizamlamaq üçün ilk pleylistinizi yaradın</string>
     <string name="empty_favorites_title">Hələ seçilmiş yoxdur</string>
     <string name="empty_favorites_subtitle">Treki seçilmişlərə əlavə etmək üçün ürək nişanına toxunun</string>
     <string name="empty_history_title">Hələ tarixçə yoxdur</string>
-    <string name="empty_history_subtitle">Tarixçəni burada görmək üçün musiqi dinləməyə başlayın</string>
     <string name="empty_downloads_title">Hələ endirmə yoxdur</string>
     <string name="empty_downloads_subtitle">Oflayn oxutma üçün trekləri endirin</string>
     <string name="total_size">Ümumi ölçü</string>
@@ -1548,7 +1525,7 @@
     <string name="check_for_updates">Yeniləmələri yoxla</string>
     <string name="check_for_updates_subtitle">Ən son versiyanı yoxlamaq üçün toxunun</string>
     <string name="checking_for_updates">Yeniləmələr yoxlanılır…</string>
-    <string name="flow_is_up_to_date">Chorplay güncəldir!</string>
+    <string name="chorplay_is_up_to_date">Chorplay güncəldir!</string>
     <string name="update_check_failed">Yeniləmələri yoxlamaq mümkün olmadı. Bağlantınızı yoxlayın.</string>
     <string name="export_engine_data">Mühərrik profilini ixrac et</string>
     <string name="export_engine_data_subtitle">Süni intellekt şəxsiyyətinizin və öyrənmə məlumatlarınızın ehtiyat nüsxəsini yaradın</string>
@@ -1624,7 +1601,7 @@
     <string name="sync_error_peer_also_receive">Digər cihaz da “Qəbul et” rejimindədir. Onu “Göndər” rejiminə keçirin və yenidən skan edin.</string>
     <string name="sync_error_qr_expired">Bu QR kodunun vaxtı bitib. Digər cihazda yeni kod göstərin.</string>
     <string name="sync_error_qr_wrong_version">Digər cihazdakı tətbiq versiyası uyğun deyil.</string>
-    <string name="sync_error_qr_not_flow">Bu, Chorplay sinxronizasiya koduna bənzəmir.</string>
+    <string name="sync_error_qr_not_chorplay">Bu, Chorplay sinxronizasiya koduna bənzəmir.</string>
     <string name="sync_error_qr_bad_address">Sinxronizasiya kodunda etibarlı şəbəkə ünvanı yoxdur.</string>
     <string name="auto_backup_title">Avtomatik ehtiyat nüsxələr</string>
     <string name="auto_backup_subtitle">Qovluğa avtomatik ehtiyat nüsxə cədvəli qurun</string>
@@ -1697,10 +1674,10 @@
     <string name="error_extraction_failed_hint">YouTube formatını yeniləmiş ola bilər. Chorplay tezliklə yenilənəcək — sonra yenidən sınayın.</string>
     <string name="error_generic">Videonu yükləmək mümkün olmadı</string>
     <string name="error_generic_hint">Naməlum xəta baş verdi. Yenidən sınayın.</string>
-    <string name="music_playback_warning_forbidden">Musiqi axınına giriş rədd edildi. YouTube bu IP-ni məhdudlaşdırır ola bilər; yenidən yükləməyi və ya şəbəkəni/VPN-i dəyişməyi sınayın.</string>
-    <string name="music_playback_warning_network">Şəbəkə problemi səbəbindən musiqi axını uğursuz oldu. Bağlantınızı yoxlayın və ya başqa şəbəkə sınayın.</string>
-    <string name="music_playback_warning_final">Bu mahnı bir neçə cəhddən sonra yüklənmədi. Mahnılar davamlı yüklənmirsə başqa şəbəkə və ya VPN sınayın.</string>
-    <string name="music_playback_warning_generic">Musiqini oxutmaq mümkün olmadı. Problem davam edərsə yenidən sınayın və ya şəbəkəni dəyişin.</string>
+
+
+
+
     <string name="player_lock_controls">İdarəetmələri kilidlə</string>
     <string name="player_unlock_controls">İdarəetmələrin kilidini aç</string>
     <string name="player_settings_overlay_controls">Örtük idarəetmələri</string>
@@ -1871,28 +1848,24 @@
     <string name="history_delete_shorts">Shorts videolarını tarixçədən sil</string>
     <string name="history_delete_shorts_title">Shorts videoları silinsin?</string>
     <string name="history_delete_shorts_body">Bu əməl bütün Shorts videolarını baxış tarixçənizdən silir. Digər videolar saxlanılır.</string>
-    <string name="recognize_music">Musiqini tanı</string>
+
     <string name="recognition_history">Tanıma tarixçəsi</string>
-    <string name="tap_to_recognize">Tanımaq üçün toxunun</string>
+
     <string name="listening">Dinlənilir…</string>
     <string name="processing">Emal edilir…</string>
     <string name="no_match_found">Uyğunluq tapılmadı</string>
     <string name="recognition_error">Tanıma uğursuz oldu</string>
     <string name="try_again">Yenidən sına</string>
-    <string name="search_in_flow">Chorplay-da axtar</string>
-    <string name="recognition_search_history">Tanınmış mahnılarda axtar</string>
-    <string name="recognition_history_empty">Tanınmış mahnılar burada görünəcək</string>
+    <string name="search_in_chorplay">Chorplay-da axtar</string>
     <string name="recognition_clear_history">Tarixçə təmizlənsin?</string>
-    <string name="recognition_clear_history_body">Bu əməl bütün tanınmış mahnıları silir. Geri qaytarmaq mümkün deyil.</string>
     <string name="close_popup_player">Açılan pleyeri bağla</string>
     <string name="widget_now_playing_label">İndi oxudulur</string>
-    <string name="widget_now_playing_description">Chorplay-da oxudulan musiqini idarə edin</string>
     <string name="widget_quick_actions_label">Sürətli əməliyyatlar</string>
     <string name="widget_quick_actions_description">Chorplay-da axtarın və endirmələrə, tarixçəyə və ya musiqi tanımaya keçin</string>
-    <string name="widget_recognize_label">Musiqini tanı</string>
-    <string name="widget_recognize_description">Ətrafınızda səslənən mahnını bir toxunuşla müəyyən edin</string>
-    <string name="widget_turntable_label">Val pleyeri</string>
-    <string name="widget_turntable_description">Musiqiniz fırlanan val üzərində</string>
+
+
+
+
     <string name="widget_recently_played_label">Son oxudulanlar</string>
     <string name="widget_recently_played_description">Qaldığınız yerdən davam edin</string>
     <string name="widget_downloads_label">Endirmələr</string>
@@ -1905,7 +1878,6 @@
     <string name="widget_next">Növbəti trek</string>
     <string name="widget_previous">Əvvəlki trek</string>
     <string name="widget_like">Bəyən</string>
-    <string name="widget_artwork">Albom üz qabığı</string>
     <string name="widget_open_downloads">Endirmələri aç</string>
     <string name="widget_open_history">Tarixçəni aç</string>
     <string name="widget_no_recent">Baxdığınız videolar burada görünəcək</string>
@@ -1921,11 +1893,11 @@
     <string name="ui_navigate">Keç</string>
     <string name="ui_options">Seçimlər</string>
     <string name="ui_selected">Seçilib</string>
-    <string name="ui_flow_logo">Chorplay loqosu</string>
+    <string name="ui_chorplay_logo">Chorplay loqosu</string>
     <string name="ui_list_view">Siyahı görünüşü</string>
     <string name="ui_grid_view">Tor görünüşü</string>
     <string name="ui_back">Geri</string>
-    <string name="ui_add_songs">Mahnı əlavə et</string>
+
     <string name="ui_close_search">Axtarışı bağla</string>
     <string name="ui_save_to_library">Kitabxanada yadda saxla</string>
     <string name="ui_remove_from_library">Kitabxanadan sil</string>
@@ -1934,9 +1906,9 @@
     <string name="ui_added">Əlavə edildi</string>
     <string name="ui_sync_lyrics">Mahnı sözlərini sinxronlaşdır</string>
     <string name="ui_downloading_playlist">Pleylist endirilir</string>
-    <string name="ui_no_songs_found">Mahnı tapılmadı</string>
-    <string name="ui_search_songs_to_add">Əlavə ediləcək mahnıları axtar…</string>
-    <string name="ui_add_songs_to_playlist">Pleylistə mahnı əlavə et</string>
+
+
+
     <string name="ui_show_less">Daha az göstər</string>
     <string name="ui_show_more">Daha çox göstər</string>
     <string name="ui_try_sabr_download">SABR endirməsini sına</string>
@@ -1982,7 +1954,7 @@
     <string name="toast_failed_to_add_track">Treki əlavə etmək mümkün olmadı</string>
     <string name="toast_removed_from_playlist">Pleylistdən silindi</string>
     <string name="toast_failed_to_remove_track">Treki silmək mümkün olmadı</string>
-    <string name="toast_saved_playlist_to_music_library">Pleylist musiqi kitabxananızda yadda saxlanıldı</string>
+
     <string name="toast_failed_to_save_playlist">Pleylisti yadda saxlamaq mümkün olmadı</string>
     <string name="toast_removed_playlist_from_library">Pleylist kitabxanadan silindi</string>
     <string name="toast_failed_to_merge_playlist">Pleylisti birləşdirmək mümkün olmadı</string>
@@ -2002,8 +1974,7 @@
     <string name="notification_channel_downloads_description">Endirmə irəliləyişini və tamamlanmanı göstərir</string>
     <string name="notification_channel_new_videos_description">Abunə olduğunuz kanallar yeni video yükləyəndə bildiriş verir</string>
     <string name="notification_channel_video_playback_description">Video oxutma idarəetmələri</string>
-    <string name="notification_channel_music_playback_description">Musiqi oxutma idarəetmələri</string>
-    <string name="notification_download_progress_description">Video və audio endirmə irəliləyişi</string>
+<string name="notification_download_progress_description">Video və audio endirmə irəliləyişi</string>
     <string name="notification_channel_general_description">Ümumi tətbiq bildirişləri</string>
     <string name="notification_channel_break_reminders_description">Yuxu vaxtı və fasilə xatırlatmaları</string>
     <string name="notification_channel_updates_description">Tətbiq yeniləmə bildirişləri</string>
@@ -2011,8 +1982,7 @@
     <string name="notification_channel_downloads">Endirmələr</string>
     <string name="notification_channel_new_videos">Yeni videolar</string>
     <string name="notification_channel_video_playback">Video oxutma</string>
-    <string name="notification_channel_music_playback">Musiqi oxutma</string>
-    <string name="notification_channel_general">Ümumi</string>
+<string name="notification_channel_general">Ümumi</string>
     <string name="notification_channel_reminders">Xatırlatmalar</string>
     <string name="notification_channel_updates">Tətbiq yeniləmələri</string>
     <string name="notification_channel_imports">Məlumat idxalı</string>
@@ -2072,7 +2042,6 @@
     <string name="fallback_unknown_channel">Naməlum kanal</string>
     <string name="fallback_unknown_playlist">Naməlum pleylist</string>
     <string name="fallback_unknown_artist">Naməlum ifaçı</string>
-    <string name="fallback_unknown_album">Naməlum albom</string>
     <string name="fallback_unknown_video">Naməlum video</string>
     <string name="fallback_local_video">Yerli video</string>
     <string name="fallback_local_audio">Yerli audio</string>

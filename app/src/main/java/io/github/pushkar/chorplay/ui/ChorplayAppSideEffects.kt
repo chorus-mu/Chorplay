@@ -12,11 +12,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavHostController
 import io.github.pushkar.chorplay.data.subscriptions.refreshSubscriptionsAtStartup
 import io.github.pushkar.chorplay.player.DeepChorplayManager
-import io.github.pushkar.chorplay.player.EnhancedMusicPlayerManager
 import io.github.pushkar.chorplay.player.SleepTimerManager
-import io.github.pushkar.chorplay.service.MusicServiceState
 import io.github.pushkar.chorplay.ui.components.layout.navigation.ChorplayTab
-import io.github.pushkar.chorplay.ui.screens.music.sharedMusicPlayerViewModel
 import kotlinx.coroutines.flow.collectLatest
 
 /** App-wide effects with no UI of their own: preference propagation and the global snackbar feeds. */
@@ -27,10 +24,6 @@ internal fun ChorplayAppSideEffects(
     subscriptionRefreshOnStartup: Boolean,
 ) {
     val context = LocalContext.current
-
-    // Music the system media controls resumed plays before any music screen exists; the player
-    // manager starts with its ViewModel, so start it now for the mini player and queue to show.
-    if (remember { MusicServiceState.isRunning }) sharedMusicPlayerViewModel()
 
     LaunchedEffect(sleepTimerCloseAppOnExpiry) {
         SleepTimerManager.updatePreferredCloseAppOnExpiry(sleepTimerCloseAppOnExpiry)
@@ -51,16 +44,6 @@ internal fun ChorplayAppSideEffects(
             )
         }
     }
-
-    LaunchedEffect(snackbarHostState) {
-        EnhancedMusicPlayerManager.playbackWarnings.collectLatest { message ->
-            snackbarHostState.currentSnackbarData?.dismiss()
-            snackbarHostState.showSnackbar(
-                message = message,
-                duration = SnackbarDuration.Long,
-            )
-        }
-    }
 }
 
 /** Detail screens keep the tab they were opened from, so this holds the last tab root navigated to. */
@@ -71,14 +54,14 @@ internal fun rememberSelectedChorplayTab(
 ): State<ChorplayTab> {
     val selectedTab = remember { mutableStateOf(defaultTab) }
     LaunchedEffect(navController) {
-        navController.currentBackStackEntryFlow.collect { entry -> entry.flowTab()?.let { selectedTab.value = it } }
+        navController.currentBackStackEntryFlow.collect { entry -> entry.chorTab()?.let { selectedTab.value = it } }
     }
     return selectedTab
 }
 
 /** Follows a changed default tab, and leaves Home for the default tab once the user hides Home. */
 @Composable
-internal fun FlowStartTabEffects(
+internal fun ChorStartTabEffects(
     navController: NavHostController,
     currentRoute: MutableState<String>,
     defaultTab: ChorplayTab,

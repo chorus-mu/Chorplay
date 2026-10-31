@@ -3,7 +3,7 @@
     <string name="app_name">Chorplay</string>
     <string name="subscribers_count_template">%1$s subskrybentów</string>
     <string name="error_yt_music_premium_hint">Ten utwór jest dostępny tylko dla subskrybentów YouTube Music Premium.</string>
-    <string name="support_flow_dev_desc">Jeśli uważasz, że Chorplay jest przydatny i chcesz wesprzeć jego rozwój, możesz wesprzeć go na Patreonie lub przekazać darowiznę za pośrednictwem poniższych adresów. Twoje wsparcie pomoże utrzymać projekt przy życiu!</string>
+    <string name="support_chorplay_dev_desc">Jeśli uważasz, że Chorplay jest przydatny i chcesz wesprzeć jego rozwój, możesz wesprzeć go na Patreonie lub przekazać darowiznę za pośrednictwem poniższych adresów. Twoje wsparcie pomoże utrzymać projekt przy życiu!</string>
     <string name="subscriptions_search_placeholder">Wyszukaj subskrypcje ...</string>
     <string name="top_bar_subscriptions_title">Subskrypcje</string>
     <string name="subscribed">Zasubskrybowano</string>
@@ -16,13 +16,12 @@
     <string name="library_section_header">Twoje Treści</string>
     <string name="library_history_label">Historia</string>
     <string name="library_playlists_label">Playlisty</string>
-    <string name="library_music_playlists_subtitle">Twoja kolekcja muzyki</string>
+
     <string name="library_liked_videos_label">Polubione treści</string>
     <string name="library_saved_shorts_label">Zapisane Shorts</string>
     <string name="library_watch_later_label">Obejrzyj później</string>
     <string name="library_downloads_label">Pobrania</string>
     <string name="cancel">Anuluj</string>
-    <string name="share_song">Udostępnij piosenkę</string>
     <string name="share">Udostępnij</string>
     <string name="download">Pobierz</string>
     <string name="save">Zapisz</string>
@@ -34,7 +33,7 @@
     <string name="retry">Ponów</string>
     <string name="subscribers">Subskrybenci</string>
     <string name="stats">Statystyki</string>
-    <string name="library_music_playlists_label">Playlisty Muzyczne</string>
+
     <string name="library_settings_data_header"><![CDATA[Ustawienia i Dane]]></string>
     <string name="library_manage_data_label">Zarządzaj Danymi</string>
     <string name="library_manage_data_subtitle">Wyczyść cache i historię</string>
@@ -55,14 +54,14 @@
     <string name="history_tab_videos">Filmy</string>
     <string name="history_tab_shorts">Shorts</string>
     <string name="liked">Polubione</string>
-    <string name="liked_music">Polubiona Muzyka</string>
+
     <string name="liked_videos">Polubione Filmy</string>
     <string name="empty_liked">Brak Polubionych Treści</string>
     <string name="empty_liked_body">Tu pojawią się twoje polubione treści</string>
     <string name="empty_liked_videos">Brak polubionych filmów</string>
-    <string name="empty_liked_music">Brak polubionej muzyki</string>
-    <string name="empty_liked_music_body">Utwory które polubisz pojawią się tutaj</string>
-    <string name="song">Utwór</string>
+
+
+
     <string name="video">Film</string>
     <string name="downloaded">Pobrane</string>
     <string name="download_all">Pobierz wszystko</string>
@@ -88,7 +87,6 @@
     <string name="remove">Usuń</string>
     <string name="related_content">Polecana Zawartość</string>
     <string name="no_related_content">Nie znaleziono polecanej zawartości</string>
-    <string name="share_message_template">Sprawdź ten utwór: %1$s od artysty %2$s\nhttps://music.youtube.com/watch?v=%3$s</string>
     <string name="hz">Hz</string>
     <string name="kbps">kbps</string>
     <string name="filter_discover">Odkrywaj</string>
@@ -114,7 +112,7 @@
     <string name="video_marked_not_interested">Film oznaczony jako nieinteresujący</string>
     <string name="play_mode_suggestion_body">Ten film jest krótszy niż 2 minuty. Czy chcesz przejść do trybu odtwarzania Shorts?</string>
     <string name="shorts_player">Odtwarzacz Shorts</string>
-    <string name="music_player">Odtwarzacz Muzyki</string>
+
     <plurals name="channels_count">
         <item quantity="one">%d kanał</item>
         <item quantity="few">%d kanały</item>
@@ -122,8 +120,7 @@
         <item quantity="other">%d kanałów</item>
     </plurals>
     <string name="tab_videos">Filmy</string>
-    <string name="tab_music">Muzyka</string>
-    <string name="empty_offline_title">Offline %1$s</string>
+<string name="empty_offline_title">Offline %1$s</string>
     <string name="action_delete">Usuń</string>
     <string name="downloads_title">Pobrane</string>
     <string name="download_deleted">Pobranie usunięte</string>
@@ -172,11 +169,11 @@
     <string name="copied_to_clipboard">Skopiowano %1$s</string>
     <string name="unknown">Nieznany</string>
     <string name="subscriptions_video_section_title">Subskrypcje filmów</string>
-    <string name="subscriptions_music_section_title">Subskrybcje muzyki</string>
+
     <string name="subscriptions_quick_access_title">Szybki dostęp</string>
     <string name="subscriptions_compact_header">Przejdź do najnowszych subskrybowanych kanałów.</string>
-    <string name="subscriptions_music_chip_label">Muzyka</string>
-    <string name="subscriptions_music_badge_cd">Subskrybcje muzyki</string>
+
+
     <string name="no_subscriptions_found">Nie znaleziono subskrypcji</string>
     <string name="comments">Komentarze</string>
     <string name="filter_newest">Najnowsze</string>
@@ -193,11 +190,11 @@
     <string name="new_update_available">Dostępna jest aktualizacja</string>
     <string name="update_available_template">%1$s jest już dostępny</string>
     <string name="release_notes">DZIENNIK ZMIAN</string>
-    <string name="update_flow">Zaktualizuj Chorplay</string>
+    <string name="update_chorplay">Zaktualizuj Chorplay</string>
     <string name="maybe_later">Może później</string>
     <string name="nav_home">Główna</string>
     <string name="nav_shorts">Shorts</string>
-    <string name="nav_music">Muzyka</string>
+
     <string name="nav_subs">Subskrypcje</string>
     <string name="nav_library">Biblioteka</string>
     <string name="notifications">Powiadomienia</string>
@@ -227,7 +224,6 @@
     <string name="empty_offline_body">%1$s do odtwarzania offline pojawią się w tym miejscu.\nCiesz się ulubioną rozrywką nawet bez dostępu do sieci.</string>
     <string name="action_go_to_home">Powróć do Głównej</string>
     <string name="save_to">Zapisz do...</string>
-    <string name="play_next_desc">Dodaj na początek kolejki</string>
     <string name="add_to_queue">Dodaj do kolejki</string>
     <string name="add_to_queue_desc">Dodaj na koniec kolejki</string>
     <string name="similar_content">Podobna Zawartość</string>
@@ -240,8 +236,6 @@
     <string name="audio_effects">Efekty Dźwiękowe</string>
     <string name="more_header">Więcej</string>
     <string name="view_artist">Zobacz Artystę</string>
-    <string name="view_album">Zobacz Album</string>
-    <string name="album_art">Okładka albumu</string>
     <string name="close_player">Zamknij odtwarzacz</string>
     <string name="views_template">%1$s wyświetleń</string>
     <string name="chapters">Sekcje</string>
@@ -316,7 +310,7 @@
     <string name="channel_search_close">Zamknij wyszukiwanie</string>
     <string name="channel_search_no_results">Brak wyników dla %1$s</string>
     <string name="remove_from_history">Usuń z historii</string>
-    <string name="share_song_chooser">Udostępnuj utwór</string>
+
     <string name="time_today">Dzisiaj</string>
     <string name="time_yesterday">Wczoraj</string>
     <string name="time_earlier">Wcześniej</string>
@@ -326,33 +320,33 @@
     <string name="peace_and_quiet">Spokój i cisza</string>
     <string name="notifications_empty_body">Jesteś na bieżąco! Nowe aktualizacje od Twoich subskrypcji pojawią się tutaj.</string>
     <string name="settings_title">Ustawienia</string>
-    <string name="settings_flow_engine_header">Silnik Chorplay</string>
+    <string name="settings_chor_engine_header">Silnik Chorplay</string>
     <string name="settings_active_learning">AKTYWNA NAUKA</string>
     <string name="settings_reset_brain_title">Zresetować Osobowość Chorplay?</string>
     <string name="settings_reset_brain_body">To całkowicie usunie Twój profil zainteresowań \'Mózg Chorplay\'\n\n• Wszystkie nauczone tematy zostaną zapomniane.\n• Cechy osobowości zresetują się do neutralnych.\n• Rekomendacje powrócą do domyślnych.\n\nTa akcja nie może zostać cofnięta.</string>
     <string name="settings_reset_everything">Zresetuj Wszystko</string>
     <string name="settings_analyzing_interactions">Analizowanie Twoich interakcji...</string>
     <string name="settings_view_analytics">Zobacz Statystyki</string>
-    <string name="deep_flow_mode_title">Tryb Deep Chorplay</string>
-    <string name="deep_flow_mode_subtitle">Wstrzymaj naukę — przeglądaj treści bez wpływu na swój profil rekomendacji</string>
-    <string name="deep_flow_learning_paused">ZATRZYMANO NAUKĘ</string>
-    <string name="deep_flow_expires_in">Wygasa za %s</string>
-    <string name="deep_flow_expire_duration_title">Automatycznie wyłącz po</string>
-    <string name="deep_flow_expire_duration_subtitle">Nauka silnika wznowi się za %s</string>
-    <string name="deep_flow_dialog_title">Długość Zatrzymania</string>
-    <string name="deep_flow_dialog_body">Na jak długo nauka powinna zostać zatrzymana?</string>
-    <string name="deep_flow_enabled_message">Tryb Deep Chorplay włączony</string>
-    <string name="deep_flow_disabled_message">Tryb Deep Chorplay wyłączony</string>
-    <string name="deep_flow_expired_message">Czasomierz trybu Deep Chorplay zakończył się</string>
-    <string name="deep_flow_active_until_disabled">Deep Chorplay pozostanie aktywny dopóki go nie wyłączysz</string>
-    <string name="deep_flow_duration_never">Nieokreślony czas</string>
-    <string name="deep_flow_duration_1h">1 godzinę</string>
-    <string name="deep_flow_duration_2h">2 godziny</string>
-    <string name="deep_flow_duration_4h">4 godziny</string>
-    <string name="deep_flow_duration_6h">6 godzin</string>
-    <string name="deep_flow_duration_8h">8 godzin</string>
-    <string name="deep_flow_duration_12h">12 godzin</string>
-    <string name="deep_flow_duration_24h">24 godziny</string>
+    <string name="deep_chor_mode_title">Tryb Deep Chorplay</string>
+    <string name="deep_chor_mode_subtitle">Wstrzymaj naukę — przeglądaj treści bez wpływu na swój profil rekomendacji</string>
+    <string name="deep_chor_learning_paused">ZATRZYMANO NAUKĘ</string>
+    <string name="deep_chor_expires_in">Wygasa za %s</string>
+    <string name="deep_chor_expire_duration_title">Automatycznie wyłącz po</string>
+    <string name="deep_chor_expire_duration_subtitle">Nauka silnika wznowi się za %s</string>
+    <string name="deep_chor_dialog_title">Długość Zatrzymania</string>
+    <string name="deep_chor_dialog_body">Na jak długo nauka powinna zostać zatrzymana?</string>
+    <string name="deep_chor_enabled_message">Tryb Deep Chorplay włączony</string>
+    <string name="deep_chor_disabled_message">Tryb Deep Chorplay wyłączony</string>
+    <string name="deep_chor_expired_message">Czasomierz trybu Deep Chorplay zakończył się</string>
+    <string name="deep_chor_active_until_disabled">Deep Chorplay pozostanie aktywny dopóki go nie wyłączysz</string>
+    <string name="deep_chor_duration_never">Nieokreślony czas</string>
+    <string name="deep_chor_duration_1h">1 godzinę</string>
+    <string name="deep_chor_duration_2h">2 godziny</string>
+    <string name="deep_chor_duration_4h">4 godziny</string>
+    <string name="deep_chor_duration_6h">6 godzin</string>
+    <string name="deep_chor_duration_8h">8 godzin</string>
+    <string name="deep_chor_duration_12h">12 godzin</string>
+    <string name="deep_chor_duration_24h">24 godziny</string>
     <string name="settings_header_appearance">Wygląd</string>
     <string name="settings_header_content_playback">Zawartość i Odtwarzanie</string>
     <string name="settings_header_data_management">Zarządzanie Danymi</string>
@@ -462,8 +456,8 @@
     <string name="app_icon_picker_subtitle">Wybierz styl ikony aplikacji. Po zmianie aplikacja uruchomi się ponownie.</string>
     <string name="app_icon_picker_warning">Uwaga: Zmiana ikony wykorzystuje mechanizm systemu Android, który może tymczasowo usunąć skrót z ekranu głównego. Jeśli tak się stanie, wystarczy dodać go ponownie z listy aplikacji.</string>
     <string name="app_icon_apply_toast">Ikona zaktualizowana - aplikacja się włączy ponownie</string>
-    <string name="icon_name_flow_red">Chorplay Czerwony</string>
-    <string name="icon_name_flow_light">Chorplay Jasny</string>
+    <string name="icon_name_chorplay_red">Chorplay Czerwony</string>
+    <string name="icon_name_chorplay_light">Chorplay Jasny</string>
     <string name="icon_name_amoled">Czarny AMOLED</string>
     <string name="icon_name_monochrome">Monochromatyczny</string>
     <string name="icon_name_ghost">Duch</string>
@@ -474,7 +468,6 @@
     <string name="player_appearance_header">Dostosuj Przyciski Odtwarzacza</string>
     <string name="player_appearance_style_title">Styl Paska Postępu Muzyki</string>
     <string name="player_appearance_style_subtitle">Wybierz styl wizualny paska przewijania</string>
-    <string name="player_background_style_title">Tło Odtwarzacza Muzyki</string>
     <string name="player_background_style_blur_gradient">Rozmycie + Gradient</string>
     <string name="player_background_style_blur">Rozmyta Okładka</string>
     <string name="player_background_style_gradient">Paleta Gradientu</string>
@@ -516,8 +509,8 @@
     <string name="player_fullscreen_seekbar_width_full">Pełna szerokość</string>
     <string name="player_fullscreen_seekbar_width_default">Domyślna</string>
     <string name="player_fullscreen_seekbar_width_custom">Własna</string>
-    <string name="lyrics_provider_title">Dostawca Tekstów Piosenek</string>
-    <string name="lyrics_provider_subtitle">Ustaw swoje preferowane źródło tekstu utworów</string>
+
+
     <string name="lyrics_provider_lrclib">LrcLib</string>
     <string name="lyrics_provider_better_lyrics">Better Lyrics</string>
     <string name="lyrics_provider_simpmusic">SimpMusic</string>
@@ -618,7 +611,6 @@
     <string name="content_settings_grid_small_title">Małe</string>
     <string name="content_settings_grid_small_desc">Widok kompaktowy</string>
     <string name="content_settings_header_preview">Podgląd</string>
-    <string name="content_settings_preview_album_art">Podgląd Okładki Albumu</string>
     <string name="content_settings_dynamic_components">Dynamiczne Komponenty</string>
     <string name="settings_show_related_videos_title">Pokaż polecane filmy</string>
     <string name="settings_show_related_videos_subtitle">Wyświetl polecane filmy pod odtwarzaczem</string>
@@ -652,12 +644,12 @@
     <string name="proxy_type_socks5">SOCKS5</string>
     <string name="player_settings_background_play">Odtwarzanie w Tle</string>
     <string name="import_data_title">Import Danych</string>
-    <string name="import_flow_backup_success">Kopia zapasowa Chorplay importowana pomyślnie</string>
-    <string name="import_flow_backup_failed_template">Importowanie kopii zapasowej Chorplay nie powiodło się: %1$s</string>
+    <string name="import_chorplay_backup_success">Kopia zapasowa Chorplay importowana pomyślnie</string>
+    <string name="import_chorplay_backup_failed_template">Importowanie kopii zapasowej Chorplay nie powiodło się: %1$s</string>
     <string name="import_newpipe_failed_template">Importowanie kopii zapasowej NewPipe nie powiodło się: %1$s</string>
     <string name="import_youtube_failed_template">Importowanie kopii zapasowej Youtube nie powiodło się: %1$s</string>
-    <string name="import_flow_backup_item_title">Importuj Kopię Zapasową Chorplay</string>
-    <string name="import_flow_backup_desc">Przywróć swoją historię, ustawienia i subskrypcje z pliku kopii zapasowej Chorplay.</string>
+    <string name="import_chorplay_backup_item_title">Importuj Kopię Zapasową Chorplay</string>
+    <string name="import_chorplay_backup_desc">Przywróć swoją historię, ustawienia i subskrypcje z pliku kopii zapasowej Chorplay.</string>
     <string name="import_from_newpipe">Importuj z NewPipe</string>
     <string name="import_from_newpipe_desc">Zaimportuj subskrypcje z pliku eksportu NewPipe (.json).</string>
     <string name="import_from_libretube">Importuj z LibreTube</string>
@@ -670,10 +662,10 @@
     <string name="import_libretube_playlists_desc">Zaimportuj playlisty z pliku kopii zapasowej LibreTube (.json).</string>
     <string name="import_yt_takeout_all">Importuj z Google Takeout</string>
     <string name="import_yt_takeout_all_desc">Zaimportuj swoje subskrypcje, historię oglądania i playlisty jednocześnie z pliku Google Takeout (.zip).</string>
-    <string name="import_music_apps_section_title">Aplikacje Muzyczne</string>
-    <string name="import_music_apps_section_subtitle">Importuj swoją bibliotekę muzyczną z innych odtwarzaczy</string>
-    <string name="import_from_metrolist">Importuj z Metrolist</string>
-    <string name="import_from_metrolist_desc">Zaimportuj playlisty muzyczne z pliku kopii zapasowej Metrolist (.zip). Playlisty pojawią się w twojej Bibliotece Muzycznej.</string>
+
+
+
+
     <string name="import_from_youtube">Importuj z Youtube</string>
     <string name="import_from_youtube_desc">Zaimportuj subskrybpcje z Youtube Takeout (.csv).</string>
     <string name="import_subscriptions_section_title">Subskrypcje</string>
@@ -695,13 +687,13 @@
     <string name="total_space_template">Łącznie: %1$s</string>
     <string name="location_label">Lokalizacja</string>
     <string name="video_download_location_label">Lokalizacja pobranych filmów</string>
-    <string name="music_download_location_label">Lokalizacja pobranej muzyki</string>
+
     <string name="internal_app_storage_label">Wewnętrzna Pamięć Aplikacji</string>
     <string name="preferences_header">Preferencje</string>
     <string name="default_video_quality_label">Domyślna Jakość Filmów</string>
     <string name="support_donations_title">Wsparcie i Wpłaty</string>
-    <string name="support_flow_dev_title">Wesprzyj Rozwój Chorplay</string>
-    <string name="support_flow_patreon">Wesprzyj Chorplay na Patreonie</string>
+    <string name="support_chorplay_dev_title">Wesprzyj Rozwój Chorplay</string>
+    <string name="support_chorplay_patreon">Wesprzyj Chorplay na Patreonie</string>
     <string name="thank_you_support_message">Dziękuję za wsparcie! ❤️</string>
     <string name="address_copied_toast">Adres skopiowany do schowka</string>
     <string name="donation_address_clip_label">Adres Wpłat</string>
@@ -717,7 +709,7 @@
     <string name="newpipe_extractor_title">Ekstraktor NewPipe</string>
     <string name="about_license">Licencja</string>
     <string name="about_changelog">Dziennik zmian</string>
-    <string name="whats_new_in_flow">Co nowego w Chorplay</string>
+    <string name="whats_new_in_chorplay">Co nowego w Chorplay</string>
     <string name="about_device_info">Informacje o urządzeniu</string>
     <string name="gnu_license_full_title">GNU General Public License</string>
     <string name="loading_ellipsis">Ładowanie...</string>
@@ -732,11 +724,9 @@
     <string name="android_sdk_label">SDK Androida: %1$s</string>
     <string name="os_label">System: Android %1$s</string>
     <string name="recognition_clear_history">Wyczyścić historię?</string>
-    <string name="recognition_clear_history_body">Spowoduje to usunięcie wszystkich rozpoznanych utworów. Czynności tej nie można cofnąć.</string>
     <string name="datetime_sample_relative">7 miesięcy temu</string>
     <string name="settings_item_content_display">Wyświetlanie Treści</string>
     <string name="content_settings_grid_size_title">Rozmiar elementów siatki</string>
-    <string name="content_settings_grid_size_subtitle">Ustaw rozmiar okładek albumów i kart treści</string>
     <string name="content_settings_grid_big_desc">Większe miniatury</string>
     <string name="download_menu_style_title">Styl menu pobierania</string>
     <string name="download_menu_style_classic">Klasyczny</string>
@@ -767,8 +757,8 @@
     <string name="content_settings_video_card_mark_watched_subtitle">Wyświetlaj przycisk „Oka” na miniaturach filmów w trybie pełnym i kompaktowym, które umożliwia szybkie oznaczanie filmów jako obejrzane</string>
     <string name="settings_shorts_nav_tab_title">Karta Shorts w pasku nawigacyjnym</string>
     <string name="settings_shorts_nav_tab_subtitle">Wyświetl kartę Shorts na dolnym pasku nawigacyjnym.</string>
-    <string name="settings_music_nav_tab_title">Karta Muzyka w pasku nawigacyjnym</string>
-    <string name="settings_music_nav_tab_subtitle">Wyświetl kartę „Muzyka” na dolnym pasku nawigacyjnym.</string>
+
+
     <string name="settings_search_nav_tab_title">Karta Wyszukaj w pasku nawigacyjnym</string>
     <string name="settings_search_nav_tab_subtitle">Wyświetl kartę „Wyszukaj” na dolnym pasku nawigacyjnym.</string>
     <string name="content_settings_subs_startup_refresh_title">Odświeżaj subskrypcje przy uruchomieniu</string>
@@ -811,7 +801,7 @@
     <string name="settings_item_datetime_subtitle">Dostosuj sposób wyświetlania dat dodania filmów</string>
     <string name="persona_explorer_title">Eksploracja</string>
     <string name="persona_explorer_description">Chaotyczna i piękna. Po trochu wszystkiego.</string>
-    <string name="flow_control_center">Centrum Kontroli Chorplay</string>
+    <string name="chorplay_control_center">Centrum Kontroli Chorplay</string>
     <string name="player_settings_overlay_cast">Przycisk Przesyłania</string>
     <string name="player_settings_overlay_cast_subtitle">Pokaż przycisk przesyłania na nakładce odtwarzacza wideo</string>
     <string name="player_settings_overlay_cc">Przycisk Napisów</string>
@@ -917,13 +907,13 @@
     <string name="video_quality_warning">Wyższa jakość wymaga większej ilości danych</string>
     <string name="video_quality_wifi_header">Jakość Filmów w Sieci Wi-Fi</string>
     <string name="video_quality_cellular_header">Jakość Filmów w Sieci Komórkowej</string>
-    <string name="music_quality_header">Jakość Muzyki</string>
+
     <string name="shorts_quality_wifi_header">Jakość Shorts w Sieci Wi-Fi</string>
     <string name="shorts_quality_cellular_header">Jakość Shorts w Sieci Komórkowej</string>
-    <string name="music_quality_auto">Automatyczna</string>
-    <string name="music_quality_high">Wysoka</string>
-    <string name="music_quality_medium">Średnia</string>
-    <string name="music_quality_low">Niska</string>
+
+
+
+
     <string name="quality_144p">144p</string>
     <string name="quality_240p">240p</string>
     <string name="quality_360p">360p</string>
@@ -1069,7 +1059,7 @@
     <string name="sleep_timer_custom_label">Czas niestandardowy</string>
     <string name="sleep_timer_unit">min</string>
     <string name="sleep_timer_input_error">Wprowadź wartość z przedziału od 1 do 1440</string>
-    <string name="sleep_timer_end_of_song">Zakończ odtwarzanie filmu / piosenki</string>
+    <string name="sleep_timer_end_of_video">Zakończ odtwarzanie filmu / piosenki</string>
     <string name="sleep_timer_start">Rozpocznij</string>
     <string name="sleep_timer_stops_in">Wyłączy się za:</string>
     <string name="sleep_timer_end_of_media">Zakończ odtwarzanie obecnego utworu</string>
@@ -1084,13 +1074,10 @@
     <string name="merge_playlist_dialog_title">Dodaj wszystkie utwory do…</string>
     <string name="section_from_the_community">Utworzone przez społeczność</string>
     <string name="section_mixed_for_you">Zmiksowane dla Ciebie</string>
-    <string name="section_top_albums">Najpopularniejsze Albumy</string>
     <string name="section_new_releases">Nowości</string>
     <string name="daily_discover_similar_to">Podobnie do %1$s</string>
     <string name="section_daily_discover">Twoje Codzienne Odkrycia</string>
     <string name="daily_discover_subtitle">Najnowsze propozycje na podstawie Twoich odtworzeń</string>
-    <string name="import_yt_music_playlist">Importuj Playlistę z YouTube Music</string>
-    <string name="import_yt_music_playlist_desc">Zaimportuj playlisty z pliku YouTube Music Takeout (.csv). Pojawią się one w sekcji Playlisty Muzyczne.</string>
     <string name="auto_backup_title">Automatyczna Kopia Zapasowa</string>
     <string name="auto_backup_screen_title">Automatyczna Kopia Zapasowa</string>
     <string name="auto_backup_notification_channel">Automatyczna Kopia Zapasowa</string>
@@ -1115,7 +1102,7 @@
     <string name="about_title">Informacje</string>
     <string name="player_appearance_shorts_ui_title">Wygląd Odtwarzacza Shorts</string>
     <string name="section_app">Aplikacja</string>
-    <string name="music_playback_warning_generic">Błąd odtwarzania. Spróbuj ponownie lub zmień sieć.</string>
+
     <string name="donate_item_title">Wesprzyj</string>
     <string name="support_dev_subtitle">Wesprzyj rozwój</string>
     <string name="section_contact">Kontakt</string>
@@ -1150,9 +1137,9 @@
     <string name="currently_following">Obecnie Obserwowane</string>
     <string name="add_topics">Dodaj Tematy</string>
     <string name="browse_by_category">Przeglądaj według kategorii</string>
-    <string name="screen_title_music">MUZYKA</string>
-    <string name="section_music_videos">Teledyski</string>
-    <string name="section_music_videos_for_you">Teledyski dla Ciebie</string>
+
+
+
     <string name="blocked_tab">Zablokowane</string>
     <string name="currently_blocked">Obecnie Zablokowane</string>
     <string name="hidden_content_title">Ukryte Treści</string>
@@ -1192,21 +1179,19 @@
     <string name="metric_topics_detail">przypisane tematy</string>
     <string name="history_delete_shorts_title">Usunąć Shorts?</string>
     <string name="history_delete_shorts_body">Spowoduje to usunięcie wszystkich Shorts z historii oglądania. Pozostałe filmy zostaną zachowane.</string>
-    <string name="recognize_music">Rozpoznaj muzykę</string>
+
     <string name="recognition_history">Historia rozpoznawania</string>
-    <string name="tap_to_recognize">Dotknij, aby rozpoznać</string>
+
     <string name="listening">Nasłuchiwanie…</string>
     <string name="processing">Przetwarzanie…</string>
     <string name="no_match_found">Nie znaleziono dopasowania</string>
     <string name="recognition_error">Rozpoznawanie nie powiodło się</string>
     <string name="try_again">Spróbuj ponownie</string>
-    <string name="search_in_flow">Szukaj w Chorplay</string>
-    <string name="recognition_search_history">Przeszukaj rozpoznane utwory</string>
-    <string name="recognition_history_empty">Tutaj pojawią się rozpoznane utwory</string>
+    <string name="search_in_chorplay">Szukaj w Chorplay</string>
     <string name="history_delete_shorts">Usuń Shorts z historii</string>
     <string name="action_retry">Ponów</string>
     <string name="history_tab_local_videos">Filmy z urządzenia</string>
-    <string name="history_tab_local_music">Muzyka z urządzenia</string>
+
     <string name="local_media_grant">Przyznaj dostęp</string>
     <string name="metric_evidence_detail">zweryfikowane tematy</string>
     <string name="interest_weights_subtitle">Najwyżej oceniane tematy po okresie próbnym i weryfikacji danych</string>
@@ -1267,9 +1252,9 @@
     <string name="error_http_forbidden_hint">Transmisja na YouTube niedostępna lub link wygasł. Spróbuj odświeżyć stronę.</string>
     <string name="error_generic">Błąd ładowania wideo</string>
     <string name="error_generic_hint">Wystąpił nieznany błąd. Spróbuj ponownie.</string>
-    <string name="music_playback_warning_forbidden">Brak dostępu do streamu. YouTube może blokować to IP; odśwież stronę lub zmień sieć/VPN.</string>
-    <string name="music_playback_warning_network">Błąd odtwarzania muzyki: problem z siecią. Sprawdź połączenie lub zmień sieć.</string>
-    <string name="music_playback_warning_final">Błąd ładowania utworu mimo wielu prób. Jeśli problem z odtwarzaniem nadal występuje, zmień sieć lub użyj VPN.</string>
+
+
+
     <string name="error_playback_failed_hint">Wystąpił nieoczekiwany błąd odtwarzacza. Spróbuj ponownie.</string>
     <string name="sync_devices_title">Synchronizacja urządzeń</string>
     <string name="sync_devices_subtitle">Synchronizuj bibliotekę, historie i profil przez lokalną sieć Wi-Fi</string>
@@ -1295,16 +1280,16 @@
     <string name="sync_show_qr_here">Wyświetl tutaj kod QR</string>
     <string name="quick_actions_error_template">Błąd: %1$s</string>
     <string name="not_interested_toast">Rozumiem! Będziesz widzieć mniej tego typu treści.</string>
-    <string name="deep_flow_save_history_subtitle">Zapisuj historię i postęp oglądania bez wpływu na naukę silnika AI. Wyłączone = brak zapisu.</string>
-    <string name="deep_flow_save_history_title">Zapisz w historii oglądania</string>
+    <string name="deep_chor_save_history_subtitle">Zapisuj historię i postęp oglądania bez wpływu na naukę silnika AI. Wyłączone = brak zapisu.</string>
+    <string name="deep_chor_save_history_title">Zapisz w historii oglądania</string>
     <string name="download_menu_style_subtitle">Zmień wygląd i układ okna pobierania</string>
     <string name="content_settings_header_home_feed">Strona Główna</string>
     <string name="content_settings_home_feed_title">Włącz Stronę Główną</string>
     <string name="content_settings_home_feed_disabled_title">Wyłączono Stronę Główną</string>
     <string name="content_settings_home_reselect_refresh_title">Odświeżanie po kliknięciu Strony głównej</string>
     <string name="content_settings_home_reselect_refresh_subtitle">Ponowne kliknięcie przycisku Strony głównej odświeży polecane filmy</string>
-    <string name="content_settings_restored_music_mini_player_title">Automatyczne wznawianie miniodtwarzacza</string>
-    <string name="content_settings_restored_music_mini_player_subtitle">Wznawia i wyświetla ostatnio odtwarzany utwór zaraz po przywróceniu</string>
+
+
     <string name="content_settings_hide_watched_home_title">Ukryj Obejrzane Filmy ze Stronie Głównej</string>
     <string name="content_settings_hide_watched_home_subtitle">Filtruj i ukrywaj obejrzane filmy ze Strony głównej</string>
     <string name="content_settings_hide_watched_subscriptions_title">Ukryj Obejrzane Filmy ze Strony Subskrypcji</string>
@@ -1372,7 +1357,6 @@
     <string name="player_settings_autoplay_countdown_title">Opóźnienie autoodtwarzania</string>
     <string name="player_settings_autoplay_countdown_none">Żadne (przełącz od razu)</string>
     <string name="player_settings_autoplay_countdown_dialog_body">Wyświetlaj odliczanie przed autoodtwarzaniem kolejnego filmu. W tym czasie możesz uruchomić film od nowa, anulować przejście lub natychmiast włączyć następny.</string>
-    <string name="search_empty_prompt">Wyszukuj filmy, muzykę i więcej</string>
     <string name="search_filter_all">Wszystko</string>
     <string name="play_next_video">Odtwórz jako Następny</string>
     <string name="play_next_video_desc">Dodaj na początek kolejki odtwarzania</string>
@@ -1391,8 +1375,7 @@
     <string name="link_with_timestamp_copied">Skopiowano link z sygnaturą czasową</string>
     <string name="dlna_cast_to_device">Prześlij na Urządzenie</string>
     <string name="dlna_searching">Wyszukiwanie urządzeń DLNA...</string>
-    <string name="voice_search_prompt">Mów, aby wyszukać muzykę</string>
-    <string name="search_music_placeholder">Wyszukaj muzykę</string>
+
     <string name="section_popular_artists">Popularni artyści</string>
     <string name="playlist_sort_most_popular">Najpopularniejsze</string>
     <string name="section_mood_and_genres">Nastrój i Gatunki</string>
@@ -1418,8 +1401,8 @@
     <string name="player_portrait_seekbar_width_title">Szerokość Paska Postępu</string>
     <string name="player_portrait_seekbar_width_spaced">Zwężona</string>
     <string name="player_fullscreen_seekbar_width_subtitle">Margines %1$d dp po obu stronach</string>
-    <string name="player_appearance_hide_music_artwork_title">Ukryj Okładki Utworów</string>
-    <string name="player_appearance_hide_music_artwork_subtitle">Wyświetl ikonę aplikacji na tle wygenerowanym z koloru okładki</string>
+
+
     <string name="player_fullscreen_seekbar_width_value">%1$d dp</string>
     <string name="shorts_player_ui_impressive">Dynamiczny</string>
     <string name="shorts_player_ui_simple">Uproszczony</string>
@@ -1471,26 +1454,26 @@
     <string name="settings_categories_nav_tab_subtitle">Wyświetl kartę „Odkrywaj” w dolnym pasku nawigacyjnym.</string>
     <string name="shorts_auto_scroll_active_template">Auto %1$ds</string>
     <string name="sync_grant_camera">Przyznaj na dostęp do aparatu</string>
-    <string name="discord_presence_title">Integracja z Discordem</string>
-    <string name="discord_presence_off">Wyłączona</string>
-    <string name="discord_presence_enable">Udostępniaj aktywność</string>
-    <string name="discord_presence_enable_description">Utrzymuj połączenie podczas pauzy i odtwarzania w tle</string>
-    <string name="discord_presence_not_connected">Nie połączono</string>
-    <string name="discord_presence_connected">Połączono</string>
-    <string name="discord_presence_description">Wyświetl odtwarzane treści z Chorplay w Twoim statusie Discord.</string>
-    <string name="discord_presence_connection_section">Połączenie</string>
-    <string name="discord_presence_account">Konto Discord</string>
-    <string name="discord_presence_privacy_section">Prywatność i bezpieczeństwo konta</string>
-    <string name="discord_presence_privacy_title">Polityka prywatności</string>
-    <string name="discord_presence_privacy_body">Po włączeniu aplikacja Chorplay udostępnia na Discordzie tytuł, wykonawcę, okładkę oraz czas odtwarzania treści (Shorts, filmy, streamy, muzyka). Domyślnie wyłączone. Token sesji Discord jest szyfrowany w Android Keystore i nie jest zapisywany w logach.</string>
-    <string name="discord_presence_gateway_warning">Chorplay korzysta z nieoficjalnego połączenia self-bot przez token konta, a nie OAuth. Narusza to Regulamin Discorda i grozi zawieszeniem lub usunięciem konta. Niezaufane aplikacje mogą też wywołać alerty bezpieczeństwa, reset hasła, CAPTCHA lub wymóg weryfikacji numerem telefonu.</string>
-    <string name="discord_presence_risk_dialog_title">Akceptujesz ryzyko?</string>
-    <string name="discord_presence_risk_dialog_body">Połączenie loguje Cię przez Discorda i przekazuje aplikacji Chorplay token Twojego konta. Chorplay szyfruje go w Android Keystore i wysyła wyłącznie do Discorda, jednak ten nieoficjalny self-bot narusza Regulamin usługi. Discord może zawiesić lub usunąć Twoje konto, wymusić reset hasła, wyświetlić CAPTCHA lub zażądać weryfikacji numerem telefonu.</string>
-    <string name="discord_presence_risk_accept">Rozumiem, połącz</string>
-    <string name="discord_presence_playing_fallback">Odtwarzane w Chorplay</string>
-    <string name="discord_presence_retry">Ponów połączenie</string>
-    <string name="discord_presence_connected_as">Połączono jako %1$s</string>
-    <string name="discord_presence_connected_account">Konto Discord: %1$s</string>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <string name="check_for_updates">Sprawdź Aktualizacje</string>
     <string name="check_for_updates_subtitle">Dotknij, aby sprawdzić najnowszą wersję</string>
     <string name="checking_for_updates">Sprawdzam dostępność aktualizacji…</string>
@@ -1499,7 +1482,6 @@
     <string name="error_timeout_hint">Błąd limitu czasu serwera. Sprawdź połączenie i spróbuj ponownie.</string>
     <string name="error_network_hint">Błąd sieci uniemożliwił załadowanie filmu. Sprawdź połączenie i spróbuj ponownie.</string>
     <string name="error_playback_retry_hint">Spróbuj ponownie później lub sprawdź połączenie z siecią.</string>
-    <string name="empty_music_playlists">Brak playlist muzycznych</string>
     <string name="now_playing">TERAZ ODTWARZANE</string>
     <string name="widget_quick_actions_label">Szybkie akcje</string>
     <string name="widget_quick_actions_description">Wyszukuj w Chorplay i przechodź do pobranych, historii lub rozpoznawania muzyki</string>
@@ -1507,14 +1489,13 @@
     <string name="widget_no_downloads">Twoje pobrane treści pojawią się tutaj</string>
     <string name="add_comment_placeholder">Dodaj komentarz...</string>
     <string name="widget_now_playing_label">Teraz Odtwarzane</string>
-    <string name="widget_now_playing_description">Steruj muzyką odtwarzaną we Chorplay</string>
     <string name="section_recently_played">Ostatnio odtwarzane</string>
     <string name="widget_recently_played_label">Ostatnio odtwarzane</string>
     <string name="widget_recently_played">Ostatnio odtwarzane</string>
     <string name="widget_no_recent">Filmy które obejrzałeś pojawią się tutaj</string>
-    <string name="widget_recognize_label">Rozpoznaj muzykę</string>
-    <string name="widget_recognize_description">Rozpoznaj muzykę w Twoim otoczeniu jednym dotknięciem</string>
-    <string name="flow_is_up_to_date">Brak nowych aktualizacji!</string>
+
+
+    <string name="chorplay_is_up_to_date">Brak nowych aktualizacji!</string>
     <string name="sync_continue">Kontynuuj</string>
     <string name="channel_and_more_template">%1$s i %2$d więcej</string>
     <string name="local_media_empty_title">Nie znaleziono %1$s</string>
@@ -1522,7 +1503,7 @@
     <string name="playlist_video_added_template">Dodano %1$s</string>
     <string name="upcoming_label">Nadchodzące</string>
     <string name="upcoming_video_starts_in">Zaczyna się za</string>
-    <string name="subscriptions_compact_header_with_music">Kanały muzyczne są oznaczone bezpośrednio w tekście, dzięki czemu strumień treści pozostaje kompaktowy.</string>
+
     <string name="filter_top">Top</string>
     <string name="already_downloaded_toast">Już pobrane</string>
     <string name="playlist_visibility_metadata">%1$s • %2$s</string>
@@ -1532,7 +1513,7 @@
     <string name="channel_sort_latest">Najnowsze</string>
     <string name="channel_search_failed">Nie udało się przeszukać tego kanału</string>
     <string name="share_community_post">Udostępnij wpis społeczności</string>
-    <string name="music_history">Historia muzyki</string>
+
     <string name="appearance_customizer_variant_title">%1$s niestandardowy motyw</string>
     <string name="appearance_role_primary_container">Główny Kontener</string>
     <string name="appearance_role_on_primary_container">W Głównym Kontenerze</string>
@@ -1547,7 +1528,7 @@
     <string name="appearance_color_alpha">Alfa</string>
     <string name="appearance_navigate_back">Nawiguj wstecz</string>
     <string name="appearance_selected">Zaznaczono</string>
-    <string name="icon_name_flow_play">Chorplay Play</string>
+    <string name="icon_name_chorplay_play">Chorplay Play</string>
     <string name="shorts_saved">Short został zapisany</string>
     <string name="shorts_unsaved">Short nie został zapisany</string>
     <string name="autoplay_countdown_up_next">Następny</string>
@@ -1638,7 +1619,7 @@
     <string name="playlist_sort_date_published_oldest">Data opublikowania (najstarsze)</string>
     <string name="remove_selected_playlist_text">Zostaną usunięte z listy odtwarzania.</string>
     <string name="remove_selected_watch_later_text">Zostaną usunięte z „Na później”.</string>
-    <string name="welcome_to_flow">Witamy w Chorplay</string>
+    <string name="welcome_to_chorplay">Witamy w Chorplay</string>
     <string name="cd_collapse_category">Zwiń</string>
     <string name="cd_expand_category">Rozwiń</string>
     <string name="action_refresh">Odśwież</string>
@@ -1676,10 +1657,7 @@
     <string name="erase_everything">Wymaż Wszystko</string>
     <string name="empty_bubble_cloud_message">Obejrzyj kilka filmów, aby wzbogacić swoją mgławicę zainteresowań!</string>
     <string name="export_profile_data">Eksportuj Dane Profilu</string>
-    <string name="flow_neural_profile_export_subject">Eksport Neuralnego Profilu Chorplay</string>
-    <string name="screen_title_music_library">Biblioteka muzyczna</string>
-    <string name="subtitle_liked_music">Twoje ulubione utwory</string>
-    <string name="subtitle_history">Utwory których słuchałeś/aś</string>
+    <string name="chorplay_neural_profile_export_subject">Eksport Neuralnego Profilu Chorplay</string>
     <string name="rename_playlist_title">Zmień nazwę listy odtwarzania</string>
     <string name="action_rename">Zmień nazwę</string>
     <string name="share_link_cd">Udostępnij Link</string>
@@ -1704,7 +1682,7 @@
     <string name="action_add_to_favorites">Dodaj do Ulubionych</string>
     <string name="action_listen_now">Posłuchaj Teraz</string>
     <string name="action_play_all">Odtwarzaj wszystko</string>
-    <string name="loading_music">Ładowanie muzyki...</string>
+
     <string name="section_listen_again">Posłuchaj ponownie</string>
     <string name="daily_discover_sounds_like">Brzmi jak %1$s</string>
     <string name="daily_discover_because_you_listen_to">Ponieważ słuchałeś %1$s</string>
@@ -1723,13 +1701,10 @@
     <string name="template_q">%1$.1f</string>
     <string name="action_save_preset">Zapisz szablon</string>
     <string name="label_preset_name">Nazwa szablonu</string>
-    <string name="filter_albums">Albumy</string>
-    <string name="filter_songs">Utwory</string>
-    <string name="subtitle_song_prefix">Utwór • %1$s</string>
+
+
     <string name="subtitle_artist">Twórca</string>
-    <string name="subtitle_album_template">Album • %1$s</string>
     <string name="subtitle_playlist_template">Lista odtwarzania • %1$s</string>
-    <string name="album_year_template">Album • %1$s • %2$s</string>
     <string name="search_source_template">Szukaj: %1$s</string>
     <string name="artist_source_template">Twórca: %1$s</string>
     <string name="no_results_found">Brak wyników wyszukiwania</string>
@@ -1793,7 +1768,7 @@
     <string name="sync_try_again">Spróbuj ponownie</string>
     <string name="sync_qr_content_description">Synchronizuj kod QR</string>
     <string name="sync_error_qr_wrong_version">Niekompatybilna wersja aplikacji na drugim urządzeniu.</string>
-    <string name="sync_error_qr_not_flow">To nie wygląda na kod synchronizacji Chorplay.</string>
+    <string name="sync_error_qr_not_chorplay">To nie wygląda na kod synchronizacji Chorplay.</string>
     <string name="auto_backup_failed">Błąd kopii zapasowej</string>
     <string name="error_age_restricted">Treść ograniczona wiekowo</string>
     <string name="error_private_video">Prywatny film</string>
@@ -1837,10 +1812,10 @@
     <string name="playlist_filter_owned">Utworzone</string>
     <string name="playlist_creation_menu_close">Zamknij kreator playlisty</string>
     <string name="sync_qr_network_note">Oba urządzenia muszą być w tej samej sieci Wi-Fi (lub hotspocie). Może być wymagane odblokowanie aplikacji Chorplay w zaporze sieciowej.</string>
-    <string name="discord_presence_connect_action">Połącz</string>
-    <string name="discord_presence_connection_error">Błąd połączenia</string>
-    <string name="discord_error_login_cancelled">Połączenie z Discordem zostało przerwane.</string>
-    <string name="discord_presence_linking">Logowanie do Discorda…</string>
+
+
+
+
     <string name="appearance_variant_title">Styl motywu</string>
     <string name="appearance_variant_light">Jasny</string>
     <string name="appearance_variant_dark">Ciemny</string>
@@ -1854,7 +1829,7 @@
     <string name="tv_theme_variant_dark">Ciemny</string>
     <string name="tv_theme_variant_amoled">AMOLED</string>
     <string name="tv_theme_variant_title">Wariant</string>
-    <string name="tv_settings_flow_engine">Silnik Chorplay</string>
+    <string name="tv_settings_chor_engine">Silnik Chorplay</string>
     <string name="tv_remote_guide_back">Wróć do ustawień</string>
     <string name="tv_remote_guide_title">Obsługa pilotem i klawiaturą</string>
     <string name="tv_remote_guide_subtitle">Szybki przewodnik po nawigacji w aplikacji Chorplay</string>
@@ -1964,7 +1939,7 @@
     <string name="duration_minutes_short">%1$dmin</string>
     <string name="ui_version">Wersja %1$s</string>
     <string name="update_download_prompt">Dostępna jest nowa wersja Chorplay (%1$s). Czy chcesz pobrać najnowszy plik APK?</string>
-    <string name="discord_presence_ready">Połączono i gotowe</string>
+
     <string name="error_http_general_hint">YouTube zwrócił nieoczekiwaną odpowiedź (%1$s). Spróbuj ponownie za chwilę.</string>
     <string name="error_extraction_failed_hint">YouTube zmienił format danych. Aktualizacja Chorplay pojawi się wkrótce — spróbuj ponownie później.</string>
     <string name="error_extraction_failed">Nie udało się przetworzyć danych wideo</string>
@@ -1979,34 +1954,33 @@
     <string name="on">Włącz</string>
     <string name="download_status_paused">Wstrzymane</string>
     <string name="no_active_queue_toast">Brak aktywnej kolejki filmów. Najpierw odtwórz film.</string>
-    <string name="discord_presence_connecting">Łączenie z Discordem…</string>
-    <string name="discord_error_not_initialized">Funkcja Discord Rich Presence nie została uruchomiona.</string>
-    <string name="discord_error_enable_before_connect">Włącz Discord Rich Presence przed połączeniem konta.</string>
-    <string name="discord_error_unavailable">Discord Rich Presence jest niedostępny w tej wersji.</string>
-    <string name="discord_error_open_flow">Otwórz Chorplay przed połączeniem z Discordem.</string>
-    <string name="discord_error_connection_in_progress">Trwa już łączenie z Discordem.</string>
-    <string name="discord_error_login_timeout">Przekroczono czas oczekiwania na zalogowanie do Discord.</string>
-    <string name="discord_error_connection_incomplete">Połączenie z Discord nie zostało ukończone.</string>
-    <string name="discord_error_empty_token">Discord zwrócił pusty token sesji.</string>
-    <string name="discord_error_missing_application_id">Brak identyfikatora aplikacji (ID) Discord w tej wersji.</string>
-    <string name="discord_error_gateway_timeout">Przekroczono czas połączenia z bramką Discord (Gateway).</string>
-    <string name="discord_error_gateway_reconnect">Discord wymaga ponownego połączenia.</string>
-    <string name="discord_error_session_rejected">Discord odrzucił sesję. Połącz konto ponownie.</string>
-    <string name="discord_error_gateway_failed">Błąd połączenia z serwerami Discord.</string>
-    <string name="discord_error_heartbeat_unacknowledged">Brak odpowiedzi z serwerów Discord (sygnał kontrolny).</string>
-    <string name="discord_error_heartbeat_failed">Błąd sygnału kontrolnego serwerów Discord.</string>
-    <string name="discord_presence_unavailable">Niedostępne w tej wersji</string>
-    <string name="discord_presence_connect">Połącz konto Discord</string>
-    <string name="discord_presence_disconnect">Rozłącz i usuń powiązanie</string>
-    <string name="discord_presence_unlink_action">Rozłącz</string>
-    <string name="discord_account_fallback">Użytkownik Discord</string>
-    <string name="discord_presence_by_creator">– %1$s</string>
-    <string name="discord_presence_ready_as">Połączono jako %1$s · włącza się podczas odtwarzania</string>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <string name="fallback_unknown_title">Nieznany Tytuł</string>
     <string name="fallback_unknown_channel">Nieznany Kanał</string>
     <string name="fallback_unknown_playlist">Nieznana Playlista</string>
     <string name="fallback_unknown_artist">Nieznany Wykonawca</string>
-    <string name="fallback_unknown_album">Nieznany Album</string>
     <string name="fallback_unknown_video">Nieznany Film</string>
     <string name="notif_background_restricted_subtitle">Android blokuje sprawdzanie, gdy Chorplay jest zamknięty. Naciśnij, aby zezwolić na działanie w tle.</string>
     <string name="content_settings_preview_big">Duże miniatury (128 dp)</string>
@@ -2063,9 +2037,8 @@
     <string name="widget_nothing_playing">Brak odtwarzania</string>
     <string name="widget_open_history">Otwórz historie</string>
     <string name="widget_open_downloads">Otwórz pobrania</string>
-    <string name="widget_artwork">Okładka albumu</string>
-    <string name="widget_turntable_label">Gramofon</string>
-    <string name="widget_turntable_description">Twoja muzyka jako kręcąca się płyta</string>
+
+
     <string name="widget_recently_played_description">Wznów odtwarzanie od momentu, w którym przerwano</string>
     <string name="widget_downloads_description">Odtwarzaj pobrane pliki</string>
     <string name="taste_chart_profile">Profil</string>
@@ -2146,9 +2119,9 @@
     <string name="import_yt_watch_later">Importuj Obejrzyj Później</string>
     <string name="import_yt_watch_later_desc">Zaimportuj z pliku YouTube Takeout (.csv) bezpośrednio do listy Obejrzyj później, niezależnie od nazwy pliku.</string>
     <string name="settings_backup_source_youtube">YouTube i Google Takeout</string>
-    <string name="import_music_brain_desc">Przywróć profil gustu muzycznego z pliku JSON</string>
-    <string name="settings_backup_restore_flow">Przywróć z Chorplay</string>
-    <string name="import_music_brain_title">Importuj Dane Silnika Muzycznego</string>
+
+    <string name="settings_backup_restore_chorplay">Przywróć z Chorplay</string>
+
     <string name="onboarding_import_footnote">Wszystko tutaj jest opcjonalne. W ustawieniach znajdują się te same opcje importu.</string>
     <plurals name="onboarding_import_count">
         <item quantity="one">%d do zaimportowania</item>
@@ -2156,10 +2129,10 @@
         <item quantity="many">%d do zaimportowania</item>
         <item quantity="other">%d do zaimportowania</item>
     </plurals>
-    <string name="onboarding_import_source_flow">Kopia Chorplay</string>
+    <string name="onboarding_import_source_chorplay">Kopia Chorplay</string>
     <string name="onboarding_ready_title">Wszystko gotowe</string>
     <string name="favourite_artists_search">Szukaj artystów</string>
-    <string name="music_search_section_artists">Artyści</string>
+
     <string name="onboarding_artists_search_placeholder">Szukaj artystów</string>
     <string name="update_skip_version">Pomiń tą wersję</string>
     <string name="update_open_github">Otwórz w GitHub</string>
@@ -2197,7 +2170,7 @@
     <string name="import_label_newpipe_watch_history">Historia Oglądania NewPipe</string>
     <string name="import_label_newpipe_playlists">Playlisty NewPipe</string>
     <string name="settings_backup_source_newpipe">NewPipe</string>
-    <plurals name="deep_flow_duration_hours">
+    <plurals name="deep_chor_duration_hours">
         <item quantity="one">%1$d godzina</item>
         <item quantity="few">%1$d godziny</item>
         <item quantity="many">%1$d godzin</item>
@@ -2207,10 +2180,7 @@
     <string name="import_label_youtube_takeout">YouTube Takeout</string>
     <string name="import_label_youtube_watch_history">Historia Oglądania YouTube</string>
     <string name="import_label_youtube_subscriptions">Subskrypcje YouTube</string>
-    <string name="import_takeout_music_library_name">Biblioteka YouTube Music</string>
-    <string name="settings_backup_source_metrolist">Metrolist</string>
-    <string name="import_label_metrolist_playlists">Playlisty Muzyki Metrolist</string>
-    <string name="import_label_freetube_watch_history">Historia Oglądania FreeTube</string>
+<string name="import_label_freetube_watch_history">Historia Oglądania FreeTube</string>
     <string name="settings_backup_source_freetube">FreeTube</string>
     <plurals name="import_takeout_part_subscriptions">
         <item quantity="one">%d subskrypcja</item>

@@ -20,7 +20,6 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material.icons.filled.Shuffle
-import androidx.compose.material.icons.outlined.MusicNote
 import androidx.compose.material.icons.outlined.SearchOff
 import androidx.compose.material.icons.outlined.VideoLibrary
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -39,12 +38,12 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import io.github.pushkar.chorplay.R
 import io.github.pushkar.chorplay.data.localmedia.LocalMediaItem
-import io.github.pushkar.chorplay.ui.components.layout.flowBottomContentPadding
+import io.github.pushkar.chorplay.ui.components.layout.chorBottomContentPadding
 import io.github.pushkar.chorplay.ui.components.library.LibrarySelection
 import io.github.pushkar.chorplay.ui.components.library.libraryGridLayoutFor
 import io.github.pushkar.chorplay.ui.components.shared.ChorplayEmptyState
 import io.github.pushkar.chorplay.ui.components.shared.ChorplayPullToRefreshBox
-import io.github.pushkar.chorplay.ui.components.shared.FlowSegmentedGap
+import io.github.pushkar.chorplay.ui.components.shared.ChorSegmentedGap
 import io.github.pushkar.chorplay.ui.components.shared.MediaKind
 import io.github.pushkar.chorplay.ui.components.shared.MediaThumbnailDefaults
 import io.github.pushkar.chorplay.ui.components.shared.animateMediaGridItem
@@ -53,7 +52,6 @@ private val GridSpacing = 12.dp
 private val LaneCardWidth = 200.dp
 private const val PHONE_GRID_COLUMNS = 2
 
-/** How the viewer acts on files from the list; the screen decides what each does. */
 internal class LocalContentActions(
     val onPlay: (items: List<LocalMediaItem>, index: Int, shuffle: Boolean) -> Unit,
     val onLongClick: (LocalMediaItem) -> Unit,
@@ -61,11 +59,6 @@ internal class LocalContentActions(
     val onManageHidden: () -> Unit,
 )
 
-/**
- * The files of the current tab under [banner]: Continue watching, a count with Play all and
- * Shuffle, then the files as rows, or with [asGrid] as cards over as many columns as the pane
- * holds. With [showFolders], the folders instead, unless one is open.
- */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun LocalMediaContent(
@@ -92,16 +85,29 @@ internal fun LocalMediaContent(
             val columns = if (asGrid) grid.columns else 1
             val gridPadding = if (columns > 1 && !showFolders) grid.padding else 0.dp
             val partialRows =
-                remember(state.items.size, grid, asGrid) { if (asGrid) grid.partialRows(state.items.size) else emptySet() }
+                remember(
+                    state.items.size,
+                    grid,
+                    asGrid
+                ) { if (asGrid) grid.partialRows(state.items.size) else emptySet() }
             LazyVerticalGrid(
                 columns = GridCells.Fixed(if (showFolders) 1 else columns),
-                contentPadding = PaddingValues(start = gridPadding, end = gridPadding, bottom = flowBottomContentPadding()),
+                contentPadding = PaddingValues(
+                    start = gridPadding,
+                    end = gridPadding,
+                    bottom = chorBottomContentPadding()
+                ),
                 horizontalArrangement = Arrangement.spacedBy(grid.spacing),
                 modifier = Modifier.fillMaxSize(),
             ) {
                 banner?.let { content ->
                     fullWidth("banner") {
-                        Box(Modifier.padding(horizontal = rowInset(columns, showFolders), vertical = 8.dp)) { content() }
+                        Box(
+                            Modifier.padding(
+                                horizontal = rowInset(columns, showFolders),
+                                vertical = 8.dp
+                            )
+                        ) { content() }
                     }
                 }
                 if (showFolders) {
@@ -114,7 +120,7 @@ internal fun LocalMediaContent(
                                     if (index <
                                         state.folders.lastIndex
                                     ) {
-                                        FlowSegmentedGap
+                                        ChorSegmentedGap
                                     } else {
                                         0.dp
                                     },
@@ -126,22 +132,30 @@ internal fun LocalMediaContent(
                         }
                     }
                 } else {
-                    val showLane = isVideos && state.openFolder == null && filters.query.isBlank() && !filters.isFiltering
+                    val showLane =
+                        isVideos && state.openFolder == null && filters.query.isBlank() && !filters.isFiltering
                     if (showLane && state.continueWatching.isNotEmpty()) {
                         fullWidth("continue") { ContinueWatchingLane(state, actions) }
                     }
                     if (state.items.isNotEmpty()) {
-                        fullWidth("summary") { PlayAllRow(state.items, isVideos, rowInset(columns, showFolders), actions) }
+                        fullWidth("summary") {
+                            PlayAllRow(
+                                state.items,
+                                isVideos,
+                                rowInset(columns, showFolders),
+                                actions
+                            )
+                        }
                     } else if (state.totalCount == 0) {
                         fullWidth("empty") {
                             ChorplayEmptyState(
                                 title =
                                     stringResource(
                                         R.string.local_media_empty_title,
-                                        stringResource(if (isVideos) R.string.tab_videos else R.string.tab_music),
+                                        stringResource(R.string.tab_videos),
                                     ),
                                 subtitle = stringResource(R.string.local_media_empty_body),
-                                icon = if (isVideos) Icons.Outlined.VideoLibrary else Icons.Outlined.MusicNote,
+                                icon = Icons.Outlined.VideoLibrary,
                                 modifier = Modifier.padding(top = 48.dp),
                             )
                         }
@@ -151,7 +165,7 @@ internal fun LocalMediaContent(
                                 title =
                                     stringResource(
                                         R.string.local_media_empty_title,
-                                        stringResource(if (isVideos) R.string.tab_videos else R.string.tab_music),
+                                        stringResource(R.string.tab_videos),
                                     ),
                                 icon = Icons.Outlined.SearchOff,
                                 modifier = Modifier.padding(top = 48.dp),
@@ -166,7 +180,11 @@ internal fun LocalMediaContent(
                     ) { index, item ->
                         val isNew = item.watchState(state.playback, state.nowMs) == WatchState.NEW
                         val onClick = {
-                            if (selection.active) selection.onToggle(item.mediaId) else actions.onPlay(state.items, index, false)
+                            if (selection.active) selection.onToggle(item.mediaId) else actions.onPlay(
+                                state.items,
+                                index,
+                                false
+                            )
                         }
                         if (isVideos && columns > 1 && index !in partialRows) {
                             LocalMediaCard(
@@ -199,7 +217,6 @@ internal fun LocalMediaContent(
     }
 }
 
-/** Rows carry their own side padding, so content above them is inset to match; cards use the grid's. */
 private fun rowInset(
     columns: Int,
     showFolders: Boolean,
@@ -223,7 +240,10 @@ private fun ContinueWatchingLane(
         color = MaterialTheme.colorScheme.primary,
         modifier = Modifier.padding(start = 16.dp, top = 12.dp, bottom = 8.dp),
     )
-    LazyRow(contentPadding = PaddingValues(horizontal = 16.dp), horizontalArrangement = Arrangement.spacedBy(GridSpacing)) {
+    LazyRow(
+        contentPadding = PaddingValues(horizontal = 16.dp),
+        horizontalArrangement = Arrangement.spacedBy(GridSpacing)
+    ) {
         items(state.continueWatching, key = { it.id }) { item ->
             LocalMediaCard(
                 item = item,

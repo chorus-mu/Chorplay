@@ -2,14 +2,6 @@ package io.github.pushkar.chorplay.sync.crypto
 
 import java.io.ByteArrayOutputStream
 
-/**
- * Byte-encoding helpers for FLOW-SYNC/1. Hand-rolled (no `android.util.Base64`, no
- * `java.util.Base64`) so they are byte-exact, portable across all minSdk-21 devices, and run in
- * plain JVM unit tests without Robolectric.
- *
- * - base64 is **URL-safe, no padding** (`b64url`)
- * - hex is lowercase; used by the shared golden vectors.
- */
 object SyncBytes {
 
     private const val B64URL_ALPHABET =
@@ -23,15 +15,13 @@ object SyncBytes {
 
     private val HEX_DIGITS = "0123456789abcdef".toCharArray()
 
-    // --- base64url ---
-
     fun b64urlEncode(data: ByteArray): String {
         val sb = StringBuilder((data.size + 2) / 3 * 4)
         var i = 0
         while (i + 3 <= data.size) {
             val n = ((data[i].toInt() and 0xFF) shl 16) or
-                ((data[i + 1].toInt() and 0xFF) shl 8) or
-                (data[i + 2].toInt() and 0xFF)
+                    ((data[i + 1].toInt() and 0xFF) shl 8) or
+                    (data[i + 2].toInt() and 0xFF)
             sb.append(B64URL_ALPHABET[(n ushr 18) and 0x3F])
             sb.append(B64URL_ALPHABET[(n ushr 12) and 0x3F])
             sb.append(B64URL_ALPHABET[(n ushr 6) and 0x3F])
@@ -44,6 +34,7 @@ object SyncBytes {
                 sb.append(B64URL_ALPHABET[(n ushr 18) and 0x3F])
                 sb.append(B64URL_ALPHABET[(n ushr 12) and 0x3F])
             }
+
             2 -> {
                 val n = ((data[i].toInt() and 0xFF) shl 16) or ((data[i + 1].toInt() and 0xFF) shl 8)
                 sb.append(B64URL_ALPHABET[(n ushr 18) and 0x3F])
@@ -73,8 +64,6 @@ object SyncBytes {
         return out.toByteArray()
     }
 
-    // --- hex ---
-
     fun toHex(data: ByteArray): String {
         val sb = StringBuilder(data.size * 2)
         for (b in data) {
@@ -98,7 +87,6 @@ object SyncBytes {
         return out
     }
 
-    /** Overwrite a key buffer with zeros. Best-effort key hygiene. */
     fun zeroize(vararg arrays: ByteArray?) {
         for (a in arrays) a?.fill(0)
     }

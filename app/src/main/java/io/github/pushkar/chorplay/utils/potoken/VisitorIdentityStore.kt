@@ -95,7 +95,7 @@ class VisitorIdentityStore
             prefs.edit().putString(KEY_REROLLS, RerollBudget.format(history - takenAtMs)).apply()
         }
 
-        // Earlier versions kept the visitor in the backed-up flow_prefs. It is deleted rather than
+        // Earlier versions kept the visitor in the backed-up chorplay_prefs. It is deleted rather than
         // moved, so a visitor walled before this version is not carried into it.
         private fun dropLegacyCopy() {
             val legacy = context.getSharedPreferences(LEGACY_PREFS_NAME, Context.MODE_PRIVATE)
@@ -114,7 +114,7 @@ class VisitorIdentityStore
             const val KEY_REROLLS = "visitor_rerolls"
             const val KEY_NETWORK = "visitor_data_network"
             const val NO_NETWORK = -1L
-            const val LEGACY_PREFS_NAME = "flow_prefs"
+            const val LEGACY_PREFS_NAME = "chorplay_prefs"
             const val LEGACY_KEY_VISITOR = "visitor_data"
             const val LEGACY_KEY_FETCHED_AT = "visitor_data_fetched_at"
         }

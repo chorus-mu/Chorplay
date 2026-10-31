@@ -28,14 +28,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import io.github.pushkar.chorplay.ui.components.layout.LocalChorplayBottomInsets
 import io.github.pushkar.chorplay.ui.components.layout.floatAboveBottomChrome
-import io.github.pushkar.chorplay.ui.components.layout.flowBottomContentPadding
+import io.github.pushkar.chorplay.ui.components.layout.chorBottomContentPadding
 import io.github.pushkar.chorplay.ui.components.layout.topbar.ChorplayGlobalActionsMode
 import io.github.pushkar.chorplay.ui.components.layout.topbar.ChorplayTopBar
-import io.github.pushkar.chorplay.ui.components.shared.FlowMaxContentWidth
+import io.github.pushkar.chorplay.ui.components.shared.ChorMaxContentWidth
 import io.github.pushkar.chorplay.ui.components.shared.LocalDpadNavigation
 import kotlinx.coroutines.flow.first
 
-internal val SettingsMaxContentWidth = FlowMaxContentWidth
+internal val SettingsMaxContentWidth = ChorMaxContentWidth
 internal val SettingsHorizontalPadding = 16.dp
 private val SettingsBottomSpacing = 32.dp
 private const val HIGHLIGHT_VISIBLE_OFFSET_PX = -160
@@ -108,7 +108,7 @@ fun SettingsPage(
                     modifier = Modifier.fillMaxSize(),
                     verticalArrangement = Arrangement.spacedBy(SettingsRowGap),
                     contentPadding =
-                        PaddingValues(bottom = flowBottomContentPadding(SettingsBottomSpacing)),
+                        PaddingValues(bottom = chorBottomContentPadding(SettingsBottomSpacing)),
                 ) {
                     keys.reset()
                     SettingsListScope(this, keys, onTv = onTv).content()

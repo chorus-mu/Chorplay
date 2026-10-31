@@ -1,8 +1,6 @@
 package io.github.pushkar.chorplay.data.stats
 
 import com.google.common.truth.Truth.assertThat
-import io.github.pushkar.chorplay.data.recommendation.music.MusicStatsParams
-import io.github.pushkar.chorplay.data.recommendation.music.MusicStatsStorage
 import org.junit.Test
 import java.time.YearMonth
 
@@ -41,26 +39,8 @@ class RecapLedgerBenchmarkTest {
             hourViews = (0..23).associateWith { 150 },
         )
 
-    private val musicMonth =
-        MusicStatsStorage.SerializableMonth(
-            plays = 3_000,
-            sessions = 3_500,
-            listenedMs = 200L * 3_600_000L,
-            artistPlays = (0 until MusicStatsParams.ARTISTS_PER_MONTH).associate { "artist$it" to it + 1 },
-            artistNames = (0 until MusicStatsParams.ARTISTS_PER_MONTH).associate { "artist$it" to "Artist name $it" },
-            trackPlays = (0 until MusicStatsParams.TRACKS_PER_MONTH).associate { "track$it" to it + 1 },
-            trackTitles = (0 until MusicStatsParams.TRACKS_PER_MONTH).associate { "track$it" to title(it) },
-            genrePlays = (0 until MusicStatsParams.GENRES_PER_MONTH).associate { "genre$it" to it + 1 },
-            discoveredArtists = (0 until 50).map { "artist$it" },
-            dayPlays = (1..31).associateWith { 100 },
-            hourPlays = (0..23).associateWith { 125 },
-            dayMs = (1..31).associateWith { 3_600_000L },
-            trackSkips = (0 until MusicStatsParams.SKIPS_PER_MONTH).associate { "track$it" to 2 },
-            artistSkips = (0 until MusicStatsParams.SKIPS_PER_MONTH).associate { "artist$it" to 2 },
-        )
 
     private val video = VideoStatsSnapshot(months = months.associate { LedgerTime.monthKey(it) to videoMonth })
-    private val music = MusicStatsStorage.SerializableStats(months = months.associate { LedgerTime.monthKey(it) to musicMonth })
 
     private fun timeMs(block: () -> Unit): Long {
         repeat(WARMUP) { block() }
@@ -77,9 +57,9 @@ class RecapLedgerBenchmarkTest {
 
     @Test
     fun `folding every month at the caps stays well inside one screen open`() {
-        val month = timeMs { RecapAggregates.summarize(RecapPeriod.Month(months.last()), video, music) }
-        val year = timeMs { RecapAggregates.summarize(RecapPeriod.Year(months.last().year), video, music) }
-        val allTime = timeMs { RecapAggregates.summarize(RecapPeriod.AllTime, video, music) }
+        val month = timeMs { RecapAggregates.summarize(RecapPeriod.Month(months.last()), video) }
+        val year = timeMs { RecapAggregates.summarize(RecapPeriod.Year(months.last().year), video) }
+        val allTime = timeMs { RecapAggregates.summarize(RecapPeriod.AllTime, video) }
         println("RecapLedgerBenchmark: month=${month}ms year=${year}ms allTime=${allTime}ms")
 
         assertThat(month).isLessThan(MONTH_FLOOR_MS)
@@ -97,17 +77,6 @@ class RecapLedgerBenchmarkTest {
                 ),
             )
         val cold = LedgerJson.encodeToString(VideoStatsSnapshot.serializer(), video)
-        val musicHot =
-            LedgerJson.encodeToString(
-                StoredLedger.serializer(MusicStatsStorage.SerializableMonth.serializer()),
-                StoredLedger(months = mapOf("2026-09" to musicMonth)),
-            )
-        println(
-            "RecapLedgerBenchmark: videoHot=${hot.length / 1024}KB videoCold=${cold.length / 1024}KB musicHot=${musicHot.length / 1024}KB",
-        )
-
-        assertThat(hot.length).isLessThan(HOT_FILE_FLOOR_BYTES)
-        assertThat(musicHot.length).isLessThan(HOT_FILE_FLOOR_BYTES)
     }
 
     private companion object {

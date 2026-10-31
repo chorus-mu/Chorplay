@@ -52,8 +52,6 @@ data class CategoriesUiState(
     val selected: ExploreDestination = CATEGORY_TABS.first().destination,
     val sectionKind: ExploreSectionKind = ExploreSectionKind.SHELVES,
     val shelves: List<FeedShelf> = emptyList(),
-    val chartEntries: List<Video> = emptyList(),
-    val chartTitle: String? = null,
     val subTabs: List<CategorySubTab> = emptyList(),
     val selectedSubTab: String? = null,
     val openShelfTitle: String? = null,
@@ -101,9 +99,7 @@ class CategoriesViewModel
 
         private data class CachedSection(
             val shelves: List<FeedShelf> = emptyList(),
-            val chartEntries: List<Video> = emptyList(),
-            val chartTitle: String? = null,
-            val subTabs: List<CategorySubTab> = emptyList(),
+                            val subTabs: List<CategorySubTab> = emptyList(),
             val selectedSubTab: String? = null,
             val loadedAtMs: Long = System.currentTimeMillis(),
         ) {
@@ -230,8 +226,6 @@ class CategoriesViewModel
                     error = null,
                     openShelfTitle = null,
                     shelves = cached?.shelves.orEmpty(),
-                    chartEntries = cached?.chartEntries.orEmpty(),
-                    chartTitle = cached?.chartTitle,
                     // A sub-tab switch reloads within a destination, whose tab row outlives it.
                     subTabs = cached?.subTabs?.takeIf(List<CategorySubTab>::isNotEmpty) ?: it.subTabs,
                     selectedSubTab = cached?.selectedSubTab ?: it.selectedSubTab,
@@ -241,10 +235,6 @@ class CategoriesViewModel
             loadJob =
                 viewModelScope.launch {
                     when (destination.kind) {
-                        ExploreSectionKind.CHART -> {
-                            loadChart(key)
-                        }
-
                         ExploreSectionKind.GRID -> {
                             loadGrid(destination, params)
                         }
@@ -318,48 +308,6 @@ class CategoriesViewModel
         ) {
             gridKey.value = params?.let { GridKey(destination.browseId, it) }
             _uiState.update { it.copy(isLoading = false) }
-        }
-
-        private suspend fun loadChart(key: CacheKey) {
-            val region = preferences.trendingRegion.first()
-            YouTube
-                .musicVideoChart(region)
-                .onSuccess { chart ->
-                    _uiState.update {
-                        it.copy(
-                            chartEntries = chart.entries,
-                            chartTitle = chart.title.takeIf(String::isNotBlank),
-                            isLoading = false,
-                            error = if (chart.entries.isEmpty()) context.getString(R.string.error_no_videos_for_category) else null,
-                        )
-                    }
-                    if (chart.entries.isNotEmpty()) {
-                        cache[key] = CachedSection(chartEntries = chart.entries, chartTitle = chart.title.takeIf(String::isNotBlank))
-                    }
-                    enrichChartAvatars(chart.entries, key)
-                }.onFailure {
-                    if (_uiState.value.chartEntries.isEmpty()) failed(it)
-                }
-        }
-
-        /** A chart entry names its channel but carries no avatar, so the rows fill in after paint. */
-        private fun enrichChartAvatars(
-            entries: List<Video>,
-            key: CacheKey,
-        ) {
-            if (entries.isEmpty()) return
-            viewModelScope.launch {
-                val enriched = runCatching { repository.enrichVideosWithAvatars(entries) }.getOrNull() ?: return@launch
-                if (enriched === entries) return@launch
-                cache[key]?.let { cache[key] = it.copy(chartEntries = enriched) }
-                _uiState.update { state ->
-                    if (state.chartEntries.map(Video::id) == entries.map(Video::id)) {
-                        state.copy(chartEntries = enriched)
-                    } else {
-                        state
-                    }
-                }
-            }
         }
 
         private fun failed(error: Throwable) {

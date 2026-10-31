@@ -1,7 +1,6 @@
 package io.github.pushkar.chorplay.ui.screens.settings
 
 import com.google.common.truth.Truth.assertThat
-import io.github.pushkar.chorplay.data.recommendation.music.MusicStatsStorage
 import io.github.pushkar.chorplay.data.stats.RecapAggregates
 import io.github.pushkar.chorplay.data.stats.VideoMonthRecord
 import io.github.pushkar.chorplay.data.stats.VideoStatsSnapshot
@@ -26,16 +25,11 @@ class WellbeingLedgerTest {
     }
 
     @Test
-    fun `daily time adds both ledgers inside the range only`() {
+    fun `daily time reads video ledger inside the range only`() {
         val video = VideoStatsSnapshot(months = mapOf("2026-09" to VideoMonthRecord(dayMs = mapOf(23 to 60_000L, 1 to 5_000L))))
-        val music =
-            MusicStatsStorage.SerializableStats(
-                months =
-                    mapOf("2026-09" to MusicStatsStorage.SerializableMonth(dayMs = mapOf(23 to 30_000L))),
-            )
 
-        val days = RecapAggregates.dailyTime(video, music, today.minusDays(6), today)
-        assertThat(days).containsExactly(today, 90_000L)
+        val days = RecapAggregates.dailyTime(video, today.minusDays(6), today)
+        assertThat(days).containsExactly(today, 60_000L)
         assertThat(RecapAggregates.videoLedgerStart(video)).isEqualTo(LocalDate.of(2026, 9, 1))
     }
 }

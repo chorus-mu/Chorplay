@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.foundation.text.input.setTextAndPlaceCursorAtEnd
 import androidx.compose.material.icons.Icons
@@ -18,20 +17,14 @@ import androidx.compose.material.icons.rounded.Mic
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
-import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.compose.collectAsLazyPagingItems
 import io.github.pushkar.chorplay.R
 import io.github.pushkar.chorplay.data.local.HomeFeedColumns
@@ -39,16 +32,9 @@ import io.github.pushkar.chorplay.data.local.availableWith
 import io.github.pushkar.chorplay.data.model.Channel
 import io.github.pushkar.chorplay.data.model.Playlist
 import io.github.pushkar.chorplay.data.model.Video
-import io.github.pushkar.chorplay.data.music.model.MusicTrack
-import io.github.pushkar.chorplay.innertube.pages.MoodAndGenres
 import io.github.pushkar.chorplay.ui.components.search.SearchSuggestionsPanel
-import io.github.pushkar.chorplay.ui.components.shared.ChorplayConnectedToggleGroup
 import io.github.pushkar.chorplay.ui.components.shared.ChorplaySearchField
-import io.github.pushkar.chorplay.ui.components.shared.FlowToggleOption
-import io.github.pushkar.chorplay.ui.components.shared.MediaKind
 import io.github.pushkar.chorplay.ui.components.shared.quickactions.sharedQuickActionsViewModel
-import io.github.pushkar.chorplay.ui.screens.music.MusicSearchBody
-import io.github.pushkar.chorplay.ui.screens.music.MusicSearchViewModel
 import io.github.pushkar.chorplay.ui.screens.search.SearchResultsBody
 import io.github.pushkar.chorplay.ui.screens.search.SearchViewModel
 import io.github.pushkar.chorplay.ui.screens.search.launchVoiceSearch
@@ -56,30 +42,14 @@ import io.github.pushkar.chorplay.ui.screens.search.rememberSearchState
 import io.github.pushkar.chorplay.ui.screens.search.rememberSearchSubmitter
 import io.github.pushkar.chorplay.ui.tv.components.TvScreenFrame
 import io.github.pushkar.chorplay.ui.tv.theme.LocalTvDimens
-import kotlinx.coroutines.flow.drop
 
-private val KindSelectorWidth = 320.dp
-
-/**
- * TV search: the query, voice search and the Videos and Music switch across the top, the phone's
- * suggestions and results under them. OK on the field raises the system keyboard, which types in
- * every language. Both kinds read the one query, so switching kind keeps what was typed.
- */
 @Composable
 fun TvSearchScreen(
     viewModel: SearchViewModel,
     onVideoClick: (Video) -> Unit,
     onChannelClick: (Channel) -> Unit,
     onPlaylistClick: (Playlist) -> Unit,
-    onPlayTrack: (MusicTrack, List<MusicTrack>, String?) -> Unit,
-    onOpenAlbum: (String) -> Unit,
-    onOpenArtist: (String) -> Unit,
-    onOpenChannel: (String) -> Unit,
-    onOpenMusicPlaylist: (String) -> Unit,
-    onOpenMood: (MoodAndGenres.Item) -> Unit,
-    onOpenMoods: () -> Unit,
     modifier: Modifier = Modifier,
-    musicViewModel: MusicSearchViewModel = hiltViewModel(),
 ) {
     val context = LocalContext.current
     val dimens = LocalTvDimens.current
@@ -90,20 +60,12 @@ fun TvSearchScreen(
     val submitVideo = rememberSearchSubmitter(viewModel, state, quickActions)
     val pagingItems = viewModel.searchResults.collectAsLazyPagingItems()
     val gridState = rememberLazyGridState()
-    var kind by rememberSaveable { mutableStateOf(MediaKind.Videos) }
     val text = state.textFieldState
-    val kinds = MediaKind.entries.map { FlowToggleOption(it, stringResource(it.labelRes), it.icon) }
 
     fun submit() {
         softwareKeyboard?.hide()
         val query = text.text.toString()
-        if (kind == MediaKind.Music) musicViewModel.performSearch(query) else submitVideo(query, uiState.filters)
-    }
-
-    LaunchedEffect(state) {
-        snapshotFlow { text.text.toString() }
-            .drop(1)
-            .collect(musicViewModel::onQueryChange)
+        submitVideo(query, uiState.filters)
     }
 
     val voiceLauncher =
@@ -135,27 +97,8 @@ fun TvSearchScreen(
                 IconButton(onClick = { launchVoiceSearch(context, voiceLauncher::launch) }) {
                     Icon(imageVector = Icons.Rounded.Mic, contentDescription = stringResource(R.string.voice_search_cd))
                 }
-                ChorplayConnectedToggleGroup(
-                    options = kinds,
-                    selected = kind,
-                    onSelected = { kind = it },
-                    modifier = Modifier.width(KindSelectorWidth),
-                )
             }
-            if (kind == MediaKind.Music) {
-                MusicSearchBody(
-                    viewModel = musicViewModel,
-                    onTrackClick = onPlayTrack,
-                    onAlbumClick = onOpenAlbum,
-                    onArtistClick = onOpenArtist,
-                    onChannelClick = onOpenChannel,
-                    onPlaylistClick = onOpenMusicPlaylist,
-                    onMoodClick = onOpenMood,
-                    onMoodsSeeAll = onOpenMoods,
-                    dismissSearchInput = {},
-                    onSuggestionPicked = {},
-                )
-            } else if (uiState.query.isBlank() || state.isTyping) {
+            if (uiState.query.isBlank() || state.isTyping) {
                 SearchSuggestionsPanel(
                     query = state.query,
                     history = state.matchingHistory,
@@ -195,5 +138,4 @@ fun TvSearchScreen(
     }
 }
 
-/** The phone pages under the bar keep a 16 dp margin; the bar lines up with them. */
 private val SearchBarHorizontalPadding = 16.dp

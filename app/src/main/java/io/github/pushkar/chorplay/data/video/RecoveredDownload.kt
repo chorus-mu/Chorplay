@@ -4,14 +4,12 @@ import io.github.pushkar.chorplay.data.local.entity.DownloadEntity
 import io.github.pushkar.chorplay.data.local.entity.DownloadFileType
 import io.github.pushkar.chorplay.data.local.entity.DownloadItemEntity
 import io.github.pushkar.chorplay.data.local.entity.DownloadItemStatus
-import io.github.pushkar.chorplay.data.video.downloader.request.StoredArtist
 import io.github.pushkar.chorplay.data.video.downloader.tags.DownloadKind
 import io.github.pushkar.chorplay.data.video.downloader.tags.DownloadTags
 import io.github.pushkar.chorplay.data.video.downloader.tags.displayArtist
 import io.github.pushkar.chorplay.utils.YouTubeLink
 import io.github.pushkar.chorplay.utils.parseYouTubeLink
 
-/** A media file met on disk, as the recovery scan measured it. */
 internal data class FoundFile(
     val path: String,
     val name: String,
@@ -23,12 +21,6 @@ internal data class FoundFile(
     val isVideo: Boolean get() = extension in RecoveredDownload.VIDEO_EXTENSIONS
 }
 
-/**
- * The rows a file found on disk is recorded with. A file Chorplay tagged comes back as the download it
- * was, under its real video id with its channel, album and counts; a file whose comment names its
- * video keeps that id; any other file gets an id made from its path and whatever title and artist
- * it carries. Pure, so it is unit tested.
- */
 internal object RecoveredDownload {
     val VIDEO_EXTENSIONS = setOf("mp4", "webm", "mkv", "avi", "mov")
     val AUDIO_EXTENSIONS = setOf("m4a", "mp3", "aac", "opus", "ogg")
@@ -37,7 +29,7 @@ internal object RecoveredDownload {
     fun isMedia(fileName: String): Boolean =
         fileName.substringAfterLast('.', "").lowercase().let {
             it in VIDEO_EXTENSIONS ||
-                it in AUDIO_EXTENSIONS
+                    it in AUDIO_EXTENSIONS
         }
 
     fun idFor(
@@ -46,10 +38,6 @@ internal object RecoveredDownload {
         sourceUrl: String? = null,
     ): String = knownIdFor(tags, sourceUrl) ?: "recovered_${path.hashCode().toLong() and 0xFFFFFFFFL}"
 
-    /**
-     * The video the file is a copy of: Chorplay's own tag, or else the watch URL in its comment, which
-     * yt-dlp writes by default and Chorplay wrote before it had tags of its own.
-     */
     fun knownIdFor(
         tags: DownloadTags?,
         sourceUrl: String?,
@@ -84,7 +72,7 @@ internal object RecoveredDownload {
         sourceUrl: String? = null,
     ): Pair<DownloadEntity, DownloadItemEntity> {
         val videoId = idFor(file.path, tags, sourceUrl)
-        val kind = tags?.kind ?: if (file.isVideo) DownloadKind.VIDEO else DownloadKind.MUSIC
+        val kind = tags?.kind ?: DownloadKind.VIDEO
         val download =
             DownloadEntity(
                 videoId = videoId,
@@ -100,13 +88,6 @@ internal object RecoveredDownload {
                 releaseDate = tags?.releaseDate,
                 viewCount = tags?.viewCount ?: 0L,
                 likeCount = tags?.likeCount ?: 0L,
-                album = tags?.album,
-                albumId = tags?.albumId,
-                artistsJson =
-                    tags?.artists?.takeIf { it.isNotEmpty() }?.let { names ->
-                        StoredArtist.encode(names.map { StoredArtist(it, null) })
-                    },
-                trackNumber = tags?.trackNumber,
             )
         val item =
             DownloadItemEntity(

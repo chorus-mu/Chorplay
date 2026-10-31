@@ -47,7 +47,7 @@ class SearchScreenState(
     private val gridModeState: State<Boolean>,
     private val shortsEnabledState: State<Boolean>,
     private val feedColumnsState: State<HomeFeedColumns>,
-    private val deepFlowState: State<DeepChorplayState>,
+    private val deepChorState: State<DeepChorplayState>,
     private val setDeepChorplay: suspend (Boolean) -> Unit,
     private val fetchSuggestions: suspend (String) -> List<SearchSuggestion>,
     private val onHistoryCleared: () -> Unit = {},
@@ -62,7 +62,7 @@ class SearchScreenState(
     val isGridMode: Boolean get() = gridModeState.value
     val shortsContentEnabled: Boolean get() = shortsEnabledState.value
     val feedColumns: HomeFeedColumns get() = feedColumnsState.value
-    val deepFlow: DeepChorplayState get() = deepFlowState.value
+    val deepChor: DeepChorplayState get() = deepChorState.value
 
     val query: String
         get() = textFieldState.text.toString()
@@ -135,13 +135,13 @@ fun rememberSearchState(viewModel: SearchViewModel): SearchScreenState {
     val gridMode = preferences.searchIsGridMode.collectAsStateWithLifecycle(false)
     val shortsEnabled = preferences.shortsContentEnabled.collectAsStateWithLifecycle(true)
     val feedColumns = preferences.homeFeedColumns.collectAsStateWithLifecycle(HomeFeedColumns.AUTO)
-    val deepFlow =
+    val deepChor =
         remember(preferences) {
             combine(
-                preferences.deepFlowOnSearch,
-                preferences.deepFlowActive,
-                preferences.deepFlowActivatedAt,
-                preferences.deepFlowExpireHours,
+                preferences.deepChorOnSearch,
+                preferences.deepChorActive,
+                preferences.deepChorActivatedAt,
+                preferences.deepChorExpireHours,
             ) { onSearch, active, activatedAt, expireHours ->
                 DeepChorplayState(active = active, activatedAt = activatedAt, expireHours = expireHours, showOnSearch = onSearch)
             }
@@ -167,7 +167,7 @@ fun rememberSearchState(viewModel: SearchViewModel): SearchScreenState {
                 gridModeState = gridMode,
                 shortsEnabledState = shortsEnabled,
                 feedColumnsState = feedColumns,
-                deepFlowState = deepFlow,
+                deepChorState = deepChor,
                 setDeepChorplay = { DeepChorplayManager.setEnabled(context, it) },
                 fetchSuggestions = viewModel::getSearchSuggestions,
                 onHistoryCleared = viewModel::onSearchHistoryCleared,

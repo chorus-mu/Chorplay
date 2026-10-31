@@ -70,7 +70,7 @@ class LinkedLiveTest {
                         call.respondJson(200, """{"token":"t","expires":${Long.MAX_VALUE / 2}}""")
                     }
                 }
-                webSocket("/v1/live", protocol = "flow-sync.v1") {
+                webSocket("/v1/live", protocol = "chor-sync.v1") {
                     bearers.value += call.request.headers["Sec-WebSocket-Protocol"].orEmpty()
                     send(Frame.Text("""{"type":"peers","online":[]}"""))
                     send(Frame.Text("""{"type":"later"}"""))
@@ -119,7 +119,7 @@ class LinkedLiveTest {
             val live = LinkedLive(context, db, keys, sync, channel, scope)
             live.start()
             withTimeout(10_000) { bearers.first { it.isNotEmpty() } }
-            assertEquals(listOf("flow-sync.v1, bearer.t"), bearers.value)
+            assertEquals(listOf("chor-sync.v1, bearer.t"), bearers.value)
             withTimeout(10_000) { received.first { it.isNotEmpty() } }
             assertEquals("a binary frame is a live envelope for the channel", listOf(listOf<Byte>(1, 2, 3)), received.value)
             withTimeout(10_000) { relayed.first { it.isNotEmpty() } }

@@ -51,7 +51,7 @@ import io.github.pushkar.chorplay.ui.components.shared.ChorplayAlertDialog
 import io.github.pushkar.chorplay.ui.components.shared.ChorplayConnectedToggleGroup
 import io.github.pushkar.chorplay.ui.components.shared.ChorplayEmptyState
 import io.github.pushkar.chorplay.ui.components.shared.ChorplayLoadingIndicator
-import io.github.pushkar.chorplay.ui.components.shared.FlowToggleOption
+import io.github.pushkar.chorplay.ui.components.shared.ChorToggleOption
 import io.github.pushkar.chorplay.ui.screens.settings.index.DiagnosticsIndex
 import io.github.pushkar.chorplay.utils.copyPlainText
 import kotlinx.coroutines.launch
@@ -102,8 +102,8 @@ internal fun DiagnosticsScreen(
         }
     val tabs =
         listOf(
-            FlowToggleOption(DiagnosticsTab.SESSION, stringResource(R.string.diagnostics_tab_session), Icons.Outlined.BugReport),
-            FlowToggleOption(DiagnosticsTab.CRASHES, stringResource(R.string.diagnostics_tab_crashes), Icons.Outlined.Warning),
+            ChorToggleOption(DiagnosticsTab.SESSION, stringResource(R.string.diagnostics_tab_session), Icons.Outlined.BugReport),
+            ChorToggleOption(DiagnosticsTab.CRASHES, stringResource(R.string.diagnostics_tab_crashes), Icons.Outlined.Warning),
         )
 
     SettingsPage(
@@ -154,7 +154,7 @@ internal fun DiagnosticsScreen(
                 showChevron = false,
                 enabled = snapshotCount > 0,
                 value = noSnapshotText.takeIf { snapshotCount == 0 },
-                onClick = { exportSnapshot.launch("flow_home_snapshot_${LocalDate.now()}.json.gz") },
+                onClick = { exportSnapshot.launch("chorplay_home_snapshot_${LocalDate.now()}.json.gz") },
             )
         }
         if (BuildConfig.DEBUG) {

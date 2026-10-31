@@ -40,7 +40,7 @@ import java.util.concurrent.ConcurrentHashMap
 import javax.inject.Inject
 import javax.inject.Singleton
 
-const val SESSION_PATH = "/flow-sync/2"
+const val SESSION_PATH = "/chor-sync/2"
 
 /** A peer that just synced isn't dialed again sooner than this. */
 private const val REDIAL_MS = 60_000L

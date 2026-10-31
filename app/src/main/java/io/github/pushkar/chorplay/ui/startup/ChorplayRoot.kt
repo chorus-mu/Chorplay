@@ -31,7 +31,7 @@ import io.github.pushkar.chorplay.ui.components.shared.ProvideChannelGroupLabels
 import io.github.pushkar.chorplay.ui.components.shared.ProvideDateDisplaySettings
 import io.github.pushkar.chorplay.ui.components.shared.card.ProvideVideoCardState
 import io.github.pushkar.chorplay.ui.screens.crash.CrashReportScreen
-import io.github.pushkar.chorplay.ui.theme.FlowFontFamily
+import io.github.pushkar.chorplay.ui.theme.ChorFontFamily
 import io.github.pushkar.chorplay.ui.tv.ChorplayTvApp
 import io.github.pushkar.chorplay.ui.tv.screens.TvProfileGate
 import io.github.pushkar.chorplay.ui.utils.ProvideWindowSizeClass
@@ -81,7 +81,7 @@ internal fun ChorplayRoot(
 
     if (pendingCrashLog != null) {
         SideEffect { splashController.contentReady = true }
-        ChorplayTheme(theme.copy(fontFamily = FlowFontFamily)) {
+        ChorplayTheme(theme.copy(fontFamily = ChorFontFamily)) {
             CrashReportScreen(
                 report = pendingCrashLog!!,
                 onContinue = { pendingCrashLog = null },
@@ -120,8 +120,7 @@ internal fun ChorplayRoot(
                         val deeplinkVideoId by links.videoId
                         val isDeeplinkShort by links.isShort
                         val isDeeplinkShared by links.isShared
-                        val openMusicPlayerRequest by links.musicPlayerRequest
-                        val pendingRoute by links.route
+                                                val pendingRoute by links.route
                         val downloadVideoId by links.downloadVideoId
 
                         ProvideChannelGroupLabels {
@@ -144,8 +143,7 @@ internal fun ChorplayRoot(
                                     deeplinkVideoId = deeplinkVideoId,
                                     isShort = isDeeplinkShort,
                                     isSharedLink = isDeeplinkShared,
-                                    openMusicPlayerRequest = openMusicPlayerRequest,
-                                    onDeeplinkConsumed = links::consumeVideo,
+                                                                        onDeeplinkConsumed = links::consumeVideo,
                                     pendingRoute = pendingRoute,
                                     onPendingRouteConsumed = links::consumeRoute,
                                     downloadVideoId = downloadVideoId,

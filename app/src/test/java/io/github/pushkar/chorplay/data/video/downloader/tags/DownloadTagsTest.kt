@@ -1,89 +1,69 @@
 package io.github.pushkar.chorplay.data.video.downloader.tags
 
 import com.google.common.truth.Truth.assertThat
-import kotlinx.serialization.json.Json
 import org.junit.Test
 
 class DownloadTagsTest {
     private val full =
         DownloadTags(
+            schema = 1,
             kind = DownloadKind.VIDEO,
-            videoId = "abc123DEF45",
-            title = "Title 🎵",
-            artists = listOf("A, with comma", "B"),
-            channelId = "UC123",
-            channelName = "Channel",
-            album = "Album",
-            albumId = "MPREb",
-            albumArtist = "A",
-            trackNumber = 3,
-            trackTotal = 12,
-            playlistId = "PL1",
-            releaseDate = "2024-02-29",
-            description = "Line one\nLine two",
-            sourceUrl = "https://www.youtube.com/watch?v=abc123DEF45",
-            viewCount = 42L,
-            likeCount = 7L,
-            thumbnailUrl = "https://i.ytimg.com/vi/abc123DEF45/hqdefault.jpg",
-            lyrics = "la la",
+            videoId = "kffacxfA7G4",
+            title = "Never Gonna Give You Up",
+            channelId = "UCuAXFkgsw1L7xaCfnd5JJOw",
+            channelName = "Rick Astley",
+            playlistId = "PL123",
+            releaseDate = "1987-07-27",
+            description = "The official video",
+            sourceUrl = "https://www.youtube.com/watch?v=kffacxfA7G4",
+            viewCount = 1_500_000_000L,
+            likeCount = 17_000_000L,
+            thumbnailUrl = "https://i.ytimg.com/vi/kffacxfA7G4/hqdefault.jpg",
         )
 
     @Test
-    fun `json round trip keeps every field`() {
-        val json = Json.encodeToString(DownloadTags.serializer(), full)
-        assertThat(Json.decodeFromString(DownloadTags.serializer(), json)).isEqualTo(full)
-    }
+    fun `defaults populate schema and optional fields as null`() {
+        val minimal =
+            DownloadTags(
+                kind = DownloadKind.VIDEO,
+                videoId = "v",
+                title = "Title",
+            )
 
-    @Test
-    fun `json with only required fields decodes with defaults`() {
-        val decoded = Json.decodeFromString(DownloadTags.serializer(), """{"kind":"SHORT","videoId":"id","title":"t"}""")
-        assertThat(decoded).isEqualTo(DownloadTags(kind = DownloadKind.SHORT, videoId = "id", title = "t"))
-        assertThat(decoded.schema).isEqualTo(DownloadTags.SCHEMA_VERSION)
-    }
-
-    @Test
-    fun `display artist joins distinct credited artists`() {
-        val tags = full.copy(artists = listOf(" Alice ", "bob", "Alice", "", "Bob"))
-        assertThat(tags.displayArtist()).isEqualTo("Alice, bob")
+        assertThat(minimal.schema).isEqualTo(1)
+        assertThat(minimal.channelId).isNull()
+        assertThat(minimal.channelName).isNull()
+        assertThat(minimal.playlistId).isNull()
     }
 
     @Test
     fun `display artist falls back to the channel without the topic suffix`() {
-        val tags = full.copy(artists = emptyList(), channelName = "Queen - Topic")
+        val tags = full.copy(channelName = "Queen - Topic")
         assertThat(tags.displayArtist()).isEqualTo("Queen")
-        assertThat(tags.copy(channelName = null).displayArtist()).isNull()
-        assertThat(tags.copy(channelName = " - Topic").displayArtist()).isNull()
     }
 
     @Test
-    fun `field codec round trips everything except lyrics`() {
+    fun `field codec round trips everything`() {
         val fields = ChorplayTagFields.encode(full)
-        assertThat(fields).doesNotContainKey("lyrics")
-        assertThat(ChorplayTagFields.decode(fields)).isEqualTo(full.copy(lyrics = null))
+
+        assertThat(ChorplayTagFields.decode(fields)).isEqualTo(full)
     }
 
     @Test
-    fun `field codec omits absent values and needs id kind and title`() {
-        val minimal = DownloadTags(kind = DownloadKind.MUSIC, videoId = "id", title = "t")
-        val fields = ChorplayTagFields.encode(minimal)
-        assertThat(fields.keys).containsExactly("schema", "kind", "videoId", "title")
-        assertThat(ChorplayTagFields.decode(fields - "videoId")).isNull()
-        assertThat(ChorplayTagFields.decode(fields - "title")).isNull()
-        assertThat(ChorplayTagFields.decode(fields + ("kind" to "PODCAST"))).isNull()
+    fun `field decoder rejects missing required fields`() {
+        val valid = ChorplayTagFields.encode(full)
+
+        assertThat(ChorplayTagFields.decode(valid - ChorplayTagFields.VIDEO_ID)).isNull()
+        assertThat(ChorplayTagFields.decode(valid - ChorplayTagFields.KIND)).isNull()
+        assertThat(ChorplayTagFields.decode(valid - ChorplayTagFields.TITLE)).isNull()
+        assertThat(ChorplayTagFields.decode(valid + (ChorplayTagFields.KIND to "NOT_A_KIND"))).isNull()
     }
 
     @Test
-    fun `mdta keys are namespaced`() {
-        assertThat(ChorplayTagFields.mdtaKey("videoId")).isEqualTo("io.github.pushkar.chorplay.videoId")
-        assertThat(ChorplayTagFields.fieldFromMdtaKey("io.github.pushkar.chorplay.videoId")).isEqualTo("videoId")
-        assertThat(ChorplayTagFields.fieldFromMdtaKey("com.android.capture.fps")).isNull()
-    }
-
-    @Test
-    fun `truncate never splits a surrogate pair`() {
-        val text = "ab🎵cd"
-        assertThat(ChorplayTagFields.truncate(text, 3)).isEqualTo("ab")
-        assertThat(ChorplayTagFields.truncate(text, 4)).isEqualTo("ab🎵")
-        assertThat(ChorplayTagFields.truncate(text, 100)).isEqualTo(text)
+    fun `text truncation respects unicode surrogate pairs`() {
+        val emoji = "Hi \uD83D\uDE00 there"
+        assertThat(ChorplayTagFields.truncate(emoji, 5)).isEqualTo("Hi ")
+        assertThat(ChorplayTagFields.truncate(emoji, 6)).isEqualTo("Hi \uD83D\uDE00")
+        assertThat(ChorplayTagFields.truncate(emoji, 100)).isEqualTo(emoji)
     }
 }

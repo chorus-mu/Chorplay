@@ -27,7 +27,7 @@ import androidx.compose.ui.semantics.customActions
 import androidx.compose.ui.semantics.semantics
 import io.github.pushkar.chorplay.R
 import io.github.pushkar.chorplay.data.model.PlaylistInfo
-import io.github.pushkar.chorplay.ui.components.layout.flowBottomContentPadding
+import io.github.pushkar.chorplay.ui.components.layout.chorBottomContentPadding
 import io.github.pushkar.chorplay.ui.components.shared.ReorderHandle
 import sh.calvin.reorderable.ReorderableItem
 import sh.calvin.reorderable.rememberReorderableLazyListState
@@ -71,7 +71,7 @@ internal fun PlaylistsReorderList(
     LazyColumn(
         state = listState,
         modifier = modifier.fillMaxSize(),
-        contentPadding = PaddingValues(bottom = flowBottomContentPadding()),
+        contentPadding = PaddingValues(bottom = chorBottomContentPadding()),
     ) {
         itemsIndexed(ordered, key = { _, playlist -> playlist.id }) { index, playlist ->
             ReorderableItem(reorderState, key = playlist.id) { isDragging ->

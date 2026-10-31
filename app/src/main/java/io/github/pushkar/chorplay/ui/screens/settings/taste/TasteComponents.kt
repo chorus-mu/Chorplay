@@ -33,7 +33,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import io.github.pushkar.chorplay.R
-import io.github.pushkar.chorplay.data.recommendation.FlowPersona
+import io.github.pushkar.chorplay.data.recommendation.ChorPersona
 import io.github.pushkar.chorplay.ui.components.shared.chorplayArtistShape
 import kotlin.math.PI
 import kotlin.math.cos
@@ -55,7 +55,7 @@ private const val START_ANGLE = -PI / 2
 /** The persona's glyph in the artist cookie shape, on a tonal container. */
 @Composable
 internal fun PersonaEmblem(
-    persona: FlowPersona,
+    persona: ChorPersona,
     modifier: Modifier = Modifier,
 ) {
     Surface(
@@ -72,7 +72,7 @@ internal fun PersonaEmblem(
 
 @Composable
 internal fun PersonaHeroCard(
-    persona: FlowPersona,
+    persona: ChorPersona,
     maturity: Float,
 ) {
     Surface(

@@ -12,10 +12,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import org.junit.Rule
 import org.junit.Test
 
-/**
- * Guards the rule that fixes the "settings and notifications disappear when Home is disabled" bug:
- * a top bar with no back affordance is a root destination and must offer both shell actions.
- */
 class ChorplayTopBarTest {
     @get:Rule
     val composeRule = createComposeRule()
@@ -67,7 +63,7 @@ class ChorplayTopBarTest {
 
     @Test
     fun brandedLeadingSlotStillCountsAsARootDestination() {
-        setBar { ChorplayTopBar(title = "FLOW", leading = {}) }
+        setBar { ChorplayTopBar(title = "CHORPLAY", leading = {}) }
 
         composeRule
             .onNodeWithContentDescription(context.getString(R.string.settings))

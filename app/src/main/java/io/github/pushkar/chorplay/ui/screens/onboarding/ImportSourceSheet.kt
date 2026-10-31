@@ -15,11 +15,11 @@ import androidx.compose.ui.unit.dp
 import io.github.pushkar.chorplay.R
 import io.github.pushkar.chorplay.data.backup.ImportKind
 import io.github.pushkar.chorplay.data.backup.ImportSource
-import io.github.pushkar.chorplay.ui.components.shared.FlowNavRow
-import io.github.pushkar.chorplay.ui.components.shared.FlowRowGroup
+import io.github.pushkar.chorplay.ui.components.shared.ChorNavRow
+import io.github.pushkar.chorplay.ui.components.shared.ChorRowGroup
 import io.github.pushkar.chorplay.ui.components.shared.ChorplaySheetHeader
-import io.github.pushkar.chorplay.ui.components.shared.flowRowGroupShape
-import io.github.pushkar.chorplay.ui.components.shared.rememberFlowSheetState
+import io.github.pushkar.chorplay.ui.components.shared.chorRowGroupShape
+import io.github.pushkar.chorplay.ui.components.shared.rememberChorSheetState
 
 private val SheetBottomPadding = 16.dp
 
@@ -34,7 +34,7 @@ internal fun ImportSourceSheet(
 ) {
     ModalBottomSheet(
         onDismissRequest = onDismiss,
-        sheetState = rememberFlowSheetState(),
+        sheetState = rememberChorSheetState(),
         containerColor = MaterialTheme.colorScheme.surface,
     ) {
         ChorplaySheetHeader(
@@ -42,9 +42,9 @@ internal fun ImportSourceSheet(
             onClose = onDismiss,
             showDragHandle = false,
         )
-        FlowRowGroup(Modifier.verticalScroll(rememberScrollState()).padding(bottom = SheetBottomPadding)) {
+        ChorRowGroup(Modifier.verticalScroll(rememberScrollState()).padding(bottom = SheetBottomPadding)) {
             source.kinds.forEachIndexed { index, kind ->
-                FlowNavRow(
+                ChorNavRow(
                     title = stringResource(kind.titleRes),
                     // Outside Default, say that a master backup reaches every profile it holds, not just this one.
                     supportingText =
@@ -55,7 +55,7 @@ internal fun ImportSourceSheet(
                         },
                     leadingIcon = Icons.Outlined.FileOpen,
                     showChevron = false,
-                    shape = flowRowGroupShape(index, source.kinds.size),
+                    shape = chorRowGroupShape(index, source.kinds.size),
                     onClick = { onImport(kind) },
                 )
             }

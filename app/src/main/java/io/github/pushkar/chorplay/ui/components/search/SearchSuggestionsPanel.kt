@@ -28,11 +28,11 @@ import io.github.pushkar.chorplay.R
 import io.github.pushkar.chorplay.data.local.SearchHistoryItem
 import io.github.pushkar.chorplay.data.local.SearchType
 import io.github.pushkar.chorplay.innertube.pages.search.SearchSuggestion
-import io.github.pushkar.chorplay.ui.components.layout.flowBottomContentPadding
+import io.github.pushkar.chorplay.ui.components.layout.chorBottomContentPadding
 import io.github.pushkar.chorplay.ui.components.shared.DeepChorplayState
 import io.github.pushkar.chorplay.ui.components.shared.ChorplaySuggestionRow
 import io.github.pushkar.chorplay.ui.components.shared.ChorplaySwitchRow
-import io.github.pushkar.chorplay.ui.components.shared.deepFlowStatus
+import io.github.pushkar.chorplay.ui.components.shared.deepChorStatus
 
 /**
  * What the search screen shows before a query is submitted: the user's own history first, then
@@ -50,19 +50,19 @@ fun SearchSuggestionsPanel(
     onDeleteHistoryItem: (SearchHistoryItem) -> Unit,
     onClearHistory: () -> Unit,
     modifier: Modifier = Modifier,
-    deepFlow: DeepChorplayState = DeepChorplayState(),
+    deepChor: DeepChorplayState = DeepChorplayState(),
     onDeepChorplayChange: (Boolean) -> Unit = {},
 ) {
     LazyColumn(
         modifier = modifier.fillMaxSize(),
-        contentPadding = PaddingValues(bottom = flowBottomContentPadding()),
+        contentPadding = PaddingValues(bottom = chorBottomContentPadding()),
     ) {
-        if (deepFlow.showOnSearch && query.isBlank()) {
-            item(key = "deepflow") {
+        if (deepChor.showOnSearch && query.isBlank()) {
+            item(key = "deepchor") {
                 ChorplaySwitchRow(
-                    title = stringResource(R.string.deep_flow_mode_title),
-                    supportingText = deepFlowStatus(deepFlow) ?: stringResource(R.string.deep_flow_mode_subtitle),
-                    checked = deepFlow.active,
+                    title = stringResource(R.string.deep_chor_mode_title),
+                    supportingText = deepChorStatus(deepChor) ?: stringResource(R.string.deep_chor_mode_subtitle),
+                    checked = deepChor.active,
                     onCheckedChange = onDeepChorplayChange,
                     leadingIcon = Icons.Outlined.VisibilityOff,
                     shape = MaterialTheme.shapes.large,

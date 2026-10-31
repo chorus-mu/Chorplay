@@ -8,7 +8,7 @@ import java.io.PrintWriter
 import java.io.StringWriter
 import java.util.concurrent.ConcurrentLinkedDeque
 
-private const val CRASH_PREFS_NAME = "flow_crash_prefs"
+private const val CRASH_PREFS_NAME = "chorplay_crash_prefs"
 private const val CRASH_PREFS_KEY_LAST = "last_crash"
 
 /**
@@ -22,10 +22,10 @@ class ChorplayCrashHandler private constructor(
 
     companion object {
         private const val TAG = "ChorplayCrashHandler"
-        private const val CRASH_LOG_FILE = "flow_crashes.log"
+        private const val CRASH_LOG_FILE = "chorplay_crashes.log"
         private const val MAX_CRASH_LOG_SIZE = 500_000L // 500KB
         private const val MAX_BREADCRUMBS = 40
-        private val breadcrumbs = ConcurrentLinkedDeque<FlowCrashBreadcrumb>()
+        private val breadcrumbs = ConcurrentLinkedDeque<ChorCrashBreadcrumb>()
         
         @Volatile
         private var instance: ChorplayCrashHandler? = null
@@ -89,7 +89,7 @@ class ChorplayCrashHandler private constructor(
 
         fun recordPhase(phase: String, detail: String) {
             breadcrumbs.addLast(
-                FlowCrashBreadcrumb(
+                ChorCrashBreadcrumb(
                     timestampMs = System.currentTimeMillis(),
                     phase = phase.take(48),
                     detail = detail.take(240)
@@ -167,7 +167,7 @@ class ChorplayCrashHandler private constructor(
         throwable: Throwable,
         stackTrace: String
     ): String {
-        val snapshot = FlowCrashReportSnapshot(
+        val snapshot = ChorCrashReportSnapshot(
             timestampMs = System.currentTimeMillis(),
             threadName = thread.name,
             threadId = thread.id,

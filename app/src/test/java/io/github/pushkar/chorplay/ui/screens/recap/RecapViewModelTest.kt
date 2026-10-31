@@ -3,9 +3,7 @@ package io.github.pushkar.chorplay.ui.screens.recap
 import com.google.common.truth.Truth.assertThat
 import io.github.pushkar.chorplay.data.local.PlayerPreferences
 import io.github.pushkar.chorplay.data.local.SearchHistoryRepository
-import io.github.pushkar.chorplay.data.recommendation.music.MusicBrainEngine
-import io.github.pushkar.chorplay.data.recommendation.music.MusicStatsStorage
-import io.github.pushkar.chorplay.data.recommendation.music.graph.MusicGraphStore
+import io.github.pushkar.chorplay.data.local.dao.WatchHistoryDao
 import io.github.pushkar.chorplay.data.stats.RecapImageResolver
 import io.github.pushkar.chorplay.data.stats.RecapPeriod
 import io.github.pushkar.chorplay.data.stats.VideoMonthRecord
@@ -35,10 +33,9 @@ class RecapViewModelTest {
     private val september = YearMonth.of(2026, 9)
     private val gate = CompletableDeferred<Unit>()
     private val videoStats: VideoStatsRecorder = mockk()
-    private val musicBrain: MusicBrainEngine = mockk()
+    private val watchHistoryDao: WatchHistoryDao = mockk(relaxed = true)
     private val searchHistory: SearchHistoryRepository = mockk()
     private val images: RecapImageResolver = mockk()
-    private val musicGraph: MusicGraphStore = mockk()
     private val preferences: PlayerPreferences = mockk(relaxed = true)
 
     @Before
@@ -49,49 +46,51 @@ class RecapViewModelTest {
             gate.await()
             VideoStatsSnapshot(months = mapOf("2026-08" to month, "2026-09" to month))
         }
-        coEvery { musicBrain.listeningStats() } returns MusicStatsStorage.SerializableStats()
         every { searchHistory.isAutoDeleteHistoryEnabledFlow() } returns flowOf(false)
         coEvery { images.localImages() } returns emptyMap()
         coEvery { images.fetchMissing(any()) } returns emptyMap()
-        coEvery { musicGraph.albumsOfTracks(any()) } returns emptyMap()
         every { preferences.recapSource } returns flowOf(null)
     }
 
     @After
     fun tearDown() = Dispatchers.resetMain()
 
-    private fun viewModel() = RecapViewModel(videoStats, musicBrain, mockk(relaxed = true), searchHistory, images, musicGraph, preferences)
+    private fun viewModel() = RecapViewModel(videoStats, watchHistoryDao, searchHistory, images, preferences)
 
     @Test
-    fun `a period asked for while the ledgers load wins over the newest month`() =
+    fun `initial state is loading until ledgers finish`() =
         runBlocking {
-            val viewModel = viewModel()
-            viewModel.openAt(RecapPeriod.Month(august), RecapSource.ALL)
-            gate.complete(Unit)
+            val vm = viewModel()
+            assertThat(vm.state.value.loading).isTrue()
 
-            val state = withTimeout(TIMEOUT_MS) { viewModel.state.first { !it.loading } }
-            assertThat(state.period).isEqualTo(RecapPeriod.Month(august))
-            assertThat(state.summary?.period).isEqualTo(RecapPeriod.Month(august))
-        }
-
-    @Test
-    fun `without a request the newest month opens`() =
-        runBlocking {
             gate.complete(Unit)
-            val state = withTimeout(TIMEOUT_MS) { viewModel().state.first { !it.loading } }
+            val state = withTimeout(1_000) { vm.state.first { !it.loading } }
+
+            assertThat(state.months).containsExactly(september, august).inOrder()
             assertThat(state.period).isEqualTo(RecapPeriod.Month(september))
+            assertThat(state.summary).isNotNull()
         }
 
     @Test
-    fun `the recap opens on the tab it was last left on`() =
+    fun `switching period updates summary immediately`() =
         runBlocking {
-            every { preferences.recapSource } returns flowOf(RecapSource.MUSIC.name)
             gate.complete(Unit)
-            val state = withTimeout(TIMEOUT_MS) { viewModel().state.first { !it.loading } }
-            assertThat(state.source).isEqualTo(RecapSource.MUSIC)
+            val vm = viewModel()
+            withTimeout(1_000) { vm.state.first { !it.loading } }
+
+            vm.selectPeriod(RecapPeriod.Month(august))
+            assertThat(vm.state.value.period).isEqualTo(RecapPeriod.Month(august))
+            assertThat(vm.state.value.summary?.period).isEqualTo(RecapPeriod.Month(august))
         }
 
-    private companion object {
-        const val TIMEOUT_MS = 5_000L
-    }
+    @Test
+    fun `switching source writes preference and updates state`() =
+        runBlocking {
+            gate.complete(Unit)
+            val vm = viewModel()
+            withTimeout(1_000) { vm.state.first { !it.loading } }
+
+            vm.selectSource(RecapSource.VIDEO)
+            assertThat(vm.state.value.source).isEqualTo(RecapSource.VIDEO)
+        }
 }

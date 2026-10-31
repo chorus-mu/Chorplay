@@ -1,13 +1,9 @@
 package io.github.pushkar.chorplay.data.video.downloader.tags
 
-import kotlinx.serialization.builtins.ListSerializer
-import kotlinx.serialization.builtins.serializer
-import kotlinx.serialization.json.Json
-
 /**
  * The flat key/value form of [DownloadTags] that is written twice into a file: as MP4 `mdta`
  * entries keyed `io.github.pushkar.chorplay.<field>` and as iTunes `----` atoms with mean
- * [NAMESPACE] and name `<field>`. Lyrics are left out; they travel in the `©lyr` atom.
+ * [NAMESPACE] and name `<field>`.
  */
 object ChorplayTagFields {
     const val NAMESPACE = "io.github.pushkar.chorplay"
@@ -17,14 +13,8 @@ object ChorplayTagFields {
     const val KIND = "kind"
     const val VIDEO_ID = "videoId"
     const val TITLE = "title"
-    const val ARTISTS = "artists"
     const val CHANNEL_ID = "channelId"
     const val CHANNEL_NAME = "channelName"
-    const val ALBUM = "album"
-    const val ALBUM_ID = "albumId"
-    const val ALBUM_ARTIST = "albumArtist"
-    const val TRACK_NUMBER = "trackNumber"
-    const val TRACK_TOTAL = "trackTotal"
     const val PLAYLIST_ID = "playlistId"
     const val RELEASE_DATE = "releaseDate"
     const val DESCRIPTION = "description"
@@ -32,9 +22,6 @@ object ChorplayTagFields {
     const val VIEW_COUNT = "viewCount"
     const val LIKE_COUNT = "likeCount"
     const val THUMBNAIL_URL = "thumbnailUrl"
-
-    private val artistListSerializer = ListSerializer(String.serializer())
-    private val json = Json { ignoreUnknownKeys = true }
 
     fun mdtaKey(field: String): String = "$NAMESPACE.$field"
 
@@ -46,14 +33,8 @@ object ChorplayTagFields {
             put(KIND, tags.kind.name)
             put(VIDEO_ID, tags.videoId)
             put(TITLE, tags.title)
-            if (tags.artists.isNotEmpty()) put(ARTISTS, json.encodeToString(artistListSerializer, tags.artists))
             putIfPresent(CHANNEL_ID, tags.channelId)
             putIfPresent(CHANNEL_NAME, tags.channelName)
-            putIfPresent(ALBUM, tags.album)
-            putIfPresent(ALBUM_ID, tags.albumId)
-            putIfPresent(ALBUM_ARTIST, tags.albumArtist)
-            putIfPresent(TRACK_NUMBER, tags.trackNumber?.toString())
-            putIfPresent(TRACK_TOTAL, tags.trackTotal?.toString())
             putIfPresent(PLAYLIST_ID, tags.playlistId)
             putIfPresent(RELEASE_DATE, tags.releaseDate)
             putIfPresent(DESCRIPTION, tags.description?.let { truncate(it, DESCRIPTION_MAX_CHARS) })
@@ -73,14 +54,8 @@ object ChorplayTagFields {
             kind = kind,
             videoId = videoId,
             title = title,
-            artists = fields[ARTISTS]?.let(::decodeArtists).orEmpty(),
             channelId = fields[CHANNEL_ID],
             channelName = fields[CHANNEL_NAME],
-            album = fields[ALBUM],
-            albumId = fields[ALBUM_ID],
-            albumArtist = fields[ALBUM_ARTIST],
-            trackNumber = fields[TRACK_NUMBER]?.toIntOrNull(),
-            trackTotal = fields[TRACK_TOTAL]?.toIntOrNull(),
             playlistId = fields[PLAYLIST_ID],
             releaseDate = fields[RELEASE_DATE],
             description = fields[DESCRIPTION],
@@ -100,8 +75,6 @@ object ChorplayTagFields {
         val end = if (Character.isHighSurrogate(text[maxChars - 1])) maxChars - 1 else maxChars
         return text.substring(0, end)
     }
-
-    private fun decodeArtists(raw: String): List<String>? = runCatching { json.decodeFromString(artistListSerializer, raw) }.getOrNull()
 
     private fun MutableMap<String, String>.putIfPresent(
         key: String,

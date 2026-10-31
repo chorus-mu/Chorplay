@@ -15,7 +15,6 @@ import io.github.pushkar.chorplay.data.local.entity.DownloadItemEntity
 import io.github.pushkar.chorplay.data.local.entity.DownloadItemStatus
 import io.github.pushkar.chorplay.data.video.VideoDownloadManager
 import io.github.pushkar.chorplay.data.video.downloader.request.DownloadRequest
-import io.github.pushkar.chorplay.data.video.downloader.request.StoredArtist
 import io.github.pushkar.chorplay.data.video.downloader.tags.displayArtist
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -166,10 +165,6 @@ class DownloadController
                 releaseDate = tags.releaseDate,
                 viewCount = tags.viewCount ?: 0L,
                 likeCount = tags.likeCount ?: 0L,
-                album = tags.album,
-                albumId = tags.albumId,
-                artistsJson = request.artists.takeIf { it.isNotEmpty() }?.let(StoredArtist::encode),
-                trackNumber = tags.trackNumber,
                 requestJson = request.encode(),
             )
         }

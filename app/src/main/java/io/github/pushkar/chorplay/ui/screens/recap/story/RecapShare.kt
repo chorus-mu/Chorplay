@@ -11,14 +11,9 @@ import kotlinx.coroutines.withContext
 import java.io.File
 
 private const val SHARE_DIR = "recap"
-private const val SHARE_FILE = "flow_recap.png"
+private const val SHARE_FILE = "chorplay_recap.png"
 private const val PNG_QUALITY = 100
 
-/**
- * Shares [image] through the system sheet, with [text] alongside for apps that take only text.
- * The image lives in the app's cache under a single name, so each share replaces the last one.
- * Returns false when the image could not be written, and the caller falls back to text alone.
- */
 internal suspend fun shareRecap(
     context: Context,
     image: ImageBitmap?,

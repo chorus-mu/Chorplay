@@ -30,7 +30,7 @@ import kotlin.io.path.createTempDirectory
 class DeviceKeysCopyTest {
     private val dir = createTempDirectory("device-keys").toFile()
     private val playerFile = File(dir, "player_preferences.preferences_pb")
-    private val flowFile = File(dir, "flow_preferences.preferences_pb")
+    private val chorplayFile = File(dir, "chorplay_preferences.preferences_pb")
     private val deviceFile = File(dir, "device_preferences.preferences_pb")
     private val jobs = mutableListOf<Job>()
 
@@ -80,7 +80,7 @@ class DeviceKeysCopyTest {
     ) = DeviceKeysCopy(
         listOf(
             DeviceKeysCopy.Source(player, playerNames, playerFile),
-            DeviceKeysCopy.Source(flow, flowNames, flowFile),
+            DeviceKeysCopy.Source(flow, flowNames, chorplayFile),
         ),
     )
 
@@ -88,7 +88,7 @@ class DeviceKeysCopyTest {
     fun `device keys are copied with their types and profile keys stay behind`() =
         runBlocking<Unit> {
             val player = store(playerFile)
-            val flow = store(flowFile)
+            val flow = store(chorplayFile)
             player.edit {
                 it[downloadThreads] = 4
                 it[proxyHost] = "10.0.0.2"
@@ -120,7 +120,7 @@ class DeviceKeysCopyTest {
     fun `the sources keep every value`() =
         runBlocking<Unit> {
             val player = store(playerFile)
-            val flow = store(flowFile)
+            val flow = store(chorplayFile)
             player.edit {
                 it[downloadThreads] = 4
                 it[sponsorColor] = "red"
@@ -135,7 +135,7 @@ class DeviceKeysCopyTest {
     fun `the copy runs once, so a later change in the old file never comes back`() =
         runBlocking<Unit> {
             val player = store(playerFile)
-            val flow = store(flowFile)
+            val flow = store(chorplayFile)
             player.edit { it[downloadThreads] = 4 }
             val device = store(deviceFile, listOf(copy(player, flow)))
             device.data.first()
@@ -151,7 +151,7 @@ class DeviceKeysCopyTest {
     @Test
     fun `nothing set copies nothing but still finishes`() =
         runBlocking<Unit> {
-            val device = store(deviceFile, listOf(copy(store(playerFile), store(flowFile)))).data.first()
+            val device = store(deviceFile, listOf(copy(store(playerFile), store(chorplayFile)))).data.first()
 
             assertThat(device.asMap()).containsExactly(DeviceKeysCopy.COPIED, true)
         }

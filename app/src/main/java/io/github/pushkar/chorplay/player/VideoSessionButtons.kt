@@ -12,7 +12,6 @@ import com.google.common.util.concurrent.Futures
 import com.google.common.util.concurrent.ListenableFuture
 import io.github.pushkar.chorplay.R
 
-/** What the video notification's repeat and shuffle buttons show and do. */
 internal object VideoSessionControls {
     enum class Repeat { OFF, QUEUE, ONE }
 
@@ -38,7 +37,6 @@ internal object VideoSessionControls {
         val queueLoop: Boolean,
     )
 
-    /** Off, then the whole queue, then this video; a single video goes straight to looping itself. */
     fun nextLoop(state: State): LoopTarget =
         when (state.repeat) {
             Repeat.OFF -> {
@@ -62,10 +60,6 @@ internal object VideoSessionControls {
         }
 }
 
-/**
- * Repeat and shuffle on the video session, for the media card and older notifications. They are
- * session commands because the queue lives in the app: the player only ever holds the current video.
- */
 @OptIn(UnstableApi::class)
 internal class VideoSessionButtons(
     private val context: Context,
@@ -75,7 +69,6 @@ internal class VideoSessionButtons(
 ) {
     val callback: MediaSession.Callback =
         object : MediaSession.Callback {
-            // Built from the trust-aware defaults: in Media3 1.11 super.onConnect is an empty placeholder.
             override fun onConnectAsync(
                 session: MediaSession,
                 controller: MediaSession.ControllerInfo,
@@ -137,7 +130,7 @@ internal class VideoSessionButtons(
     }
 
     private companion object {
-        val REPEAT = SessionCommand("flow.video.REPEAT", Bundle.EMPTY)
-        val SHUFFLE = SessionCommand("flow.video.SHUFFLE", Bundle.EMPTY)
+        val REPEAT = SessionCommand("chorplay.video.REPEAT", Bundle.EMPTY)
+        val SHUFFLE = SessionCommand("chorplay.video.SHUFFLE", Bundle.EMPTY)
     }
 }

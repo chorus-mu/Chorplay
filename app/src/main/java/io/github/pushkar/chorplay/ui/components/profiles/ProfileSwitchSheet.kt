@@ -43,11 +43,11 @@ import io.github.pushkar.chorplay.data.profile.displayName
 import io.github.pushkar.chorplay.ui.components.layout.LocalChorplaySnackbarHostState
 import io.github.pushkar.chorplay.ui.components.settings.SettingsDestination
 import io.github.pushkar.chorplay.ui.components.settings.SettingsTarget
-import io.github.pushkar.chorplay.ui.components.shared.FlowNavRow
-import io.github.pushkar.chorplay.ui.components.shared.FlowRowGroup
-import io.github.pushkar.chorplay.ui.components.shared.FlowSectionHeader
-import io.github.pushkar.chorplay.ui.components.shared.FlowSegmentedGap
-import io.github.pushkar.chorplay.ui.components.shared.flowRowGroupShape
+import io.github.pushkar.chorplay.ui.components.shared.ChorNavRow
+import io.github.pushkar.chorplay.ui.components.shared.ChorRowGroup
+import io.github.pushkar.chorplay.ui.components.shared.ChorSectionHeader
+import io.github.pushkar.chorplay.ui.components.shared.ChorSegmentedGap
+import io.github.pushkar.chorplay.ui.components.shared.chorRowGroupShape
 import io.github.pushkar.chorplay.ui.components.shared.quickactions.QuickActionRow
 import io.github.pushkar.chorplay.ui.components.shared.quickactions.QuickActionsGroup
 import io.github.pushkar.chorplay.ui.components.shared.quickactions.QuickActionsSheet
@@ -111,7 +111,7 @@ internal fun ProfileSwitchSheet(
     val context = LocalContext.current
     val atLimit = profiles.size >= ProfileRegistry.MAX_PROFILES
     QuickActionsSheet(onDismiss = onDismiss) { sheet ->
-        FlowSectionHeader(text = stringResource(R.string.profiles_title))
+        ChorSectionHeader(text = stringResource(R.string.profiles_title))
         ProfileDropdown(
             profiles = profiles,
             runningId = runningId,
@@ -126,7 +126,7 @@ internal fun ProfileSwitchSheet(
             rows =
                 listOf(
                     QuickActionRow("profiles.add") { shape ->
-                        FlowNavRow(
+                        ChorNavRow(
                             title = stringResource(R.string.profiles_add),
                             supportingText = stringResource(R.string.profiles_limit, ProfileRegistry.MAX_PROFILES).takeIf { atLimit },
                             onClick = {
@@ -140,7 +140,7 @@ internal fun ProfileSwitchSheet(
                         )
                     },
                     QuickActionRow("profiles.manage") { shape ->
-                        FlowNavRow(
+                        ChorNavRow(
                             title = stringResource(R.string.profiles_manage),
                             onClick = {
                                 sheet.close()
@@ -182,9 +182,9 @@ private fun ProfileDropdown(
     val sizeSpec = MaterialTheme.motionScheme.defaultEffectsSpec<IntSize>()
     val fadeSpec = MaterialTheme.motionScheme.defaultEffectsSpec<Float>()
 
-    FlowRowGroup {
+    ChorRowGroup {
         Column {
-            FlowNavRow(
+            ChorNavRow(
                 title = running.displayName(context),
                 supportingText = stringResource(R.string.profiles_in_use),
                 onClick = { if (others.isNotEmpty()) expanded = !expanded },
@@ -205,7 +205,7 @@ private fun ProfileDropdown(
                             )
                         }
                     },
-                shape = flowRowGroupShape(index = 0, count = if (joined) profiles.size else 1),
+                shape = chorRowGroupShape(index = 0, count = if (joined) profiles.size else 1),
             )
             AnimatedVisibility(
                 visibleState = visibility,
@@ -213,16 +213,16 @@ private fun ProfileDropdown(
                 exit = shrinkVertically(sizeSpec) + fadeOut(fadeSpec),
             ) {
                 Column(
-                    modifier = Modifier.padding(top = FlowSegmentedGap),
-                    verticalArrangement = Arrangement.spacedBy(FlowSegmentedGap),
+                    modifier = Modifier.padding(top = ChorSegmentedGap),
+                    verticalArrangement = Arrangement.spacedBy(ChorSegmentedGap),
                 ) {
                     others.forEachIndexed { index, profile ->
-                        FlowNavRow(
+                        ChorNavRow(
                             title = profile.displayName(context),
                             onClick = { onSwitch(profile.id) },
                             showChevron = false,
                             leadingContent = { ProfileAvatar(profile) },
-                            shape = flowRowGroupShape(index = index + 1, count = profiles.size),
+                            shape = chorRowGroupShape(index = index + 1, count = profiles.size),
                         )
                     }
                 }

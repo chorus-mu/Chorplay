@@ -12,13 +12,13 @@ import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
 
-/** FLOW-SYNC/1's chunk size; it keeps every batch well under the 4 MiB object limit. */
+/** CHOR-SYNC/1's chunk size; it keeps every batch well under the 4 MiB object limit. */
 private const val RECORDS_PER_BATCH = 1000
 
 /** The brains change with every video watched; spec/protocol.md asks for at most one upload in 6 hours. */
 private const val BRAIN_INTERVAL_MS = 6 * 60 * 60 * 1000L
 
-private val BRAINS = setOf(SyncCollection.FLOW_NEURO_BRAIN, SyncCollection.MUSIC_BRAIN)
+private val BRAINS = setOf(SyncCollection.CHOR_NEURO_BRAIN)
 
 @Serializable
 private class BatchHeader(
@@ -131,7 +131,7 @@ fun parseBatch(content: ByteArray): IncomingBatch {
 }
 
 /**
- * Applies batches from one sender through the FLOW-SYNC/1 merges, which run in one transaction
+ * Applies batches from one sender through the CHOR-SYNC/1 merges, which run in one transaction
  * behind a pre-merge backup. What an applied record looks like in this device's own [export] counts
  * as known to the group, so it isn't sent back: another app's canonical form of the same record
  * differs, and sending that back would bounce between the two forever. A record of this device's

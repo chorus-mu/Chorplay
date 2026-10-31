@@ -15,7 +15,7 @@ import org.junit.Assert.assertEquals
 import org.junit.Test
 
 /**
- * The desktop's crypto golden vectors (the JSON files in `src-tauri/tests/fixtures/flow-sync/`, mirrored into
+ * The desktop's crypto golden vectors (the JSON files in `src-tauri/tests/fixtures/chorplay-sync/`, mirrored into
  * `resources/sync/desktop/crypto/`). [SyncGoldenVectorsTest] asserts Android's own set; this asserts
  * the desktop's, so each side checks both fixture sets and neither can drift alone.
  */

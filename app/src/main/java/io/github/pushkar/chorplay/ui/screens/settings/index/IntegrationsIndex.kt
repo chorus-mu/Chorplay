@@ -72,26 +72,6 @@ internal object IntegrationsIndex {
             summary = R.string.player_settings_rytd_subtitle,
             destination = page,
         )
-    val discord =
-        SettingEntry(
-            key = "integrations.discord",
-            title = R.string.discord_presence_enable,
-            summary = R.string.discord_presence_enable_description,
-            keywords = R.string.settings_keywords_discord,
-            section = R.string.discord_presence_title,
-            availability = SettingAvailability.GithubOnly,
-            destination = page,
-        )
-    val discordAccount =
-        SettingEntry(
-            key = "integrations.discord.account",
-            title = R.string.discord_presence_account,
-            keywords = R.string.settings_keywords_discord,
-            section = R.string.discord_presence_title,
-            availability = SettingAvailability.GithubOnly,
-            destination = page,
-        )
-
     val all =
-        listOf(sponsorBlock, segments, contribute, userId, deArrow, deArrowRandomFrame, deArrowBadge, dislikes, discord, discordAccount)
+        listOf(sponsorBlock, segments, contribute, userId, deArrow, deArrowRandomFrame, deArrowBadge, dislikes)
 }

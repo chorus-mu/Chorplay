@@ -1,14 +1,9 @@
 package io.github.pushkar.chorplay.data.stats
 
-import io.github.pushkar.chorplay.data.recommendation.music.MusicStatsStorage
 import io.github.pushkar.chorplay.utils.ThumbnailUrlResolver
 import java.time.LocalDate
 import java.time.YearMonth
 
-/**
- * Folds the two ledgers into what one period shows. Pure and allocation-light: the recap screens
- * call [summarize] once per period they display, off the main thread, and render only its result.
- */
 internal object RecapAggregates {
     const val TOP_COUNT = 10
 
@@ -26,55 +21,37 @@ internal object RecapAggregates {
     private val ViewCountName = Regex("""^[\d.,]+\s?[KMBkmb]?\s+views?$""", RegexOption.IGNORE_CASE)
     private const val TRACK_ART_SIZE = 544
 
-    /** Every month either ledger holds, newest first. */
     fun availableMonths(
         video: VideoStatsSnapshot,
-        music: MusicStatsStorage.SerializableStats,
     ): List<YearMonth> =
-        (video.months.keys + music.months.keys)
+        video.months.keys
             .mapNotNull(LedgerTime::parseMonth)
             .distinct()
             .sortedDescending()
 
-    /**
-     * [queriesSince] drops search texts from months before it, for the search history's own
-     * auto-delete; null keeps every stored query.
-     */
     fun summarize(
         period: RecapPeriod,
         video: VideoStatsSnapshot,
-        music: MusicStatsStorage.SerializableStats,
         queriesSince: YearMonth? = null,
         trackAlbums: Map<String, TrackAlbum> = emptyMap(),
     ): RecapSummary {
         val videoMonths = video.months.inPeriod(period)
-        val musicMonths = music.months.inPeriod(period)
         val previousVideo = period.previous()?.let { video.months.inPeriod(it) }
-        val previousMusic = period.previous()?.let { music.months.inPeriod(it) }
 
         val videoRecap = videoRecap(videoMonths, previousVideo.orEmpty(), queriesSince)
-        val musicRecap = musicRecap(musicMonths, trackAlbums)
-        val combined = combine(videoRecap.activity, musicRecap.activity)
-        val previousTotal =
-            if (previousVideo.isNullOrEmpty() && previousMusic.isNullOrEmpty()) {
-                null
-            } else {
-                previousVideo.orEmpty().sumOf { it.second.watchedMs } + previousMusic.orEmpty().sumOf { it.second.listenedMs }
-            }
+        val combined = videoRecap.activity
+        val previousTotal = previousVideo?.sumOf { it.second.watchedMs }
         return RecapSummary(
             period = period,
             video = videoRecap,
-            music = musicRecap,
             combined = combined,
             previousTotalMs = previousTotal,
-            insights = insights(videoRecap, musicRecap, combined),
+            insights = insights(videoRecap, combined),
         )
     }
 
-    /** Watching and listening time per day from [from] to [to], both ledgers together. */
     fun dailyTime(
         video: VideoStatsSnapshot,
-        music: MusicStatsStorage.SerializableStats,
         from: LocalDate,
         to: LocalDate,
     ): Map<LocalDate, Long> {
@@ -91,11 +68,9 @@ internal object RecapAggregates {
             }
         }
         video.months.forEach { (key, month) -> add(key, month.dayMs) }
-        music.months.forEach { (key, month) -> add(key, musicDayMs(month)) }
         return days
     }
 
-    /** The first day the video ledger holds anything; before it, only watch history knows. */
     fun videoLedgerStart(video: VideoStatsSnapshot): LocalDate? =
         video.months
             .mapNotNull { (key, month) ->
@@ -105,7 +80,6 @@ internal object RecapAggregates {
                     ?.let { parsed.dateOrNull(it) }
             }.minOrNull()
 
-    /** Some music results arrive with their view count where the artist belongs ("34M views"). */
     private fun String.looksLikeViewCount(): Boolean = ViewCountName.matches(trim())
 
     private fun <M> Map<String, M>.inPeriod(period: RecapPeriod): List<Pair<YearMonth, M>> =
@@ -135,7 +109,14 @@ internal object RecapAggregates {
         fun channelItem(
             id: String,
             count: Int,
-        ) = RankedItem(id, channel(id), count, channelMs[id] ?: 0L, imageUrl = channelAvatars[id].orEmpty(), kind = RankedKind.CHANNEL)
+        ) = RankedItem(
+            id,
+            channel(id),
+            count,
+            channelMs[id] ?: 0L,
+            imageUrl = channelAvatars[id].orEmpty(),
+            kind = RankedKind.CHANNEL
+        )
 
         fun videoItem(
             id: String,
@@ -170,7 +151,8 @@ internal object RecapAggregates {
             topChannels = channelViews.ranked(TOP_COUNT, ::channelItem),
             topVideos = months.sumCounts { it.videoViews }.ranked(TOP_COUNT, ::videoItem),
             topTopics = topTopics,
-            newTopics = if (previous.isEmpty()) emptyList() else topTopics.map { it.id }.filterNot(previousTopics::contains),
+            newTopics = if (previous.isEmpty()) emptyList() else topTopics.map { it.id }
+                .filterNot(previousTopics::contains),
             discoveredChannels =
                 discovered
                     .associateWith { channelViews[it] ?: 0 }
@@ -186,109 +168,6 @@ internal object RecapAggregates {
                     .ranked(TOP_COUNT) { id, count -> RankedItem(id, id, count) },
             sponsorSkippedMs = months.sumDurations { it.sponsorSkippedMs },
         )
-    }
-
-    private fun musicRecap(
-        months: List<Pair<YearMonth, MusicStatsStorage.SerializableMonth>>,
-        trackAlbums: Map<String, TrackAlbum>,
-    ): MusicRecap {
-        val artistNames = HashMap<String, String>()
-        val trackTitles = HashMap<String, String>()
-        val trackArt = HashMap<String, String>()
-        val artistArt = HashMap<String, String>()
-        months.forEach { (_, m) ->
-            artistNames.putAll(m.artistNames)
-            trackTitles.putAll(m.trackTitles)
-            trackArt.putAll(m.trackArt)
-            artistArt.putAll(m.artistArt)
-        }
-
-        fun artist(key: String) = artistNames[key].orEmpty().ifBlank { key }
-
-        fun artistItem(
-            key: String,
-            count: Int,
-        ) = RankedItem(key, artist(key), count, imageUrl = artistArt[key].orEmpty(), kind = RankedKind.ARTIST)
-
-        fun trackItem(
-            id: String,
-            count: Int,
-        ) = RankedItem(
-            id = id,
-            name = trackTitles[id].orEmpty().ifBlank { id },
-            count = count,
-            imageUrl = ThumbnailUrlResolver.resolveMusicThumbnail(id, trackArt[id], TRACK_ART_SIZE),
-            kind = RankedKind.TRACK,
-        )
-
-        val trackPlays = months.sumCounts { it.trackPlays }
-
-        fun datedArtists(pick: (MusicStatsStorage.SerializableMonth) -> Map<String, Long>) =
-            months
-                .flatMap { pick(it.second).entries }
-                .sortedByDescending { it.value }
-                .distinctBy { it.key }
-                .map { artistItem(it.key, 1) }
-
-        val artistPlays = months.sumCounts { it.artistPlays }.filterKeys { !artist(it).looksLikeViewCount() }
-        return MusicRecap(
-            plays = months.sumOf { it.second.plays },
-            sessions = months.sumOf { it.second.sessions },
-            activity =
-                activity(
-                    months = months,
-                    totalMs = months.sumOf { it.second.listenedMs },
-                    dayMs = ::musicDayMs,
-                    dayCounts = { it.dayPlays },
-                    hourCounts = { it.hourPlays },
-                ),
-            topArtists = artistPlays.ranked(TOP_COUNT, ::artistItem),
-            topTracks = trackPlays.ranked(TOP_COUNT, ::trackItem),
-            topAlbums = topAlbums(trackPlays, trackAlbums),
-            topGenres = months.sumCounts { it.genrePlays }.ranked(TOP_COUNT) { id, count -> RankedItem(id, id, count) },
-            discoveredArtists =
-                months
-                    .flatMap { it.second.discoveredArtists }
-                    .filterNot { artist(it).looksLikeViewCount() }
-                    .toSet()
-                    .associateWith { artistPlays[it] ?: 0 }
-                    .ranked(TOP_COUNT * 3, ::artistItem),
-            skippedTracks = months.sumCounts { it.trackSkips }.ranked(TOP_COUNT, ::trackItem),
-            skippedArtists = months.sumCounts { it.artistSkips }.ranked(TOP_COUNT, ::artistItem),
-            dislikedArtists = datedArtists { it.dislikedArtists },
-            blockedArtists = datedArtists { it.blockedArtists },
-        )
-    }
-
-    /** Plays of every track the music graph places on an album, summed per album. */
-    private fun topAlbums(
-        trackPlays: Map<String, Int>,
-        trackAlbums: Map<String, TrackAlbum>,
-    ): List<RankedItem> {
-        val albums = HashMap<String, TrackAlbum>()
-        val plays = HashMap<String, Int>()
-        trackPlays.forEach { (trackId, count) ->
-            val album = trackAlbums[trackId] ?: return@forEach
-            albums.putIfAbsent(album.id, album)
-            plays[album.id] = (plays[album.id] ?: 0) + count
-        }
-        return plays.ranked(TOP_COUNT) { id, count ->
-            val album = albums.getValue(id)
-            RankedItem(id, album.title, count, detail = album.artist, imageUrl = album.imageUrl, kind = RankedKind.ALBUM)
-        }
-    }
-
-    /**
-     * Listening time per day. Days recorded before minutes were kept per day only have play counts,
-     * so the month's time not yet placed on a day is spread over those days by their plays; a month
-     * that straddles the change keeps both kinds of day.
-     */
-    internal fun musicDayMs(month: MusicStatsStorage.SerializableMonth): Map<Int, Long> {
-        val legacyDays = month.dayPlays.filterKeys { it !in month.dayMs }
-        val legacyPlays = legacyDays.values.sum()
-        val unplaced = (month.listenedMs - month.dayMs.values.sum()).coerceAtLeast(0L)
-        if (legacyPlays == 0 || unplaced == 0L) return month.dayMs
-        return month.dayMs + legacyDays.mapValues { (_, count) -> unplaced * count / legacyPlays }
     }
 
     private fun <M> activity(
@@ -313,23 +192,8 @@ internal object RecapAggregates {
 
     private fun YearMonth.dateOrNull(day: Int): LocalDate? = if (isValidDay(day)) atDay(day) else null
 
-    private fun combine(
-        video: ActivityPattern,
-        music: ActivityPattern,
-    ): ActivityPattern {
-        val days = HashMap(video.dayMs)
-        music.dayMs.forEach { (day, ms) -> days[day] = (days[day] ?: 0L) + ms }
-        return ActivityPattern(
-            totalMs = video.totalMs + music.totalMs,
-            dayMs = days,
-            hourCounts = video.hourCounts.zip(music.hourCounts, Int::plus),
-            weekdayCounts = video.weekdayCounts.zip(music.weekdayCounts, Int::plus),
-        )
-    }
-
     private fun insights(
         video: VideoRecap,
-        music: MusicRecap,
         combined: ActivityPattern,
     ): List<RecapInsight> {
         val events = combined.hourCounts.sum()
@@ -337,14 +201,16 @@ internal object RecapAggregates {
         if (events >= MIN_EVENTS_FOR_TRAITS) {
             val night = NightHours.sumOf { combined.hourCounts[it] }.toDouble() / events
             val morning = MorningHours.sumOf { combined.hourCounts[it] }.toDouble() / events
-            val weekend = (combined.weekdayCounts[5] + combined.weekdayCounts[6]).toDouble() / combined.weekdayCounts.sum().coerceAtLeast(1)
+            val weekend =
+                (combined.weekdayCounts[5] + combined.weekdayCounts[6]).toDouble() / combined.weekdayCounts.sum()
+                    .coerceAtLeast(1)
             if (night >= NIGHT_SHARE) traits += RecapInsight.NIGHT_OWL
             if (morning >= MORNING_SHARE) traits += RecapInsight.EARLY_BIRD
             if (weekend >= WEEKEND_SHARE) traits += RecapInsight.WEEKEND_WATCHER
         }
         val topChannelViews = video.topChannels.firstOrNull()?.count ?: 0
         if (video.views >= LOYAL_MIN_VIEWS && topChannelViews.toDouble() / video.views >= LOYAL_SHARE) traits += RecapInsight.LOYAL
-        if (video.discoveredChannels.size + music.discoveredArtists.size >= EXPLORER_MIN) traits += RecapInsight.EXPLORER
+        if (video.discoveredChannels.size >= EXPLORER_MIN) traits += RecapInsight.EXPLORER
         if ((combined.busiestDay?.second ?: 0L) >= MARATHON_MS) traits += RecapInsight.MARATHON
         if (video.sponsorSavedMs >= TIME_SAVER_MS) traits += RecapInsight.TIME_SAVER
         return traits

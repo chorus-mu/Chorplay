@@ -2,7 +2,6 @@ package io.github.pushkar.chorplay.ui.screens.library
 
 import androidx.annotation.StringRes
 import io.github.pushkar.chorplay.R
-import io.github.pushkar.chorplay.data.music.DownloadedTrack
 import io.github.pushkar.chorplay.data.video.DownloadedVideo
 
 /** How the Downloads lists are ordered. */
@@ -19,10 +18,9 @@ enum class DownloadSort(
 /** Space the downloads take, and what is left on the volume they are saved to. */
 data class DownloadStorage(
     val videoBytes: Long = 0L,
-    val musicBytes: Long = 0L,
     val freeBytes: Long = 0L,
 ) {
-    val usedBytes: Long get() = videoBytes + musicBytes
+    val usedBytes: Long get() = videoBytes
 }
 
 internal fun List<DownloadedVideo>.filterAndSort(
@@ -40,11 +38,6 @@ internal fun List<DownloadedVideo>.filterAndSort(
             },
         )
 
-internal fun List<DownloadedTrack>.filterAndSortTracks(
-    query: String,
-    sort: DownloadSort,
-): List<DownloadedTrack> =
-    filter { matches(query, it.track.title, it.track.artist, it.track.album) }
         .sortedWith(
             when (sort) {
                 DownloadSort.NEWEST -> compareByDescending { it.downloadedAt }

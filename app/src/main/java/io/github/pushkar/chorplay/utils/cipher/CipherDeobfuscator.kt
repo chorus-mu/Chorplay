@@ -19,7 +19,7 @@ import kotlinx.coroutines.withContext
  * n-parameter transformation (for throttle avoidance / 403 fix).
  */
 object CipherDeobfuscator {
-    private const val TAG = "Flow_CipherDeobfusc"
+    private const val TAG = "Chor_CipherDeobfusc"
 
     lateinit var appContext: Context
         private set

@@ -59,7 +59,7 @@ internal fun SubscriptionManagerItem(
                 modifier =
                     Modifier
                         .size(AvatarSize)
-                        .clip(subscriptionAvatarShape(channel.isMusic))
+                        .clip(subscriptionAvatarShape())
                         .background(MaterialTheme.colorScheme.surfaceVariant),
             )
             ChannelGroupBadge(channelId = channel.id)
@@ -78,9 +78,6 @@ internal fun SubscriptionManagerItem(
                 maxLines = 2,
                 overflow = TextOverflow.Ellipsis,
             )
-            if (channel.isMusic) {
-                SubscriptionMusicPill()
-            }
         }
 
         Spacer(modifier = Modifier.width(TitleActionSpacing))

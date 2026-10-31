@@ -27,7 +27,7 @@ import io.github.pushkar.chorplay.ui.components.settings.nav
 import io.github.pushkar.chorplay.ui.components.settings.notice
 import io.github.pushkar.chorplay.ui.components.settings.option
 import io.github.pushkar.chorplay.ui.components.settings.toggleGroup
-import io.github.pushkar.chorplay.ui.components.shared.FlowToggleOption
+import io.github.pushkar.chorplay.ui.components.shared.ChorToggleOption
 import io.github.pushkar.chorplay.ui.screens.settings.index.BackupIndex
 
 internal fun SettingsListScope.exportPage(onExport: (ExportKind) -> Unit) {
@@ -59,7 +59,7 @@ internal class AutoBackupState(
     val lastRun: String?,
     val running: Boolean,
     val severalProfiles: Boolean,
-    val frequencyOptions: List<FlowToggleOption<AutoBackupFrequency>>,
+    val frequencyOptions: List<ChorToggleOption<AutoBackupFrequency>>,
     val typeLabels: Map<AutoBackupType, String>,
 )
 

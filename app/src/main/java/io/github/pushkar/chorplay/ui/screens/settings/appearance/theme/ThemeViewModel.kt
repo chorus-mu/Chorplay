@@ -14,7 +14,7 @@ import io.github.pushkar.chorplay.ui.theme.ThemeCatalog
 import io.github.pushkar.chorplay.ui.theme.ThemeCatalogEntry
 import io.github.pushkar.chorplay.ui.theme.ThemeMode
 import io.github.pushkar.chorplay.ui.theme.ThemeVariant
-import io.github.pushkar.chorplay.ui.theme.resolveFlowColorScheme
+import io.github.pushkar.chorplay.ui.theme.resolveChorColorScheme
 import io.github.pushkar.chorplay.ui.theme.toColorScheme
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.StateFlow
@@ -90,7 +90,7 @@ class ThemeViewModel
             mode: ThemeMode,
             variant: ThemeVariant,
         ): ThemeSwatch =
-            resolveFlowColorScheme(
+            resolveChorColorScheme(
                 context = context,
                 isSystemDark = variant != ThemeVariant.LIGHT,
                 themeMode = mode,

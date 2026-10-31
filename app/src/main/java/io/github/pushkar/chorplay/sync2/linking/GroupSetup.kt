@@ -113,7 +113,7 @@ suspend fun createWebDavGroup(
         SyncSerialization
             .canonicalJson(
                 buildJsonObject {
-                    put("format", "FLOW-SYNC/2")
+                    put("format", "CHOR-SYNC/2")
                     put("group", group)
                 },
             ).toByteArray(),

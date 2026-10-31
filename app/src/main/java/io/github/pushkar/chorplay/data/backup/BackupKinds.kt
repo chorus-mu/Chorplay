@@ -20,10 +20,9 @@ enum class ExportKind(
     private val extension: String,
     private val timestamped: Boolean = true,
 ) {
-    MASTER(R.string.master_backup_title, R.string.master_backup_subtitle, ZIP, "flow_master_backup", "zip"),
-    APP_DATA(R.string.export_app_data_title, R.string.export_app_data_desc, JSON, "flow_backup", "json"),
-    ENGINE(R.string.export_engine_data, R.string.export_engine_data_subtitle, JSON, "flow_engine", "json"),
-    MUSIC_BRAIN(R.string.export_music_brain_title, R.string.export_music_brain_desc, JSON, "flow_music_brain", "json"),
+    MASTER(R.string.master_backup_title, R.string.master_backup_subtitle, ZIP, "chorplay_master_backup", "zip"),
+    APP_DATA(R.string.export_app_data_title, R.string.export_app_data_desc, JSON, "chorplay_backup", "json"),
+    ENGINE(R.string.export_engine_data, R.string.export_engine_data_subtitle, JSON, "chorplay_engine", "json"),
     NEWPIPE_SUBSCRIPTIONS(
         R.string.export_newpipe_subs_title,
         R.string.export_newpipe_subs_desc,
@@ -35,7 +34,7 @@ enum class ExportKind(
         R.string.export_watch_history_title,
         R.string.export_watch_history_desc,
         JSON,
-        "flow-watch-history",
+        "chorplay-watch-history",
         "json",
         timestamped = false,
     ),
@@ -51,7 +50,6 @@ enum class ExportKind(
         MASTER -> coordinator.exportMaster(uri)
         APP_DATA -> coordinator.exportAppData(uri)
         ENGINE -> coordinator.exportEngine(uri)
-        MUSIC_BRAIN -> coordinator.exportMusicBrain(uri)
         NEWPIPE_SUBSCRIPTIONS -> coordinator.exportNewPipeSubscriptions(uri)
         WATCH_HISTORY -> coordinator.exportWatchHistory(uri)
     }
@@ -63,10 +61,9 @@ enum class ImportKind(
     val mimeTypes: Array<String>,
     val takesSeveralFiles: Boolean = false,
 ) {
-    FLOW_BACKUP(R.string.import_flow_backup_item_title, R.string.import_flow_backup_desc, arrayOf(JSON)),
+    CHORPLAY_BACKUP(R.string.import_chorplay_backup_item_title, R.string.import_chorplay_backup_desc, arrayOf(JSON)),
     MASTER(R.string.import_master_backup_title, R.string.import_master_backup_desc, arrayOf(ZIP, BINARY)),
     ENGINE(R.string.import_engine_data, R.string.import_engine_data_desc, arrayOf(JSON)),
-    MUSIC_BRAIN(R.string.import_music_brain_title, R.string.import_music_brain_desc, arrayOf(JSON)),
     TAKEOUT(R.string.import_yt_takeout_all, R.string.import_yt_takeout_all_desc, ZipTypes, takesSeveralFiles = true),
     YOUTUBE_SUBSCRIPTIONS(R.string.import_from_youtube, R.string.import_from_youtube_desc, CsvTypes),
     YOUTUBE_HISTORY(
@@ -77,7 +74,6 @@ enum class ImportKind(
     YOUTUBE_LIKES(R.string.import_yt_likes, R.string.import_yt_likes_desc, arrayOf(JSON, ZIP, BINARY, ANY)),
     YOUTUBE_PLAYLIST(R.string.import_yt_playlist, R.string.import_yt_playlist_desc, CsvTypes),
     WATCH_LATER(R.string.import_yt_watch_later, R.string.import_yt_watch_later_desc, CsvTypes),
-    YOUTUBE_MUSIC_PLAYLIST(R.string.import_yt_music_playlist, R.string.import_yt_music_playlist_desc, CsvTypes),
     NEWPIPE_SUBSCRIPTIONS(R.string.import_from_newpipe, R.string.import_from_newpipe_desc, arrayOf(JSON)),
     NEWPIPE_HISTORY(
         R.string.import_newpipe_history,
@@ -92,7 +88,6 @@ enum class ImportKind(
         R.string.import_freetube_history_desc,
         arrayOf(JSON, "text/plain", BINARY, ANY)
     ),
-    METROLIST(R.string.import_from_metrolist, R.string.import_from_metrolist_desc, ZipTypes),
     ;
 
     fun start(
@@ -108,23 +103,20 @@ enum class ImportKind(
         coordinator: BackupCoordinator,
         uri: Uri,
     ) = when (this) {
-        FLOW_BACKUP -> coordinator.importFlowBackup(uri)
+        CHORPLAY_BACKUP -> coordinator.importChorplayBackup(uri)
         MASTER -> coordinator.importMaster(uri)
         ENGINE -> coordinator.importEngine(uri)
-        MUSIC_BRAIN -> coordinator.importMusicBrain(uri)
         TAKEOUT -> coordinator.importYouTubeTakeout(listOf(uri))
         YOUTUBE_SUBSCRIPTIONS -> coordinator.importYouTube(uri)
         YOUTUBE_HISTORY -> coordinator.importYouTubeWatchHistory(uri)
         YOUTUBE_LIKES -> coordinator.importYouTubeLikes(uri)
         YOUTUBE_PLAYLIST -> coordinator.importYouTubePlaylist(uri)
         WATCH_LATER -> coordinator.importYouTubePlaylist(uri, forceWatchLater = true)
-        YOUTUBE_MUSIC_PLAYLIST -> coordinator.importYouTubePlaylist(uri, isMusic = true)
         NEWPIPE_SUBSCRIPTIONS -> coordinator.importNewPipe(uri)
         NEWPIPE_HISTORY -> coordinator.importNewPipeWatchHistory(uri)
         NEWPIPE_PLAYLISTS -> coordinator.importNewPipePlaylists(uri)
         LIBRETUBE_SUBSCRIPTIONS -> coordinator.importLibreTube(uri)
         LIBRETUBE_PLAYLISTS -> coordinator.importLibreTubePlaylists(uri)
         FREETUBE_HISTORY -> coordinator.importFreeTubeWatchHistory(uri)
-        METROLIST -> coordinator.importMetrolist(uri)
     }
 }

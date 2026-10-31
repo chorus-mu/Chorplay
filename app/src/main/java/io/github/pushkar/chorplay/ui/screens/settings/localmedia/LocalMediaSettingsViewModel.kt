@@ -33,7 +33,7 @@ class LocalMediaSettingsViewModel
 
         val hiddenFolders: StateFlow<List<HiddenFolder>> =
             combine(repository.library, preferences.settings) { library, settings ->
-                val names = (library.videos + library.music).associate { it.folderId to it.folderName }
+                val names = library.videos.associate { it.folderId to it.folderName }
                 settings.hiddenFolderIds.map { id -> HiddenFolder(id, names[id] ?: id) }.sortedBy { it.name.lowercase() }
             }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(SHARING_TIMEOUT_MS), emptyList())
 

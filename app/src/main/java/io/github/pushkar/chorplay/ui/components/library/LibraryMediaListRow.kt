@@ -9,9 +9,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Dp
 import io.github.pushkar.chorplay.data.localmedia.LocalMediaIds
 import io.github.pushkar.chorplay.data.model.Video
-import io.github.pushkar.chorplay.data.music.model.MusicTrack
-import io.github.pushkar.chorplay.ui.components.music.item.MusicTrackItem
-import io.github.pushkar.chorplay.ui.components.music.sheet.LocalMusicMenus
 import io.github.pushkar.chorplay.ui.components.shared.MediaRow
 import io.github.pushkar.chorplay.ui.components.shared.MediaThumbnail
 import io.github.pushkar.chorplay.ui.components.shared.MediaThumbnailDefaults
@@ -26,12 +23,9 @@ import io.github.pushkar.chorplay.ui.components.shared.quickactions.VideoQuickAc
  */
 @Composable
 internal fun LibraryMediaListRow(
-    track: MusicTrack,
     video: Video,
-    isMusic: Boolean,
     title: String,
     onVideoClick: () -> Unit,
-    onMusicClick: () -> Unit,
     removeLabel: String,
     onRemove: () -> Unit,
     modifier: Modifier = Modifier,
@@ -42,42 +36,30 @@ internal fun LibraryMediaListRow(
     showWatchProgress: Boolean = LocalVideoCardPreferences.current.showWatchProgress,
     action: @Composable () -> Unit,
 ) {
-    val isLocal = LocalMediaIds.isLocal(track.videoId)
-    if (isMusic) {
-        val musicMenus = LocalMusicMenus.current
-        MusicTrackItem(
-            track = track,
-            onClick = onMusicClick,
-            modifier = modifier,
-            showMenu = false,
-            trailingContent = { action() },
-            onLongClick = if (isLocal) null else ({ musicMenus.openSong(track) }),
+    val isLocal = LocalMediaIds.isLocal(video.id)
+    var showMenu by remember { mutableStateOf(false) }
+    MediaRow(
+        title = title,
+        modifier = modifier,
+        subtitle = subtitle,
+        onClick = onVideoClick,
+        onLongClick = if (isLocal) null else ({ showMenu = true }),
+        trailing = { action() },
+    ) {
+        MediaThumbnail(
+            videoId = video.id,
+            thumbnailUrl = thumbnailUrl,
+            durationSeconds = durationSeconds,
+            showWatchProgress = showWatchProgress,
+            width = thumbnailWidth,
         )
-    } else {
-        var showMenu by remember { mutableStateOf(false) }
-        MediaRow(
-            title = title,
-            modifier = modifier,
-            subtitle = subtitle,
-            onClick = onVideoClick,
-            onLongClick = if (isLocal) null else ({ showMenu = true }),
-            trailing = { action() },
-        ) {
-            MediaThumbnail(
-                videoId = track.videoId,
-                thumbnailUrl = thumbnailUrl,
-                durationSeconds = durationSeconds,
-                showWatchProgress = showWatchProgress,
-                width = thumbnailWidth,
-            )
-        }
-        if (showMenu) {
-            VideoQuickActionsBottomSheet(
-                video = video,
-                onDismiss = { showMenu = false },
-                onRemoveFromCollection = onRemove,
-                removeFromCollectionLabel = removeLabel,
-            )
-        }
+    }
+    if (showMenu) {
+        VideoQuickActionsBottomSheet(
+            video = video,
+            onDismiss = { showMenu = false },
+            onRemoveFromCollection = onRemove,
+            removeFromCollectionLabel = removeLabel,
+        )
     }
 }

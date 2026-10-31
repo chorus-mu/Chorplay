@@ -115,7 +115,7 @@ class PairingTest {
         }
 
     @Test
-    fun codes_that_are_not_flow_sync_2_are_refused() {
+    fun codes_that_are_not_chor_sync_2_are_refused() {
         val newWithStore = newOffer(StoreLocation("server", "memory"), "Desktop A", null).qr.replace("\"r\":\"m\"", "\"r\":\"n\"")
         val flowSync1 = """{"v":1,"sid":"AAAAAAAAAAAAAAAAAAAAAA","k":"AAAA","ip":"192.168.1.2","p":1,"d":"x","exp":0}"""
         for (qr in listOf(newWithStore, flowSync1, "not json")) {

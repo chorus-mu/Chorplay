@@ -458,7 +458,7 @@ class ShortsViewModel
                 runCatching {
                     ChorplayNeuroEngine.onVideoInteraction(video.copy(isShort = true), signal.interaction, percentWatched = signal.percent)
                     ChorplayNeuroEngine.recordSeenShorts(listOf(video.id))
-                }.onFailure { e -> Log.w(TAG, "Failed to record abandoned short in FlowNeuro", e) }
+                }.onFailure { e -> Log.w(TAG, "Failed to record abandoned short in ChorNeuro", e) }
             }
         }
 
@@ -476,7 +476,7 @@ class ShortsViewModel
                 runCatching {
                     ChorplayNeuroEngine.onVideoInteraction(video.copy(isShort = true), signal.interaction, percentWatched = signal.percent)
                     ChorplayNeuroEngine.recordSeenShorts(listOf(video.id))
-                }.onFailure { e -> Log.w(TAG, "Failed to record watched short in FlowNeuro", e) }
+                }.onFailure { e -> Log.w(TAG, "Failed to record watched short in ChorNeuro", e) }
             }
         }
 

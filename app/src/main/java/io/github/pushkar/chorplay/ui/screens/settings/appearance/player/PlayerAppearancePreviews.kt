@@ -29,21 +29,7 @@ import androidx.compose.ui.unit.dp
 import io.github.pushkar.chorplay.R
 import io.github.pushkar.chorplay.data.local.GestureOverlayStyle
 import io.github.pushkar.chorplay.data.local.MiniBarSwipeAction
-import io.github.pushkar.chorplay.data.local.MusicPlayerBackgroundStyle
-import io.github.pushkar.chorplay.data.local.QueueSwipeAction
 import io.github.pushkar.chorplay.data.local.SliderStyle
-import io.github.pushkar.chorplay.ui.components.musicplayer.common.musicPlayerTurnsLight
-import io.github.pushkar.chorplay.ui.components.musicplayer.common.playerBackdropColors
-import io.github.pushkar.chorplay.ui.components.musicplayer.controls.ExpressivePlayerSlider
-import io.github.pushkar.chorplay.ui.components.musicplayer.controls.ExpressiveWavySlider
-import io.github.pushkar.chorplay.ui.components.musicplayer.controls.SquigglySlider
-import io.github.pushkar.chorplay.ui.components.musicplayer.controls.expressiveSliderSpec
-import io.github.pushkar.chorplay.ui.components.musicplayer.full.PlayerBackground
-import io.github.pushkar.chorplay.ui.components.musicplayer.queue.containerColor
-import io.github.pushkar.chorplay.ui.components.musicplayer.queue.contentColor
-import io.github.pushkar.chorplay.ui.components.musicplayer.queue.icon
-import io.github.pushkar.chorplay.ui.components.musicplayer.queue.labelRes
-import io.github.pushkar.chorplay.ui.components.musicplayer.queue.rowSwipe
 import io.github.pushkar.chorplay.ui.components.shared.GestureLevelHudPreview
 import io.github.pushkar.chorplay.ui.components.shared.MediaMiniBarDefaults
 import io.github.pushkar.chorplay.ui.components.shared.MediaMiniBarSwipeReveal
@@ -62,121 +48,6 @@ private val SeekbarTrackHeight = 4.dp
 private val BackgroundPreviewHeight = 72.dp
 private val GesturePreviewHeight = 184.dp
 
-/** The real player slider in [style], parked at 40 %. */
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-internal fun SliderStylePreview(style: SliderStyle) {
-    val position = PREVIEW_DURATION * PREVIEW_PROGRESS
-    val range = 0f..PREVIEW_DURATION
-    when (style) {
-        SliderStyle.SQUIGGLY -> {
-            SquigglySlider(
-                value = position,
-                onValueChange = {},
-                valueRange = range,
-                colors =
-                    SliderDefaults.colors(
-                        activeTrackColor = MaterialTheme.colorScheme.primary,
-                        inactiveTrackColor = MaterialTheme.colorScheme.surfaceVariant,
-                        thumbColor = MaterialTheme.colorScheme.primary,
-                    ),
-                isPlaying = true,
-            )
-        }
-
-        SliderStyle.EXPRESSIVE_WAVY -> {
-            ExpressiveWavySlider(
-                value = position,
-                onValueChange = {},
-                onValueChangeFinished = {},
-                valueRange = range,
-                isPlaying = true,
-            )
-        }
-
-        else -> {
-            val spec = expressiveSliderSpec(style)
-            ExpressivePlayerSlider(
-                value = position,
-                onValueChange = {},
-                onValueChangeFinished = {},
-                valueRange = range,
-                trackHeight = spec.trackHeight,
-                thumbHeight = spec.thumbHeight,
-                thumbTrackGap = spec.thumbTrackGap,
-            )
-        }
-    }
-}
-
-/**
- * A seek bar inside a stand-in for the video, inset by [padding] on each side. The inset animates
- * with an effects spec, which never overshoots — a spring would push the padding below zero.
- */
-@Composable
-internal fun SeekbarWidthPreview(padding: Dp) {
-    val animated by animateDpAsState(
-        targetValue = padding,
-        animationSpec = MaterialTheme.motionScheme.defaultEffectsSpec(),
-        label = "seekbarWidthPreview",
-    )
-    Box(
-        modifier =
-            Modifier
-                .fillMaxWidth()
-                .height(SeekbarPreviewHeight)
-                .clip(MaterialTheme.shapes.small)
-                .background(MaterialTheme.colorScheme.surfaceContainerHighest)
-                .padding(horizontal = SeekbarPreviewInset),
-        contentAlignment = Alignment.Center,
-    ) {
-        Box(
-            modifier =
-                Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = animated.coerceAtLeast(0.dp))
-                    .height(SeekbarTrackHeight)
-                    .clip(MaterialTheme.shapes.extraSmall)
-                    .background(MaterialTheme.colorScheme.outlineVariant),
-        ) {
-            Box(
-                modifier =
-                    Modifier
-                        .fillMaxWidth(SEEKBAR_PREVIEW_PROGRESS)
-                        .fillMaxHeight()
-                        .background(MaterialTheme.colorScheme.primary),
-            )
-        }
-    }
-}
-
-/**
- * The music player's own background in [style], painted around Chorplay's icon in place of album art,
- * so the preview is exactly what the player draws rather than a sketch of it. [followLightTheme]
- * is the player's light switch, so a light app theme previews the light version.
- */
-@Composable
-internal fun MusicBackgroundPreview(
-    style: MusicPlayerBackgroundStyle,
-    followLightTheme: Boolean,
-) {
-    val context = LocalContext.current
-    val artwork = remember { "android.resource://${context.packageName}/${R.drawable.ic_launcher_foreground}" }
-    val scheme = MaterialTheme.colorScheme
-    val light = musicPlayerTurnsLight(style, followLightTheme, scheme.surface)
-    PlayerBackground(
-        thumbnailUrl = artwork,
-        style = style,
-        backdrop = remember(scheme, light) { playerBackdropColors(scheme.primary, scheme.tertiary, light) },
-        modifier =
-            Modifier
-                .fillMaxWidth()
-                .height(BackgroundPreviewHeight)
-                .clip(MaterialTheme.shapes.medium),
-    )
-}
-
-/** The volume and brightness read-out in [style], over the player's own backdrop. */
 @Composable
 internal fun GestureOverlayPreview(style: GestureOverlayStyle) {
     GestureLevelHudPreview(
@@ -190,7 +61,6 @@ internal fun GestureOverlayPreview(style: GestureOverlayStyle) {
     )
 }
 
-/** What a mini bar swipe set to [action] uncovers, as the bar shows it mid-swipe towards that side. */
 @Composable
 internal fun MiniBarSwipePreview(
     action: MiniBarSwipeAction,
@@ -212,28 +82,4 @@ internal fun MiniBarSwipePreview(
     }
 }
 
-/** What a queue row swiped towards that side uncovers. */
-@Composable
-internal fun QueueSwipePreview(
-    action: QueueSwipeAction,
-    towardsLeft: Boolean,
-) {
-    val swipe = action.rowSwipe
-    Row(
-        modifier =
-            Modifier
-                .fillMaxWidth()
-                .height(QueueSwipePreviewHeight)
-                .clip(CircleShape)
-                .background(swipe.containerColor)
-                .padding(horizontal = QueueSwipePreviewPadding),
-        horizontalArrangement = Arrangement.spacedBy(QueueSwipePreviewPadding / 2, if (towardsLeft) Alignment.End else Alignment.Start),
-        verticalAlignment = Alignment.CenterVertically,
-    ) {
-        Icon(imageVector = swipe.icon, contentDescription = null, tint = swipe.contentColor)
-        Text(text = stringResource(swipe.labelRes), style = MaterialTheme.typography.titleSmall, color = swipe.contentColor)
-    }
-}
 
-private val QueueSwipePreviewHeight = 56.dp
-private val QueueSwipePreviewPadding = 20.dp

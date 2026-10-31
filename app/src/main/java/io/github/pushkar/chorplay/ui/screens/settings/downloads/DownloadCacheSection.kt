@@ -15,7 +15,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Description
 import androidx.compose.material.icons.outlined.Image
 import androidx.compose.material.icons.outlined.Movie
-import androidx.compose.material.icons.outlined.MusicNote
 import androidx.compose.material.icons.outlined.Storage
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.Icon
@@ -41,9 +40,9 @@ import io.github.pushkar.chorplay.data.local.MediaCacheSizes
 import io.github.pushkar.chorplay.data.repository.MediaCacheType
 import io.github.pushkar.chorplay.data.repository.MediaCacheUsage
 import io.github.pushkar.chorplay.ui.components.settings.SettingsListScope
-import io.github.pushkar.chorplay.ui.components.shared.FlowChoice
+import io.github.pushkar.chorplay.ui.components.shared.ChorChoice
 import io.github.pushkar.chorplay.ui.components.shared.ChorplayChoiceDialog
-import io.github.pushkar.chorplay.ui.components.shared.FlowNavRow
+import io.github.pushkar.chorplay.ui.components.shared.ChorNavRow
 import io.github.pushkar.chorplay.ui.screens.settings.index.DownloadsIndex
 
 private val UsageSpacing = 8.dp
@@ -53,13 +52,8 @@ private val LegendDot = 8.dp
 private val LegendSpacing = 6.dp
 private val LegendRowSpacing = 12.dp
 
-/** Each cache in the meter, in the order the bar and the rows show them. */
-private val MeteredTypes = listOf(MediaCacheType.VIDEOS, MediaCacheType.SONGS, MediaCacheType.ARTWORK, MediaCacheType.OTHER)
+private val MeteredTypes = listOf(MediaCacheType.VIDEOS, MediaCacheType.ARTWORK, MediaCacheType.OTHER)
 
-/**
- * The Cache group of Downloads: one meter split by type, then a row per cache with its size, its
- * limit and Clear. The caches are measured once when the page opens.
- */
 internal fun SettingsListScope.downloadCacheSection(
     viewModel: DownloadCacheViewModel,
     onEditLimit: (MediaCacheType) -> Unit,
@@ -73,10 +67,6 @@ internal fun SettingsListScope.downloadCacheSection(
             val limit by viewModel.videoLimitMb.collectAsStateWithLifecycle()
             CacheRow(MediaCacheType.VIDEOS, limit, viewModel, shape, onClick = { onEditLimit(MediaCacheType.VIDEOS) })
         }
-        row(DownloadsIndex.songCache.key) { shape ->
-            val limit by viewModel.songLimitMb.collectAsStateWithLifecycle()
-            CacheRow(MediaCacheType.SONGS, limit, viewModel, shape, onClick = { onEditLimit(MediaCacheType.SONGS) })
-        }
         row(DownloadsIndex.artworkCache.key) { shape ->
             val limit by viewModel.artworkLimitMb.collectAsStateWithLifecycle()
             CacheRow(MediaCacheType.ARTWORK, limit, viewModel, shape, onClick = { onEditLimit(MediaCacheType.ARTWORK) })
@@ -87,7 +77,6 @@ internal fun SettingsListScope.downloadCacheSection(
     }
 }
 
-/** The size choice for one cache; picking a size saves it for the next start. */
 @Composable
 internal fun DownloadCacheLimitDialog(
     type: MediaCacheType,
@@ -97,7 +86,6 @@ internal fun DownloadCacheLimitDialog(
     val state =
         when (type) {
             MediaCacheType.VIDEOS -> viewModel.videoLimitMb
-            MediaCacheType.SONGS -> viewModel.songLimitMb
             MediaCacheType.ARTWORK -> viewModel.artworkLimitMb
             MediaCacheType.OTHER -> return
         }
@@ -107,7 +95,7 @@ internal fun DownloadCacheLimitDialog(
     ChorplayChoiceDialog(
         title = stringResource(type.sizeTitle()),
         description = stringResource(R.string.cache_size_applies_on_restart),
-        options = options.map { FlowChoice(it, stringResource(cacheSizeLabel(it, artwork))) },
+        options = options.map { ChorChoice(it, stringResource(cacheSizeLabel(it, artwork))) },
         selected = selected,
         onSelect = { viewModel.setLimit(type, it) },
         onDismiss = onDismiss,
@@ -129,7 +117,12 @@ private fun CacheUsageRow(
         supportingContent = {
             Column(verticalArrangement = Arrangement.spacedBy(UsageSpacing)) {
                 Text(
-                    usage?.let { stringResource(R.string.cache_in_use, Formatter.formatShortFileSize(context, it.total)) }
+                    usage?.let {
+                        stringResource(
+                            R.string.cache_in_use,
+                            Formatter.formatShortFileSize(context, it.total)
+                        )
+                    }
                         ?: stringResource(R.string.cache_measuring),
                 )
                 CacheBar(usage)
@@ -141,7 +134,6 @@ private fun CacheUsageRow(
     }
 }
 
-/** One bar split by each cache's share of the total; an empty or unmeasured cache leaves only the track. */
 @Composable
 private fun CacheBar(usage: MediaCacheUsage?) {
     Row(
@@ -175,7 +167,10 @@ private fun CacheLegend(usage: MediaCacheUsage) {
     val context = LocalContext.current
     FlowRow(horizontalArrangement = Arrangement.spacedBy(LegendRowSpacing)) {
         MeteredTypes.forEach { type ->
-            Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(LegendSpacing)) {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(LegendSpacing)
+            ) {
                 Box(
                     Modifier
                         .size(LegendDot)
@@ -225,14 +220,18 @@ private fun CacheRow(
             }
 
             else -> {
-                stringResource(R.string.cache_used_of_limit, used, stringResource(cacheSizeLabel(limitMb, plain = true)))
+                stringResource(
+                    R.string.cache_used_of_limit,
+                    used,
+                    stringResource(cacheSizeLabel(limitMb, plain = true))
+                )
             }
         }
     val clear: @Composable () -> Unit = {
         TextButton(onClick = { viewModel.clear(type) }) { Text(stringResource(R.string.clear)) }
     }
     if (onClick != null) {
-        FlowNavRow(
+        ChorNavRow(
             title = stringResource(type.title()),
             supportingText = summary,
             onClick = onClick,
@@ -258,7 +257,6 @@ private fun CacheRow(
 private fun MediaCacheType.title(): Int =
     when (this) {
         MediaCacheType.VIDEOS -> R.string.cache_videos
-        MediaCacheType.SONGS -> R.string.cache_songs
         MediaCacheType.ARTWORK -> R.string.cache_artwork
         MediaCacheType.OTHER -> R.string.cache_other
     }
@@ -266,14 +264,12 @@ private fun MediaCacheType.title(): Int =
 private fun MediaCacheType.sizeTitle(): Int =
     when (this) {
         MediaCacheType.VIDEOS -> R.string.cache_videos_size_title
-        MediaCacheType.SONGS -> R.string.cache_songs_size_title
         MediaCacheType.ARTWORK, MediaCacheType.OTHER -> R.string.cache_artwork_size_title
     }
 
 private fun MediaCacheType.icon(): ImageVector =
     when (this) {
         MediaCacheType.VIDEOS -> Icons.Outlined.Movie
-        MediaCacheType.SONGS -> Icons.Outlined.MusicNote
         MediaCacheType.ARTWORK -> Icons.Outlined.Image
         MediaCacheType.OTHER -> Icons.Outlined.Description
     }
@@ -282,7 +278,6 @@ private fun MediaCacheType.icon(): ImageVector =
 private fun MediaCacheType.color(): Color =
     when (this) {
         MediaCacheType.VIDEOS -> MaterialTheme.colorScheme.primary
-        MediaCacheType.SONGS -> MaterialTheme.colorScheme.tertiary
         MediaCacheType.ARTWORK -> MaterialTheme.colorScheme.secondary
         MediaCacheType.OTHER -> MaterialTheme.colorScheme.outline
     }

@@ -9,11 +9,11 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import io.github.pushkar.chorplay.ui.components.shared.FlowSectionHeader
-import io.github.pushkar.chorplay.ui.components.shared.FlowSegmentedGap
-import io.github.pushkar.chorplay.ui.components.shared.flowRowGroupShape
+import io.github.pushkar.chorplay.ui.components.shared.ChorSectionHeader
+import io.github.pushkar.chorplay.ui.components.shared.ChorSegmentedGap
+import io.github.pushkar.chorplay.ui.components.shared.chorRowGroupShape
 
-internal val SettingsRowGap = FlowSegmentedGap
+internal val SettingsRowGap = ChorSegmentedGap
 private val GroupHeaderTopPadding = 8.dp
 
 /** Lines the header text up with the row titles below it, whose own padding is 16 dp. */
@@ -53,7 +53,7 @@ class SettingsListScope internal constructor(
         lazy.item(key = keys.add(key)) {
             SettingsColumnFrame(Modifier.padding(horizontal = GroupHeaderInset)) {
                 SettingsHighlightFrame(key = key, shape = RectangleShape) {
-                    FlowSectionHeader(
+                    ChorSectionHeader(
                         text = stringResource(text),
                         modifier = Modifier.padding(top = GroupHeaderTopPadding),
                     )
@@ -78,7 +78,7 @@ class SettingsListScope internal constructor(
         if (header != null) header(key = key, text = header)
         built.forEachIndexed { index, row ->
             lazy.item(key = keys.add(row.key)) {
-                val shape = flowRowGroupShape(index = index, count = built.size)
+                val shape = chorRowGroupShape(index = index, count = built.size)
                 SettingsColumnFrame(Modifier.padding(horizontal = SettingsHorizontalPadding)) {
                     SettingsHighlightFrame(key = row.key, shape = shape) { row.content(shape) }
                 }

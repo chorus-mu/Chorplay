@@ -15,7 +15,7 @@ import org.junit.Test
 class DownloadRetagTest {
     private fun row(
         videoId: String = "abc",
-        path: String = "/storage/emulated/0/Download/Flow/Video.mp4",
+        path: String = "/storage/emulated/0/Download/Chorplay/Video.mp4",
         status: DownloadItemStatus = DownloadItemStatus.COMPLETED,
         requestJson: String? = null,
     ) = DownloadWithItems(
@@ -36,7 +36,7 @@ class DownloadRetagTest {
     @Test
     fun `an older finished mp4 or m4a the app saved is retagged`() {
         assertThat(DownloadRetagger.isCandidate(row())).isTrue()
-        assertThat(DownloadRetagger.isCandidate(row(path = "/Music/Flow/Song.m4a"))).isTrue()
+        assertThat(DownloadRetagger.isCandidate(row(path = "/Movies/Chorplay/Song.m4a"))).isTrue()
     }
 
     @Test
@@ -44,7 +44,7 @@ class DownloadRetagTest {
         assertThat(DownloadRetagger.isCandidate(row(requestJson = "{}"))).isFalse()
         assertThat(DownloadRetagger.isCandidate(row(status = DownloadItemStatus.PAUSED))).isFalse()
         assertThat(DownloadRetagger.isCandidate(row(videoId = "recovered_123"))).isFalse()
-        assertThat(DownloadRetagger.isCandidate(row(path = "/Download/Flow/Video.mkv"))).isFalse()
+        assertThat(DownloadRetagger.isCandidate(row(path = "/Download/Chorplay/Video.mkv"))).isFalse()
         assertThat(DownloadRetagger.isCandidate(row(path = "content://com.android.externalstorage.documents/document/1"))).isFalse()
     }
 

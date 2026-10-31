@@ -16,8 +16,8 @@
     <string name="library">Bibliothek</string>
     <string name="library_section_header">Ihre Inhalte</string>
     <string name="library_playlists_label">Playlists</string>
-    <string name="library_music_playlists_label">Musik-Playlists</string>
-    <string name="library_music_playlists_subtitle">Ihre Musiksammlungen</string>
+
+
     <string name="library_liked_videos_label">Likes</string>
     <string name="library_saved_shorts_label">Gespeicherte Shorts</string>
     <string name="library_watch_later_label">Später ansehen</string>
@@ -34,12 +34,11 @@
     <string name="cancel">Abbrechen</string>
     <string name="empty_watch_history">Kein Wiedergabeverlauf</string>
     <string name="empty_watch_history_body">Videos, die Sie sich ansehen, werden hier erscheinen</string>
-    <string name="liked_music">Musik, die ich mag</string>
+
     <string name="liked_videos">Likes</string>
-    <string name="share_song">Song teilen</string>
     <string name="empty_liked">Keine Likes</string>
     <string name="empty_liked_body">Deine gelikte Inhalte werden hier angezeigt</string>
-    <string name="song">Song</string>
+
     <string name="video">Video</string>
     <string name="share">Teilen</string>
     <string name="downloaded">Heruntergeladen</string>
@@ -67,7 +66,6 @@
     <string name="remove">Entfernen</string>
     <string name="related_content">Verwandte Inhalte</string>
     <string name="no_related_content">Keine verwandten Inhalte gefunden</string>
-    <string name="share_message_template">Schauen Sie sich diesen Song an: %1$s von %2$s\n\nhttps://music.youtube.com/watch?v=%3$s</string>
     <string name="hz">Hz</string>
     <string name="kbps">kbps</string>
     <string name="filter_discover">Entdecken</string>
@@ -95,15 +93,14 @@
     <string name="video_marked_not_interested">Video als nicht interessiert markiert</string>
     <string name="play_mode_suggestion_body">Dieses Video ist weniger als 2 Minuten lang. Möchten Sie zu einem speziellen Player wechseln?</string>
     <string name="shorts_player">Shorts-Player</string>
-    <string name="music_player">Musik-Player</string>
+
     <string name="library_history_label">Verlauf</string>
     <plurals name="channels_count">
         <item quantity="one">%d Kanal</item>
         <item quantity="other">%d Kanäle</item>
     </plurals>
     <string name="tab_videos">Videos</string>
-    <string name="tab_music">Musik</string>
-    <string name="empty_offline_title">Offline %1$s</string>
+<string name="empty_offline_title">Offline %1$s</string>
     <string name="empty_offline_body">Ihre heruntergeladenen %1$s werden hier erscheinen.\n\nGenießen Sie Ihre Inhalte auch ohne Internet.</string>
     <string name="action_go_to_home">Zur Startseite</string>
     <string name="action_delete">Löschen</string>
@@ -164,10 +161,10 @@
     <string name="release_notes">VERSIONSHINWEISE</string>
     <string name="premiere_date_prefix">Premieren %1$s</string>
     <string name="maybe_later">Vielleicht später</string>
-    <string name="update_flow">Chorplay Aktualisieren</string>
+    <string name="update_chorplay">Chorplay Aktualisieren</string>
     <string name="nav_home">Startseite</string>
     <string name="nav_shorts">Shorts</string>
-    <string name="nav_music">Musik</string>
+
     <string name="nav_subs">Abos</string>
     <string name="nav_library">Bibliothek</string>
     <string name="notifications">Benachrichtigungen</string>
@@ -184,14 +181,11 @@
     <string name="since">Seit</string>
     <string name="playback_header">Wiedergabe</string>
     <string name="play_next">Als nächstes wiedergegeben</string>
-    <string name="play_next_desc">Spielt nach dem aktuellen Song</string>
     <string name="add_to_queue">In die Warteschlange</string>
     <string name="add_to_queue_desc">Zum Ende der Warteschlange einreihen</string>
     <string name="audio_effects">Audio-Effekte</string>
     <string name="more_header">Mehr</string>
     <string name="view_artist">Künstler ansehen</string>
-    <string name="view_album">Album ansehen</string>
-    <string name="album_art">Albumcover</string>
     <string name="close_player">Player schließen</string>
     <string name="views_template">%1$s Aufrufe</string>
     <string name="chapters">Kapitel</string>
@@ -266,9 +260,9 @@
     <string name="channel_search_open">Suche im Kanal</string>
     <string name="channel_search_close">Suche schließen</string>
     <string name="channel_search_no_results">Keine Ergebnisse gefunden für %1$s</string>
-    <string name="music_history">Musik-Verlauf</string>
+
     <string name="remove_from_history">Aus dem Verlauf entfernen</string>
-    <string name="share_song_chooser">Song teilen</string>
+
     <string name="time_today">Heute</string>
     <string name="time_yesterday">Gestern</string>
     <string name="time_earlier">Früher</string>
@@ -278,33 +272,33 @@
     <string name="peace_and_quiet">Ruhe und Frieden</string>
     <string name="notifications_empty_body">Jetzt bist du auf dem neuesten Stand! Neue Updates aus deinen Abonnements werden hier angezeigt.</string>
     <string name="settings_title">Einstellungen</string>
-    <string name="settings_flow_engine_header">Chorplay Engine</string>
+    <string name="settings_chor_engine_header">Chorplay Engine</string>
     <string name="settings_active_learning">AKTIVES LERNEN</string>
     <string name="settings_reset_brain_title">Chorplay-Persönlichkeit zurücksetzen?</string>
     <string name="settings_reset_brain_body">Dadurch wird dein „Chorplay Brain“-Profil gelöscht.\n\n• Erlernte Themen werden vergessen.\n• Persönlichkeitsmerkmale werden zurückgesetzt.\n• Empfehlungen werden auf die Standardeinstellungen zurückgesetzt.\n\nDies kann nicht rückgängig gemacht werden.</string>
     <string name="settings_reset_everything">Alles zurücksetzen</string>
     <string name="settings_analyzing_interactions">Analysieren Sie Ihre Interaktionen...</string>
     <string name="settings_view_analytics">Analysen anzeigen</string>
-    <string name="deep_flow_mode_title">Deep-Chorplay-Modus</string>
-    <string name="deep_flow_mode_subtitle">Lernen unterbrechen – während du stöberst</string>
-    <string name="deep_flow_learning_paused">Lernen pausiert</string>
-    <string name="deep_flow_expires_in">Läuft in %s ab</string>
-    <string name="deep_flow_expire_duration_title">Automatisch deaktivieren nach</string>
-    <string name="deep_flow_expire_duration_subtitle">Das Lernen wird automatisch nach %s fortgesetzt</string>
-    <string name="deep_flow_dialog_title">Pausendauer</string>
-    <string name="deep_flow_dialog_body">Wie lange sollte das Lernen unterbrochen bleiben?</string>
-    <string name="deep_flow_enabled_message">Deep Chorplay aktiviert</string>
-    <string name="deep_flow_disabled_message">Deep Chorplay deaktiviert</string>
-    <string name="deep_flow_expired_message">Der Deep Chorplay-Timer ist abgelaufen</string>
-    <string name="deep_flow_active_until_disabled">Deep Chorplay bleibt aktiv, bis Sie es ausschalten</string>
-    <string name="deep_flow_duration_never">Niemals</string>
-    <string name="deep_flow_duration_1h">1 Stunde</string>
-    <string name="deep_flow_duration_2h">2 Stunden</string>
-    <string name="deep_flow_duration_4h">4 Stunden</string>
-    <string name="deep_flow_duration_6h">6 Stunden</string>
-    <string name="deep_flow_duration_8h">8 Stunden</string>
-    <string name="deep_flow_duration_12h">12 Stunden</string>
-    <string name="deep_flow_duration_24h">24 Stunden</string>
+    <string name="deep_chor_mode_title">Deep-Chorplay-Modus</string>
+    <string name="deep_chor_mode_subtitle">Lernen unterbrechen – während du stöberst</string>
+    <string name="deep_chor_learning_paused">Lernen pausiert</string>
+    <string name="deep_chor_expires_in">Läuft in %s ab</string>
+    <string name="deep_chor_expire_duration_title">Automatisch deaktivieren nach</string>
+    <string name="deep_chor_expire_duration_subtitle">Das Lernen wird automatisch nach %s fortgesetzt</string>
+    <string name="deep_chor_dialog_title">Pausendauer</string>
+    <string name="deep_chor_dialog_body">Wie lange sollte das Lernen unterbrochen bleiben?</string>
+    <string name="deep_chor_enabled_message">Deep Chorplay aktiviert</string>
+    <string name="deep_chor_disabled_message">Deep Chorplay deaktiviert</string>
+    <string name="deep_chor_expired_message">Der Deep Chorplay-Timer ist abgelaufen</string>
+    <string name="deep_chor_active_until_disabled">Deep Chorplay bleibt aktiv, bis Sie es ausschalten</string>
+    <string name="deep_chor_duration_never">Niemals</string>
+    <string name="deep_chor_duration_1h">1 Stunde</string>
+    <string name="deep_chor_duration_2h">2 Stunden</string>
+    <string name="deep_chor_duration_4h">4 Stunden</string>
+    <string name="deep_chor_duration_6h">6 Stunden</string>
+    <string name="deep_chor_duration_8h">8 Stunden</string>
+    <string name="deep_chor_duration_12h">12 Stunden</string>
+    <string name="deep_chor_duration_24h">24 Stunden</string>
     <string name="settings_header_appearance">Aussehen</string>
     <string name="settings_header_content_playback">Inhalt &amp; Wiedergabe</string>
     <string name="settings_header_data_management">Datenmanagement</string>
@@ -425,7 +419,7 @@
     <string name="app_icon_picker_subtitle">Wählen Sie einen Launcher-Symbol-Stil. Die Änderung wird sofort wirksam und der Launcher wird kurz aktualisiert.</string>
     <string name="app_icon_picker_warning">Achtung: Beim Wechseln der Symbole wird ein Android-Systemmechanismus verwendet, der die App-Verknüpfung möglicherweise kurzzeitig von deinem Startbildschirm entfernt. Halte den Launcher bei Bedarf lange gedrückt, um sie wieder hinzuzufügen.</string>
     <string name="app_icon_apply_toast">Symbol aktualisiert - Ihr Launcher wird neu geladen</string>
-    <string name="icon_name_flow_red">Chorplay Rot</string>
+    <string name="icon_name_chorplay_red">Chorplay Rot</string>
     <string name="icon_name_amoled">AMOLED Dunkel</string>
     <string name="icon_name_monochrome">Monochrom</string>
     <string name="icon_name_ghost">Geist</string>
@@ -441,8 +435,8 @@
     <string name="player_appearance_fullscreen_header">Vollbild</string>
     <string name="player_show_title_title">Video Titel anzeigen</string>
     <string name="player_show_title_subtitle">Zeigen Sie den Videotitel unter der oberen Leiste an, während Sie sich im Vollbildmodus befinden</string>
-    <string name="lyrics_provider_title">Anbieter von Songtexten</string>
-    <string name="lyrics_provider_subtitle">Wählen Sie Ihre bevorzugte Quelle für Songtexte</string>
+
+
     <string name="lyrics_provider_lrclib">LrcLib</string>
     <string name="lyrics_provider_better_lyrics">Better Lyrics</string>
     <string name="lyrics_provider_simpmusic">SimpMusic</string>
@@ -508,13 +502,11 @@
     <string name="content_settings_layout_grid">Gitter</string>
     <string name="content_settings_layout_list">Liste</string>
     <string name="content_settings_grid_size_title">Größe der Rasterelemente</string>
-    <string name="content_settings_grid_size_subtitle">Legt die Größe von Albumcovern und Inhaltskarten fest</string>
     <string name="content_settings_grid_big_title">Groß</string>
     <string name="content_settings_grid_big_desc">Größere Vorschaubilder</string>
     <string name="content_settings_grid_small_title">Klein</string>
     <string name="content_settings_grid_small_desc">Kompakte Ansicht</string>
     <string name="content_settings_header_preview">Vorschau</string>
-    <string name="content_settings_preview_album_art">Albumcover-Vorschau</string>
     <string name="content_settings_preview_big">Groß – 128 dp Thumbnails</string>
     <string name="content_settings_preview_small">Klein - 104dp Thumbnails</string>
     <string name="content_settings_dynamic_components">Dynamische Komponenten</string>
@@ -547,8 +539,8 @@
     <string name="content_settings_hide_watched_title">Angesehene Videos Ausblenden</string>
     <string name="content_settings_hide_watched_subtitle">Filtern Sie Videos, die Sie bereits von Ihrem Home-Feed und Abonnements angesehen haben</string>
     <string name="settings_shorts_nav_tab_subtitle">„Shorts“-Tab in der unteren Navigationsleiste Anzeigen.</string>
-    <string name="settings_music_nav_tab_title">„Musik“-Tab in der Navigation</string>
-    <string name="settings_music_nav_tab_subtitle">„Musik“-Tab in der unteren Navigationsleiste Anzeigen.</string>
+
+
     <string name="settings_search_nav_tab_title">„Suchen“-Tab in der Navigation</string>
     <string name="settings_shorts_nav_tab_title">„Shorts“-Tab in der Navigation</string>
     <string name="content_settings_disable_shorts_player_subtitle">Abspielen aller Videos (einschließlich YouTube Shorts) im regulären Videoplayer</string>
@@ -568,7 +560,7 @@
     <string name="history_no_results_body">Versuchen Sie es mit einer anderen Suche oder einem anderen Filter</string>
     <string name="history_tab_videos">Videos</string>
     <string name="history_tab_shorts">Shorts</string>
-    <string name="empty_liked_music_body">Hier werden die Songs angezeigt, die Sie liken</string>
+
     <string name="download_all">Alle herunterladen</string>
     <string name="saved">Gespeichert</string>
     <string name="play_mode_suggestion_title">Vorschlag für den Spielmodus</string>
@@ -577,12 +569,12 @@
     <string name="upcoming_video_reminder_action">Erinnere mich daran</string>
     <string name="upcoming_video_reminder_badge">Erinnerung aktiviert</string>
     <string name="subscriptions_video_section_title">Video-Abonnements</string>
-    <string name="subscriptions_music_section_title">Musik-Abonnements</string>
+
     <string name="subscriptions_quick_access_title">Schnellzugriff</string>
     <string name="subscriptions_compact_header">Stöbern Sie in Ihren zuletzt abonnierten Kanälen.</string>
-    <string name="subscriptions_compact_header_with_music">Musikkanäle werden direkt im Text gekennzeichnet, damit der Feed übersichtlich bleibt.</string>
-    <string name="subscriptions_music_chip_label">Musik</string>
-    <string name="subscriptions_music_badge_cd">Musik-Abonnement</string>
+
+
+
     <string name="no_subscriptions_found">Es wurden keine Abonnements gefunden</string>
     <string name="filter_oldest">Älteste</string>
     <string name="title_copied">Titel in die Zwischenablage kopiert</string>
@@ -598,7 +590,7 @@
     <string name="appearance_system_defaults_subtitle">Wählen Sie aus, welches Design verwendet werden soll, wenn Ihr Gerät zwischen hellem und dunklem Modus wechselt.</string>
     <string name="empty_liked_videos">Keine gelikten Videos</string>
     <string name="liked">Gefällt mir</string>
-    <string name="empty_liked_music">Keine gelikte Musik</string>
+
     <string name="like">Gefällt mir</string>
     <string name="resume">Wieder aufnehmen</string>
     <string name="icon_name_material_mint">Material: Minze</string>
@@ -640,7 +632,7 @@
     <string name="categories_switch_to_list">Zur Listenansicht wechseln</string>
     <string name="category_all">Alle</string>
     <string name="category_trending">Im Trend</string>
-    <string name="icon_name_flow_light">Chorplay hell</string>
+    <string name="icon_name_chorplay_light">Chorplay hell</string>
     <string name="lyrics_provider_lyrics_plus">LyricsPlus</string>
     <string name="content_settings_subs_show_shorts_subtitle">„Shorts“ im Abonnement-Feed anzeigen</string>
     <string name="content_settings_subs_show_live_title">Live-Streams im Abonnement</string>
@@ -688,7 +680,6 @@
     <string name="download_started_toast">Der Download wurde gestartet…</string>
     <string name="download_error_toast">Download-Fehler: %1$s</string>
     <string name="unlike">Mag ich nicht</string>
-    <string name="player_background_style_title">Hintergrund des Musik-Players</string>
     <string name="player_background_style_blur_gradient">Unschärfe + Farbverlauf</string>
     <string name="player_background_style_gradient">Farbverlauf</string>
     <string name="player_background_style_default">Standardoberfläche</string>
@@ -805,11 +796,11 @@
     <string name="video_quality_warning">Eine höhere Qualität erfordert mehr Daten</string>
     <string name="video_quality_wifi_header">WLAN-Qualität</string>
     <string name="video_quality_cellular_header">Mobilfunkqualität</string>
-    <string name="music_quality_header">Audioqualität</string>
-    <string name="music_quality_auto">Automatisch</string>
-    <string name="music_quality_high">Hoch</string>
-    <string name="music_quality_medium">Mittel</string>
-    <string name="music_quality_low">Niedrig</string>
+
+
+
+
+
     <string name="quality_144p">144p</string>
     <string name="quality_240p">240p</string>
     <string name="quality_360p">360p</string>
@@ -925,7 +916,7 @@
     <string name="sleep_timer_custom_label">Benutzerdefinierte Zeit</string>
     <string name="sleep_timer_unit">Minuten</string>
     <string name="sleep_timer_input_error">Geben Sie einen Wert zwischen 1 und 1440 ein</string>
-    <string name="sleep_timer_end_of_song">Ende des Songs / Videos</string>
+    <string name="sleep_timer_end_of_video">Ende des Songs / Videos</string>
     <string name="sleep_timer_start">Start</string>
     <string name="sleep_timer_end_of_media">Ende des aktuellen Songs</string>
     <string name="sleep_timer_reset">Zurücksetzen</string>
@@ -941,9 +932,9 @@
     <string name="local_media_permission_body">Erlauben Sie den Zugriff auf Ihre Medien, damit Chorplay lokale Videos und Musik finden und abspielen kann.</string>
     <string name="local_media_grant">Zugriff gewähren</string>
     <string name="history_tab_local_videos">Lokale Videos</string>
-    <string name="history_tab_local_music">Lokale Musik</string>
-    <string name="deep_flow_save_history_title">Zum Verlauf hinzufügen</string>
-    <string name="deep_flow_save_history_subtitle">Behalte Wiedergabeverlauf ohne Interessen zu trainieren</string>
+
+    <string name="deep_chor_save_history_title">Zum Verlauf hinzufügen</string>
+    <string name="deep_chor_save_history_subtitle">Behalte Wiedergabeverlauf ohne Interessen zu trainieren</string>
     <string name="content_settings_watched_threshold_title">Als „gesehen“ markieren, wenn</string>
     <string name="content_settings_watched_threshold_dialog_body">Legen Sie fest, wie viel von einem Video abgespielt werden muss, bevor es als angesehen gilt und ausgeblendet wird.</string>
     <string name="share_link_only_template">https://youtube.com/watch?v=%1$s</string>
@@ -1000,12 +991,12 @@
     <string name="shorts_player_ui_impressive">Beeindruckend</string>
     <string name="shorts_saved">Short gespeichert</string>
     <string name="shorts_unsaved">Short, nicht gespeichert</string>
-    <string name="import_flow_backup_success">Chorplay-Backup erfolgreich importiert</string>
-    <string name="import_flow_backup_failed_template">Der Import des Chorplay-Backups ist fehlgeschlagen: %1$s</string>
+    <string name="import_chorplay_backup_success">Chorplay-Backup erfolgreich importiert</string>
+    <string name="import_chorplay_backup_failed_template">Der Import des Chorplay-Backups ist fehlgeschlagen: %1$s</string>
     <string name="import_newpipe_failed_template">Der Import des NewPipe-Backups ist fehlgeschlagen: %1$s</string>
     <string name="import_youtube_failed_template">Der Import des YouTube-Backups ist fehlgeschlagen: %1$s</string>
-    <string name="import_flow_backup_item_title">Chorplay-Backup importieren</string>
-    <string name="import_flow_backup_desc">Stellen Sie Ihren Verlauf, Ihre Einstellungen und Ihre Abonnements aus einer Chorplay-Backup wieder her.</string>
+    <string name="import_chorplay_backup_item_title">Chorplay-Backup importieren</string>
+    <string name="import_chorplay_backup_desc">Stellen Sie Ihren Verlauf, Ihre Einstellungen und Ihre Abonnements aus einer Chorplay-Backup wieder her.</string>
     <string name="import_from_newpipe">Aus NewPipe importieren</string>
     <string name="player_settings_display">Anzeige</string>
     <string name="sleep_timer_stops_in">Schaltet sich nach</string>
@@ -1050,7 +1041,6 @@
     <string name="appearance_role_inverse_surface">Inverse Oberfläche</string>
     <string name="appearance_role_inverse_on_surface">Inverse auf der Oberfläche</string>
     <string name="add_comment_placeholder">Kommentar hinzufügen...</string>
-    <string name="search_empty_prompt">Videos, Musik und mehr suchen</string>
     <string name="appearance_role_error_container">Fehler-Container</string>
     <string name="appearance_role_outline_variant">Variante der Gliederung</string>
     <string name="appearance_role_surface_bright">Oberfläche hell</string>
@@ -1068,8 +1058,8 @@
     <string name="select_all">Alles auswählen</string>
     <string name="import_from_libretube_desc">Abonnements von LibreTube Backup Datei (JSON) importieren.</string>
     <string name="import_playlists_section_title">Playlists</string>
-    <string name="import_music_apps_section_title">Musik Apps</string>
-    <string name="import_from_metrolist">Von Metrolist importieren</string>
+
+
     <string name="import_subscriptions_section_title">Abos</string>
     <string name="import_history_section_title">Verlauf</string>
     <string name="import_freetube_history">FreeTube Verlauf importieren</string>
@@ -1180,8 +1170,8 @@
     <string name="action_remove_from_favorites">Aus Favoriten entfernen</string>
     <string name="action_add_to_favorites">Zu Favoriten hinzufügen</string>
     <string name="action_play_all">Alle abspielen</string>
-    <string name="loading_music">Musik laden...</string>
-    <string name="screen_title_music">MUSIK</string>
+
+
     <string name="section_listen_again">Nochmal anhören</string>
     <string name="shuffle_play">Zufallswiedergabe</string>
     <string name="daily_discover_sounds_like">Klingt wie %1$s</string>
@@ -1189,8 +1179,8 @@
     <string name="daily_discover_similar_to">Ähnlich zu %1$s</string>
     <string name="section_recommended">Vorgeschlagen</string>
     <string name="section_recently_played">Kürzlich gespielt</string>
-    <string name="section_music_videos">Musikvideos</string>
-    <string name="section_music_videos_for_you">Musikvideos für dich</string>
+
+
     <string name="section_live_performances">Live Auftritte</string>
     <string name="section_new_releases">Neue Erscheinungen</string>
     <string name="subtitle_single_template">Single · %1$s</string>
@@ -1207,14 +1197,12 @@
     <string name="template_freq">%1$dHz</string>
     <string name="template_gain">%1$.1fdB</string>
     <string name="template_q">%1$.1f</string>
-    <string name="search_music_placeholder">Musik suchen</string>
+
     <string name="voice_search_cd">Sprachsuche</string>
-    <string name="filter_songs">Songs</string>
-    <string name="subtitle_song_prefix">Song • %1$s</string>
+
+
     <string name="subtitle_artist">Künstler</string>
-    <string name="subtitle_album_template">Album • %1$s</string>
     <string name="plays_count_template">• %1$s spielt</string>
-    <string name="album_year_template">Album • %1$s • %2$s</string>
     <string name="search_source_template">Suchen: %1$s</string>
     <string name="artist_source_template">Künstler: %1$s</string>
     <string name="no_results_found">Keine Ergebnisse gefunden</string>
@@ -1257,7 +1245,7 @@
     <string name="subtitle_background_color">Hintergrundfarbe</string>
     <string name="check_for_updates">Nach Updates suchen</string>
     <string name="checking_for_updates">Suche nach Updates…</string>
-    <string name="flow_is_up_to_date">Chorplay ist auf dem neuesten Stand!</string>
+    <string name="chorplay_is_up_to_date">Chorplay ist auf dem neuesten Stand!</string>
     <string name="update_check_failed">Konnte nicht nach Updates suchen. Überprüfe deine Verbindung.</string>
     <string name="sync_devices_title">Synchronisiere Geräte</string>
     <string name="sync_notification_title">Geräte synchronisieren</string>
@@ -1363,11 +1351,11 @@
     <string name="shorts_playback_speed">Wiedergabe Geschwindigkeit</string>
     <string name="speed_normal">Normal</string>
     <string name="export_watch_history_title">Wiedergabeverlauf</string>
-    <string name="recognize_music">Musik erkennen</string>
+
     <string name="processing">Verarbeiten…</string>
     <string name="recognition_error">Erkennung fehlgeschlagen</string>
     <string name="try_again">Erneut versuchen</string>
-    <string name="search_in_flow">In Chorplay suchen</string>
+    <string name="search_in_chorplay">In Chorplay suchen</string>
     <string name="recognition_clear_history">Verlauf leeren?</string>
     <string name="appearance_variant_title">Designstil</string>
     <string name="appearance_variant_amoled">AMOLED</string>
@@ -1375,8 +1363,8 @@
     <string name="appearance_color_hue">Farbton</string>
     <string name="appearance_color_alpha">Alpha</string>
     <string name="appearance_navigate_back">Zurück</string>
-    <string name="player_appearance_hide_music_artwork_title">Cover des Musik-Players ausblenden</string>
-    <string name="player_appearance_hide_music_artwork_subtitle">Zeige stattdessen das App-Symbol in der Farbe des extrahierten Bildmaterials an</string>
+
+
     <string name="content_settings_shorts_player_prompt_subtitle">Vor dem Wechsel zu Videos unter 2 Minuten zum Shorts-Player nachfragen</string>
     <string name="settings_home_nav_tab_title">Registerkarte „Startseite“</string>
     <string name="playback_speed_multiplier">%1$s×</string>
@@ -1392,8 +1380,8 @@
     <string name="free_space_template">%1$s kostenlos</string>
     <string name="total_space_template">Gesamt: %1$s</string>
     <string name="video_download_location_label">Speicherort für Videodownloads</string>
-    <string name="music_download_location_label">Speicherort für Musikdownloads</string>
-    <string name="content_settings_restored_music_mini_player_subtitle">Die letzte Musiksitzung nach der Wiederherstellung automatisch anzeigen</string>
+
+
     <string name="content_settings_hide_watched_home_title">Gesehene Videos auf der Startseite ausblenden</string>
     <string name="content_settings_hide_watched_home_subtitle">Filtere bereits angesehene Videos aus deinem Startfeed heraus</string>
     <string name="content_settings_hide_watched_subscriptions_title">Gesehene Videos aus Abonnements ausblenden</string>
@@ -1409,8 +1397,8 @@
     <string name="import_libretube_playlists_desc">Importieren Sie Ihre lokalen LibreTube-Wiedergabelisten aus einer JSON-Sicherungsdatei.</string>
     <string name="import_yt_takeout_all">Aus Google-Auszug importieren</string>
     <string name="import_yt_takeout_all_desc">Importieren Sie Ihre YouTube-Abonnements, Ihren Videoverlauf und Ihre Wiedergabelisten auf einmal aus einer ZIP-Datei von Google-Auszug.</string>
-    <string name="import_music_apps_section_subtitle">Importieren Sie Ihre Musikbibliothek von anderen Musik-Apps</string>
-    <string name="import_from_metrolist_desc">Importieren Sie Musik-Playlists aus einer Metrolist-Sicherungsdatei (.zip). Die Playlists werden in Ihrer Musikbibliothek angezeigt.</string>
+
+
     <string name="import_from_youtube">Von YouTube importieren</string>
     <string name="import_from_youtube_desc">Abonnements aus YouTube-Auszug (CSV) importieren.</string>
     <string name="import_freetube_history_desc">Importieren Sie Ihren Wiedergabeverlauf aus einer JSON-Exportdatei von FreeTube.</string>
@@ -1426,14 +1414,12 @@
     <string name="player_portrait_seekbar_width_spaced">Mit Abständen</string>
     <string name="content_settings_home_reselect_refresh_title">Startseite aktualisieren, wenn erneut ausgewählt</string>
     <string name="content_settings_home_reselect_refresh_subtitle">Vorschläge neu laden, nachdem man zum Anfang gescrollt hat, wenn erneut auf „Startseite“ getippt wird</string>
-    <string name="content_settings_restored_music_mini_player_title">Mini-Player für wiederhergestellte Musik anzeigen</string>
+
     <string name="content_settings_shorts_player_prompt_title">Vorschlag für einen Shorts-Player</string>
     <string name="import_yt_watch_history">Verlauf importieren</string>
     <string name="import_yt_watch_history_desc">Importieren Sie Ihren Wiedergabeverlauf aus YouTube-Auszug (watch-history.html).</string>
     <string name="import_yt_playlist">YouTube-Playlist importieren</string>
     <string name="import_yt_playlist_desc">Importiere eine Playlist aus einer YouTube Auszug-CSV-Datei (Playlist-&lt;Name&gt;.csv).</string>
-    <string name="import_yt_music_playlist">YouTube-Musik-Playlist importieren</string>
-    <string name="import_yt_music_playlist_desc">Importieren Sie eine Musik-Playlist aus einer YouTube Music Auszug-CSV-Datei. Diese wird unter „Musik-Playlists“ angezeigt.</string>
     <string name="import_yt_history_failed_template">Der Import des Wiedergabesverlaufs ist fehlgeschlagen: %1$s</string>
     <string name="channel_error_log_clip_label">Chorplay Kanal-Fehlerprotokoll</string>
     <string name="thank_you_support_message">Vielen Dank für eure Unterstützung! ❤️</string>
@@ -1449,7 +1435,7 @@
     <string name="newpipe_extractor_title">NewPipe Extractor</string>
     <string name="about_license_name">GNU GPL v3</string>
     <string name="about_changelog">Änderungsprotokoll</string>
-    <string name="whats_new_in_flow">Was gibt es Neues bei Chorplay?</string>
+    <string name="whats_new_in_chorplay">Was gibt es Neues bei Chorplay?</string>
     <string name="no_changelog_found_message">Es wurde kein Änderungsprotokoll gefunden.</string>
     <string name="error_changelog_load">Die Änderungsprotokoll-Datei konnte nicht geladen werden.</string>
     <string name="app_logo_desc">App Logo</string>
@@ -1478,7 +1464,7 @@
     <string name="playlist_sort_date_published_oldest">Veröffentlichungsdatum (ältestes)</string>
     <string name="remove_selected_playlist_text">Sie werden aus dieser Playlist entfernt.</string>
     <string name="remove_selected_watch_later_text">Sie werden aus „Später ansehen“ entfernt.</string>
-    <string name="welcome_to_flow">Willkommen bei Chorplay</string>
+    <string name="welcome_to_chorplay">Willkommen bei Chorplay</string>
     <string name="onboarding_interests_title">Was macht dir Spaß?</string>
     <string name="onboarding_interests_hint">Wähle mindestens %1$d Themen aus, um deinen Feed individuell anzupassen. Es fehlen noch %2$d.</string>
     <string name="onboarding_channels_empty_prompt">Gib einen Kanalnamen ein, um danach zu suchen</string>
@@ -1489,7 +1475,7 @@
     <string name="onboarding_btn_continue">Weiter</string>
     <string name="category_creative">Kreativ</string>
     <string name="category_news_current_events">Nachrichten &amp; Aktuelles</string>
-    <string name="flow_control_center">Chorplay Kontrollzentrum</string>
+    <string name="chorplay_control_center">Chorplay Kontrollzentrum</string>
     <string name="filter_deep_cuts">Deep cuts</string>
     <string name="player_portrait_seekbar_width_title">Breite der Suchleiste im Hochformat</string>
     <string name="player_settings_stable_voice">Stabiler Ton</string>
@@ -1521,8 +1507,8 @@
     <string name="persona_scholar_title">Der Gelehrte</string>
     <string name="persona_scholar_description">Inhalte mit hohem Komplexitätsgrad. Wir sind hier, um uns weiterzuentwickeln – nicht nur, um uns unterhalten zu lassen.</string>
     <string name="persona_deep_diver_title">Der Tieftaucher</string>
-    <string name="support_flow_dev_desc">Wenn Sie Chorplay nützlich finden und die Entwicklung des Projekts unterstützen möchten, können Sie dies auf Patreon tun oder über die unten angegebenen Krypto-Adressen spenden. Ihre Unterstützung hilft dabei, das Projekt am Leben zu erhalten!</string>
-    <string name="support_flow_patreon">Unterstütze Chorplay auf Patreon</string>
+    <string name="support_chorplay_dev_desc">Wenn Sie Chorplay nützlich finden und die Entwicklung des Projekts unterstützen möchten, können Sie dies auf Patreon tun oder über die unten angegebenen Krypto-Adressen spenden. Ihre Unterstützung hilft dabei, das Projekt am Leben zu erhalten!</string>
+    <string name="support_chorplay_patreon">Unterstütze Chorplay auf Patreon</string>
     <string name="persona_specialist_description">Ganz gezielt auf einige wenige Nischen ausgerichtet. Du weißt, was dir gefällt.</string>
     <string name="persona_explorer_description">Chaotisch und wunderschön. Von allem etwas.</string>
     <string name="channel_memory_empty">Es sind keine Kanäle im Speicher vorhanden.</string>
@@ -1553,10 +1539,6 @@
     <string name="persona_audiophile_description">Du nutzt Chorplay hauptsächlich für Musik. Die Stimmung ist das Wichtigste.</string>
     <string name="persona_skimmer_title">Der Skimmer</string>
     <string name="persona_skimmer_description">Rasante, kurze Inhalte. Dopamin auf Abruf.</string>
-    <string name="screen_title_music_library">Bildschirm „Musik-Playlists“</string>
-    <string name="subtitle_liked_music">Deine Lieblingssongs</string>
-    <string name="subtitle_history">Songs, die du dir angehört hast</string>
-    <string name="empty_music_playlists">Noch keine Musik-Playlists</string>
     <string name="rename_playlist_title">Playlist umbenennen</string>
     <string name="section_featured_on">Vorgestellt auf</string>
     <string name="section_fans_also_like">Fans mögen auch</string>
@@ -1566,12 +1548,10 @@
     <string name="section_popular_artists">Aktuelle Künstler</string>
     <string name="section_mixed_for_you">Speziell für Sie zusammengestellt</string>
     <string name="daily_discover_subtitle">Aktuelle Empfehlungen basierend auf deinem Hörverhalten</string>
-    <string name="section_top_albums">Top-Alben</string>
     <string name="subtitle_similar_to">Basierend auf Ihrem Hörverlauf</string>
     <string name="section_vibe_vibes">%1$s Stimmungen</string>
     <string name="subtitle_community_playlists">Community-Playlists</string>
     <string name="playlist_author_community">Community-Playlist</string>
-    <string name="playlist_description_community">Eine kuratierte Playlist mit Musik von %1$s aus unserer Community</string>
     <string name="radio">Radio</string>
     <string name="template_bass_boost">Bassverstärkung: %1$ddB</string>
     <string name="label_tempo_pitch">Tempo &amp; Tonhöhe</string>
@@ -1582,19 +1562,15 @@
     <string name="equalizer">Equalizer</string>
     <string name="action_save_preset">Voreinstellung speichern</string>
     <string name="label_preset_name">Name der Voreinstellung</string>
-    <string name="voice_search_prompt">Sprich, um nach Musik zu suchen</string>
-    <string name="filter_albums">Album</string>
     <string name="filter_community_playlists">Community-Playlists</string>
     <string name="section_top_result">Top-Ergebnis</string>
     <string name="subtitle_playlist_template">Playlist • %1$s</string>
     <string name="top_picks_for_you">Top-Empfehlungen für Sie</string>
     <string name="no_tracks_available">Es sind keine Titel verfügbar</string>
-    <string name="create_playlist_subtitle">Organisiere deine Musik</string>
     <string name="empty_playlists_title">Noch keine Playlisten</string>
     <string name="empty_playlists_subtitle">Erstelle deine erste Playlist, um deine Lieblings-Songs zu ordnen</string>
     <string name="empty_favorites_title">Noch keine Favoriten</string>
     <string name="empty_favorites_subtitle">Tippe bei einem beliebigen Titel auf das Herz-Symbol, um ihn zu deinen Favoriten hinzuzufügen</string>
-    <string name="empty_history_subtitle">Hör dir Musik an, um hier deinen Verlauf anzuzeigen</string>
     <string name="empty_downloads_title">Noch keine Downloads</string>
     <string name="empty_downloads_subtitle">Songs für die Offline-Wiedergabe herunterladen</string>
     <string name="tracks_count_template">%1$s Songs</string>
@@ -1652,7 +1628,7 @@
     <string name="notif_background_restricted_subtitle">Android hindert Chorplay im Hintergrund nach neuen Videos zu suchen. Klicke hier um uneingeschränkte Hintergrundaktivitäten zuzulassen.</string>
     <string name="player_appearance_long_press_speed_title">Wiedergabetempo beim gedrückthalten</string>
     <string name="select_threads_count_desc">Wähle die Anzahl der Threads (1-8):</string>
-    <string name="support_flow_dev_title">Unterstützte die Chorplay Entwicklung</string>
+    <string name="support_chorplay_dev_title">Unterstützte die Chorplay Entwicklung</string>
     <string name="topic_weights_subtitle">Volle Transparenz wodurch dein Feed beeinflusst wird</string>
     <string name="persona_deep_diver_description">Lamge Videobeiträge und Dokumentationen sind deine Welt</string>
     <string name="status_playing">Spielt</string>
@@ -1670,14 +1646,14 @@
     <string name="section_daily_mix_title">%1$s Mix</string>
     <string name="section_daily_mix_label">Täglicher Mix</string>
     <string name="daily_mix_page_description">Zusammengestellt aus Künstlern, die ihr gemeinsam hört. Speichere ihn, um den heutigen Mix zu behalten.</string>
-    <string name="music_discovery_appetite_detail">Wie viel neue Musik der Algorithmus hinzufügt</string>
+
     <string name="diagnostics_tab_session">Sitzungsprotokolle</string>
     <string name="diagnostics_no_crashes">Keine Absturzberichte – super!</string>
     <string name="settings_item_diagnostics_subtitle">Fehlerprotokolle und Absturzberichte anzeigen</string>
     <string name="diagnostics_clear_crashes">Absturzberichte löschen</string>
     <string name="diagnostics_clear_confirm_title">Absturzberichte löschen?</string>
     <string name="diagnostics_clear_confirm_body">Alle gespeicherten Absturzberichte werden endgültig gelöscht. Dieser Vorgang kann nicht rückgängig gemacht werden.</string>
-    <string name="tv_settings_flow_engine">Chorplay Engine</string>
+    <string name="tv_settings_chor_engine">Chorplay Engine</string>
     <string name="newpipe_extractor_subtitle">Kern-Extraktionsbibliothek</string>
     <string name="onboarding_step_interests">Interessen</string>
     <plurals name="subscriptions_refresh_progress_template">
@@ -1739,10 +1715,10 @@
     <string name="import_no_content">Keine importierbaren Inhalte in diesem Backup gefunden</string>
     <string name="import_invalid_format">Unbekanntes Backup Format – bitte stellen Sie sicher, dass Sie die richtige Datei ausgewählt haben</string>
     <string name="import_failed_template">Import fehlgeschlagen: %1$s</string>
-    <string name="import_music_brain_title">Musik-Engine-Daten importieren</string>
-    <string name="import_music_brain_desc">Ein Musikgeschmacksprofil aus einer JSON-Datei wiederherstellen</string>
-    <string name="music_brain_import_success">Musik-Engine-Daten importiert</string>
-    <string name="music_brain_import_failed">Musik-Engine Import fehlgeschlagen</string>
+
+
+
+
     <string name="import_engine_success">Engine Profil erfolgreich wiederhergestellt</string>
     <string name="import_engine_failed">Import des Engine Profils fehlgeschlagen</string>
     <string name="profile_action_import_detail">Ein Profil Backup wiederherstellen</string>
@@ -1756,16 +1732,15 @@
     <string name="import_label_freetube_watch_history">FreeTube Wiedergabeverlauf</string>
     <string name="import_label_newpipe_watch_history">NewPipe Wiedergabeverlauf</string>
     <string name="import_label_libretube_subscriptions">LibreTube Abonnements</string>
-    <string name="import_label_metrolist_playlists">Metrolist Musik Playlisten</string>
     <string name="import_label_newpipe_playlists">NewPipe Playlisten</string>
     <string name="import_label_libretube_playlists">LibreTube Playlisten</string>
     <string name="import_label_youtube_takeout">YouTube-Auszug</string>
     <string name="imported_from_google_takeout">Aus Google-Auszug importieren</string>
-    <string name="flow_neural_profile_export_subject">Chorplay Neural Profil Export</string>
-    <string name="export_music_brain_title">Export Musik Engine Daten</string>
-    <string name="export_music_brain_desc">Speichere Sie ihr Musikgeschmacksprofil als JSON-Datei</string>
-    <string name="music_brain_export_success">Musik Engine Daten exportiert</string>
-    <string name="music_brain_export_failed">Musik Engine Export fehlgeschlagen</string>
+    <string name="chorplay_neural_profile_export_subject">Chorplay Neural Profil Export</string>
+
+
+
+
     <string name="export_engine_data">Export Engine Profile</string>
     <string name="export_engine_success">Engine Profil erfolgreich exportiert</string>
     <string name="export_engine_failed">Engine Profil Export fehlgeschlagen</string>
@@ -1801,8 +1776,8 @@
     <string name="interface_mode_tv_summary">Verwenden Sie immer die fernbedienungsfreundliche TV-Oberfläche</string>
     <string name="learning_stats_title">Lernsignale</string>
     <string name="learning_stats_subtitle">An was sich die Engine derzeit erinnert</string>
-    <string name="music_genre_affinity_title">Genres und Stimmungen</string>
-    <string name="music_genre_affinity_subtitle">Aus den Genre- und Stimmungsmerkmalen, die du tatsächlich spielst, gelernt</string>
+
+
     <string name="metric_channels_detail">Affinitätseinträge</string>
     <string name="taste_live_affinity">Live Affinität</string>
     <string name="channel_affinity_balanced">Ausgewogen</string>
@@ -1858,10 +1833,7 @@
         <item quantity="one">%1$d Video</item>
         <item quantity="other">%1$d Videos</item>
     </plurals>
-    <plurals name="songs_count_template">
-        <item quantity="one">%1$d Song</item>
-        <item quantity="other">%1$d Songs</item>
-    </plurals>
+
     <plurals name="playlists_count_template">
         <item quantity="one">%1$d Playlist</item>
         <item quantity="other">%1$d Playlists</item>
@@ -1917,11 +1889,11 @@
     <string name="notifications_removed">Benachrichtigung entfernt</string>
     <string name="notifications_open_settings">Benachrichtigungseinstellungen</string>
     <string name="notifications_clear_title">Benachrichtigungen leeren?</string>
-    <plurals name="deep_flow_duration_hours">
+    <plurals name="deep_chor_duration_hours">
         <item quantity="one">%1$d Stunde</item>
         <item quantity="other">%1$d Stunden</item>
     </plurals>
-    <string name="icon_name_flow_play">Chorplay Play</string>
+    <string name="icon_name_chorplay_play">Chorplay Play</string>
     <string name="player_appearance_haptics_title">Vibration</string>
     <string name="player_appearance_gesture_overlay_subtitle">Wie Lautstärke und Helligkeit gezeigt werden, während du wischst</string>
     <string name="gesture_overlay_style_vertical">Vertikal</string>
@@ -2010,9 +1982,7 @@
     <string name="category_news">Neuigkeiten</string>
     <string name="category_sports">Sport</string>
     <string name="category_learning">Lernen</string>
-    <string name="category_fashion">Mode</string>
-    <string name="categories_chart_source">YouTube Music Charts</string>
-    <plurals name="categories_rate_limited">
+    <string name="category_fashion">Mode</string>    <plurals name="categories_rate_limited">
         <item quantity="one">YouTube begrenzt Anfragen im Moment. Versuche es in ein paar Minuten erneut.</item>
     </plurals>
     <string name="proxy_settings_bypass_vpn">Überspringe den Proxy mit VPN</string>
@@ -2047,14 +2017,12 @@
     <string name="cache_size_automatic">Automatisch</string>
     <string name="cache_in_use">%1$s in Verwendung</string>
     <string name="cache_videos">Videos</string>
-    <string name="cache_songs">Songs</string>
-    <string name="cache_other">Andere</string>
+<string name="cache_other">Andere</string>
     <string name="cache_used_of_limit">%1$s von %2$s</string>
     <string name="cache_used_no_limit">%1$s, keine Begrenzung</string>
     <string name="cache_measuring">Messen…</string>
     <string name="cache_videos_size_title">Video Cache Größe</string>
-    <string name="cache_songs_size_title">Song Cache Größe</string>
-    <string name="cd_short_watched">Angeschaut</string>
+<string name="cd_short_watched">Angeschaut</string>
     <string name="shorts_linked_video">Verwandte Videos</string>
     <plurals name="topics_count_template">
         <item quantity="one">%1$d Thema</item>
@@ -2105,8 +2073,7 @@
         <item quantity="one">%1$d Playlist (%2$d Videos)</item>
         <item quantity="other">%1$d Playlists (%2$d Videos)</item>
     </plurals>
-    <string name="import_takeout_music_library_name">YouTube Music Bibliothek</string>
-    <plurals name="import_takeout_part_searches">
+<plurals name="import_takeout_part_searches">
         <item quantity="one">%d Suche</item>
         <item quantity="other">%d Suchen</item>
     </plurals>
@@ -2126,7 +2093,7 @@
         <item quantity="other">%1$d Videos entfernen?</item>
     </plurals>
     <string name="onboarding_channels_results_header">Kanäle</string>
-    <string name="onboarding_import_source_flow">Chorplay Backup</string>
+    <string name="onboarding_import_source_chorplay">Chorplay Backup</string>
     <string name="onboarding_import_source_youtube">YouTube</string>
     <string name="onboarding_import_done">Importiert</string>
     <string name="onboarding_progress">Schritt %1$d von %2$d</string>
@@ -2169,31 +2136,31 @@
     <string name="dont_recommend_artist_desc">Diesen Künstler nicht mehr vorschlagen</string>
     <string name="feedback_not_interested_applied">Du wirst weniger von %1$s sehen</string>
     <string name="feedback_artist_blocked">%1$s wird nicht mehr vorgeschlagen</string>
-    <string name="music_prefs_section_title">Musik Empfehlungen</string>
-    <string name="music_endless_radio_title">Endloses Radio</string>
-    <string name="music_endless_radio_desc">Füge ähnliche Songs hinzu wenn die Warteschlange endet</string>
-    <string name="settings_music_video_switch_summary">Wechsle zwischen Song und dessen Musik Video im Player</string>
+
+
+
+
     <string name="music_player_mode_song">Song</string>
     <string name="music_player_mode_video">Video</string>
-    <string name="music_video_unavailable">Dieser Song hat kein Musikvideo</string>
-    <string name="music_video_failed">Musikvideo konnte nicht geladen werden</string>
-    <string name="music_watch_video">Video anschauen</string>
-    <string name="music_content_language_title">Inhalt Sprache</string>
-    <string name="music_content_language_follow_app">Folge Appsprache</string>
-    <string name="music_content_language_dialog_title">Wähle Inhaltssprache</string>
-    <string name="music_content_country_title">Inhalt Land</string>
-    <string name="music_normalize_volume_title">Lautstärke normalisieren</string>
+
+
+
+    <string name="content_language_title">Inhalt Sprache</string>
+    <string name="content_language_follow_app">Folge Appsprache</string>
+    <string name="content_language_dialog_title">Wähle Inhaltssprache</string>
+    <string name="content_country_title">Inhalt Land</string>
+
     <string name="section_other_versions">Andere Versionen</string>
-    <string name="music_blocked_artists_title">Blockierte Künstler</string>
-    <string name="music_blocked_artists_empty">Keine blockierten Künstler</string>
-    <string name="music_persona_overview_title">Musikgeschmack</string>
-    <string name="music_persona_maturity_cold">Kaltstart</string>
-    <string name="music_persona_maturity_warming">Aufwärmen</string>
-    <string name="music_metric_artists">Künstler</string>
-    <string name="music_top_artists_title">Top Künstler</string>
-    <string name="music_top_artist_plays">%1$d spielt</string>
-    <string name="music_bucket_weekday_night">Wochentags Nächte</string>
-    <string name="music_bucket_plays">%1$d spielt</string>
+
+
+
+
+
+
+
+
+
+
     <string name="section_charts_global">Globale Charts</string>
     <string name="section_top_artists_in">Top Künstler in %1$s</string>
     <string name="section_top_artists_global">Top Künstler weltweit</string>
@@ -2242,9 +2209,9 @@
         <item quantity="other">%d Bands</item>
     </plurals>
     <string name="now_playing">SPIELT GERADE</string>
-    <string name="music_search_section_artists">Künstler</string>
-    <string name="music_search_section_playlists">Playlists</string>
-    <string name="music_search_section_episodes">Episoden</string>
+
+
+
     <string name="shorts_settings_this_short">Dieses Short</string>
     <string name="shorts_auto_scroll_active_template">Auto %1$ds</string>
     <string name="play_next_video_desc">Spielt nach dem aktuellen Video</string>
@@ -2272,8 +2239,7 @@
     <string name="subtitle_fullscreen_landscape">Landschaft</string>
     <string name="subtitle_fullscreen_vertical">Vertikal</string>
     <string name="subtitle_custom_color">Benutzerdefinierte Farbe</string>
-    <string name="sync_collection_music_profile">Musik Geschmacksprofil</string>
-    <string name="sync_enter_connection_data">Verbindungsdaten manuell eingeben</string>
+<string name="sync_enter_connection_data">Verbindungsdaten manuell eingeben</string>
     <string name="sync_enter_connection_data_hint">Füge die Verbindungsdaten vom anderen Gerät ein.</string>
     <string name="sync_connection_data_label">Verbindungsdaten</string>
     <string name="sync_paste_connection_data">Verbindungsdaten einfügen</string>

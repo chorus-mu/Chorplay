@@ -28,18 +28,16 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import io.github.pushkar.chorplay.R
 import io.github.pushkar.chorplay.data.model.Video
-import io.github.pushkar.chorplay.data.music.DownloadedTrack
-import io.github.pushkar.chorplay.data.music.model.MusicTrack
 import io.github.pushkar.chorplay.data.stats.RecapPeriod
 import io.github.pushkar.chorplay.data.video.DownloadedVideo
 import io.github.pushkar.chorplay.ui.OnTabReselected
-import io.github.pushkar.chorplay.ui.components.layout.flowBottomContentPadding
+import io.github.pushkar.chorplay.ui.components.layout.chorBottomContentPadding
 import io.github.pushkar.chorplay.ui.components.layout.navigation.ChorplayTab
 import io.github.pushkar.chorplay.ui.components.layout.topbar.ChorplayTopBar
 import io.github.pushkar.chorplay.ui.components.library.LibraryNavigationRow
 import io.github.pushkar.chorplay.ui.components.library.LibrarySection
 import io.github.pushkar.chorplay.ui.components.shared.ChorplayEmptyState
-import io.github.pushkar.chorplay.ui.components.shared.FlowMaxContentWidth
+import io.github.pushkar.chorplay.ui.components.shared.ChorMaxContentWidth
 import io.github.pushkar.chorplay.ui.components.shared.MediaKind
 import io.github.pushkar.chorplay.ui.components.stats.RecapEntryCard
 import java.time.format.TextStyle
@@ -53,7 +51,6 @@ fun LibraryScreen(
     onNavigateToHistory: () -> Unit,
     onNavigateToPlaylists: (MediaKind?) -> Unit,
     onNavigateToLikedVideos: () -> Unit,
-    onNavigateToLikedMusic: () -> Unit,
     onNavigateToWatchLater: () -> Unit,
     onNavigateToSavedShorts: () -> Unit,
     onNavigateToDownloads: () -> Unit,
@@ -62,11 +59,8 @@ fun LibraryScreen(
     onManageData: () -> Unit,
     onOpenRecap: (RecapPeriod?) -> Unit,
     onVideoClick: (Video) -> Unit,
-    onMusicClick: (MusicTrack, List<MusicTrack>, String) -> Unit,
     onPlaylistClick: (String) -> Unit,
-    onMusicPlaylistClick: (String) -> Unit,
     onDownloadedVideoClick: (List<DownloadedVideo>, Int) -> Unit,
-    onDownloadedMusicClick: (List<DownloadedTrack>, Int) -> Unit,
     onSavedShortClick: (Video) -> Unit,
     modifier: Modifier = Modifier,
     viewModel: LibraryViewModel = hiltViewModel(),
@@ -86,10 +80,8 @@ fun LibraryScreen(
             LibrarySection.HISTORY -> onNavigateToHistory()
             LibrarySection.PLAYLISTS -> onNavigateToPlaylists(null)
             LibrarySection.VIDEO_PLAYLISTS -> onNavigateToPlaylists(MediaKind.Videos)
-            LibrarySection.MUSIC_PLAYLISTS -> onNavigateToPlaylists(MediaKind.Music)
             LibrarySection.WATCH_LATER -> onNavigateToWatchLater()
             LibrarySection.LIKED_VIDEOS -> onNavigateToLikedVideos()
-            LibrarySection.LIKED_MUSIC -> onNavigateToLikedMusic()
             LibrarySection.DOWNLOADS -> onNavigateToDownloads()
             LibrarySection.SAVED_SHORTS -> onNavigateToSavedShorts()
             LibrarySection.LOCAL_MEDIA -> onNavigateToLocalMedia()
@@ -109,7 +101,7 @@ fun LibraryScreen(
                     .fillMaxSize()
                     .padding(padding)
                     .background(MaterialTheme.colorScheme.background),
-            contentPadding = PaddingValues(top = ListVerticalPadding, bottom = flowBottomContentPadding(ListVerticalPadding)),
+            contentPadding = PaddingValues(top = ListVerticalPadding, bottom = chorBottomContentPadding(ListVerticalPadding)),
             verticalArrangement = Arrangement.spacedBy(ShelfSpacing),
         ) {
             item(key = "recap", contentType = "recap") {
@@ -151,11 +143,8 @@ fun LibraryScreen(
                     sections = contentSections,
                     onOpenSection = openSection,
                     onVideoClick = onVideoClick,
-                    onMusicClick = onMusicClick,
                     onPlaylistClick = onPlaylistClick,
-                    onMusicPlaylistClick = onMusicPlaylistClick,
                     onDownloadedVideoClick = onDownloadedVideoClick,
-                    onDownloadedMusicClick = onDownloadedMusicClick,
                     onSavedShortClick = onSavedShortClick,
                 )
             } else if (contentSections.isNotEmpty()) {
@@ -169,7 +158,7 @@ fun LibraryScreen(
             val emptyLibraryDownloads = shelfPreviewsEnabled && isLibraryEmpty && LibrarySection.DOWNLOADS in contentSections
             if (emptyLibraryDownloads || settingsSections.isNotEmpty()) {
                 item(key = "settings-data", contentType = "navigation-section") {
-                    Column(modifier = Modifier.widthIn(max = FlowMaxContentWidth).padding(horizontal = 16.dp)) {
+                    Column(modifier = Modifier.widthIn(max = ChorMaxContentWidth).padding(horizontal = 16.dp)) {
                         LibrarySectionHeader(stringResource(R.string.library_settings_data_header))
                         if (emptyLibraryDownloads) {
                             LibraryNavigationRow(
@@ -205,39 +194,32 @@ internal fun LazyListScope.libraryShelves(
     sections: List<LibrarySection>,
     onOpenSection: (LibrarySection) -> Unit,
     onVideoClick: (Video) -> Unit,
-    onMusicClick: (MusicTrack, List<MusicTrack>, String) -> Unit,
     onPlaylistClick: (String) -> Unit,
-    onMusicPlaylistClick: (String) -> Unit,
     onDownloadedVideoClick: (List<DownloadedVideo>, Int) -> Unit,
-    onDownloadedMusicClick: (List<DownloadedTrack>, Int) -> Unit,
     onSavedShortClick: (Video) -> Unit,
 ) {
     sections.forEach { section ->
         val onTitleClick = { onOpenSection(section) }
         when (section) {
-            LibrarySection.HISTORY, LibrarySection.LIKED_MUSIC -> {
+            LibrarySection.HISTORY -> {
                 item(key = section.name, contentType = "media-shelf") {
                     LibraryMediaShelfRoute(
                         section = section,
-                        itemsFlow = if (section == LibrarySection.HISTORY) viewModel.history else viewModel.likedMusic,
+                        itemsFlow = viewModel.history,
                         onTitleClick = onTitleClick,
                         onVideoClick = onVideoClick,
-                        onMusicClick = onMusicClick,
                         onDownloadedVideoClick = onDownloadedVideoClick,
-                        onDownloadedMusicClick = onDownloadedMusicClick,
                     )
                 }
             }
 
-            LibrarySection.PLAYLISTS, LibrarySection.VIDEO_PLAYLISTS, LibrarySection.MUSIC_PLAYLISTS -> {
+            LibrarySection.PLAYLISTS, LibrarySection.VIDEO_PLAYLISTS -> {
                 item(key = section.name, contentType = "playlist-shelf") {
                     LibraryPlaylistsShelf(
                         section = section,
-                        videoPlaylistsFlow = viewModel.playlists.takeIf { section != LibrarySection.MUSIC_PLAYLISTS },
-                        musicPlaylistsFlow = viewModel.musicPlaylists.takeIf { section != LibrarySection.VIDEO_PLAYLISTS },
+                        videoPlaylistsFlow = viewModel.playlists,
                         onTitleClick = onTitleClick,
                         onVideoPlaylistClick = onPlaylistClick,
-                        onMusicPlaylistClick = onMusicPlaylistClick,
                     )
                 }
             }
@@ -261,9 +243,7 @@ internal fun LazyListScope.libraryShelves(
                         itemsFlow = viewModel.downloads,
                         onTitleClick = onTitleClick,
                         onVideoClick = onVideoClick,
-                        onMusicClick = onMusicClick,
                         onDownloadedVideoClick = onDownloadedVideoClick,
-                        onDownloadedMusicClick = onDownloadedMusicClick,
                         emptyMessage =
                             stringResource(
                                 if ((activeDownloads ?: 0) > 0) R.string.downloads_section_in_progress else R.string.empty_downloads,

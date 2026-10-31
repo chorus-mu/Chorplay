@@ -19,7 +19,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import io.github.pushkar.chorplay.R
 import io.github.pushkar.chorplay.data.model.Video
-import io.github.pushkar.chorplay.ui.components.layout.flowBottomContentPadding
+import io.github.pushkar.chorplay.ui.components.layout.chorBottomContentPadding
 import io.github.pushkar.chorplay.ui.components.library.PlaylistVideoRow
 import io.github.pushkar.chorplay.ui.components.library.libraryListThumbnailWidth
 import io.github.pushkar.chorplay.ui.components.shared.ChorplayEmptyState
@@ -53,7 +53,7 @@ internal fun PlaylistDetailList(
     onVideoClick: (index: Int, video: Video) -> Unit,
     onRemove: (Video) -> Unit,
     modifier: Modifier = Modifier,
-    contentPadding: PaddingValues = PaddingValues(bottom = flowBottomContentPadding()),
+    contentPadding: PaddingValues = PaddingValues(bottom = chorBottomContentPadding()),
     header: (@Composable () -> Unit)? = null,
 ) {
     BoxWithConstraints(modifier = modifier.fillMaxSize()) {

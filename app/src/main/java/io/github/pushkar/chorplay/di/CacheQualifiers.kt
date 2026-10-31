@@ -8,8 +8,4 @@ annotation class PlayerCache
 
 @Qualifier
 @Retention(AnnotationRetention.BINARY)
-annotation class MusicCache
-
-@Qualifier
-@Retention(AnnotationRetention.BINARY)
 annotation class DownloadCache

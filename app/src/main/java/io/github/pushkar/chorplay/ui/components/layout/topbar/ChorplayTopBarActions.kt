@@ -42,7 +42,7 @@ internal fun ChorplayGlobalActionsRow() {
     val actions = LocalChorplayGlobalActions.current ?: return
     val unreadCount by actions.unreadNotifications.collectAsStateWithLifecycle()
 
-    FlowNotificationsAction(
+    ChorNotificationsAction(
         unreadCount = unreadCount,
         onClick = actions.onOpenNotifications,
     )
@@ -55,7 +55,7 @@ internal fun ChorplayGlobalActionsRow() {
 }
 
 @Composable
-private fun FlowNotificationsAction(
+private fun ChorNotificationsAction(
     unreadCount: Int,
     onClick: () -> Unit,
 ) {

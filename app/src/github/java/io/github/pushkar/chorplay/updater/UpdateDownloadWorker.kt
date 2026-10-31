@@ -56,7 +56,7 @@ class UpdateDownloadWorker(
                 ) {
                     return@withContext fail(UpdateFailure.CHECKSUM, part)
                 }
-                if (!isFlowPackage(part)) return@withContext fail(UpdateFailure.PACKAGE, part)
+                if (!isChorplayPackage(part)) return@withContext fail(UpdateFailure.PACKAGE, part)
                 if (!part.renameTo(UpdateFiles.apkFile(applicationContext, version))) return@withContext fail(
                     UpdateFailure.STORAGE,
                     part
@@ -111,7 +111,7 @@ class UpdateDownloadWorker(
         return digest.digest().joinToString("") { "%02x".format(it) }
     }
 
-    private fun isFlowPackage(apk: File): Boolean =
+    private fun isChorplayPackage(apk: File): Boolean =
         applicationContext.packageManager.getPackageArchiveInfo(
             apk.path,
             0
@@ -189,12 +189,12 @@ internal object UpdateFiles {
     fun apkFile(
         context: Context,
         version: String,
-    ) = File(directory(context), "flow-$version.apk")
+    ) = File(directory(context), "chorplay-$version.apk")
 
     fun partFile(
         context: Context,
         version: String,
-    ) = File(directory(context), "flow-$version.apk.part")
+    ) = File(directory(context), "chorplay-$version.apk.part")
 
     fun clean(
         context: Context,

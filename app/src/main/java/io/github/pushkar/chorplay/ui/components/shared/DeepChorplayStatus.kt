@@ -4,7 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import io.github.pushkar.chorplay.R
-import io.github.pushkar.chorplay.data.local.DEEP_FLOW_NEVER_EXPIRES_HOURS
+import io.github.pushkar.chorplay.data.local.DEEP_CHOR_NEVER_EXPIRES_HOURS
 import java.time.Duration
 import java.time.Instant
 
@@ -13,15 +13,14 @@ data class DeepChorplayState(
     val activatedAt: Long = 0L,
     val expireHours: Int = DEFAULT_EXPIRE_HOURS,
     val saveToHistory: Boolean = false,
-    val scrobble: Boolean = false,
     val showOnSearch: Boolean = false,
 )
 
 /** The Deep Chorplay row's supporting text while it is on, or null while it is off. */
 @Composable
-fun deepFlowStatus(state: DeepChorplayState): String? {
+fun deepChorStatus(state: DeepChorplayState): String? {
     if (!state.active) return null
-    if (state.expireHours == DEEP_FLOW_NEVER_EXPIRES_HOURS) return stringResource(R.string.deep_flow_active_until_disabled)
+    if (state.expireHours == DEEP_CHOR_NEVER_EXPIRES_HOURS) return stringResource(R.string.deep_chor_active_until_disabled)
     if (state.activatedAt == 0L) return null
     val remaining =
         Duration.between(
@@ -37,7 +36,7 @@ fun deepFlowStatus(state: DeepChorplayState): String? {
         } else {
             context.getString(R.string.duration_hours_minutes_short, minutes / MINUTES_PER_HOUR, minutes % MINUTES_PER_HOUR)
         }
-    return stringResource(R.string.deep_flow_expires_in, label)
+    return stringResource(R.string.deep_chor_expires_in, label)
 }
 
 private const val MINUTES_PER_HOUR = 60

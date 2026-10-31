@@ -13,12 +13,10 @@ import kotlin.time.Duration.Companion.seconds
 
 enum class SyncRole { SENDER, RECEIVER }
 
-/** Summary shown to the receiver before it consents to merge. */
 data class TransferSummary(
     val collections: List<String>,
 )
 
-/** Final outcome of a session: per-collection merge stats + the peer that was synced with. */
 data class SyncResult(
     val peerName: String,
     val stats: Map<String, ApplyStats>,
@@ -26,26 +24,16 @@ data class SyncResult(
 
 interface ProtocolCallbacks {
     suspend fun onPeerHello(peer: PeerInfo) {}
-
-    /** Both sides display the 6-digit SAS; return true to proceed (defends against MITM). */
     suspend fun confirmSas(sas: String): Boolean
-
-    /** Receiver-only: "peer wants to send X — merge?" Return true to accept. */
     suspend fun confirmConsent(summary: TransferSummary): Boolean
-
     fun onProgress(
         collection: String,
         done: Int,
         total: Int,
-    ) {}
+    ) {
+    }
 }
 
-/**
- * A session failure on this side. [code] uses the wire codes shared with the desktop
- * (`timeout`, `hash_mismatch`, `apply_failed`, ...); when [tellPeer] is set the peer is sent an
- * `ERROR` frame with it before the socket closes, so it can show what happened instead of
- * "connection closed".
- */
 class SyncProtocolException(
     message: String,
     val code: String,
@@ -53,20 +41,11 @@ class SyncProtocolException(
     cause: Throwable? = null,
 ) : Exception(message, cause)
 
-/** The peer ended the session with an `ERROR` frame. */
 class SyncPeerException(
     val code: String,
     val detail: String,
 ) : Exception("peer error [$code]: $detail")
 
-/**
- * Drives one FLOW-SYNC/1 session over a [SyncConnection]. Strict lockstep with an
- * independent monotonic `seq` per direction: handshake → capability/selection
- * negotiation → SAS → consent → streamed transfer → atomic apply. v1 is one-way per session.
- *
- * Transport-symmetric: [isHost] only decides which directional key seals/opens and who speaks
- * first in each exchange; either role can be the SENDER or RECEIVER.
- */
 class SyncProtocol(
     private val conn: SyncConnection,
     private val isHost: Boolean,
@@ -108,8 +87,6 @@ class SyncProtocol(
         }
     }
 
-    // --- phases ---
-
     private suspend fun handshake(): PeerInfo =
         if (isHost) {
             val hello = decode(expect(FrameType.HELLO, NETWORK_WAIT), Hello.serializer())
@@ -138,11 +115,6 @@ class SyncProtocol(
             peer
         }
 
-    /**
-     * Only names the peer advertised go into our SELECTION. Released desktops parse the list into a
-     * fixed set of collections and abort the whole session on a name they don't know, which is what
-     * `notes` did to every desktop pairing.
-     */
     private suspend fun exchangeSelection(peerCaps: Capabilities): Selection {
         val outgoing =
             Selection(
@@ -159,11 +131,6 @@ class SyncProtocol(
         }
     }
 
-    /**
-     * Sender side of the canonical sequence (must mirror the desktop authority exactly):
-     * `MANIFEST` (one aggregate frame) → `CONSENT` from the receiver → per-collection
-     * `CHUNK*`/`CHUNK_ACK`/`COMPLETE` stream → one aggregate `APPLY_RESULT`.
-     */
     private suspend fun runSender(
         peer: PeerInfo,
         peerSelection: Selection,
@@ -172,19 +139,25 @@ class SyncProtocol(
         val toSend = localSelection.send.filter { it in peerSelection.accept && canConsume(peerCaps, it) }
         val payload = buildPayload(toSend)
 
-        // 1. Single aggregate MANIFEST describing everything we are about to stream.
         sendFrame(
             FrameType.MANIFEST,
             Manifest.serializer(),
-            Manifest(payload.mapValues { (_, w) -> ManifestEntry(w.recordCount, w.lines.sumOf { it.length.toLong() }, w.hash) }),
+            Manifest(payload.mapValues { (_, w) ->
+                ManifestEntry(
+                    w.recordCount,
+                    w.lines.sumOf { it.length.toLong() },
+                    w.hash
+                )
+            }),
         )
 
-        // 2. CONSENT (one-way, receiver→sender): the receiver is the SOLE merge gate. The sender
-        // sends no consent of its own — the user authorizes the send by verifying the SAS here.
         val consent = decode(expect(FrameType.CONSENT, USER_WAIT), Consent.serializer())
-        if (!consent.accepted) throw SyncProtocolException("peer declined the merge", CODE_PEER_DECLINED, tellPeer = false)
+        if (!consent.accepted) throw SyncProtocolException(
+            "peer declined the merge",
+            CODE_PEER_DECLINED,
+            tellPeer = false
+        )
 
-        // 3. Stream each collection: CHUNK* → CHUNK_ACK → COMPLETE.
         for ((collection, wire) in payload) {
             val chunks = wire.lines.chunked(CHUNK_SIZE)
             if (chunks.isEmpty()) {
@@ -200,17 +173,11 @@ class SyncProtocol(
             sendFrame(FrameType.COMPLETE, Complete.serializer(), Complete(collection, wire.recordCount, wire.hash))
         }
 
-        // 4. One aggregate APPLY_RESULT from the receiver.
         val result = decode(expect(FrameType.APPLY_RESULT, APPLY_WAIT), ApplyResult.serializer())
         return SyncResult(peer.deviceName, result.collections)
     }
 
-    /**
-     * Receiver side: read the single aggregate `MANIFEST` first, gate on the user, send `CONSENT`,
-     * consume the per-collection stream, apply it, then emit one aggregate `APPLY_RESULT`.
-     */
     private suspend fun runReceiver(peer: PeerInfo): SyncResult {
-        // An Android sender asks its user to confirm the code before it sends the MANIFEST.
         val manifest = decode(expect(FrameType.MANIFEST, USER_WAIT), Manifest.serializer())
         val incoming = manifest.collections.keys.filter { it in localSelection.accept }
 
@@ -227,17 +194,17 @@ class SyncProtocol(
             } catch (e: CancellationException) {
                 throw e
             } catch (e: Exception) {
-                throw SyncProtocolException("couldn't save the received data: ${e.message}", CODE_APPLY_FAILED, tellPeer = true, e)
+                throw SyncProtocolException(
+                    "couldn't save the received data: ${e.message}",
+                    CODE_APPLY_FAILED,
+                    tellPeer = true,
+                    e
+                )
             }
         sendFrame(FrameType.APPLY_RESULT, ApplyResult.serializer(), ApplyResult(stats))
         return SyncResult(peer.deviceName, stats)
     }
 
-    /**
-     * Receive every collection the MANIFEST lists, routed by the name each chunk carries. Senders
-     * disagree on stream order (released desktops follow their own selection order), so the
-     * position of a collection in the stream says nothing about which one it is.
-     */
     private suspend fun receiveStream(manifest: Manifest): Map<String, ReceivedCollection> {
         val remaining = LinkedHashMap(manifest.collections)
         val received = LinkedHashMap<String, ReceivedCollection>()
@@ -245,7 +212,8 @@ class SyncProtocol(
             var (header, body) = parseChunk(expect(FrameType.CHUNK, CHUNK_WAIT))
             val name = header.collection
             val entry =
-                remaining.remove(name) ?: throw protocolError("received $name, which the manifest doesn't list or which already arrived")
+                remaining.remove(name)
+                    ?: throw protocolError("received $name, which the manifest doesn't list or which already arrived")
             val lines = ArrayList<String>()
             while (true) {
                 if (header.collection != name) throw protocolError("a chunk for ${header.collection} arrived in the middle of $name")
@@ -268,12 +236,6 @@ class SyncProtocol(
         return received
     }
 
-    // --- framing helpers ---
-
-    /**
-     * A collection whose topic keys follow a key spec goes only to a peer that writes them the same
-     * way: a reader of another spec would file them as new topics beside its own (#907).
-     */
     private fun canConsume(
         caps: Capabilities,
         collection: String,
@@ -319,14 +281,17 @@ class SyncProtocol(
 
     private fun parseChunk(plaintext: ByteArray): Pair<ChunkHeader, List<String>> = ChunkFraming.decode(plaintext)
 
-    /** The next frame's plaintext, which must be of [type] and arrive within [wait]. */
     private suspend fun expect(
         type: Byte,
         wait: Duration,
     ): ByteArray {
         val frame =
             withTimeoutOrNull(wait) { recvFrame() }
-                ?: throw SyncProtocolException("timed out waiting for ${FrameType.name(type)}", CODE_TIMEOUT, tellPeer = true)
+                ?: throw SyncProtocolException(
+                    "timed out waiting for ${FrameType.name(type)}",
+                    CODE_TIMEOUT,
+                    tellPeer = true
+                )
         if (frame.frameType == FrameType.ERROR) {
             val err = decode(frame.plaintext, ErrorFrame.serializer())
             throw SyncPeerException(err.code, err.message)
@@ -339,15 +304,28 @@ class SyncProtocol(
 
     private suspend fun recvFrame(): SyncCodec.Opened {
         val msg =
-            conn.receive() ?: throw SyncProtocolException("connection closed by peer", CODE_PEER_CLOSED, tellPeer = false)
+            conn.receive() ?: throw SyncProtocolException(
+                "connection closed by peer",
+                CODE_PEER_CLOSED,
+                tellPeer = false
+            )
         val opened =
             try {
                 SyncCodec.open(keys.openKey(isHost), sessionId, msg)
             } catch (e: AEADBadTagException) {
-                throw SyncProtocolException("authentication failed (wrong key or tampered frame)", CODE_PROTOCOL, tellPeer = false, e)
+                throw SyncProtocolException(
+                    "authentication failed (wrong key or tampered frame)",
+                    CODE_PROTOCOL,
+                    tellPeer = false,
+                    e
+                )
             }
         if (opened.seq != expectedRecvSeq) {
-            throw SyncProtocolException("out-of-order frame: got ${opened.seq}, expected $expectedRecvSeq", CODE_PROTOCOL, tellPeer = false)
+            throw SyncProtocolException(
+                "out-of-order frame: got ${opened.seq}, expected $expectedRecvSeq",
+                CODE_PROTOCOL,
+                tellPeer = false
+            )
         }
         expectedRecvSeq++
         return opened
@@ -370,16 +348,9 @@ class SyncProtocol(
     companion object {
         private const val CHUNK_SIZE = 1500
 
-        /** A frame the peer sends straight back without involving its user. */
         private val NETWORK_WAIT = 60.seconds
-
-        /** A chunk mid-stream: the sender may be reading a large collection from disk. */
         private val CHUNK_WAIT = 90.seconds
-
-        /** A frame the peer only sends after its user confirms the code or the merge. */
         private val USER_WAIT = 10.minutes
-
-        /** `APPLY_RESULT`: the receiver merges everything into its database first. */
         private val APPLY_WAIT = 10.minutes
 
         const val CODE_SAS_REJECTED = "sas_rejected"

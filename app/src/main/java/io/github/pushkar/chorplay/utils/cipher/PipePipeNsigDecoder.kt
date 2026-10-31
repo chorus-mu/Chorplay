@@ -48,7 +48,7 @@ object PipePipeNsigDecoder {
     private const val USER_AGENT = "PipePipe/4.9.0"
     private const val PLAYER_TTL_MS = 24L * 60L * 60L * 1000L
 
-    private const val PREFS_NAME = "flow_prefs"
+    private const val PREFS_NAME = "chorplay_prefs"
     private const val KEY_PLAYER_ID = "nsig_player_id"
     private const val KEY_PLAYER_STS = "nsig_player_sts"
     private const val KEY_PLAYER_EXPIRY_MS = "nsig_player_expiry_ms"

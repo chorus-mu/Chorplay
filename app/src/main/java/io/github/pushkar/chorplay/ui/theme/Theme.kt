@@ -161,11 +161,11 @@ fun ChorplayTheme(
     systemLightThemeMode: ThemeMode = ThemeMode.DARK,
     systemDarkThemeMode: ThemeMode = ThemeMode.DARK,
     systemDarkThemeVariant: ThemeVariant = ThemeVariant.DARK,
-    fontFamily: FontFamily = FlowFontFamily,
+    fontFamily: FontFamily = ChorFontFamily,
     content: @Composable () -> Unit,
 ) {
     val colorScheme =
-        resolveFlowColorScheme(
+        resolveChorColorScheme(
             context = LocalContext.current,
             isSystemDark = isSystemInDarkTheme(),
             themeMode = themeMode,
@@ -189,7 +189,7 @@ fun ChorplayTheme(
         MaterialExpressiveTheme(
             colorScheme = colorScheme,
             motionScheme = MotionScheme.expressive(),
-            typography = remember(fontFamily) { flowTypography(fontFamily) },
+            typography = remember(fontFamily) { chorTypography(fontFamily) },
             content = content,
         )
     }
@@ -200,7 +200,7 @@ fun ChorplayTheme(
  * shared by [ChorplayTheme] and the home-screen widgets, so widgets always render in the
  * exact palette the user selected in-app (including custom and Material You themes).
  */
-fun resolveFlowColorScheme(
+fun resolveChorColorScheme(
     context: Context,
     isSystemDark: Boolean,
     themeMode: ThemeMode,

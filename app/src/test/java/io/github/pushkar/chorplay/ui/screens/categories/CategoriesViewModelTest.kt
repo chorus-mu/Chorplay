@@ -8,7 +8,6 @@ import io.github.pushkar.chorplay.innertube.YouTube
 import io.github.pushkar.chorplay.innertube.pages.explore.ExploreDestination
 import io.github.pushkar.chorplay.innertube.pages.explore.ExploreDestinationPage
 import io.github.pushkar.chorplay.innertube.pages.explore.ExploreSectionKind
-import io.github.pushkar.chorplay.innertube.pages.explore.MusicVideoChart
 import io.github.pushkar.chorplay.innertube.pages.renderer.FeedShelf
 import io.mockk.coEvery
 import io.mockk.every
@@ -50,7 +49,6 @@ class CategoriesViewModelTest {
         // The loads are not what these assert, and a real one would reach the network.
         mockkObject(YouTube)
         every { YouTube.exploreDestination(any(), any()) } returns flowOf(ExploreDestinationPage())
-        coEvery { YouTube.musicVideoChart(any()) } returns Result.success(MusicVideoChart(title = ""))
     }
 
     @After
@@ -89,11 +87,11 @@ class CategoriesViewModelTest {
         runTest(testDispatcher) {
             val viewModel = viewModel()
 
-            viewModel.select(ExploreDestination.MUSIC)
+            viewModel.select(ExploreDestination.GAMING)
 
             val state = viewModel.uiState.value
-            assertThat(state.selected).isEqualTo(ExploreDestination.MUSIC)
-            assertThat(state.sectionKind).isEqualTo(ExploreSectionKind.CHART)
+            assertThat(state.selected).isEqualTo(ExploreDestination.GAMING)
+            assertThat(state.sectionKind).isEqualTo(ExploreSectionKind.GRID)
             assertThat(state.shelves).isEmpty()
             assertThat(state.subTabs).isEmpty()
         }

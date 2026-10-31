@@ -25,7 +25,7 @@ import org.junit.Test
 import java.util.concurrent.atomic.AtomicReference
 
 /**
- * End-to-end protocol loopback that locks in the canonical FLOW-SYNC/1 sequence agreed with the
+ * End-to-end protocol loopback that locks in the canonical CHOR-SYNC/1 sequence agreed with the
  * desktop authority: `MANIFEST` → `CONSENT` both ways → per-collection `CHUNK*`/`CHUNK_ACK`/
  * `COMPLETE` → one aggregate `APPLY_RESULT`. Two [SyncProtocol] instances run concurrently over a
  * pair of in-memory channels.

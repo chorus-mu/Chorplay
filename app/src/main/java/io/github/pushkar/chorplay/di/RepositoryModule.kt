@@ -15,7 +15,8 @@ import javax.inject.Singleton
 object RepositoryModule {
     @Provides
     @Singleton
-    fun provideYouTubeRepository(playerPreferences: PlayerPreferences): YouTubeRepository = YouTubeRepository.getInstance(playerPreferences)
+    fun provideYouTubeRepository(playerPreferences: PlayerPreferences): YouTubeRepository =
+        YouTubeRepository.getInstance(playerPreferences)
 
     @Provides
     @Singleton
@@ -51,35 +52,12 @@ object RepositoryModule {
 
     @Provides
     @Singleton
-    fun provideMusicPlaylistRepository(
-        @ApplicationContext context: Context,
-    ): io.github.pushkar.chorplay.data.music.PlaylistRepository =
-        io.github.pushkar.chorplay.data.music
-            .PlaylistRepository(context)
-
-    // VideoDownloadManager is now @Singleton @Inject — Hilt provides it automatically
-    @Provides
-    @Singleton
     fun providePlayerPreferences(
         @ApplicationContext context: Context,
     ): io.github.pushkar.chorplay.data.local.PlayerPreferences =
         io.github.pushkar.chorplay.data.local
             .PlayerPreferences(context)
 
-    /** Transitional: the music player manager still reaches the queue store through getInstance, so this hands injected consumers the same instance. */
-    @Provides
-    @Singleton
-    fun provideQueuePersistence(
-        @ApplicationContext context: Context,
-    ): io.github.pushkar.chorplay.data.local.QueuePersistence =
-        io.github.pushkar.chorplay.data.local.QueuePersistence
-            .getInstance(context)
-
-    /**
-     * Transitional: [io.github.pushkar.chorplay.data.local.BackupRepository] still builds its own
-     * collaborators, so it is provided here rather than injected through its constructor. One
-     * instance serves the whole app.
-     */
     @Provides
     @Singleton
     fun provideBackupRepository(

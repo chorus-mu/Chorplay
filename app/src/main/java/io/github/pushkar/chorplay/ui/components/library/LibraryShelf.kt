@@ -37,8 +37,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import io.github.pushkar.chorplay.data.model.Video
-import io.github.pushkar.chorplay.data.music.DownloadedTrack
-import io.github.pushkar.chorplay.data.music.model.MusicTrack
 import io.github.pushkar.chorplay.data.video.DownloadedVideo
 import io.github.pushkar.chorplay.ui.components.shared.MediaShortCard
 import io.github.pushkar.chorplay.ui.components.shared.ShimmerBone
@@ -162,21 +160,11 @@ internal fun LibraryMediaShelf(
     sourceName: String,
     onTitleClick: () -> Unit,
     onVideoClick: (Video) -> Unit,
-    onMusicClick: (MusicTrack, List<MusicTrack>, String) -> Unit,
     onDownloadedVideoClick: (List<DownloadedVideo>, Int) -> Unit,
-    onDownloadedMusicClick: (List<DownloadedTrack>, Int) -> Unit,
 ) {
-    val musicQueue =
-        remember(items) {
-            items.mapNotNull { (it as? LibraryMediaItem.MusicItem)?.track }
-        }
     val downloadedVideoQueue =
         remember(items) {
             items.mapNotNull { (it as? LibraryMediaItem.DownloadedVideoItem)?.download }
-        }
-    val downloadedMusicQueue =
-        remember(items) {
-            items.mapNotNull { (it as? LibraryMediaItem.DownloadedMusicItem)?.download }
         }
 
     LibraryShelf(title = title, icon = icon, onTitleClick = onTitleClick) { cardWidth ->
@@ -190,9 +178,6 @@ internal fun LibraryMediaShelf(
                     is LibraryMediaItem.DownloadedVideoItem,
                     -> "video"
 
-                    is LibraryMediaItem.MusicItem,
-                    is LibraryMediaItem.DownloadedMusicItem,
-                    -> "music"
                 }
             },
         ) { item ->
@@ -205,15 +190,6 @@ internal fun LibraryMediaShelf(
                     )
                 }
 
-                is LibraryMediaItem.MusicItem -> {
-                    LibraryAlbumCard(
-                        title = item.track.title,
-                        subtitle = item.track.artist,
-                        thumbnailUrl = item.track.thumbnailUrl,
-                        onClick = { onMusicClick(item.track, musicQueue, sourceName) },
-                        artworkSize = artworkSize,
-                    )
-                }
 
                 is LibraryMediaItem.DownloadedVideoItem -> {
                     LibraryVideoCard(
@@ -229,22 +205,6 @@ internal fun LibraryMediaShelf(
                     )
                 }
 
-                is LibraryMediaItem.DownloadedMusicItem -> {
-                    LibraryAlbumCard(
-                        title = item.download.track.title,
-                        subtitle = item.download.track.artist,
-                        thumbnailUrl = item.download.track.thumbnailUrl,
-                        isDownloaded = true,
-                        onClick = {
-                            val index =
-                                downloadedMusicQueue.indexOfFirst {
-                                    it.track.videoId == item.download.track.videoId
-                                }
-                            if (index >= 0) onDownloadedMusicClick(downloadedMusicQueue, index)
-                        },
-                        artworkSize = artworkSize,
-                    )
-                }
             }
         }
     }

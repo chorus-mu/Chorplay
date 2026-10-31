@@ -32,7 +32,7 @@ import kotlinx.coroutines.runBlocking
 class PlayerFactory {
     companion object {
         private const val TAG = "PlayerFactory"
-        private const val EVENT_LOG_TAG = "FlowVideoEvents"
+        private const val EVENT_LOG_TAG = "ChorVideoEvents"
     }
 
     private class CachedPrefs(

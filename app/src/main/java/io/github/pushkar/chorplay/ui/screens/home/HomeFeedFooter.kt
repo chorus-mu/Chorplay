@@ -26,7 +26,7 @@ import androidx.compose.ui.unit.dp
 import io.github.pushkar.chorplay.R
 
 @Composable
-internal fun FlowFeedFooter(
+internal fun ChorFeedFooter(
     videoCount: Int,
     onRefresh: () -> Unit,
     modifier: Modifier = Modifier,

@@ -50,7 +50,7 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import io.github.pushkar.chorplay.R
 import io.github.pushkar.chorplay.ui.components.shared.ChorplayActionButton
-import io.github.pushkar.chorplay.ui.components.shared.FlowMaxContentWidth
+import io.github.pushkar.chorplay.ui.components.shared.ChorMaxContentWidth
 import io.github.pushkar.chorplay.ui.components.shared.chorplayActionShape
 import kotlinx.coroutines.launch
 import java.time.format.DateTimeFormatter
@@ -93,7 +93,7 @@ fun CrashReportScreen(
                 Row(
                     modifier =
                         Modifier
-                            .widthIn(max = FlowMaxContentWidth)
+                            .widthIn(max = ChorMaxContentWidth)
                             .fillMaxWidth()
                             .navigationBarsPadding()
                             .padding(BarPadding),
@@ -127,7 +127,7 @@ fun CrashReportScreen(
     ) { padding ->
         Box(Modifier.fillMaxSize().padding(padding), contentAlignment = Alignment.TopCenter) {
             LazyColumn(
-                modifier = Modifier.widthIn(max = FlowMaxContentWidth).fillMaxWidth(),
+                modifier = Modifier.widthIn(max = ChorMaxContentWidth).fillMaxWidth(),
                 contentPadding = PagePadding,
                 verticalArrangement = Arrangement.spacedBy(Spacing),
             ) {

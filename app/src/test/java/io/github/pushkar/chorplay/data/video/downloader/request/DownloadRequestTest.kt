@@ -6,8 +6,6 @@ import io.github.pushkar.chorplay.data.local.entity.DownloadFileType
 import io.github.pushkar.chorplay.data.local.entity.DownloadItemEntity
 import io.github.pushkar.chorplay.data.local.entity.DownloadWithItems
 import io.github.pushkar.chorplay.data.model.Video
-import io.github.pushkar.chorplay.data.music.model.MusicArtist
-import io.github.pushkar.chorplay.data.music.model.MusicTrack
 import io.github.pushkar.chorplay.data.video.downloader.tags.DownloadKind
 import io.github.pushkar.chorplay.data.video.downloader.work.LegacyDownloadRequest
 import org.junit.Test
@@ -51,29 +49,6 @@ class DownloadRequestTest {
     }
 
     @Test
-    fun `a song request is audio only with its album, artists and track number`() {
-        val track =
-            MusicTrack(
-                videoId = "song",
-                title = "Intro",
-                artist = "Artist A, Artist B",
-                thumbnailUrl = "",
-                duration = 60,
-                album = "Album",
-                albumId = "MPREb_1",
-                artists = listOf(MusicArtist("Artist A", "UCa"), MusicArtist("Artist B", null)),
-            )
-
-        val request = track.toDownloadRequest(collectionId = "MPREb_1", trackNumber = 3, trackTotal = 12, albumArtist = "Artist A")
-
-        assertThat(request.wantsAudioOnly).isTrue()
-        assertThat(request.tags.artists).containsExactly("Artist A", "Artist B").inOrder()
-        assertThat(request.tags.trackNumber).isEqualTo(3)
-        assertThat(request.tags.sourceUrl).isEqualTo("https://music.youtube.com/watch?v=song")
-        assertThat(request.artists).containsExactly(StoredArtist("Artist A", "UCa"), StoredArtist("Artist B", null)).inOrder()
-    }
-
-    @Test
     fun `a row from before requests were stored asks for the quality its label named`() {
         val row =
             DownloadWithItems(
@@ -97,11 +72,4 @@ class DownloadRequestTest {
         assertThat(request.tags.channelName).isEqualTo("Someone")
     }
 
-    @Test
-    fun `stored artists read back, and junk reads as none`() {
-        val artists = listOf(StoredArtist("A", "UC"), StoredArtist("B"))
-
-        assertThat(StoredArtist.decode(StoredArtist.encode(artists))).isEqualTo(artists)
-        assertThat(StoredArtist.decode("[{")).isEmpty()
-    }
 }

@@ -30,7 +30,7 @@ import io.github.pushkar.chorplay.sync2.data.LAN_STORE
 import io.github.pushkar.chorplay.sync2.data.WEBDAV_STORE
 import io.github.pushkar.chorplay.sync2.service.LinkedDevice
 import io.github.pushkar.chorplay.sync2.service.LinkedError
-import io.github.pushkar.chorplay.ui.components.shared.FlowNavRow
+import io.github.pushkar.chorplay.ui.components.shared.ChorNavRow
 import io.github.pushkar.chorplay.ui.screens.sync.SyncActionRow
 import io.github.pushkar.chorplay.ui.screens.sync.SyncCard
 import io.github.pushkar.chorplay.ui.screens.sync.SyncInfoRow
@@ -73,7 +73,7 @@ internal fun LinkedOverview(
             ?: stringResource(R.string.linked_last_sync_never)
     SyncRowGroup(count = 2) { index, shape ->
         if (index == 0) {
-            FlowNavRow(
+            ChorNavRow(
                 title = stringResource(R.string.linked_server),
                 onClick = {},
                 supportingText =
@@ -89,7 +89,7 @@ internal fun LinkedOverview(
                 shape = shape,
             )
         } else {
-            FlowNavRow(
+            ChorNavRow(
                 title = stringResource(if (state.syncing) R.string.linked_syncing else R.string.linked_sync_now),
                 onClick = onSyncNow,
                 supportingText = lastSync,
@@ -161,7 +161,7 @@ private fun DeviceList(
     Text(stringResource(R.string.linked_devices), Modifier.fillMaxWidth(), style = MaterialTheme.typography.titleMedium)
     SyncRowGroup(count = devices.size) { index, shape ->
         val device = devices[index]
-        FlowNavRow(
+        ChorNavRow(
             title = device.name,
             onClick = { open = device.id },
             supportingText =

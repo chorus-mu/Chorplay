@@ -35,8 +35,8 @@ import io.github.pushkar.chorplay.data.stats.RankedItem
 import io.github.pushkar.chorplay.data.stats.RecapPeriod
 import io.github.pushkar.chorplay.data.stats.RecapSummary
 import io.github.pushkar.chorplay.data.stats.ViewFormat
-import io.github.pushkar.chorplay.ui.components.shared.FlowMorphingPortrait
-import io.github.pushkar.chorplay.ui.components.shared.FlowPopIn
+import io.github.pushkar.chorplay.ui.components.shared.ChorMorphingPortrait
+import io.github.pushkar.chorplay.ui.components.shared.ChorPopIn
 import io.github.pushkar.chorplay.ui.components.stats.StatCalendar
 import io.github.pushkar.chorplay.ui.components.stats.StatClock
 import io.github.pushkar.chorplay.ui.components.stats.StatLegendItem
@@ -91,15 +91,13 @@ internal fun StoryPageContent(
                     if (!summary.video.isEmpty) {
                         StatPill(summary.video.views.toString(), stringResource(R.string.recap_views), tint, index++)
                     }
-                    if (!summary.music.isEmpty) {
-                        StatPill(summary.music.plays.toString(), stringResource(R.string.recap_plays), tint, index++)
-                    }
+
                     StatPill(summary.combined.longestStreak.toString(), stringResource(R.string.recap_streak), tint, index)
                 }
             }
 
             is StoryPage.TopChannel -> {
-                FlowMorphingPortrait(page.channel.imageUrl, page.channel.name, HeroPortrait, tint.accent, tint.container)
+                ChorMorphingPortrait(page.channel.imageUrl, page.channel.name, HeroPortrait, tint.accent, tint.container)
                 Eyebrow(stringResource(R.string.recap_story_top_channel), tint)
                 Headline(page.channel.name)
                 val watched = spentTimeLabel(page.channel.durationMs)
@@ -133,17 +131,7 @@ internal fun StoryPageContent(
                 Streak(summary, tint, locale)
             }
 
-            is StoryPage.TopArtist -> {
-                FlowMorphingPortrait(page.artist.imageUrl, page.artist.name, HeroPortrait, tint.accent, tint.container)
-                Eyebrow(stringResource(R.string.recap_story_artist), tint)
-                Headline(page.artist.name)
-                Body(stringResource(R.string.recap_story_artist_body, playsLabel(page.artist), page.sharePercent))
-            }
 
-            StoryPage.Songs -> {
-                Eyebrow(stringResource(R.string.recap_story_songs), tint)
-                ArtworkList(summary.music.topTracks.take(STORY_LIST), tint) { playsLabel(it) }
-            }
 
             StoryPage.NewToYou -> {
                 NewToYou(summary, tint)
@@ -177,7 +165,7 @@ private fun StatPill(
     tint: StoryTint,
     index: Int,
 ) {
-    FlowPopIn(index) {
+    ChorPopIn(index) {
         Surface(shape = MaterialTheme.shapes.extraLarge, color = tint.raised, contentColor = tint.onContainer) {
             Column(
                 modifier = Modifier.padding(horizontal = PillPaddingH, vertical = PillPaddingV),
@@ -199,7 +187,7 @@ private fun FaceRow(
     Row(horizontalArrangement = Arrangement.spacedBy(SmallSpacing), verticalAlignment = Alignment.Top) {
         items.forEachIndexed { index, item ->
             Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.widthIn(max = SmallPortrait * 1.6f)) {
-                FlowMorphingPortrait(item.imageUrl, item.name, SmallPortrait, tint.accent, tint.container, delayIndex = index + 2)
+                ChorMorphingPortrait(item.imageUrl, item.name, SmallPortrait, tint.accent, tint.container, delayIndex = index + 2)
                 Text(item.name, style = MaterialTheme.typography.labelSmall, maxLines = 1, overflow = TextOverflow.Ellipsis)
             }
         }
@@ -213,7 +201,7 @@ private fun RepeatArtwork(
     tint: StoryTint,
 ) {
     Box(Modifier.widthIn(max = StoryMaxWidth).fillMaxWidth()) {
-        FlowPopIn(0) {
+        ChorPopIn(0) {
             AsyncImage(
                 model = video.imageUrl,
                 contentDescription = null,
@@ -221,7 +209,7 @@ private fun RepeatArtwork(
                 modifier = Modifier.fillMaxWidth().aspectRatio(VIDEO_ASPECT).clip(MaterialTheme.shapes.extraLarge),
             )
         }
-        FlowPopIn(3, Modifier.align(Alignment.TopEnd).offset(x = SmallSpacing, y = -SmallSpacing)) {
+        ChorPopIn(3, Modifier.align(Alignment.TopEnd).offset(x = SmallSpacing, y = -SmallSpacing)) {
             Surface(
                 shape = MaterialShapes.SoftBurst.toShape(),
                 color = tint.accent,
@@ -250,7 +238,7 @@ private fun Topics(
         verticalArrangement = Arrangement.spacedBy(SmallSpacing),
     ) {
         topics.take(STORY_LIST + 2).forEachIndexed { index, topic ->
-            FlowPopIn(index) {
+            ChorPopIn(index) {
                 Surface(
                     shape = MaterialTheme.shapes.extraLarge,
                     color = if (index == 0) tint.accent else tint.raised,
@@ -308,17 +296,15 @@ private fun NewToYou(
     tint: StoryTint,
 ) {
     val channels = summary.video.discoveredChannels
-    val artists = summary.music.discoveredArtists
     Eyebrow(stringResource(R.string.recap_story_new), tint)
     if (channels.isNotEmpty()) Headline(pluralStringResource(R.plurals.recap_new_channels, channels.size, channels.size))
-    if (artists.isNotEmpty()) Headline(pluralStringResource(R.plurals.recap_new_artists, artists.size, artists.size))
     FlowRow(
         horizontalArrangement = Arrangement.spacedBy(SmallSpacing, Alignment.CenterHorizontally),
         verticalArrangement = Arrangement.spacedBy(SmallSpacing),
     ) {
-        (channels + artists).take(NEW_FACES).forEachIndexed { index, item ->
+        channels.take(NEW_FACES).forEachIndexed { index, item ->
             Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.widthIn(max = SmallPortrait * 1.6f)) {
-                FlowMorphingPortrait(item.imageUrl, item.name, SmallPortrait, tint.accent, tint.container, delayIndex = index)
+                ChorMorphingPortrait(item.imageUrl, item.name, SmallPortrait, tint.accent, tint.container, delayIndex = index)
                 Text(item.name, style = MaterialTheme.typography.labelSmall, maxLines = 1, overflow = TextOverflow.Ellipsis)
             }
         }
@@ -336,7 +322,7 @@ private fun PassedOn(
         StatPill(video.dislikes.size.toString(), stringResource(R.string.recap_dislikes), tint, 0)
         StatPill((video.actions[LedgerAction.NOT_INTERESTED] ?: 0).toString(), stringResource(R.string.recap_not_interested), tint, 1)
     }
-    val skipped = video.skippedVideos.ifEmpty { summary.music.skippedTracks }
+    val skipped = video.skippedVideos
     if (skipped.isNotEmpty()) ArtworkList(skipped.take(SHORT_LIST), tint) { timesLabel(it) }
 }
 
@@ -350,7 +336,6 @@ private fun Formats(summary: RecapSummary) {
             Triple(R.string.recap_format_long, summary.video.formatMs[ViewFormat.LONG] ?: 0L, primary),
             Triple(R.string.recap_format_shorts, summary.video.formatMs[ViewFormat.SHORT] ?: 0L, primary.copy(alpha = FORMAT_SECONDARY)),
             Triple(R.string.recap_format_live, summary.video.formatMs[ViewFormat.LIVE] ?: 0L, primary.copy(alpha = FORMAT_TERTIARY)),
-            Triple(R.string.recap_format_music, summary.music.activity.totalMs, MaterialTheme.colorScheme.tertiary),
         ).filter { it.second > 0L }
     val labels = shares.map { (label, ms, _) -> stringResource(R.string.recap_format_share, stringResource(label), spentTimeLabel(ms)) }
     val entrance = rememberStatEntrance(StoryPage.Formats)
@@ -370,7 +355,7 @@ private fun ArtworkList(
 ) {
     Column(Modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(SmallSpacing)) {
         items.forEachIndexed { index, item ->
-            FlowPopIn(index) {
+            ChorPopIn(index) {
                 Surface(shape = MaterialTheme.shapes.large, color = tint.raised, contentColor = tint.onContainer) {
                     Row(
                         Modifier.fillMaxWidth().padding(SmallSpacing),

@@ -5,23 +5,21 @@ import io.github.pushkar.chorplay.ui.components.layout.navigation.MediaNavigator
 import io.github.pushkar.chorplay.utils.YouTubeLink
 import java.net.URLDecoder
 
-/**
- * The TV shell's [MediaNavigator], so a card's channel, a menu's "Go to artist" and a link in a
- * description open the TV page for it. [beforeNavigate] closes a full-screen player, which would
- * otherwise cover the page. TV has no equalizer page, so that request does nothing.
- */
 internal class TvMediaNavigator(
     private val navController: NavHostController,
     private val beforeNavigate: () -> Unit,
     private val playVideo: (videoId: String) -> Unit,
 ) : MediaNavigator {
-    override fun openChannel(channelId: String) = open(channelId, TvRoutes.CHANNEL, TvRoutes.CHANNEL_ARG, TvRoutes::channel)
+    override fun openChannel(channelId: String) =
+        open(channelId, TvRoutes.CHANNEL, TvRoutes.CHANNEL_ARG, TvRoutes::channel)
 
-    override fun openArtist(artistId: String) = open(artistId, TvRoutes.MUSIC_ARTIST, TvRoutes.MUSIC_ARTIST_ARG, TvRoutes::musicArtist)
+    override fun openArtist(artistId: String) = openChannel(artistId)
 
-    override fun openAlbum(albumId: String) = openCollection(albumId)
+    override fun openAlbum(albumId: String) =
+        open(albumId, TvRoutes.PLAYLIST, TvRoutes.PLAYLIST_ARG, TvRoutes::playlist)
 
-    override fun openMusicPlaylist(playlistId: String) = openCollection(playlistId)
+    override fun openMusicPlaylist(playlistId: String) =
+        open(playlistId, TvRoutes.PLAYLIST, TvRoutes.PLAYLIST_ARG, TvRoutes::playlist)
 
     override fun openEqualizer() = Unit
 
@@ -36,21 +34,15 @@ internal class TvMediaNavigator(
             }
 
             is YouTubeLink.Playlist -> {
-                if (link.isMusic) {
-                    openMusicPlaylist(
-                        link.id,
-                    )
-                } else {
-                    open(link.id, TvRoutes.PLAYLIST, TvRoutes.PLAYLIST_ARG, TvRoutes::playlist)
-                }
+                open(link.id, TvRoutes.PLAYLIST, TvRoutes.PLAYLIST_ARG, TvRoutes::playlist)
             }
 
             is YouTubeLink.Album -> {
-                openAlbum(link.browseId)
+                open(link.browseId, TvRoutes.PLAYLIST, TvRoutes.PLAYLIST_ARG, TvRoutes::playlist)
             }
 
             is YouTubeLink.Channel -> {
-                if (link.isMusic) openArtist(link.id) else openChannel(link.id)
+                openChannel(link.id)
             }
 
             is YouTubeLink.ChannelHandle -> {
@@ -68,9 +60,6 @@ internal class TvMediaNavigator(
         return true
     }
 
-    private fun openCollection(id: String) = open(id, TvRoutes.MUSIC_COLLECTION, TvRoutes.MUSIC_COLLECTION_ARG, TvRoutes::musicCollection)
-
-    /** Opens [route] for [id] unless that page is already on top, so a repeat tap does not stack it twice. */
     private fun open(
         id: String,
         pattern: String,
@@ -78,7 +67,6 @@ internal class TvMediaNavigator(
         route: (String) -> String,
     ) {
         val key = id.trim().takeIf(String::isNotEmpty) ?: return
-        // Null until the shell's NavHost has set its graph, as when a deep link opens straight into the player.
         val current = navController.currentBackStackEntry ?: return
         val openId = current.arguments?.getString(argName)?.let { URLDecoder.decode(it, "UTF-8") }
         beforeNavigate()

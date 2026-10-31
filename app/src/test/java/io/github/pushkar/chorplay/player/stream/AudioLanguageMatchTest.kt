@@ -1,7 +1,6 @@
 package io.github.pushkar.chorplay.player.stream
 
 import io.github.pushkar.chorplay.innertube.models.response.PlayerResponse
-import io.github.pushkar.chorplay.utils.MusicPlayerUtils
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
@@ -29,7 +28,7 @@ class AudioLanguageMatchTest {
         val english = audioFormat(id = "en.4", name = "English original", original = true, itag = 140, bitrate = 128_000)
         val french = audioFormat(id = "fr-FR.3", name = "French (FR)", original = false, itag = 141, bitrate = 130_000)
 
-        val picked = MusicPlayerUtils.preferredAudioFormats(listOf(english, french), "en")
+        val picked = AudioStreamSelector.preferredAudioFormats(listOf(english, french), "en")
 
         assertEquals(listOf(english), picked)
     }
@@ -39,7 +38,7 @@ class AudioLanguageMatchTest {
         val english = audioFormat(id = "en.4", name = "English original", original = true, itag = 140)
         val brazilian = audioFormat(id = "pt-BR.3", name = "Portuguese (Brazil)", original = false, itag = 141)
 
-        assertEquals(listOf(brazilian), MusicPlayerUtils.preferredAudioFormats(listOf(english, brazilian), "pt"))
+        assertEquals(listOf(brazilian), AudioStreamSelector.preferredAudioFormats(listOf(english, brazilian), "pt"))
     }
 
     private fun audioFormat(

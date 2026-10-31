@@ -19,7 +19,6 @@ val CATEGORY_TABS: List<CategoryTab> =
     listOf(
         CategoryTab(ExploreDestination.LIVE, R.string.category_live),
         CategoryTab(ExploreDestination.GAMING, R.string.category_gaming),
-        CategoryTab(ExploreDestination.MUSIC, R.string.category_music),
         CategoryTab(ExploreDestination.NEWS, R.string.category_news),
         CategoryTab(ExploreDestination.SPORTS, R.string.category_sports),
         CategoryTab(ExploreDestination.LEARNING, R.string.category_learning),

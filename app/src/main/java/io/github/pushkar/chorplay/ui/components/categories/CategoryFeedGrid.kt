@@ -24,7 +24,7 @@ import io.github.pushkar.chorplay.innertube.pages.renderer.FeedItem
 import io.github.pushkar.chorplay.ui.components.FeedGridLayout
 import io.github.pushkar.chorplay.ui.components.PlaylistCard
 import io.github.pushkar.chorplay.ui.components.PlaylistCardLayout
-import io.github.pushkar.chorplay.ui.components.layout.flowBottomContentPadding
+import io.github.pushkar.chorplay.ui.components.layout.chorBottomContentPadding
 import io.github.pushkar.chorplay.ui.components.shared.FeedGridSkeleton
 import io.github.pushkar.chorplay.ui.components.shared.FeedGridTopPadding
 import io.github.pushkar.chorplay.ui.components.shared.FeedPagingFooter
@@ -89,7 +89,7 @@ internal fun CategoryPagedGrid(
         columns = plan.cells,
         state = gridState,
         modifier = modifier.fillMaxSize(),
-        contentPadding = plan.contentPadding(top = FeedGridTopPadding, bottom = flowBottomContentPadding()),
+        contentPadding = plan.contentPadding(top = FeedGridTopPadding, bottom = chorBottomContentPadding()),
         verticalArrangement = Arrangement.spacedBy(plan.rowSpacing),
     ) {
         items(
@@ -136,71 +136,6 @@ internal fun CategoryPagedGrid(
 
 /** A chart: 30 ranked entries and no next page, in the same grid the paged surfaces use. */
 @Composable
-internal fun CategoryChartGrid(
-    entries: List<Video>,
-    title: String?,
-    gridState: LazyGridState,
-    feedLayout: FeedGridLayout,
-    isListView: Boolean,
-    onVideoClick: (Video) -> Unit,
-    modifier: Modifier = Modifier,
-) {
-    val plan =
-        rememberFeedGridPlan(
-            layout = feedLayout,
-            listMode = isListView,
-            itemCount = entries.size,
-            spansOwnRow = { false },
-            includeLastRun = true,
-            itemsKey = entries,
-        )
-
-    LazyVerticalGrid(
-        columns = plan.cells,
-        state = gridState,
-        modifier = modifier.fillMaxSize(),
-        contentPadding = plan.contentPadding(top = FeedGridTopPadding, bottom = flowBottomContentPadding()),
-        verticalArrangement = Arrangement.spacedBy(plan.rowSpacing),
-    ) {
-        if (title != null) {
-            item(key = "chart-title", span = { GridItemSpan(maxLineSpan) }, contentType = "chart-title") {
-                CategoryChartHeader(title = title)
-            }
-        }
-        itemsIndexed(
-            items = entries,
-            key = { _, video -> video.id },
-            contentType = { _, _ -> "video" },
-            span = { index, _ -> plan.span(index, spansOwnRow = false, maxLineSpan = maxLineSpan) },
-        ) { index, video ->
-            MediaVideoCard(
-                video = video,
-                layout = if (plan.isListCard(index)) VideoCardLayout.Row else VideoCardLayout.Stacked,
-                onClick = { onVideoClick(video) },
-                thumbnailWidth = plan.listThumbnailWidth,
-            )
-        }
-    }
-}
-
-@Composable
-private fun CategoryChartHeader(title: String) {
-    Column(
-        modifier = Modifier.fillMaxWidth().padding(horizontal = ChartHeaderHorizontalPadding),
-        verticalArrangement = Arrangement.spacedBy(ChartHeaderLineSpacing),
-    ) {
-        Text(text = title, style = MaterialTheme.typography.titleMedium, color = MaterialTheme.colorScheme.onSurface)
-        Text(
-            text = stringResource(R.string.categories_chart_source),
-            style = MaterialTheme.typography.bodySmall,
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
-        )
-    }
-}
-
-private val ChartHeaderHorizontalPadding = 16.dp
-private val ChartHeaderLineSpacing = 2.dp
-
 private fun FeedItem?.gridVideo(): Video =
     when (this) {
         is FeedItem.VideoItem -> video

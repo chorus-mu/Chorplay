@@ -19,7 +19,7 @@ import io.github.pushkar.chorplay.data.model.Video
 import io.github.pushkar.chorplay.ui.components.FeedGridLayout
 import io.github.pushkar.chorplay.ui.components.home.ContinueWatchingShelf
 import io.github.pushkar.chorplay.ui.components.home.ContinueWatchingShelfDefaults
-import io.github.pushkar.chorplay.ui.components.layout.flowBottomContentPadding
+import io.github.pushkar.chorplay.ui.components.layout.chorBottomContentPadding
 import io.github.pushkar.chorplay.ui.components.shared.ChorplayFeedProgress
 import io.github.pushkar.chorplay.ui.components.shared.MediaShortsShelf
 import io.github.pushkar.chorplay.ui.components.shared.card.MediaVideoCard
@@ -82,7 +82,7 @@ internal fun HomeFeedGrid(
                 .dpadFocusGroup()
                 .testTag("home_feed"),
         state = gridState,
-        contentPadding = plan.contentPadding(top = FeedTopPadding, bottom = flowBottomContentPadding()),
+        contentPadding = plan.contentPadding(top = FeedTopPadding, bottom = chorBottomContentPadding()),
         verticalArrangement = Arrangement.spacedBy(plan.rowSpacing),
     ) {
         itemsIndexed(
@@ -158,7 +158,7 @@ internal fun HomeFeedGrid(
                 key = "feed_footer",
                 span = { GridItemSpan(maxLineSpan) },
             ) {
-                FlowFeedFooter(
+                ChorFeedFooter(
                     videoCount = videos.size,
                     onRefresh = onRefresh,
                 )

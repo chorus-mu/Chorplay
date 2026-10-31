@@ -62,7 +62,7 @@ internal fun collaboratorRows(
         val name = collaborator.name.ifBlank { fallbackName }
         val canOpen = collaborator.channelId.isNotBlank()
         QuickActionRow(key = collaborator.channelId.ifBlank { "collaborator:$index" }) { shape ->
-            FlowNavRow(
+            ChorNavRow(
                 title = name,
                 supportingText = collaborator.subscriberCountText.takeIf { it.isNotBlank() },
                 onClick = {

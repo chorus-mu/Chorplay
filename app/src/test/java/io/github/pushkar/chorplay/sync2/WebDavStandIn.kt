@@ -62,7 +62,7 @@ class WebDavStandIn(
             }
         }
 
-    val url = server.url + "dav/flow/"
+    val url = server.url + "dav/chorplay/"
 
     fun store(
         password: String = PASSWORD,
@@ -70,7 +70,7 @@ class WebDavStandIn(
     ) = WebDavStore.connect(url, USER, password, conditional)
 
     /** What a file or folder under the store's folder holds. */
-    fun file(path: String) = files["flow/$path"]
+    fun file(path: String) = files["chorplay/$path"]
 
     private fun parent(path: String) = path.trimEnd('/').substringBeforeLast('/', "").let { if (it.isEmpty()) "" else "$it/" }
 
@@ -138,7 +138,7 @@ class WebDavStandIn(
     override fun close() = server.close()
 
     companion object {
-        const val USER = "flow"
+        const val USER = "chorplay"
         const val PASSWORD = "secret"
     }
 }

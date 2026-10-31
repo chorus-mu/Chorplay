@@ -40,7 +40,7 @@ sealed class Code(
     internal val showerKey: ByteArray get() = key(qr.e)
 }
 
-/** Reads a FLOW-SYNC/2 code; FLOW-SYNC/1 codes and stores other than a Chorplay server or WebDAV are refused. */
+/** Reads a CHOR-SYNC/2 code; CHOR-SYNC/1 codes and stores other than a Chorplay server or WebDAV are refused. */
 fun readCode(text: String): Code {
     val qr =
         try {

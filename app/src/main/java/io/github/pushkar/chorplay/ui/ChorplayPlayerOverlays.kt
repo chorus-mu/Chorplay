@@ -21,7 +21,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.media3.common.util.UnstableApi
 import androidx.navigation.NavHostController
 import io.github.pushkar.chorplay.R
 import io.github.pushkar.chorplay.data.audio.eq.EqState
@@ -34,6 +33,7 @@ import io.github.pushkar.chorplay.player.GlobalPlayerState
 import io.github.pushkar.chorplay.ui.components.equalizer.LocalEqualizerState
 import io.github.pushkar.chorplay.ui.components.layout.ChorplayBottomInsets
 import io.github.pushkar.chorplay.ui.components.layout.LocalChorplayBottomInsets
+import io.github.pushkar.chorplay.ui.components.layout.navigation.MediaNavigator
 import io.github.pushkar.chorplay.ui.components.shared.LocalMediaOpenOrigins
 import io.github.pushkar.chorplay.ui.components.shared.MediaMiniBarBounds
 import io.github.pushkar.chorplay.ui.components.shared.MediaOpenOrigins
@@ -124,61 +124,13 @@ internal fun ChorPlayerSessionEffects(
         }
     }
 
-    LaunchedEffect(GlobalPlayerState.dismissRequests) {
-        GlobalPlayerState.dismissRequests.collect {
-            playerVisible = false
-            playerSheetState.snapTo(PlayerSheetValue.Collapsed)
-            GlobalPlayerState.hideMiniPlayer()
-            playerViewModel.clearVideo()
-        }
-    }
-
-    LaunchedEffect(GlobalPlayerState.minimizeRequests) {
-        GlobalPlayerState.minimizeRequests.collect {
-            playerSheetState.snapTo(PlayerSheetValue.Collapsed)
-            GlobalPlayerState.hideMiniPlayer()
-            playerVisible = false
-        }
-    }
-
-    LaunchedEffect(GlobalPlayerState.miniPlayerExpansionRequests) {
-        GlobalPlayerState.miniPlayerExpansionRequests.collect {
-            if (playerVisible && playerSheetState.currentValue == PlayerSheetValue.Collapsed) {
-                playerSheetState.expand()
-            }
-        }
-    }
-
-    LaunchedEffect(GlobalPlayerState.playerSheetSnapshots) {
-        GlobalPlayerState.playerSheetSnapshots.collect { targetValue ->
-            if (playerVisible) {
-                when (targetValue) {
-                    PlayerSheetValue.Expanded -> playerSheetState.expand()
-                    PlayerSheetValue.Collapsed -> playerSheetState.collapse()
-                }
-            }
-        }
-    }
-
     LaunchedEffect(currentIsInPipMode) {
         if (currentIsInPipMode) {
             playerVisible = false
         }
     }
-
-    LaunchedEffect(enhancedPlayerManager) {
-        var previousAutoPlayIndex = enhancedPlayerManager.playerState.value.autoPlayNextMediaItemIndex
-        enhancedPlayerManager.playerState.collect { state ->
-            val currentIndex = state.autoPlayNextMediaItemIndex
-            if (currentIndex != null && currentIndex != previousAutoPlayIndex && playerSheetState.currentValue == PlayerSheetValue.Collapsed) {
-                keepMiniOnQueueAutoAdvance = true
-            }
-            previousAutoPlayIndex = currentIndex
-        }
-    }
 }
 
-@OptIn(UnstableApi::class)
 @Composable
 internal fun ChorplayPlayerOverlays(
     mediaNavigator: MediaNavigator,

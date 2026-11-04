@@ -36,12 +36,13 @@ internal class NeuroCategoryStore(
     )
 
     private object CategorySerializer : Serializer<CategoryIndex> {
+        private val json = Json { ignoreUnknownKeys = true }
         override val defaultValue: CategoryIndex = CategoryIndex()
 
         override suspend fun readFrom(input: InputStream): CategoryIndex =
             try {
                 val text = input.bufferedReader().readText()
-                if (text.isBlank()) defaultValue else Json { ignoreUnknownKeys = true }.decodeFromString<CategoryIndex>(
+                if (text.isBlank()) defaultValue else json.decodeFromString<CategoryIndex>(
                     text
                 )
             } catch (e: Exception) {
@@ -53,7 +54,7 @@ internal class NeuroCategoryStore(
             t: CategoryIndex,
             output: OutputStream,
         ) {
-            output.write(Json.encodeToString(t).toByteArray())
+            output.write(json.encodeToString(t).toByteArray())
         }
     }
 

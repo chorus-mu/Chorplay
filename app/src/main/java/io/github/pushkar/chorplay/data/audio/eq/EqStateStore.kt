@@ -20,9 +20,7 @@ interface EqStatePersistence {
     suspend fun save(state: EqState)
 }
 
-/** The equalizer as one JSON value, also the form it takes in backups and device sync. */
 object EqStateJson {
-    /** The settings key the state is stored, backed up and synced under. */
     const val KEY = "eq_state_json"
 
     private val json =

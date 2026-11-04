@@ -48,4 +48,5 @@ fun rememberStatEntrance(key: Any = Unit): StatEntrance {
 }
 
 /** Starts [entrance] when this node first becomes mostly visible. */
+@Suppress("DEPRECATION")
 fun Modifier.playsEntrance(entrance: StatEntrance): Modifier = onFirstVisible(minFractionVisible = VISIBLE_FRACTION) { entrance.play() }

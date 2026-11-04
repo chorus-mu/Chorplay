@@ -54,8 +54,6 @@
     <string name="action_like">高評価</string>
     <string name="action_dislike">低評価</string>
     <string name="player_action_dislike">低評価</string>
-    <string name="tv_library_liked">高く評価した動画</string>
-    <string name="tv_library_likes">高く評価した動画</string>
     <string name="widget_like">高評価</string>
     <string name="save">保存</string>
     <string name="saved">保存済み</string>
@@ -69,7 +67,6 @@
     <string name="filter_top">人気順</string>
     <string name="filter_popular">人気の動画</string>
     <string name="filter_oldest">古い順</string>
-    <string name="channel_sort_latest">新しい順</string>
     <string name="notif_interval_6h">6 時間 (デフォルト)</string>
     <string name="notif_interval_12h">12 時間</string>
     <string name="notif_interval_24h">24 時間</string>
@@ -88,10 +85,8 @@
     <string name="speed_2x">2 倍速</string>
     <string name="continue_watching_title">続きを見る</string>
     <string name="player_mini_player_continue_watching_label">続きを見る</string>
-    <string name="tv_continue_watching">続きを見る</string>
     <string name="library_watch_later_label">後で見る</string>
     <string name="watch_later">後で見る</string>
-    <string name="tv_library_watch_later">後で見る</string>
     <string name="library_playlists_label">再生リスト</string>
 
     <string name="playlist_creation_menu_open">再生リストを作成</string>
@@ -99,12 +94,7 @@
     <string name="playlist_name">タイトル</string>
     <string name="playlist_description_optional">説明 (オプション)</string>
     <string name="playlist">再生リスト</string>
-    <string name="playlist_visibility_metadata">%1$s • %2$s</string>
-    <string name="playlist_private">非公開</string>
     <string name="error_private_video">非公開動画</string>
-    <string name="playlist_public">公開</string>
-    <string name="make_public_action">公開する</string>
-    <string name="make_private_action">非公開にする</string>
     <string name="top_bar_subscriptions_title">登録チャンネル</string>
     <string name="view_all_button_label">すべて</string>
     <string name="no_subscriptions_yet">登録したチャンネルがありません</string>
@@ -116,7 +106,6 @@
     <string name="library_settings_data_header"><![CDATA[設定とデータ]]></string>
     <string name="library_manage_data_label">データを管理</string>
     <string name="about">説明</string>
-    <string name="top_bar_clear_search">検索をクリア</string>
     <string name="top_bar_close_search">検索を閉じる</string>
     <string name="home_refresh_feed">フィードを更新</string>
     <string name="subscriptions_search_placeholder">登録チャンネルを検索...</string>

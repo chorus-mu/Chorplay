@@ -11,7 +11,7 @@ import androidx.media3.common.Player
 import androidx.media3.ui.PlayerView
 import io.github.pushkar.chorplay.data.model.ShortVideo
 import io.github.pushkar.chorplay.data.shorts.SHORT_COMPLETE_FRACTION
-import io.github.pushkar.chorplay.player.EnhancedMusicPlayerManager
+import io.github.pushkar.chorplay.player.EnhancedPlayerManager
 import io.github.pushkar.chorplay.player.shorts.ShortsPlayerPool
 import io.github.pushkar.chorplay.ui.screens.shorts.ShortsViewModel
 import kotlinx.coroutines.delay
@@ -60,7 +60,7 @@ internal fun ShortsReelPlaybackEffects(
     LaunchedEffect(isActive, short.id, ownershipGeneration) {
         if (isActive) {
             playerPool.initialize(context)
-            EnhancedMusicPlayerManager.pause()
+            EnhancedPlayerManager.getInstance().pause()
             val player = playerPool.playerForAttach(pageIndex, short.id)
             playerView.player = player
             onAttachedPlayerChange(player)

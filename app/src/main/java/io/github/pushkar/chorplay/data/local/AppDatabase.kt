@@ -94,7 +94,6 @@ abstract class AppDatabase : RoomDatabase() {
                 deviceDatabase ?: open(context.applicationContext, DEFAULT_NAME).also { deviceDatabase = it }
             }
 
-        /** The running profile's own file. With Default running it is [device]: Room must never open one file twice. */
         fun profile(context: Context): AppDatabase =
             profileDatabase ?: synchronized(this) {
                 profileDatabase ?: ProfileFiles

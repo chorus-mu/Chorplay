@@ -160,8 +160,6 @@ internal fun HistorySettingsScreen(
             )
         }
 
-        null -> {
-            Unit
-        }
+        null -> {}
     }
 }

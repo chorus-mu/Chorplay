@@ -50,7 +50,6 @@
     <string name="download">डाउनलोड</string>
     <string name="save">सेव करें</string>
     <string name="up_next">अगला</string>
-    <string name="lyrics">बोल</string>
     <string name="related">संबंधित</string>
     <string name="close">बंद करें</string>
     <string name="more_options">अधिक विकल्प</string>
@@ -67,7 +66,6 @@
     <string name="autoplay">ऑटोप्ले</string>
     <string name="move_up">ऊपर ले जाएँ</string>
     <string name="move_down">नीचे ले जाएँ</string>
-    <string name="lyrics_not_available">बोल उपलब्ध नहीं</string>
     <string name="playing">चल रहा है</string>
     <string name="remove">हटाएँ</string>
     <string name="related_content">संबंधित सामग्री</string>
@@ -116,8 +114,6 @@
     <string name="save_to">इसमें सहेजें..।</string>
     <string name="watch_later">बाद में देखें</string>
     <string name="watch_later_unsave">बाद में देखें सूची अनसेव करें</string>
-    <string name="playlist_private">निजी</string>
-    <string name="playlist_public">पब्लिक</string>
     <string name="create_new_playlist">नई प्लेलिस्ट बनाएँ</string>
     <string name="playlist_name">नाम</string>
     <string name="playlist_description_optional">विवरण (वैकल्पिक)</string>
@@ -226,13 +222,9 @@
     <string name="date_this_month">इस महीने</string>
     <string name="date_this_year">इस वर्ष</string>
     <string name="duration_any">कोई भी अवधि</string>
-    <string name="duration_under_4">4 मिनट से कम</string>
-    <string name="duration_4_20">4 से 20 मिनट</string>
     <string name="duration_over_20">20 मिनट से अधिक</string>
     <string name="sort_relevance">प्रासंगिकता</string>
-    <string name="sort_upload_date">अपलोड तिथि</string>
     <string name="sort_view_count">दृश्य संख्या</string>
-    <string name="sort_rating">रेटिंग</string>
     <string name="channel_default_title">चैनल</string>
     <string name="channel_banner">चैनल बैनर</string>
     <string name="channel_avatar">चैनल अवतार</string>
@@ -354,8 +346,6 @@
     <string name="settings_item_player_appearance">प्लेयर दिखावट</string>
     <string name="settings_item_player_appearance_subtitle">प्रगति पट्टी शैली अनुकूलित करें</string>
     <string name="style_default">रेगुलर</string>
-    <string name="style_metrolist">मोटा</string>
-    <string name="style_metrolist_slim">डिफ़ॉल्ट</string>
     <string name="style_squiggly">लहरदार</string>
     <string name="style_slim">अल्ट्रा पतला</string>
     <string name="player_appearance_gestures_header">इशारे</string>
@@ -372,9 +362,6 @@
     <string name="player_nav_btn_subtitle">मिनी प्लेयर पर अगले और पिछले वीडियो बटन दिखाएँ</string>
 
 
-    <string name="lyrics_provider_lrclib">LrcLib</string>
-    <string name="lyrics_provider_better_lyrics">BetterLyrics</string>
-    <string name="lyrics_provider_simpmusic">SimpMusic</string>
     <string name="theme_name_system_default">सिस्टम डिफ़ॉल्ट</string>
     <string name="theme_desc_system_default">डिवाइस थीम के साथ सिंक करें</string>
     <string name="theme_name_pure_light">शुद्ध हल्का</string>
@@ -475,9 +462,6 @@
     <string name="categories_title">श्रेणियाँ</string>
     <string name="categories_switch_to_grid">ग्रिड दृश्य पर स्विच करें</string>
     <string name="categories_switch_to_list">लिस्ट दृश्य पर स्विच करें</string>
-    <string name="category_all">सभी</string>
-    <string name="category_trending">ट्रेंडिंग</string>
-    <string name="category_movies">फ़िल्में</string>
     <string name="category_live">लाइव</string>
     <string name="settings_continue_watching_title">देखना जारी रखें शेल्फ़</string>
     <string name="settings_continue_watching_subtitle">होम स्क्रीन पर प्रगति पर वीडियो का एक शेल्फ़ दिखाएँ।</string>
@@ -502,8 +486,6 @@
     <string name="player_settings_custom_speeds_empty">कोई प्रीसेट नहीं जोड़ा गया। नीचे जोड़ें।</string>
     <string name="player_settings_custom_speeds_add">प्रीसेट जोड़ें</string>
     <string name="player_settings_custom_speeds_remove">हटाएँ</string>
-    <string name="player_settings_stable_voice">स्थिर आवाज़</string>
-    <string name="player_settings_stable_voice_subtitle">लगातार प्लेबैक के लिए ऑडियो वॉल्यूम सामान्य करें</string>
     <string name="loop_video">वीडियो लूप करें</string>
     <string name="player_settings_sponsorblock">स्पॉन्सरब्लॉक</string>
     <string name="player_settings_sponsorblock_subtitle">प्रायोजित खंडों को छोड़ें</string>
@@ -564,7 +546,6 @@
     <string name="player_settings_audio_original_desc">वीडियो के मूल ऑडियो ट्रैक का उपयोग करता है</string>
     <string name="player_settings_header_gestures">इशारे</string>
     <string name="player_settings_double_tap_seek">डबल-टैप सीक अवधि</string>
-    <string name="player_settings_double_tap_seek_subtitle_template">प्रति पक्ष डबल-टैप पर %ds</string>
     <string name="player_settings_double_tap_seek_dialog_title">डबल-टैप सीक अवधि</string>
     <string name="player_settings_double_tap_seek_dialog_body">प्लेयर के बाएँ या दाएँ तरफ डबल-टैप करने पर कितने सेकंड सीक करना है, यह चुनें।</string>
     <string name="video_quality_title">वीडियो क्वालिटी</string>
@@ -602,7 +583,6 @@
     <string name="btn_close">बंद करें</string>
     <string name="loading_shorts">शॉर्ट्स लोड हो रहे हैं…</string>
     <string name="error_short_load">एक त्रुटि हुई</string>
-    <string name="share_short_template">यह शॉर्ट देखें: https://youtu.be/%1$s</string>
     <string name="speed_2x">2x गति</string>
     <string name="cd_liked">पसंद किए</string>
     <string name="cd_pause">रोकें</string>
@@ -813,8 +793,6 @@
     <string name="add_description_placeholder">कोई विवरण जोड़ें..।</string>
     <string name="edit_playlist_action">प्लेलिस्ट संपादित करें</string>
     <string name="delete_playlist_action">प्लेलिस्ट हटाएँ</string>
-    <string name="make_public_action">पब्लिक करें</string>
-    <string name="make_private_action">निजी करें</string>
     <string name="remove_from_playlist_action">प्लेलिस्ट से हटाएँ</string>
     <string name="playlist_empty_title">यह प्लेलिस्ट खाली है</string>
     <string name="playlist_empty_desc">अपनी प्लेलिस्ट बनाने के लिए\nवीडियो प्लेयर से वीडियो जोड़ें</string>
@@ -923,7 +901,6 @@
     <string name="template_bass_boost">बास बूस्ट: %1$ddB</string>
     <string name="label_tempo_pitch">टेम्पो और पिच</string>
     <string name="action_reset">रीसेट करें</string>
-    <string name="template_speed">गति: %1$d%%</string>
     <string name="template_pitch">पिच: %1$d सेमीटोन</string>
     <string name="label_parametric_equalizer">पैरामीट्रिक इक्वलाइज़र</string>
     <string name="action_add_band">बैंड जोड़ें</string>
@@ -1125,7 +1102,6 @@
     <string name="failed_to_save_to_library">लाइब्रेरी में सेव करने में विफल</string>
     <string name="open">खोलें</string>
     <string name="resume">फिर से शुरू करें</string>
-    <string name="refresh_lyrics">लिरिक्स रिफ्रेश करें</string>
     <string name="share_link_only_template">https://youtube.com/watch?v=%1$s</string>
     <string name="not_interested_toast">समझ गए! आपको इस तरह का कंटेंट कम दिखाई देगा।</string>
     <string name="quick_actions_error_template">एरर: %1$s</string>

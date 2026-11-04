@@ -44,7 +44,7 @@ internal class IncomingIntents(
                 playlistTransfer.get().import(file, activity.getString(R.string.imported_playlist_default_name))
             Toast.makeText(activity, result.message(activity), Toast.LENGTH_LONG).show()
             if (result is PlaylistImport.Imported) {
-                links.openRoute(if (result.isMusic) musicCollectionRoute(result.playlistId) else "playlist/${result.playlistId}")
+                links.openRoute("playlist/${result.playlistId}")
             }
         }
     }

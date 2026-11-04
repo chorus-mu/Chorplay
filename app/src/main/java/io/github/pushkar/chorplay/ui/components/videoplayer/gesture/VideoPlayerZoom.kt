@@ -62,7 +62,7 @@ fun Modifier.videoPlayerZoom(
                         it.id != firstDown.id && it.pressed && !it.previousPressed
                     }
             }
-            val second = secondDown ?: return@awaitEachGesture
+            val second = secondDown
             second.consume()
 
             // Picking the pinch back up mid-settle continues from wherever it got to.

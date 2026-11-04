@@ -13,7 +13,6 @@ import io.github.pushkar.chorplay.data.model.Video
 import io.github.pushkar.chorplay.data.video.DownloadedVideo
 import io.github.pushkar.chorplay.ui.components.PlaylistCard
 import io.github.pushkar.chorplay.ui.components.PlaylistCardLayout
-import io.github.pushkar.chorplay.ui.components.library.LibraryAlbumCard
 import io.github.pushkar.chorplay.ui.components.library.LibraryEmptyShelf
 import io.github.pushkar.chorplay.ui.components.library.LibraryMediaItem
 import io.github.pushkar.chorplay.ui.components.library.LibraryMediaShelf
@@ -44,9 +43,7 @@ internal fun LibraryMediaShelfRoute(
             LibraryEmptyShelf(title = title, icon = section.icon, message = emptyMessage, onTitleClick = onTitleClick)
         }
 
-        items.isNullOrEmpty() -> {
-            Unit
-        }
+        items.isNullOrEmpty() -> {}
 
         else -> {
             LibraryMediaShelf(
@@ -72,6 +69,7 @@ internal fun LibraryPlaylistsShelf(
     val videoPlaylists = videoPlaylistsFlow?.collectAsStateWithLifecycle()?.value
     val title = section.title
 
+    if (videoPlaylists == null) {
         LibraryShelfPlaceholder(title = title, icon = section.icon)
         return
     }
@@ -82,7 +80,7 @@ internal fun LibraryPlaylistsShelf(
         onTitleClick = onTitleClick,
     ) { cardWidth ->
         items(
-            items = videoPlaylists.orEmpty(),
+            items = videoPlaylists,
             key = { "video-${it.id}" },
             contentType = { "video-playlist" },
         ) { playlist ->
@@ -91,15 +89,6 @@ internal fun LibraryPlaylistsShelf(
                 onClick = { onVideoPlaylistClick(playlist.id) },
                 layout = PlaylistCardLayout.SHELF,
                 modifier = Modifier.width(cardWidth),
-            )
-        }
-        items(
-        ) { playlist ->
-            LibraryAlbumCard(
-                title = playlist.name,
-                subtitle = stringResource(R.string.tracks_count_template, playlist.videoCount),
-                thumbnailUrl = playlist.thumbnailUrl,
-                artworkSize = cardWidth * 9f / 16f,
             )
         }
     }
@@ -119,9 +108,7 @@ internal fun LibraryVideoShelf(
             LibraryShelfPlaceholder(title = title, icon = section.icon)
         }
 
-        videos.isNullOrEmpty() -> {
-            Unit
-        }
+        videos.isNullOrEmpty() -> {}
 
         else -> {
             LibraryShelf(
@@ -159,9 +146,7 @@ internal fun LibraryShortsShelfRoute(
             LibraryShelfPlaceholder(title = title, icon = section.icon, portrait = true)
         }
 
-        shorts.isNullOrEmpty() -> {
-            Unit
-        }
+        shorts.isNullOrEmpty() -> {}
 
         else -> {
             LibraryShortsShelf(

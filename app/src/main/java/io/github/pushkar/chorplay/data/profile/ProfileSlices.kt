@@ -112,12 +112,11 @@ constructor(
             )
         )
         file.parentFile?.mkdirs()
-        val engine = SlicePart.RECOMMENDATIONS in parts
         return measured("seed") {
-            repository.exportMasterBackup(uri, recapBytes()),
-            musicBrain = if (engine) musicBrainBytes() else null,
-            favouriteArtists = if (engine) favouriteArtists.export() else null,
-            seed = parts,
+            repository.exportMasterBackup(
+                uri = Uri.fromFile(file),
+                recap = recapBytes(),
+                seed = parts,
             )
         }.onSuccess { logSize(file) }.onFailure { file.delete() }
     }

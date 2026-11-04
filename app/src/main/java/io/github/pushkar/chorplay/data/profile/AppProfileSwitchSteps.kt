@@ -14,7 +14,6 @@ import io.github.pushkar.chorplay.notification.WellbeingAlarms
 import io.github.pushkar.chorplay.player.PlaybackShutdown
 import io.github.pushkar.chorplay.sync.SyncManager
 import io.github.pushkar.chorplay.utils.potoken.PoTokenGenerator
-import io.github.pushkar.chorplay.widget.core.state.clearNowPlayingSnapshot
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.first
 import java.io.File
@@ -77,7 +76,6 @@ constructor(
         ProfileWork.cancelAll(context)
         WellbeingAlarms.cancel(context)
         NotificationHelper.cancelProfileNotifications(context)
-        context.clearNowPlayingSnapshot()
     }
 
     override suspend fun clearCaches() {

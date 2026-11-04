@@ -2,7 +2,6 @@ package io.github.pushkar.chorplay.data.local
 
 import java.io.Reader
 
-// Every Takeout activity entry sits in this cell, whatever language the archive is in.
 private const val TAKEOUT_ACTIVITY_MARKUP = "content-cell"
 private const val READ_SIZE = 65_536
 private const val OVERLAP = 2_048

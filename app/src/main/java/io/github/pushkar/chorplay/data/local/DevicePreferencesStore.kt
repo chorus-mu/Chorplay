@@ -12,11 +12,6 @@ import kotlinx.coroutines.flow.first
 import java.io.File
 import java.io.IOException
 
-/**
- * Settings that belong to the device rather than to a profile: downloads, language, region, player controls,
- * storage and update checks. They used to live in player_preferences and chorplay_preferences; [DeviceKeysCopy] copies
- * them here once.
- */
 internal val Context.devicePreferencesDataStore: DataStore<Preferences> by safePreferencesDataStore(
     name = "device_preferences",
     scope = StoreScope.DEVICE,

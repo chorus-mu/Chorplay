@@ -6,7 +6,6 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 import java.net.URI
 
-/** Where a NewPipe entry points: a channel id, or a link that has to be resolved to one first. */
 sealed interface NewPipeChannelRef {
     data class Id(
         val channelId: String,
@@ -18,7 +17,6 @@ sealed interface NewPipeChannelRef {
         val url: String get() = "https://www.youtube.com/@$handle"
     }
 
-    /** A `/user/` or `/c/` link, which only YouTube can map to a channel. */
     data class Legacy(
         val url: String,
     ) : NewPipeChannelRef
@@ -34,11 +32,6 @@ data class NewPipeSubscriptionExport(
     val skipped: Int,
 )
 
-/**
- * NewPipe's subscription export: `{app_version, app_version_int, subscriptions: [{service_id, url, name}]}`.
- * NewPipe decodes it strictly, so [encode] writes exactly those keys, and only channels it can open:
- * a `/channel/UC…` id or an `@handle`.
- */
 object NewPipeSubscriptionCodec {
     private const val YOUTUBE_SERVICE_ID = 0
 
@@ -88,7 +81,6 @@ object NewPipeSubscriptionCodec {
         return NewPipeSubscriptionExport(json, skipped = subscriptions.size - items.size)
     }
 
-    /** Fails on anything that is not a NewPipe export, so a wrong file never reads as an empty one. */
     fun decode(json: String): Result<List<NewPipeSubscriptionEntry>> =
         runCatching {
             reader
@@ -99,7 +91,6 @@ object NewPipeSubscriptionCodec {
                 .distinctBy { it.ref }
         }
 
-    /** A stored channel id as a URL NewPipe can open, or null when the id is neither a UC id nor an @handle. */
     private fun channelUrl(channelId: String): String? {
         val id = channelId.trim()
         return when {

@@ -34,7 +34,6 @@
     <string name="downloaded">Allalaaaditud</string>
     <string name="download">Laadi alla</string>
     <string name="save">Salvesta</string>
-    <string name="lyrics">LAULUSÕNAD</string>
     <string name="related">SEOTUD</string>
     <string name="close">Sulge</string>
     <string name="like">Meeldib</string>
@@ -78,8 +77,6 @@
 <string name="action_delete">Kustuta</string>
     <string name="downloads_title">Allalaadimised</string>
     <string name="action_undo">Võta tegevus tagasi</string>
-    <string name="playlist_private">Privaatne</string>
-    <string name="playlist_public">Avalik</string>
     <string name="playlist_name">Nimi</string>
     <string name="create">Loo</string>
     <string name="views">Vaatamisi</string>
@@ -122,7 +119,6 @@
     <string name="error_occurred">Tekkis viga</string>
     <string name="move_up">Liiguta ülespoole</string>
     <string name="move_down">Liiguta allapoole</string>
-    <string name="lyrics_not_available">Laulusõnad pole saadaval</string>
     <string name="related_content">Teemakohane sisu</string>
     <string name="no_related_content">Teemakohast sisu ei leidu</string>
     <string name="track_details">Loo üksikasjad</string>
@@ -199,7 +195,6 @@
     <string name="copy_description">Kopeeri kirjeldus</string>
     <string name="description_copied">Kirjeldus on kopeeritud lõikelauale</string>
     <string name="title_copied">Pealkiri on kopeeritud lõikelauale</string>
-    <string name="in_this_video">Selles videos</string>
     <string name="add_to_playlist">Lisa esitusloendisse</string>
     <string name="play_next">Esita järgmisena</string>
     <string name="add_to_queue">Lisa esitusjärjekorda</string>
@@ -247,13 +242,9 @@
     <string name="date_this_month">Sel kuul</string>
     <string name="date_this_year">Sel aastal</string>
     <string name="duration_any">Ükspuha mis kestusega</string>
-    <string name="duration_under_4">Alla 4 minuti</string>
-    <string name="duration_4_20">4-20 minutit</string>
     <string name="duration_over_20">Üle 20 minuti</string>
     <string name="sort_relevance">Olulisus</string>
-    <string name="sort_upload_date">Üleslaadimise kuupäev</string>
     <string name="sort_view_count">Vaatamiste arv</string>
-    <string name="sort_rating">Hinnang</string>
     <string name="channel_default_title">Kanal</string>
     <string name="channel_banner">Kanali päis</string>
     <string name="channel_avatar">Kanali tunnuspilt</string>

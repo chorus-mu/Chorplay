@@ -51,9 +51,7 @@ internal fun PlaylistDetailDialogs(
     onRemovedSelected: () -> Unit,
 ) {
     when (dialog) {
-        null -> {
-            Unit
-        }
+        null -> {}
 
         PlaylistDialog.Edit -> {
             CollectionEditDialog(

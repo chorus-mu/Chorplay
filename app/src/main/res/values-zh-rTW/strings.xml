@@ -64,7 +64,6 @@
     <string name="failed_to_save_to_library">加入媒體庫失敗</string>
     <string name="open">開啓</string>
     <string name="up_next">待播</string>
-    <string name="lyrics">歌詞</string>
     <string name="related">相關</string>
     <string name="close">關閉</string>
     <string name="more_options">更多</string>
@@ -82,8 +81,6 @@
     <string name="autoplay">自動播放</string>
     <string name="move_up">上移</string>
     <string name="move_down">下移</string>
-    <string name="lyrics_not_available">沒有歌詞</string>
-    <string name="refresh_lyrics">刷新歌詞</string>
     <string name="playing">正在播放</string>
     <string name="remove">刪除</string>
     <string name="related_content">相關內容</string>
@@ -109,7 +106,6 @@
     <string name="unsubscribed_from">已移除訂閱 %s</string>
     <string name="unsubscribe">移除訂閱</string>
     <string name="share_video">分享影片</string>
-    <string name="share_short_template">看一下這短片：https://youtu.be/%1$s</string>
     <string name="speed_2x">２倍速</string>
     <string name="cd_liked">已讚好</string>
     <string name="cd_pause">暫停</string>
@@ -139,8 +135,6 @@
     <string name="save_to">儲存至……</string>
     <string name="watch_later">稍後觀看</string>
     <string name="watch_later_unsave">從稍後觀看移除</string>
-    <string name="playlist_private">私人</string>
-    <string name="playlist_public">公開</string>
     <string name="create_new_playlist">建立新播放清單</string>
     <string name="playlist_name">名稱</string>
     <string name="playlist_description_optional">描述（可選）</string>
@@ -155,7 +149,6 @@
     <string name="go_to_channel">前往頻道</string>
     <string name="track_info">曲目詳情</string>
     <string name="track_info_subtitle">詳細的技術和社交指標</string>
-    <string name="top_bar_clear_search">清除搜尋</string>
     <string name="top_bar_close_search">關閉搜尋</string>
     <string name="subscriptions_sort_label">頻道排序</string>
     <string name="subscriptions_sort_default">預設</string>
@@ -193,25 +186,6 @@
 
     <string name="playlist_creation_menu_open">建立播放清單</string>
     <string name="playlist_creation_menu_close">關閉建立播放清單選單</string>
-    <string name="lyrics_save_file">另存為 .lrc 檔案</string>
-    <string name="lyrics_saved">歌詞已儲存</string>
-    <string name="lyrics_save_failed">無法儲存歌詞</string>
-    <string name="lyrics_choose_source">選擇歌詞來源</string>
-    <string name="lyrics_synced_badge">已同步</string>
-    <string name="lyrics_edit">編輯歌詞</string>
-    <string name="lyrics_copy">複製歌詞</string>
-    <string name="lyrics_copied">複製歌詞</string>
-    <string name="lyrics_alignment">對齊</string>
-    <string name="lyrics_align_left">靠左對齊</string>
-    <string name="lyrics_align_center">置中對齊</string>
-    <string name="lyrics_align_right">靠右對齊</string>
-    <string name="lyrics_adjust_sync">調整同步時間差</string>
-    <string name="lyrics_sync_reset">重設歌詞同步時間</string>
-    <string name="lyrics_searching_sources">正在搜尋來源…</string>
-    <string name="lyrics_no_sources_found">找不到任何來源提供的歌詞</string>
-    <string name="lyrics_source_edited">已編輯</string>
-    <string name="lyrics_current_source">目前來源：%1$s</string>
-    <string name="lyrics_display_header">顯示</string>
     <string name="share_link_only_template">https://youtube.com/watch?v=%1$s</string>
     <string name="content_settings_share_without_text_title">分享不含文字的連結</string>
     <string name="content_settings_share_without_text_subtitle">僅分享影片連結，不附帶「看看這部影片」訊息</string>
@@ -296,7 +270,6 @@
     <string name="description_copied">說明已複製到剪貼簿</string>
     <string name="title_copied">標題已複製到剪貼簿</string>
     <string name="tags">標籤</string>
-    <string name="in_this_video">在這部影片中</string>
     <string name="sb_manual_skip">略過</string>
     <string name="sb_skip_segment">略過 %1$s</string>
     <string name="ago">前</string>
@@ -341,7 +314,6 @@
     <string name="search_hint">搜尋</string>
     <string name="search_videos_channels_placeholder">搜尋影片、頻道...</string>
     <string name="search_voice_prompt">說話以搜尋…</string>
-    <string name="shared_video">分享的影片</string>
     <string name="search_failed">搜尋失敗</string>
     <string name="settings_item_downloads_subtitle">效能、儲存空間、執行緒</string>
     <string name="settings_item_region">熱門地區</string>
@@ -479,7 +451,6 @@
     <string name="transcript_subtitle">使用逐字稿同步觀看.</string>
     <string name="transcript_unavailable">這部影片沒有可用的逐字稿</string>
     <string name="transcript_search_hint">搜尋逐字稿</string>
-    <string name="lyrics_sync_offset_value">%1$ss</string>
     <string name="audio_bitrate_kbps_template">%1$d kbps</string>
     <string name="no_timed_comments">目前尚無帶有時間戳記的留言</string>
     <string name="comment_hearted_by_creator">創作者按了愛心</string>
@@ -515,13 +486,10 @@
     <string name="auto_backup_screen_title">自動備份</string>
 
     <string name="notification_channel_downloads_name">Chorplay 下載內容</string>
-    <string name="player_settings_stable_voice_subtitle">將音量標準化，讓播放音量保持一致</string>
 
     <string name="default_download_codec_label">預設下載編碼格式</string>
-<string name="tv_subscriptions_empty">目前尚無訂閱影片</string>
     <string name="theme_desc_monochrome">中性且不易分心的配色，提供最清晰的視覺效果。</string>
     <string name="sb_category_outro">片尾／結尾畫面</string>
-    <string name="category_all">全部</string>
     <string name="player_settings_dearrow_subtitle">將標題黨標題和縮圖替換為社群提供的版本</string>
     <string name="update_check_failed">無法檢查更新。請檢查你的網路連線。</string>
     <string name="files_access_denied_subtitle">點選以允許存取，讓每次下載都能列出</string>
@@ -578,13 +546,9 @@
     <string name="date_this_month">本月</string>
     <string name="date_this_year">今年</string>
     <string name="duration_any">不限影片長度</string>
-    <string name="duration_under_4">少於4分鐘</string>
-    <string name="duration_4_20">4-20分鐘</string>
     <string name="duration_over_20">超過20分鐘</string>
     <string name="sort_relevance">相關性</string>
-    <string name="sort_upload_date">上傳日期</string>
     <string name="sort_view_count">觀看次數</string>
-    <string name="sort_rating">評分</string>
     <string name="channel_default_title">頻道</string>
     <string name="channel_banner">頻道橫幅</string>
     <string name="channel_avatar">頻道頭像</string>
@@ -754,7 +718,6 @@
     <string name="sync_continue">繼續</string>
     <string name="sync_sas_body">請確認兩部裝置顯示相同的 6 位數代碼。</string>
     <string name="sync_verification_after_connect">連線後，請確認兩部裝置顯示相同的代碼。</string>
-    <string name="tv_continue_watching">繼續觀看</string>
     <string name="ui_clear_and_continue">清除並繼續</string>
     <string name="import_running_background">你可以離開此畫面，匯入作業會繼續執行。</string>
     <string name="player_settings_video_codec_dialog_body">Chorplay 優先選用的編解碼器。你仍可從畫質選單中選擇任何編解碼器。H.264 在大多數裝置上播放最流暢。AV1 和 VP9 消耗較少數據，但需要更多電力。</string>
@@ -764,7 +727,6 @@
     <string name="export_data_section_subtitle">選擇要匯出的資料並儲存至裝置</string>
     <string name="export_app_data_desc">匯出你的訂閱內容、觀看記錄、播放清單和設定</string>
     <string name="error_no_internet_hint">請檢查 Wi-Fi 或行動數據連線，然後再試一次。</string>
-    <string name="content_settings_explore_region_picker_subtitle">在「探索」頁面的頂端列顯示地球圖示，以便立即變更熱門內容地區。</string>
     <string name="settings_categories_nav_tab_subtitle">在導覽列中新增「熱門趨勢與分類」分頁</string>
     <string name="persona_explorer_title">探索者</string>
     <string name="persona_explorer_description">混沌之美，萬象交融。</string>
@@ -823,7 +785,6 @@
     <string name="player_settings_auto_pip_subtitle">離開 App 時切換至子母畫面</string>
     <string name="player_appearance_volume_boost_title">允許額外提高音量</string>
     <string name="player_appearance_volume_boost_subtitle">允許透過滑動調整音量，超過系統音量上限</string>
-    <string name="tv_player_chapters">章節</string>
     <string name="tv_guide_player_media">播放、暫停、上一個、下一個、倒轉、快轉和字幕按鍵可直接使用。</string>
     <string name="content_settings_notes_title">個人備註</string>
     <string name="content_settings_notes_subtitle">在頻道和影片上保留私人備註</string>
@@ -891,7 +852,6 @@
     <string name="content_settings_disable_shorts_player_subtitle">在一般影片播放器中播放Shorts</string>
     <string name="content_settings_shorts_player_prompt_title">Shorts 播放器建議</string>
     <string name="content_settings_shorts_player_prompt_subtitle">將 2 分鐘以下的影片以 Shorts 開啟前先詢問</string>
-    <string name="content_settings_explore_region_picker_title">探索頁面的快速地區選擇器</string>
     <string name="content_settings_header_nav_tabs">導覽分頁</string>
     <string name="content_settings_comments_enabled_title">留言</string>
     <string name="content_settings_comments_enabled_subtitle">在影片下方顯示留言</string>
@@ -935,7 +895,6 @@
     <string name="taste_live_affinity_detail">直播內容與個人檔案的契合程度</string>
     <string name="blocked_content_title">篩選條件</string>
     <string name="blocked_content_subtitle">從推薦內容中排除的主題與頻道</string>
-    <string name="tv_error_loading">無法載入內容</string>
     <string name="tv_guide_left_edge">從內容邊界向左移動，以開啟導覽列。</string>
     <string name="tv_guide_rail">使用向上鍵和向下鍵選擇目的地，按下「確定」開啟，按向右鍵返回內容。</string>
     <string name="error_failed_to_load_content">內容載入失敗</string>
@@ -1072,13 +1031,9 @@
     <string name="player_appearance_frame_step_title">逐幀播放按鈕</string>
     <string name="player_appearance_frame_step_subtitle">暫停時顯示上一幀/下一幀箭頭</string>
 
-    <string name="lyrics_provider_lrclib">LrcLib</string>
-    <string name="lyrics_provider_better_lyrics">Better Lyrics</string>
-    <string name="lyrics_provider_simpmusic">SimpMusic</string>
     <string name="transcript_resync">與影片同步</string>
     <string name="transcript_language">語言</string>
     <string name="end_of_results">已無更多結果</string>
-    <string name="lyrics_provider_lyrics_plus">LyricsPlus</string>
     <string name="content_settings_grid_small_title">小</string>
     <string name="settings_show_related_videos_title">顯示相關影片</string>
     <string name="settings_show_related_videos_subtitle">在影片播放器下方顯示相關影片</string>
@@ -1101,7 +1056,6 @@
     <string name="categories_title">分類</string>
     <string name="categories_switch_to_grid">切換至網格檢視</string>
     <string name="categories_switch_to_list">切換至清單檢視</string>
-    <string name="category_movies">電影</string>
     <string name="category_live">直播</string>
     <string name="category_news">新聞</string>
     <string name="category_sports">體育</string>
@@ -1171,7 +1125,6 @@
     <string name="speed_slider_reset">重設為 1 倍速</string>
     <string name="speed_slider_apply">套用</string>
     <string name="playback_speed_multiplier_precise">%1$.2f×</string>
-    <string name="player_settings_stable_voice">標準化音量</string>
     <string name="player_settings_display">顯示</string>
     <string name="player_settings_ambient_mode">環境模式</string>
     <string name="player_settings_ambient_mode_subtitle">在影片周圍呈現影片色彩的柔和光暈</string>
@@ -1434,23 +1387,11 @@
     <string name="sync_enter_connection_data">手動輸入連線資料</string>
     <string name="sync_enter_connection_data_hint">貼上從另一部裝置取得的連線資料。</string>
     <string name="sync_connection_data_label">連線資料</string>
-    <string name="music_player_tab_up_next">接下來播放</string>
-    <string name="music_player_tab_lyrics">歌詞</string>
-    <string name="music_player_lyrics_full_screen">全螢幕歌詞</string>
-    <string name="lyrics_play_from_line">從這一行開始播放</string>
-    <string name="lyrics_show_translation">翻譯</string>
-    <string name="lyrics_show_translation_summary">在每句歌詞下方顯示翻譯</string>
-    <string name="lyrics_show_romanization">羅馬拼音</string>
-    <string name="lyrics_show_romanization_summary">以拉丁字母顯示其他文字系統的歌詞</string>
-    <string name="lyrics_auto_romanize">在此裝置上自動轉換羅馬字母</string>
-    <string name="lyrics_auto_romanize_summary">當歌詞來源未提供羅馬拼音時，自動轉換為羅馬字母</string>
     <string name="player_appearance_artwork_control_colors_title">控制項採用封面配色</string>
     <string name="player_appearance_artwork_control_colors_subtitle">使用封面色調為按鈕和播放進度列上色</string>
     <string name="player_appearance_plain_control_colors_title">控制項顏色</string>
     <string name="player_appearance_plain_control_colors_monochrome">黑白</string>
     <string name="player_appearance_plain_control_colors_app">應用程式主題</string>
-    <string name="lyrics_source_local_file">歌詞檔案</string>
-    <string name="lyrics_source_embedded">內嵌歌詞</string>
     <string name="check_out_short_template">看看這部 Shorts: %1$s\nhttps://youtube.com/shorts/%2$s</string>
     <string name="link_not_supported">Chorplay 無法開啟這種類型的連結</string>
     <string name="quick_action_watched">已觀看</string>
@@ -1709,9 +1650,8 @@
 
 
     <string name="content_settings_subs_collaborations_title">合作影片</string>
-    <string name="content_settings_subs_collaborations_subtitle">與你訂閱的頻道合作製作的影片</string>    <plurals name="categories_rate_limited">
-        <item quantity="other">YouTube 目前限制了請求次數，請幾分鐘後再試。</item>
-    </plurals>
+    <string name="content_settings_subs_collaborations_subtitle">與你訂閱的頻道合作製作的影片</string>
+    <string name="categories_rate_limited">YouTube 目前限制了請求次數，請幾分鐘後再試。</string>
     <string name="proxy_settings_bypass_vpn">使用 VPN 時略過代理伺服器</string>
     <string name="proxy_settings_bypass_vpn_subtitle">VPN 開啟期間直接連線</string>
     <string name="proxy_settings_vpn_paused">代理伺服器已暫停</string>
@@ -2166,8 +2106,6 @@
 
 
 
-    <string name="music_player_mode_song">歌曲</string>
-    <string name="music_player_mode_video">影片</string>
 
 
 
@@ -2254,7 +2192,6 @@
     <string name="template_bass_boost">重低音增強：%1$ddB</string>
     <string name="label_tempo_pitch">速度與音調</string>
     <string name="action_reset">重設</string>
-    <string name="template_speed">速度：%1$d%%</string>
     <string name="template_pitch">音調：%1$d 個半音</string>
     <string name="label_parametric_equalizer">參數式等化器</string>
     <string name="action_add_band">新增頻段</string>
@@ -2870,58 +2807,9 @@
 
 
 
-    <string name="tv_home_title">首頁</string>
-    <string name="tv_home_recommended">推薦</string>
-    <string name="tv_no_recommendations">目前沒有推薦內容</string>
-    <string name="tv_subscriptions_title">訂閱內容</string>
-    <string name="tv_no_subscriptions">目前沒有訂閱影片</string>
-    <string name="tv_search_hint">搜尋影片</string>
-    <string name="tv_search_empty">搜尋想看的影片</string>
-    <string name="tv_search_no_results">找不到影片</string>
-    <string name="tv_library_history">記錄</string>
-    <string name="tv_library_liked">喜歡的影片</string>
-    <string name="tv_library_playlists">播放清單</string>
-    <string name="tv_library_empty">你的媒體庫是空的</string>
-    <string name="tv_player_rewind">倒轉 10 秒</string>
-    <string name="tv_player_fast_forward">快轉 10 秒</string>
-    <string name="tv_player_close">關閉播放器</string>
-    <string name="tv_search_prompt">搜尋影片</string>
-    <string name="tv_search_action">搜尋</string>
-    <string name="tv_library_likes">喜歡的影片</string>
-    <string name="tv_library_watch_later">稍後觀看</string>
-    <string name="tv_music_empty">目前沒有音樂推薦</string>
-    <string name="tv_music_charts">排行榜</string>
-    <string name="tv_player_settings">播放器設定</string>
     <string name="tv_player_queue">佇列</string>
-    <string name="tv_player_play_now">立即播放</string>
-    <string name="tv_player_skip_segment">略過 %1$s</string>
-    <string name="tv_more_replies">更多回覆</string>
-    <string name="tv_keyboard_space">空格</string>
-    <string name="tv_keyboard_delete">刪除</string>
-    <string name="tv_keyboard_clear">清除</string>
-    <string name="tv_keyboard_voice">語音搜尋</string>
-    <string name="tv_filter_all">全部</string>
-    <string name="tv_filter_videos">影片</string>
-    <string name="tv_filter_channels">頻道</string>
-    <string name="tv_filter_playlists">播放清單</string>
-    <string name="tv_filter_artists">藝人</string>
-    <string name="tv_filter_live">直播</string>
-    <string name="tv_channel_videos">影片</string>
-    <string name="tv_subscriptions_all">所有頻道</string>
-    <plurals name="tv_playlist_video_count">
-        <item quantity="other">%1$d 部影片</item>
-    </plurals>
-    <string name="tv_music_lyrics">歌詞</string>
-    <string name="tv_music_expand">開啟完整播放器</string>
-    <string name="tv_music_no_lyrics">找不到歌詞</string>
-    <string name="tv_music_radio">電台</string>
-    <string name="tv_settings_appearance">外觀</string>
-    <string name="tv_settings_chor_engine">Chorplay 引擎</string>
-    <string name="tv_settings_sync">同步裝置</string>
-    <string name="tv_sync_qr_session_active">只要這個畫面保持開啟，此代碼就會持續有效。</string>
     <string name="tv_remote_guide_title">遙控器與按鍵指南</string>
     <string name="tv_remote_guide_subtitle">在沙發上操作 Chorplay 的快速指南</string>
-    <string name="tv_remote_guide_back">返回設定</string>
     <string name="tv_guide_navigation_title">導覽</string>
     <string name="tv_guide_search_title">搜尋與瀏覽</string>
     <string name="tv_guide_playback_title">播放</string>
@@ -2930,9 +2818,7 @@
     <string name="tv_guide_key_back">返回</string>
     <string name="tv_guide_key_left_edge">左側邊緣</string>
     <string name="tv_guide_key_rail">側欄</string>
-    <string name="tv_guide_key_edit">編輯按鍵</string>
     <string name="tv_guide_key_voice">麥克風</string>
-    <string name="tv_guide_key_right">右</string>
     <string name="tv_guide_key_left_right">左／右</string>
     <string name="tv_guide_key_hold">長按</string>
     <string name="tv_guide_key_up">上</string>
@@ -2941,25 +2827,12 @@
     <string name="tv_guide_dpad">在各列、格狀排列、按鈕和選單之間移動焦點。</string>
     <string name="tv_guide_ok">開啟焦點所在的項目、選擇選項或確認操作。</string>
     <string name="tv_guide_back">關閉目前的面板、返回上一個畫面，或在離開前先回到首頁。</string>
-    <string name="tv_guide_search_keyboard">在螢幕鍵盤和篩選列之間移動。</string>
-    <string name="tv_guide_search_type">輸入焦點所在的字母，或啟用篩選條件、建議或搜尋結果。</string>
-    <string name="tv_guide_search_edit">使用鍵盤最下排的「空格」、「刪除」和「清除」來編輯搜尋內容。</string>
     <string name="tv_guide_search_voice">當電視具備支援的麥克風服務時，啟動語音搜尋。</string>
-    <string name="tv_guide_search_results">從鍵盤移到篩選條件和搜尋結果；在各區塊之間使用上、下鍵。</string>
     <string name="tv_guide_player_toggle">播放或暫停，並顯示播放控制項。</string>
     <string name="tv_guide_player_seek">向前或向後快轉；進度列會顯示待跳轉的位置。</string>
     <string name="tv_guide_player_up">顯示控制項，並將焦點移到「接下來播放」列。</string>
     <string name="tv_guide_player_down">顯示播放控制項，並將焦點移到播放/暫停。</string>
     <string name="tv_guide_player_back">先關閉面板或控制項；再按一次即可離開播放器。</string>
-    <string name="tv_settings_wifi_quality">預設畫質（Wi‑Fi）</string>
-    <string name="tv_settings_cellular_quality">預設畫質（行動網路）</string>
-    <string name="tv_settings_codec">偏好的編碼格式</string>
-    <string name="tv_theme_mode_title">主題</string>
-    <string name="tv_theme_variant_title">樣式</string>
-    <string name="tv_theme_variant_light">淺色</string>
-    <string name="tv_theme_variant_dark">深色</string>
-    <string name="tv_theme_variant_amoled">AMOLED</string>
-    <string name="tv_about_version">版本 %1$s</string>
     <string name="widget_now_playing_label">正在播放</string>
     <string name="widget_quick_actions_label">快速動作</string>
     <string name="widget_quick_actions_description">搜尋 Chorplay，並快速前往下載、記錄或音樂辨識</string>
@@ -3042,7 +2915,6 @@
     <string name="ui_clear">清除</string>
     <string name="ui_delete_from_playlist">從播放清單中刪除</string>
     <string name="ui_added">已新增</string>
-    <string name="ui_sync_lyrics">同步歌詞</string>
     <string name="ui_downloading_playlist">正在下載播放清單</string>
 
 
@@ -3345,7 +3217,6 @@
     <string name="fallback_playing">播放中…</string>
     <string name="empty_saved_shorts">還沒有儲存的 Shorts</string>
     <string name="settings_search_no_results">找不到符合「%1$s」的設定</string>
-    <string name="settings_lyrics_provider_order_description">由上到下依序嘗試，拖曳即可重新排序。</string>
     <string name="donations_cryptocurrency">加密貨幣</string>
     <string name="import_no_history_entries">檔案中找不到任何觀看記錄</string>
     <string name="import_no_videos">播放清單檔案中找不到任何影片</string>
@@ -3946,8 +3817,6 @@
     <plurals name="subscriptions_refresh_checks_template">
         <item quantity="other">正在檢查第 %1$d 個頻道，共 %2$d 個頻道的 Shorts 和直播</item>
     </plurals>
-    <string name="lyrics_keep_screen_on">螢幕保持開啟</string>
-    <string name="lyrics_keep_screen_on_summary">顯示歌詞且音樂播放時</string>
     <string name="player_appearance_follow_light_theme_title">淺色主題時使用淺色</string>
     <string name="player_appearance_follow_light_theme_subtitle">封面圖的背景會變成淺色</string>
     <string name="player_appearance_sleep_timer_button_title">睡眠計時器按鈕</string>
@@ -3957,12 +3826,6 @@
     <string name="search_filter_watch_any">不限</string>
     <string name="search_filter_unwatched">未觀看</string>
     <string name="search_filter_watched">已觀看</string>
-    <plurals name="search_watch_empty_watched">
-        <item quantity="other">這裡沒有已觀看的影片</item>
-    </plurals>
-    <plurals name="search_watch_empty_unwatched">
-        <item quantity="other">這裡沒有未觀看的影片</item>
-    </plurals>
     <string name="deep_chor_on_search_title">在搜尋中顯示</string>
     <string name="deep_chor_on_search_subtitle">在最近搜尋上方顯示 Deep Chorplay 開關</string>
     <string name="support_chorplay_open_collective">在 Open Collective 上支持 Chorplay</string>
@@ -3980,22 +3843,6 @@
     <string name="queue_swipe_left">佇列向左滑動</string>
     <string name="queue_swipe_right">佇列向右滑動</string>
     <string name="queue_move_to_end">移到最後</string>
-    <string name="lyrics_provider_lrc_red">lrc.red</string>
-    <string name="lyrics_provider_kugou">酷狗音樂</string>
-    <string name="lyrics_provider_paxsenix">Apple Music (Paxsenix)</string>
-    <string name="lyrics_provider_unison">Unison</string>
-    <string name="lyrics_provider_youtube_captions">YouTube 字幕</string>
-    <string name="lyrics_provider_youtube_music">YouTube Music</string>
-    <string name="lyrics_provider_better_lyrics_desc">逐字同步 · Apple Music 歌詞</string>
-    <string name="lyrics_provider_lrc_red_desc">逐字同步 · 依錄音比對</string>
-    <string name="lyrics_provider_lyrics_plus_desc">逐字同步</string>
-    <string name="lyrics_provider_simpmusic_desc">逐字同步 · 依影片比對</string>
-    <string name="lyrics_provider_kugou_desc">逐行同步 · 適合中文歌曲</string>
-    <string name="lyrics_provider_paxsenix_desc">逐字同步</string>
-    <string name="lyrics_provider_lrclib_desc">逐行同步 · 開放資料庫</string>
-    <string name="lyrics_provider_unison_desc">社群歌詞 · 曲庫較小</string>
-    <string name="lyrics_provider_youtube_captions_desc">逐行同步 · 影片的字幕</string>
-    <string name="lyrics_provider_youtube_music_desc">純文字 · 「歌詞」分頁</string>
 
     <string name="playlist_unavailable_hidden">已隱藏無法播放的影片</string>
     <string name="error_bot_wall_network_hint">請改用其他網路，例如行動數據。</string>
@@ -4005,7 +3852,6 @@
     <string name="playlist_move_to_videos">移到影片</string>
 
     <string name="playlist_moved_to_videos">已移到影片</string>
-    <string name="lyrics_auto_romanize_japanese">尚不支援日文</string>
     <string name="filter_artists">藝人</string>
     <string name="filter_featured_playlists">精選播放清單</string>
     <string name="filter_podcasts">Podcast</string>
@@ -4144,8 +3990,6 @@
     <string name="linked_done_body">裝置已連結，並會讓彼此保持最新。</string>
     <string name="linked_done">完成</string>
     <string name="linked_forget">讓這部裝置離開群組</string>
-    <string name="linked_forget_title">要離開群組嗎？</string>
-    <string name="linked_forget_body">這部裝置將停止同步並忘記此群組。你的其他裝置不會受到影響；請也在那些裝置上移除這部裝置。</string>
     <string name="linked_removed_title">這部裝置已被移除</string>
     <string name="linked_removed_body">另一部裝置已將這部裝置從群組中移除。請在此離開群組，才能重新連結。</string>
     <string name="linked_recovery_unsaved">你的復原字詞尚未確認。</string>

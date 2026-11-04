@@ -101,8 +101,8 @@ internal fun PlaylistLibraryFilterRow(
                                     }
                                 } else {
                                     null
-                                }
-                                        onClick = {
+                                },
+                                onClick = {
                                     ownershipExpanded = false
                                     onOwnershipSelected(filter)
                                 },

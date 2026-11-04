@@ -47,7 +47,6 @@ data class EqPreset(
     val imported: Boolean = false,
 )
 
-/** The curve a mode is playing, and the preset it started from; null once that preset is gone. */
 @Serializable
 data class EqWorkingCopy(
     val presetId: String?,
@@ -73,7 +72,6 @@ data class EqState(
     }
 }
 
-/** What the audio processors run: already resolved for bypass, bass boost and auto preamp. */
 data class EqProcessingSpec(
     val enabled: Boolean,
     val preampDb: Double,

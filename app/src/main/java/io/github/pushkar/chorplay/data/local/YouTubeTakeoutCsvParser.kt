@@ -11,7 +11,6 @@ internal data class YouTubeTakeoutSubscription(
     val channelName: String,
 )
 
-/** A playlist as `playlists.csv` lists it; [createdAt] is null when the row carries no timestamp. */
 internal data class TakeoutPlaylistInfo(
     val id: String,
     val title: String,
@@ -44,14 +43,11 @@ private const val MAX_TAKEOUT_PLAYLISTS = 2_000
 
 internal fun isYouTubeTakeoutCsvEntry(entryName: String): Boolean =
     youTubeTakeoutSegments(entryName)?.last()?.endsWith(".csv", ignoreCase = true) == true
-
-/** An HTML file one folder inside the YouTube product, where Takeout puts the history files in every language. */
 internal fun isYouTubeTakeoutHtmlEntry(entryName: String): Boolean =
     youTubeTakeoutSegments(entryName)?.let { segments ->
         segments.size == 4 && segments.last().endsWith(".html", ignoreCase = true)
     } == true
 
-/** A JSON file one folder inside the YouTube product: the watch or search history, when the export chose JSON. */
 internal fun isYouTubeTakeoutJsonEntry(entryName: String): Boolean =
     youTubeTakeoutSegments(entryName)?.let { segments ->
         segments.size == 4 && segments.last().endsWith(".json", ignoreCase = true)
@@ -244,10 +240,6 @@ private fun List<String>.toPlaylistVideoId(): String? {
     return videoId
 }
 
-/**
- * The create timestamp is found by its shape, not its column: the first field after the id that
- * reads as a date, which is the create timestamp and is followed by the update one.
- */
 private fun List<String>.toPlaylistInfo(): TakeoutPlaylistInfo? {
     if (size < 11) return null
     val playlistId = this[0].trim().trimStart('\uFEFF')
@@ -258,6 +250,49 @@ private fun List<String>.toPlaylistInfo(): TakeoutPlaylistInfo? {
             runCatching { OffsetDateTime.parse(field.trim()).toInstant().toEpochMilli() }.getOrNull()
         }
     return TakeoutPlaylistInfo(playlistId, title, createdAt)
+}
+
+private fun String.validatedTakeoutName(): String? =
+    trim().takeIf { value ->
+        value.isNotEmpty() &&
+            value.length <= MAX_IMPORTED_NAME_CHARACTERS &&
+            value.none { character ->
+                character.isISOControl() || character == '\u2028' || character == '\u2029'
+            }
+    }
+
+private fun String.normalizedTakeoutName(): String =
+    Normalizer
+        .normalize(this, Normalizer.Form.NFKC)
+        .lowercase(Locale.ROOT)
+        .filter(Char::isTakeoutNameCharacter)
+
+private fun Char.isTakeoutNameCharacter(): Boolean =
+    isLetterOrDigit() ||
+        Character.isSurrogate(this) ||
+        when (Character.getType(this)) {
+            Character.MATH_SYMBOL.toInt(),
+            Character.CURRENCY_SYMBOL.toInt(),
+            Character.MODIFIER_SYMBOL.toInt(),
+            Character.OTHER_SYMBOL.toInt(),
+            -> true
+
+            else -> false
+        }
+
+private fun String.takeoutLeafStem(): String {
+    val leaf = replace('\\', '/').substringAfterLast('/')
+    return leaf.substringBeforeLast('.', leaf)
+}
+
+private fun String.withoutEnglishVideosSuffix(): String = if (endsWith("-videos", ignoreCase = true)) dropLast(7) else this
+
+private fun String.fallbackTakeoutPlaylistName(fallbackPlaylistName: String): String {
+    val fallback =
+        takeoutLeafStem()
+            .withoutEnglishVideosSuffix()
+            .trim { it.isWhitespace() || it == '-' || it == '_' }
+    return fallback.validatedTakeoutName() ?: fallbackPlaylistName
 }
 
 

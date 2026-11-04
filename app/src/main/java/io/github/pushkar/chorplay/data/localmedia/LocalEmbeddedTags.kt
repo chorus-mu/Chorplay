@@ -28,10 +28,6 @@ import java.io.FileInputStream
 import javax.inject.Inject
 import javax.inject.Singleton
 
-/**
- * One file's read, kept until the file changes. [titleless] is whether the platform's reader finds
- * no title either; it is asked only when a file without one is no longer titled by its name.
- */
 @Serializable
 internal data class StoredEmbeddedText(
     val stamp: String,
@@ -39,11 +35,6 @@ internal data class StoredEmbeddedText(
     val titleless: Boolean? = null,
 )
 
-/**
- * Reads the title, artist and album straight from each device file's container, the way players
- * with their own parsers show them: Media3 for MP4, MP3, FLAC and Ogg, [MatroskaTextTags] for
- * Matroska and WebM. Every file is read once; the results are kept on disk until it changes.
- */
 @OptIn(UnstableApi::class)
 @Singleton
 class LocalEmbeddedTags
@@ -56,13 +47,11 @@ class LocalEmbeddedTags
         private var stored: MutableMap<Long, StoredEmbeddedText>? = null
         private val file: File get() = File(context.filesDir, FILE_NAME)
 
-        /** [library] with every read already kept, after reading the files whose MediaStore text looks damaged. */
         internal suspend fun withKnown(library: LocalLibrary): LocalLibrary {
             readMissing(library.items().filter { it.looksDamaged() })
             return applied(library)
         }
 
-        /** [library] with every file read, reading the ones not read yet; forgets files that are gone. */
         internal suspend fun withAll(library: LocalLibrary): LocalLibrary {
             readMissing(library.items())
             checkRenamed(library.items())
@@ -74,7 +63,6 @@ class LocalEmbeddedTags
             return applied(library)
         }
 
-        /** The text of the device file [uri] points at, from the kept read when there is one. */
         suspend fun forFile(
             mediaStoreId: Long,
             uri: Uri,
@@ -104,11 +92,6 @@ class LocalEmbeddedTags
             }
         }
 
-        /**
-         * Asks the platform's reader about each untitled file whose MediaStore title no longer
-         * matches its name. Media3 skips some tags MediaStore reads (ID3v1, AVI, ASF), so only a
-         * file neither finds a title in was titled by a name it has since lost.
-         */
         private suspend fun checkRenamed(items: List<LocalMediaItem>) {
             val unknown =
                 lock.withLock {

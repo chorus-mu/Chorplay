@@ -104,6 +104,7 @@ class PlayerFactory {
         val prefs = ensurePrefs(context)
 
         return DefaultTrackSelector(context, trackSelectionFactory).apply {
+            @Suppress("DEPRECATION")
             val builder =
                 buildUponParameters()
                     .setPreferredVideoMimeTypes(*PlayerConfig.PREFERRED_VIDEO_MIME_TYPES)

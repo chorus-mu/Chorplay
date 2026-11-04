@@ -219,9 +219,7 @@ internal class NeuroChunker(
                 }
 
                 // The last dot of an abbreviation ("a.i.") is part of it, not the end of a sentence.
-                c == '.' && next == null && '.' in word -> {
-                    Unit
-                }
+                c == '.' && next == null && '.' in word -> {}
 
                 c in KEEP_SUFFIX && word.isNotEmpty() && keepsWhole(word, piece, i) -> {
                     word.append(c)

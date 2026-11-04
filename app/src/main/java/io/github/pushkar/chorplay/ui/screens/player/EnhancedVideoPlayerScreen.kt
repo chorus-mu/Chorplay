@@ -60,6 +60,7 @@ private val ListEndPadding = 80.dp
  * This composable only renders the VIDEO DETAILS (description, comments, related videos).
  * The video player surface and all effects are handled by ChorplayApp.kt
  */
+@Suppress("DEPRECATION")
 @UnstableApi
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3AdaptiveApi::class)
 @Composable

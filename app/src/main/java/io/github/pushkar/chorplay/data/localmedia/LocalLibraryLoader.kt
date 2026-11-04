@@ -21,30 +21,16 @@ import kotlinx.coroutines.sync.withLock
 
 private const val TAG = "LocalLibraryLoader"
 
-/** Where the loader reads the device's media from; MediaStore in the app, a fake in tests. */
 internal interface LocalMediaSource {
-    /** Reads everything; may throw. */
     suspend fun read(): LocalLibrary
 
-    /** A number that changes whenever the media changed, or null when the platform has none. */
     fun generation(): Long?
-
-    /** Emits whenever a file was added, changed or removed, for as long as it is collected. */
     fun changes(): Flow<Unit>
 
-    /** [read] finished with the slower work that can follow the first look; may throw. */
     suspend fun complete(read: LocalLibrary): LocalLibrary = read
-
-    /** Brings the platform's index up to date with the files before a refresh reads it; may throw. */
     suspend fun reindex() = Unit
 }
 
-/**
- * Keeps the last read of [source] and reads again on open, on reported changes and on [refresh].
- * Every read runs under one lock and publishes into one state, so a refresh always ends, and clears
- * [refreshing], whether or not a screen is collecting when it finishes. Each good read is published
- * at once and again when [LocalMediaSource.complete] finishes with it, unless a newer read came first.
- */
 @OptIn(FlowPreview::class)
 internal class LocalLibraryLoader(
     private val source: LocalMediaSource,

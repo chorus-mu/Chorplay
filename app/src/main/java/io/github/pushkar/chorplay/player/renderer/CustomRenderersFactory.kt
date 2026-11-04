@@ -59,6 +59,7 @@ open class CustomRenderersFactory(
                 }
         }
 
+    @Suppress("DEPRECATION")
     override fun buildAudioSink(
         context: Context,
         enableFloatOutput: Boolean,
@@ -103,6 +104,7 @@ open class CustomRenderersFactory(
         )
     }
 
+    @Suppress("DEPRECATION")
     override fun buildTextRenderers(
         context: Context,
         output: TextOutput,

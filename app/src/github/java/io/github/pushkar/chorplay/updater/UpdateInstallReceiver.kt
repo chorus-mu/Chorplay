@@ -26,9 +26,7 @@ class UpdateInstallReceiver : BroadcastReceiver() {
                 }
             }
 
-            PackageInstaller.STATUS_SUCCESS -> {
-                Unit
-            }
+            PackageInstaller.STATUS_SUCCESS -> {}
 
             else -> {
                 Log.w(TAG, "Update install failed ($status): ${intent.getStringExtra(PackageInstaller.EXTRA_STATUS_MESSAGE)}")

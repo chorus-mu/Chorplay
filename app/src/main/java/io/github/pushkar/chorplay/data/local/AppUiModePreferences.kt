@@ -14,7 +14,6 @@ import javax.inject.Inject
 
 private val Context.appUiModeDataStore: DataStore<Preferences> by safePreferencesDataStore(name = "app_ui_mode", scope = StoreScope.DEVICE)
 
-/** Stores the interface override independently from playback preferences. */
 class AppUiModePreferences
     @Inject
     constructor(

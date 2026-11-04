@@ -15,17 +15,11 @@ import io.github.pushkar.chorplay.data.stats.VideoStatsRecorder
 import io.github.pushkar.chorplay.utils.ThumbnailUrlResolver
 import javax.inject.Inject
 
-/** A channel a block applied to, named as the viewer knows it. */
 data class BlockedChannel(
     val channelId: String,
     val channelName: String,
 )
 
-/**
- * What a video's menu tells the recommendation engine and the library: Watch later, not interested,
- * more like this, watched, and hiding a channel. Each call does the writes and the learning signal
- * that belong together, and says nothing to the viewer; the caller decides how to confirm it.
- */
 class VideoFeedbackUseCase
     @Inject
     constructor(
@@ -37,14 +31,12 @@ class VideoFeedbackUseCase
         private val watchLaterCleanup: WatchLaterCleanup,
         private val blockedNames: BlockedChannelNames,
     ) {
-        /** Adds [video] to Watch later, or takes it out; returns whether it is saved afterwards. */
         suspend fun toggleWatchLater(video: Video): Boolean {
             if (saveToWatchLater(video)) return true
             playlistRepository.removeFromWatchLater(video.id)
             return false
         }
 
-        /** Adds [video] to Watch later unless it is there already; returns whether it was added. */
         suspend fun saveToWatchLater(video: Video): Boolean {
             if (playlistRepository.isInWatchLater(video.id)) return false
             playlistRepository.addToWatchLater(video)
@@ -60,10 +52,6 @@ class VideoFeedbackUseCase
             if (saved) playlistRepository.addToWatchLater(video) else playlistRepository.removeFromWatchLater(video.id)
         }
 
-        /**
-         * Hides [video]'s channel from every feed. A live or premiere entry can carry a handle instead
-         * of a channel id, so that case asks the watch page for the real id first.
-         */
         suspend fun blockChannel(video: Video): BlockedChannel {
             val metadata = if (video.channelId.startsWith("UC")) null else repository.getLiveWatchMetadata(video.id)
             val channelId = metadata?.channelId.orEmpty().ifBlank { video.channelId }
@@ -91,7 +79,6 @@ class VideoFeedbackUseCase
             ChorplayNeuroEngine.onVideoInteraction(context, video, InteractionType.LIKED, percentWatched = 0f)
         }
 
-        /** Records [video] as watched to the end, so every card shows it full and the engine learns from it. */
         suspend fun markWatched(video: Video) {
             ChorplayNeuroEngine.onVideoInteraction(context, video, InteractionType.WATCHED, percentWatched = 1.0f)
             val durationMs = if (video.duration > 0) video.duration * 1000L else 1000L
@@ -110,10 +97,6 @@ class VideoFeedbackUseCase
             watchLaterCleanup.onFinished(video.id)
         }
 
-        /**
-         * Clears the progress that makes [video] read as watched. The history row stays, and the
-         * recommendation signal from the earlier watched interaction is left as it was.
-         */
         suspend fun markUnwatched(video: Video) {
             viewHistory.clearProgress(video.id)
         }

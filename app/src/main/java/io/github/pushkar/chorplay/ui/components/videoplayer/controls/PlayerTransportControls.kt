@@ -13,8 +13,8 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.KeyboardArrowLeft
-import androidx.compose.material.icons.rounded.KeyboardArrowRight
+import androidx.compose.material.icons.automirrored.rounded.KeyboardArrowLeft
+import androidx.compose.material.icons.automirrored.rounded.KeyboardArrowRight
 import androidx.compose.material.icons.rounded.Pause
 import androidx.compose.material.icons.rounded.PlayArrow
 import androidx.compose.material.icons.rounded.Replay
@@ -119,7 +119,7 @@ internal fun PlayerTransportControls(
                 SkipButton(
                     onClick = { actions.onStepFrame(false) },
                     enabled = true,
-                    icon = Icons.Rounded.KeyboardArrowLeft,
+                    icon = Icons.AutoMirrored.Rounded.KeyboardArrowLeft,
                     contentDescription = stringResource(R.string.previous_frame),
                 )
             }
@@ -185,7 +185,7 @@ internal fun PlayerTransportControls(
                 SkipButton(
                     onClick = { actions.onStepFrame(true) },
                     enabled = true,
-                    icon = Icons.Rounded.KeyboardArrowRight,
+                    icon = Icons.AutoMirrored.Rounded.KeyboardArrowRight,
                     contentDescription = stringResource(R.string.next_frame),
                 )
             }

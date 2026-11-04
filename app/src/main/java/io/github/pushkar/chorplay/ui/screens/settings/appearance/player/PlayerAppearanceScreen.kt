@@ -139,19 +139,94 @@ internal fun PlayerAppearanceScreen(
             toggleGroup(PlayerAppearanceIndex.scrubPreview, scrubOptions, scrubPreview, viewModel::setScrubPreview)
             switch(PlayerAppearanceIndex.frameStep, frameStep, viewModel::setFrameStepButtons)
         }
+        group(key = "player_appearance.video_player", header = R.string.settings_section_video_player) {
+            switch(PlayerAppearanceIndex.adaptiveSize, adaptiveSize, viewModel::setAdaptivePlayerSize)
+            switch(PlayerAppearanceIndex.ambientMode, ambientMode, viewModel::setAmbientMode)
+            switch(PlayerAppearanceIndex.groupedQuality, groupedQuality, viewModel::setGroupedQualitySelector)
+            nav(PlayerAppearanceIndex.gestureOverlay, value = gestureLabel, onClick = { sheet = PreviewSheet.GESTURE })
+        }
+        group(key = "player_appearance.shorts", header = R.string.content_settings_header_shorts) {
+            toggleGroup(PlayerAppearanceIndex.shortsUi, shortsOptions, shortsUi, viewModel::setShortsUiMode)
+        }
+        group(key = "player_appearance.mini_player", header = R.string.settings_section_mini_player) {
+            toggleGroup(
+                PlayerAppearanceIndex.miniPlayerSize,
+                miniPlayerOptions,
+                MiniPlayerSize.nearest(miniPlayerScale),
+                viewModel::setMiniPlayerSize,
+            )
+            switch(PlayerAppearanceIndex.miniPlayerSkip, miniPlayerSkip, viewModel::setMiniPlayerSkip)
+            switch(PlayerAppearanceIndex.miniPlayerNextPrev, miniPlayerNextPrev, viewModel::setMiniPlayerNextPrev)
+            nav(
+                PlayerAppearanceIndex.miniBarSwipeLeft,
+                value = swipeLeftLabel,
+                onClick = { sheet = PreviewSheet.SWIPE_LEFT },
+            )
+            nav(
+                PlayerAppearanceIndex.miniBarSwipeRight,
+                value = swipeRightLabel,
+                onClick = { sheet = PreviewSheet.SWIPE_RIGHT },
+            )
+        }
+    }
 
-        private fun SettingsGroupScope.seekbarSlider(
-            entry: SettingEntry,
-            value: Int,
-            max: Int,
-            onCommit: (Int) -> Unit,
-        ) = slider(
-            entry = entry,
-            value = value.toFloat(),
-            onValueCommitted = { committed ->
-                onCommit(((committed / SEEKBAR_STEP_DP).roundToInt() * SEEKBAR_STEP_DP).coerceIn(0, max))
-            },
-            valueRange = 0f..max.toFloat(),
-            steps = max / SEEKBAR_STEP_DP - 1,
-            valueLabel = { stringResource(R.string.player_fullscreen_seekbar_width_value, it.roundToInt()) },
-        )
+    when (sheet) {
+        PreviewSheet.SLIDER -> {
+            SettingsPreviewSheet(
+                title = stringResource(R.string.player_appearance_style_title),
+                subtitle = stringResource(R.string.player_appearance_style_subtitle),
+                options = SliderStyle.entries,
+                selected = sliderStyle,
+                label = { stringResource(sliderStyleLabel(it)) },
+                onSelect = viewModel::setSliderStyle,
+                onDismiss = { sheet = null },
+                preview = { SliderStylePreview(it) },
+            )
+        }
+
+        PreviewSheet.GESTURE -> {
+            SettingsPreviewSheet(
+                title = stringResource(R.string.player_appearance_gesture_overlay_title),
+                subtitle = stringResource(R.string.player_appearance_gesture_overlay_subtitle),
+                options = GestureOverlayStyle.entries,
+                selected = gestureOverlay,
+                label = { stringResource(gestureOverlayLabel(it)) },
+                onSelect = viewModel::setGestureOverlay,
+                onDismiss = { sheet = null },
+                preview = { GestureOverlayPreview(it) },
+            )
+        }
+
+        PreviewSheet.SWIPE_LEFT, PreviewSheet.SWIPE_RIGHT -> {
+            val left = sheet == PreviewSheet.SWIPE_LEFT
+            SettingsPreviewSheet(
+                title = stringResource(if (left) R.string.mini_bar_swipe_left else R.string.mini_bar_swipe_right),
+                subtitle = stringResource(R.string.mini_bar_swipe_subtitle),
+                options = MiniBarSwipeAction.entries,
+                selected = if (left) miniBarSwipeLeft else miniBarSwipeRight,
+                label = { stringResource(it.labelRes) },
+                onSelect = { action -> if (left) viewModel.setMiniBarSwipeLeft(action) else viewModel.setMiniBarSwipeRight(action) },
+                onDismiss = { sheet = null },
+                preview = { MiniBarSwipePreview(it, towardsLeft = left) },
+            )
+        }
+
+        null -> Unit
+    }
+}
+
+private fun SettingsGroupScope.seekbarSlider(
+    entry: SettingEntry,
+    value: Int,
+    max: Int,
+    onCommit: (Int) -> Unit,
+) = slider(
+    entry = entry,
+    value = value.toFloat(),
+    onValueCommitted = { committed ->
+        onCommit(((committed / SEEKBAR_STEP_DP).roundToInt() * SEEKBAR_STEP_DP).coerceIn(0, max))
+    },
+    valueRange = 0f..max.toFloat(),
+    steps = max / SEEKBAR_STEP_DP - 1,
+    valueLabel = { stringResource(R.string.player_fullscreen_seekbar_width_value, it.roundToInt()) },
+)

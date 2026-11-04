@@ -38,7 +38,7 @@ class TranscriptRepository
                                 Log.w(TAG, "Caption track returned HTTP ${response.code}")
                                 return@withContext emptyList()
                             }
-                            response.body?.string().orEmpty()
+                            response.body.string()
                         }
                     } catch (e: Exception) {
                         Log.w(TAG, "Caption track fetch failed: ${e.message}")

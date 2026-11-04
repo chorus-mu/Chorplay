@@ -32,7 +32,7 @@ internal fun LocalFolderRow(
     val separator = stringResource(R.string.metadata_separator)
     val files =
         pluralStringResource(
-            if (isVideos) R.plurals.local_videos_count else R.plurals.local_songs_count,
+            R.plurals.local_videos_count,
             folder.items.size,
             folder.items.size,
         )

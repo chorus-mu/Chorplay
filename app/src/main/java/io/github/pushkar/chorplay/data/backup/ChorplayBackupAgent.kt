@@ -9,11 +9,6 @@ import io.github.pushkar.chorplay.data.profile.ActiveProfile
 import io.github.pushkar.chorplay.data.profile.ProfileFolders
 import kotlinx.coroutines.runBlocking
 
-/**
- * Auto Backup with extra steps after a restore, before the app first runs: install-only files an older
- * backup still carries are deleted, the app reopens in Default, and the folders of profiles the
- * restored registry doesn't list are removed. With fullBackupOnly the key-value calls never run.
- */
 class ChorplayBackupAgent : BackupAgent() {
     override fun onBackup(
         oldState: ParcelFileDescriptor?,

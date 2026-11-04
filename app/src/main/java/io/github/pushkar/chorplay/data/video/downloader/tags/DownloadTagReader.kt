@@ -40,10 +40,8 @@ constructor(
                         listOf(
                             tags.title,
                             tags.artist,
-                            
                             tags.description,
-                            tags.comment,
-                            tags.lyrics
+                            tags.comment
                         ).any { it != null }
             }
         }

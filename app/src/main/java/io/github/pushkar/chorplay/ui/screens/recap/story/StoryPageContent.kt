@@ -151,9 +151,7 @@ internal fun StoryPageContent(
                 Body(stringResource(R.string.recap_sponsor_label))
             }
 
-            StoryPage.Summary -> {
-                Unit
-            }
+            StoryPage.Summary -> {}
         }
     }
 }

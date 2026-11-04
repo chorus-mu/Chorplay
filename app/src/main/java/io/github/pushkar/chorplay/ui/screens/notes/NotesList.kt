@@ -14,7 +14,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
-import androidx.compose.material.icons.outlined.StickyNote2
+import androidx.compose.material.icons.automirrored.outlined.StickyNote2
 import androidx.compose.material.icons.rounded.PlayArrow
 import androidx.compose.material3.AssistChip
 import androidx.compose.material3.AssistChipDefaults
@@ -105,7 +105,7 @@ internal fun NotesListPane(
                 ChorplayEmptyState(
                     title = stringResource(R.string.notes_empty_title),
                     subtitle = stringResource(R.string.notes_empty_body),
-                    icon = Icons.Outlined.StickyNote2,
+                    icon = Icons.AutoMirrored.Outlined.StickyNote2,
                 )
             }
 

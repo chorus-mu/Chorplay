@@ -3,7 +3,7 @@ package io.github.pushkar.chorplay.ui.components.shared.quickactions
 import androidx.activity.ComponentActivity
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
-import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 
 /**
  * The activity's [QuickActionsViewModel]. Cards, menus and search share it, so a route that opens a

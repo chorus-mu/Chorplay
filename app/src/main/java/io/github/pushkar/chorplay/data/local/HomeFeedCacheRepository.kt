@@ -146,10 +146,6 @@ class HomeFeedCacheRepository(
         dao.trimRelatedSeeds(RELATED_SEED_CAP)
     }
 
-    /**
-     * Metadata fetched by id for videos known only from history (views, upload date, avatar), so a
-     * card fetched once stays complete for a week without asking again.
-     */
     suspend fun loadVideoMetadata(
         ids: Collection<String>,
         now: Long = System.currentTimeMillis(),
@@ -186,16 +182,10 @@ class HomeFeedCacheRepository(
         if (videoId.isNotBlank()) dao.deleteVideo(videoId)
     }
 
-    /**
-     * Removes served reserve rows so a later refresh cannot re-serve them.
-     * Without this, reserve rows stayed eligible for their full 12h TTL and
-     * reappeared after every pull-to-refresh.
-     */
     suspend fun consumeReserve(videoIds: Collection<String>) {
         if (videoIds.isNotEmpty()) dao.deleteReserveVideos(videoIds.toList())
     }
 
-    /** The reel feed's unserved lane tails: one bucket, replaced whole on every save. */
     suspend fun saveShortsReserve(
         items: List<CachedHomeVideo>,
         now: Long = System.currentTimeMillis(),

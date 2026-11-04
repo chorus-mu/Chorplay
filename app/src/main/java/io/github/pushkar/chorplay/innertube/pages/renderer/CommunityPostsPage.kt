@@ -81,9 +81,7 @@ internal fun JsonElement.toCommunityPostsPage(
                 element.values.forEach(::collect)
             }
 
-            else -> {
-                Unit
-            }
+            else -> {}
         }
     }
 
@@ -157,9 +155,7 @@ internal fun JsonElement.toCommunityCommentsPage(): CommunityCommentsPage {
                 element.values.forEach(::collect)
             }
 
-            else -> {
-                Unit
-            }
+            else -> {}
         }
     }
 

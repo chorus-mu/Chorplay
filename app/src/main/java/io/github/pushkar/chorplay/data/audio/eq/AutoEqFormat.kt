@@ -4,7 +4,6 @@ import java.util.Locale
 import kotlin.math.pow
 import kotlin.math.sqrt
 
-/** What an EqualizerAPO / AutoEQ `ParametricEQ.txt` import produced, and what it left out. */
 data class AutoEqImport(
     val curve: EqCurve,
     val skippedFilters: Int,
@@ -12,11 +11,6 @@ data class AutoEqImport(
     val truncatedFilters: Int,
 )
 
-/**
- * Reads and writes the EqualizerAPO parametric text format that AutoEQ publishes, for example
- * `Filter 1: ON PK Fc 105 Hz Gain -2.3 dB Q 0.70`. Lenient about case, spacing, comma decimals and
- * the short type names; strict about anything that would break the audio, such as Q 0.
- */
 object AutoEqFormat {
     private val FILTER_PREFIX = Regex("^filter\\s*\\d*\\s*:", RegexOption.IGNORE_CASE)
     private val PREAMP_PREFIX = Regex("^preamp\\s*:", RegexOption.IGNORE_CASE)
@@ -40,7 +34,6 @@ object AutoEqFormat {
             "HPQ" to EqFilterType.HIGH_PASS,
         )
 
-    /** Null when the text holds no usable filter and no preamp. */
     fun parse(text: String): AutoEqImport? {
         var preamp: Double? = null
         val bands = mutableListOf<EqBand>()
@@ -141,7 +134,6 @@ object AutoEqFormat {
 
     private fun String.toNumber(): Double? = if (NUMBER.matches(this)) replace(',', '.').toDoubleOrNull() else null
 
-    /** "1,000" in a frequency is a thousands separator: no one sets a filter at 1 Hz. */
     private fun String.toFrequency(): Double? = if (THOUSANDS.matches(this)) replace(",", "").toDoubleOrNull() else toNumber()
 
     private fun Double.format(decimals: Int): String = String.format(Locale.ROOT, "%.${decimals}f", this)

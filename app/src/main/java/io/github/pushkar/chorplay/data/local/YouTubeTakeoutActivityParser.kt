@@ -31,7 +31,6 @@ internal data class TakeoutSearch(
     val isMusic: Boolean,
 )
 
-/** What one Takeout activity JSON file holds that Chorplay keeps. */
 internal data class TakeoutActivity(
     val likes: TakeoutLikes,
     val searches: List<TakeoutSearch>,
@@ -59,10 +58,8 @@ private data class LikeDecision(
     val like: TakeoutLike?,
 )
 
-/** YouTube keeps at most this many videos in Liked videos; more would also bloat the likes store. */
 internal const val MAX_IMPORTED_LIKES = 5_000
 
-// My Activity names the action only in the account's language; no field marks a like.
 private const val LIKED_PREFIX = "Liked "
 private const val DISLIKED_PREFIX = "Disliked "
 private const val WATCHED_PREFIX = "Watched "
@@ -73,7 +70,6 @@ private val myActivityJson = Json { ignoreUnknownKeys = true }
 private val watchVideoIdPattern = Regex("""[?&]v=([\w-]{11})(?:[&#]|$)""")
 private val activityChannelIdPattern = Regex("""/channel/(UC[\w-]{22})""")
 
-/** The YouTube activity file of a Takeout "My Activity" export, e.g. `Takeout/My Activity/YouTube/MyActivity.json`. */
 internal fun isMyActivityYouTubeEntry(entryName: String): Boolean {
     val segments = entryName.replace('\\', '/').split('/')
     return segments.size >= 3 &&
@@ -82,18 +78,11 @@ internal fun isMyActivityYouTubeEntry(entryName: String): Boolean {
         segments.last().endsWith(".json", ignoreCase = true)
 }
 
-/** Streams a My Activity JSON export for its likes; see [readTakeoutActivity]. */
 internal fun readMyActivityLikes(
     input: InputStream,
     limit: Int = MAX_IMPORTED_LIKES,
 ): TakeoutLikes = readTakeoutActivity(input, likeLimit = limit, keepWatches = false).likes
 
-/**
- * Streams a Takeout activity JSON file: My Activity's `MyActivity.json`, or the YouTube product's
- * history files, which share its record format. A like counts only when it is the video's latest
- * like or dislike, newest [likeLimit] kept. Searches are read from the search link, so they come
- * through in any language. Ads (records with `details`) are skipped.
- */
 @OptIn(ExperimentalSerializationApi::class)
 internal fun readTakeoutActivity(
     input: InputStream,
@@ -128,10 +117,6 @@ internal fun readTakeoutActivity(
     return TakeoutActivity(TakeoutLikes(likes.take(likeLimit), likes.size), searches, watches)
 }
 
-/**
- * The query of a YouTube (`/results?search_query=`) or YouTube Music (`/search?q=`) search link,
- * and whether it was a music search; null for any other link.
- */
 internal fun takeoutSearchOf(url: String?): Pair<String, Boolean>? {
     val uri = runCatching { URI(url?.trim()) }.getOrNull() ?: return null
     val host = uri.host?.lowercase() ?: return null
@@ -189,7 +174,6 @@ private fun MyActivityRecord.toLike(
     )
 }
 
-/** Other languages put the verb elsewhere in the title; the player replaces the title on the first play. */
 private fun MyActivityRecord.toWatch(
     title: String,
     watchedAt: Long,

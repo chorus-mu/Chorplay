@@ -33,7 +33,6 @@ class LikedVideosRepository private constructor(
                 ).also { INSTANCE = it }
             }
 
-        // Keys format: "video_{videoId}" -> JSON string with video info
         private fun videoKey(videoId: String) = stringPreferencesKey("video_$videoId")
 
         private const val LIKE_STATE_PREFIX = "like_state_"
@@ -43,17 +42,12 @@ class LikedVideosRepository private constructor(
         private const val LIKED_VIDEOS_ORDER_KEY = "liked_videos_order"
     }
 
-    /**
-     * Like a video
-     */
     suspend fun likeVideo(videoInfo: LikedVideoInfo) {
         dataStore.edit { preferences ->
-            // A like re-applied by sync or a restore carries less than an enriched record already holds.
             val stored = preferences[videoKey(videoInfo.videoId)]?.let(::deserializeVideo)
             preferences[videoKey(videoInfo.videoId)] = serializeVideo(stored?.let(videoInfo::keepingDetailsOf) ?: videoInfo)
             preferences[likeStateKey(videoInfo.videoId)] = "LIKED"
 
-            // Update order list
             val currentOrder = preferences[stringPreferencesKey(LIKED_VIDEOS_ORDER_KEY)] ?: ""
             val orderList =
                 if (currentOrder.isEmpty()) {
@@ -63,20 +57,16 @@ class LikedVideosRepository private constructor(
                 }
 
             if (!orderList.contains(videoInfo.videoId)) {
-                orderList.add(0, videoInfo.videoId) // Add to front
+                orderList.add(0, videoInfo.videoId)
                 preferences[stringPreferencesKey(LIKED_VIDEOS_ORDER_KEY)] = orderList.joinToString(",")
             }
         }
     }
 
-    /**
-     * Dislike a video (removes like if exists)
-     */
     suspend fun dislikeVideo(videoId: String) {
         dataStore.edit { preferences ->
             preferences[likeStateKey(videoId)] = "DISLIKED"
 
-            // Remove from liked videos list
             val currentOrder = preferences[stringPreferencesKey(LIKED_VIDEOS_ORDER_KEY)] ?: ""
             if (currentOrder.isNotEmpty()) {
                 val orderList = currentOrder.split(",").toMutableList()
@@ -86,7 +76,6 @@ class LikedVideosRepository private constructor(
         }
     }
 
-    /** Every video the viewer has disliked. */
     suspend fun dislikedVideoIds(): Set<String> =
         dataStore.data
             .first()
@@ -95,17 +84,11 @@ class LikedVideosRepository private constructor(
                 key.name.removePrefix(LIKE_STATE_PREFIX).takeIf { value == "DISLIKED" && key.name.startsWith(LIKE_STATE_PREFIX) }
             }
 
-    /**
-     * Get like state for a video (LIKED, DISLIKED, or null)
-     */
     fun getLikeState(videoId: String): Flow<String?> =
         dataStore.data.map { preferences ->
             preferences[likeStateKey(videoId)]
         }
 
-    /**
-     * Remove like/dislike from a video
-     */
     suspend fun removeLikeState(videoId: String) {
         dataStore.edit { preferences ->
             preferences.remove(likeStateKey(videoId))
@@ -120,7 +103,6 @@ class LikedVideosRepository private constructor(
         }
     }
 
-    /** Replaces the stored details of a video that is still liked; its place and like date stay. */
     suspend fun updateDetails(videoInfo: LikedVideoInfo) {
         dataStore.edit { preferences ->
             val key = videoKey(videoInfo.videoId)
@@ -129,7 +111,6 @@ class LikedVideosRepository private constructor(
         }
     }
 
-    /** Unlikes [videoIds] as one change and returns what [restoreLikes] needs to put them back. */
     suspend fun takeLikes(videoIds: Collection<String>): List<LikedVideoInfo> {
         val ids = videoIds.toSet()
         var taken = emptyList<LikedVideoInfo>()
@@ -142,16 +123,11 @@ class LikedVideosRepository private constructor(
         return taken
     }
 
-    /** Likes [likes] again, each back in its place by the date it was first liked. */
     suspend fun restoreLikes(likes: List<LikedVideoInfo>) {
         if (likes.isEmpty()) return
         dataStore.edit { preferences -> preferences.insertLikes(likes) }
     }
 
-    /**
-     * Adds likes brought from another app, each placed by the date it was liked. A video Chorplay already
-     * holds a like or dislike for is left as it is. Returns the likes that were added.
-     */
     suspend fun importLikes(likes: List<LikedVideoInfo>): List<LikedVideoInfo> {
         var added = emptyList<LikedVideoInfo>()
         dataStore.edit { preferences ->
@@ -175,10 +151,6 @@ class LikedVideosRepository private constructor(
         this[orderKey] = restoredOrder(order, dated).joinToString(",")
     }
 
-    /**
-     * Every liked video, newest like first. Read by like date rather than the stored order, which
-     * older backup restores wrote back to front.
-     */
     fun getAllLikedVideos(): Flow<List<LikedVideoInfo>> =
         dataStore.data.map { preferences ->
             val orderString = preferences[stringPreferencesKey(LIKED_VIDEOS_ORDER_KEY)] ?: ""
@@ -200,14 +172,9 @@ class LikedVideosRepository private constructor(
 private val LikeJson =
     Json {
         ignoreUnknownKeys = true
-        // likedAt defaults to the current time, so a default must never be left out and re-evaluated on read.
         encodeDefaults = true
     }
 
-/**
- * Reads a stored like. Records are JSON; older ones were `id|title|thumbnail|channel|likedAt|isMusic`,
- * which a title or channel holding a `|` split in the wrong places, so those are read from both ends.
- */
 internal fun deserializeVideo(data: String): LikedVideoInfo? {
     if (data.startsWith("{")) return runCatching { LikeJson.decodeFromString(LikedVideoInfo.serializer(), data) }.getOrNull()
     val parts = data.split("|")
@@ -229,7 +196,6 @@ internal fun deserializeVideo(data: String): LikedVideoInfo? {
 
 private const val LEGACY_MIN_PARTS = 5
 
-/** Existing likes keep their order; each restored one goes back before the first like that is older than it. */
 internal fun restoredOrder(
     order: List<String>,
     dated: List<Pair<String, Long>>,
@@ -244,7 +210,6 @@ internal fun restoredOrder(
     return result
 }
 
-/** Newest like first; equal dates keep their stored order. */
 internal fun List<LikedVideoInfo>.newestLikeFirst(): List<LikedVideoInfo> = sortedByDescending { it.likedAt }
 
 @Serializable
@@ -255,11 +220,10 @@ data class LikedVideoInfo(
     val channelName: String,
     val likedAt: Long = System.currentTimeMillis(),
     val isMusic: Boolean = false,
-    // Nullable and zero by default: Gson backups written before these existed leave them unset.
     val channelId: String? = null,
     val durationSeconds: Int = 0,
 ) {
-    /** This like, with the channel and length [stored] already knew where this one lacks them. */
+
     fun keepingDetailsOf(stored: LikedVideoInfo): LikedVideoInfo =
         copy(
             channelId = channelId?.takeIf(String::isNotBlank) ?: stored.channelId,

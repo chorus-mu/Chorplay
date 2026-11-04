@@ -10,14 +10,12 @@ import io.github.pushkar.chorplay.data.local.entity.DownloadCollectionEntity
 import io.github.pushkar.chorplay.data.local.entity.DownloadCollectionItemEntity
 import kotlinx.coroutines.flow.Flow
 
-/** A downloaded collection with how much of it is on disk. */
 data class DownloadCollectionSummary(
     @Embedded val collection: DownloadCollectionEntity,
     val wantedCount: Int,
     val downloadedCount: Int,
     val downloadedBytes: Long,
 ) {
-    /** Every song or video the collection still wants is on the device. */
     val isComplete: Boolean get() = wantedCount > 0 && downloadedCount >= wantedCount
 }
 
@@ -29,7 +27,6 @@ interface DownloadCollectionDao {
     @Upsert
     suspend fun upsertItems(items: List<DownloadCollectionItemEntity>)
 
-    /** Writes the collection and its members together, so no member ever points at a missing row. */
     @Transaction
     suspend fun upsertWithItems(
         collection: DownloadCollectionEntity,

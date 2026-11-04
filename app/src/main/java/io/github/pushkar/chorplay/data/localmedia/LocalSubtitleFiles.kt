@@ -38,14 +38,14 @@ private val NonLanguageTokens =
 private val Regions: Set<String> by lazy { Locale.getISOCountries().map { it.lowercase(Locale.ROOT) }.toSet() }
 
 private val TwoLetterByThree: Map<String, String> by lazy {
-    Locale.getISOLanguages().associateBy { code -> runCatching { Locale(code).isO3Language }.getOrDefault(code) }
+    Locale.getISOLanguages().associateBy { code -> runCatching { Locale.forLanguageTag(code).isO3Language }.getOrDefault(code) }
 }
 
 private val CodeByLanguageName: Map<String, String> by lazy {
     Locale
         .getISOLanguages()
         .flatMap { code ->
-            val locale = Locale(code)
+            val locale = Locale.forLanguageTag(code)
             listOf(locale.getDisplayLanguage(Locale.ENGLISH), locale.getDisplayLanguage(locale)).map { it.lowercase(Locale.ROOT) to code }
         }.filter { (name, code) -> name.isNotBlank() && name != code }
         .toMap()

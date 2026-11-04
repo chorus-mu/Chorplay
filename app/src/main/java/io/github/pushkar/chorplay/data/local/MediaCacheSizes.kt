@@ -1,10 +1,7 @@
 package io.github.pushkar.chorplay.data.local
 
-/** How much each on-disk cache may hold, as read from the size settings. */
 data class MediaCacheLimits(
-    /** The video and Shorts cache; 0 means unlimited. */
     val videoBytes: Long,
-    /** The image cache; null leaves the size to Coil. */
     val artworkBytes: Long?,
 ) {
     companion object {
@@ -16,7 +13,6 @@ data class MediaCacheLimits(
     }
 }
 
-/** The size settings of the media and image caches, in megabytes as stored. */
 object MediaCacheSizes {
     const val UNLIMITED_MB = 0
     const val ARTWORK_AUTOMATIC_MB = 0
@@ -27,7 +23,6 @@ object MediaCacheSizes {
 
     private const val BYTES_PER_MB = 1024L * 1024L
 
-    /** 0 stays 0, which the media caches read as no limit. */
     fun mediaBytes(megabytes: Int): Long = if (megabytes <= UNLIMITED_MB) 0L else megabytes * BYTES_PER_MB
 
     fun artworkBytes(megabytes: Int): Long? = if (megabytes <= ARTWORK_AUTOMATIC_MB) null else megabytes * BYTES_PER_MB

@@ -44,10 +44,8 @@ private val BadgeIconSize = 12.dp
 private val BadgePadding = 4.dp
 private val LabelSpacing = 4.dp
 
- */
 @Composable
-@Composable
-internal fun subscriptionAvatarShape(): Shape = CircleShape
+internal fun subscriptionAvatarShape(): Shape = CircleShape
 
 @Composable
 internal fun ChannelAvatarItem(

@@ -86,9 +86,7 @@ internal fun parseChangelog(
                 items += line.removePrefix(bullet).trim()
             }
 
-            line.equals("CHORPLAY CHANGE LOG", ignoreCase = true) -> {
-                Unit
-            }
+            line.equals("CHORPLAY CHANGE LOG", ignoreCase = true) -> {}
 
             else -> {
                 closeSection()

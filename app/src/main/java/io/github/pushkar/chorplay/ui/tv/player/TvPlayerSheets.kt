@@ -167,9 +167,7 @@ internal fun BoxScope.TvPlayerSheets(
                         )
                     }
 
-                    else -> {
-                        Unit
-                    }
+                    else -> {}
                 }
             }
         }

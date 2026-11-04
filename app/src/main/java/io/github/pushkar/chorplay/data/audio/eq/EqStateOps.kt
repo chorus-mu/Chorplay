@@ -1,9 +1,5 @@
 package io.github.pushkar.chorplay.data.audio.eq
 
-/**
- * Every change the equalizer supports, as pure functions of [EqState]. The repository applies them
- * and persists the result; the tests exercise them without Android.
- */
 fun EqState.userPreset(id: String?): EqPreset? = id?.let { wanted -> userPresets.firstOrNull { it.id == wanted } }
 
 fun EqState.presetCurve(id: String?): EqCurve? = BuiltInEqPresets.byId(id)?.curve ?: userPreset(id)?.curve
@@ -16,10 +12,6 @@ private fun EqState.presetMode(id: String?): EqMode? =
 
 private fun defaultCurve(mode: EqMode): EqCurve = if (mode == EqMode.PARAMETRIC) EqCurve() else GraphicEq.flatCurve()
 
-/**
- * Preset [id] as the given [mode] plays it: a graphic preset's ten bands load as parametric bands as
- * they are, and a parametric preset is fitted onto the ten graphic bands.
- */
 fun EqState.presetCurveFor(
     mode: EqMode,
     id: String?,
@@ -32,11 +24,9 @@ fun EqState.presetCurveFor(
     }
 }
 
-/** The curve differs from the preset it came from, or there is no preset and it is not flat. */
 val EqState.isEdited: Boolean
     get() = active.curve != (presetCurveFor(mode, active.presetId) ?: defaultCurve(mode))
 
-/** The equalizer is on and something in it alters the signal. */
 val EqState.changesSound: Boolean
     get() =
         enabled &&
@@ -46,7 +36,6 @@ val EqState.changesSound: Boolean
                     (!autoPreamp && active.curve.preamp != 0.0)
             )
 
-/** Save can overwrite the source preset only when it is one of the user's own. */
 val EqState.canSaveActive: Boolean
     get() = isEdited && userPreset(active.presetId)?.mode == mode
 
@@ -55,7 +44,6 @@ private fun EqState.withActive(working: EqWorkingCopy): EqState =
 
 fun EqState.withActiveCurve(curve: EqCurve): EqState = withActive(active.copy(curve = sanitizedFor(mode, curve)))
 
-/** Plays preset [id] in the current mode; the mode itself never changes here. */
 fun EqState.selectPreset(id: String): EqState {
     val curve = presetCurveFor(mode, id) ?: return this
     return withActive(EqWorkingCopy(id, curve))
@@ -91,7 +79,6 @@ fun EqState.duplicatePreset(
     return copy(userPresets = userPresets + EqPreset(id = newId, name = name, curve = curve, mode = mode))
 }
 
-/** A deleted preset and where it was, so Undo can put it back in place. */
 data class DeletedEqPreset(
     val preset: EqPreset,
     val index: Int,
@@ -169,7 +156,6 @@ fun EqState.insertBand(
     return withActiveCurve(active.curve.copy(bands = bands.toMutableList().apply { add(index.coerceIn(0, size), band) }))
 }
 
-/** True when [name] is free among the user's presets and the built-in names shown to them. */
 fun EqState.isNameAvailable(
     name: String,
     builtInNames: Collection<String>,
@@ -183,10 +169,6 @@ fun EqState.isNameAvailable(
 
 fun normalizedPresetName(raw: String): String = raw.trim().take(EqLimits.MAX_NAME_LENGTH)
 
-/**
- * What the processors should run. [preview] replaces the active curve while a point is dragged, so
- * the sound follows the finger without the saved state or the UI changing every frame.
- */
 fun EqState.processingSpec(
     bypass: Boolean,
     preview: EqCurve? = null,
@@ -204,7 +186,6 @@ fun EqState.processingSpec(
     return EqProcessingSpec(enabled = true, preampDb = preamp, bands = bands)
 }
 
-/** Clamps every value and repairs anything a hand-edited backup or an old version could hold. */
 fun EqState.sanitized(): EqState =
     copy(
         parametric = parametric.copy(curve = parametric.curve.sanitized()),

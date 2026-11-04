@@ -20,13 +20,13 @@ import androidx.compose.ui.platform.LocalClipboard
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.github.pushkar.chorplay.R
-import io.github.pushkar.chorplay.data.newmusic.InnertubeMusicService
+import io.github.pushkar.chorplay.innertube.YouTube
 import io.github.pushkar.chorplay.innertube.models.MediaInfo
 import io.github.pushkar.chorplay.ui.components.shared.ChorplayLoadingIndicator
 import io.github.pushkar.chorplay.ui.components.shared.ChorNavRow
@@ -78,7 +78,7 @@ class MediaDetailsViewModel
             }
             _state.value = MediaDetailsState(durationSeconds = subject.durationSeconds?.takeIf { it > 0 })
             viewModelScope.launch {
-                val info = runCatching { InnertubeMusicService.getMediaInfo(subject.videoId) }.getOrNull()
+                val info = YouTube.getMediaInfo(subject.videoId).getOrNull()
                 val duration =
                     info?.durationSeconds?.takeIf { it > 0 }
                         ?: subject.durationSeconds?.takeIf { it > 0 }

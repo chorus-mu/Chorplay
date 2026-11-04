@@ -197,7 +197,7 @@ internal fun HomeFeedBody(
 
         uiState.error != null && uiState.videos.isEmpty() -> {
             ChorplayErrorState(
-                error = uiState.error ?: stringResource(R.string.error_occurred),
+                error = uiState.error,
                 onRetry = { viewModel.retry() },
             )
         }

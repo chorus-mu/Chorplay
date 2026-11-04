@@ -132,7 +132,6 @@ fun MediaSeekBar(
             {
                 isScrubbing.value = false
                 currentOnValueChangeFinished?.invoke()
-                Unit
             }
         }
     sliderState.onValueChange = onScrub

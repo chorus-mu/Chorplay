@@ -84,9 +84,7 @@ internal fun IntegrationsDialogs(
         }
 
 
-        null -> {
-            Unit
-        }
+        null -> {}
     }
 }
 

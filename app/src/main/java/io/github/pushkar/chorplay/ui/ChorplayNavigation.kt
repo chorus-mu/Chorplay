@@ -362,23 +362,12 @@ fun NavGraphBuilder.chorplayAppGraph(
     composable("history") {
         currentRoute.value = "history"
         HistoryScreen(
-            onVideoClick = { track ->
-                val deviceFile = LocalMediaIds.videoUri(track.videoId)
+            onVideoClick = { video ->
+                val deviceFile = LocalMediaIds.videoUri(video.id)
                 if (deviceFile != null) {
-                    val video =
-                        io.github.pushkar.chorplay.data.model.Video(
-                            id = track.videoId,
-                            title = track.title,
-                            channelName = track.artist,
-                            channelId = "",
-                            thumbnailUrl = deviceFile.toString(),
-                            duration = track.duration,
-                            viewCount = 0,
-                            uploadDate = "",
-                        )
                     playerViewModel.playLocalVideo(video, deviceFile.toString())
                 } else {
-                    playerViewModel.playVideo(track.toVideo())
+                    playerViewModel.playVideo(video)
                 }
             },
             onShortsQueue = { source ->

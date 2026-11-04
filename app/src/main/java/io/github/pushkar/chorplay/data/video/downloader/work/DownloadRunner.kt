@@ -252,9 +252,7 @@ constructor(
                 notifier.show(videoId, request.tags.title, DownloadPhase.Paused)
             }
 
-            StopAction.NOTHING -> {
-                Unit
-            }
+            StopAction.NOTHING -> {}
 
             StopAction.WAIT -> {
                 downloadDao.updateAllItemsStatus(videoId, DownloadItemStatus.PENDING)

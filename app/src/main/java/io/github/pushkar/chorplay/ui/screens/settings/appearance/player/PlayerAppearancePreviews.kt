@@ -12,8 +12,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Slider
 import androidx.compose.material3.SliderDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -80,6 +82,61 @@ internal fun MiniBarSwipePreview(
             shape = RoundedCornerShape(MediaMiniBarDefaults.CornerRadius),
         )
     }
+}
+
+@OptIn(ExperimentalMaterial3ExpressiveApi::class)
+@Composable
+internal fun SeekbarWidthPreview(padding: Dp) {
+    val animated by animateDpAsState(
+        targetValue = padding,
+        animationSpec = MaterialTheme.motionScheme.defaultEffectsSpec(),
+        label = "seekbarWidthPreview",
+    )
+    Box(
+        modifier =
+            Modifier
+                .fillMaxWidth()
+                .height(SeekbarPreviewHeight)
+                .clip(MaterialTheme.shapes.small)
+                .background(MaterialTheme.colorScheme.surfaceContainerHighest)
+                .padding(horizontal = SeekbarPreviewInset),
+        contentAlignment = Alignment.Center,
+    ) {
+        Row(
+            modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = animated)
+                    .height(SeekbarTrackHeight)
+                    .clip(CircleShape)
+                    .background(MaterialTheme.colorScheme.surfaceVariant),
+        ) {
+            Box(
+                modifier =
+                    Modifier
+                        .fillMaxWidth(SEEKBAR_PREVIEW_PROGRESS)
+                        .fillMaxHeight()
+                        .background(MaterialTheme.colorScheme.primary),
+            )
+        }
+    }
+}
+
+@Composable
+internal fun SliderStylePreview(style: SliderStyle) {
+    val position = PREVIEW_DURATION * PREVIEW_PROGRESS
+    val range = 0f..PREVIEW_DURATION
+    Slider(
+        value = position,
+        onValueChange = {},
+        valueRange = range,
+        colors =
+            SliderDefaults.colors(
+                activeTrackColor = MaterialTheme.colorScheme.primary,
+                inactiveTrackColor = MaterialTheme.colorScheme.surfaceVariant,
+                thumbColor = MaterialTheme.colorScheme.primary,
+            ),
+    )
 }
 
 

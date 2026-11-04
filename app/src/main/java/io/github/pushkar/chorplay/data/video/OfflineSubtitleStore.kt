@@ -191,7 +191,7 @@ class OfflineSubtitleStore
                     .newCall(Request.Builder().url(url).build())
                     .execute()
                     .use { response ->
-                        val body = response.body?.string()
+                        val body = response.body.string()
                         if (!response.isSuccessful || body.isNullOrBlank() || !body.startsWith(VTT_MAGIC)) {
                             Log.w(TAG, "Caption fetch rejected (${response.code})")
                             null

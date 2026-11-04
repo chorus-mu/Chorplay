@@ -191,9 +191,7 @@ internal fun SettingsDetail(
             AboutScreen(onBack = onBack, highlight = target.highlight, onNavigate = onNavigate)
         }
 
-        SettingsDestination.REMOTE_GUIDE -> {
-            Unit
-        }
+        SettingsDestination.REMOTE_GUIDE -> {}
 
         SettingsDestination.DIAGNOSTICS -> {
             DiagnosticsScreen(onBack = onBack, highlight = target.highlight)

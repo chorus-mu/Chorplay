@@ -272,7 +272,7 @@ private fun PlayAllRow(
         Text(
             text =
                 pluralStringResource(
-                    if (isVideos) R.plurals.local_videos_count else R.plurals.local_songs_count,
+                    R.plurals.local_videos_count,
                     items.size,
                     items.size,
                 ),

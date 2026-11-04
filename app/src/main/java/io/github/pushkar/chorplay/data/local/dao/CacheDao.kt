@@ -75,7 +75,6 @@ interface CacheDao {
         timestampIsExact: Boolean,
     )
 
-    /** Everything a channel brought into the feed: its uploads and its collaborations. */
     @Query("DELETE FROM subscription_feed_cache WHERE channelId = :channelId OR feedChannelId = :channelId")
     suspend fun deleteSubscriptionFeedForChannel(channelId: String)
 

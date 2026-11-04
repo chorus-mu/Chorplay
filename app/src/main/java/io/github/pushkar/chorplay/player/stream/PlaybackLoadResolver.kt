@@ -176,7 +176,7 @@ class PlaybackLoadResolver
             // here: a load that waited on it would be waiting on a second request.
             val relatedVideos = emptyList<Video>()
 
-            if (liveFromInnerTube && innerTubeResult != null) {
+            if (innerTubeResult != null && liveFromInnerTube) {
                 onStep(ResolvedPlayback.Live(innerTubeResult, relatedVideos))
             } else if (innerTubeResult != null && innerTubeHasPlayableVod(innerTubeResult)) {
                 onStep(

@@ -208,9 +208,7 @@ private fun RecapControls(
                 }
             }
 
-            RecapPeriod.AllTime -> {
-                Unit
-            }
+            RecapPeriod.AllTime -> {}
         }
     }
 }

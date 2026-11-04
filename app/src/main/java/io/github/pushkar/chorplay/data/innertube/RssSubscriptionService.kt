@@ -24,62 +24,23 @@ import java.util.concurrent.atomic.AtomicInteger
 import javax.inject.Inject
 import javax.inject.Singleton
 
-/** Which part of a refresh a chunk belongs to. Each has its own counter, so neither runs backwards. */
 enum class SubscriptionRefreshStage {
-    /** Every channel's RSS feed, eight at a time. */
     RSS,
-
-    /** Shorts checks and channel page reads, only for the channels RSS could not settle. */
     CHECKS,
 }
 
-/**
- * One progressive slice of a subscription refresh.
- *
- * [failedChannelIds] holds channels that yielded nothing at all — neither RSS nor the channel tabs
- * answered — so the UI can say part of the feed is missing instead of silently showing less.
- */
 data class SubscriptionFeedChunk(
     val videos: List<Video>,
     val failedChannelIds: Set<String>,
-    /** Why each failed channel could not be read, keyed by channel id. */
     val failedChannelReasons: Map<String, String> = emptyMap(),
-    /**
-     * Channels whose RSS answered but whose slice is unfinished: the channel-tab pass failed, or the
-     * Shorts tab could not say which uploads are reels. Their latest uploads arrived, so they are not
-     * reported, but their earlier rows are kept and they are not stamped fresh, exactly like
-     * [failedChannelIds] (#1094, #1186).
-     */
     val incompleteChannelIds: Set<String> = emptySet(),
     val stage: SubscriptionRefreshStage = SubscriptionRefreshStage.RSS,
-    /** Channels this [stage] has finished, out of [totalChannels] it covers. */
     val processedChannels: Int = 0,
     val totalChannels: Int = 0,
-    /**
-     * Set once, on the chunk that opens [SubscriptionRefreshStage.CHECKS]: the channels RSS settled
-     * on its own. No later chunk changes their slice, so the caller can store them right away.
-     */
     val rssSettledChannelIds: Set<String>? = null,
-    /**
-     * Every upload this sweep knows is a reel, including the older ones the feed leaves out (it keeps
-     * a channel's newest reel only). A cached row of one of them is filed as a Short again.
-     */
     val reelIds: Set<String> = emptySet(),
 )
 
-/**
- * Two-stage subscription extraction.
- *
- * The RSS stage reads every channel's feed: cheap, and the only source with a trustworthy publish
- * timestamp. Each entry's link says whether it is a reel (#1393); an entry without one is only shown
- * once [ChannelReelIndex] or a stored verdict says what it is, and a channel whose verdict is not at
- * hand is held back for the checks stage rather than shown with its reels as videos (#903).
- *
- * The checks stage asks the Shorts tab for those held channels, then reads the channel tabs for the
- * channels RSS could not satisfy, which is also the only way to see livestreams — their upload dates
- * are then back-filled from the RSS timestamps. With [readAllTabs], every channel gets the tab read,
- * which reaches further back than RSS's fifteen entries.
- */
 @Singleton
 class RssSubscriptionService
     @Inject
@@ -172,7 +133,6 @@ class RssSubscriptionService
                     for ((channelId, classified) in marked) {
                         val result = sweep.held.remove(channelId) ?: continue
                         if (classified == null) {
-                            // Shown as uploads, but never stamped or trusted, so the next pass asks again.
                             sweep.add(result.videos)
                             sweep.incomplete += channelId
                         } else {
@@ -243,20 +203,15 @@ class RssSubscriptionService
                 )
             }
 
-        /** What one sweep has gathered so far, channel by channel. */
         private inner class Sweep {
             val regular = mutableListOf<Video>()
             val shorts = mutableListOf<Video>()
             val reelIds = HashSet<String>()
             val rssDates = mutableMapOf<String, Long>()
             val hasRecent = mutableMapOf<String, Boolean>()
-
-            /** RSS answered, but no verdict on its reels is at hand yet. */
             val held = LinkedHashMap<String, RssResult>()
             val needsTabs = mutableSetOf<String>()
             val rssAnswered = mutableSetOf<String>()
-
-            // Seeded by the RSS stage and cleared per channel as soon as the tabs answer for it.
             val unreachable = mutableSetOf<String>()
             val reasons = mutableMapOf<String, String>()
             val incomplete = mutableSetOf<String>()
@@ -295,10 +250,6 @@ class RssSubscriptionService
             )
         }
 
-        /**
-         * RSS carries only the last fifteen uploads, so a Shorts-heavy channel can fill all of them
-         * with reels and hide its latest long-form upload entirely.
-         */
         private fun RssResult.needsTabs(
             classified: List<Video>,
             readAllTabs: Boolean,
@@ -327,7 +278,6 @@ class RssSubscriptionService
             val videos: List<Video>,
             val needsChannelFallback: Boolean,
             val linkVerdicts: Map<String, Boolean> = emptyMap(),
-            /** The feed lists an upload inside the window, whether or not it survived the filters. */
             val hasRecentEntries: Boolean = false,
             val failed: Boolean = false,
             val failureReason: String? = null,
@@ -339,10 +289,6 @@ class RssSubscriptionService
             val failureReason: String? = null,
         )
 
-        /**
-         * RSS gives accurate dates for all recent uploads (including Shorts) but never a duration or a
-         * live flag, so its timestamps double as the date source for the Phase 2 tab items.
-         */
         private suspend fun fetchRssVideos(
             channelId: String,
             minimumDateMillis: Long,
@@ -400,11 +346,6 @@ class RssSubscriptionService
             )
         }
 
-        /**
-         * Each entry's link, else a stored verdict, classifies the slice without a browse. When some
-         * entry has neither, a Shorts tab read within the cache window is reused; otherwise the
-         * channel needs a Shorts check, one full browse, and null holds it for the checks stage.
-         */
         private suspend fun knownReels(
             channelId: String,
             result: RssResult,
@@ -438,12 +379,6 @@ class RssSubscriptionService
             )
         }
 
-        /**
-         * A channel's own Videos, Shorts and Live tabs, through the native InnerTube browse.
-         *
-         * @param rssDateMap Pre-fetched RSS timestamps keyed by video ID. Used to assign accurate
-         *   upload dates to Shorts tab items, which carry no date metadata of their own.
-         */
         private suspend fun getChannelVideos(
             channelId: String,
             minimumDateMillis: Long,
@@ -522,13 +457,8 @@ class RssSubscriptionService
 
         private fun formatRelativeTime(timestampMillis: Long): String = formatYouTubeRelativeTime(timestampMillis)
 
-        /** The structured members-only badge, or a strong marker in the title itself. */
         private fun Video.isPaidOrMembersOnly(): Boolean = membersOnlyText != null || hasRestrictionMarker(title)
 
-        /**
-         * Title only: "join this channel" and "channel members" are YouTube's stock membership call
-         * to action in ordinary descriptions, so matching descriptions dropped normal uploads (#1094).
-         */
         private fun ChannelRssEntry.isPaidOrMembersOnly(): Boolean = hasRestrictionMarker(title)
 
         private fun hasRestrictionMarker(title: String): Boolean {

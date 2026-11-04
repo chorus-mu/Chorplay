@@ -9,9 +9,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.outlined.List
 import androidx.compose.material.icons.outlined.GridView
 import androidx.compose.material.icons.outlined.Language
-import androidx.compose.material.icons.outlined.List
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -25,7 +25,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.paging.compose.collectAsLazyPagingItems
 import io.github.pushkar.chorplay.R
@@ -34,7 +34,6 @@ import io.github.pushkar.chorplay.data.local.PlayerPreferences
 import io.github.pushkar.chorplay.data.model.Video
 import io.github.pushkar.chorplay.innertube.pages.explore.ExploreSectionKind
 import io.github.pushkar.chorplay.ui.OnTabReselected
-import io.github.pushkar.chorplay.ui.components.categories.CategoryChartGrid
 import io.github.pushkar.chorplay.ui.components.categories.CategoryPagedGrid
 import io.github.pushkar.chorplay.ui.components.categories.CategoryShelfPage
 import io.github.pushkar.chorplay.ui.components.categories.CategorySubTabMenu
@@ -94,7 +93,7 @@ fun CategoriesScreen(
                     }
                     IconButton(onClick = viewModel::toggleViewMode) {
                         Icon(
-                            imageVector = if (uiState.isListView) Icons.Outlined.GridView else Icons.Outlined.List,
+                            imageVector = if (uiState.isListView) Icons.Outlined.GridView else Icons.AutoMirrored.Outlined.List,
                             contentDescription =
                                 if (uiState.isListView) {
                                     stringResource(R.string.categories_switch_to_grid)

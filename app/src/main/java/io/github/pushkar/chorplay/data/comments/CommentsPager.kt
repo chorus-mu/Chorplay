@@ -21,41 +21,19 @@ import kotlinx.coroutines.withTimeoutOrNull
 
 private const val TAG = "CommentsPager"
 
-/** How long a comment fetch waits for playback to stop competing with it before giving up. */
 private const val STARTUP_GATE_TIMEOUT_MS = 20_000L
 
-/**
- * Pages fetched behind the first one, so a filter that reads the whole loaded set has something to
- * read. Bounded and sequential: each page waits for the one before it, and a user-driven load more
- * or a sort change cancels what is left.
- */
 private const val DEFAULT_PREFETCH_PAGES = 3
 
-/** What the pager needs to know about the surface's playback before it spends the network on comments. */
 internal data class CommentsPlaybackState(
     val isPlaybackLoading: Boolean,
     val currentVideoId: String?,
 ) {
     companion object {
-        /** For a surface whose playback never competes with the comment fetch. */
         val READY = CommentsPlaybackState(isPlaybackLoading = false, currentVideoId = null)
     }
 }
 
-/**
- * The comment list for one video: first page, further pages, and a comment's replies.
- *
- * The player and Shorts each had their own copy of this and drifted — only one of them deduplicated
- * by comment id, and neither guarded against a second request landing while the first was still in
- * flight, so re-opening the sheet fetched page one twice.
- *
- * One request per (video, page) is in flight at a time. A request for a different video supersedes
- * the one before it; a repeat of the request already running is dropped.
- *
- * [isCurrentVideo] is the owner's decision about whether the answer still belongs on screen, and it
- * is asked both before and after the fetch, because the fetch outlives a fast swipe to the next
- * video. [fetchTimeoutMs] bounds the fetch itself for a surface that wants one.
- */
 internal class CommentsPager(
     private val repository: YouTubeRepository,
     private val scope: CoroutineScope,
@@ -92,7 +70,6 @@ internal class CommentsPager(
     private var activeSortToken: String? = null
     private val repliesInFlight = mutableSetOf<String>()
 
-    /** Empties the list, for a video with no comments to fetch and for a player being torn down. */
     fun clear() {
         loadJob?.cancel()
         prefetchJob?.cancel()
@@ -115,7 +92,6 @@ internal class CommentsPager(
         startLoad(videoId, sortToken = null)
     }
 
-    /** Reloads the section in the order [sort] names, which is a different continuation entirely. */
     fun selectSort(
         videoId: String,
         sort: VideoCommentSort,
@@ -130,7 +106,6 @@ internal class CommentsPager(
     ) {
         loadJob?.cancel()
         prefetchJob?.cancel()
-        // A re-sort keeps the header; a page without a count must not inherit the last video's (#1111).
         if (videoId != loadingVideoId) {
             _sortOptions.value = emptyList()
             _totalText.value = null
@@ -193,10 +168,6 @@ internal class CommentsPager(
         }
     }
 
-    /**
-     * Walks a bounded number of further pages in the background once the first one has landed, so
-     * a filter over the loaded set is not deciding from twenty rows.
-     */
     private fun prefetchFollowingPages(videoId: String) {
         if (prefetchPages <= 0) return
         prefetchJob?.cancel()

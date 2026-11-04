@@ -281,9 +281,7 @@ internal object NeuroLanguages {
                     if (c in OTHER_CYRILLIC_LETTERS) otherCyrillic = true
                 }
 
-                else -> {
-                    Unit
-                }
+                else -> {}
             }
         }
 

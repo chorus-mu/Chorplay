@@ -9,7 +9,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.StickyNote2
+import androidx.compose.material.icons.automirrored.outlined.StickyNote2
 import androidx.compose.material.icons.rounded.Folder
 import androidx.compose.material.icons.rounded.KeyboardArrowDown
 import androidx.compose.material.icons.rounded.NotificationsActive
@@ -25,8 +25,8 @@ import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.SplitButton
 import androidx.compose.material3.SplitButtonDefaults
-import androidx.compose.material3.SplitButtonLayout
 import androidx.compose.material3.Text
 import androidx.compose.material3.ToggleButton
 import androidx.compose.material3.ToggleButtonDefaults
@@ -138,7 +138,7 @@ fun ChorplaySubscribeButton(
                 Text(text = stringResource(R.string.subscribed), maxLines = 1)
             }
         } else if (isSubscribed) {
-            SplitButtonLayout(
+            SplitButton(
                 leadingButton = {
                     SplitButtonDefaults.TonalLeadingButton(
                         onClick = {
@@ -282,7 +282,7 @@ fun ChorplaySubscribeButton(
             if (onAddNote != null) {
                 DropdownMenuItem(
                     text = { Text(stringResource(R.string.note_add)) },
-                    leadingIcon = { Icon(Icons.Outlined.StickyNote2, contentDescription = null) },
+                    leadingIcon = { Icon(Icons.AutoMirrored.Outlined.StickyNote2, contentDescription = null) },
                     onClick = {
                         onAddNote()
                         menuExpanded = false

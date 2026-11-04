@@ -172,7 +172,7 @@ private fun TvRailItem(
                 Text(
                     text = label,
                     style = MaterialTheme.typography.labelLarge,
-                    color = if (selected) colors.selectedTextColor else colors.unselectedTextColor,
+                    color = if (selected) colors.selectedTextColorTopIconPosition else colors.unselectedTextColor,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
                     modifier =

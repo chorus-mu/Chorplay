@@ -123,9 +123,7 @@ fun SearchResults(
                     )
                 }
 
-                null -> {
-                    Unit
-                }
+                null -> {}
             }
         }
 

@@ -87,6 +87,7 @@ internal fun PlayerDialogsContainer(
                         ?.localConfiguration
                         ?.uri
                         ?.toString()
+                @Suppress("DEPRECATION")
                 val (videoOnlyStreams, muxedStreams) = playerManager.getCastVideoStreams().partition { it.isVideoOnly }
                 DlnaCastManager.castStreamInfo(
                     device = device,

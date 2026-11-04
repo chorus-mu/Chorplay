@@ -186,9 +186,7 @@ internal fun WellbeingScreen(
             )
         }
 
-        null -> {
-            Unit
-        }
+        null -> {}
     }
 }
 

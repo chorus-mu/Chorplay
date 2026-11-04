@@ -4,7 +4,6 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.net.Uri
 import androidx.media3.common.util.BitmapLoader
-import androidx.media3.common.util.UnstableApi
 import com.google.common.util.concurrent.ListenableFuture
 import com.google.common.util.concurrent.ListeningExecutorService
 import com.google.common.util.concurrent.MoreExecutors
@@ -17,7 +16,6 @@ import java.util.concurrent.Executors
  * which the image decoder can't read as a picture, so the notification had none; this loads a
  * frame or cover through [MediaStoreThumbnails] and leaves every other URI to [delegate].
  */
-@OptIn(UnstableApi::class)
 internal class MediaStoreArtworkBitmapLoader(
     private val context: Context,
     private val delegate: BitmapLoader,

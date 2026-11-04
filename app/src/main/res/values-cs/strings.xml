@@ -98,7 +98,6 @@
     <string name="playing_from">Hraje z</string>
     <string name="move_up">Přesunou nahoru</string>
     <string name="move_down">Posunou dolů</string>
-    <string name="lyrics_not_available">Lyrics nejsou dostupné</string>
     <string name="playing">Hraje</string>
     <string name="remove">Odstranit</string>
     <string name="related_content">Obnovit Content</string>
@@ -115,12 +114,10 @@
     <string name="local_media_empty_title">Není nalezeno</string>
     <string name="local_media_permission_body">Povolte přístup k médiím, aby Chorplay mohl vyhledávat a přehrávat místní videa a hudbu.</string>
     <string name="failed_to_save_to_library">"Nepovedlo se uložit do  knihovny"</string>
-    <string name="lyrics">karaoke</string>
     <string name="related">SOUVISEJÍCÍ</string>
     <string name="shuffle">Náhodně</string>
     <string name="loading_track">Načítání skladby...</string>
     <string name="autoplay">Auto-Přehrávání</string>
-    <string name="refresh_lyrics">Obnovit Karaoke</string>
     <string name="no_related_content">Nebyl nalezen žádný související obsah</string>
     <string name="hz">Hz</string>
     <string name="kbps">kbps</string>

@@ -60,7 +60,7 @@ constructor(
                 .intPreferencesKey("bedtime_start_minute")
         private val BEDTIME_END_HOUR =
             androidx.datastore.preferences.core
-                .intPreferencesKey("bedtime_end_hour") // Optional, mostly for UI
+                .intPreferencesKey("bedtime_end_hour")
         private val BEDTIME_END_MINUTE =
             androidx.datastore.preferences.core
                 .intPreferencesKey("bedtime_end_minute")
@@ -70,7 +70,7 @@ constructor(
                 .booleanPreferencesKey("break_reminder")
         private val BREAK_FREQUENCY =
             androidx.datastore.preferences.core
-                .intPreferencesKey("break_frequency") // Minutes
+                .intPreferencesKey("break_frequency")
 
         private val CUSTOM_THEME_COLORS = stringPreferencesKey("custom_theme_colors")
         private val CUSTOM_THEME_PALETTES = stringPreferencesKey("custom_theme_palettes_v2")
@@ -132,7 +132,6 @@ constructor(
         context.devicePreferencesDataStore.edit { it[UPDATE_NOTIFIED_VERSION] = version }
     }
 
-    // Theme Settings
     val themeMode: Flow<ThemeMode> =
         context.dataStore.data.map { prefs ->
             parseThemeMode(prefs[THEME_MODE], ThemeMode.SYSTEM)
@@ -318,7 +317,6 @@ constructor(
         }
     }
 
-    // Watch History
     val watchHistory: Flow<List<Video>> =
         context.dataStore.data.map { prefs ->
             val json = prefs[WATCH_HISTORY] ?: "[]"
@@ -350,7 +348,6 @@ constructor(
         }
     }
 
-    // Liked Videos
     val likedVideos: Flow<List<Video>> =
         context.dataStore.data.map { prefs ->
             val json = prefs[LIKED_VIDEOS] ?: "[]"
@@ -374,7 +371,6 @@ constructor(
         }
     }
 
-    // Playlists
     val playlists: Flow<List<Playlist>> =
         context.dataStore.data.map { prefs ->
             val json = prefs[PLAYLISTS] ?: "[]"
@@ -433,7 +429,6 @@ constructor(
         }
     }
 
-    // Search History
     val searchHistory: Flow<List<String>> =
         context.dataStore.data.map { prefs ->
             prefs[SEARCH_HISTORY]?.toList() ?: emptyList()
@@ -456,7 +451,6 @@ constructor(
         }
     }
 
-    // Settings
     val trendingRegion: Flow<String> =
         context.dataStore.data.map { prefs ->
             prefs[TRENDING_REGION] ?: "US"
@@ -511,7 +505,7 @@ constructor(
     }
 
     val breakFrequency: Flow<Int> =
-        context.dataStore.data.map { prefs -> prefs[BREAK_FREQUENCY] ?: 30 } // Default 30 min
+        context.dataStore.data.map { prefs -> prefs[BREAK_FREQUENCY] ?: 30 }
 
     suspend fun setBreakFrequency(minutes: Int) {
         context.dataStore.edit { prefs ->

@@ -91,7 +91,6 @@
     <string name="failed_to_save_to_library">පුස්තකාලයට සුරැකීමට අසමත් විය</string>
     <string name="open">විවෘත</string>
     <string name="up_next">ඊළඟට</string>
-    <string name="lyrics">ගී පද</string>
     <string name="related">අදාළ</string>
     <string name="close">වසන්න</string>
     <string name="more_options">තවත් විකල්ප</string>
@@ -109,8 +108,6 @@
     <string name="autoplay">ස්වයං ධාවනය</string>
     <string name="move_up">ඉහළට යවන්න</string>
     <string name="move_down">පහළට යවන්න</string>
-    <string name="lyrics_not_available">පද රචනා නොමැත</string>
-    <string name="refresh_lyrics">පද රචනා නැවුම් කරන්න</string>
     <string name="playing">ධාවනය වෙමින්</string>
     <string name="remove">ඉවත් කරන්න</string>
     <string name="related_content">අදාළ අන්තර්ගතය</string>

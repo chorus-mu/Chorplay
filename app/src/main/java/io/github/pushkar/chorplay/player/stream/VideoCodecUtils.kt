@@ -98,7 +98,7 @@ object VideoCodecUtils {
     fun codecKeyFromStream(stream: VideoStream): String {
         val url =
             try {
-                stream.content.takeIf { it.isNotBlank() } ?: stream.url ?: ""
+                stream.content.orEmpty()
             } catch (_: Exception) {
                 ""
             }
@@ -164,6 +164,7 @@ object VideoCodecUtils {
         fallbackHeight: Int,
     ): Int = normalizeQualityHeight(parseQualityHeight(qualityLabel) ?: fallbackHeight)
 
+    @Suppress("DEPRECATION")
     fun qualityHeightFromStream(stream: VideoStream): Int {
         parseQualityHeight(stream.resolution)?.let { return it }
         parseQualityHeight(stream.quality)?.let { return it }
@@ -171,6 +172,7 @@ object VideoCodecUtils {
         return normalizeQualityHeight(stream.height)
     }
 
+    @Suppress("DEPRECATION")
     fun frameRateFromStream(stream: VideoStream): Int {
         if (stream.fps > 0) return stream.fps
         // A stream built without ItagItem metadata carries the frame rate only inside its label.

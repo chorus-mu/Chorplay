@@ -16,10 +16,6 @@ import kotlinx.serialization.json.decodeFromJsonElement
 import kotlinx.serialization.json.encodeToJsonElement
 import kotlin.math.roundToInt
 
-/**
- * Chorplay Desktop's `ThemeColors`, field for field. Colours are `#rrggbb`, or a `color-mix(in srgb, …)`
- * expression, which is how desktop stores the derived surface steps of a theme cloned from a preset.
- */
 @Serializable
 data class DesktopThemeColors(
     val primary: String,
@@ -37,7 +33,6 @@ data class DesktopThemeColors(
     val error: String,
 )
 
-/** Chorplay Desktop's `CustomThemeDefinition`: the shape both apps store, export and import. */
 @Serializable
 data class DesktopCustomTheme(
     val id: String,
@@ -46,11 +41,6 @@ data class DesktopCustomTheme(
     val variants: Map<String, DesktopThemeColors> = emptyMap(),
 )
 
-/**
- * Reads and writes custom themes in Chorplay Desktop's format, so a theme exported from either app
- * imports into the other. Validation matches desktop's `parseCustomThemes`: an id starting with
- * `custom-`, a name of 1 to 48 characters, `custom: true`, and every role in all three styles.
- */
 object CustomThemeCodec {
     private val json =
         Json {
@@ -66,7 +56,6 @@ object CustomThemeCodec {
 
     fun encodeOne(theme: CustomTheme): String = json.encodeToString(DesktopCustomTheme.serializer(), theme.toDesktop())
 
-    /** The valid themes in [raw], which may hold one theme or a list of them; at most [CustomTheme.MAX_COUNT]. */
     fun decode(raw: String?): List<CustomTheme> {
         if (raw.isNullOrBlank()) return emptyList()
         val element = runCatching { json.parseToJsonElement(raw) }.getOrNull() ?: return emptyList()
@@ -140,11 +129,6 @@ private val HexColor = Regex("""^#([0-9a-fA-F]{6})$""")
 private val ColorMix = Regex("""^color-mix\(\s*in\s+srgb\s*,\s*(.+?)\s*,\s*(.+?)\s*\)$""", RegexOption.IGNORE_CASE)
 private val MixStop = Regex("""^(.+?)(?:\s+(\d+(?:\.\d+)?)%)?$""")
 
-/**
- * A colour as Chorplay Desktop writes one: `#rrggbb`, or `color-mix(in srgb, A p%, B)` with the
- * percentage on either side, as CSS allows, where a stop may be `transparent`. Anything else is
- * rejected, as desktop rejects it.
- */
 internal fun parseThemeColor(value: String): Color? {
     val text = value.trim()
     HexColor.matchEntire(text)?.let { return Color(0xFF000000 or it.groupValues[1].toLong(16)) }
@@ -174,11 +158,6 @@ private const val OPAQUE_ALPHA = 0xFF
 private const val TENTHS_PER_UNIT = 1000f
 private const val TENTHS_PER_PERCENT = 10
 
-/**
- * `#rrggbb`, or for a translucent colour `color-mix(in srgb, #rrggbb N%, transparent)`, which Chorplay
- * Desktop accepts and CSS draws at N % opacity. N keeps one decimal so every alpha step survives
- * a round trip, and never reaches 0 so a fully transparent colour keeps its hue.
- */
 internal fun Color.toThemeColor(): String {
     val argb = toArgb()
     val hex = "#%06x".format(argb and 0xFFFFFF)
@@ -196,11 +175,6 @@ internal fun Color.toThemeColor(): String {
     return "color-mix(in srgb, $hex $percent%, $TRANSPARENT)"
 }
 
-/**
- * The single custom palette older versions kept per style, keyed by Material role name, turned into
- * a named theme. The thirteen roles both apps share carry over; the divider colour older versions
- * called OUTLINE_VARIANT is what desktop calls outline. Anything missing falls back to Chorplay Default.
- */
 internal fun legacyCustomTheme(
     stored: Map<ThemeVariant, Map<String, Long>>,
     id: String,
@@ -251,7 +225,6 @@ private data class LegacyStoredPalette(
     val values: Map<String, Long> = emptyMap(),
 )
 
-/** Roles in the comma-separated form the first custom theme editor wrote, dark style only. */
 private val LegacyCsvRoles =
     listOf(
         "PRIMARY",
@@ -274,11 +247,6 @@ private val LegacyCsvRoles =
 
 private val legacyJson = Json { ignoreUnknownKeys = true }
 
-/**
- * The roles an older version stored for its one custom palette: the per-style JSON of
- * `custom_theme_palettes_v2`, or the older comma-separated `custom_theme_colors`. Null when neither
- * holds anything, so a user who never made a custom theme gets none.
- */
 internal fun decodeLegacyCustomPalettes(
     raw: String?,
     legacyCsv: String?,

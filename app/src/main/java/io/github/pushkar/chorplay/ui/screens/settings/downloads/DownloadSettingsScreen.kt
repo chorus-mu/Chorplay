@@ -326,9 +326,7 @@ internal fun DownloadSettingsScreen(
             )
         }
 
-        null -> {
-            Unit
-        }
+        null -> {}
     }
 }
 

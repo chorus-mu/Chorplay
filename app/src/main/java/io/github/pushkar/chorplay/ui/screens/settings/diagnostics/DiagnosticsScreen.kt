@@ -221,9 +221,7 @@ internal fun DiagnosticsScreen(
             )
         }
 
-        null -> {
-            Unit
-        }
+        null -> {}
     }
 
     profileToDelete?.let { profile ->

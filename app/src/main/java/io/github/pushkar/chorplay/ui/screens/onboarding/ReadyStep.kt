@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Interests
-import androidx.compose.material.icons.outlined.LibraryMusic
 import androidx.compose.material.icons.outlined.MoveToInbox
 import androidx.compose.material.icons.outlined.Subscriptions
 import androidx.compose.material3.Icon
@@ -42,7 +41,6 @@ private val PortraitOrbit =
 @Composable
 internal fun ReadyStep(
     state: OnboardingUiState,
-    artistCount: Int,
     hero: HeroSlot,
     onEdit: (OnboardingStep) -> Unit,
     contentPadding: PaddingValues,
@@ -84,12 +82,6 @@ internal fun ReadyStep(
                 text = pluralStringResource(R.plurals.onboarding_ready_channels, state.subscribed.size, state.subscribed.size),
                 icon = Icons.Outlined.Subscriptions,
             ) { onEdit(OnboardingStep.CHANNELS) }
-            if (artistCount > 0) {
-                SummaryChip(
-                    text = pluralStringResource(R.plurals.onboarding_ready_artists, artistCount, artistCount),
-                    icon = Icons.Outlined.LibraryMusic,
-                ) { onEdit(OnboardingStep.ARTISTS) }
-            }
             if (state.importedSources.isNotEmpty()) {
                 SummaryChip(
                     text = pluralStringResource(R.plurals.onboarding_ready_imports, state.importedSources.size, state.importedSources.size),

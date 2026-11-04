@@ -45,22 +45,28 @@ internal fun <T> linkedQueue(
 internal suspend fun findLinkedVideoQueue(
     firstPage: RemotePlaylistPage,
     videoId: String,
-    fetchNext: suspend (String) -> RemotePlaylistPage?,
+    fetchNext: suspend (String) -> Pair<List<Video>, String?>?,
 ): LinkedQueue<Video>? {
     val accumulated = ArrayList<Video>(firstPage.videos)
     var targetIndex = accumulated.indexOfFirst { it.id == videoId }
     if (targetIndex >= 0) return LinkedQueue(accumulated, targetIndex, firstPage.title)
 
-    walkPlaylistPages(firstPage.continuationToken, fetchNext) { page ->
-        val startOffset = accumulated.size
-        accumulated.addAll(page.videos)
-        val found = page.videos.indexOfFirst { it.id == videoId }
-        if (found >= 0) {
-            targetIndex = startOffset + found
-            return@walkPlaylistPages false
-        }
-        true
-    }
+    walkPlaylistPages(
+        firstVideos = firstPage.videos,
+        firstToken = firstPage.continuation,
+        maxPages = YouTubePlaylistRepository.PAGE_LIMIT,
+        nextPage = fetchNext,
+        keepGoing = { currentVideos ->
+            targetIndex = currentVideos.indexOfFirst { it.id == videoId }
+            if (targetIndex >= 0) {
+                accumulated.clear()
+                accumulated.addAll(currentVideos)
+                false
+            } else {
+                true
+            }
+        },
+    )
 
     return if (targetIndex >= 0) LinkedQueue(accumulated, targetIndex, firstPage.title) else null
 }

@@ -5,13 +5,6 @@ import kotlinx.serialization.builtins.MapSerializer
 import kotlinx.serialization.builtins.serializer
 import kotlinx.serialization.json.Json
 
-/**
- * Turns the settings the first equalizer stored (a profile name, a bass boost level, the live
- * "Custom" curve and a map of named presets) into an [EqState].
- *
- * The old processor ignored shelf Q and ran low and high pass as peaks, so migrated bands are
- * rewritten to what was actually heard: shelves at the Butterworth Q, pass filters as peaks.
- */
 object EqLegacyMigration {
     const val LEGACY_CUSTOM_PROFILE = "Custom"
 

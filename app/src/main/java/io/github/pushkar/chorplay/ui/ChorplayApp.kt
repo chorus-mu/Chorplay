@@ -19,7 +19,7 @@ import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.media3.common.util.UnstableApi
 import androidx.navigation.compose.NavHost
@@ -85,11 +85,11 @@ fun ChorplayApp(
     onStartDestinationKnown: () -> Unit = {},
 ) {
     val context = LocalContext.current
-    val activity = context as? androidx.activity.ComponentActivity
+    val activity = context as androidx.activity.ComponentActivity
     val navController = rememberNavController()
     val snackbarHostState = remember { androidx.compose.material3.SnackbarHostState() }
 
-    val playerViewModel: VideoPlayerViewModel = hiltViewModel(activity!!)
+    val playerViewModel: VideoPlayerViewModel = hiltViewModel(activity)
     // Activity-scoped so the unread badge has exactly one collector for the whole shell.
     val notificationViewModel: NotificationViewModel = hiltViewModel(activity)
     val equalizerViewModel: EqualizerViewModel = hiltViewModel(activity)
@@ -141,7 +141,7 @@ fun ChorplayApp(
     LaunchedEffect(Unit) {
         PendingSlice.await()
         DeepChorplayManager.initialize(context)
-        val bypass = activity?.intent?.getBooleanExtra(MainActivity.EXTRA_BENCHMARK_BYPASS_ONBOARDING, false) == true
+        val bypass = activity.intent?.getBooleanExtra(MainActivity.EXTRA_BENCHMARK_BYPASS_ONBOARDING, false) == true
         needsOnboarding =
             when {
                 bypass || preferences.onboardingDone.first() -> {
@@ -389,7 +389,7 @@ fun ChorplayApp(
                             .nestedScroll(navScrollState.nestedScrollConnection),
                 ) {
                     if (needsOnboarding != null) {
-                        val homeViewModel: HomeViewModel = hiltViewModel(activity!!)
+                        val homeViewModel: HomeViewModel = hiltViewModel(activity)
                         LaunchedEffect(homeViewModel) {
                             homeViewModel.initialize(context.applicationContext)
                         }

@@ -101,9 +101,7 @@ internal fun JsonElement.gridItemLists(): List<JsonArray> {
                 node.forEach(::collect)
             }
 
-            else -> {
-                Unit
-            }
+            else -> {}
         }
     }
 
@@ -141,9 +139,7 @@ internal fun JsonElement.findFirstRenderer(key: String): JsonElement? {
             forEach { child -> child.findFirstRenderer(key)?.let { return it } }
         }
 
-        else -> {
-            Unit
-        }
+        else -> {}
     }
     return null
 }

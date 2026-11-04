@@ -83,12 +83,13 @@ internal class NeuroCoWatchStore(
     )
 
     private object CoWatchSerializer : Serializer<CoWatchIndex> {
+        private val json = Json { ignoreUnknownKeys = true }
         override val defaultValue: CoWatchIndex = CoWatchIndex()
 
         override suspend fun readFrom(input: InputStream): CoWatchIndex =
             try {
                 val text = input.bufferedReader().readText()
-                if (text.isBlank()) defaultValue else Json { ignoreUnknownKeys = true }.decodeFromString<CoWatchIndex>(
+                if (text.isBlank()) defaultValue else json.decodeFromString<CoWatchIndex>(
                     text
                 )
             } catch (e: Exception) {
@@ -100,7 +101,7 @@ internal class NeuroCoWatchStore(
             t: CoWatchIndex,
             output: OutputStream,
         ) {
-            output.write(Json.encodeToString(t).toByteArray())
+            output.write(json.encodeToString(t).toByteArray())
         }
     }
 

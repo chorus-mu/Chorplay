@@ -10,9 +10,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.outlined.StickyNote2
 import androidx.compose.material.icons.outlined.EditNote
 import androidx.compose.material.icons.outlined.MoreTime
-import androidx.compose.material.icons.outlined.StickyNote2
 import androidx.compose.material3.AssistChip
 import androidx.compose.material3.AssistChipDefaults
 import androidx.compose.material3.Button
@@ -90,7 +90,7 @@ fun ChorplayNoteCard(
         ) {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Icon(
-                    imageVector = Icons.Outlined.StickyNote2,
+                    imageVector = Icons.AutoMirrored.Outlined.StickyNote2,
                     contentDescription = null,
                     modifier = Modifier.size(16.dp),
                 )
@@ -174,7 +174,7 @@ fun ChorplayNoteEditorDialog(
         onDismissRequest = onDismiss,
         icon = {
             Icon(
-                imageVector = Icons.Outlined.StickyNote2,
+                imageVector = Icons.AutoMirrored.Outlined.StickyNote2,
                 contentDescription = null,
                 tint = MaterialTheme.colorScheme.primary,
             )

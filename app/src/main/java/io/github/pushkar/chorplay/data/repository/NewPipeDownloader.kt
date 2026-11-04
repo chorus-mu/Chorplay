@@ -3,6 +3,7 @@ package io.github.pushkar.chorplay.data.repository
 import android.content.Context
 import io.github.pushkar.chorplay.network.AppProxyManager
 import okhttp3.OkHttpClient
+import okhttp3.RequestBody.Companion.toRequestBody
 import org.schabi.newpipe.extractor.downloader.Downloader
 import org.schabi.newpipe.extractor.downloader.Request
 import org.schabi.newpipe.extractor.downloader.Response
@@ -75,11 +76,7 @@ class NewPipeDownloader private constructor(context: Context) : Downloader() {
 
         // Set method and body
         if (httpMethod == "POST") {
-            val body = if (dataToSend != null) {
-                okhttp3.RequestBody.create(null, dataToSend)
-            } else {
-                okhttp3.RequestBody.create(null, ByteArray(0))
-            }
+            val body = (dataToSend ?: ByteArray(0)).toRequestBody(null)
             builder.post(body)
         } else {
             builder.get()
@@ -90,7 +87,7 @@ class NewPipeDownloader private constructor(context: Context) : Downloader() {
                 throw ReCaptchaException("reCaptcha Challenge requested", url)
             }
 
-            val responseString = response.body?.string() ?: ""
+            val responseString = response.body.string()
             val responseHeaders = response.headers.toMultimap()
 
             Response(

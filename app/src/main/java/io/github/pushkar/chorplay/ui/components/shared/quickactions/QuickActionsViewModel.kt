@@ -290,9 +290,7 @@ class QuickActionsViewModel
                             likedMedia.restore(undo.likes)
                         }
 
-                        is QuickActionUndo.RestoreFromTrash -> {
-                            Unit
-                        }
+                        is QuickActionUndo.RestoreFromTrash -> {}
 
                         is QuickActionUndo.QueueRemoval -> {
                             playerManager.get().restoreRemovedVideo(undo.entry)

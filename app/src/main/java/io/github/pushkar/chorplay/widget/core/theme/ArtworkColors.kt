@@ -6,7 +6,6 @@ import androidx.compose.material3.darkColorScheme
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.luminance
 import androidx.glance.color.ColorProviders
-import io.github.pushkar.chorplay.data.local.MusicPlayerBackgroundStyle
 import io.github.pushkar.chorplay.ui.components.shared.MediaPalette
 import io.github.pushkar.chorplay.ui.components.shared.mediaPaletteOf
 import io.github.pushkar.chorplay.widget.core.image.WidgetImageLoader
@@ -14,10 +13,10 @@ import io.github.pushkar.chorplay.widget.core.image.WidgetImageLoader
 internal suspend fun artworkColorProviders(
     context: Context,
     artworkUrl: String?,
-    style: MusicPlayerBackgroundStyle,
+    enabled: Boolean = true,
     appColors: ColorProviders,
 ): ColorProviders? {
-    if (style == MusicPlayerBackgroundStyle.DEFAULT) return null
+    if (!enabled) return null
     val bitmap = WidgetImageLoader.load(context, artworkUrl, PALETTE_SAMPLE_PX) ?: return null
     val palette = mediaPaletteOf(bitmap, appColors.surface.getColor(context), appColors.primary.getColor(context))
     val scheme = paletteColorScheme(palette, appColors.error.getColor(context))

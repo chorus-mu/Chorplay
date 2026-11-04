@@ -103,8 +103,6 @@
     <string name="save_to">Сачувај...</string>
     <string name="watch_later">Гледај касније</string>
     <string name="watch_later_unsave">Оповргни гледај касније</string>
-    <string name="playlist_private">Приватно</string>
-    <string name="playlist_public">Јавно</string>
     <string name="create_new_playlist">Прави нову плејлисту</string>
     <string name="playlist_name">Име</string>
     <string name="playlist_description_optional">Опис (опционо)</string>

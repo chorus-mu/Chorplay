@@ -12,7 +12,6 @@ import io.github.pushkar.chorplay.data.local.PlayerPreferences
 import io.github.pushkar.chorplay.data.local.PlayerRelatedCardStyle
 import io.github.pushkar.chorplay.data.local.SpeedSwipeSide
 import io.github.pushkar.chorplay.player.stream.CaptionTrackResolver
-import io.github.pushkar.chorplay.service.HeadphoneResume
 import io.github.pushkar.chorplay.ui.screens.settings.SettingsViewModel
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map
@@ -101,10 +100,7 @@ constructor(
 
     fun setKeepPlayingAfterSwipe(value: Boolean) = write { preferences.setKeepPlayingAfterSwipe(value) }
 
-    fun setResumeFromHeadphones(value: Boolean) {
-        if (!value) HeadphoneResume.set(context, allowed = false)
-        write { preferences.setResumeFromHeadphones(value) }
-    }
+    fun setResumeFromHeadphones(value: Boolean) = write { preferences.setResumeFromHeadphones(value) }
 
     fun setStartPaused(value: Boolean) = write { preferences.setStartVideosPaused(value) }
 

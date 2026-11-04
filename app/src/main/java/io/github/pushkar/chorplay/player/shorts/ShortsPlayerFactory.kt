@@ -74,6 +74,7 @@ internal object ShortsPlayerFactory {
                 context,
                 AdaptiveTrackSelection.Factory(),
             ).apply {
+                @Suppress("DEPRECATION")
                 val builder =
                     buildUponParameters()
                         .setPreferredVideoMimeTypes(*PlayerConfig.PREFERRED_VIDEO_MIME_TYPES)
@@ -92,6 +93,7 @@ internal object ShortsPlayerFactory {
         // One processor per pooled player: they are all live at once and each keeps its own filter history.
         val renderersFactory =
             object : DefaultRenderersFactory(context) {
+                @Suppress("DEPRECATION")
                 override fun buildAudioSink(
                     context: Context,
                     enableFloatOutput: Boolean,

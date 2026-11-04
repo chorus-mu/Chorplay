@@ -4,11 +4,7 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 
-/**
- * Lightweight singleton event bus for feed-visible state changes.
- * Emitted by QuickActionsViewModel, observed by HomeViewModel / ShortsViewModel
- * to instantly strip blocked/disliked content from the cached feed.
- */
+
 object FeedInvalidationBus {
     sealed class Event {
         data class ChannelBlocked(

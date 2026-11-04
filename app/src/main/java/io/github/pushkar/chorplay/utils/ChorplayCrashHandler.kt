@@ -101,6 +101,7 @@ class ChorplayCrashHandler private constructor(
         }
     }
     
+    @Suppress("DEPRECATION")
     override fun uncaughtException(thread: Thread, throwable: Throwable) {
         try {
             // Log to logcat
@@ -162,6 +163,7 @@ class ChorplayCrashHandler private constructor(
         return sw.toString()
     }
 
+    @Suppress("DEPRECATION")
     private fun buildCrashReport(
         thread: Thread,
         throwable: Throwable,

@@ -60,9 +60,7 @@ internal fun TvOverlayFocusEffect(
                 transportTarget().requestFocus()
             }
 
-            TvOverlayMode.PANEL -> {
-                Unit
-            }
+            TvOverlayMode.PANEL -> {}
         }
     }
 }

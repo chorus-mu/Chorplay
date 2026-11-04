@@ -18,12 +18,6 @@ import java.io.ByteArrayOutputStream
 import java.io.File
 import java.util.concurrent.TimeUnit
 
-/**
- * Covers the platform reader misses. `MediaMetadataRetriever` (and so MediaStore's own thumbnail)
- * drops an Ogg or FLAC picture block unless it is typed as the front cover and its base64 is clean,
- * which many taggers don't do; Media3's parser takes either. Failing that, a cover image saved in the
- * song's folder. Each file is looked at once: the result, found or not, is kept until it changes.
- */
 @OptIn(UnstableApi::class)
 internal object LocalCovers {
     fun find(
@@ -35,7 +29,7 @@ internal object LocalCovers {
         val missing = File(cached.path + MISSING_SUFFIX)
         if (cached.isFile) return runCatching { cached.readBytes() }.getOrNull()
         if (missing.isFile) return null
-        // A read that failed or timed out says nothing about the file, so only a completed one is kept.
+
         val entries = media3Entries(context, uri)
         val cover = entries?.coverPicture() ?: file.path?.let(::folderCover)
         runCatching {
@@ -59,7 +53,6 @@ internal object LocalCovers {
             }
         }.getOrNull()
 
-    /** Readable only with access to images, which on Android 13 and later means All files access. */
     private fun folderCover(audioPath: String): ByteArray? =
         runCatching {
             val folder = File(audioPath).parentFile ?: return null
@@ -67,7 +60,6 @@ internal object LocalCovers {
             File(folder, name).takeIf { it.length() in 1..MAX_FOLDER_COVER_BYTES }?.readBytes()
         }.getOrNull()
 
-    /** Kept covers are re-encoded at artwork size, so a 5 MB scan doesn't sit in the cache. */
     private fun ByteArray.shrunk(): ByteArray {
         if (size <= MAX_KEPT_BYTES) return this
         val bounds = BitmapFactory.Options().apply { inJustDecodeBounds = true }
@@ -93,17 +85,12 @@ internal object LocalCovers {
             contentResolver.query(uri, projection, null, null, null)?.use { cursor ->
                 if (!cursor.moveToFirst()) return@use null
                 val id = uri.lastPathSegment ?: return@use null
-                // Granting All files access can reveal a folder cover that was unreadable before.
                 val access = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R && Environment.isExternalStorageManager()) "a" else "m"
                 AudioFile(path = cursor.getString(0), cacheName = "${id}_${cursor.getLong(1)}_${cursor.getLong(2)}_$access")
             }
         }.getOrNull()
 }
 
-/**
- * The cover image among a folder's [names], by the names players and rippers use, most specific
- * first; null when the folder has none.
- */
 internal fun folderCoverName(names: List<String>): String? {
     val images = names.filter { it.substringAfterLast('.', "").lowercase() in FOLDER_COVER_EXTENSIONS }
     return FOLDER_COVER_STEMS.firstNotNullOfOrNull { stem ->

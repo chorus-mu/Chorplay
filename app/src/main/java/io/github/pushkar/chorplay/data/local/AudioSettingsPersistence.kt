@@ -9,7 +9,6 @@ import io.github.pushkar.chorplay.data.profile.StoreScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
-/** Shared with the equalizer store: one file may only ever have one DataStore instance. */
 internal val Context.audioSettingsDataStore: DataStore<Preferences> by safePreferencesDataStore(
     name = "audio_settings",
     scope = StoreScope.PROFILE_SETTINGS,

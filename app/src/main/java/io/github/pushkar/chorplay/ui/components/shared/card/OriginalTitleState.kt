@@ -23,8 +23,8 @@ fun rememberOriginalTitle(
     val titles = LocalOriginalTitles.current
     val active = enabled && titles != null && !LocalMediaIds.isLocal(videoId)
     return key(videoId, active) {
-        produceState(initialValue = if (active) titles?.cached(videoId) else null, videoId, active) {
-            if (active) value = titles?.originalTitle(videoId)
+        produceState(initialValue = if (active) titles.cached(videoId) else null, videoId, active) {
+            if (active) value = titles.originalTitle(videoId)
         }.value
     }
 }
@@ -42,8 +42,8 @@ fun rememberKnownOriginalTitle(
     val titles = LocalOriginalTitles.current
     val active = enabled && titles != null && !LocalMediaIds.isLocal(videoId)
     return key(videoId, active) {
-        produceState(initialValue = if (active) titles?.cached(videoId) else null, videoId, active) {
-            if (active) titles?.cachedUpdates(videoId)?.collect { value = it }
+        produceState(initialValue = if (active) titles.cached(videoId) else null, videoId, active) {
+            if (active) titles.cachedUpdates(videoId).collect { value = it }
         }.value
     }
 }

@@ -20,6 +20,7 @@ import org.schabi.newpipe.extractor.stream.VideoStream
  * [ManifestGenerator] describes a single stream: the progressive URL as base URL, plus its init and
  * sidx byte ranges.
  */
+@Suppress("DEPRECATION")
 @UnstableApi
 internal object AdaptiveDashManifest {
     private const val MIN_BUFFER_TIME_MS = 1_500L

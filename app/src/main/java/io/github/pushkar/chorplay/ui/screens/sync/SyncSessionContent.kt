@@ -11,10 +11,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.outlined.MergeType
 import androidx.compose.material.icons.outlined.CheckCircle
 import androidx.compose.material.icons.outlined.ErrorOutline
 import androidx.compose.material.icons.outlined.Lan
-import androidx.compose.material.icons.outlined.MergeType
 import androidx.compose.material.icons.outlined.Password
 import androidx.compose.material.icons.outlined.Shield
 import androidx.compose.material.icons.outlined.Sync
@@ -221,7 +221,7 @@ internal fun SyncConsentContent(
     onDecision: (Boolean) -> Unit,
 ) {
     SyncStepHeader(
-        icon = Icons.Outlined.MergeType,
+        icon = Icons.AutoMirrored.Outlined.MergeType,
         title = stringResource(R.string.sync_consent_title),
     )
     SyncRowGroup(count = collections.size) { index, shape ->

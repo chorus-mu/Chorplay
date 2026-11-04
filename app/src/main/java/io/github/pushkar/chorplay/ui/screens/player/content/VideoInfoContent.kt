@@ -136,7 +136,7 @@ internal fun VideoInfoContent(
         onSubscribeClick = {
             val channelThumbSafe =
                 uiState.channelAvatarUrl?.takeIf { it.isNotEmpty() }
-                    ?: video.channelThumbnailUrl?.takeIf { it.isNotEmpty() }
+                    ?: video.channelThumbnailUrl.takeIf { it.isNotEmpty() }
                     ?: ""
 
             viewModel.toggleSubscription(video.channelId, video.channelName, channelThumbSafe)
@@ -163,7 +163,7 @@ internal fun VideoInfoContent(
         onUnsubscribeClick = {
             val channelThumbSafe =
                 uiState.channelAvatarUrl?.takeIf { it.isNotEmpty() }
-                    ?: video.channelThumbnailUrl?.takeIf { it.isNotEmpty() }
+                    ?: video.channelThumbnailUrl.takeIf { it.isNotEmpty() }
                     ?: ""
             viewModel.toggleSubscription(video.channelId, video.channelName, channelThumbSafe)
             scope.launch {

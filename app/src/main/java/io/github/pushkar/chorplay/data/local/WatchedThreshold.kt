@@ -1,13 +1,4 @@
 package io.github.pushkar.chorplay.data.local
-
-/**
- * How much of a video counts as watched. [isWatched] is the only definition: every watched video
- * filter reads history rows and applies it here rather than restating it in SQL. Shorts filters use
- * `finishedShortIds` instead (#979).
- *
- * [ALMOST_FINISHED] means the last minute of a long video, and at least 90 % of a short one, so a
- * one-minute Short is not watched the moment it starts.
- */
 enum class WatchedThreshold(
     val minPercent: Float,
     val maxRemainingMs: Long,

@@ -1,25 +1,11 @@
 package io.github.pushkar.chorplay.data.local
 
-/**
- * The stored form of a subscription:
- * `id|name|thumbnail|subscribedAt|lastVideoId|lastCheckTime|notify|isMusic|lastFeedFetchAt`.
- *
- * Text fields escape `|` as `%7C`, and `%` as `%25` only where it would otherwise read as an escape,
- * so a record without either is byte-identical to what older versions wrote. An older version
- * reading an escaped record still gets all nine fields and simply shows `%7C` in the name. The
- * thumbnail is a URL, where `%7C` already means `|`, so it is written that way and read verbatim.
- *
- * Older versions wrote text unescaped and had fewer trailing fields, so [decode] also recovers
- * those rows by anchoring the id at the front and the typed fields at the back.
- */
 internal object SubscriptionRecordCodec {
     private const val SEPARATOR = '|'
     private const val ESCAPED_SEPARATOR = "%7C"
     private const val ESCAPED_PERCENT = "%25"
 
     private enum class Field { LONG, BOOLEAN, VIDEO_ID }
-
-    /** Every layout ever written, newest first, as the fields that follow name and thumbnail. */
     private val LegacyTails =
         listOf(
             listOf(Field.LONG, Field.VIDEO_ID, Field.LONG, Field.BOOLEAN, Field.BOOLEAN, Field.LONG),
@@ -55,7 +41,6 @@ internal object SubscriptionRecordCodec {
         }
     }
 
-    /** [strict] demands exact types, since a recovered row could otherwise anchor on a thumbnail. */
     private fun fits(
         parts: List<String>,
         tail: List<Field>,
@@ -93,7 +78,6 @@ internal object SubscriptionRecordCodec {
         )
     }
 
-    /** An unescaped name can hold any number of `|`; the thumbnail, a URL or empty, is the last piece. */
     private fun splitNameAndThumbnail(middle: List<String>): Pair<String, String> {
         if (middle.size <= 2) return middle.getOrElse(0) { "" } to middle.getOrElse(1) { "" }
         val urlStart = (1 until middle.size).firstOrNull { middle[it].isUrl() } ?: middle.lastIndex

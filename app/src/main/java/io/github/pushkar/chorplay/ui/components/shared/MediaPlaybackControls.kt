@@ -306,9 +306,7 @@ private fun RowScope.ElasticControlButton(
                                     up
                                 }
                             when {
-                                cancelled -> {
-                                    Unit
-                                }
+                                cancelled -> {}
 
                                 upBeforeTimeout != null -> {
                                     currentOnClick()

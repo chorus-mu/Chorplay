@@ -50,7 +50,7 @@ fun VideoThumbnailImage(
                 }
 
                 model is String || model == null -> {
-                    ThumbnailUrlResolver.resolveVideoThumbnailCandidates(videoId, model as? String, quality, portrait)
+                    ThumbnailUrlResolver.resolveVideoThumbnailCandidates(videoId, model, quality, portrait)
                 }
 
                 else -> {

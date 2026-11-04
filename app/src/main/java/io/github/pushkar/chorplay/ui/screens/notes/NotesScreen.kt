@@ -16,9 +16,9 @@ import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Checklist
 import androidx.compose.material.icons.filled.SelectAll
 import androidx.compose.material.icons.filled.SwapVert
+import androidx.compose.material.icons.automirrored.outlined.StickyNote2
 import androidx.compose.material.icons.outlined.Delete
 import androidx.compose.material.icons.outlined.Share
-import androidx.compose.material.icons.outlined.StickyNote2
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
@@ -50,7 +50,7 @@ import androidx.compose.ui.platform.LocalResources
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import io.github.pushkar.chorplay.R
 import io.github.pushkar.chorplay.data.model.Video
@@ -240,7 +240,7 @@ internal fun NotesScreen(
                             if (note == null) {
                                 ChorplayEmptyState(
                                     title = stringResource(R.string.notes_pick_title),
-                                    icon = Icons.Outlined.StickyNote2,
+                                    icon = Icons.AutoMirrored.Outlined.StickyNote2,
                                     modifier = paneModifier.fillMaxSize(),
                                 )
                             } else {

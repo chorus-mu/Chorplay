@@ -2031,7 +2031,6 @@ class PlayerPreferences(
         }
     }
 
-    // Custom playback speeds
     val customSpeedsEnabled: Flow<Boolean> =
         context.playerPreferencesDataStore.data
             .map { preferences ->
@@ -2109,7 +2108,6 @@ class PlayerPreferences(
         }
     }
 
-    // Subscriptions feed view mode
     val subsFullWidthView: Flow<Boolean> =
         context.playerPreferencesDataStore.data
             .map { preferences ->
@@ -2315,7 +2313,6 @@ class PlayerPreferences(
         }
     }
 
-    // PiP Preferences
     val autoPipEnabled: Flow<Boolean> =
         context.playerPreferencesDataStore.data
             .map { preferences ->
@@ -2340,7 +2337,6 @@ class PlayerPreferences(
         }
     }
 
-    // Content filtering
     val hideWatchedVideosFromHome: Flow<Boolean> =
         context.playerPreferencesDataStore.data
             .map { preferences ->
@@ -2645,16 +2641,6 @@ class PlayerPreferences(
         }
     }
 
-    val mediaCacheSizeMb: Flow<Int> =
-        context.devicePreferencesDataStore.data
-            .map { preferences -> preferences[DeviceKeys.MEDIA_CACHE_SIZE_MB] ?: MediaCacheSizes.DEFAULT_MEDIA_MB }
-
-    suspend fun setMediaCacheSizeMb(sizeMb: Int) {
-        context.devicePreferencesDataStore.edit { preferences ->
-            preferences[DeviceKeys.MEDIA_CACHE_SIZE_MB] = sizeMb
-        }
-    }
-
     val artworkCacheSizeMb: Flow<Int> =
         context.devicePreferencesDataStore.data
             .map { preferences ->
@@ -2842,7 +2828,6 @@ class PlayerPreferences(
         }
     }
 
-    // Download Preferences
     val downloadThreads: Flow<Int> =
         context.devicePreferencesDataStore.data
             .map { preferences ->
@@ -3168,7 +3153,6 @@ class PlayerPreferences(
         }
     }
 
-    // Return YouTube Dislikes
     val rytdEnabled: Flow<Boolean> =
         context.playerPreferencesDataStore.data
             .map { preferences ->
@@ -3181,7 +3165,6 @@ class PlayerPreferences(
         }
     }
 
-    // Surface timeout
     val surfaceReadyTimeoutMs: Flow<Long> =
         context.devicePreferencesDataStore.data
             .map { preferences ->
@@ -3358,7 +3341,6 @@ class PlayerPreferences(
         }
     }
 
-    // AUTO-BACKUP SETTINGS
     val autoBackupFrequency: Flow<LocalDataManager.AutoBackupFrequency> =
         context.devicePreferencesDataStore.data
             .map { preferences ->

@@ -91,6 +91,7 @@ fun Modifier.thumbnailGradientOverlay(
  *
  * Usage: `sheetState = rememberChorSheetState()`
  */
+@Suppress("DEPRECATION")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun rememberChorSheetState(skipPartiallyExpanded: Boolean = true): SheetState =

@@ -8,11 +8,6 @@ import kotlin.math.pow
 import kotlin.math.sin
 import kotlin.math.sqrt
 
-/**
- * Biquad design from Robert Bristow-Johnson's Audio EQ Cookbook, in the Q form EqualizerAPO and
- * AutoEQ use for every type, shelves included. The processor, the response curve and auto preamp all
- * read these coefficients, so what is drawn is what is heard.
- */
 object EqFilterMath {
     const val COEFFICIENTS_PER_SECTION = 5
     const val REFERENCE_SAMPLE_RATE = 48_000
@@ -20,13 +15,11 @@ object EqFilterMath {
     private const val NYQUIST_MARGIN = 0.49
     private const val RESPONSE_POINTS = 256
 
-    /** A band that would not change the signal, or that sits above what [sampleRate] can carry. */
     fun isBypassed(
         band: EqBand,
         sampleRate: Int,
     ): Boolean = !band.enabled || (band.type.hasGain && band.gain == 0.0) || band.frequency >= sampleRate * NYQUIST_MARGIN
 
-    /** Writes b0, b1, b2, a1, a2 (normalised by a0) for [band] into [out] at [offset]. */
     fun design(
         band: EqBand,
         sampleRate: Int,
@@ -98,7 +91,6 @@ object EqFilterMath {
         out[offset + 4] = a2 / a0
     }
 
-    /** The level, in dB, the active bands of [bands] apply at [frequency], without preamp. */
     fun magnitudeDb(
         bands: List<EqBand>,
         frequency: Double,
@@ -123,7 +115,6 @@ object EqFilterMath {
         return total
     }
 
-    /** The highest level the curve reaches between 20 Hz and 20 kHz, without preamp. */
     fun peakDb(bands: List<EqBand>): Double {
         if (bands.none { !isBypassed(it, REFERENCE_SAMPLE_RATE) }) return 0.0
         var peak = Double.NEGATIVE_INFINITY
@@ -133,13 +124,11 @@ object EqFilterMath {
         return peak
     }
 
-    /** The preamp that keeps the loudest point of the curve at 0 dB, and never a boost. */
     fun autoPreampDb(bands: List<EqBand>): Double {
         val peak = peakDb(bands)
         return if (peak > 0.0) -peak else 0.0
     }
 
-    /** Position 0..1 on a log axis from 20 Hz to 20 kHz. */
     fun frequencyAt(fraction: Double): Double =
         EqLimits.MIN_FREQUENCY * (EqLimits.MAX_FREQUENCY / EqLimits.MIN_FREQUENCY).pow(fraction.coerceIn(0.0, 1.0))
 

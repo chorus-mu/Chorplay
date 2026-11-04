@@ -1,6 +1,6 @@
 package io.github.pushkar.chorplay.data.video
 
-import io.github.pushkar.chorplay.data.local.MusicAudioQuality
+import io.github.pushkar.chorplay.data.local.AudioStreamQuality
 import io.github.pushkar.chorplay.innertube.models.response.PlayerResponse.StreamingData.Format
 import io.github.pushkar.chorplay.player.stream.VideoCodecUtils
 import io.github.pushkar.chorplay.player.stream.preferNonDrc
@@ -124,7 +124,7 @@ object DownloadStreamPolicy {
     fun pickAacAudio(
         allAudio: List<Format>,
         preferredLang: String?,
-        quality: MusicAudioQuality = MusicAudioQuality.HIGH,
+        quality: AudioStreamQuality = AudioStreamQuality.HIGH,
     ): Format? {
         val aac = allAudio.filter(::isAacFormat)
         if (aac.isEmpty()) return null
@@ -140,9 +140,9 @@ object DownloadStreamPolicy {
             }
         val candidates = inLanguage.ifEmpty { aac }
         return when (quality) {
-            MusicAudioQuality.MEDIUM -> candidates.minByOrNull { abs(audioBitrate(it) - MEDIUM_BITRATE) }
-            MusicAudioQuality.LOW -> candidates.minByOrNull(::audioBitrate)
-            MusicAudioQuality.HIGH, MusicAudioQuality.AUTO -> candidates.maxByOrNull(::audioBitrate)
+            AudioStreamQuality.MEDIUM -> candidates.minByOrNull { abs(audioBitrate(it) - MEDIUM_BITRATE) }
+            AudioStreamQuality.LOW -> candidates.minByOrNull(::audioBitrate)
+            AudioStreamQuality.HIGH, AudioStreamQuality.AUTO -> candidates.maxByOrNull(::audioBitrate)
         }
     }
 

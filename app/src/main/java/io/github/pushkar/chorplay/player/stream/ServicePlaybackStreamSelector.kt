@@ -12,6 +12,7 @@ import kotlin.math.abs
  *
  */
 object ServicePlaybackStreamSelector {
+    @Suppress("DEPRECATION")
     fun selectStreams(
         videoCandidates: List<VideoStream>,
         audioCandidatesAll: List<AudioStream>,
@@ -21,7 +22,7 @@ object ServicePlaybackStreamSelector {
     ): Pair<VideoStream?, AudioStream?> {
         val audioStream =
             AudioStreamSelector.selectPreferredAudioStream(
-                streams = audioCandidatesAll.distinctBy { it.url ?: it.content },
+                streams = audioCandidatesAll.distinctBy { it.content },
                 preferredAudioLanguage = preferredAudioLanguage,
             )
 

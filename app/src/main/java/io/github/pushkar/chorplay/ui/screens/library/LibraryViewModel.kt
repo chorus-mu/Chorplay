@@ -140,9 +140,7 @@ constructor(
         shortsContentFilter.enabled
             .stateIn(viewModelScope, sharing, true)
 
-    internal val separatePlaylistKinds =
-        playerPreferences.separatePlaylistKinds
-            .stateIn(viewModelScope, sharing, false)
+    internal val separatePlaylistKinds = MutableStateFlow(false)
 
     internal val hiddenSections: StateFlow<Set<LibrarySection>?> =
         playerPreferences.hiddenLibrarySections

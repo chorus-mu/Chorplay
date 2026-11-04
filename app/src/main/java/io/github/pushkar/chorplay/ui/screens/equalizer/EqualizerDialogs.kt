@@ -103,9 +103,7 @@ internal fun EqualizerDialogs(
             )
         }
 
-        null -> {
-            Unit
-        }
+        null -> {}
     }
     importPreview?.let { ImportPreviewDialog(preview = it, viewModel = viewModel) }
 }

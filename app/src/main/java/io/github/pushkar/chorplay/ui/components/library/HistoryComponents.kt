@@ -165,7 +165,6 @@ internal fun HistoryList(
         remember(entries) {
             entries.groupBy { historySectionKey(it.timestamp) }
         }
-        }
     val today = remember(entries) { startOfDay(System.currentTimeMillis()) }
     val listState = rememberLazyListState()
 

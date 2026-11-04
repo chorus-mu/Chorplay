@@ -8,7 +8,7 @@ import io.github.pushkar.chorplay.data.playlist.PlaylistImport
 internal fun PlaylistImport.message(context: Context): String =
     when (this) {
         is PlaylistImport.Imported -> {
-            val plural = if (isMusic) R.plurals.music_playlist_imported else R.plurals.playlist_imported
+            val plural = R.plurals.playlist_imported
             context.resources.getQuantityString(plural, videoCount, name, videoCount)
         }
 

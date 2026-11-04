@@ -7,10 +7,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.input.TextFieldState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.ArrowBack
+import androidx.compose.material.icons.automirrored.rounded.ViewList
 import androidx.compose.material.icons.rounded.GridView
 import androidx.compose.material.icons.rounded.Mic
 import androidx.compose.material.icons.rounded.Tune
-import androidx.compose.material.icons.rounded.ViewList
 import androidx.compose.material3.Badge
 import androidx.compose.material3.BadgedBox
 import androidx.compose.material3.Icon
@@ -98,7 +98,7 @@ fun SearchTopBarActions(
     }
     IconButton(onClick = onToggleGridMode) {
         Icon(
-            imageVector = if (isGridMode) Icons.Rounded.ViewList else Icons.Rounded.GridView,
+            imageVector = if (isGridMode) Icons.AutoMirrored.Rounded.ViewList else Icons.Rounded.GridView,
             contentDescription = stringResource(R.string.search_toggle_view_mode),
         )
     }

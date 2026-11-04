@@ -51,9 +51,7 @@ class DonationPromptViewModel
                         _visible.value = true
                     }
 
-                    DonationDecision.WAIT -> {
-                        Unit
-                    }
+                    DonationDecision.WAIT -> {}
                 }
             }
         }

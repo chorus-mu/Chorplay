@@ -81,8 +81,6 @@ class MainActivity : ComponentActivity() {
     @Inject
     lateinit var widgetContentSync: dagger.Lazy<io.github.pushkar.chorplay.widget.core.refresh.WidgetContentSync>
 
-    @Inject
-
     private val incomingIntents by lazy { IncomingIntents(this, links, playlistTransfer) }
 
     private val splashController = SplashController(this)
@@ -146,7 +144,9 @@ class MainActivity : ComponentActivity() {
                 ),
         )
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            @Suppress("DEPRECATION")
             window.isNavigationBarContrastEnforced = false
+            @Suppress("DEPRECATION")
             window.isStatusBarContrastEnforced = false
             window.decorView.isForceDarkAllowed = false
         }

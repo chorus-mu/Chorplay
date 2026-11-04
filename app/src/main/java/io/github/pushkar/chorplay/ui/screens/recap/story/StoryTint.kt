@@ -45,18 +45,11 @@ internal fun rememberStoryTints(
                 .firstOrNull()
                 ?.imageUrl,
         )
-    val artist =
-        artworkTint(
-            summary.music.topArtists
-                .firstOrNull()
-                ?.imageUrl,
-        )
     return pages.mapIndexed { index, page ->
         when (page) {
             is StoryPage.TopChannel -> channel
             is StoryPage.OnRepeat -> video
-            is StoryPage.TopArtist, StoryPage.Songs -> artist
-            StoryPage.Summary -> if (summary.music.topArtists.isNotEmpty() && summary.video.topChannels.isEmpty()) artist else channel
+            StoryPage.Summary -> channel
             else -> null
         } ?: roles[index % roles.size]
     }

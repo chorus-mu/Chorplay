@@ -63,7 +63,6 @@ internal fun StoryShareCard(
     modifier: Modifier = Modifier,
 ) {
     val channel = summary.video.topChannels.firstOrNull()
-    val artist = summary.music.topArtists.firstOrNull()
     val ground = tint.accent
     val ink = tint.container
     Box(
@@ -83,17 +82,6 @@ internal fun StoryShareCard(
             Text(periodLabel, style = MaterialTheme.typography.headlineMedium, color = ink, fontWeight = FontWeight.Black)
             Row(verticalAlignment = Alignment.CenterVertically) {
                 channel?.let { ChorMorphingPortrait(it.imageUrl, it.name, PortraitSize, tint.raised, tint.onContainer) }
-                artist?.let {
-                    ChorMorphingPortrait(
-                        imageUrl = it.imageUrl,
-                        fallback = it.name,
-                        diameter = PortraitSize,
-                        accent = ink,
-                        onAccent = ground,
-                        modifier = Modifier.offset(x = if (channel != null) PortraitOverlap else 0.dp),
-                        delayIndex = 2,
-                    )
-                }
             }
             Spacer(Modifier.weight(1f))
             Column {
@@ -107,14 +95,16 @@ internal fun StoryShareCard(
             }
             Row(horizontalArrangement = Arrangement.spacedBy(TileSpacing)) {
                 Tile(summary.video.views.toString(), stringResource(R.string.recap_views), tint, Modifier.weight(1f))
-                Tile(summary.music.plays.toString(), stringResource(R.string.recap_plays), tint, Modifier.weight(1f))
+                Tile(summary.video.topChannels.size.toString(), stringResource(R.string.recap_top_channels), tint, Modifier.weight(1f))
             }
             Row(horizontalArrangement = Arrangement.spacedBy(TileSpacing)) {
                 Tile(summary.combined.activeDays.toString(), stringResource(R.string.recap_active_days), tint, Modifier.weight(1f))
                 Tile(summary.combined.longestStreak.toString(), stringResource(R.string.recap_streak), tint, Modifier.weight(1f))
             }
             NamedLine(stringResource(R.string.recap_summary_top_channel), channel?.name, ink)
-            NamedLine(stringResource(R.string.recap_summary_top_artist), artist?.name, ink)
+            summary.video.topTopics.firstOrNull()?.let {
+                NamedLine(stringResource(R.string.recap_summary_top_topic), it.name, ink)
+            }
             Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(TileSpacing)) {
                 summary.insights.firstOrNull()?.let { insight ->
                     Surface(

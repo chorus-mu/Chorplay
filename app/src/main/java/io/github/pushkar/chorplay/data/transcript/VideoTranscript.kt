@@ -139,9 +139,7 @@ object VideoTranscript {
                     result += cue
                 }
 
-                cue.text == previous.text -> {
-                    Unit
-                }
+                cue.text == previous.text -> {}
 
                 // The longer form is the finished line, but it began when the shorter one did.
                 cue.text.startsWith(previous.text) -> {
@@ -152,9 +150,7 @@ object VideoTranscript {
                         )
                 }
 
-                previous.text.startsWith(cue.text) -> {
-                    Unit
-                }
+                previous.text.startsWith(cue.text) -> {}
 
                 else -> {
                     result += cue

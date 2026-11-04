@@ -55,12 +55,13 @@ constructor(
     )
 
     private object IndexSerializer : Serializer<Index> {
+        private val json = Json { ignoreUnknownKeys = true }
         override val defaultValue: Index = Index()
 
         override suspend fun readFrom(input: InputStream): Index =
             try {
                 val text = input.bufferedReader().readText()
-                if (text.isBlank()) defaultValue else Json { ignoreUnknownKeys = true }.decodeFromString<Index>(text)
+                if (text.isBlank()) defaultValue else json.decodeFromString<Index>(text)
             } catch (e: Exception) {
                 Log.e(TAG, "Failed to read neighbour index", e)
                 defaultValue
@@ -70,7 +71,7 @@ constructor(
             t: Index,
             output: OutputStream,
         ) {
-            output.write(Json.encodeToString(t).toByteArray())
+            output.write(json.encodeToString(t).toByteArray())
         }
     }
 

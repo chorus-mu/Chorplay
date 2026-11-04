@@ -40,9 +40,7 @@ fun MediaDownloadPrompt(
     val latestOnDismiss by rememberUpdatedState(onDismiss)
 
     when {
-        style == null || askEveryTime == null -> {
-            Unit
-        }
+        style == null || askEveryTime == null -> {}
 
         askEveryTime == false -> {
             LaunchedEffect(video.id) {

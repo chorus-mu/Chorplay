@@ -91,7 +91,6 @@
     <string name="failed_to_save_to_library">Kitabxanada yadda saxlamaq mümkün olmadı</string>
     <string name="open">Aç</string>
     <string name="up_next">NÖVBƏTİ</string>
-    <string name="lyrics">MAHNI SÖZLƏRİ</string>
     <string name="related">ƏLAQƏLİ</string>
     <string name="close">Bağla</string>
     <string name="more_options">Daha çox seçim</string>
@@ -109,8 +108,6 @@
     <string name="autoplay">Avtomatik oxutma</string>
     <string name="move_up">Yuxarı daşı</string>
     <string name="move_down">Aşağı daşı</string>
-    <string name="lyrics_not_available">Mahnı sözləri əlçatan deyil</string>
-    <string name="refresh_lyrics">Mahnı sözlərini yenilə</string>
     <string name="playing">Oxudulur</string>
     <string name="remove">Sil</string>
     <string name="related_content">Əlaqəli məzmun</string>
@@ -166,8 +163,6 @@
     <string name="save_to">Burada yadda saxla...</string>
     <string name="watch_later">Sonra bax</string>
     <string name="watch_later_unsave">“Sonra bax”dan sil</string>
-    <string name="playlist_private">Gizli</string>
-    <string name="playlist_public">Hamıya açıq</string>
     <string name="create_new_playlist">Yeni pleylist yarat</string>
     <string name="playlist_name">Ad</string>
     <string name="playlist_description_optional">Açıqlama (istəyə bağlı)</string>
@@ -257,7 +252,6 @@
     <string name="description_copied">Açıqlama mübadilə buferinə kopyalandı</string>
     <string name="title_copied">Başlıq mübadilə buferinə kopyalandı</string>
     <string name="tags">Teqlər</string>
-    <string name="in_this_video">Bu videoda</string>
     <string name="sb_manual_skip">Keç</string>
     <string name="sb_skip_segment">%1$s seqmentini keç</string>
     <string name="ago">əvvəl</string>
@@ -283,7 +277,6 @@
     <string name="chapters">Fəsillər</string>
     <string name="artist">İfaçı</string>
     <string name="playlist">Pleylist</string>
-    <string name="playlist_visibility_metadata">%1$s • %2$s</string>
     <string name="app_name_uppercase">CHORPLAY</string>
     <string name="notification_badge_9_plus">9+</string>
     <string name="personalized_feed">Fərdiləşdirilmiş lentiniz</string>
@@ -331,14 +324,9 @@
     <string name="date_this_month">Bu ay</string>
     <string name="date_this_year">Bu il</string>
     <string name="duration_any">İstənilən müddət</string>
-    <string name="duration_under_4">4 dəqiqədən az</string>
-    <string name="duration_4_20">4–20 dəqiqə</string>
     <string name="duration_over_20">20 dəqiqədən çox</string>
     <string name="sort_relevance">Uyğunluq</string>
-    <string name="sort_upload_date">Yüklənmə tarixi</string>
     <string name="sort_view_count">Baxış sayı</string>
-    <string name="sort_rating">Reytinq</string>
-    <string name="channel_sort_latest">Ən yeni</string>
     <string name="channel_default_title">Kanal</string>
     <string name="channel_banner">Kanal banneri</string>
     <string name="channel_avatar">Kanal avatarı</string>
@@ -579,8 +567,6 @@
     <string name="settings_item_player_appearance">Pleyer görünüşü</string>
     <string name="settings_item_player_appearance_subtitle">İrəliləyiş çubuğunun üslubunu fərdiləşdirin</string>
     <string name="style_default">Defolt (Chorplay)</string>
-    <string name="style_metrolist">Metrolist (qalın)</string>
-    <string name="style_metrolist_slim">Metrolist (nazik)</string>
     <string name="style_squiggly">Dalğalı</string>
     <string name="style_slim">Çox nazik</string>
     <string name="player_appearance_gestures_header">Jestlər</string>
@@ -609,8 +595,6 @@
     <string name="player_appearance_fullscreen_header">Tam ekran</string>
     <string name="player_adaptive_size_title">Adaptiv pleyer ölçüsü</string>
     <string name="player_adaptive_size_subtitle">Pleyerin hündürlüyü üçün video formatından istifadə edin. Sabit 16:9 üçün söndürün.</string>
-    <string name="player_show_title_title">Video başlığını göstər</string>
-    <string name="player_show_title_subtitle">Tam ekran rejimində video başlığını yuxarı panelin altında göstərin</string>
     <string name="player_fullscreen_seekbar_width_title">Tam ekran irəliləyiş çubuğunun eni</string>
     <string name="player_portrait_seekbar_width_title">Portret rejimində irəliləyiş çubuğunun eni</string>
     <string name="player_portrait_seekbar_width_spaced">Kənarlardan aralı</string>
@@ -621,10 +605,6 @@
     <string name="player_fullscreen_seekbar_width_value">%1$d dp</string>
 
 
-    <string name="lyrics_provider_lrclib">LrcLib</string>
-    <string name="lyrics_provider_better_lyrics">Better Lyrics</string>
-    <string name="lyrics_provider_simpmusic">SimpMusic</string>
-    <string name="lyrics_provider_lyrics_plus">LyricsPlus</string>
     <string name="theme_name_system_default">Sistem defoltu</string>
     <string name="theme_desc_system_default">Cihaz teması ilə sinxronlaşdır</string>
     <string name="theme_name_material_you">Material You</string>
@@ -744,8 +724,6 @@
     <string name="content_settings_disable_shorts_player_subtitle">YouTube Shorts daxil olmaqla bütün videoları adi video pleyerində oxudun</string>
     <string name="content_settings_shorts_player_prompt_title">Shorts pleyeri təklifi</string>
     <string name="content_settings_shorts_player_prompt_subtitle">2 dəqiqədən qısa videoları Shorts pleyerinə keçirməzdən əvvəl soruşun</string>
-    <string name="content_settings_explore_region_picker_title">Kəşf bölməsində sürətli region seçicisi</string>
-    <string name="content_settings_explore_region_picker_subtitle">Trend regionunu dərhal dəyişmək üçün Kəşf ekranının yuxarı panelində qlobus nişanını göstərin.</string>
     <string name="categories_region_picker_desc">Trend regionunu dəyiş (cari: %1$s)</string>
     <string name="content_settings_header_nav_tabs">Naviqasiya tabları</string>
     <string name="settings_home_nav_tab_title">Əsas səhifə tabı</string>
@@ -784,9 +762,6 @@
     <string name="categories_title">Kateqoriyalar</string>
     <string name="categories_switch_to_grid">Tor görünüşünə keç</string>
     <string name="categories_switch_to_list">Siyahı görünüşünə keç</string>
-    <string name="category_all">Hamısı</string>
-    <string name="category_trending">Trenddə olanlar</string>
-    <string name="category_movies">Filmlər</string>
     <string name="category_live">Canlı</string>
     <string name="settings_continue_watching_title">“Baxmağa davam et” bölməsi</string>
     <string name="settings_continue_watching_subtitle">Əsas ekranda yarımçıq qalmış videolar üçün bölmə göstərin.</string>
@@ -855,8 +830,6 @@
     <string name="speed_slider_apply">Tətbiq et</string>
     <string name="playback_speed_multiplier">%1$s×</string>
     <string name="playback_speed_multiplier_precise">%1$.2f×</string>
-    <string name="player_settings_stable_voice">Stabil səs</string>
-    <string name="player_settings_stable_voice_subtitle">Sabit oxutma üçün səs səviyyəsini normallaşdırın</string>
     <string name="player_settings_display">Görünüş</string>
     <string name="player_settings_ambient_mode">Ətraf rejimi</string>
     <string name="player_settings_ambient_mode_subtitle">Videonun ətrafındakı zolaqları onun rənglərindən yaranan yumşaq parıltı ilə doldurun</string>
@@ -931,7 +904,6 @@
     <string name="player_settings_video_codec_auto_desc">Tətbiq seçsin (H.264-ə üstünlük verir)</string>
     <string name="player_settings_header_gestures">Jestlər</string>
     <string name="player_settings_double_tap_seek">İki dəfə toxunma ilə keçid müddəti</string>
-    <string name="player_settings_double_tap_seek_subtitle_template">Hər tərəfə iki dəfə toxunma üçün %d san.</string>
     <string name="player_settings_double_tap_seek_dialog_title">İki dəfə toxunma ilə keçid müddəti</string>
     <string name="player_settings_double_tap_seek_dialog_body">Pleyerin sol və ya sağ tərəfinə iki dəfə toxunduqda neçə saniyə keçiləcəyini seçin.</string>
     <string name="video_quality_title">Video keyfiyyəti</string>
@@ -980,7 +952,6 @@
     <string name="btn_close">Bağla</string>
     <string name="loading_shorts">Shorts yüklənir…</string>
     <string name="error_short_load">Xəta baş verdi</string>
-    <string name="share_short_template">Bu Shorts videosuna baxın: https://youtu.be/%1$s</string>
     <string name="speed_2x">2× sürət</string>
     <string name="cd_liked">Bəyənilib</string>
     <string name="cd_pause">Pauza</string>
@@ -1231,8 +1202,6 @@
     <string name="add_description_placeholder">Açıqlama əlavə et...</string>
     <string name="edit_playlist_action">Pleylisti redaktə et</string>
     <string name="delete_playlist_action">Pleylisti sil</string>
-    <string name="make_public_action">Hamıya açıq et</string>
-    <string name="make_private_action">Gizli et</string>
     <string name="remove_from_playlist_action">Pleylistdən sil</string>
     <string name="playlist_empty_title">Bu pleylist boşdur</string>
     <string name="playlist_empty_desc">Pleylistinizi yaratmaq üçün\npleyerdən videolar əlavə edin</string>
@@ -1407,7 +1376,6 @@
     <string name="template_bass_boost">Bas gücləndirməsi: %1$ddB</string>
     <string name="label_tempo_pitch">Temp və ton</string>
     <string name="action_reset">Sıfırla</string>
-    <string name="template_speed">Sürət: %1$d%%</string>
     <string name="template_pitch">Ton: %1$d yarımton</string>
     <string name="label_parametric_equalizer">Parametrik ekvalayzer</string>
     <string name="action_add_band">Zolaq əlavə et</string>
@@ -1575,7 +1543,6 @@
     <string name="sync_continue">Davam et</string>
     <string name="sync_qr_scan_on_target_sending">Bunu məlumat göndərəcəyiniz cihazda skan edin</string>
     <string name="sync_qr_scan_on_target_receiving">Bunu məlumat alacağınız cihazda skan edin</string>
-    <string name="sync_confirmation_code">Təsdiq kodu: %1$s</string>
     <string name="sync_expires_in">%1$d san. sonra vaxtı bitir</string>
     <string name="sync_qr_network_note">Hər iki cihaz eyni Wi-Fi şəbəkəsində (və ya cihazlardan birinin hotspotunda) olmalıdır. Təhlükəsizlik divarında Chorplay-a icazə vermək lazım gələ bilər.</string>
     <string name="sync_sas_title">Kodlar uyğun gəlir?</string>
@@ -1904,7 +1871,6 @@
     <string name="ui_clear">Təmizlə</string>
     <string name="ui_delete_from_playlist">Pleylistdən sil</string>
     <string name="ui_added">Əlavə edildi</string>
-    <string name="ui_sync_lyrics">Mahnı sözlərini sinxronlaşdır</string>
     <string name="ui_downloading_playlist">Pleylist endirilir</string>
 
 

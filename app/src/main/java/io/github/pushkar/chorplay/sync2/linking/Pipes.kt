@@ -124,7 +124,7 @@ internal class LanPipe(
 
     /** Waits for the other side to close, so a last message isn't lost when this side stops serving. */
     suspend fun awaitClosed() {
-        withTimeoutOrNull(CLOSE_WAIT_MS) { while (connection.receive() != null) Unit }
+        withTimeoutOrNull(CLOSE_WAIT_MS) { while (connection.receive() != null) {} }
     }
 }
 

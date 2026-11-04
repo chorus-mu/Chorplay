@@ -472,7 +472,6 @@ class BackupRepository(
                 val subscriptions = resolved.distinctBy { it.channelId }
                 subscriptionRepo.subscribeAll(subscriptions)
 
-                // V9.2: Seed recommendation engine from imported subscriptions
                 val channelNames = subscriptions.map { it.channelName }.filter { it.isNotEmpty() }
                 if (channelNames.isNotEmpty()) {
                     try {

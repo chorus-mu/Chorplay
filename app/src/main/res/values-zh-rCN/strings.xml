@@ -91,7 +91,6 @@
     <string name="failed_to_save_to_library">保存到媒体库失败</string>
     <string name="open">打开</string>
     <string name="up_next">接下来</string>
-    <string name="lyrics">歌词</string>
     <string name="related">相关内容</string>
     <string name="close">关闭</string>
     <string name="more_options">更多选项</string>
@@ -109,8 +108,6 @@
     <string name="autoplay">自动播放</string>
     <string name="move_up">向上移动</string>
     <string name="move_down">下移</string>
-    <string name="lyrics_not_available">歌词不可用</string>
-    <string name="refresh_lyrics">刷新歌词</string>
     <string name="playing">正在播放</string>
     <string name="remove">删除</string>
     <string name="related_content">相关内容</string>
@@ -165,8 +162,6 @@
     <string name="save_to">保存到...</string>
     <string name="watch_later">稍后观看</string>
     <string name="watch_later_unsave">取消保存稍后观看</string>
-    <string name="playlist_private">私密</string>
-    <string name="playlist_public">公开</string>
     <string name="create_new_playlist">创建新的播放列表</string>
     <string name="playlist_name">名称</string>
     <string name="playlist_description_optional">说明（可选）</string>
@@ -256,7 +251,6 @@
     <string name="description_copied">描述已复制到剪贴板</string>
     <string name="title_copied">标题已复制到剪贴板</string>
     <string name="tags">标签</string>
-    <string name="in_this_video">在这个视频中</string>
     <string name="sb_manual_skip">跳过</string>
     <string name="sb_skip_segment">跳过 %1$s</string>
     <string name="ago">前</string>
@@ -282,7 +276,6 @@
     <string name="chapters">章节</string>
     <string name="artist">艺术家</string>
     <string name="playlist">播放列表</string>
-    <string name="playlist_visibility_metadata">%1$s • %2$s</string>
     <string name="app_name_uppercase">CHORPLAY</string>
     <string name="notification_badge_9_plus">9+</string>
     <string name="personalized_feed">您的个性化信息流</string>
@@ -330,14 +323,9 @@
     <string name="date_this_month">这个月</string>
     <string name="date_this_year">今年</string>
     <string name="duration_any">任意时长</string>
-    <string name="duration_under_4">4分钟以下</string>
-    <string name="duration_4_20">4-20分钟</string>
     <string name="duration_over_20">超过20分钟</string>
     <string name="sort_relevance">相关性</string>
-    <string name="sort_upload_date">上传日期</string>
     <string name="sort_view_count">观看次数</string>
-    <string name="sort_rating">评分</string>
-    <string name="channel_sort_latest">最新</string>
     <string name="channel_default_title">频道</string>
     <string name="channel_banner">频道横幅</string>
     <string name="channel_avatar">频道头像</string>
@@ -578,8 +566,6 @@
     <string name="settings_item_player_appearance">播放器外观</string>
     <string name="settings_item_player_appearance_subtitle">自定义进度条样式</string>
     <string name="style_default">默认</string>
-    <string name="style_metrolist">厚的</string>
-    <string name="style_metrolist_slim">默认</string>
     <string name="style_squiggly">波浪形</string>
     <string name="style_slim">超薄</string>
     <string name="player_appearance_gestures_header">手势</string>
@@ -608,8 +594,6 @@
     <string name="player_appearance_fullscreen_header">全屏</string>
     <string name="player_adaptive_size_title">自适应播放器尺寸</string>
     <string name="player_adaptive_size_subtitle">使用播放器高度的视频格式。关闭固定 16:9。</string>
-    <string name="player_show_title_title">显示视频标题</string>
-    <string name="player_show_title_subtitle">在全屏模式下，在顶部栏下方显示视频标题</string>
     <string name="player_fullscreen_seekbar_width_title">全屏进度条宽度</string>
     <string name="player_portrait_seekbar_width_title">竖屏进度条宽度</string>
     <string name="player_portrait_seekbar_width_spaced">间隔</string>
@@ -620,10 +604,6 @@
     <string name="player_fullscreen_seekbar_width_value">%1$d dp</string>
 
 
-    <string name="lyrics_provider_lrclib">LrcLib</string>
-    <string name="lyrics_provider_better_lyrics">Better Lyrics</string>
-    <string name="lyrics_provider_simpmusic">SimpMusic</string>
-    <string name="lyrics_provider_lyrics_plus">LyricsPlus</string>
     <string name="theme_name_system_default">系统默认值</string>
     <string name="theme_desc_system_default">与设备主题同步</string>
     <string name="theme_name_material_you">Material You</string>
@@ -743,8 +723,6 @@
     <string name="content_settings_disable_shorts_player_subtitle">在常规视频播放器中播放所有视频（包括YouTube Shorts）</string>
     <string name="content_settings_shorts_player_prompt_title">Shorts 播放器建议</string>
     <string name="content_settings_shorts_player_prompt_subtitle">将 2 分钟以下的视频切换到 Shorts 播放器之前先询问</string>
-    <string name="content_settings_explore_region_picker_title">探索中的快速区域选择器</string>
-    <string name="content_settings_explore_region_picker_subtitle">在探索屏幕顶部栏中显示地球图标以立即更改趋势区域。</string>
     <string name="categories_region_picker_desc">更改趋势区域（当前：%1$s）</string>
     <string name="content_settings_header_nav_tabs">导航选项卡</string>
     <string name="settings_home_nav_tab_title">主页选项卡</string>
@@ -783,9 +761,6 @@
     <string name="categories_title">类别</string>
     <string name="categories_switch_to_grid">切换到网格视图</string>
     <string name="categories_switch_to_list">切换到列表视图</string>
-    <string name="category_all">全部</string>
-    <string name="category_trending">热门</string>
-    <string name="category_movies">电影</string>
     <string name="category_live">直播</string>
     <string name="settings_continue_watching_title">“继续观看”内容栏</string>
     <string name="settings_continue_watching_subtitle">在首页显示正在观看的视频内容栏。</string>
@@ -854,8 +829,6 @@
     <string name="speed_slider_apply">应用</string>
     <string name="playback_speed_multiplier">%1$s×</string>
     <string name="playback_speed_multiplier_precise">%1$.2f×</string>
-    <string name="player_settings_stable_voice">稳定音量</string>
-    <string name="player_settings_stable_voice_subtitle">标准化音量以实现一致的播放</string>
     <string name="player_settings_display">显示</string>
     <string name="player_settings_ambient_mode">环境模式</string>
     <string name="player_settings_ambient_mode_subtitle">用柔和的色彩填充视频周围的条形</string>
@@ -930,7 +903,6 @@
     <string name="player_settings_video_codec_auto_desc">让应用程序选择（首选H.264）</string>
     <string name="player_settings_header_gestures">手势</string>
     <string name="player_settings_double_tap_seek">双击快进/快退时长</string>
-    <string name="player_settings_double_tap_seek_subtitle_template">%ds 每侧双击</string>
     <string name="player_settings_double_tap_seek_dialog_title">双击快进/快退时长</string>
     <string name="player_settings_double_tap_seek_dialog_body">选择双击播放器左侧或右侧时跳转的秒数。</string>
     <string name="video_quality_title">视频质量</string>
@@ -979,7 +951,6 @@
     <string name="btn_close">关闭</string>
     <string name="loading_shorts">正在加载 Shorts…</string>
     <string name="error_short_load">发生错误</string>
-    <string name="share_short_template">看看这个 Shorts：https://youtu.be/%1$s</string>
     <string name="speed_2x">2 倍速度</string>
     <string name="cd_liked">喜欢</string>
     <string name="cd_pause">暂停</string>
@@ -1230,8 +1201,6 @@
     <string name="add_description_placeholder">添加描述...</string>
     <string name="edit_playlist_action">编辑播放列表</string>
     <string name="delete_playlist_action">删除播放列表</string>
-    <string name="make_public_action">公开</string>
-    <string name="make_private_action">设为私有</string>
     <string name="remove_from_playlist_action">从播放列表中删除</string>
     <string name="playlist_empty_title">该播放列表为空</string>
     <string name="playlist_empty_desc">从视频播放器 \n 添加视频来构建您的播放列表</string>
@@ -1406,7 +1375,6 @@
     <string name="template_bass_boost">低音增强：%1$ddB</string>
     <string name="label_tempo_pitch">节奏和音高</string>
     <string name="action_reset">重置</string>
-    <string name="template_speed">速度：%1$d%%</string>
     <string name="template_pitch">音高：%1$d 半音</string>
     <string name="label_parametric_equalizer">参数均衡器</string>
     <string name="action_add_band">添加频段</string>
@@ -1574,7 +1542,6 @@
     <string name="sync_continue">继续</string>
     <string name="sync_qr_scan_on_target_sending">在您要发送到的设备上扫描此内容</string>
     <string name="sync_qr_scan_on_target_receiving">在数据来源设备上扫描此二维码</string>
-    <string name="sync_confirmation_code">确认码：%1$s</string>
     <string name="sync_expires_in">将在 %1$d 秒后过期</string>
     <string name="sync_qr_network_note">两台设备必须位于同一 Wi-Fi（或一台设备的热点）上。您可能需要允许 Chorplay 通过防火墙。</string>
     <string name="sync_sas_title">代码匹配吗？</string>

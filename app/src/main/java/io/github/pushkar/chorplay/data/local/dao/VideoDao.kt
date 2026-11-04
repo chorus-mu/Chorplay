@@ -27,11 +27,6 @@ interface VideoDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertVideosOrIgnore(videos: List<VideoEntity>)
 
-    /**
-     * Update only the metadata columns of an existing video — does NOT do DELETE+INSERT,
-     * so PlaylistVideoCrossRef CASCADE is never triggered.
-     * isMusic is intentionally NOT updated here — the stub's value is the source of truth.
-     */
     @Query(
         """
         UPDATE videos
@@ -62,11 +57,6 @@ interface VideoDao {
         channelThumbnailUrl: String,
     )
 
-    /**
-     * Like [updateVideoMetadata], but a blank or zero value never replaces a known one, and the
-     * earlier publish time is kept. A song copied from a music page carries no upload date, views
-     * or description, and must not erase what the video side already stored for the same id.
-     */
     @Query(
         """
         UPDATE videos
@@ -97,7 +87,6 @@ interface VideoDao {
         channelThumbnailUrl: String,
     )
 
-    /** Inserts new videos and fills in what known ones lack, as one change. */
     @Transaction
     suspend fun mergeMetadata(entities: List<VideoEntity>) {
         entities.forEach { entity ->
@@ -130,7 +119,6 @@ interface VideoDao {
     suspend fun getAllVideos(): List<VideoEntity>
 }
 
-/** SQLite before Android 11 binds at most 999 variables per statement, so one IN list stays well under it. */
 internal const val MAX_IDS_PER_QUERY = 500
 
 internal suspend fun <T> chunkedLookup(

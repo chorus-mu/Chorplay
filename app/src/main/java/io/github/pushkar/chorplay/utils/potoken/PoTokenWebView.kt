@@ -364,7 +364,7 @@ class PoTokenWebView private constructor(
             } else {
                 val body =
                     withContext(Dispatchers.IO) {
-                        response.body!!.string()
+                        response.body.string()
                     }
                 if (generation != attestationGeneration.get()) {
                     Log.d(TAG, "Dropping BotGuard response from a superseded attestation")

@@ -67,11 +67,10 @@ internal fun SettingsListScope.tasteContent(
         nav(TasteIndex.recap, onClick = actions.onOpenRecap, icon = Icons.Outlined.Insights)
         nav(TasteIndex.hidden, onClick = actions.onOpenHidden, value = hiddenLabel, icon = Icons.Outlined.VisibilityOff)
         nav(
-            nav(
-                DestinationIndex.entry(SettingsDestination.DISCOVER_CHANNELS),
-                onClick = actions.onOpenDiscoverChannels,
-                icon = Icons.Outlined.PersonSearch,
-            )
+            DestinationIndex.entry(SettingsDestination.DISCOVER_CHANNELS),
+            onClick = actions.onOpenDiscoverChannels,
+            icon = Icons.Outlined.PersonSearch,
+        )
     }
     state.engine?.let { engineDetails(it, noQueriesLabel, startersLabel) }
     data(actions)
@@ -289,6 +288,14 @@ private fun channelStrength(score: Float): Int =
         score >= BALANCED_CHANNEL -> R.string.channel_affinity_balanced
         else -> R.string.channel_affinity_cooling
     }
+
+private fun SettingsListScope.data(actions: TasteActions) {
+    group(key = "taste.data", header = R.string.taste_data_header) {
+        nav(TasteIndex.exportVideo, onClick = actions.onExportVideo, showChevron = false, icon = Icons.Outlined.Upload)
+        nav(TasteIndex.importVideo, onClick = actions.onImportVideo, showChevron = false, icon = Icons.Outlined.Download)
+        nav(TasteIndex.resetVideo, onClick = actions.onResetVideo, showChevron = false, icon = Icons.Outlined.RestartAlt)
+    }
+}
 
 private const val GROUP_MENU_WORDS = 3
 

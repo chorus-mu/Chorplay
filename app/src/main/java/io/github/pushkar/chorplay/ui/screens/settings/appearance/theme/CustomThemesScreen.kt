@@ -247,9 +247,7 @@ private fun CustomThemeActionDialogs(
             DeleteThemeDialog(name = theme.name, onConfirm = { viewModel.delete(theme.id) }, onDismiss = onDismiss)
         }
 
-        null -> {
-            Unit
-        }
+        null -> {}
     }
 }
 

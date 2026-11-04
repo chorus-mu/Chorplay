@@ -6,11 +6,6 @@ import kotlinx.coroutines.flow.first
 import javax.inject.Inject
 import javax.inject.Singleton
 
-/**
- * Takes watched videos out of Watch later when the viewer turned that on (#1060). A video leaves
- * as its progress crosses the watched threshold, and opening Watch later sweeps out any that were
- * watched elsewhere, with an Undo.
- */
 @Singleton
 class WatchLaterCleanup
     @Inject
@@ -29,13 +24,11 @@ class WatchLaterCleanup
             if (playlists.isInWatchLater(videoId)) playlists.removeFromWatchLater(videoId)
         }
 
-        /** The viewer marked [videoId] as watched, or it played to its end. */
         suspend fun onFinished(videoId: String) {
             if (!preferences.removeWatchedFromWatchLater.first()) return
             if (playlists.isInWatchLater(videoId)) playlists.removeFromWatchLater(videoId)
         }
 
-        /** Removes the watched ones among [videos] and returns what Undo needs to put them back. */
         suspend fun sweep(videos: List<Video>): List<PlaylistVideoCrossRef> {
             if (videos.isEmpty() || !preferences.removeWatchedFromWatchLater.first()) return emptyList()
             val watched = watchedIds(videos, viewHistory.getVideoHistoryFlow().first(), preferences.watchedThreshold.first())

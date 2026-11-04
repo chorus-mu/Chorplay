@@ -37,9 +37,7 @@ internal fun JsonElement?.forEachObject(action: (JsonObject) -> Unit) {
             forEach { it.forEachObject(action) }
         }
 
-        else -> {
-            Unit
-        }
+        else -> {}
     }
 }
 

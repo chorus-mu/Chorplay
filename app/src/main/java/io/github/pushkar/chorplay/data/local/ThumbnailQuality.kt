@@ -1,12 +1,9 @@
 package io.github.pushkar.chorplay.data.local
 
-/** How large a video thumbnail is fetched. HIGH is what every card loaded before this was a choice. */
 enum class ThumbnailQuality {
     HIGH,
     MEDIUM,
     LOW,
-
-    /** Nothing is fetched; covers stored on the device still show. */
     OFF,
     ;
 

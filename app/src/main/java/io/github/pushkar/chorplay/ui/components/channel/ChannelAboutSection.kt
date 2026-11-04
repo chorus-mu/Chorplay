@@ -14,7 +14,7 @@ import androidx.compose.material.icons.outlined.Language
 import androidx.compose.material.icons.outlined.Link
 import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material.icons.outlined.Public
-import androidx.compose.material.icons.outlined.TrendingUp
+import androidx.compose.material.icons.automirrored.outlined.TrendingUp
 import androidx.compose.material.icons.outlined.VideoLibrary
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
@@ -47,7 +47,7 @@ internal fun ChannelAboutSection(header: ChannelHeader) {
                 header.handle?.let { Icons.Outlined.Person to it },
                 header.subscriberCountText?.let { Icons.Outlined.Person to it },
                 header.videoCountText?.let { Icons.Outlined.VideoLibrary to it },
-                header.viewCountText?.let { Icons.Outlined.TrendingUp to it },
+                header.viewCountText?.let { Icons.AutoMirrored.Outlined.TrendingUp to it },
                 header.countryText?.let { Icons.Outlined.Public to it },
                 header.joinedDateText?.let { Icons.Outlined.CalendarMonth to it },
             )

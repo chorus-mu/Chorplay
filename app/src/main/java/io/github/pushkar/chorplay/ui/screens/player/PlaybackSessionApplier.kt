@@ -176,9 +176,7 @@ internal class PlaybackSessionApplier(
     ) {
         val videoId = load.videoId
         when (val prepare = latest.latePrepare(videoId)) {
-            null -> {
-                Unit
-            }
+            null -> {}
 
             is LatePrepare.LocalFile -> {
                 Log.w(TAG, "Late prepare: arming local playback for $videoId")
@@ -375,7 +373,7 @@ internal class PlaybackSessionApplier(
                 // POST_LIVE_STREAM type; the player response splits it across two flags.
                 isArchivedLivestream =
                     result.playerResponse.videoDetails?.isLiveContent == true &&
-                        result.playerResponse.videoDetails?.isLive != true,
+                        result.playerResponse.videoDetails.isLive != true,
                 relatedVideos = relatedVideos,
                 videoStream = streams.videoStream,
                 audioStream = streams.audioStream,

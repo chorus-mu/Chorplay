@@ -210,7 +210,7 @@ object DlnaCastManager {
                 http
                     .newCall(Request.Builder().url(device.location).build())
                     .execute()
-                    .use { it.body?.string() ?: "" }
+                    .use { it.body.string() }
 
             var friendlyName = device.friendlyName
             var urlBaseFromXml: String? = null
@@ -318,13 +318,13 @@ object DlnaCastManager {
         fun bestVariants(codecKey: String): List<CastStreamVariant> =
             listOfNotNull(
                 videoOnlyStreams
-                    .filter { it.height > 0 && !(it.content ?: it.url).isNullOrEmpty() }
+                    .filter { it.height > 0 && !it.content.isNullOrEmpty() }
                     .filter { VideoCodecUtils.codecKeyFromStream(it) == codecKey }
                     // Renderers start on the first variant listed, and each one is probed before they get the playlist.
                     .maxByOrNull { VideoCodecUtils.qualityHeightFromStream(it) },
             ).map { stream ->
                 CastStreamVariant(
-                    url = stream.content ?: stream.url ?: "",
+                    url = stream.content,
                     width = stream.width.takeIf { it > 0 } ?: (stream.height * 16 / 9),
                     height = stream.height,
                     bitrate = stream.bitrate.takeIf { it > 0 } ?: 2_500_000,
@@ -344,9 +344,9 @@ object DlnaCastManager {
                     mime.contains("mp4") || mime.contains("m4a") || mime.contains("aac")
                 }.maxByOrNull { it.bitrate }
 
-        val audioUrl = bestAudio?.let { it.content ?: it.url }
+        val audioUrl = bestAudio?.content
         val audioBitrate = bestAudio?.bitrate?.takeIf { it > 0 } ?: 128_000
-        val audioCodec = bestAudio?.codec?.takeIf { it?.isNotBlank() == true } ?: "mp4a.40.2"
+        val audioCodec = bestAudio?.codec?.takeIf { it.isNotBlank() } ?: "mp4a.40.2"
         val audioMime =
             bestAudio?.format?.mimeType?.let {
                 if (it.contains("mp4") || it.contains("m4a")) "audio/mp4" else it
@@ -357,7 +357,7 @@ object DlnaCastManager {
                 .filter { it.height > 0 }
                 .maxByOrNull { VideoCodecUtils.qualityHeightFromStream(it) }
         val muxedUrl =
-            (bestMuxed?.let { it.content ?: it.url } ?: currentPlayerUrl)
+            (bestMuxed?.content ?: currentPlayerUrl)
                 ?.takeIf { it.isNotEmpty() && !it.startsWith("local://") }
 
         val audioSegmentRanges = bestAudio?.castSegmentRanges()
@@ -671,7 +671,7 @@ object DlnaCastManager {
                 .build()
         http.newCall(request).execute().use { response ->
             if (!response.isSuccessful) {
-                val responseBody = response.body?.string().orEmpty()
+                val responseBody = response.body.string()
                 throw IllegalStateException("SOAP $action failed (${response.code}): $responseBody")
             }
         }
@@ -690,7 +690,7 @@ object DlnaCastManager {
                 .post(body.toRequestBody(SOAP_TYPE))
                 .build()
         return http.newCall(request).execute().use { response ->
-            response.body?.string() ?: ""
+            response.body.string()
         }
     }
 

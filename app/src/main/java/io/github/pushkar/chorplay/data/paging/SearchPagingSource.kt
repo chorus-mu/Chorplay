@@ -116,7 +116,7 @@ internal fun SearchResultsPage.toResultItems(shortsEnabled: Boolean): List<Searc
         val latest = (item as? SearchResultItem.ChannelResult)?.let { sections.latestStripAfter(index) }
         if (latest != null) {
             items +=
-                (item as SearchResultItem.ChannelResult).copy(
+                item.copy(
                     latestTitle = latest.title,
                     latestVideos = latest.videos,
                 )

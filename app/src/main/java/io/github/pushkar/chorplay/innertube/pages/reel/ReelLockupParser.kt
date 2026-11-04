@@ -49,9 +49,7 @@ private fun collectReelLockups(
             element.values.forEach { collectReelLockups(it, out) }
         }
 
-        else -> {
-            Unit
-        }
+        else -> {}
     }
 }
 

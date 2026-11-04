@@ -139,9 +139,7 @@ internal fun ProfilesScreen(
             }
         }
 
-        null -> {
-            Unit
-        }
+        null -> {}
     }
 }
 

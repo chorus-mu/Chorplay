@@ -32,7 +32,7 @@ object SubscriptionFeedTimestamps {
         return when {
             timestamp <= 0L -> parsedRelative ?: 0L
             timestampLooksLikeFallbackNow && isUnstableFreshUploadText(video.uploadDate) -> parsedRelative ?: 0L
-            timestampLooksLikeFallbackNow && relativeDateIsClearlyOlder -> parsedRelative ?: timestamp
+            timestampLooksLikeFallbackNow && relativeDateIsClearlyOlder -> parsedRelative
             else -> timestamp
         }
     }

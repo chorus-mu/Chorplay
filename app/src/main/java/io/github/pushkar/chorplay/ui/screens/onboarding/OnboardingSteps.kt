@@ -81,12 +81,9 @@ internal fun SharedTransitionScope.OnboardingSteps(
             }
 
             step == OnboardingStep.READY -> {
-                val artists by actions.viewModel.artists.state
-                    .collectAsStateWithLifecycle()
                 Readable {
                     ReadyStep(
                         state = state,
-                        artistCount = artists.picked.size,
                         hero = hero,
                         onEdit = actions.viewModel::goTo,
                         contentPadding = StepPadding,
@@ -188,9 +185,7 @@ private fun StepBody(
             )
         }
 
-        OnboardingStep.WELCOME, OnboardingStep.READY -> {
-            Unit
-        }
+        OnboardingStep.WELCOME, OnboardingStep.READY -> {}
     }
 }
 

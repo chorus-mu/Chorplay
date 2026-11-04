@@ -125,6 +125,7 @@ object InnerTubeStreamBridge {
         }
     }
 
+    @Suppress("DEPRECATION")
     private fun buildItagItem(
         format: PlayerResponse.StreamingData.Format,
         isAudio: Boolean,
@@ -174,6 +175,7 @@ object InnerTubeStreamBridge {
      * fall back to the throttled progressive path. The response carries everything the table would
      * have said, so describe the format from it instead.
      */
+    @Suppress("DEPRECATION")
     private fun syntheticItagItem(
         format: PlayerResponse.StreamingData.Format,
         isAudio: Boolean,

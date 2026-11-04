@@ -2997,18 +2997,19 @@ class EnhancedPlayerManager private constructor() {
                     if (p.playWhenReady) p.play()
                 }
             }
-            if (resyncPausedVideo && p != null) {
-                resyncAfterSurfaceReattach(p)
-            } else if (
-                p != null &&
-                VideoSurfacePolicy.shouldWatchFirstFrame(
-                    wasSurfaceValid = wasSurfaceValid,
-                    reenabledVideo = reenablesVideo,
-                    isAudioOnly = audioOnlyMode.isActive,
-                    isLive = currentIsLiveStream,
-                )
-            ) {
-                armSurfaceFirstFrameWatchdog(p)
+            if (p != null) {
+                if (resyncPausedVideo) {
+                    resyncAfterSurfaceReattach(p)
+                } else if (
+                    VideoSurfacePolicy.shouldWatchFirstFrame(
+                        wasSurfaceValid = wasSurfaceValid,
+                        reenabledVideo = reenablesVideo,
+                        isAudioOnly = audioOnlyMode.isActive,
+                        isLive = currentIsLiveStream,
+                    )
+                ) {
+                    armSurfaceFirstFrameWatchdog(p)
+                }
             }
         }
         return attached

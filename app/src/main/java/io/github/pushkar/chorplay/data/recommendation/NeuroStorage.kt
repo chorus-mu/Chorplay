@@ -27,6 +27,8 @@ internal class NeuroStorage(
 ) {
     companion object {
         private const val TAG = "ChorplayNeuroEngine"
+        private val jsonWithUnknownKeys = Json { ignoreUnknownKeys = true }
+        private val jsonWithDefaults = Json { encodeDefaults = true }
         private const val BRAIN_FILENAME = "user_neuro_brain.json"
         private const val BRAIN_DATASTORE_FILE = "chorplay_neuro_brain_v10.json"
         private val PREVIOUS_DATASTORE_FILES = listOf("v9", "v8", "v7").map { "chorplay_neuro_brain_$it.json" }
@@ -151,7 +153,7 @@ internal class NeuroStorage(
                 if (text.isBlank()) {
                     defaultValue
                 } else {
-                    Json { ignoreUnknownKeys = true }
+                    jsonWithUnknownKeys
                         .decodeFromString<SerializableBrain>(text)
                 }
             } catch (e: Exception) {
@@ -164,7 +166,7 @@ internal class NeuroStorage(
             output: OutputStream,
         ) {
             output.write(
-                Json { encodeDefaults = true }
+                jsonWithDefaults
                     .encodeToString(t)
                     .toByteArray(),
             )
@@ -352,7 +354,7 @@ internal class NeuroStorage(
             try {
                 val brainCopy = brain.toSerializable()
                 val jsonBytes =
-                    Json { encodeDefaults = true }
+                    jsonWithDefaults
                         .encodeToString(brainCopy)
                         .toByteArray()
                 output.write(jsonBytes)
@@ -433,7 +435,7 @@ internal class NeuroStorage(
         if (file.exists()) return@withContext
         runCatching {
             file.parentFile?.mkdirs()
-            file.writeText(Json { encodeDefaults = true }.encodeToString(brain.toSerializable()))
+            file.writeText(jsonWithDefaults.encodeToString(brain.toSerializable()))
         }.onFailure { Log.e(TAG, "Could not keep the brain before migration $toSchema", it) }
     }
 
@@ -621,7 +623,7 @@ internal class NeuroStorage(
                 if (text.isBlank()) continue
 
                 val data =
-                    Json { ignoreUnknownKeys = true }
+                    jsonWithUnknownKeys
                         .decodeFromString<SerializableBrain>(text)
 
                 if (data.interactions > 0 ||

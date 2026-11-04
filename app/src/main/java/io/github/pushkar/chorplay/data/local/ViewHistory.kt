@@ -26,18 +26,11 @@ import kotlinx.coroutines.flow.mapLatest
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.yield
 
-/**
- * Legacy DataStore kept only for one-time migration of existing user data.
- * After migration it is left empty (cleared).
- */
 private val Context.viewHistoryDataStore: DataStore<Preferences> by safePreferencesDataStore(
     name = "view_history",
     scope = StoreScope.PROFILE_LIBRARY,
 )
 
-/**
- * Watch-history repository backed by Room SQLite.
-*/
 class ViewHistory private constructor(
     private val context: Context,
 ) {
@@ -77,12 +70,6 @@ class ViewHistory private constructor(
         private fun isMusicKey(id: String) = booleanPreferencesKey("video_${id}_is_music")
     }
 
-    // ── Writes ───────────────────────────────────────────────────────────────
-
-    /**
-     * Save / update playback position (called during real playback).
-     * REPLACE strategy so progress is always current.
-     */
     suspend fun savePlaybackPosition(
         videoId: String,
         position: Long,
@@ -93,8 +80,6 @@ class ViewHistory private constructor(
         channelId: String = "",
         isMusic: Boolean = false,
         isShort: Boolean = false,
-        // A device file's row stays local whichever caller writes it, or it would join the online
-        // history, the engine's signals and sync under an id that names no YouTube video.
         isLocal: Boolean = LocalMediaIds.isLocal(videoId),
     ) {
         if (PlayerPreferences(context).isWatchHistorySavingBlocked()) return
@@ -117,10 +102,6 @@ class ViewHistory private constructor(
         )
     }
 
-    /**
-     * Records that [videoId] played to its end. Its card then shows a full bar until the next
-     * playback of it starts over from the beginning and saves new progress.
-     */
     suspend fun markCompleted(
         videoId: String,
         durationMs: Long,
@@ -130,7 +111,6 @@ class ViewHistory private constructor(
         dao.markCompleted(videoId, durationMs)
     }
 
-    /** Clears playback progress for [videoId]. The history row stays; the card stops reading as watched. */
     suspend fun clearProgress(videoId: String) {
         dao.clearProgress(videoId)
     }
@@ -139,11 +119,6 @@ class ViewHistory private constructor(
 
     suspend fun getSavedDuration(videoId: String): Long = dao.getDuration(videoId) ?: 0L
 
-    /**
-     * Create-or-touch a history entry **without** overwriting an already-saved
-     * playback position.  Call this on video open so the video appears in history
-     * even if the user closes it immediately, while leaving any real progress intact.
-     */
     suspend fun touchHistoryEntry(
         videoId: String,
         title: String = "",
@@ -156,12 +131,8 @@ class ViewHistory private constructor(
         if (PlayerPreferences(context).isWatchHistorySavingBlocked()) return
 
         val thumbnail = ThumbnailUrlResolver.normalizeVideoThumbnail(videoId, thumbnailUrl)
-        val existingPosition = dao.getPosition(videoId) ?: 0L // preserve saved progress
-        // Opening a video before its stream resolves passes no duration, and taking that 0 would
-        // erase the length a real playback save had recorded — leaving a row with a position but
-        // nothing to measure it against, which is exactly what drops it from the progress map.
+        val existingPosition = dao.getPosition(videoId) ?: 0L
         val resolvedDuration = duration.takeIf { it > 0 } ?: dao.getDuration(videoId) ?: 0L
-        // A player opened from only an id knows no title yet; a blank must not erase the one on record.
         val existing = if (title.isBlank() || channelName.isBlank() || channelId.isBlank()) dao.getEntry(videoId).first() else null
         dao.upsert(
             WatchHistoryEntity(
@@ -180,11 +151,6 @@ class ViewHistory private constructor(
         )
     }
 
-    /**
-     * Bulk-insert history entries from an import.
-     * Uses IGNORE conflict strategy so that real playback progress already in
-     * the DB is never overwritten by imported stubs.
-     */
     suspend fun bulkSaveHistoryEntries(entries: List<VideoHistoryEntry>) {
         if (entries.isEmpty()) return
         val entities =
@@ -209,10 +175,6 @@ class ViewHistory private constructor(
         dao.deleteEntry(videoId)
     }
 
-    /**
-     * Marks the given video as fully watched (position = duration) so it no longer
-     * appears in the continue-watching mini-player popup on the next app launch.
-     */
     suspend fun markAsWatched(videoId: String) {
         dao.markAsWatched(videoId)
     }
@@ -225,38 +187,28 @@ class ViewHistory private constructor(
         dao.clearShorts()
     }
 
-    // ── Reads ────────────────────────────────────────────────────────────────
-
     fun getPlaybackPosition(videoId: String): Flow<Long> = dao.getEntry(videoId).map { it?.position ?: 0L }
 
     fun getVideoHistory(videoId: String): Flow<VideoHistoryEntry?> = dao.getEntry(videoId).map { it?.toDomain() }
 
-    /** All history, newest first. */
     fun getAllHistory(): Flow<List<VideoHistoryEntry>> = observeHistory()
 
     fun getRecentLibraryHistory(limit: Int): Flow<List<VideoHistoryEntry>> =
         dao.getRecentLibraryHistory(limit).map { list -> list.map { it.toDomain() } }
 
-    /** Video (non-music) history, newest first. */
     fun getVideoHistoryFlow(): Flow<List<VideoHistoryEntry>> = observeHistory(isMusic = 0, isLocal = 0)
 
-
-    /** Plays of files on the device, newest first: their progress and when they were last played. */
     fun getLocalHistoryFlow(): Flow<List<VideoHistoryEntry>> = observeHistory(isLocal = 1)
 
-    /** Position and duration of every entry, for progress bars. */
     fun getAllWatchProgress(): Flow<List<WatchProgress>> = observe { dao.readProgress() }
 
-    /** Position and duration of every video (non-music, non-local) entry, for watched checks. */
     fun getVideoWatchProgress(): Flow<List<WatchProgress>> = observe { dao.readProgress(isMusic = 0, isLocal = 0) }
 
-    /** The latest [limit] video entries, newest first, without reading the rest of the table. */
     suspend fun getRecentVideoHistory(
         limit: Int,
         includeShorts: Boolean,
     ): List<VideoHistoryEntry> = dao.getRecentVideoHistory(limit, includeShorts).map { it.toDomain() }
 
-    /** [getRecentVideoHistory], read again whenever the history table changes. */
     fun observeRecentVideoHistory(
         limit: Int,
         includeShorts: Boolean,
@@ -267,7 +219,6 @@ class ViewHistory private constructor(
         isLocal: Int = WatchHistoryDao.ANY,
     ): Flow<List<VideoHistoryEntry>> = observe { dao.readHistory(isMusic, isLocal).map { it.toDomain() } }
 
-    /** Re-reads on every change to the table, as a Room Chorplay query would, dropping a read a newer change supersedes. */
     @OptIn(ExperimentalCoroutinesApi::class)
     private fun <T> observe(read: suspend () -> T): Flow<T> =
         database.invalidationTracker
@@ -279,22 +230,12 @@ class ViewHistory private constructor(
 
     suspend fun getWatchProgress(videoId: String): WatchProgress? = dao.getProgress(videoId)
 
-    /** Efficient count without loading all rows — use this instead of list.size. */
     fun getVideoCount(): Flow<Int> = dao.getVideoCount()
 
     fun getLibraryHistoryCount(): Flow<Int> = dao.getLibraryHistoryCount()
 
-    /**
-     * Returns the most recently watched unfinished video (<95% complete).
-     * Used to restore the "resume" mini player on app launch.
-     */
     suspend fun getLatestUnfinishedVideo() = dao.getLatestUnfinishedVideo()
 
-    /**
-     * On the first launch after the 10→11 DB migration the Room table is empty
-     * but the old DataStore may contain thousands of entries.  Read them all
-     * in batches and insert into Room, then clear the DataStore.
-     */
     private suspend fun migrateFromDataStoreIfNeeded() {
         try {
             val roomCount = dao.getCount().first()

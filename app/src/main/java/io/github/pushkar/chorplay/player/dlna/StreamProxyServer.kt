@@ -584,12 +584,7 @@ class StreamProxyServer private constructor() {
                 return
             }
 
-            val body =
-                response.body ?: run {
-                    sendError(output, 502, "No Body")
-                    response.close()
-                    return
-                }
+            val body = response.body
 
             val responseHeaders =
                 buildString {
@@ -681,6 +676,7 @@ class StreamProxyServer private constructor() {
             -1
         }
 
+    @Suppress("DEPRECATION")
     private fun getDeviceIpAddress(context: Context): String {
         try {
             val wifiManager =

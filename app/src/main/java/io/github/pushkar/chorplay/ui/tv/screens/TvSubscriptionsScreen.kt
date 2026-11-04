@@ -45,7 +45,6 @@ fun TvSubscriptionsScreen(
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val feedGridState = rememberLazyGridState()
     var isManagingSubs by remember { mutableStateOf(false) }
-    var manageShowsMusic by rememberSaveable { mutableStateOf(false) }
     var showGroupsDialog by remember { mutableStateOf(false) }
     val channels = rememberSubscriptionChannels(uiState)
 
@@ -74,8 +73,6 @@ fun TvSubscriptionsScreen(
                     onNotificationChange = viewModel::updateNotificationState,
                     onShortsExcludeChange = viewModel::setShortsChannelExcluded,
                     onUnsubscribe = { channel -> viewModel.unsubscribe(channel.id) },
-                    showsMusic = manageShowsMusic,
-                    onShowsMusicChange = { manageShowsMusic = it },
                 )
             }
 
@@ -95,11 +92,6 @@ fun TvSubscriptionsScreen(
                     onShortClick = {},
                     onChannelClick = onChannelClick,
                     onViewAllClick = {
-                        manageShowsMusic = false
-                        isManagingSubs = true
-                    },
-                    onMusicSubscriptionsClick = {
-                        manageShowsMusic = true
                         isManagingSubs = true
                     },
                     onGroupSelected = viewModel::selectGroup,

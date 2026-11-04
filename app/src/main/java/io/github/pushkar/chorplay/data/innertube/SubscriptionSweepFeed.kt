@@ -3,7 +3,6 @@ package io.github.pushkar.chorplay.data.innertube
 import io.github.pushkar.chorplay.data.model.Video
 import io.github.pushkar.chorplay.utils.ThumbnailUrlResolver
 
-/** Merge regular and shorts lists with independent caps, sorted by date. */
 internal fun buildSweepFeed(
     regular: List<Video>,
     shorts: List<Video>,

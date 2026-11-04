@@ -38,16 +38,6 @@ internal fun List<DownloadedVideo>.filterAndSort(
             },
         )
 
-        .sortedWith(
-            when (sort) {
-                DownloadSort.NEWEST -> compareByDescending { it.downloadedAt }
-                DownloadSort.OLDEST -> compareBy { it.downloadedAt }
-                DownloadSort.LARGEST -> compareByDescending { it.fileSize }
-                DownloadSort.TITLE -> compareBy(String.CASE_INSENSITIVE_ORDER) { it.track.title }
-                DownloadSort.CHANNEL -> compareBy(String.CASE_INSENSITIVE_ORDER) { it.track.artist }
-            },
-        )
-
 private fun matches(
     query: String,
     vararg fields: String,

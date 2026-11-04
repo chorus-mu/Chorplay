@@ -47,7 +47,6 @@
     <string name="download">Télécharger</string>
     <string name="save">Enregistrer</string>
     <string name="up_next">À SUIVRE</string>
-    <string name="lyrics">PAROLES</string>
     <string name="related">SIMILAIRES</string>
     <string name="close">Fermer</string>
     <string name="more_options">Plus d\'options</string>
@@ -64,7 +63,6 @@
     <string name="autoplay">Lecture automatique</string>
     <string name="move_up">Monter</string>
     <string name="move_down">Descendre</string>
-    <string name="lyrics_not_available">Paroles non disponibles</string>
     <string name="playing">Lecture en cours</string>
     <string name="remove">Retirer</string>
     <string name="related_content">Contenu associé</string>
@@ -118,8 +116,6 @@
     <string name="save_to">Enregistrer dans...</string>
     <string name="watch_later">À regarder plus tard</string>
     <string name="watch_later_unsave">Retirer de À regarder plus tard</string>
-    <string name="playlist_private">Privée</string>
-    <string name="playlist_public">Publique</string>
     <string name="create_new_playlist">Créer une playlist</string>
     <string name="playlist_name">Nom</string>
     <string name="playlist_description_optional">Description (optionnelle)</string>
@@ -221,13 +217,9 @@
     <string name="date_this_month">Ce mois-ci</string>
     <string name="date_this_year">Cette année</string>
     <string name="duration_any">N\'importe quelle durée</string>
-    <string name="duration_under_4">Moins de 4 min</string>
-    <string name="duration_4_20">4-20 min</string>
     <string name="duration_over_20">Plus de 20 min</string>
     <string name="sort_relevance">Pertinence</string>
-    <string name="sort_upload_date">Date de téléchargement</string>
     <string name="sort_view_count">Nombre de vues</string>
-    <string name="sort_rating">Évaluation</string>
     <!-- Écran de Chaîne -->
     <string name="channel_default_title">Chaîne</string>
     <string name="channel_banner">Bannière de la chaîne</string>
@@ -315,16 +307,11 @@
     <string name="settings_item_player_appearance">Apparence du lecteur</string>
     <string name="settings_item_player_appearance_subtitle">Personnaliser le style de la barre de progression</string>
     <string name="style_default">Expressif</string>
-    <string name="style_metrolist">Épais</string>
-    <string name="style_metrolist_slim">Par défaut</string>
     <string name="style_squiggly">Vague (Squiggly)</string>
     <string name="style_slim">Ultra Fin</string>
     <!-- Fournisseur de paroles -->
 
 
-    <string name="lyrics_provider_lrclib">LrcLib</string>
-    <string name="lyrics_provider_better_lyrics">Better Lyrics</string>
-    <string name="lyrics_provider_simpmusic">SimpMusic</string>
     <!-- Noms &amp; Descriptions des Thèmes -->
     <string name="theme_name_pure_light">Lumière pure</string>
     <string name="theme_desc_pure_light">Épuré et minimaliste</string>
@@ -448,7 +435,6 @@
     <!-- Écran des Shorts -->
     <string name="loading_shorts">Chargement des shorts…</string>
     <string name="error_short_load">Une erreur est survenue</string>
-    <string name="share_short_template">Découvrez ce short : https://youtu.be/%1$s</string>
     <string name="speed_2x">Vitesse 2x</string>
     <string name="cd_liked">Aimé</string>
     <string name="cd_pause">Pause</string>
@@ -615,8 +601,6 @@
     <string name="add_description_placeholder">Ajouter une description...</string>
     <string name="edit_playlist_action">Modifier la playlist</string>
     <string name="delete_playlist_action">Supprimer la playlist</string>
-    <string name="make_public_action">Rendre publique</string>
-    <string name="make_private_action">Rendre privée</string>
     <string name="remove_from_playlist_action">Retirer de la playlist</string>
     <string name="playlist_empty_title">Cette playlist est vide</string>
     <string name="playlist_empty_desc">Ajoutez des vidéos depuis le lecteur vidéo\npour construire votre playlist</string>
@@ -732,7 +716,6 @@
     <string name="template_bass_boost">Boost des Basses : %1$ddB</string>
     <string name="label_tempo_pitch">Tempo &amp; Hauteur</string>
     <string name="action_reset">Réinitialiser</string>
-    <string name="template_speed">Vitesse : %1$d%%</string>
     <string name="template_pitch">Hauteur : %1$d demi-tons</string>
     <string name="label_parametric_equalizer">Égaliseur Paramétrique</string>
     <string name="action_add_band">Ajouter une Bande</string>
@@ -897,8 +880,6 @@
     <string name="appearance_role_tertiary">Tertiaire</string>
     <string name="app_icon_picker_subtitle">Choisissez un style d\'icône pour le lanceur. La modification prend effet immédiatement et le lanceur s\'actualise brièvement.</string>
     <string name="app_icon_picker_warning">La modification de l\'icône peut entraîner la disparition temporaire de Chorplay de votre écran d\'accueil. Si nécessaire, rajoutez-la depuis le tiroir d\'applications.</string>
-    <string name="content_settings_explore_region_picker_title">Sélection rapide de la région dans Explorer</string>
-    <string name="content_settings_explore_region_picker_subtitle">Afficher une icône représentant un globe terrestre dans la barre supérieure de l\'écran « Explorer » pour changer instantanément la région en vogue.</string>
     <string name="categories_region_picker_desc">Changer la région en vogue (actuellement : %1$s)</string>
     <string name="sb_color_picker_title">Couleur de mise en évidence du segment</string>
     <string name="auto_backup_pick_folder">Sélectionner un dossier</string>
@@ -911,8 +892,6 @@
     <string name="player_nav_btn_title">Afficher les boutons Suivant/Précédent</string>
     <string name="player_nav_btn_subtitle">Afficher les boutons « Vidéo suivante » et « Vidéo précédente » sur le mini-lecteur</string>
     <string name="player_appearance_fullscreen_header">Plein écran</string>
-    <string name="player_show_title_title">Afficher le titre de la vidéo</string>
-    <string name="player_show_title_subtitle">Afficher le titre de la vidéo sous la barre supérieure en mode plein écran</string>
     <string name="theme_name_system_default">Paramètres par défaut du système</string>
     <string name="theme_desc_system_default">Suit votre appareil entre la lumière et l\'obscurité.</string>
     <string name="theme_name_monochrome">Monochrome</string>
@@ -932,8 +911,6 @@
     <string name="content_settings_show_app_logo_title">Afficher l\'icône du logo de l\'application</string>
     <string name="content_settings_show_app_logo_subtitle">Afficher l\'icône du logo Chorplay à côté du nom de l\'application dans la barre supérieure de l\'écran d\'accueil</string>
     <string name="content_settings_header_content_components">Éléments de contenu</string>
-    <string name="content_settings_hide_watched_title">Masquer les vidéos visionnées</string>
-    <string name="content_settings_hide_watched_subtitle">Filtrez les vidéos que vous avez déjà visionnées dans votre fil d\'actualité et vos abonnements</string>
     <string name="content_settings_disable_shorts_player_title">Désactiver le lecteur Shorts</string>
     <string name="content_settings_disable_shorts_player_subtitle">Lire toutes les vidéos (y compris les YouTube Shorts) dans le lecteur vidéo standard</string>
     <string name="content_settings_header_nav_tabs">Onglets de navigation</string>
@@ -1017,9 +994,6 @@
     <string name="categories_title">Catégories</string>
     <string name="categories_switch_to_grid">Passer à l\'affichage en grille</string>
     <string name="categories_switch_to_list">Passer à l\'affichage en liste</string>
-    <string name="category_all">Tout</string>
-    <string name="category_trending">Tendances</string>
-    <string name="category_movies">Films</string>
     <string name="category_live">Direct</string>
     <string name="settings_continue_watching_title">Reprendre la lecture</string>
     <string name="settings_continue_watching_subtitle">Afficher une section pour les vidéos en cours de lecture sur l\'écran d\'accueil.</string>
@@ -1058,8 +1032,6 @@
     <string name="speed_slider_increase">Augmenter la vitesse</string>
     <string name="speed_slider_reset">Réinitialiser à 1×</string>
     <string name="speed_slider_apply">Appliquer</string>
-    <string name="player_settings_stable_voice">Voix stable</string>
-    <string name="player_settings_stable_voice_subtitle">Normaliser le volume audio pour une lecture homogène</string>
     <string name="player_settings_dearrow">DeArrow</string>
     <string name="sb_category_sponsor">Parrainage</string>
     <string name="load_more_replies">Afficher plus de réponses</string>
@@ -1210,7 +1182,6 @@
     <string name="saved">Enregistré</string>
     <string name="filter_oldest">Le plus ancien</string>
     <string name="title_copied">Le titre a été copié dans le presse-papiers</string>
-    <string name="in_this_video">Dans cette vidéo</string>
     <string name="proxy_settings_username">Nom d\'utilisateur</string>
     <string name="proxy_settings_password">Mot de passe</string>
     <string name="proxy_settings_optional_auth">Laissez les champs « Nom d\'utilisateur » et « Mot de passe » vides pour les proxys sans authentification.</string>
@@ -1232,7 +1203,6 @@
     <string name="player_settings_play_during_calls">Lecture pendant les appels</string>
     <string name="player_settings_header_gestures">Gestes</string>
     <string name="player_settings_double_tap_seek">Durée de la recherche par double-tap</string>
-    <string name="player_settings_double_tap_seek_subtitle_template">%ds par côté en appuyant deux fois</string>
     <string name="player_settings_double_tap_seek_dialog_title">Durée de la recherche en appuyant deux fois</string>
     <string name="player_settings_double_tap_seek_dialog_body">Choisissez le nombre de secondes à parcourir lorsque vous appuyez deux fois sur le côté gauche ou droit du lecteur.</string>
     <string name="cache_size_header">Taille du cache multimédia</string>
@@ -1530,7 +1500,6 @@
     <string name="player_background_style_blur">Œuvre floue</string>
     <string name="player_background_style_gradient">Dégradé de couleurs</string>
     <string name="player_background_style_default">Surface par défaut</string>
-    <string name="lyrics_provider_lyrics_plus">LyricsPlus</string>
     <string name="section_daily_discover">Votre découverte du jour</string>
     <string name="section_speed_dial">Accès Rapide</string>
     <string name="shuffle_play">Lecture aléatoire</string>
@@ -1568,7 +1537,6 @@
     <string name="open">Ouvrir</string>
     <string name="video_download_location_label">Emplacement de téléchargement de la vidéo</string>
 
-    <string name="refresh_lyrics">Actualiser les paroles</string>
     <string name="settings_item_datetime">Date et heure</string>
     <string name="settings_item_datetime_subtitle">Personnaliser l\'affichage des dates de téléchargement</string>
     <string name="datetime_title">Affichage de la date et de l\'heure</string>
@@ -1710,7 +1678,6 @@
     <string name="sync_continue">Continuer</string>
     <string name="sync_qr_scan_on_target_sending">Scannez ce code-barres sur l\'appareil vers lequel vous effectuez l\'envoi</string>
     <string name="sync_qr_scan_on_target_receiving">Scannez ce code-barres sur l\'appareil à partir duquel vous recevez le message</string>
-    <string name="sync_confirmation_code">Code de confirmation : %1$s</string>
     <string name="sync_expires_in">Expire dans %1$ds</string>
     <string name="sync_qr_network_note">Les deux appareils doivent être connectés au même réseau Wi-Fi (ou au point d\'accès d\'un des deux appareils). Vous devrez peut-être autoriser l\'accès à Chorplay via un pare-feu.</string>
     <string name="sync_sas_title">Les codes correspondent-ils ?</string>
@@ -1865,7 +1832,6 @@
     <string name="channel_error_log_clip_label">Journal des erreurs du canal de Chorplay</string>
     <string name="search_filter_all">Tout</string>
     <string name="search_toggle_view_mode">Basculer l\'affichage des résultats de recherche</string>
-    <string name="channel_sort_latest">Les plus récentes</string>
     <string name="tab_posts">Publications</string>
     <string name="community_posts_empty">Aucune publication de la communauté n\'a été trouvée</string>
     <string name="community_posts_load_failed">Impossible de charger les publications de la communauté</string>
@@ -1921,7 +1887,6 @@
     <string name="widget_no_downloads">Vos téléchargements s\'afficheront ici</string>
     <string name="widget_like">Favoris</string>
     <string name="desc_more">…et plus</string>
-    <string name="playlist_visibility_metadata">%1$s • %2$s</string>
     <string name="playlist_filter_owned">Appartenant à</string>
     <string name="playlist_creation_menu_open">Création de playlist</string>
     <string name="playlist_creation_menu_close">Fermer le menu de création de playlist</string>
@@ -1949,7 +1914,6 @@
     <string name="ui_clear">Effacer</string>
     <string name="ui_delete_from_playlist">Supprimer de la playlist</string>
     <string name="ui_added">Ajouté</string>
-    <string name="ui_sync_lyrics">Synchroniser les paroles</string>
     <string name="ui_downloading_playlist">Téléchargement de la playlist</string>
 
     <string name="content_settings_hide_unplayable_subscriptions_title">Masquer les vidéos non lisibles dans les abonnements</string>
@@ -2043,7 +2007,6 @@
 
 
 
-    <string name="tv_library_history">Historique</string>
 
 
 
@@ -2077,16 +2040,6 @@
     <string name="interface_mode_mobile_summary">Utilisez toujours l\'interface du téléphone et de la tablette</string>
     <string name="interface_mode_tv">TV</string>
     <string name="interface_mode_tv_summary">Utilisez toujours l\'interface du téléviseur compatible avec la télécommande</string>
-    <string name="tv_home_title">Accueil</string>
-    <string name="tv_continue_watching">Continuer à regarder</string>
-    <string name="tv_home_recommended">Recommandé</string>
-    <string name="tv_error_loading">Impossible de charger le contenu</string>
-    <string name="tv_no_recommendations">Aucune recommandation pour l\'instant</string>
-    <string name="tv_subscriptions_title">Abonnements</string>
-    <string name="tv_no_subscriptions">Aucune vidéo par abonnement pour le moment</string>
-    <string name="tv_search_hint">Recherche de vidéos</string>
-    <string name="tv_search_empty">Rechercher des vidéos à regarder</string>
-    <string name="tv_search_no_results">Aucune vidéo trouvée</string>
 
     <string name="error_failed_to_load_videos">Impossible de charger les vidéos.</string>
     <string name="error_invalid_channel_url">URL de chaîne non valide</string>
@@ -2153,18 +2106,6 @@
 
 
 
-    <string name="tv_library_liked">Vidéos aimées</string>
-    <string name="tv_library_playlists">Playlists</string>
-    <string name="tv_library_empty">Votre bibliothèque est vide</string>
-    <string name="tv_player_rewind">Revenir 10 secondes en arrière</string>
-    <string name="tv_player_fast_forward">Avancer de 10 secondes</string>
-    <string name="tv_player_close">Fermer le lecteur</string>
-    <string name="tv_subscriptions_empty">Aucune vidéo par abonnement pour le moment</string>
-    <string name="tv_search_prompt">Rechercher des vidéos</string>
-    <string name="tv_search_action">Rechercher</string>
-    <string name="tv_library_likes">Vidéos aimées</string>
-    <string name="tv_library_watch_later">Regarder plus tard</string>
-    <string name="tv_library_saved_shorts">Shorts enregistrées</string>
     <string name="error_no_internet_found">Aucune connexion Internet détectée</string>
     <string name="error_no_videos_for_category">Aucune vidéo n\'a été trouvée pour cette catégorie.</string>
     <string name="download_sabr_failed_try_again">Échec du téléchargement SABR. Veuillez réessayer.</string>
@@ -2184,42 +2125,9 @@
     <string name="about_reddit">Reddit</string>
     <string name="about_reddit_subtitle">r/Chorplay_Official</string>
     <string name="about_license_name">GNU GPL v3</string>
-    <string name="tv_music_empty">Aucune musique à recommander pour le moment</string>
-    <string name="tv_music_charts">Classement musical</string>
-    <string name="tv_player_settings">Paramètres du lecteur</string>
     <string name="tv_player_queue">File d\'attente</string>
-    <string name="tv_player_play_now">Jouer maintenant</string>
-    <string name="tv_player_skip_segment">Passer %1$s</string>
-    <string name="tv_player_chapters">Chapitres</string>
-    <string name="tv_keyboard_space">Espace</string>
-    <string name="tv_keyboard_delete">Supprimer</string>
-    <string name="tv_keyboard_clear">Effacer</string>
-    <string name="tv_keyboard_voice">Recherche vocale</string>
-    <string name="tv_more_replies">Plus de réponses</string>
-    <string name="tv_filter_all">Tout</string>
-    <string name="tv_filter_videos">Vidéos</string>
-    <string name="tv_filter_channels">Chaînes</string>
-    <string name="tv_filter_playlists">Playlists</string>
-    <string name="tv_filter_artists">Artistes</string>
-    <string name="tv_filter_live">En direct</string>
-    <string name="tv_channel_videos">Vidéos</string>
-    <string name="tv_subscriptions_all">Toutes les chaînes</string>
-    <plurals name="tv_playlist_video_count">
-        <item quantity="one">%1$d vidéo</item>
-        <item quantity="many">%1$d vidéos</item>
-        <item quantity="other">%1$d vidéos</item>
-    </plurals>
-    <string name="tv_music_lyrics">Paroles</string>
-    <string name="tv_music_expand">Ouvrir le lecteur en plein écran</string>
-    <string name="tv_music_no_lyrics">Aucune parole trouvée</string>
-    <string name="tv_music_radio">Radio</string>
-    <string name="tv_settings_appearance">Apparence</string>
-    <string name="tv_settings_chor_engine">Moteur Chorplay</string>
-    <string name="tv_settings_sync">Synchroniser les appareils</string>
-    <string name="tv_sync_qr_session_active">Ce code reste actif tant que cet écran est ouvert.</string>
     <string name="tv_remote_guide_title">Guide d\'utilisation de la télécommande et du clavier</string>
     <string name="tv_remote_guide_subtitle">Un guide pratique pour utiliser Chorplay depuis son canapé</string>
-    <string name="tv_remote_guide_back">Retour aux paramètres</string>
     <string name="tv_guide_navigation_title">Navigation</string>
     <string name="tv_guide_search_title">Rechercher et parcourir</string>
     <string name="tv_guide_playback_title">Lecture</string>
@@ -2227,9 +2135,7 @@
     <string name="tv_guide_key_ok">OK</string>
     <string name="tv_guide_key_back">Retour</string>
     <string name="tv_guide_key_left_edge">Bord gauche</string>
-    <string name="tv_guide_key_edit">Modifier les clés</string>
     <string name="tv_guide_key_voice">Micro</string>
-    <string name="tv_guide_key_right">Droite</string>
     <string name="tv_guide_key_left_right">Gauche / Droite</string>
     <string name="tv_guide_key_hold">Verrouillage</string>
     <string name="tv_guide_key_up">Haut</string>
@@ -2240,12 +2146,8 @@
     <string name="tv_guide_back">Fermez le panneau actif, revenez à l\'écran précédent ou accédez à la page d\'accueil avant de quitter.</string>
     <string name="tv_guide_left_edge">Déplacez-vous vers la gauche à partir du bord du contenu pour ouvrir la barre de navigation.</string>
     <string name="tv_guide_rail">Utilisez les touches Haut et Bas pour choisir une destination, OK pour l\'ouvrir, et Droite pour revenir au contenu.</string>
-    <string name="tv_guide_search_keyboard">Parcourez le clavier à l\'écran et filtrez les lignes.</string>
-    <string name="tv_guide_search_type">Saisissez la lettre mise en évidence ou sélectionnez un filtre, une suggestion ou un résultat.</string>
     <string name="tv_guide_key_rail">Barre de navigation</string>
-    <string name="tv_guide_search_edit">Utilisez les touches Espace, Supprimer et Effacer situées sur la rangée inférieure du clavier pour modifier la requête.</string>
     <string name="tv_guide_search_voice">Lancez la recherche vocale si le téléviseur dispose d\'un service de microphone compatible.</string>
-    <string name="tv_guide_search_results">Passez du clavier aux filtres et aux résultats ; utilisez les touches Haut et Bas pour naviguer entre les sections.</string>
     <string name="tv_guide_player_toggle">Lancez la lecture ou mettez-la en pause pour afficher les commandes de lecture.</string>
     <string name="tv_guide_player_seek">Effectuez une recherche en arrière ou en avant ; la barre de recherche indique la position actuelle.</string>
     <string name="tv_guide_player_hold">Maintenez la touche gauche ou droite enfoncée pour accélérer le défilement, puis relâchez-la pour valider.</string>
@@ -2253,17 +2155,7 @@
     <string name="tv_guide_player_down">Afficher les commandes de navigation et mettre en surbrillance les boutons Lecture/Pause.</string>
     <string name="tv_guide_player_media">Les touches « Lecture », « Pause », « Précédent », « Suivant », « Retour rapide », « Avance rapide » et « Sous-titres » fonctionnent directement.</string>
     <string name="tv_guide_player_back">Fermez d\'abord un panneau ou les commandes ; appuyez à nouveau pour quitter le lecteur.</string>
-    <string name="tv_settings_wifi_quality">Qualité par défaut (Wi-Fi)</string>
-    <string name="tv_settings_cellular_quality">Qualité par défaut (réseau mobile)</string>
-    <string name="tv_settings_codec">Codec préféré</string>
-    <string name="tv_theme_mode_title">Thème</string>
-    <string name="tv_theme_variant_title">Variante</string>
-    <string name="tv_theme_variant_light">Clair</string>
-    <string name="tv_theme_variant_dark">Sombre</string>
-    <string name="tv_theme_variant_amoled">AMOLED</string>
-    <string name="tv_about_version">Version %1$s</string>
     <string name="remove_from_queue">Retirer de la file d\'attente</string>
-    <string name="remove_from_queue_confirmation">Êtes-vous sûr de vouloir supprimer cette vidéo de la file d\'attente ?</string>
     <string name="reorder_queue_item">Réorganiser un élément de la file d\'attente</string>
     <string name="notif_background_restricted_subtitle">Android empêche Chorplay de vérifier la présence de nouvelles vidéos lorsque l\'application est fermée ; les notifications ne s\'affichent donc que lorsque vous ouvrez l\'application. Appuyez ici pour autoriser l\'activité en arrière-plan sans restriction.</string>
     <string name="notif_background_restricted_title">Les vérifications d\'antécédents sont soumises à des restrictions</string>
@@ -2283,7 +2175,6 @@
     <string name="duration_minutes_short">%1$dm</string>
     <string name="empty_saved_shorts">Aucun court métrage enregistré pour l\'instant</string>
     <string name="settings_search_no_results">Aucun paramètre trouvé pour %1$s</string>
-    <string name="settings_lyrics_provider_order_description">Les fournisseurs sont testés les uns après les autres. Le premier qui renvoie les paroles remporte la mise.</string>
     <string name="import_running_background">Vous pouvez quitter cette page : l\'importation se poursuit en arrière-plan.</string>
     <string name="donations_cryptocurrency">CRYPTOMONNAIE</string>
     <string name="import_no_history_entries">Aucune entrée d\'historique de surveillance n\'a été trouvée dans le fichier</string>
@@ -2343,7 +2234,6 @@
     <string name="sync_receive_option_body">Fusionner la bibliothèque d\'un autre appareil avec celle-ci.</string>
     <string name="sync_select_all">Tout sélectionner</string>
     <string name="sync_select_none">Effacer</string>
-    <string name="top_bar_clear_search">Effacer la recherche</string>
     <string name="top_bar_close_search">Fermer la recherche</string>
     <plurals name="subscriptions_refresh_progress_template">
         <item quantity="one">Actualisation de la chaîne %1$d sur %2$d</item>
@@ -2383,7 +2273,6 @@
     <string name="player_time_separator">/</string>
     <string name="you">Vous</string>
     <string name="search_voice_prompt">Parlez pour lancer la recherche…</string>
-    <string name="shared_video">Vidéo partagée</string>
     <string name="search_failed">Échec de la recherche</string>
     <string name="loading_more">Chargement en cours…</string>
     <string name="load_failed">Échec du chargement</string>
@@ -2489,37 +2378,17 @@
 
 
 
-    <string name="lyrics_save_file">Enregistrer sous forme de fichier .lrc</string>
     <plurals name="queue_track_count">
         <item quantity="one">%1$d titre</item>
         <item quantity="many">%1$d titres</item>
         <item quantity="other">%1$d titres</item>
     </plurals>
-    <string name="lyrics_saved">Paroles enregistrées</string>
-    <string name="lyrics_save_failed">Impossible d\'enregistrer les paroles</string>
-    <string name="lyrics_choose_source">Choisissez la source des paroles</string>
     <string name="subscriptions_failed_channels_copy_logs">Copier les journaux</string>
     <string name="content_settings_channel_group_badge_title">Afficher le groupe sur les avatars des chaînes</string>
     <string name="content_settings_channel_group_badge_subtitle">Attribuer aux avatars une étiquette correspondant à leur groupe d\'abonnement</string>
     <string name="channel_add_to_group">Ajouter au groupe</string>
     <string name="channel_groups_sheet_title">Groupes de chaînes</string>
     <string name="channel_groups_empty">Aucun groupe pour l\'instant</string>
-    <string name="lyrics_synced_badge">Synchronisé</string>
-    <string name="lyrics_edit">Modifier les paroles</string>
-    <string name="lyrics_copy">Copier les paroles</string>
-    <string name="lyrics_copied">Paroles copiées</string>
-    <string name="lyrics_alignment">Alignement</string>
-    <string name="lyrics_align_left">Aligner à gauche</string>
-    <string name="lyrics_align_center">Aligner au centre</string>
-    <string name="lyrics_align_right">Aligner à droite</string>
-    <string name="lyrics_adjust_sync">Régler le décalage de synchronisation</string>
-    <string name="lyrics_sync_offset_value">%1$ss</string>
-    <string name="lyrics_sync_reset">Réinitialiser la synchronisation des paroles</string>
-    <string name="lyrics_searching_sources">Recherche de sources…</string>
-    <string name="lyrics_no_sources_found">Aucune parole n\'a été trouvée, quelle que soit la source</string>
-    <string name="lyrics_source_edited">Modifié</string>
-    <string name="lyrics_current_source">Source actuelle : %1$s</string>
-    <string name="lyrics_display_header">Affichage</string>
     <string name="audio_bitrate_kbps_template">%1$d kbps</string>
     <string name="scheduled_for_prefix">Prévu pour %1$s</string>
     <string name="live_in_prefix">En direct %1$s</string>
@@ -2695,12 +2564,10 @@
     <string name="theme_name_yin_yang">Yin &amp; Yang</string>
     <string name="theme_name_strawberry_daiquiri">Daiquiri à la fraise</string>
     <string name="theme_name_tide">Marée</string>
-    <string name="lyrics_keep_screen_on_summary">Tant que les paroles sont affichés et que la musique joue</string>
     <string name="player_appearance_sleep_timer_button_title">Bouton de mise en veille</string>
     <string name="player_appearance_plain_control_colors_title">controle des couleurs</string>
     <string name="player_appearance_plain_control_colors_monochrome">Noir et blanc</string>
     <string name="player_appearance_plain_control_colors_app">Thème de couleurs</string>
-    <string name="lyrics_source_local_file">Fichier de paroles</string>
     <string name="check_out_short_template">Découvrez ce short : %1$s\nhttps://youtube.com/shorts/%2$s</string>
     <string name="link_not_supported">Chorplay ne peut pas ouvrir ce type de lien</string>
     <string name="mark_as_unwatched">Marquer comme « non vu »</string>
@@ -2726,9 +2593,6 @@
     <string name="search_filter_recently_uploaded">télécharger récemment</string>
     <string name="search_filter_watch_any">Regarder ou pas</string>
     <string name="search_filter_unwatched">Pas regarder</string>
-    <plurals name="search_watch_empty_watched">
-        <item quantity="one">Pas de vidéos regarder ici</item>
-    </plurals>
     <string name="home_load_more_failed">Impossible de charger d\'autres vidéos</string>
     <string name="home_load_more_failed_body">Vérifiez votre connection</string>
     <plurals name="subscriptions_refresh_checks_template">
@@ -2740,7 +2604,6 @@
     <string name="player_appearance_follow_light_theme_title">Thème lumineux</string>
     <string name="player_appearance_follow_light_theme_subtitle">Les arrière-plans des illustrations s\'éclaircissent</string>
     <string name="player_appearance_sleep_timer_button_subtitle">Afficher à côté du bouton de file d\'attente</string>
-    <string name="lyrics_source_embedded">Paroles intégrées</string>
     <string name="mark_as_unwatched_toast">Marqué comme « non visionné »</string>
     <string name="search_watch_empty_unwatched">Aucune vidéo non visionnée ici</string>
     <string name="player_appearance_artwork_control_colors_subtitle">Colorez les boutons et la barre de défilement de la couverture</string>
@@ -2755,7 +2618,4 @@
     <string name="notes_filter_channels">Chaînes</string>
     <string name="notes_sort_recent">Dernière modification</string>
     <string name="notes_sort_oldest">Les plus anciens en premier</string>
-    <string name="music_player_tab_lyrics">Paroles</string>
-    <string name="music_player_tab_up_next">Suivant</string>
-    <string name="music_player_lyrics_full_screen">Paroles en plein écran</string>
 </resources>

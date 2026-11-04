@@ -28,12 +28,10 @@ class PlaylistRepository
             AppDatabase.profile(context).videoDao(),
         )
 
-        // Watch Later Logic (using a special hardcoded playlist ID "watch_later")
         companion object {
             const val WATCH_LATER_ID = "watch_later"
             const val SAVED_SHORTS_ID = "saved_shorts"
 
-            // Built-in pages read from the likes store, not playlist rows.
             const val LIKED_VIDEOS_ID = "liked_videos"
             const val LIKED_MUSIC_ID = "liked_music"
         }
@@ -58,9 +56,7 @@ class PlaylistRepository
             return VideoEntity.fromDomain(normalizedVideo)
         }
 
-        // Saved Shorts Logic
         suspend fun addToSavedShorts(video: Video) {
-            // Ensure saved shorts playlist exists
             val savedShorts = playlistDao.getPlaylist(SAVED_SHORTS_ID)
             if (savedShorts == null) {
                 playlistDao.insertPlaylist(
@@ -75,10 +71,8 @@ class PlaylistRepository
                 )
             }
 
-            // Save video
             updateVideoMetadata(video)
 
-            // Add relationship
             val position = System.currentTimeMillis()
             playlistDao.insertPlaylistVideoCrossRef(
                 PlaylistVideoCrossRef(
@@ -123,11 +117,9 @@ class PlaylistRepository
                     )
                 }
 
-                // Save video
                 android.util.Log.d("PlaylistRepository", "Inserting video metadata")
                 updateVideoMetadata(video)
 
-                // Add relationship
                 val position = System.currentTimeMillis()
                 android.util.Log.d("PlaylistRepository", "Inserting cross-ref")
                 playlistDao.insertPlaylistVideoCrossRef(
@@ -189,7 +181,6 @@ class PlaylistRepository
                 false
             }
 
-        // Playlist Management
         suspend fun createPlaylist(
             playlistId: String,
             name: String,
@@ -211,10 +202,6 @@ class PlaylistRepository
             playlistDao.insertPlaylist(entity)
         }
 
-        /**
-         * Adds an imported playlist as the viewer's own, in the given order. Videos already in the
-         * library keep their stored metadata; the file only fills in ones Chorplay has never seen.
-         */
         suspend fun importPlaylist(
             name: String,
             description: String,
@@ -305,11 +292,6 @@ class PlaylistRepository
             addVideosToPlaylist(playlistId, listOf(video))
         }
 
-        /**
-         * Appends [videos] to the end of the playlist, preserving the order they are given in.
-         * Positions are a plain ascending ordering key here, unlike the negative "newest first"
-         * timestamps Watch Later and Saved Shorts stamp on their own rows.
-         */
         suspend fun addVideosToPlaylist(
             targetPlaylistId: String,
             videos: List<Video>,
@@ -321,7 +303,6 @@ class PlaylistRepository
 
                 videoDao.mergeMetadata(videos.map(::normalizedEntity))
                 videos.forEach { video ->
-                    // Re-adding a track already in the playlist must not move it.
                     if (!alreadyInPlaylist.add(video.id)) return@forEach
                     playlistDao.insertPlaylistVideoCrossRef(
                         PlaylistVideoCrossRef(
@@ -349,7 +330,6 @@ class PlaylistRepository
             playlistDao.updatePlaylistThumbnail(playlistId, newThumb)
         }
 
-        /** Removes [videoIds] and returns what [restorePlaylistVideos] needs to put them back. */
         suspend fun takeVideosFromPlaylist(
             playlistId: String,
             videoIds: Collection<String>,
@@ -387,19 +367,11 @@ class PlaylistRepository
                 entities.map { it.toDomain() }
             }
 
-        /** Like [getPlaylistVideosFlow] but each video carries when it was added to this playlist. */
         fun getPlaylistVideosWithAddedAtFlow(playlistId: String): Flow<List<Video>> =
             playlistDao.getVideosWithMetaForPlaylist(playlistId).map { rows ->
-                // addedAt <= 0 means "unknown" (legacy rows reordered before the addedAt column
-                // existed) — surface null so the UI falls back instead of showing an epoch date.
                 rows.map { it.video.toDomain().copy(addedAtInPlaylist = it.addedAt.takeIf { ts -> ts > 0L }) }
             }
 
-        /**
-         * Reconciles a saved (not-owned) playlist's local copy with a fresh remote fetch: upserts each
-         * remote video's metadata, restores creator order, adds newly-published videos and drops ones
-         * the creator removed. Keeps the playlist available offline while showing real, current data.
-         */
         suspend fun syncSavedPlaylistVideos(
             playlistId: String,
             remoteVideos: List<Video>,

@@ -29,29 +29,6 @@ internal fun NavGraphBuilder.linkPlaybackRoutes(
     defaultStartRoute: String,
 ) {
     composable(
-        route = MUSIC_PLAYER_ROUTE_PATTERN,
-        arguments =
-            listOf(
-                navArgument(MUSIC_PLAYER_ROUTE_ARG) { type = NavType.StringType },
-                navArgument(MUSIC_PLAYER_LIST_ARG) {
-                    type = NavType.StringType
-                    nullable = true
-                    defaultValue = null
-                },
-            ),
-    ) { backStackEntry ->
-        val videoId = backStackEntry.arguments?.getString(MUSIC_PLAYER_ROUTE_ARG).orEmpty()
-
-        LaunchedEffect(videoId) {
-            val video = linkedVideo(videoId)
-            playerViewModel.playVideo(video)
-            GlobalPlayerState.setCurrentVideo(video)
-            withFrameNanos { }
-            navController.popTransientRouteOrNavigateStart(defaultStartRoute)
-        }
-    }
-
-    composable(
         route = LINKED_PLAYLIST_ROUTE_PATTERN,
         arguments =
             listOf(

@@ -139,8 +139,6 @@ internal fun LanguageRegionScreen(
             )
         }
 
-        null -> {
-            Unit
-        }
+        null -> {}
     }
 }

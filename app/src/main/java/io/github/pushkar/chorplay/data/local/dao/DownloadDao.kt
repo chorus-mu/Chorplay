@@ -13,7 +13,6 @@ import io.github.pushkar.chorplay.data.local.entity.DownloadItemStatus
 import io.github.pushkar.chorplay.data.local.entity.DownloadWithItems
 import kotlinx.coroutines.flow.Flow
 
-/** One row of the download queue. */
 data class QueuedDownload(
     val videoId: String,
     val createdAt: Long,
@@ -22,14 +21,9 @@ data class QueuedDownload(
 
 @Dao
 interface DownloadDao {
-    // ===== Download (parent) =====
-
-    // An upsert, never REPLACE: REPLACE deletes the row first, and the foreign key cascades that
-    // delete to every file row of the download.
     @Upsert
     suspend fun insertDownload(download: DownloadEntity)
 
-    /** Starts [download] over with [items], dropping the file rows of any earlier attempt. */
     @Transaction
     suspend fun replaceDownload(
         download: DownloadEntity,
@@ -61,9 +55,6 @@ interface DownloadDao {
     @Query("SELECT sponsorBlockSegmentsJson FROM downloads WHERE videoId = :videoId")
     suspend fun getSponsorBlockData(videoId: String): String?
 
-    // ===== Download Items (children) =====
-
-    // ABORT: two downloads resolving to one path must fail loudly, not delete each other's rows.
     @Insert(onConflict = OnConflictStrategy.ABORT)
     suspend fun insertItem(item: DownloadItemEntity): Long
 
@@ -116,8 +107,6 @@ interface DownloadDao {
     @Query("DELETE FROM download_items WHERE id = :itemId")
     suspend fun deleteItem(itemId: Int)
 
-    // ===== Combined Queries =====
-
     @Transaction
     @Query("SELECT * FROM downloads ORDER BY createdAt DESC")
     fun getAllDownloadsWithItems(): Flow<List<DownloadWithItems>>
@@ -134,7 +123,6 @@ interface DownloadDao {
     @Query("SELECT * FROM downloads WHERE videoId = :videoId")
     fun getDownloadWithItemsFlow(videoId: String): Flow<DownloadWithItems?>
 
-    /** Get downloads that have at least one item with VIDEO fileType */
     @Transaction
     @Query(
         """
@@ -146,7 +134,6 @@ interface DownloadDao {
     )
     fun getVideoDownloads(): Flow<List<DownloadWithItems>>
 
-    /** Get downloads that have AUDIO items but NO VIDEO items */
     @Transaction
     @Query(
         """
@@ -161,7 +148,6 @@ interface DownloadDao {
     )
     fun getAudioOnlyDownloads(): Flow<List<DownloadWithItems>>
 
-    /** Get downloads with active (DOWNLOADING/PENDING) items */
     @Transaction
     @Query(
         """
@@ -173,10 +159,6 @@ interface DownloadDao {
     )
     fun getActiveDownloads(): Flow<List<DownloadWithItems>>
 
-    /**
-     * Where the finished audio-only download of [videoId] was saved. Blocking, for the player's
-     * loader thread, which has to answer before it opens the stream.
-     */
     @Query(
         """
         SELECT filePath FROM download_items
@@ -187,7 +169,6 @@ interface DownloadDao {
     )
     fun completedAudioPathBlocking(videoId: String): String?
 
-    /** Check if a completed download exists for a video */
     @Query(
         """
         SELECT EXISTS(
@@ -198,7 +179,6 @@ interface DownloadDao {
     )
     suspend fun isDownloaded(videoId: String): Boolean
 
-    /** A finished download's file row: where it ended up, what it is, and that it is complete. */
     @Query(
         """
         UPDATE download_items SET filePath = :filePath, fileName = :fileName, format = :format, mimeType = :mimeType,
@@ -222,7 +202,6 @@ interface DownloadDao {
         path: String,
     )
 
-    /** What the watch page added to a download's metadata, so a retry does not ask again. */
     @Query(
         """
         UPDATE downloads SET title = :title, uploader = :uploader, channelId = :channelId, description = :description,
@@ -242,40 +221,15 @@ interface DownloadDao {
         requestJson: String,
     )
 
-    /** A download's stored request, rewritten when a step adds to it so a retry does not repeat the step. */
     @Query("UPDATE downloads SET requestJson = :requestJson WHERE videoId = :videoId")
     suspend fun updateRequest(
         videoId: String,
         requestJson: String,
     )
 
-    /** A song's album and artists, moved in from where older versions kept them. */
-    @Query(
-        """
-        UPDATE downloads SET kind = :kind, album = COALESCE(:album, album), albumId = COALESCE(:albumId, albumId),
-            artistsJson = COALESCE(:artistsJson, artistsJson), channelId = :channelId, uploader = :uploader
-        WHERE videoId = :videoId
-        """,
-    )
-    suspend fun updateMusicMetadata(
-        videoId: String,
-        kind: io.github.pushkar.chorplay.data.video.downloader.tags.DownloadKind,
-        album: String?,
-        albumId: String?,
-        artistsJson: String?,
-        channelId: String,
-        uploader: String,
-    )
-
-    /** Whether anything is waiting for, or in the middle of, a transfer. */
     @Query("SELECT EXISTS(SELECT 1 FROM download_items WHERE status IN ('PENDING', 'DOWNLOADING'))")
     suspend fun hasQueuedDownloads(): Boolean
 
-    /**
-     * Every download as the queue work sees it, oldest first. Finished and failed rows are included
-     * on purpose: a row that left the waiting states still has a running job that must be let finish,
-     * and only a row that is paused, cancelled or gone asks for its job to stop.
-     */
     @Query(
         """
         SELECT d.videoId AS videoId, MIN(d.createdAt) AS createdAt, di.status AS status FROM downloads d
@@ -286,19 +240,15 @@ interface DownloadDao {
     )
     fun observeQueue(): Flow<List<QueuedDownload>>
 
-    /** A download the app was killed in the middle of goes back to waiting, so the queue picks it up. */
     @Query("UPDATE download_items SET status = 'PENDING' WHERE status = 'DOWNLOADING'")
     suspend fun requeueInterrupted()
 
-    /** Get total download storage size */
     @Query("SELECT COALESCE(SUM(totalBytes), 0) FROM download_items WHERE status = 'COMPLETED'")
     suspend fun getTotalDownloadSize(): Long
 
-    /** Count completed downloads */
     @Query("SELECT COUNT(DISTINCT videoId) FROM download_items WHERE status = 'COMPLETED'")
     suspend fun getCompletedDownloadCount(): Int
 
-    /** Check if a download item already exists for a given file path */
     @Query("SELECT EXISTS(SELECT 1 FROM download_items WHERE filePath = :filePath)")
     suspend fun existsByFilePath(filePath: String): Boolean
 }

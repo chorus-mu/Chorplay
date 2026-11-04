@@ -4,7 +4,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.PlaylistPlay
 import androidx.compose.material.icons.outlined.Folder
 import androidx.compose.material.icons.outlined.History
-import androidx.compose.material.icons.outlined.LibraryMusic
 import androidx.compose.material.icons.outlined.Psychology
 import androidx.compose.material.icons.outlined.Subscriptions
 import androidx.compose.material.icons.outlined.ThumbUp
@@ -64,6 +63,6 @@ internal fun collectionIcon(key: String): ImageVector =
         SyncCollection.SUBSCRIBED_CHANNELS -> Icons.Outlined.Subscriptions
         SyncCollection.SUBSCRIPTIONS -> Icons.Outlined.Folder
         SyncCollection.SETTINGS -> Icons.Outlined.Tune
-        SyncCollection.MUSIC_BRAIN -> Icons.Outlined.LibraryMusic
+        SyncCollection.CHOR_NEURO_BRAIN -> Icons.Outlined.Psychology
         else -> Icons.Outlined.Psychology
     }

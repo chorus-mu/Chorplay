@@ -98,7 +98,7 @@ internal object NeuroStemmer {
     ): String {
         if (word in unstemmed || word.any { !it.isLetter() }) return word
         val language = languageOf(word, profile) ?: return word
-        val stemmer = stemmers.get().getOrPut(language) { create(language) }
+        val stemmer = stemmers.get()?.getOrPut(language) { create(language) } ?: return word
         val stem = stemmer.stemOf(word)
         // A stem that stems again ("casero", "caser", "cas") would drift on every pass, so the word stays.
         return if (stem.length < MIN_STEM || stemmer.stemOf(stem) != stem) word else stem

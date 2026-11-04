@@ -10,7 +10,6 @@ import kotlinx.coroutines.withContext
 import java.io.File
 import java.io.IOException
 
-/** Why a picked file was not taken as the app font. */
 enum class FontImportError { NOT_A_FONT_FILE, TOO_LARGE, UNREADABLE }
 
 sealed interface FontImportResult {
@@ -23,7 +22,6 @@ sealed interface FontImportResult {
     ) : FontImportResult
 }
 
-/** The one custom font file, kept in app storage because a picked document's URI does not stay readable. */
 class CustomFontStore(
     context: Context,
 ) {
@@ -68,7 +66,6 @@ class CustomFontStore(
         file()?.delete()
     }
 
-    /** The custom font as a family, or null when the file is gone or no longer reads as a font. */
     fun loadFamily(file: File): FontFamily? = loadTypeface(file)?.let(::FontFamily)
 
     private fun describe(uri: Uri): Pair<String?, Long?> =
@@ -81,7 +78,6 @@ class CustomFontStore(
             }
         }.getOrNull() ?: (uri.lastPathSegment to null)
 
-    /** Copies at most one byte past the limit, so an unknown-size stream can't fill the disk. */
     private fun copyCapped(
         uri: Uri,
         target: File,
@@ -103,7 +99,6 @@ class CustomFontStore(
         return total
     }
 
-    /** `Typeface.createFromFile` falls back to the default font for a bad file; the builder returns null instead. */
     private fun loadTypeface(file: File): Typeface? = runCatching { Typeface.Builder(file).build() }.getOrNull()
 
     companion object {
@@ -114,7 +109,6 @@ class CustomFontStore(
         private const val BUFFER_SIZE = 64 * 1024
         private val Extensions = setOf("ttf", "otf")
 
-        /** The lowercase extension when [name] is a TrueType or OpenType file name, else null. */
         fun fontExtension(name: String?): String? =
             name
                 ?.substringAfterLast('.', missingDelimiterValue = "")

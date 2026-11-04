@@ -358,9 +358,7 @@ internal fun ChannelContent(
                                             coroutineScope.launch { pagerState.animateScrollToPage(target.index) }
                                         }
 
-                                        null -> {
-                                            Unit
-                                        }
+                                        null -> {}
                                     }
                                 },
                             ),

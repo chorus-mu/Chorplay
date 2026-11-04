@@ -47,7 +47,6 @@
     <string name="download">Скачать</string>
     <string name="save">Сохранить</string>
     <string name="up_next">ДАЛЕЕ</string>
-    <string name="lyrics">ТЕКСТ ПЕСНИ</string>
     <string name="related">ПОХОЖИЕ</string>
     <string name="close">Закрыть</string>
     <string name="more_options">Параметры</string>
@@ -64,7 +63,6 @@
     <string name="autoplay">Автовоспроизведение</string>
     <string name="move_up">Вверх</string>
     <string name="move_down">Вниз</string>
-    <string name="lyrics_not_available">Текст песни недоступен</string>
     <string name="playing">Воспроизведение</string>
     <string name="remove">Удалить</string>
     <string name="related_content">Связанный контент</string>
@@ -119,8 +117,6 @@
     <string name="save_to">Сохранить в...</string>
     <string name="watch_later">Смотреть позже</string>
     <string name="watch_later_unsave">Удалить из «Смотреть позже»</string>
-    <string name="playlist_private">Ограниченный доступ</string>
-    <string name="playlist_public">Публичный</string>
     <string name="create_new_playlist">Создать новый плейлист</string>
     <string name="playlist_name">Название</string>
     <string name="playlist_description_optional">Описание (опционально)</string>
@@ -229,13 +225,9 @@
     <string name="date_this_month">В этом месяце</string>
     <string name="date_this_year">В этом году</string>
     <string name="duration_any">Любая длительность</string>
-    <string name="duration_under_4">Менее 4 мин</string>
-    <string name="duration_4_20">4–20 мин</string>
     <string name="duration_over_20">Более 20 мин</string>
     <string name="sort_relevance">По релевантности</string>
-    <string name="sort_upload_date">По дате загрузки</string>
     <string name="sort_view_count">По числу просмотров</string>
-    <string name="sort_rating">По рейтингу</string>
     <string name="channel_default_title">Канал</string>
     <string name="channel_banner">Баннер канала</string>
     <string name="channel_avatar">Аватар канала</string>
@@ -357,8 +349,6 @@
     <string name="settings_item_player_appearance">Вид плеера</string>
     <string name="settings_item_player_appearance_subtitle">Настройка стиля полосы прокрутки</string>
     <string name="style_default">Динамический</string>
-    <string name="style_metrolist">Толстый</string>
-    <string name="style_metrolist_slim">По умолчанию</string>
     <string name="style_squiggly">Волнистый</string>
     <string name="style_slim">Ультратонкий</string>
     <string name="player_appearance_gestures_header">Жесты</string>
@@ -375,9 +365,6 @@
     <string name="player_nav_btn_subtitle">Показывать кнопки переключения видео в мини-плеере</string>
 
 
-    <string name="lyrics_provider_lrclib">LrcLib</string>
-    <string name="lyrics_provider_better_lyrics">Better Lyrics</string>
-    <string name="lyrics_provider_simpmusic">SimpMusic</string>
     <string name="theme_name_system_default">Системная тема</string>
     <string name="theme_desc_system_default">Следует за настройками вашего устройства: светлыми или тёмными.</string>
     <string name="theme_name_pure_light">Чистый светлый</string>
@@ -478,9 +465,6 @@
     <string name="categories_title">Категории</string>
     <string name="categories_switch_to_grid">Переключить на сетку</string>
     <string name="categories_switch_to_list">Переключить на список</string>
-    <string name="category_all">Все</string>
-    <string name="category_trending">В тренде</string>
-    <string name="category_movies">Фильмы</string>
     <string name="category_live">Трансляции</string>
     <string name="settings_continue_watching_title">Полка «Продолжить просмотр»</string>
     <string name="settings_continue_watching_subtitle">Показывать полку с недосмотренными видео на главном экране.</string>
@@ -495,8 +479,6 @@
     <string name="player_settings_autoplay_subtitle">Воспроизвести предложенное видео, когда ничего не стоит в очереди</string>
     <string name="player_settings_skip_silence">Пропускать тишину</string>
     <string name="player_settings_skip_silence_subtitle">Пропускать части без звука</string>
-    <string name="player_settings_stable_voice">Стабильный голос</string>
-    <string name="player_settings_stable_voice_subtitle">Нормализовать громкость звука для стабильного воспроизведения</string>
     <string name="loop_video">Зациклить видео</string>
     <string name="player_settings_sponsorblock">SponsorBlock</string>
     <string name="player_settings_sponsorblock_subtitle">Пропускать спонсорские сегменты</string>
@@ -557,7 +539,6 @@
     <string name="player_settings_audio_original_desc">Использовать родную аудиодорожку видео</string>
     <string name="player_settings_header_gestures">Жесты</string>
     <string name="player_settings_double_tap_seek">Время перемотки двойным нажатием</string>
-    <string name="player_settings_double_tap_seek_subtitle_template">%d сек при двойном нажатии</string>
     <string name="player_settings_double_tap_seek_dialog_title">Время перемотки</string>
     <string name="player_settings_double_tap_seek_dialog_body">Насколько далеко прыгает двойное нажатие в любую сторону.</string>
     <string name="video_quality_title">Качество видео</string>
@@ -595,7 +576,6 @@
     <string name="btn_close">Закрыть</string>
     <string name="loading_shorts">Загрузка Shorts…</string>
     <string name="error_short_load">Произошла ошибка</string>
-    <string name="share_short_template">Посмотрите этот Short: https://youtu.be/%1$s</string>
     <string name="speed_2x">Скорость 2x</string>
     <string name="cd_liked">Нравится</string>
     <string name="player_settings_remember_speed">Запоминать скорость воспроизведения</string>
@@ -614,13 +594,9 @@
     <string name="speed_slider_increase">Увеличить скорость</string>
     <string name="speed_slider_reset">Сбросить до 1×</string>
     <string name="speed_slider_apply">Применить</string>
-    <string name="content_settings_hide_watched_title">Скрыть просмотренные видео</string>
-    <string name="content_settings_hide_watched_subtitle">Отфильтровать видео, которые вы уже отсмотрели, из своей домашней ленты и страницы подписок</string>
     <string name="content_settings_disable_shorts_player_title">Отключить Shorts-плеер</string>
     <string name="content_settings_disable_shorts_player_subtitle">Воспроизведение Shorts в обычном видеоплеере</string>
     <string name="categories_region_picker_desc">Сменить регион (текущий: %1$s)</string>
-    <string name="content_settings_explore_region_picker_subtitle">Показать значок глобуса на верхней панели экрана, чтобы мгновенно изменить регион.</string>
-    <string name="content_settings_explore_region_picker_title">Быстрый выбор региона</string>
     <string name="pinned_comment">Закрепленный комментарий</string>
     <string name="pinned_by_creator">Закреплено автором</string>
     <string name="cache_size_header">Размер кэша медиафайлов</string>
@@ -682,7 +658,6 @@
     <string name="resume">Возобновить</string>
     <string name="filter_oldest">Старые</string>
     <string name="title_copied">Заголовок скопирован в буфер обмена</string>
-    <string name="in_this_video">В этом видео</string>
     <string name="manage_groups">Управлять группами</string>
     <string name="new_group">Новая группа</string>
     <string name="edit_group">Редактировать группу</string>
@@ -766,8 +741,6 @@
     <string name="player_appearance_fullscreen_header">Полноэкранный режим</string>
     <string name="player_adaptive_size_title">Адаптивный размер проигрывателя</string>
     <string name="player_adaptive_size_subtitle">Расширьте плеер для более высоких видео. Выкл. сохраняет соотношение 16:9.</string>
-    <string name="player_show_title_title">Показать название видео</string>
-    <string name="player_show_title_subtitle">Отображать название видео под верхней панелью в полноэкранном режиме</string>
     <string name="theme_name_material_you">Material You</string>
     <string name="theme_desc_material_you">Цвета, подобранные на основе ваших обоев — в Android 12 и более новых версиях.</string>
     <string name="theme_name_monochrome">Монохром</string>
@@ -897,7 +870,6 @@
     <string name="saved_to_library">Сохранено в библиотеку</string>
     <string name="failed_to_save_to_library">Не удалось сохранить в библиотеку</string>
     <string name="open">Открыть</string>
-    <string name="refresh_lyrics">Обновить текст песни</string>
     <string name="upcoming_video_reminder_enabled">Напоминание установлено</string>
     <string name="upcoming_video_reminder_badge">Напоминание включено</string>
     <string name="playback_speed">Скорость воспроизведения</string>
@@ -1095,8 +1067,6 @@
     <string name="add_description_placeholder">Добавить описание...</string>
     <string name="edit_playlist_action">Редактировать плейлист</string>
     <string name="delete_playlist_action">Удалить плейлист</string>
-    <string name="make_public_action">Сделать публичным</string>
-    <string name="make_private_action">Ограничить доступ</string>
     <string name="remove_from_playlist_action">Удалить из плейлиста</string>
     <string name="playlist_empty_title">Плейлист пуст</string>
     <string name="playlist_empty_desc">Добавляйте видео прямо из плеера,\nчтобы собрать свой плейлист</string>
@@ -1200,7 +1170,6 @@
     <string name="sync_continue">Продолжить</string>
     <string name="sync_qr_scan_on_target_sending">Отсканируйте это на принимающем устройстве</string>
     <string name="sync_qr_scan_on_target_receiving">Отсканируйте это на отправляющем устройстве</string>
-    <string name="sync_confirmation_code">Код подтверждения: %1$s</string>
     <string name="sync_expires_in">Истекает через %1$d с</string>
     <string name="sync_qr_network_note">Оба устройства должны быть подключены к одной сети Wi-Fi или точке доступа.</string>
     <string name="sync_sas_title">Совпадают ли проверочные коды?</string>
@@ -1427,7 +1396,6 @@
     <string name="playlist_author_community">Плейлисты сообщества</string>
     <string name="template_bass_boost">Усиление басов: %1$ddB</string>
     <string name="label_tempo_pitch">Скорость и высота тона</string>
-    <string name="template_speed">Скорость: %1$d%%</string>
     <string name="template_pitch">Высота тона: %1$d</string>
     <string name="action_add_band">Добавить группу</string>
     <string name="template_preamp">Предусилитель: %1$.1fdB</string>
@@ -1585,7 +1553,6 @@
     <string name="appearance_selected">Выбрано</string>
     <string name="icon_name_chorplay_play">Chorplay Play</string>
     <string name="player_fullscreen_seekbar_width_value">%1$d dp</string>
-    <string name="lyrics_provider_lyrics_plus">LyricsPlus</string>
     <string name="currently_blocked">В данный момент заблокировано</string>
     <string name="desc_remove_topic">Удалить %1$s</string>
     <string name="desc_unblock_topic">Разблокировать %1$s</string>
@@ -1812,7 +1779,6 @@
     <string name="search_in_chorplay">Поиск в Chorplay</string>
     <string name="close_popup_player">Закрыть всплывающий плеер</string>
     <string name="topic_score_prefix">Оценка</string>
-    <string name="channel_sort_latest">Новые</string>
     <string name="search_filter_all">Все</string>
     <string name="search_toggle_view_mode">Вид результатов поиска</string>
     <string name="content_settings_home_reselect_refresh_title">Обновлять вкладку «Главная» при повторном нажатии</string>
@@ -1879,7 +1845,6 @@
     <string name="widget_open_history">Открыть историю</string>
     <string name="widget_no_recent">Здесь появятся просмотренные видео</string>
     <string name="widget_no_downloads">Здесь появятся ваши загрузки</string>
-    <string name="playlist_visibility_metadata">%1$s • %2$s</string>
     <string name="playlist_filter_owned">Создано</string>
     <string name="playlist_creation_menu_open">Создать плейлист</string>
     <string name="playlist_creation_menu_close">Закрыть меню создания плейлиста</string>
@@ -1952,65 +1917,9 @@
     <string name="interface_mode_mobile_summary">Всегда использовать мобильный интерфейс</string>
     <string name="interface_mode_tv">ТВ</string>
     <string name="interface_mode_tv_summary">Всегда использовать ТВ-интерфейс, адаптированный для пульта</string>
-    <string name="tv_home_title">Главная</string>
-    <string name="tv_continue_watching">Продолжить просмотр</string>
-    <string name="tv_home_recommended">Рекомендации</string>
-    <string name="tv_error_loading">Не удалось загрузить контент</string>
-    <string name="tv_no_recommendations">Рекомендаций пока нет</string>
-    <string name="tv_subscriptions_title">Подписки</string>
-    <string name="tv_no_subscriptions">Видео из подписок пока нет</string>
-    <string name="tv_search_hint">Поиск видео</string>
-    <string name="tv_search_empty">Поиск видео для просмотра</string>
-    <string name="tv_search_no_results">Видео не найдены</string>
-    <string name="tv_library_history">История</string>
-    <string name="tv_library_liked">Понравившиеся видео</string>
-    <string name="tv_library_playlists">Плейлисты</string>
-    <string name="tv_library_empty">Библиотека пуста</string>
-    <string name="tv_player_rewind">Назад на 10 секунд</string>
-    <string name="tv_player_fast_forward">Вперед на 10 секунд</string>
-    <string name="tv_player_close">Закрыть плеер</string>
-    <string name="tv_subscriptions_empty">Видео из подписок пока нет</string>
-    <string name="tv_search_prompt">Поиск видео</string>
-    <string name="tv_search_action">Поиск</string>
-    <string name="tv_library_likes">Понравившиеся видео</string>
-    <string name="tv_library_watch_later">Смотреть позже</string>
-    <string name="tv_music_empty">Музыкальных рекомендаций пока нет</string>
-    <string name="tv_music_charts">Чарты</string>
-    <string name="tv_player_settings">Настройки плеера</string>
     <string name="tv_player_queue">Очередь</string>
-    <string name="tv_player_play_now">Воспроизвести сейчас</string>
-    <string name="tv_player_skip_segment">Пропустить %1$s</string>
-    <string name="tv_player_chapters">Главы</string>
-    <string name="tv_more_replies">Еще ответы</string>
-    <string name="tv_keyboard_space">Пробел</string>
-    <string name="tv_keyboard_delete">Удалить</string>
-    <string name="tv_keyboard_clear">Очистить</string>
-    <string name="tv_keyboard_voice">Голосовой поиск</string>
-    <string name="tv_filter_all">Все</string>
-    <string name="tv_filter_videos">Видео</string>
-    <string name="tv_filter_channels">Каналы</string>
-    <string name="tv_filter_playlists">Плейлисты</string>
-    <string name="tv_filter_artists">Исполнители</string>
-    <string name="tv_filter_live">Трансляции</string>
-    <string name="tv_channel_videos">Видео</string>
-    <string name="tv_subscriptions_all">Все каналы</string>
-    <plurals name="tv_playlist_video_count">
-        <item quantity="one">%1$d видео</item>
-        <item quantity="few">%1$d видео</item>
-        <item quantity="many">%1$d видео</item>
-        <item quantity="other">%1$d видео</item>
-    </plurals>
-    <string name="tv_music_lyrics">Текст песни</string>
-    <string name="tv_music_expand">Развернуть плеер</string>
-    <string name="tv_music_no_lyrics">Текст песни не найден</string>
-    <string name="tv_music_radio">Радио</string>
-    <string name="tv_settings_appearance">Внешний вид</string>
-    <string name="tv_settings_chor_engine">Движок Chorplay</string>
-    <string name="tv_settings_sync">Синхронизация устройств</string>
-    <string name="tv_sync_qr_session_active">Код действителен, пока открыт этот экран.</string>
     <string name="tv_remote_guide_title">Справка по пульту и клавиатуре</string>
     <string name="tv_remote_guide_subtitle">Краткое руководство по управлению Chorplay с пульта</string>
-    <string name="tv_remote_guide_back">Вернуться к настройкам</string>
     <string name="tv_guide_navigation_title">Навигация</string>
     <string name="tv_guide_search_title">Поиск и обзор</string>
     <string name="tv_guide_playback_title">Воспроизведение</string>
@@ -2021,15 +1930,6 @@
     <string name="tv_guide_left_edge">Нажимайте влево до упора для вызова боковой панели.</string>
     <string name="tv_guide_key_rail">Боковая панель</string>
     <string name="tv_guide_rail">Используйте «Вверх» и «Вниз» для выбора раздела, «ОК» для открытия и «Вправо» для возврата к контенту.</string>
-    <string name="tv_settings_wifi_quality">Качество по умолчанию (Wi‑Fi)</string>
-    <string name="tv_settings_cellular_quality">Качество по умолчанию (мобильная сеть)</string>
-    <string name="tv_settings_codec">Предпочитаемый кодек</string>
-    <string name="tv_theme_mode_title">Тема</string>
-    <string name="tv_theme_variant_title">Режим</string>
-    <string name="tv_theme_variant_light">Светлый</string>
-    <string name="tv_theme_variant_dark">Темный</string>
-    <string name="tv_theme_variant_amoled">AMOLED</string>
-    <string name="tv_about_version">Версия %1$s</string>
     <string name="ui_open_in_youtube">Открыть в YouTube</string>
     <string name="ui_playback_error">Ошибка воспроизведения</string>
     <string name="ui_replay">Повтор</string>
@@ -2052,7 +1952,6 @@
     <string name="ui_clear">Очистить</string>
     <string name="ui_delete_from_playlist">Удалить из плейлиста</string>
     <string name="ui_added">Добавлено</string>
-    <string name="ui_sync_lyrics">Синхронизация текста</string>
     <string name="ui_downloading_playlist">Скачивание плейлиста</string>
 
 
@@ -2130,7 +2029,6 @@
     <string name="notification_channel_video_playback">Воспроизведение видео</string>
 <string name="notification_channel_general">Общие</string>
     <string name="notification_channel_reminders">Напоминания</string>
-    <string name="tv_guide_key_edit">Настройка кнопок</string>
     <string name="tv_guide_key_voice">Микрофон</string>
     <string name="notification_channel_updates">Обновления приложения</string>
     <string name="notification_channel_imports">Импорт данных</string>
@@ -2195,7 +2093,6 @@
     <string name="fallback_your_watch_later_list">Список для отложенного просмотра</string>
     <string name="fallback_downloaded_locally">Скачано на устройство</string>
     <string name="notification_channel_downloads">Загрузки</string>
-    <string name="tv_guide_key_right">Вправо</string>
     <string name="tv_guide_key_left_right">Влево / Вправо</string>
     <string name="tv_guide_key_hold">Удержание</string>
     <string name="tv_guide_key_up">Вверх</string>
@@ -2204,11 +2101,7 @@
     <string name="tv_guide_dpad">Перемещение выделения по строкам, спискам, кнопкам и меню.</string>
     <string name="tv_guide_ok">Открыть выделенный элемент, выбрать параметр или подтвердить действие.</string>
     <string name="tv_guide_back">Закрыть активную панель, вернуться на предыдущий экран или на Главную перед выходом.</string>
-    <string name="tv_guide_search_keyboard">Перемещаться по экранной клавиатуре и фильтрам.</string>
-    <string name="tv_guide_search_type">Ввести выделенную букву, активировать фильтр, поисковую подсказку или результат.</string>
-    <string name="tv_guide_search_edit">Использовать кнопки «Пробел», «Стереть» и «Очистить» внизу клавиатуры для редактирования запроса.</string>
     <string name="tv_guide_search_voice">Включить голосовой поиск, если ТВ поддерживает микрофона.</string>
-    <string name="tv_guide_search_results">Перемещаться от клавиатуры к фильтрам и результатам; переходить между разделами кнопками «Вверх» и «Вниз».</string>
     <string name="tv_guide_player_toggle">Воспроизведение или пауза и отображение кнопок управления.</string>
     <string name="tv_guide_player_seek">Перемотка назад или вперед; полоса прогресса показывает выбранную позицию.</string>
     <string name="tv_guide_player_hold">Удерживать «Влево» или «Вправо» для ускорения перемотки и отпустить для подтверждения.</string>
@@ -2221,7 +2114,6 @@
     <string name="fallback_more_results">Показать еще</string>
     <string name="ui_instrumental">И Н С Т Р У М Е Н Т А Л</string>
     <string name="remove_from_queue">Удалить из очереди</string>
-    <string name="remove_from_queue_confirmation">Вы уверены, что хотите удалить это видео из очереди?</string>
     <string name="reorder_queue_item">Изменение порядка в очереди</string>
     <string name="notif_background_restricted_title">Фоновые проверки ограничены</string>
     <string name="notif_background_restricted_subtitle">Android блокирует проверки, пока Chorplay закрыт. Нажмите, чтобы разрешить фоновую активность.</string>
@@ -2239,7 +2131,6 @@
     <string name="audio_track_dubbed">Дубляж</string>
     <string name="empty_saved_shorts">Нет сохраненных Shorts</string>
     <string name="settings_search_no_results">Ничего не найдено по запросу: %1$s</string>
-    <string name="settings_lyrics_provider_order_description">Попробовано сверху донизу. Перетаскивайте, чтобы изменить порядок.</string>
     <string name="import_running_background">Вы можете покинуть этот экран. Импорт продолжится.</string>
     <string name="donations_cryptocurrency">КРИПТОВАЛЮТА</string>
     <string name="import_no_history_entries">В файле не найдена история просмотра</string>
@@ -2302,7 +2193,6 @@
     <string name="sync_expires_seconds">%1$d сек</string>
     <string name="sync_done_stats_summary">Добавлено: %1$d · Обновлено: %2$d · Пропущено: %3$d</string>
     <string name="sync_scanning_hint">Разместите QR-код другого устройства внутри рамки.</string>
-    <string name="top_bar_clear_search">Очистить поиск</string>
     <string name="top_bar_close_search">Закрыть поиск</string>
     <plurals name="subscriptions_refresh_progress_template">
         <item quantity="one">Обновлено %1$d из %2$d канала</item>
@@ -2317,25 +2207,6 @@
         <item quantity="many">%1$d треков</item>
         <item quantity="other">%1$d треков</item>
     </plurals>
-    <string name="lyrics_save_file">Сохранить как LRC-файл</string>
-    <string name="lyrics_saved">Текст песни сохранен</string>
-    <string name="lyrics_save_failed">Не удалось сохранить текст песни</string>
-    <string name="lyrics_choose_source">Выберите источник текста песни</string>
-    <string name="lyrics_synced_badge">Синхронизировано</string>
-    <string name="lyrics_edit">Изменить текст песни</string>
-    <string name="lyrics_copy">Скопировать текст песни</string>
-    <string name="lyrics_copied">Текст песни скопирован</string>
-    <string name="lyrics_alignment">Выравнивание</string>
-    <string name="lyrics_align_left">По левому краю</string>
-    <string name="lyrics_align_center">По центру</string>
-    <string name="lyrics_align_right">По правому краю</string>
-    <string name="lyrics_adjust_sync">Настроить задержку</string>
-    <string name="lyrics_sync_offset_value">%1$sс</string>
-    <string name="lyrics_sync_reset">Сбросить задержку текста</string>
-    <string name="lyrics_searching_sources">Поиск источников…</string>
-    <string name="lyrics_no_sources_found">Не удалось найти текст песни</string>
-    <string name="lyrics_source_edited">Изменено</string>
-    <string name="lyrics_current_source">Текущий источник: %1$s</string>
     <string name="explicit_badge">E</string>
     <plurals name="view_replies_template">
         <item quantity="one">Посмотреть %1$d ответ</item>
@@ -2514,14 +2385,6 @@
         <item quantity="other">Последнее обновление %1$d- %2$d видео проверены</item>
     </plurals>
     <string name="channel_groups_sheet_title">Группы каналов</string>
-    <string name="music_player_tab_lyrics">Текст песни</string>
-    <string name="lyrics_show_translation">Перевод</string>
-    <string name="lyrics_show_translation_summary">Разместить переведенную строку под каждой строкой оригинального текста</string>
-    <string name="lyrics_show_romanization_summary">Показывать латиницу для других языков</string>
-    <string name="lyrics_auto_romanize">Использовать латиницу на этом устройстве</string>
-    <string name="lyrics_auto_romanize_summary">Для этих текстов песен нет транслитерации</string>
-    <string name="lyrics_keep_screen_on">Не выключать экран</string>
-    <string name="lyrics_keep_screen_on_summary">При проигрывании трека со включенным текстом</string>
     <string name="player_appearance_artwork_control_colors_subtitle">Придайте кнопкам и полосе прокрутки оттенок, взятый с обложки</string>
     <string name="player_appearance_sleep_timer_button_title">Кнопка, таймера сна</string>
     <string name="link_not_supported">Chorplay не может открыть ссылку такого типа</string>
@@ -2594,9 +2457,6 @@
     <string name="search_filter_watch_any">Смотреть или нет</string>
     <string name="search_filter_unwatched">Непросмотренный</string>
     <string name="search_filter_watched">Просмотрено</string>
-    <plurals name="search_watch_empty_unwatched">
-        <item quantity="one">Здесь нет непросмотренных видео</item>
-    </plurals>
     <string name="search_feature_hd">HD</string>
     <string name="search_feature_4k">4K</string>
     <string name="search_feature_hdr">HDR</string>
@@ -2610,17 +2470,11 @@
     <string name="content_settings_channel_group_badge_title">Показывать группу на аватарах каналов</string>
     <string name="content_settings_channel_group_badge_subtitle">Добавить к аватарам метки уровней спонсорства</string>
     <string name="channel_groups_empty">Групп пока нет</string>
-    <string name="music_player_tab_up_next">Далее</string>
-    <string name="lyrics_play_from_line">Воспроизвести с этой строки</string>
-    <string name="lyrics_show_romanization">Транслитерация</string>
     <string name="player_appearance_follow_light_theme_title">Светлый цвет в светлой теме</string>
     <string name="player_appearance_follow_light_theme_subtitle">Фоны изображений становятся светлыми</string>
     <string name="player_appearance_sleep_timer_button_subtitle">Показать это рядом с кнопкой добавления в очередь</string>
     <string name="player_appearance_plain_control_colors_monochrome">Чёрно и белое</string>
     <string name="player_appearance_plain_control_colors_app">Тема приложения</string>
-    <string name="lyrics_source_local_file">Файл с текстом песни</string>
-    <string name="lyrics_source_embedded">Встроенный текст песни</string>
-    <string name="lyrics_display_header">отобразить</string>
     <string name="audio_bitrate_kbps_template">%1$d кбит/с</string>
     <string name="check_out_short_template">Посмотри этот Shorts: %1$s\nhttps://youtube.com/shorts/%2$s</string>
     <string name="quick_action_watched">Просмотреное</string>
@@ -2640,9 +2494,6 @@
     <string name="search_filter_group_type">Тип</string>
     <string name="search_filter_group_duration">Продолжительность</string>
     <string name="search_filter_group_upload_date">Дата загрузки</string>
-    <plurals name="search_watch_empty_watched">
-        <item quantity="one">Здесь нет просмотренных видео</item>
-    </plurals>
     <string name="search_feature_subtitles">Субтитры/СС</string>
     <string name="search_results_estimated">Результаты по %1$s</string>
     <string name="search_shelf_show_more">Показать ещё</string>
@@ -2805,9 +2656,8 @@
     <string name="category_news">Новости</string>
     <string name="category_sports">Шортсы</string>
     <string name="category_learning">Обучение</string>
-    <string name="category_fashion">Мода</string>    <plurals name="categories_rate_limited">
-        <item quantity="one">В данный момент YouTube ограничивает количество запросов. Попробуйте ещё раз через несколько минут.</item>
-    </plurals>
+    <string name="category_fashion">Мода</string>
+    <string name="categories_rate_limited">В данный момент YouTube ограничивает количество запросов. Попробуйте ещё раз через несколько минут.</string>
     <string name="categories_shelf_see_all">Посмотреть все</string>
     <string name="categories_shelf_back">Вернуться ко всем полкам</string>
     <string name="proxy_settings_bypass_vpn">Отключите прокси в VPN</string>
@@ -2963,7 +2813,6 @@
 
 
     <string name="channel_add_to_group">Добавить в группу</string>
-    <string name="music_player_lyrics_full_screen">Текст песни на весь экран</string>
     <string name="player_appearance_artwork_control_colors_title">Адаптивный цвет кнопок</string>
     <string name="player_appearance_plain_control_colors_title">Цвета кнопок управления</string>
     <string name="channel_about_links">Ссылки</string>
@@ -3020,8 +2869,6 @@
 
 
 
-    <string name="music_player_mode_song">Песня</string>
-    <string name="music_player_mode_video">Видео</string>
 
     <string name="content_language_follow_app">Следовать указаниям языка приложения</string>
 
@@ -3696,23 +3543,9 @@
     <string name="settings_quality_tab_shorts">Шортс</string>
     <string name="thumbnail_quality_high">Высокий</string>
     <string name="thumbnail_quality_medium">Середина</string>
-    <string name="lyrics_provider_lrc_red_desc">Синхронизация слов · сопоставление с записью</string>
-    <string name="lyrics_provider_kugou_desc">Линейная синхронизация · сильная для китайских песен</string>
     <string name="queue_move_to_end">Перейти в конец</string>
-    <string name="lyrics_provider_youtube_captions">Субтитры на YouTube</string>
-    <string name="lyrics_provider_lrc_red">lrc.red</string>
     <string name="queue_swipe_right">Очередь, проведите пальцем вправо</string>
-    <string name="lyrics_provider_paxsenix">Apple Music (Пакссеникс)</string>
-    <string name="lyrics_provider_youtube_music">YouTube Музыка</string>
-    <string name="lyrics_provider_better_lyrics_desc">Синхронизация слов · Тексты песен Apple Music</string>
-    <string name="lyrics_provider_lyrics_plus_desc">Синхронизация слов</string>
-    <string name="lyrics_provider_simpmusic_desc">Синхронизация слов · в сочетании с видео</string>
-    <string name="lyrics_provider_paxsenix_desc">Синхронизация слов</string>
     <string name="dearrow_random_frame_subtitle">Если ничего не отправлено, показать кадр из видео</string>
-    <string name="lyrics_provider_lrclib_desc">Линейная синхронизация · открытая база данных</string>
-    <string name="lyrics_provider_unison_desc">Тексты песен сообщества · небольшой каталог</string>
-    <string name="lyrics_provider_youtube_captions_desc">Линейная синхронизация · титры к видео</string>
-    <string name="lyrics_provider_youtube_music_desc">Обычный текст · вкладка «Тексты»</string>
     <string name="dearrow_random_frame">Используйте видеокадр</string>
 
 
@@ -3802,9 +3635,6 @@
     <string name="settings_section_proxy_sign_in">Войти</string>
     <string name="settings_show_password">Показать пароль</string>
     <string name="settings_hide_password">Скрыть пароль</string>
-    <string name="lyrics_auto_romanize_japanese">Пока недоступно для японского языка</string>
-    <string name="lyrics_provider_kugou">KuGou</string>
-    <string name="lyrics_provider_unison">Unison</string>
     <string name="filter_artists">Исполнители</string>
     <string name="filter_featured_playlists">Рекомендуемые плейлисты</string>
     <string name="filter_podcasts">Подкасты</string>

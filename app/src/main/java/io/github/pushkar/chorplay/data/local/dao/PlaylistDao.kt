@@ -11,7 +11,6 @@ data class PlaylistWithCount(
     @ColumnInfo(name = "video_count") val videoCount: Int,
 )
 
-/** A playlist's video joined with per-playlist metadata (when it was added to that playlist). */
 data class PlaylistVideoWithMeta(
     @Embedded val video: VideoEntity,
     @ColumnInfo(name = "addedAt") val addedAt: Long,
@@ -22,7 +21,6 @@ interface PlaylistDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertPlaylistRow(playlist: PlaylistEntity)
 
-    /** Re-saving or syncing a playlist keeps the place the viewer dragged it to. */
     @Transaction
     suspend fun insertPlaylist(playlist: PlaylistEntity) {
         val keptPosition = if (playlist.position != 0) playlist.position else getPlaylist(playlist.id)?.position ?: 0
@@ -35,7 +33,6 @@ interface PlaylistDao {
         position: Int,
     )
 
-    /** Stores [orderedIds] as the custom order, starting at 1 so playlists added later lead the list. */
     @Transaction
     suspend fun reorderPlaylists(orderedIds: List<String>) {
         orderedIds.forEachIndexed { index, id -> updatePlaylistPosition(id, index + 1) }
@@ -99,7 +96,6 @@ interface PlaylistDao {
         videoIds: List<String>,
     ): List<PlaylistVideoCrossRef>
 
-    /** Removes [videoIds] as one change and returns their entries, so the removal can be undone. */
     @Transaction
     suspend fun takePlaylistVideos(
         playlistId: String,
@@ -111,7 +107,6 @@ interface PlaylistDao {
         return taken
     }
 
-    /** Adds a whole playlist with its entries as one change, so it never appears half filled. */
     @Transaction
     suspend fun insertPlaylistWithVideos(
         playlist: PlaylistEntity,
@@ -121,7 +116,6 @@ interface PlaylistDao {
         entries.forEach { insertPlaylistVideoCrossRef(it) }
     }
 
-    /** Puts entries back where they were, with their original position and date added. */
     @Transaction
     suspend fun restorePlaylistVideos(entries: List<PlaylistVideoCrossRef>) {
         entries.forEach { insertPlaylistVideoCrossRef(it) }
@@ -130,7 +124,6 @@ interface PlaylistDao {
         }
     }
 
-    /** Applies a whole new order at once, so no intermediate order with duplicate positions is emitted. */
     @Transaction
     suspend fun reorderPlaylistVideos(
         playlistId: String,
@@ -140,7 +133,6 @@ interface PlaylistDao {
         updatePlaylistThumbnail(playlistId, getFirstVideoThumbnail(playlistId).orEmpty())
     }
 
-    /** Makes the playlist hold exactly [orderedVideoIds], in that order, as one change. */
     @Transaction
     suspend fun replacePlaylistVideos(
         playlistId: String,
@@ -194,7 +186,6 @@ interface PlaylistDao {
     @Query("SELECT videoId FROM playlist_video_cross_ref WHERE playlistId = :playlistId")
     suspend fun getVideoIdsInPlaylist(playlistId: String): List<String>
 
-    /** Null when the playlist is empty. */
     @Query("SELECT MAX(position) FROM playlist_video_cross_ref WHERE playlistId = :playlistId")
     suspend fun getMaxPlaylistPosition(playlistId: String): Long?
 
@@ -216,7 +207,6 @@ interface PlaylistDao {
     @Query("SELECT * FROM playlist_video_cross_ref")
     suspend fun getAllPlaylistVideoCrossRefs(): List<PlaylistVideoCrossRef>
 
-    /** Distinct videos saved across Watch Later and all non-music video playlists (excludes saved shorts). */
     @Query(
         """
         SELECT v.* FROM videos v
@@ -240,10 +230,6 @@ interface PlaylistDao {
     )
     suspend fun getFirstVideoThumbnail(playlistId: String): String?
 
-    /**
-     * Returns stub VideoEntities inside music playlists that are missing a title OR a thumbnail.
-     * Used for background enrichment — e.g. synced album tracks arrive with a title but no artwork.
-     */
     @Query(
         """
         SELECT DISTINCT v.* FROM videos v
@@ -255,7 +241,6 @@ interface PlaylistDao {
     )
     suspend fun getMusicPlaylistStubVideos(): List<VideoEntity>
 
-    /** Music playlist/album ids whose cover is blank — recompute from the first track after enrichment. */
     @Query("SELECT id FROM playlists WHERE isMusic = 1 AND (thumbnailUrl = '' OR thumbnailUrl IS NULL)")
     suspend fun getMusicPlaylistsMissingThumbnail(): List<String>
 }

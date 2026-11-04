@@ -4,13 +4,6 @@ import io.github.pushkar.chorplay.data.model.Comment
 import io.github.pushkar.chorplay.innertube.pages.VideoCommentSort
 import org.schabi.newpipe.extractor.Page
 
-/**
- * One page of comments and whatever the source needs to fetch the next one.
- *
- * Two sources produce this. InnerTube pages with [continuation] and describes the orders the
- * section offers in [sortOptions]; the extractor, which stands in when a response cannot be
- * parsed, pages with [legacyPage] and offers no orders at all.
- */
 data class CommentsPageResult(
     val comments: List<Comment> = emptyList(),
     val continuation: String? = null,

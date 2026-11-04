@@ -181,9 +181,7 @@ internal class YouTubeTakeoutImporter(
                                 found.playlistsByDirectory.getOrPut(name.takeoutParentPath()) { mutableListOf() } += content.playlists
                             }
 
-                            YouTubeTakeoutCsvContent.Unsupported -> {
-                                Unit
-                            }
+                            YouTubeTakeoutCsvContent.Unsupported -> {}
                         }
                     }
                 }

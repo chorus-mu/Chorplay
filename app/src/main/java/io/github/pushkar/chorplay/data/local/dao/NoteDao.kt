@@ -25,7 +25,6 @@ interface NoteDao {
     @Query("SELECT COUNT(*) FROM notes")
     fun observeCount(): Flow<Int>
 
-    /** Fills in what a note is about without touching its text or edit time. */
     @Query(
         "UPDATE notes SET title = :title, channelName = :channelName, channelId = :channelId, " +
             "thumbnailUrl = :thumbnailUrl, durationSeconds = :durationSeconds, channelAvatarUrl = :channelAvatarUrl, " +
@@ -49,7 +48,6 @@ interface NoteDao {
         position: Int,
     )
 
-    /** The viewer's hand-made order, in one write. */
     @Transaction
     suspend fun updatePositions(ids: List<String>) {
         ids.forEachIndexed { index, id -> updatePosition(id, index) }

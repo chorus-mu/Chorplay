@@ -53,7 +53,7 @@ class ChannelAvatarRepository
                             }
                         }.awaitAll()
                         // A failed fetch is not recorded, so the next visit tries that channel again.
-                        .forEach { (id, page) -> page?.let { known[id] = it.header?.avatarUrl.orEmpty() } }
+                        .forEach { (id, page) -> page?.let { known[id] = it.header.avatarUrl.orEmpty() } }
                 }
             }
             return channelIds.mapNotNull { id -> known[id]?.takeIf(String::isNotBlank)?.let { id to it } }.toMap()

@@ -213,6 +213,7 @@ class VideoPlaybackResolver(
     /**
      * Create video source, preferring generated DASH manifests over raw progressive
      */
+    @Suppress("DEPRECATION")
     private fun createVideoSource(
         videoStreams: List<VideoStream>,
         durationSeconds: Long,
@@ -244,6 +245,7 @@ class VideoPlaybackResolver(
      * Create the optimal video source based on stream type and delivery method.
      * Prioritizes DASH manifest generation to avoid YouTube throttling.
      */
+    @Suppress("DEPRECATION")
     private fun createOptimalVideoSource(
         stream: VideoStream,
         durationSeconds: Long,

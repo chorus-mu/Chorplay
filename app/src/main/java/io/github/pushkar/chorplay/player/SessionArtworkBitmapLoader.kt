@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.util.TypedValue
 import androidx.media3.common.util.BitmapLoader
-import androidx.media3.common.util.UnstableApi
 import androidx.media3.datasource.DataSourceBitmapLoader
 import androidx.media3.session.SizeLimitedBitmapLoader
 import kotlin.math.roundToInt
@@ -24,7 +23,6 @@ private const val PLATFORM_METADATA_BITMAP_MAX_DP = 320f
  * Android 15) read a ROM-only `config_maxBitmapSizePx` instead, so the smaller of the two wins
  * (#1231).
  */
-@OptIn(UnstableApi::class)
 internal fun sessionArtworkBitmapLoader(context: Context): BitmapLoader {
     val limit = platformMetadataBitmapLimitPx(context)
     // The decoder only subsamples by powers of two, so let it land anywhere below twice the limit

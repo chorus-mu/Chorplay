@@ -14,7 +14,6 @@ import javax.inject.Singleton
 private val Context.savedPlaylistSyncDataStore: DataStore<Preferences> by
     safePreferencesDataStore(name = "saved_playlist_sync", scope = StoreScope.PROFILE_LIBRARY)
 
-/** When each saved playlist was last checked against every page of its YouTube original. */
 @Singleton
 class SavedPlaylistSyncStore
     @Inject

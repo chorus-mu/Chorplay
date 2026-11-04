@@ -47,7 +47,6 @@
     <string name="download">Preuzmi</string>
     <string name="save">Sačuvaj</string>
     <string name="up_next">SLJEDEĆE</string>
-    <string name="lyrics">TEKST</string>
     <string name="related">Povezani</string>
     <string name="close">Zatvori</string>
     <string name="more_options">Više opcija</string>
@@ -64,7 +63,6 @@
     <string name="autoplay">Autoplay</string>
     <string name="move_up">Pomakni gore</string>
     <string name="move_down">Pomakni dolje</string>
-    <string name="lyrics_not_available">Tekst nije dostupan</string>
     <string name="playing">Reproducira se</string>
     <string name="remove">Ukloni</string>
     <string name="related_content">Srodni sadržaj</string>
@@ -118,8 +116,6 @@
     <string name="save_to">Sačuvaj u…</string>
     <string name="watch_later">Gledaj kasnije</string>
     <string name="watch_later_unsave">Ukloni iz Gledaj kasnije</string>
-    <string name="playlist_private">Privatno</string>
-    <string name="playlist_public">Javno</string>
     <string name="create_new_playlist">Napravi novu listu za reprodukciju</string>
     <string name="playlist_name">Naziv</string>
     <string name="playlist_description_optional">Opis (opcionalno)</string>
@@ -228,13 +224,9 @@
     <string name="date_this_month">Ovog mjeseca</string>
     <string name="date_this_year">Ove godine</string>
     <string name="duration_any">Bilo koja dužina</string>
-    <string name="duration_under_4">Manje od 4 min</string>
-    <string name="duration_4_20">4-20 min</string>
     <string name="duration_over_20">Više od 20 min</string>
     <string name="sort_relevance">Relevantnost</string>
-    <string name="sort_upload_date">Datum otpremanja</string>
     <string name="sort_view_count">Broj pregleda</string>
-    <string name="sort_rating">Ocjena</string>
     <string name="channel_default_title">Kanal</string>
     <string name="channel_banner">Baner kanala</string>
     <string name="channel_avatar">Avatar kanala</string>
@@ -410,8 +402,6 @@
     <string name="settings_item_player_appearance">Izgled Plejera</string>
     <string name="settings_item_player_appearance_subtitle">Prilagodite stil trake napretka</string>
     <string name="style_default">Podrazumijevano (Chorplay)</string>
-    <string name="style_metrolist">Metrolist(Debela)</string>
-    <string name="style_metrolist_slim">Metrolist (Tanka)</string>
     <string name="style_squiggly">Krivudava</string>
     <string name="style_slim">Ultra Tanka</string>
     <string name="player_appearance_gestures_header">Gesti</string>

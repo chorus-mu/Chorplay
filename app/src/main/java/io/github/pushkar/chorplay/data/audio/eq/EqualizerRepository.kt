@@ -26,10 +26,6 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 import javax.inject.Singleton
 
-/**
- * The one equalizer state for audio, video and Shorts. The UI changes it through [update]; every
- * player collects [processingSpec] in process and hands it to its own processor.
- */
 @Singleton
 class EqualizerRepository internal constructor(
     private val persistence: EqStatePersistence,
@@ -62,7 +58,6 @@ class EqualizerRepository internal constructor(
             .flowOn(computeDispatcher)
             .stateIn(scope, SharingStarted.Eagerly, EqProcessingSpec.OFF)
 
-    /** Whether the saved settings change the sound at all; bypass and drag previews are ignored. */
     val needsProcessing: StateFlow<Boolean> =
         _state
             .map { it.changesSound }
@@ -80,10 +75,6 @@ class EqualizerRepository internal constructor(
         }
     }
 
-    /**
-     * Applies [transform] to the state. An edit made before the saved state has loaded is replayed on
-     * top of it, so a switch flipped in the first moments after start is not lost.
-     */
     fun update(transform: (EqState) -> EqState) {
         if (!_loaded.value) {
             synchronized(earlyEdits) { earlyEdits += transform }
@@ -98,26 +89,21 @@ class EqualizerRepository internal constructor(
         scheduleSave()
     }
 
-    /** Replaces the whole state, for Undo. */
     fun restore(state: EqState) = update { state }
 
-    /** Plays [curve] in place of the active one until [update] or a null preview. */
     fun preview(curve: EqCurve?) {
         preview.value = curve?.sanitized()
     }
 
-    /** Held Compare: the players hear the unprocessed sound. Never saved. */
     fun setBypass(bypassed: Boolean) {
         bypass.value = bypassed
     }
 
-    /** Waits for the saved state, so an early backup or sync never exports the defaults. */
     suspend fun exportJson(): String {
         _loaded.first { it }
         return EqStateJson.encode(_state.value)
     }
 
-    /** Applies a backup or a synced value; ignored when it cannot be read. */
     suspend fun importJson(raw: String): Boolean {
         val decoded = EqStateJson.decode(raw) ?: return false
         _loaded.value = true

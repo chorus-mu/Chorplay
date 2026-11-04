@@ -118,9 +118,7 @@ internal fun CategoryPagedGrid(
                     )
                 }
 
-                else -> {
-                    Unit
-                }
+                else -> {}
             }
         }
 

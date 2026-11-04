@@ -2,7 +2,6 @@ package io.github.pushkar.chorplay.player.stream
 
 import android.net.Uri
 import android.util.Log
-import androidx.media3.common.util.UnstableApi
 import io.github.pushkar.chorplay.innertube.YouTube
 import io.github.pushkar.chorplay.innertube.models.AttestationPlatform
 import io.github.pushkar.chorplay.innertube.models.YouTubeClient
@@ -123,7 +122,6 @@ object InnerTubeVideoStreamExtractor {
      * @param audioOnly the caller plays only [VideoExtractionResult.audioFormats], so a capped
      *   video ladder is not worth the SABR quality upgrade's wait.
      */
-    @OptIn(UnstableApi::class)
     suspend fun extract(
         videoId: String,
         forceSabr: Boolean = false,
@@ -411,7 +409,6 @@ object InnerTubeVideoStreamExtractor {
             }
         }
 
-    @OptIn(UnstableApi::class)
     private suspend fun tryDirectClients(
         videoId: String,
         clients: List<YouTubeClient>,
@@ -557,7 +554,7 @@ object InnerTubeVideoStreamExtractor {
                     // stream, plus whether the response is SABR-capable. Makes "why was this client skipped"
                     // visible in the in-app diagnostics instead of only when every client fails.
                     val rawUrlCount = adaptiveFormats.count { !it.url.isNullOrEmpty() }
-                    val sabrPresent = !playerResponse.streamingData?.serverAbrStreamingUrl.isNullOrEmpty()
+                    val sabrPresent = !playerResponse.streamingData.serverAbrStreamingUrl.isNullOrEmpty()
                     PlayerDiagnostics.logWarning(
                         TAG,
                         "probe ${client.clientName} v${client.clientVersion}: adaptive=${adaptiveFormats.size} " +

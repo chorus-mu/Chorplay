@@ -82,9 +82,7 @@ import io.github.pushkar.chorplay.innertube.pages.channel.toChannelTabContent
 import io.github.pushkar.chorplay.innertube.pages.channel.toChannelTabs
 import io.github.pushkar.chorplay.innertube.pages.explore.ExploreDestinationPage
 import io.github.pushkar.chorplay.innertube.pages.explore.exploreShelves
-import io.github.pushkar.chorplay.innertube.pages.explore.ranked
 import io.github.pushkar.chorplay.innertube.pages.explore.toExploreDestinationShell
-import io.github.pushkar.chorplay.innertube.pages.explore.trendingVideoChart
 import io.github.pushkar.chorplay.innertube.pages.parseYouTubeViewCount
 import io.github.pushkar.chorplay.innertube.pages.reel.ReelLockup
 import io.github.pushkar.chorplay.innertube.pages.reel.ReelOverlay
@@ -144,6 +142,11 @@ import kotlin.random.Random
  */
 object YouTube {
     private val innerTube = InnerTube()
+    private val relaxedJson =
+        Json {
+            ignoreUnknownKeys = true
+            explicitNulls = false
+        }
     private const val CHANNEL_VIDEOS_PARAMS = "EgZ2aWRlb3PyBgQKAjoA"
     private const val CHANNEL_LIVE_PARAMS = "EgdzdHJlYW1z8gYECgJ6AA%3D%3D"
     private const val CHANNEL_POSTS_PARAMS = "EgVwb3N0c_IGBAoCSgA="
@@ -340,22 +343,14 @@ object YouTube {
     suspend fun videoAvatarStack(videoId: String): Result<List<String>> =
         runCatching {
             val rawBody = innerTube.next(WEB, videoId, null, null, null, null, null).bodyAsText()
-            val root =
-                Json {
-                    ignoreUnknownKeys = true
-                    explicitNulls = false
-                }.parseToJsonElement(rawBody)
+            val root = relaxedJson.parseToJsonElement(rawBody)
             root.findVideoOwnerAvatarStackUrls()
         }
 
     suspend fun videoCollaborators(videoId: String): Result<List<VideoCollaborator>> =
         runCatching {
             val rawBody = innerTube.next(WEB, videoId, null, null, null, null, null).bodyAsText()
-            val root =
-                Json {
-                    ignoreUnknownKeys = true
-                    explicitNulls = false
-                }.parseToJsonElement(rawBody)
+            val root = relaxedJson.parseToJsonElement(rawBody)
             root.findVideoOwnerCollaborators()
         }
 
@@ -376,9 +371,7 @@ object YouTube {
                     element.values.forEach(::collect)
                 }
 
-                else -> {
-                    Unit
-                }
+                else -> {}
             }
         }
 
@@ -1007,7 +1000,7 @@ object YouTube {
                 }
         val parts =
             metadata
-                ?.metadata
+                .metadata
                 ?.contentMetadataViewModel
                 ?.metadataRows
                 ?.firstOrNull()
@@ -1453,7 +1446,7 @@ object YouTube {
                         AlbumPage.getSong(it, album)
                     }!!
                     .toMutableList()
-            var continuation = playlistShelf?.contents?.getContinuation()
+            var continuation = playlistShelf.contents.getContinuation()
             val seenContinuations = mutableSetOf<String>()
             var requestCount = 0
             val maxRequests = 50 // Prevent excessive API calls
@@ -1628,7 +1621,7 @@ object YouTube {
                 }
 
                 response.continuationContents?.musicShelfContinuation != null -> {
-                    val musicShelfContinuation = response.continuationContents!!.musicShelfContinuation!!
+                    val musicShelfContinuation = response.continuationContents.musicShelfContinuation
                     ArtistItemsContinuationPage(
                         items =
                             musicShelfContinuation.contents?.getItems()?.mapNotNull {

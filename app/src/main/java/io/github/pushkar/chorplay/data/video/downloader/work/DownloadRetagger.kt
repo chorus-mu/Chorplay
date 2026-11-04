@@ -74,7 +74,7 @@ constructor(
                     legacy
                 },
             )
-        if (!request.isMusic && request.tags.channelId == null && !acceptPartial) return Outcome.DEFERRED
+        if (!request.wantsAudioOnly && request.tags.channelId == null && !acceptPartial) return Outcome.DEFERRED
         val cover =
             row.download.thumbnailPath
                 ?.let(::File)

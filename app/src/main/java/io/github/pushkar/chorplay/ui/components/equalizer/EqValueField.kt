@@ -63,7 +63,7 @@ internal fun EqValueField(
     val isError = parsed == null || parsed !in range
 
     fun commit() {
-        if (!isError && parsed != null && parsed != value) onValueChange(parsed) else text = toText(value)
+        if (!isError && parsed != value) onValueChange(parsed) else text = toText(value)
     }
 
     Column(modifier = modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(4.dp)) {

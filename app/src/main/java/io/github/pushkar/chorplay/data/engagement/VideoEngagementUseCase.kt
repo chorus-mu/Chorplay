@@ -18,27 +18,12 @@ import javax.inject.Inject
 
 private const val TAG = "VideoEngagement"
 
-/** Everything a surface shows about the viewer's relationship with one video and its channel. */
 data class VideoEngagement(
     val isSubscribed: Boolean = false,
     val isNotificationEnabled: Boolean = false,
     val likeState: String? = null,
 )
 
-/**
- * Subscribe, notification and like/dislike for one video, with the learning signals each action
- * owes the recommendation engine.
- *
- * The player, Shorts and the quick-actions sheet all performed the same writes followed by the
- * same [VideoEngagementSignals] calls; this is that sequence, once. It holds no state of its own —
- * every read is a cold flow and every write is a suspend call — so it is unscoped and the caller's
- * own scope owns any collection.
- *
- * Mutators take an `onApplied` callback rather than returning: the local write must be reflected in
- * the UI immediately, and the signals that follow it include a network channel-tag fetch, so a
- * caller that updated its state on return would leave the button stale for the length of that
- * fetch.
- */
 class VideoEngagementUseCase
     @Inject
     constructor(
@@ -54,10 +39,6 @@ class VideoEngagementUseCase
 
         fun likeState(videoId: String): Flow<String?> = likedVideosRepository.getLikeState(videoId)
 
-        /**
-         * The three concerns as one flow, so a screen showing all of them holds one collector per
-         * concern for as long as it is on the same video rather than re-reading them per action.
-         */
         fun engagement(
             videoId: String,
             channelId: String,
@@ -74,7 +55,6 @@ class VideoEngagementUseCase
                 )
             }
 
-        /** Flips the stored subscription, reporting the state it landed on. */
         suspend fun toggleSubscription(
             channelId: String,
             channelName: String,
@@ -91,10 +71,6 @@ class VideoEngagementUseCase
             )
         }
 
-        /**
-         * Writes [subscribed] for a caller that already knows which way the toggle is going — the
-         * quick-actions sheet decides from its own cache and resolves the channel avatar first.
-         */
         suspend fun applySubscription(
             channelId: String,
             channelName: String,
@@ -127,10 +103,6 @@ class VideoEngagementUseCase
             enabled: Boolean,
         ) = subscriptionRepository.updateNotificationState(channelId, enabled)
 
-        /**
-         * Likes [video]. [signalVideo] is the item the engine learns from — the richest version of
-         * the video the caller holds — and a null one means the action carries no learning signal.
-         */
         suspend fun like(
             video: Video,
             signalVideo: Video? = null,

@@ -32,7 +32,6 @@ interface SubscriptionGroupDao {
         sortOrder: Int,
     )
 
-    /** Puts the groups named in [names] in that order. */
     @Transaction
     suspend fun setOrder(names: List<String>) {
         names.forEachIndexed { index, name -> updateSortOrder(name, index) }

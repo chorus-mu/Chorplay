@@ -40,7 +40,7 @@ class SponsorBlockRepository
                     val response = client.newCall(request).execute()
                     response.use { resp ->
                         if (resp.isSuccessful) {
-                            val responseBody = resp.body?.string() ?: return@withContext emptyList()
+                            val responseBody = resp.body.string()
                             return@withContext parseSegments(responseBody) ?: emptyList()
                         } else {
                             return@withContext emptyList()

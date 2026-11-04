@@ -143,7 +143,7 @@ internal fun PlaybackRefocusEffect(
                 // A refused source must not be fetched again: the player is already reloading it,
                 // or has given up on it (#921).
                 val streamsRefused = mgr.isRecoveringStreams(playerMgrState.currentVideoId) || mgr.hasAbandonedPlayback()
-                if (player.playbackState == Player.STATE_IDLE && playerMgrState.currentVideoId != null && !streamsRefused) {
+                if (player.playbackState == Player.STATE_IDLE && !streamsRefused) {
                     Log.d(TAG, "PlaybackRefocusEffect: player in IDLE after resume, calling prepare()")
                     player.prepare()
                     if (savedPosition != null && savedPosition > 500L) {

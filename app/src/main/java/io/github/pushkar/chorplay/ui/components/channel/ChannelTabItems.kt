@@ -162,9 +162,7 @@ internal fun ChannelTabItems(
                         ChannelRow(channel = item.channel, onClick = { onChannelClick(item.channel.id) })
                     }
 
-                    is FeedItem.PostItem, null -> {
-                        Unit
-                    }
+                    is FeedItem.PostItem, null -> {}
                 }
             }
             if (append is LoadState.Loading || append is LoadState.Error) {

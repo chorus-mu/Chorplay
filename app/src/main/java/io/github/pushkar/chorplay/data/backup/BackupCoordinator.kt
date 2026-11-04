@@ -27,14 +27,8 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 import javax.inject.Singleton
 
-/** What the one running backup operation is doing, for the screens and the notification to show. */
 sealed interface BackupOperation {
     data object Idle : BackupOperation
-
-    /**
-     * [headline] is what to show ("Importing NewPipe subscriptions…"); [current]/[total] are 0/0
-     * while the work has no measurable progress yet.
-     */
     data class Running(
         val headline: String,
         val current: Int,
@@ -259,14 +253,6 @@ constructor(
     fun importNewPipeWatchHistory(uri: Uri) =
         importCounted(R.string.import_label_newpipe_watch_history) {
             repository.importNewPipeWatchHistory(uri)
-        }
-
-    fun importMetrolist(uri: Uri) =
-        importCounted(R.string.import_label_metrolist_playlists) { progress ->
-            repository.importMetrolist(
-                uri,
-                progress
-            )
         }
 
     fun importNewPipePlaylists(uri: Uri) =

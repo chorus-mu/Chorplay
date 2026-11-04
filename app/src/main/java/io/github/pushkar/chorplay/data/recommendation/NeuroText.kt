@@ -20,7 +20,7 @@ internal object PlatformWordBreaker : WordBreaker {
     private val wordBreaks = ThreadLocal.withInitial { BreakIterator.getWordInstance(Locale.ROOT) }
 
     override fun split(chunk: String): List<String> {
-        val breaks = wordBreaks.get()
+        val breaks = checkNotNull(wordBreaks.get())
         breaks.setText(chunk)
         val tokens = ArrayList<String>()
         var start = breaks.first()

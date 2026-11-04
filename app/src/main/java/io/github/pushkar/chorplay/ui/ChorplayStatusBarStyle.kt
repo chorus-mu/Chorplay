@@ -51,6 +51,7 @@ internal fun ApplyStatusBarStyle(
         val shouldDrawBehindStatusBar =
             isFullscreen || isMusicPlayerImmersive || isShortsPlayer || videoPlayerExpanded || heroUnderStatusBar
 
+        @Suppress("DEPRECATION")
         window.statusBarColor =
             if (shouldDrawBehindStatusBar) {
                 android.graphics.Color.TRANSPARENT

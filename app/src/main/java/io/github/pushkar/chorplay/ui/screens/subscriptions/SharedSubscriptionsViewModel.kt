@@ -3,7 +3,7 @@ package io.github.pushkar.chorplay.ui.screens.subscriptions
 import androidx.activity.ComponentActivity
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
-import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 
 /**
  * One [SubscriptionsViewModel] per activity — the same scoping the TV shell already uses via

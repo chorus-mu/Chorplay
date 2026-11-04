@@ -3,10 +3,6 @@ package io.github.pushkar.chorplay.data.backup
 import io.github.pushkar.chorplay.data.profile.ProfileFolders
 import java.io.File
 
-/**
- * Files that belong to one install and must not come back from a backup: the recommendation engine
- * (#907) and the sync identity and state.
- */
 internal object RestoredDataCleanup {
     private val FILES = listOf("user_neuro_brain.json")
     private val DATASTORE_FILES =
@@ -24,16 +20,11 @@ internal object RestoredDataCleanup {
         )
     private const val SYNC_LEDGER_PREFIX = "sync_ledger_"
 
-    /**
-     * Deletes everything of the profiles the restored registry doesn't list, so nothing of a profile that is gone
-     * can resurface, and returns what it removed. Default's files are never touched.
-     */
     fun deleteUnlistedProfiles(
         folders: ProfileFolders,
         profileIds: Set<String>,
     ): List<String> = (folders.idsOnDisk() - profileIds).flatMap(folders::delete).map { it.name }
 
-    /** Deletes those files under [filesDir] and returns the names it removed. */
     fun deleteInstallOnlyFiles(filesDir: File): List<String> {
         val datastore = File(filesDir, "datastore")
         val ledgers = datastore.listFiles { file -> file.name.startsWith(SYNC_LEDGER_PREFIX) }.orEmpty().toList()

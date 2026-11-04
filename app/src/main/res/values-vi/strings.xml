@@ -85,7 +85,6 @@
     <string name="failed_to_save_to_library">Lưu thất bại</string>
     <string name="open">Mở</string>
     <string name="up_next">TIẾP THEO</string>
-    <string name="lyrics">LỜI BÀI HÁT</string>
     <string name="related">LIÊN QUAN</string>
     <string name="close">Đóng</string>
     <string name="more_options">Thêm tùy chọn</string>
@@ -103,8 +102,6 @@
     <string name="autoplay">Tự động phát</string>
     <string name="move_up">Di chuyển lên</string>
     <string name="move_down">Di chuyển xuống</string>
-    <string name="lyrics_not_available">Không có lời bài hát</string>
-    <string name="refresh_lyrics">Làm mới lời</string>
     <string name="playing">Đang phát</string>
     <string name="remove">Xóa</string>
     <string name="related_content">Nội dung liên quan</string>
@@ -165,8 +162,6 @@
     <string name="save_to">Lưu vào…</string>
     <string name="watch_later">Xem sau</string>
     <string name="watch_later_unsave">Bỏ lưu Xem sau</string>
-    <string name="playlist_private">Riêng tư</string>
-    <string name="playlist_public">Công khai</string>
     <string name="create_new_playlist">Tạo danh sách mới</string>
     <string name="playlist_name">Tên</string>
     <string name="playlist_description_optional">Mô tả (tùy chọn)</string>
@@ -256,7 +251,6 @@
     <string name="description_copied">Đã sao chép mô tả</string>
     <string name="title_copied">Đã sao chép tiêu đề</string>
     <string name="tags">Thẻ</string>
-    <string name="in_this_video">Trong video này</string>
     <string name="sb_manual_skip">Bỏ qua</string>
     <string name="sb_skip_segment">Bỏ qua %1$s</string>
     <string name="ago">trước</string>
@@ -282,7 +276,6 @@
     <string name="chapters">Chương</string>
     <string name="artist">Nghệ sĩ</string>
     <string name="playlist">Danh sách phát</string>
-    <string name="playlist_visibility_metadata">%1$s • %2$s</string>
     <string name="app_name_uppercase">CHORPLAY</string>
     <string name="notification_badge_9_plus">9+</string>
     <string name="personalized_feed">Nguồn cấp cá nhân hóa</string>
@@ -330,14 +323,9 @@
     <string name="date_this_month">Tháng này</string>
     <string name="date_this_year">Năm nay</string>
     <string name="duration_any">Bất kỳ</string>
-    <string name="duration_under_4">Dưới 4 phút</string>
-    <string name="duration_4_20">4-20 phút</string>
     <string name="duration_over_20">Trên 20 phút</string>
     <string name="sort_relevance">Liên quan</string>
-    <string name="sort_upload_date">Ngày đăng</string>
     <string name="sort_view_count">Lượt xem</string>
-    <string name="sort_rating">Đánh giá</string>
-    <string name="channel_sort_latest">Mới nhất</string>
     <string name="channel_default_title">Kênh</string>
     <string name="channel_banner">Biểu ngữ kênh</string>
     <string name="channel_avatar">Ảnh đại diện</string>
@@ -574,8 +562,6 @@
     <string name="settings_item_player_appearance">Giao diện trình phát</string>
     <string name="settings_item_player_appearance_subtitle">Tùy chỉnh kiểu thanh tiến trình</string>
     <string name="style_default">Thông thường</string>
-    <string name="style_metrolist">Dày</string>
-    <string name="style_metrolist_slim">Mặc định</string>
     <string name="style_squiggly">Lượn sóng</string>
     <string name="style_slim">Cực mỏng</string>
     <string name="player_appearance_gestures_header">Cử chỉ</string>
@@ -608,8 +594,6 @@
     <string name="player_appearance_fullscreen_header">Toàn màn hình</string>
     <string name="player_adaptive_size_title">Kích thước trình phát thích ứng</string>
     <string name="player_adaptive_size_subtitle">Dùng tỷ lệ video để xác định chiều cao. Tắt để cố định 16:9.</string>
-    <string name="player_show_title_title">Hiện tiêu đề video</string>
-    <string name="player_show_title_subtitle">Hiển thị tiêu đề bên dưới thanh trên cùng khi toàn màn hình</string>
     <string name="player_fullscreen_seekbar_width_title">Độ rộng thanh tiến trình (toàn màn hình)</string>
     <string name="player_portrait_seekbar_width_title">Độ rộng thanh tiến trình (dọc)</string>
     <string name="player_portrait_seekbar_width_spaced">Có khoảng cách</string>
@@ -620,10 +604,6 @@
     <string name="player_fullscreen_seekbar_width_value">%1$d dp</string>
 
 
-    <string name="lyrics_provider_lrclib">LrcLib</string>
-    <string name="lyrics_provider_better_lyrics">Better Lyrics</string>
-    <string name="lyrics_provider_simpmusic">SimpMusic</string>
-    <string name="lyrics_provider_lyrics_plus">LyricsPlus</string>
     <string name="theme_name_system_default">Mặc định hệ thống</string>
     <string name="theme_desc_system_default">Đồng bộ với chủ đề thiết bị</string>
     <string name="theme_name_material_you">Material You</string>
@@ -745,8 +725,6 @@
     <string name="content_settings_disable_shorts_player_subtitle">Phát tất cả video (bao gồm Shorts) trong trình phát thường</string>
     <string name="content_settings_shorts_player_prompt_title">Gợi ý trình phát Shorts</string>
     <string name="content_settings_shorts_player_prompt_subtitle">Hỏi trước khi chuyển video dưới 2 phút sang trình phát Shorts</string>
-    <string name="content_settings_explore_region_picker_title">Trình chọn khu vực nhanh trong Khám phá</string>
-    <string name="content_settings_explore_region_picker_subtitle">Hiển thị biểu tượng quả cầu trên thanh trên cùng Khám phá để thay đổi khu vực.</string>
     <string name="categories_region_picker_desc">Thay đổi khu vực xu hướng (hiện tại: %1$s)</string>
     <string name="content_settings_header_nav_tabs">Tab điều hướng</string>
     <string name="settings_home_nav_tab_title">Tab Trang chủ</string>
@@ -784,9 +762,6 @@
     <string name="categories_title">Danh mục</string>
     <string name="categories_switch_to_grid">Chuyển sang lưới</string>
     <string name="categories_switch_to_list">Chuyển sang danh sách</string>
-    <string name="category_all">Tất cả</string>
-    <string name="category_trending">Thịnh hành</string>
-    <string name="category_movies">Phim</string>
     <string name="category_live">Trực tiếp</string>
     <string name="settings_continue_watching_title">Kệ tiếp tục xem</string>
     <string name="settings_continue_watching_subtitle">Hiển thị kệ video đang xem dở trên trang chủ.</string>
@@ -856,8 +831,6 @@
     <string name="speed_slider_apply">Áp dụng</string>
     <string name="playback_speed_multiplier">%1$s×</string>
     <string name="playback_speed_multiplier_precise">%1$.2f×</string>
-    <string name="player_settings_stable_voice">Giọng ổn định</string>
-    <string name="player_settings_stable_voice_subtitle">Cân bằng âm lượng để phát nhất quán</string>
     <string name="player_settings_display">Hiển thị</string>
     <string name="player_settings_ambient_mode">Chế độ xung quanh</string>
     <string name="player_settings_ambient_mode_subtitle">Tô sáng các thanh xung quanh video bằng màu mềm</string>
@@ -912,7 +885,6 @@
     <string name="player_settings_video_codec_auto_desc">Để ứng dụng chọn (ưu tiên H.264)</string>
     <string name="player_settings_header_gestures">Cử chỉ</string>
     <string name="player_settings_double_tap_seek">Thời lượng tua khi chạm hai lần</string>
-    <string name="player_settings_double_tap_seek_subtitle_template">%ds mỗi bên</string>
     <string name="player_settings_double_tap_seek_dialog_title">Thời lượng tua hai lần</string>
     <string name="player_settings_double_tap_seek_dialog_body">Chọn số giây tua khi chạm hai lần vào bên trái hoặc phải trình phát.</string>
     <string name="video_quality_title">Chất lượng video</string>
@@ -981,7 +953,6 @@
     <string name="player_settings_show_pip_subtitle">Hiện nút PiP thủ công trong điều khiển trình phát</string>
     <string name="player_settings_header_video">Video</string>
     <string name="player_settings_header_audio">Âm thanh</string>
-    <string name="share_short_template">Xem thử Short này: https://youtu.be/%1$s</string>
     <string name="speed_2x">2x</string>
     <string name="cd_liked">Đã thích</string>
     <string name="cd_pause">Tạm dừng</string>
@@ -1236,8 +1207,6 @@
     <string name="add_description_placeholder">Thêm mô tả…</string>
     <string name="edit_playlist_action">Sửa danh sách</string>
     <string name="delete_playlist_action">Xóa danh sách</string>
-    <string name="make_public_action">Chuyển công khai</string>
-    <string name="make_private_action">Chuyển riêng tư</string>
     <string name="remove_from_playlist_action">Xóa khỏi danh sách</string>
     <string name="playlist_empty_title">Danh sách trống</string>
     <string name="playlist_empty_desc">Thêm video từ trình phát\nto build your playlist</string>
@@ -1412,7 +1381,6 @@
     <string name="template_bass_boost">Tăng bass: %1$ddB</string>
     <string name="label_tempo_pitch">Tempo &amp; Cao độ</string>
     <string name="action_reset">Đặt lại</string>
-    <string name="template_speed">Tốc độ: %1$d%%</string>
     <string name="template_pitch">Cao độ: %1$d nửa cung</string>
     <string name="label_parametric_equalizer">Bộ cân bằng tham số</string>
     <string name="action_add_band">Thêm băng tần</string>
@@ -1583,7 +1551,6 @@
     <string name="sync_continue">Tiếp tục</string>
     <string name="sync_qr_scan_on_target_sending">Quét mã này trên thiết bị bạn đang gửi đến</string>
     <string name="sync_qr_scan_on_target_receiving">Quét mã này trên thiết bị bạn đang nhận từ</string>
-    <string name="sync_confirmation_code">Mã xác nhận: %1$s</string>
     <string name="sync_expires_in">Hết hạn sau %1$ds</string>
     <string name="sync_qr_network_note">Cả hai thiết bị phải cùng Wi-Fi (hoặc cùng điểm phát sóng). Có thể cần cho phép Chorplay qua tường lửa.</string>
     <string name="sync_sas_title">Mã có khớp không?</string>
@@ -1923,62 +1890,9 @@
     <string name="interface_mode_mobile_summary">Luôn dùng giao diện điện thoại và máy tính bảng</string>
     <string name="interface_mode_tv">TV</string>
     <string name="interface_mode_tv_summary">Luôn sử dụng giao diện tivi hỗ trợ điều khiển từ xa</string>
-    <string name="tv_home_title">Trang chủ</string>
-    <string name="tv_continue_watching">Tiếp tục xem</string>
-    <string name="tv_home_recommended">Đề xuất</string>
-    <string name="tv_error_loading">Không tải được nội dung</string>
-    <string name="tv_no_recommendations">Chưa có đề xuất</string>
-    <string name="tv_subscriptions_title">Đăng ký</string>
-    <string name="tv_no_subscriptions">Chưa có video đăng ký</string>
-    <string name="tv_search_hint">Tìm video</string>
-    <string name="tv_search_empty">Tìm video để xem</string>
-    <string name="tv_search_no_results">Không tìm thấy video</string>
-    <string name="tv_library_history">Lịch sử</string>
-    <string name="tv_library_liked">Video đã thích</string>
-    <string name="tv_library_playlists">Danh sách phát</string>
-    <string name="tv_library_empty">Thư viện trống</string>
-    <string name="tv_player_rewind">Tua lại 10 giây</string>
-    <string name="tv_player_fast_forward">Tua tới 10 giây</string>
-    <string name="tv_player_close">Đóng trình phát</string>
-    <string name="tv_subscriptions_empty">Chưa có video đăng ký</string>
-    <string name="tv_search_prompt">Tìm kiếm video</string>
-    <string name="tv_search_action">Tìm kiếm</string>
-    <string name="tv_library_likes">Video đã thích</string>
-    <string name="tv_library_watch_later">Xem sau</string>
-    <string name="tv_music_empty">Chưa có đề xuất nhạc</string>
-    <string name="tv_music_charts">Bảng xếp hạng</string>
-    <string name="tv_player_settings">Cài đặt trình phát</string>
     <string name="tv_player_queue">Hàng chờ</string>
-    <string name="tv_player_play_now">Phát ngay</string>
-    <string name="tv_player_skip_segment">Bỏ qua %1$s</string>
-    <string name="tv_player_chapters">Chương</string>
-    <string name="tv_more_replies">Xem thêm trả lời</string>
-    <string name="tv_keyboard_space">Khoảng trắng</string>
-    <string name="tv_keyboard_delete">Xóa</string>
-    <string name="tv_keyboard_clear">Xóa hết</string>
-    <string name="tv_keyboard_voice">Tìm kiếm bằng giọng nói</string>
-    <string name="tv_filter_all">Tất cả</string>
-    <string name="tv_filter_videos">Video</string>
-    <string name="tv_filter_channels">Kênh</string>
-    <string name="tv_filter_playlists">Danh sách phát</string>
-    <string name="tv_filter_artists">Nghệ sĩ</string>
-    <string name="tv_filter_live">Trực tiếp</string>
-    <string name="tv_channel_videos">Video</string>
-    <string name="tv_subscriptions_all">Tất cả kênh</string>
-    <plurals name="tv_playlist_video_count">
-        <item quantity="other">%1$d video</item>
-    </plurals>
-    <string name="tv_music_lyrics">Lời bài hát</string>
-    <string name="tv_music_expand">Mở trình phát đầy đủ</string>
-    <string name="tv_music_no_lyrics">Không tìm thấy lời</string>
-    <string name="tv_music_radio">Radio</string>
-    <string name="tv_settings_appearance">Giao diện</string>
-    <string name="tv_settings_chor_engine">Động cơ Chorplay</string>
-    <string name="tv_settings_sync">Đồng bộ thiết bị</string>
-    <string name="tv_sync_qr_session_active">Mã này hoạt động khi màn hình này đang mở.</string>
     <string name="tv_remote_guide_title">Hướng dẫn điều khiển</string>
     <string name="tv_remote_guide_subtitle">Tham khảo nhanh để điều hướng Chorplay từ ghế sofa</string>
-    <string name="tv_remote_guide_back">Quay lại cài đặt</string>
     <string name="tv_guide_navigation_title">Điều hướng</string>
     <string name="tv_guide_search_title">Tìm kiếm &amp; duyệt</string>
     <string name="tv_guide_playback_title">Phát lại</string>
@@ -1987,9 +1901,7 @@
     <string name="tv_guide_key_back">Quay lại</string>
     <string name="tv_guide_key_left_edge">Cạnh trái</string>
     <string name="tv_guide_key_rail">Thanh điều hướng</string>
-    <string name="tv_guide_key_edit">Phím chỉnh sửa</string>
     <string name="tv_guide_key_voice">Mic</string>
-    <string name="tv_guide_key_right">Phải</string>
     <string name="tv_guide_key_left_right">Trái / Phải</string>
     <string name="tv_guide_key_hold">Giữ</string>
     <string name="tv_guide_key_up">Lên</string>
@@ -2000,11 +1912,7 @@
     <string name="tv_guide_back">Đóng bảng hiện tại, quay lại màn hình trước hoặc dần về Trang chủ.</string>
     <string name="tv_guide_left_edge">Di chuyển sang trái từ biên nội dung để mở thanh điều hướng.</string>
     <string name="tv_guide_rail">Dùng Lên/Xuống để chọn đích, OK để mở, Phải để quay lại nội dung.</string>
-    <string name="tv_guide_search_keyboard">Di chuyển trên bàn phím ảo và các hàng lọc.</string>
-    <string name="tv_guide_search_type">Nhập chữ cái đang chọn hoặc kích hoạt bộ lọc, gợi ý, kết quả.</string>
-    <string name="tv_guide_search_edit">Dùng Space, Delete và Clear trên hàng phím cuối để sửa truy vấn.</string>
     <string name="tv_guide_search_voice">Bắt đầu tìm kiếm bằng giọng nói khi TV hỗ trợ dịch vụ mic.</string>
-    <string name="tv_guide_search_results">Di chuyển từ bàn phím đến bộ lọc và kết quả; dùng Lên/Xuống giữa các phần.</string>
     <string name="tv_guide_player_toggle">Phát hoặc tạm dừng và hiển thị điều khiển.</string>
     <string name="tv_guide_player_seek">Tua lùi hoặc tới; thanh tiến trình hiển thị vị trí.</string>
     <string name="tv_guide_player_hold">Giữ Trái hoặc Phải để tua nhanh, thả ra để áp dụng.</string>
@@ -2012,15 +1920,6 @@
     <string name="tv_guide_player_down">Hiển thị điều khiển và tập trung vào Phát/Tạm dừng.</string>
     <string name="tv_guide_player_media">Các phím Play, Pause, Previous, Next, Rewind, Fast-forward và Captions hoạt động trực tiếp.</string>
     <string name="tv_guide_player_back">Đóng bảng điều khiển trước; nhấn lại để thoát trình phát.</string>
-    <string name="tv_settings_wifi_quality">Chất lượng mặc định (Wi‑Fi)</string>
-    <string name="tv_settings_cellular_quality">Chất lượng mặc định (di động)</string>
-    <string name="tv_settings_codec">Codec ưu tiên</string>
-    <string name="tv_theme_mode_title">Chủ đề</string>
-    <string name="tv_theme_variant_title">Phiên bản</string>
-    <string name="tv_theme_variant_light">Sáng</string>
-    <string name="tv_theme_variant_dark">Tối</string>
-    <string name="tv_theme_variant_amoled">AMOLED</string>
-    <string name="tv_about_version">Phiên bản %1$s</string>
     <string name="widget_now_playing_label">Đang phát</string>
     <string name="widget_quick_actions_label">Hành động nhanh</string>
     <string name="widget_quick_actions_description">Tìm kiếm Chorplay và truy cập tải xuống, lịch sử, nhận diện</string>
@@ -2066,7 +1965,6 @@
     <string name="ui_clear">Xóa</string>
     <string name="ui_delete_from_playlist">Xóa khỏi danh sách</string>
     <string name="ui_added">Đã thêm</string>
-    <string name="ui_sync_lyrics">Đồng bộ lời</string>
     <string name="ui_downloading_playlist">Đang tải danh sách phát</string>
 
 
@@ -2212,7 +2110,6 @@
     <string name="fallback_downloaded_locally">Đã tải xuống</string>
     <string name="fallback_more_results">Thêm kết quả</string>
     <string name="remove_from_queue">Xóa khỏi hàng chờ</string>
-    <string name="remove_from_queue_confirmation">Bạn có chắc chắn muốn xóa video này khỏi hàng chờ?</string>
     <string name="reorder_queue_item">Sắp xếp lại mục hàng chờ</string>
     <string name="topic_score_prefix">Bằng chứng chủ đề</string>
     <string name="notif_background_restricted_title">Tính năng chạy nền bị hạn chế</string>
@@ -2229,7 +2126,6 @@
     <string name="audio_track_dubbed">Lồng tiếng</string>
     <string name="empty_saved_shorts">Chưa có Shorts nào được lưu</string>
     <string name="settings_search_no_results">Không tìm thấy cài đặt cho %1$s</string>
-    <string name="settings_lyrics_provider_order_description">Các nhà cung cấp sẽ được thử theo thứ tự. Nhà cung cấp đầu tiên trả về lời bài hát sẽ được chọn.</string>
     <string name="import_running_background">Bạn có thể rời khỏi trang — quá trình nhập vẫn tiếp tục trong nền.</string>
     <string name="donations_cryptocurrency">TIỀN MÃ HÓA</string>
     <string name="import_no_history_entries">Không tìm thấy lịch sử xem nào trong tệp</string>

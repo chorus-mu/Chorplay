@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import io.github.pushkar.chorplay.MainActivity
+import io.github.pushkar.chorplay.ui.widgetPlaylistRoute
 
 object WidgetDeepLink {
     const val EXTRA_WIDGET_ROUTE = "widget_route"

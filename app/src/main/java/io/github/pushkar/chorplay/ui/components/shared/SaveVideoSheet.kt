@@ -1,8 +1,8 @@
 package io.github.pushkar.chorplay.ui.components.shared
 
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.PlaylistAdd
 import androidx.compose.material.icons.automirrored.outlined.PlaylistPlay
-import androidx.compose.material.icons.filled.PlaylistAdd
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -11,7 +11,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
-import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import io.github.pushkar.chorplay.R
 import io.github.pushkar.chorplay.data.local.PlaylistRepository
@@ -75,7 +75,7 @@ fun SaveVideoSheet(
         CollectionEditDialog(
             title = stringResource(R.string.create_new_playlist),
             confirmLabel = stringResource(R.string.create),
-            icon = Icons.Default.PlaylistAdd,
+            icon = Icons.AutoMirrored.Filled.PlaylistAdd,
             onDismiss = { showCreateDialog = false },
             onConfirm = { name, description ->
                 viewModel.createAndAdd(video, name, description)

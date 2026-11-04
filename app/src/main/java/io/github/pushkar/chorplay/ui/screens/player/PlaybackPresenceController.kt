@@ -4,10 +4,8 @@ import io.github.pushkar.chorplay.data.local.PlayerPreferences
 import io.github.pushkar.chorplay.data.local.ViewHistory
 import io.github.pushkar.chorplay.data.model.Video
 import io.github.pushkar.chorplay.data.video.SavedVideoQueue
-import io.github.pushkar.chorplay.player.EnhancedMusicPlayerManager
 import io.github.pushkar.chorplay.player.EnhancedPlayerManager
 import io.github.pushkar.chorplay.player.GlobalPlayerState
-import io.github.pushkar.chorplay.service.MusicServiceState
 import io.github.pushkar.chorplay.ui.screens.player.state.VideoPlayerUiState
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
@@ -61,7 +59,6 @@ internal class PlaybackPresenceController(
     fun restoreLastWatchedSession() {
         scope.launch {
             if (!playerPreferences.miniPlayerContinueWatchingEnabled.first()) return@launch
-            if (EnhancedMusicPlayerManager.currentTrack.value != null || MusicServiceState.isRunning) return@launch
             val lastVideo = withContext(ioDispatcher) { viewHistory.getLatestUnfinishedVideo() } ?: return@launch
             if (uiState.value.cachedVideo != null) return@launch
             uiState.update { it.copy(cachedVideo = lastVideo.toVideo(), isRestoredSession = true) }

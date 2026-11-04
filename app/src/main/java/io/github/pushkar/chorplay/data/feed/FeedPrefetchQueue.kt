@@ -5,12 +5,6 @@ data class FeedPrefetchRequest(
     val targetItemCount: Int,
 )
 
-/**
- * Viewport-driven paging for an endless feed: it arms a target only once fewer than
- * [triggerRemainingItems] loaded items remain below the viewport, raises that target as the user
- * keeps going, and invalidates in-flight work through a generation that changes whenever the
- * surface is hidden. Home and the Shorts pager share it with their own numbers.
- */
 class FeedPrefetchQueue(
     private val prefetchAheadItemCount: Int,
     private val triggerRemainingItems: Int,
@@ -19,10 +13,7 @@ class FeedPrefetchQueue(
     private var isVisible = false
     private var targetItemCount = 0
 
-    /**
-     * Returning to the surface resumes a target the user already scrolled into, but never creates
-     * one: a feed that has just loaded has nothing to prefetch until it is actually consumed.
-     */
+
     @Synchronized
     fun onVisible(
         currentItemCount: Int,

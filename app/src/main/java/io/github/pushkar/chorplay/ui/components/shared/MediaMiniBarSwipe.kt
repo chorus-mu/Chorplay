@@ -143,9 +143,7 @@ class MediaMiniBarSwipeHandler(
                     }
             }
 
-            MiniBarSwipePhase.IDLE -> {
-                Unit
-            }
+            MiniBarSwipePhase.IDLE -> {}
         }
     }
 

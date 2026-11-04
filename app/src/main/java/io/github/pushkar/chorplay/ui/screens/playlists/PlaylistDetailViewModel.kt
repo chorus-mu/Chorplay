@@ -534,3 +534,5 @@ class PlaylistDetailViewModel
                     enrichSemaphore.release()
                 }
             }
+        }
+    }

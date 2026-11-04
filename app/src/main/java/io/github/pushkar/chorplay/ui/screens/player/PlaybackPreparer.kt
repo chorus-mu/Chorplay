@@ -340,6 +340,11 @@ internal class PlaybackPreparer(
         }
     }
 
+    private fun applySpeedOverride(speed: Float) {
+        if (speedBeforeOverride == null) speedBeforeOverride = playerManager.playerState.value.playbackSpeed
+        playerManager.setPlaybackSpeed(speed)
+    }
+
     private suspend fun decideSpeed(speedContext: PlaybackSpeedContext): SpeedDecision {
         val channelSpeed =
             speedContext.channelId

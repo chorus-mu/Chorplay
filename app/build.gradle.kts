@@ -159,12 +159,13 @@ android {
                 } catch (e: Exception) {
                     null
                 }
-            if (releaseKeystore?.exists() == true) {
-                signingConfig = signingConfigs.getByName("release")
+            val releaseConfig = signingConfigs.getByName("release")
+            if (releaseKeystore?.exists() == true && !releaseConfig.storePassword.isNullOrBlank() && !releaseConfig.keyAlias.isNullOrBlank()) {
+                signingConfig = releaseConfig
                 println("Using RELEASE signing config with keystore: ${releaseKeystore.absolutePath}")
             } else {
                 signingConfig = null
-                println("WARNING: Release keystore not found. Building UNSIGNED release APK.")
+                println("WARNING: Release keystore or credentials not configured. Building UNSIGNED release APK.")
             }
         }
 

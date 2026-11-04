@@ -38,8 +38,8 @@ internal fun rememberDeArrowResult(
         }
     }
     return key(video.id, active, useRandomFrame) {
-        produceState(initialValue = if (active) resolve(repository?.cached(video.id)) else null, video.id, active, useRandomFrame) {
-            if (active) value = resolve(repository?.branding(video.id))
+        produceState(initialValue = if (active) resolve(repository.cached(video.id)) else null, video.id, active, useRandomFrame) {
+            if (active) value = resolve(repository.branding(video.id))
         }.value
     }
 }

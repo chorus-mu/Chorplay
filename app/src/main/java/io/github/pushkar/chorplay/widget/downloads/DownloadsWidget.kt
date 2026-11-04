@@ -79,7 +79,7 @@ class DownloadsWidget : GlanceAppWidget() {
         val corner = bakedCornerRadiusPx(context)
         val specs =
             downloads.items.mapIndexed { index, download ->
-                val thumb = if (download.isMusic) WidgetRowSquareThumb else WidgetRowThumb
+                val thumb = WidgetRowThumb
                 val scale = if (index == 0) HERO_SCALE else 1f
                 WidgetImageSpec(
                     download.id,
@@ -115,9 +115,9 @@ private fun WidgetDownload.toItem(
             WidgetDeepLink.playVideo(context, id),
         ),
     thumbnail = images[id],
-    badge = durationSeconds.takeIf { it > 0 && !isMusic }?.let { formatDuration(it.toInt()) },
-    isSquare = isMusic,
-    placeholderIcon = if (isMusic) R.drawable.ic_music_note else R.drawable.ic_widget_download,
+    badge = durationSeconds.takeIf { it > 0 }?.let { formatDuration(it.toInt()) },
+    isSquare = false,
+    placeholderIcon = R.drawable.ic_widget_download,
 )
 
 @Composable

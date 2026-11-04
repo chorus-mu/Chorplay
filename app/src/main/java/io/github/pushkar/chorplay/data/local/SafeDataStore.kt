@@ -25,11 +25,6 @@ private const val SAFE_DATA_STORE_TAG = "SafeDataStore"
 private const val READ_RETRY_ATTEMPTS = 3
 private const val READ_RETRY_DELAY_MS = 100L
 
-/**
- * A preferences DataStore whose file depends on [scope] and the profile this process runs as (see [ProfileFiles]).
- * The scope has no default so every store is placed deliberately; StoreScopeGuardTest checks it against the
- * inventory.
- */
 fun safePreferencesDataStore(
     name: String,
     scope: StoreScope,
@@ -69,8 +64,6 @@ internal class ReadSafeDataStore(
     private val delegate: DataStore<Preferences>,
     private val retryDelayMs: Long = READ_RETRY_DELAY_MS,
 ) : DataStore<Preferences> {
-    // A failed read must not crash the collector. Retrying first keeps observers subscribed to
-    // later writes; only a read that keeps failing falls back to defaults and ends the stream.
     override val data: Flow<Preferences> =
         delegate.data
             .retryWhen { cause, attempt ->

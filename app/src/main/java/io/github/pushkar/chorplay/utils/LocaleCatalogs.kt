@@ -250,7 +250,7 @@ object RegionCatalog {
     fun displayName(
         code: String,
         displayLocale: Locale = Locale.getDefault(),
-    ): String = Locale("", code).getDisplayCountry(displayLocale).ifBlank { code }
+    ): String = Locale.Builder().setRegion(code).build().getDisplayCountry(displayLocale).ifBlank { code }
 
     /** Every region as (code, name), alphabetical by name in [displayLocale]. */
     fun sorted(displayLocale: Locale = Locale.getDefault()): List<Pair<String, String>> =

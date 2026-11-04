@@ -13,8 +13,6 @@ internal sealed interface CsvRecordResult {
 }
 
 private class TakeoutCsvLimitExceededException : IllegalArgumentException("invalid_format")
-
-// Bound decompressed CSV input selected outside the app before it can grow parser allocations.
 private const val MAX_CSV_CHARACTERS = 16 * 1_024 * 1_024
 private const val MAX_IGNORED_CSV_CHARACTERS = 64 * 1_024 * 1_024
 private const val MAX_ARCHIVE_CSV_CHARACTERS = 256 * 1_024 * 1_024

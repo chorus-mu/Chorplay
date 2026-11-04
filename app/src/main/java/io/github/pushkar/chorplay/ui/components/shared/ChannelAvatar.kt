@@ -68,7 +68,7 @@ fun ChannelAvatarImage(
                 modifier = modifier,
                 contentScale = ContentScale.Crop,
                 onError = { errorResult ->
-                    val errMsg = errorResult.result.throwable?.message ?: "unknown error"
+                    val errMsg = errorResult.result.throwable.message ?: "unknown error"
                     if (!didRetry) {
                         didRetry = true
                         val src =

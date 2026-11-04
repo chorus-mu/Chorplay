@@ -3,11 +3,11 @@ package io.github.pushkar.chorplay.ui.components.library
 import androidx.annotation.StringRes
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.PlaylistPlay
+import androidx.compose.material.icons.automirrored.outlined.StickyNote2
 import androidx.compose.material.icons.outlined.Download
 import androidx.compose.material.icons.outlined.History
 import androidx.compose.material.icons.outlined.PermMedia
 import androidx.compose.material.icons.outlined.Settings
-import androidx.compose.material.icons.outlined.StickyNote2
 import androidx.compose.material.icons.outlined.ThumbUp
 import androidx.compose.material.icons.outlined.WatchLater
 import androidx.compose.runtime.Composable
@@ -41,7 +41,7 @@ internal enum class LibrarySection(
                 DOWNLOADS -> Icons.Outlined.Download
                 SAVED_SHORTS -> ImageVector.vectorResource(R.drawable.ic_shorts)
                 LOCAL_MEDIA -> Icons.Outlined.PermMedia
-                NOTES -> Icons.Outlined.StickyNote2
+                NOTES -> Icons.AutoMirrored.Outlined.StickyNote2
                 SETTINGS -> Icons.Outlined.Settings
             }
 

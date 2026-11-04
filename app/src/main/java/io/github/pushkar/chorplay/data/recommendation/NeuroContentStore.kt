@@ -38,6 +38,7 @@ internal class NeuroContentStore(
     )
 
     private object ContentSerializer : Serializer<ContentIndex> {
+        private val json = Json { ignoreUnknownKeys = true }
         override val defaultValue: ContentIndex = ContentIndex()
 
         override suspend fun readFrom(input: InputStream): ContentIndex =
@@ -46,7 +47,7 @@ internal class NeuroContentStore(
                 if (text.isBlank()) {
                     defaultValue
                 } else {
-                    Json { ignoreUnknownKeys = true }.decodeFromString<ContentIndex>(text)
+                    json.decodeFromString<ContentIndex>(text)
                 }
             } catch (e: Exception) {
                 Log.e(TAG, "Failed to read content index", e)
@@ -57,7 +58,7 @@ internal class NeuroContentStore(
             t: ContentIndex,
             output: OutputStream,
         ) {
-            output.write(Json.encodeToString(t).toByteArray())
+            output.write(json.encodeToString(t).toByteArray())
         }
     }
 

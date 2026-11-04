@@ -6,11 +6,6 @@ import io.github.pushkar.chorplay.data.local.entity.WatchHistoryEntity
 
 internal const val HISTORY_PAGE_SIZE = 500
 internal const val PROGRESS_PAGE_SIZE = 2_000
-
-/**
- * Reads every row newest first, one keyset page at a time. A row that moves between two pages
- * is kept once: the table can change mid-read, and the next invalidation reads it again anyway.
- */
 internal suspend fun <T> readAllPages(
     pageSize: Int,
     readPage: suspend (beforeTimestamp: Long, afterVideoId: String, limit: Int) -> List<T>,

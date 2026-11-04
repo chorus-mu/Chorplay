@@ -35,37 +35,24 @@ class SubscriptionRepository private constructor(
                 instance ?: SubscriptionRepository(context.applicationContext).also { instance = it }
             }
 
-        // Keys format: "channel_{channelId}" -> JSON string with channel info
         private fun channelKey(channelId: String) = stringPreferencesKey("channel_$channelId")
 
-        /** "unsub_{channelId}" -> epoch ms the user unsubscribed. See [unsubscribedTombstones]. */
         private fun unsubscribedKey(channelId: String) = stringPreferencesKey("unsub_$channelId")
 
         private const val UNSUBSCRIBED_PREFIX = "unsub_"
 
         private const val SUBSCRIPTIONS_ORDER_KEY = "subscriptions_order"
 
-        /**
-         * How long an unsubscribe is remembered. Device sync resolves subscribe-vs-unsubscribe by
-         * comparing their timestamps, so forgetting a tombstone lets a peer that still holds the
-         * subscription resurrect it. Long enough that any realistic sync gap is covered, bounded so
-         * the store cannot grow without limit.
-         */
         private const val UNSUBSCRIBE_TOMBSTONE_RETENTION_MS = 365L * 24 * 60 * 60 * 1000
     }
 
-    /**
-     * Subscribe to a channel
-     */
     suspend fun subscribe(channel: ChannelSubscription) {
         context.subscriptionsDataStore.edit { preferences ->
             val safeChannel = channel.withPreservedThumbnail(preferences)
 
-            // Save channel data
             preferences[channelKey(safeChannel.channelId)] = serializeChannel(safeChannel)
             preferences.remove(unsubscribedKey(safeChannel.channelId)) // re-subscribing clears the tombstone
 
-            // Update order list
             val currentOrder = preferences[stringPreferencesKey(SUBSCRIPTIONS_ORDER_KEY)] ?: ""
             val orderList =
                 if (currentOrder.isEmpty()) {
@@ -109,19 +96,13 @@ class SubscriptionRepository private constructor(
         }
     }
 
-    /**
-     * Unsubscribe from a channel
-     */
     suspend fun unsubscribe(channelId: String) {
         val now = System.currentTimeMillis()
         context.subscriptionsDataStore.edit { preferences ->
             preferences.remove(channelKey(channelId))
-            // Remember *when*, so device sync can tell an unsubscribe from "this device never knew
-            // about the channel" and the removal actually reaches the other device.
             preferences[unsubscribedKey(channelId)] = now.toString()
             prune(preferences, now)
 
-            // Update order list
             val currentOrder = preferences[stringPreferencesKey(SUBSCRIPTIONS_ORDER_KEY)] ?: ""
             if (currentOrder.isNotEmpty()) {
                 val orderList = currentOrder.split(",").toMutableList()
@@ -137,17 +118,11 @@ class SubscriptionRepository private constructor(
         FeedInvalidationBus.emit(FeedInvalidationBus.Event.ChannelUnsubscribed(channelId))
     }
 
-    /**
-     * Check if subscribed to a channel
-     */
     fun isSubscribed(channelId: String): Flow<Boolean> =
         context.subscriptionsDataStore.data.map { preferences ->
             preferences.contains(channelKey(channelId))
         }
 
-    /**
-     * Get all subscriptions
-     */
     fun getAllSubscriptions(): Flow<List<ChannelSubscription>> =
         context.subscriptionsDataStore.data.map { preferences ->
             val orderString = preferences[stringPreferencesKey(SUBSCRIPTIONS_ORDER_KEY)] ?: ""
@@ -162,7 +137,6 @@ class SubscriptionRepository private constructor(
             }
         }
 
-    /** The channels whose bell is on. */
     fun notifyingChannelIds(): Flow<Set<String>> =
         getAllSubscriptions()
             .map(::notifyingIds)
@@ -185,12 +159,6 @@ class SubscriptionRepository private constructor(
         }
     }
 
-    /**
-     * Channels this device has explicitly unsubscribed from, mapped to when it happened.
-     *
-     * Device sync ships these as tombstones. Without them an unsubscribe is indistinguishable from
-     * "never subscribed", and the peer that still holds the channel puts it straight back.
-     */
     suspend fun unsubscribedTombstones(): Map<String, Long> =
         context.subscriptionsDataStore.data
             .map { preferences ->
@@ -203,7 +171,6 @@ class SubscriptionRepository private constructor(
                     }.toMap()
             }.first()
 
-    /** Record a peer's unsubscribe so it keeps propagating to any third device. */
     suspend fun recordUnsubscribedAt(tombstones: Map<String, Long>) {
         if (tombstones.isEmpty()) return
         val now = System.currentTimeMillis()
@@ -216,7 +183,6 @@ class SubscriptionRepository private constructor(
         }
     }
 
-    /** Drop tombstones past the retention window so the store cannot grow without limit. */
     private fun prune(
         preferences: MutablePreferences,
         now: Long,
@@ -232,9 +198,6 @@ class SubscriptionRepository private constructor(
             }
     }
 
-    /**
-     * Get subscription by channel ID
-     */
     fun getSubscription(channelId: String): Flow<ChannelSubscription?> =
         context.subscriptionsDataStore.data.map { preferences ->
             val channelData = preferences[channelKey(channelId)]
@@ -282,9 +245,6 @@ class SubscriptionRepository private constructor(
 
     private fun deserializeChannel(data: String): ChannelSubscription? = SubscriptionRecordCodec.decode(data)
 
-    /**
-     * Update the notification state for a channel
-     */
     suspend fun updateNotificationState(
         channelId: String,
         enabled: Boolean,
@@ -304,19 +264,10 @@ class SubscriptionRepository private constructor(
         if (turnedOn) bellsTurnedOn.tryEmit(channelId)
     }
 
-    // Every bell in the app writes through updateNotificationState, so this is the one place that
-    // knows a viewer just asked for alerts. Nothing replays: with no shell listening, it is dropped.
     private val bellsTurnedOn = MutableSharedFlow<String>(extraBufferCapacity = 1)
 
-    /** A channel whose bell the viewer just turned on. */
     val notificationsTurnedOn: SharedFlow<String> = bellsTurnedOn.asSharedFlow()
 
-    /**
-     * Record that the subscription feed has just fetched these channels.
-     *
-     * Written in one [DataStore] transaction so a refresh over hundreds of channels does not
-     * produce hundreds of preference commits.
-     */
     suspend fun markFeedFetched(
         channelIds: Collection<String>,
         fetchedAt: Long,
@@ -334,9 +285,6 @@ class SubscriptionRepository private constructor(
         }
     }
 
-    /**
-     * Update the last seen video for a channel
-     */
     suspend fun updateChannelLatestVideo(
         channelId: String,
         videoId: String,
@@ -364,11 +312,9 @@ data class ChannelSubscription(
     val channelThumbnail: String,
     val subscribedAt: Long = System.currentTimeMillis(),
     val lastVideoId: String? = null,
-    /** When the background new-upload check last saw a *new* video for this channel. */
     val lastCheckTime: Long = 0L,
     val isNotificationEnabled: Boolean = false,
     val isMusic: Boolean = false,
-    /** When the subscription feed last fetched this channel; 0 means never. */
     val lastFeedFetchAt: Long = 0L,
 )
 

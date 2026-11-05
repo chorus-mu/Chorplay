@@ -1,6 +1,7 @@
 package io.github.pushkar.chorplay.ui.screens.settings.about
 
 import android.os.Build
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -15,7 +16,6 @@ import androidx.compose.material.icons.outlined.Extension
 import androidx.compose.material.icons.outlined.Gavel
 import androidx.compose.material.icons.outlined.History
 import androidx.compose.material.icons.outlined.Person
-import androidx.compose.material.icons.outlined.Public
 import androidx.compose.material.icons.outlined.SettingsRemote
 import androidx.compose.material.icons.outlined.Smartphone
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
@@ -51,13 +51,10 @@ import io.github.pushkar.chorplay.ui.screens.settings.index.DestinationIndex
 
 private enum class AboutDialog { CHANGELOG, DEVICE, NOTICES }
 
-private const val WEBSITE_URL = "https://github.com/chorus-mu/Chorplay"
-private const val GITHUB_URL = "https://github.com/chorus-mu/Chorplay"
-private const val REDDIT_URL = "https://github.com/chorus-mu/Chorplay"
-private const val CREATOR_URL = "https://github.com/chorus-mu"
+private const val CREATOR_URL = "https://github.com/pushkarverse"
 private const val NEWPIPE_URL = "https://github.com/TeamNewPipe/NewPipeExtractor"
 private const val LICENSE_URL = "https://github.com/chorus-mu/Chorplay/blob/main/License"
-private const val CREATOR_AVATAR_URL = "https://github.com/chorus-mu.png?size=144"
+private const val CREATOR_AVATAR_URL = "https://github.com/pushkarverse.png?size=144"
 
 private val LogoSize = 72.dp
 private val HeaderPadding = 24.dp
@@ -91,11 +88,6 @@ internal fun AboutScreen(
                 icon = Icons.Outlined.SettingsRemote,
                 onClick = { onNavigate(SettingsTarget(SettingsDestination.REMOTE_GUIDE)) },
             )
-        }
-        group(key = "about.contact", header = R.string.section_contact) {
-            nav(AboutIndex.website, icon = Icons.Outlined.Public, showChevron = false, onClick = { open(WEBSITE_URL) })
-            nav(AboutIndex.github, iconRes = R.drawable.ic_github, showChevron = false, onClick = { open(GITHUB_URL) })
-            nav(AboutIndex.reddit, icon = IconReddit, showChevron = false, onClick = { open(REDDIT_URL) })
         }
         group(key = "about.legal", header = R.string.section_legal) {
             nav(AboutIndex.license, icon = Icons.Outlined.Description, showChevron = false, onClick = { open(LICENSE_URL) })
@@ -136,11 +128,10 @@ private fun AboutHeader() {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(HeaderSpacing),
     ) {
-        Icon(
-            painter = painterResource(R.drawable.ic_notification_logo),
+        Image(
+            painter = painterResource(R.drawable.ic_splash_logo_red),
             contentDescription = null,
             modifier = Modifier.size(LogoSize),
-            tint = MaterialTheme.colorScheme.onSurface,
         )
         Text(
             text = stringResource(R.string.app_name),
@@ -186,7 +177,6 @@ private fun CreatorRow(
         },
         overlineContent = { Text(stringResource(R.string.about_creator)) },
         supportingContent = { Text(stringResource(R.string.settings_creator_role)) },
-        trailingContent = { Icon(painterResource(R.drawable.ic_github), contentDescription = null) },
     ) {
         Text(stringResource(R.string.about_creator_name), style = MaterialTheme.typography.titleMedium)
     }

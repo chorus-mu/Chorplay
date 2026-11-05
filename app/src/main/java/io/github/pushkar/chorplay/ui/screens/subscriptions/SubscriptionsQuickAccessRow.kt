@@ -1,71 +1,52 @@
 package io.github.pushkar.chorplay.ui.screens.subscriptions
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import io.github.pushkar.chorplay.R
 import io.github.pushkar.chorplay.data.model.Channel
 import io.github.pushkar.chorplay.ui.components.shared.dpadFocusGroup
 
 private val RowHorizontalPadding = 12.dp
 private val AvatarSpacing = 12.dp
-private val AvatarRowTopPadding = 10.dp
+private val AvatarRowTopPadding = 4.dp
+private val AvatarRowBottomPadding = 6.dp
 
 @Composable
 internal fun SubscriptionsQuickAccessRow(
     channels: List<Channel>,
+    selectedChannelId: String? = null,
+    unreadChannelIds: Set<String> = emptySet(),
+    liveChannelIds: Set<String> = emptySet(),
     onChannelClick: (Channel) -> Unit,
     onViewAllClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    Column(modifier = modifier) {
-        Row(
-            modifier =
-                Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = RowHorizontalPadding),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically,
-        ) {
-            Text(
-                text = stringResource(R.string.subscriptions_quick_access_title),
-                style = MaterialTheme.typography.titleSmall,
-                fontWeight = FontWeight.SemiBold,
+    LazyRow(
+        modifier = modifier.dpadFocusGroup(),
+        contentPadding =
+            PaddingValues(
+                start = RowHorizontalPadding,
+                end = 8.dp,
+                top = AvatarRowTopPadding,
+                bottom = AvatarRowBottomPadding,
+            ),
+        horizontalArrangement = Arrangement.spacedBy(AvatarSpacing),
+    ) {
+        items(channels, key = { it.id }) { channel ->
+            ChannelAvatarItem(
+                channel = channel,
+                isSelected = channel.id == selectedChannelId,
+                hasUnread = channel.id in unreadChannelIds,
+                isLive = channel.id in liveChannelIds,
+                onClick = { onChannelClick(channel) },
             )
         }
-
-        LazyRow(
-            modifier = Modifier.dpadFocusGroup(),
-            contentPadding =
-                PaddingValues(
-                    start = RowHorizontalPadding,
-                    end = 8.dp,
-                    top = AvatarRowTopPadding,
-                ),
-            horizontalArrangement = Arrangement.spacedBy(AvatarSpacing),
-        ) {
-            items(channels, key = { it.id }) { channel ->
-                ChannelAvatarItem(
-                    channel = channel,
-                    onClick = { onChannelClick(channel) },
-                )
-            }
-            item(key = "view_all") {
-                AllSubscriptionsAvatarItem(onClick = onViewAllClick)
-            }
+        item(key = "view_all") {
+            AllSubscriptionsAvatarItem(onClick = onViewAllClick)
         }
     }
 }

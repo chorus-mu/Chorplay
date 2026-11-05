@@ -100,8 +100,8 @@ jobs:
       # compile: breakage here otherwise lands on main unnoticed.
       - name: Run unit tests and compile instrumentation tests
         run: >
-          ./gradlew :app:testGithubDebugUnitTest :app:testFossDebugUnitTest
-          :app:compileGithubDebugAndroidTestKotlin
+          ./gradlew :app:testNormalDebugUnitTest :app:testFossDebugUnitTest
+          :app:compileNormalDebugAndroidTestKotlin
           --build-cache --stacktrace
 
   lint:
@@ -137,13 +137,13 @@ jobs:
       - name: Lint GitHub nightly
         if: ${{ !startsWith(github.ref, 'refs/tags/v') }}
         run: >
-          ./gradlew :app:lintGithubNightly
+          ./gradlew :app:lintNormalNightly
           --build-cache --stacktrace
 
       - name: Lint GitHub release
         if: ${{ startsWith(github.ref, 'refs/tags/v') }}
         run: >
-          ./gradlew :app:lintGithubRelease
+          ./gradlew :app:lintNormalRelease
           --build-cache --stacktrace
 
   # "Build APK" is the required status check in the Protect Main ruleset.
@@ -216,7 +216,7 @@ jobs:
       - name: Build CI APKs
         if: ${{ !startsWith(github.ref, 'refs/tags/v') }}
         run: >
-          ./gradlew :app:assembleGithubNightly :app:assembleFossRelease
+          ./gradlew :app:assembleNormalNightly :app:assembleFossRelease
           --build-cache --stacktrace
         env:
           STORE_PASSWORD: ${{ secrets.STORE_PASSWORD }}
@@ -231,7 +231,7 @@ jobs:
       - name: Build release APKs
         if: ${{ startsWith(github.ref, 'refs/tags/v') }}
         run: >
-          ./gradlew :app:assembleGithubRelease :app:assembleFossRelease
+          ./gradlew :app:assembleNormalRelease :app:assembleFossRelease
           --build-cache --stacktrace
         env:
           STORE_PASSWORD: ${{ secrets.STORE_PASSWORD }}
@@ -253,9 +253,9 @@ jobs:
           apks=()
           if [ "${GITHUB_REF#refs/tags/v}" != "$GITHUB_REF" ]; then
             apks+=(
-              app/build/outputs/apk/github/release/app-github-universal-release.apk
-              app/build/outputs/apk/github/release/app-github-arm64-v8a-release.apk
-              app/build/outputs/apk/github/release/app-github-armeabi-v7a-release.apk
+              app/build/outputs/apk/normal/release/app-normal-universal-release.apk
+              app/build/outputs/apk/normal/release/app-normal-arm64-v8a-release.apk
+              app/build/outputs/apk/normal/release/app-normal-armeabi-v7a-release.apk
             )
           fi
           apks+=(
@@ -288,7 +288,7 @@ jobs:
           NIGHTLY_SIGNED: ${{ steps.nightly_keystore.outputs.signed }}
         run: |
           set -euo pipefail
-          src=app/build/outputs/apk/github/nightly/app-github-universal-nightly.apk
+          src=app/build/outputs/apk/normal/nightly/app-normal-universal-nightly.apk
           test -f "$src"
           if [ "$NIGHTLY_SIGNED" = "true" ]; then
             apksigner=$(find "$ANDROID_SDK_ROOT/build-tools" -name apksigner -type f | sort -V | tail -1)
@@ -311,9 +311,9 @@ jobs:
           expected=3
           if [ "${GITHUB_REF#refs/tags/v}" != "$GITHUB_REF" ]; then
             apks+=(
-              app/build/outputs/apk/github/release/app-github-universal-release*.apk
-              app/build/outputs/apk/github/release/app-github-arm64-v8a-release*.apk
-              app/build/outputs/apk/github/release/app-github-armeabi-v7a-release*.apk
+              app/build/outputs/apk/normal/release/app-normal-universal-release*.apk
+              app/build/outputs/apk/normal/release/app-normal-arm64-v8a-release*.apk
+              app/build/outputs/apk/normal/release/app-normal-armeabi-v7a-release*.apk
             )
             expected=6
           fi
@@ -354,8 +354,8 @@ jobs:
         if: ${{ startsWith(github.ref, 'refs/tags/v') }}
         uses: actions/upload-artifact@v7
         with:
-          name: chorplay-github-universal-release-apk
-          path: app/build/outputs/apk/github/release/app-github-universal-release*.apk
+          name: chorplay-normal-universal-release-apk
+          path: app/build/outputs/apk/normal/release/app-normal-universal-release*.apk
           if-no-files-found: error
           retention-days: 14
           compression-level: 0
@@ -364,8 +364,8 @@ jobs:
         if: ${{ startsWith(github.ref, 'refs/tags/v') }}
         uses: actions/upload-artifact@v7
         with:
-          name: chorplay-github-arm64-release-apk
-          path: app/build/outputs/apk/github/release/app-github-arm64-v8a-release*.apk
+          name: chorplay-normal-arm64-release-apk
+          path: app/build/outputs/apk/normal/release/app-normal-arm64-v8a-release*.apk
           if-no-files-found: error
           retention-days: 14
           compression-level: 0
@@ -374,8 +374,8 @@ jobs:
         if: ${{ startsWith(github.ref, 'refs/tags/v') }}
         uses: actions/upload-artifact@v7
         with:
-          name: chorplay-github-armeabi-v7a-release-apk
-          path: app/build/outputs/apk/github/release/app-github-armeabi-v7a-release*.apk
+          name: chorplay-normal-armeabi-v7a-release-apk
+          path: app/build/outputs/apk/normal/release/app-normal-armeabi-v7a-release*.apk
           if-no-files-found: error
           retention-days: 14
           compression-level: 0
@@ -506,10 +506,10 @@ jobs:
       - name: Rename APKs for release
         run: |
           set -euo pipefail
-          mv dist/app-github-universal-release.apk   dist/chorplay.apk
+          mv dist/app-normal-universal-release.apk   dist/chorplay.apk
           mv dist/app-foss-universal-release.apk     dist/chorplay-foss.apk
-          mv dist/app-github-arm64-v8a-release.apk   dist/chorplay-arm64-v8a.apk
-          mv dist/app-github-armeabi-v7a-release.apk dist/chorplay-armeabi-v7a.apk
+          mv dist/app-normal-arm64-v8a-release.apk   dist/chorplay-arm64-v8a.apk
+          mv dist/app-normal-armeabi-v7a-release.apk dist/chorplay-armeabi-v7a.apk
           mv dist/app-foss-arm64-v8a-release.apk     dist/chorplay-foss-arm64-v8a.apk
           mv dist/app-foss-armeabi-v7a-release.apk   dist/chorplay-foss-armeabi-v7a.apk
 

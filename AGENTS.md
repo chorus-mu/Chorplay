@@ -2,7 +2,7 @@
 
 Chorplay (`io.github.pushkar.chorplay`) is an Android music/video app written in Kotlin with Jetpack Compose, Hilt, and Media3/ExoPlayer. It plays YouTube content via a native InnerTube client with a NewPipe-based fallback extraction path, supports local media playback, offline downloads, casting, lyrics, a device-to-device sync feature, and an on-device recommendation engine (ChorplayNeuroEngine). It follows Material 3 design guidelines closely.
 
-Product flavors: `github` (default, in-app updater enabled) and `foss` (no updater). Always use flavor-prefixed Gradle tasks — e.g. `assembleGithubDebug`, `compileFossDebugKotlin` — never bare `assembleDebug`/`compileDebugKotlin`.
+Product flavors: `normal` (default, in-app updater enabled) and `foss` (no updater). Always use flavor-prefixed Gradle tasks — e.g. `assembleNormalDebug`, `compileFossDebugKotlin` — never bare `assembleDebug`/`compileDebugKotlin`.
 
 ## graphify
 
@@ -293,7 +293,7 @@ and playback behavior.
     Android entry points change, also add or run an integration test that constructs the affected
     path; unit tests that instantiate the class directly do not validate Hilt wiring.
 13. Minimum validation for a non-player DI migration is `ktlintCheck`,
-    `:app:testGithubDebugUnitTest`, `:app:compileGithubDebugKotlin`, and
+    `:app:testNormalDebugUnitTest`, `:app:compileNormalDebugKotlin`, and
     `:app:compileFossDebugKotlin`, followed by the relevant flavor build. Exercise the affected UI
     or background flow on a device/emulator, including configuration change and an error path. A
     player/startup migration additionally requires the player golden paths above and relevant
@@ -505,7 +505,7 @@ revision must pass the configured ktlint rules.
 1. After making changes, build the relevant flavor to check for compilation errors, e.g.:
 
 ```bash
-./gradlew :app:assembleGithubDebug
+./gradlew :app:assembleNormalDebug
 ```
 
 2. If the build fails, fix the reported errors and rebuild before proceeding.

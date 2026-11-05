@@ -21,8 +21,6 @@ object TvRoutes {
     const val PLAYLISTS_KIND_ARG = "kind"
     const val PLAYLISTS = "playlists?kind={$PLAYLISTS_KIND_ARG}"
 
-    const val DONATIONS = "donations"
-
     fun channel(channelRef: String): String = "channel?ref=${Uri.encode(channelRef)}"
 
     fun playlists(kind: MediaKind?): String = if (kind == null) "playlists" else "playlists?kind=${kind.name}"

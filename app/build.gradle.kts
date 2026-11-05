@@ -1,5 +1,6 @@
 import com.android.build.api.variant.BuildConfigField
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import java.io.File
 import java.util.Properties
 
 plugins {
@@ -89,7 +90,7 @@ android {
 
     flavorDimensions += "version"
     productFlavors {
-        create("github") {
+        create("normal") {
             dimension = "version"
             isDefault = true
             buildConfigField("Boolean", "UPDATER_ENABLED", "true")

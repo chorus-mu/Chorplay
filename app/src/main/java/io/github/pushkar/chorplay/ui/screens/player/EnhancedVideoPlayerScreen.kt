@@ -1,5 +1,6 @@
 package io.github.pushkar.chorplay.ui.screens.player
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -13,6 +14,7 @@ import androidx.compose.material3.adaptive.layout.SupportingPaneScaffold
 import androidx.compose.material3.adaptive.layout.calculatePaneScaffoldDirective
 import androidx.compose.material3.adaptive.navigation.rememberSupportingPaneScaffoldNavigator
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.graphicsLayer
@@ -21,15 +23,22 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.media3.common.util.UnstableApi
+import io.github.pushkar.chorplay.data.local.PlayerRelatedCardStyle
 import io.github.pushkar.chorplay.data.localmedia.LocalMediaIds
 import io.github.pushkar.chorplay.data.model.Video
 import io.github.pushkar.chorplay.player.EnhancedPlayerManager
 import io.github.pushkar.chorplay.player.GlobalPlayerState
 import io.github.pushkar.chorplay.ui.components.rememberFeedGridLayout
+import io.github.pushkar.chorplay.ui.components.shared.card.VideoCardLayout
+import io.github.pushkar.chorplay.ui.components.shared.card.VideoCardSkeleton
+import io.github.pushkar.chorplay.ui.components.videoplayer.ambient.AmbientFrameHolder
+import io.github.pushkar.chorplay.ui.components.videoplayer.ambient.VideoUnderPlayerGlow
 import io.github.pushkar.chorplay.ui.components.videoplayer.sheet.PlaylistQueueDock
 import io.github.pushkar.chorplay.ui.components.videoplayer.sheet.PlaylistQueueDockDefaults
 import io.github.pushkar.chorplay.ui.components.videoplayer.sheet.PlaylistQueuePaneCard
 import io.github.pushkar.chorplay.ui.screens.player.content.PlayerDetailSideColumn
+import io.github.pushkar.chorplay.ui.screens.player.content.PlayerRelatedFilterChips
+import io.github.pushkar.chorplay.ui.screens.player.content.RelatedVideoFilter
 import io.github.pushkar.chorplay.ui.screens.player.content.VideoInfoContent
 import io.github.pushkar.chorplay.ui.screens.player.content.relatedListUsesGrid
 import io.github.pushkar.chorplay.ui.screens.player.content.relatedVideosContent
@@ -91,6 +100,12 @@ internal fun EnhancedVideoPlayerScreen(
     val relatedCardStyle = prefs.relatedCardStyle
     val isInPipMode by GlobalPlayerState.isInPipMode.collectAsStateWithLifecycle()
     val playerState by EnhancedPlayerManager.getInstance().playerState.collectAsStateWithLifecycle()
+    val ambientActive = prefs.ambientModeEnabled && !isInPipMode && !isFullscreenShown
+    val ambientFrame by if (ambientActive) {
+        AmbientFrameHolder.currentFrame.collectAsStateWithLifecycle()
+    } else {
+        remember { mutableStateOf(null) }
+    }
     Box(
         modifier =
             Modifier
@@ -135,36 +150,53 @@ internal fun EnhancedVideoPlayerScreen(
                 scaffoldState = navigator.scaffoldState,
                 mainPane = {
                     AnimatedPane {
-                        Column(
-                            Modifier
-                                .fillMaxSize()
-                                .verticalScroll(rememberScrollState()),
-                        ) {
-                            Spacer(
+                        Box(Modifier.fillMaxSize()) {
+                            if (ambientActive && ambientFrame != null) {
+                                VideoUnderPlayerGlow(
+                                    frame = ambientFrame,
+                                    modifier =
+                                        Modifier
+                                            .align(Alignment.TopCenter)
+                                            .layout { measurable, constraints ->
+                                                val topPad = videoPlayerHeightPx().roundToInt().coerceAtLeast(0)
+                                                val placeable = measurable.measure(constraints)
+                                                layout(placeable.width, placeable.height + topPad) {
+                                                    placeable.place(0, topPad)
+                                                }
+                                            },
+                                )
+                            }
+                            Column(
                                 Modifier
-                                    .fillMaxWidth()
-                                    .layout { measurable, constraints ->
-                                        val height = videoPlayerHeightPx().roundToInt().coerceAtLeast(0)
-                                        val placeable =
-                                            measurable.measure(constraints.copy(minHeight = height, maxHeight = height))
-                                        layout(placeable.width, height) { placeable.place(0, 0) }
-                                    },
-                            )
+                                    .fillMaxSize()
+                                    .verticalScroll(rememberScrollState()),
+                            ) {
+                                Spacer(
+                                    Modifier
+                                        .fillMaxWidth()
+                                        .layout { measurable, constraints ->
+                                            val height = videoPlayerHeightPx().roundToInt().coerceAtLeast(0)
+                                            val placeable =
+                                                measurable.measure(constraints.copy(minHeight = height, maxHeight = height))
+                                            layout(placeable.width, height) { placeable.place(0, 0) }
+                                        },
+                                )
 
-                            VideoInfoContent(
-                                video = video,
-                                uiState = uiState,
-                                viewModel = viewModel,
-                                screenState = screenState,
-                                commentsUiState = commentsUiState,
-                                commentsEnabled = commentsEnabled,
-                                showCommentsPreview = showCommentsPreview,
-                                deArrowEnabled = prefs.deArrowEnabled,
-                                context = context,
-                                scope = scope,
-                                snackbarHostState = snackbarHostState,
-                                onChannelClick = onChannelClick,
-                            )
+                                VideoInfoContent(
+                                    video = video,
+                                    uiState = uiState,
+                                    viewModel = viewModel,
+                                    screenState = screenState,
+                                    commentsUiState = commentsUiState,
+                                    commentsEnabled = commentsEnabled,
+                                    showCommentsPreview = showCommentsPreview,
+                                    deArrowEnabled = prefs.deArrowEnabled,
+                                    context = context,
+                                    scope = scope,
+                                    snackbarHostState = snackbarHostState,
+                                    onChannelClick = onChannelClick,
+                                )
+                            }
                         }
                     }
                 },
@@ -205,9 +237,39 @@ internal fun EnhancedVideoPlayerScreen(
         } else {
             BoxWithConstraints(Modifier.fillMaxSize()) {
                 val relatedLayout = rememberFeedGridLayout(maxWidth, prefs.feedColumns)
+                val watchedVideoIds by viewModel.watchedVideoIds.collectAsStateWithLifecycle(initialValue = emptySet())
+                var selectedRelatedFilter by rememberSaveable(video.id) { mutableStateOf(RelatedVideoFilter.ALL) }
+
+                val filteredRelatedVideos =
+                    remember(uiState.relatedVideos, selectedRelatedFilter, video.channelId, video.channelName, watchedVideoIds) {
+                        when (selectedRelatedFilter) {
+                            RelatedVideoFilter.ALL -> uiState.relatedVideos
+                            RelatedVideoFilter.FROM_CHANNEL ->
+                                uiState.relatedVideos.filter {
+                                    (video.channelId.isNotEmpty() && it.channelId == video.channelId) ||
+                                        (video.channelName.isNotEmpty() && it.channelName.equals(video.channelName, ignoreCase = true))
+                                }
+                            RelatedVideoFilter.RELATED ->
+                                uiState.relatedVideos.filter {
+                                    (video.channelId.isEmpty() || it.channelId != video.channelId) &&
+                                        (video.channelName.isEmpty() || !it.channelName.equals(video.channelName, ignoreCase = true))
+                                }
+                            RelatedVideoFilter.RECENTLY_UPLOADED ->
+                                uiState.relatedVideos.sortedByDescending { it.timestamp }
+                            RelatedVideoFilter.WATCHED ->
+                                uiState.relatedVideos.filter { it.id in watchedVideoIds }
+                        }
+                    }
+
                 // Kept through fullscreen: the layout hides the page there, and keeping the list
                 // means leaving fullscreen, or waiting for the turn into it, never shows it empty.
                 if (!isInPipMode) {
+                    if (ambientActive && ambientFrame != null) {
+                        VideoUnderPlayerGlow(
+                            frame = ambientFrame,
+                            modifier = Modifier.align(Alignment.TopCenter),
+                        )
+                    }
                     LazyColumn(
                         Modifier.fillMaxSize(),
                         contentPadding = PaddingValues(bottom = maxOf(ListEndPadding, dockReserve + QueueDockGap)),
@@ -229,19 +291,43 @@ internal fun EnhancedVideoPlayerScreen(
                             )
                         }
                         if (showRelatedVideos) {
-                            if (relatedListUsesGrid(isMediumLayout, relatedCardStyle, relatedLayout)) {
-                                relatedVideosGridContent(
-                                    relatedVideos = uiState.relatedVideos,
-                                    layout = relatedLayout,
-                                    onVideoClick = onVideoClick,
-                                    cardStyle = relatedCardStyle,
-                                )
-                            } else {
-                                relatedVideosContent(
-                                    relatedVideos = uiState.relatedVideos,
-                                    onVideoClick = onVideoClick,
-                                    cardStyle = relatedCardStyle,
-                                )
+                            if (uiState.isLoading && uiState.relatedVideos.isEmpty()) {
+                                items(count = 4, key = { "related_skeleton_$it" }) {
+                                    VideoCardSkeleton(
+                                        layout = if (relatedCardStyle == PlayerRelatedCardStyle.COMPACT) VideoCardLayout.Row else VideoCardLayout.Stacked,
+                                        useInternalPadding = true,
+                                        modifier = Modifier.padding(bottom = 12.dp),
+                                    )
+                                }
+                            } else if (uiState.relatedVideos.isNotEmpty()) {
+                                stickyHeader(key = "player_related_filters") {
+                                    Surface(
+                                        modifier = Modifier.fillMaxWidth(),
+                                        color = MaterialTheme.colorScheme.background,
+                                    ) {
+                                        PlayerRelatedFilterChips(
+                                            channelName = video.channelName,
+                                            selectedFilter = selectedRelatedFilter,
+                                            onFilterSelected = { selectedRelatedFilter = it },
+                                            modifier = Modifier.fillMaxWidth(),
+                                        )
+                                    }
+                                }
+
+                                if (relatedListUsesGrid(isMediumLayout, relatedCardStyle, relatedLayout)) {
+                                    relatedVideosGridContent(
+                                        relatedVideos = filteredRelatedVideos,
+                                        layout = relatedLayout,
+                                        onVideoClick = onVideoClick,
+                                        cardStyle = relatedCardStyle,
+                                    )
+                                } else {
+                                    relatedVideosContent(
+                                        relatedVideos = filteredRelatedVideos,
+                                        onVideoClick = onVideoClick,
+                                        cardStyle = relatedCardStyle,
+                                    )
+                                }
                             }
                         }
                     }

@@ -62,14 +62,16 @@ class NowPlaying
                 }
                 while (true) {
                     delay(REPEAT_MS)
-                    if (current().state == LiveMessage.PLAYING) publish(force = true)
+                    if (GlobalPlayerState.playerState.value.isPlaying) {
+                        publish(force = true)
+                    }
                 }
             }
 
         private suspend fun publish(force: Boolean) {
             lock.withLock {
-                // The players live on the main thread.
-                val now = withContext(Dispatchers.Main.immediate) { current() }.copy(link = db.groups().group()?.link)
+                // The players live on the main thread; current() enforces Dispatchers.Main.immediate
+                val now = current().copy(link = db.groups().group()?.link)
                 val previous = last
                 if (!force && previous != null && !changed(previous, now)) return
                 if (live.send(now) != null) {
@@ -89,23 +91,24 @@ class NowPlaying
             return now.video != null && abs(now.pos - expected) > SEEK_MS
         }
 
-        /** The currently playing video. */
-        private fun current(): LiveMessage.Now {
-            val current = GlobalPlayerState.currentVideo.value ?: return LiveMessage.Now(video = null)
-            val queue = video.queueVideos.value
-            val vol = volume()
-            return LiveMessage.Now(
-                video = current.id,
-                title = current.title,
-                by = current.channelName,
-                pos = video.getCurrentPosition(),
-                dur = video.getDuration().coerceAtLeast(0),
-                state = if (GlobalPlayerState.playerState.value.isPlaying) LiveMessage.PLAYING else LiveMessage.PAUSED,
-                vol = vol,
-                queue = queue.take(LiveMessage.QUEUE_LIMIT).map { it.id },
-                index = video.currentQueueIndexState.value.coerceAtLeast(0),
-            )
-        }
+        /** The currently playing video. Safely reads player state on the main thread. */
+        private suspend fun current(): LiveMessage.Now =
+            withContext(Dispatchers.Main.immediate) {
+                val current = GlobalPlayerState.currentVideo.value ?: return@withContext LiveMessage.Now(video = null)
+                val queue = video.queueVideos.value
+                val vol = volume()
+                LiveMessage.Now(
+                    video = current.id,
+                    title = current.title,
+                    by = current.channelName,
+                    pos = video.getCurrentPosition(),
+                    dur = video.getDuration().coerceAtLeast(0),
+                    state = if (GlobalPlayerState.playerState.value.isPlaying) LiveMessage.PLAYING else LiveMessage.PAUSED,
+                    vol = vol,
+                    queue = queue.take(LiveMessage.QUEUE_LIMIT).map { it.id },
+                    index = video.currentQueueIndexState.value.coerceAtLeast(0),
+                )
+            }
 
         /** The media volume, 0 to 100. */
         private fun volume(): Int {

@@ -31,7 +31,7 @@ constructor(
     val scrubPreview = preferences.scrubPreviewStyle.asState(overlayDefaults.scrubPreviewStyle)
     val frameStepButtons = preferences.frameStepButtonsEnabled.asState(overlayDefaults.frameStepButtonsEnabled)
     val adaptivePlayerSize = preferences.adaptivePlayerSizeEnabled.asState(true)
-    val ambientMode = preferences.videoAmbientModeEnabled.asState(false)
+    val ambientMode = preferences.videoAmbientModeEnabled.asState(true)
     val groupedQualitySelector = preferences.groupedQualitySelectorEnabled.asState(false)
     val gestureOverlay = preferences.gestureOverlayStyle.asState(GestureOverlayStyle.CIRCULAR)
     val shortsUiMode = preferences.shortsPlayerUiMode.asState(ShortsPlayerUiMode.DEFAULT)

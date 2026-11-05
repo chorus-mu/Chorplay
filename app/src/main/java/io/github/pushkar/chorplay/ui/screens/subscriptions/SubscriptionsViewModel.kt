@@ -15,6 +15,7 @@ import io.github.pushkar.chorplay.data.model.Channel
 import io.github.pushkar.chorplay.data.model.Video
 import io.github.pushkar.chorplay.data.model.toUiModel
 import io.github.pushkar.chorplay.data.recommendation.ChorplayNeuroEngine
+import io.github.pushkar.chorplay.data.repository.ChannelAvatarRepository
 import io.github.pushkar.chorplay.data.subscriptions.SubscriptionFeedRepository
 import io.github.pushkar.chorplay.data.subscriptions.SubscriptionRefreshPlan
 import io.github.pushkar.chorplay.data.subscriptions.SubscriptionWatchedVideos
@@ -65,6 +66,7 @@ class SubscriptionsViewModel
         private val subscriptionWatchedVideos: SubscriptionWatchedVideos,
         private val neuroEngine: ChorplayNeuroEngine,
         private val backupCoordinator: BackupCoordinator,
+        private val channelAvatarRepository: ChannelAvatarRepository,
     ) : ViewModel() {
         companion object {
             private const val TAG = "SubsViewModel"
@@ -89,14 +91,6 @@ class SubscriptionsViewModel
         private var hasPendingVisibleEnrichment = false
         private var hasStarted = false
 
-        /**
-         * Starts the preference/feed collectors. Deliberately not run from `init`: the TV shell
-         * hoists this ViewModel at launch (see `ChorplayTvApp`), so constructing it would kick off the
-         * subscription RSS fetch before the user ever opens Subscriptions. Called from the screens
-         * instead, so the work still begins exactly when the feed becomes visible.
-         *
-         * Idempotent, and only ever called from composition (main thread).
-         */
         fun ensureStarted() {
             if (hasStarted) return
             hasStarted = true
@@ -194,7 +188,14 @@ class SubscriptionsViewModel
                 combine(subscriptionWatchedVideos.ids, subscriptionWatchedVideos.shortIds, ::Pair).collect { (videoIds, shortIds) ->
                     watchedVideoIds = videoIds
                     watchedShortIds = shortIds
+                    _uiState.update { it.copy(watchedVideoIds = videoIds) }
                     refreshVisibleFeed()
+                }
+            }
+
+            viewModelScope.launch(PerformanceDispatcher.diskIO) {
+                playerPreferences.subscriptionChannelsVisited.collect { visited ->
+                    _uiState.update { it.copy(channelLastVisited = visited) }
                 }
             }
 
@@ -216,6 +217,7 @@ class SubscriptionsViewModel
                     val channels = allSubs.toSubscribedChannels()
                     val notifStates = allSubs.associate { it.channelId to it.isNotificationEnabled }
                     _uiState.update { it.copy(subscribedChannels = channels, notificationStates = notifStates) }
+                    resolveMissingAvatars(allSubs)
                 }
             }
 
@@ -356,6 +358,62 @@ class SubscriptionsViewModel
                     now = System.currentTimeMillis(),
                 )
             _uiState.update { it.copy(recentVideos = sections.recentVideos, shorts = sections.shorts) }
+
+            val feedAvatars =
+                videos
+                    .filter { it.channelThumbnailUrl.isNotBlank() && !ThumbnailUrlResolver.isUnusableChannelAvatar(it.channelThumbnailUrl) }
+                    .associate { it.channelId to it.channelThumbnailUrl }
+            if (feedAvatars.isNotEmpty()) {
+                val neededRepairs =
+                    channels
+                        .filter { ThumbnailUrlResolver.isUnusableChannelAvatar(it.thumbnailUrl) && feedAvatars.containsKey(it.id) }
+                        .associate { it.id to feedAvatars.getValue(it.id) }
+                if (neededRepairs.isNotEmpty()) {
+                    applyResolvedAvatars(neededRepairs)
+                }
+            }
+        }
+
+        private var avatarResolutionJob: Job? = null
+
+        private fun resolveMissingAvatars(subscriptions: List<ChannelSubscription>) {
+            val missing = subscriptions.filter { ThumbnailUrlResolver.isUnusableChannelAvatar(it.channelThumbnail) }
+            if (missing.isEmpty()) return
+
+            avatarResolutionJob?.cancel()
+            avatarResolutionJob =
+                viewModelScope.launch(PerformanceDispatcher.networkIO) {
+                    val missingIds = missing.map { it.channelId }
+                    val localAvatars = channelAvatarRepository.local(missingIds)
+                    if (localAvatars.isNotEmpty()) {
+                        applyResolvedAvatars(localAvatars)
+                    }
+
+                    val remaining = missingIds.filterNot { localAvatars.containsKey(it) }
+                    if (remaining.isNotEmpty()) {
+                        val networkAvatars = channelAvatarRepository.all(remaining)
+                        if (networkAvatars.isNotEmpty()) {
+                            applyResolvedAvatars(networkAvatars)
+                        }
+                    }
+                }
+        }
+
+        private suspend fun applyResolvedAvatars(resolved: Map<String, String>) {
+            if (resolved.isEmpty()) return
+            _uiState.update { state ->
+                val updatedChannels =
+                    state.subscribedChannels.map { channel ->
+                        val avatar = resolved[channel.id]
+                        if (!avatar.isNullOrBlank() && ThumbnailUrlResolver.isUnusableChannelAvatar(channel.thumbnailUrl)) {
+                            channel.copy(thumbnailUrl = ThumbnailUrlResolver.resolveChannelAvatar(avatar))
+                        } else {
+                            channel
+                        }
+                    }
+                state.copy(subscribedChannels = updatedChannels)
+            }
+            subscriptionRepository.updateChannelAvatars(resolved)
         }
 
         fun updateVisibleVideoIds(videoIds: Set<String>) {
@@ -498,7 +556,34 @@ class SubscriptionsViewModel
         }
 
         fun selectChannel(channelId: String?) {
-            _uiState.update { it.copy(selectedChannelId = channelId) }
+            val currentSelected = _uiState.value.selectedChannelId
+            val newSelected = if (currentSelected == channelId) null else channelId
+            val now = System.currentTimeMillis()
+            _uiState.update { state ->
+                val updatedVisited =
+                    if (newSelected != null) {
+                        state.channelLastVisited + (newSelected to now)
+                    } else {
+                        state.channelLastVisited
+                    }
+                state.copy(
+                    selectedChannelId = newSelected,
+                    channelLastVisited = updatedVisited,
+                )
+            }
+            if (newSelected != null) {
+                viewModelScope.launch(PerformanceDispatcher.diskIO) {
+                    playerPreferences.recordChannelVisited(newSelected, now)
+                }
+            }
+        }
+
+        fun markChannelVisited(channelId: String) {
+            val now = System.currentTimeMillis()
+            _uiState.update { it.copy(channelLastVisited = it.channelLastVisited + (channelId to now)) }
+            viewModelScope.launch(PerformanceDispatcher.diskIO) {
+                playerPreferences.recordChannelVisited(channelId, now)
+            }
         }
 
         /** Explicit user refresh: every channel shown, regardless of how recently it was fetched. */

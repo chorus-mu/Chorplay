@@ -74,7 +74,7 @@ jobs:
 
       - name: Build for extraction
         run: >
-          ./gradlew :app:assembleGithubDebug
+          ./gradlew :app:assembleNormalDebug
           --no-build-cache --stacktrace
 
       # The Gradle and Kotlin compile daemons stay resident after the build.

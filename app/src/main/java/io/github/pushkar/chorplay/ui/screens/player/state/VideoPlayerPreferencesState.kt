@@ -80,7 +80,7 @@ internal fun rememberVideoPlayerPreferences(context: Context): VideoPlayerPrefer
     val showShortsPlayerPrompt by playerPreferences.showShortsPlayerPrompt.collectAsState(initial = true)
     val savedSubtitleStyle by playerPreferences.subtitleStyle.collectAsState(initial = SubtitleStyle())
     val rememberPlaybackSpeed by playerPreferences.rememberPlaybackSpeed.collectAsState(initial = false)
-    val ambientModeEnabled by playerPreferences.videoAmbientModeEnabled.collectAsState(initial = false)
+    val ambientModeEnabled by playerPreferences.videoAmbientModeEnabled.collectAsState(initial = true)
     val adaptivePlayerSizeEnabled by playerPreferences.adaptivePlayerSizeEnabled.collectAsState(initial = true)
     val groupedQualitySelectorEnabled by playerPreferences.groupedQualitySelectorEnabled.collectAsState(initial = false)
     val lockModeEnabled by playerPreferences.overlayLockModeEnabled.collectAsState(initial = false)

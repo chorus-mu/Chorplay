@@ -33,7 +33,6 @@ import io.github.pushkar.chorplay.player.DeepChorplayManager
 import io.github.pushkar.chorplay.player.EnhancedPlayerManager
 import io.github.pushkar.chorplay.player.GlobalPlayerState
 import io.github.pushkar.chorplay.player.SleepTimerManager
-import io.github.pushkar.chorplay.ui.components.donation.DonationPromptHost
 import io.github.pushkar.chorplay.ui.components.equalizer.LocalEqualizerState
 import io.github.pushkar.chorplay.ui.components.layout.ChorplayBottomInsets
 import io.github.pushkar.chorplay.ui.components.layout.LocalChorplayBottomInsets
@@ -483,10 +482,5 @@ fun ChorplayApp(
         )
 
         UpdateLaunchEffect(needsOnboarding = needsOnboarding, onOpenUpdate = { navController.navigate(UPDATE_ROUTE) })
-
-        DonationPromptHost(
-            enabled = needsOnboarding == false && !isInPipMode && !playerVisible,
-            onNavigateToDonations = { navController.navigate("donations") },
-        )
     }
 }

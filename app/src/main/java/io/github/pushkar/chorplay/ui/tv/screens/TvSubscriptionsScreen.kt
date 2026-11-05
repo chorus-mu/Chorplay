@@ -91,6 +91,7 @@ fun TvSubscriptionsScreen(
                     onVideoClick = onVideoClick,
                     onShortClick = {},
                     onChannelClick = onChannelClick,
+                    onChannelSelect = viewModel::selectChannel,
                     onViewAllClick = {
                         isManagingSubs = true
                     },

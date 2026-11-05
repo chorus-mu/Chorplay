@@ -22,6 +22,7 @@ class ContentSettingsViewModel
         val hideWatchedHome = preferences.hideWatchedVideosFromHome.asState(false)
 
         val subsVideos = preferences.subscriptionShowVideos.asState(true)
+        val subsFullWidth = preferences.subsFullWidthView.asState(true)
         val subsShorts = preferences.subscriptionShowShorts.asState(true)
         val subsShortsShelf = preferences.shortsShelfEnabled.asState(true)
         val subsLive = preferences.subscriptionShowLive.asState(true)
@@ -56,6 +57,8 @@ class ContentSettingsViewModel
         fun setHideWatchedHome(value: Boolean) = write { preferences.setHideWatchedVideosFromHome(value) }
 
         fun setSubsVideos(value: Boolean) = write { preferences.setSubscriptionShowVideos(value) }
+
+        fun setSubsFullWidth(value: Boolean) = write { preferences.setSubsFullWidthView(value) }
 
         fun setSubsShorts(value: Boolean) = write { preferences.setSubscriptionShowShorts(value) }
 

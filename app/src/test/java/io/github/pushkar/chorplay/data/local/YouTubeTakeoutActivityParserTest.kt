@@ -164,6 +164,24 @@ class YouTubeTakeoutActivityParserTest {
     }
 
     @Test
+    fun `watches with Google Ads subtitles or details are excluded`() {
+        val adWithSubtitles =
+            """
+            {"header":"YouTube","title":"Watched Commercial","titleUrl":"https://www.youtube.com/watch?v=adVideoId12",
+             "subtitles":[{"name":"From Google Ads","url":"https://googleads.g.doubleclick.net/pagead/aclk?test"}],
+             "time":"2026-02-01T10:00:00Z","products":["YouTube"]}
+            """.trimIndent()
+        val result =
+            activity(
+                record("Watched Legitimate Video", "aaaaaaaaaaa", "2026-02-01T09:00:00Z"),
+                adWithSubtitles,
+                record("Watched Sponsored Video", "bbbbbbbbbbb", "2026-02-01T08:00:00Z", extra = ""","details":[{"name":"From Google Ads"}]"""),
+            )
+
+        assertThat(result.watches.map { it.videoId }).containsExactly("aaaaaaaaaaa")
+    }
+
+    @Test
     fun `a search link needs its query and a YouTube host`() {
         assertThat(takeoutSearchOf("https://www.youtube.com/results?search_query=")).isNull()
         assertThat(takeoutSearchOf("https://example.com/results?search_query=x")).isNull()

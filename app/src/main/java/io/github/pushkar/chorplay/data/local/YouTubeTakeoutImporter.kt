@@ -11,11 +11,6 @@ import io.github.pushkar.chorplay.data.recommendation.ChorplayNeuroEngine
 import io.github.pushkar.chorplay.di.ProfileDb
 import io.github.pushkar.chorplay.utils.ThumbnailUrlResolver
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
-import kotlinx.coroutines.awaitAll
-import kotlinx.coroutines.supervisorScope
-import kotlinx.coroutines.sync.Semaphore
-import kotlinx.coroutines.sync.withPermit
 import kotlinx.coroutines.withContext
 import kotlinx.coroutines.yield
 import kotlinx.serialization.SerializationException
@@ -26,8 +21,6 @@ import java.util.zip.ZipInputStream
 private const val ENGLISH_TAKEOUT_WATCH_HISTORY = "history/watch-history.html"
 private const val TAKEOUT_PLAYLIST_ID_PREFIX = "yt_takeout_"
 private const val NEURO_CANDIDATE_LIMIT = 800
-private const val AVATAR_FETCHES = 5
-private const val SUBSCRIPTION_BATCH = 25
 private const val WATCH_BATCH = 500
 
 internal class YouTubeTakeoutImporter(
@@ -214,7 +207,15 @@ internal class YouTubeTakeoutImporter(
         found: Found,
     ) {
         if (watches.isEmpty()) return
-        val entries = watches.map { it.toHistoryEntry() }
+        val filtered =
+            watches.filterNot { watch ->
+                watch.channelName.contains("Google Ads", ignoreCase = true) ||
+                    watch.title.contains("Google Ads", ignoreCase = true) ||
+                    watch.title.equals("Watched an ad", ignoreCase = true) ||
+                    watch.title.equals("an ad", ignoreCase = true)
+            }
+        if (filtered.isEmpty()) return
+        val entries = filtered.map { it.toHistoryEntry() }
         viewHistory.bulkSaveHistoryEntries(entries)
         entries.forEach { entry ->
             if (found.learnable.size < NEURO_CANDIDATE_LIMIT && entry.title.isNotBlank()) found.learnable.putIfAbsent(
@@ -233,29 +234,18 @@ internal class YouTubeTakeoutImporter(
         if (rows.isEmpty()) return 0
         val label = context.getString(R.string.import_takeout_step_subscriptions)
         onProgress?.invoke(label, 0, rows.size)
-        val semaphore = Semaphore(AVATAR_FETCHES)
         val completed = AtomicInteger(0)
-        val imported = mutableListOf<ChannelSubscription>()
-        supervisorScope {
-            rows.chunked(SUBSCRIPTION_BATCH).forEach { batch ->
-                imported +=
-                    batch
-                        .map { sub ->
-                            async(Dispatchers.IO) {
-                                semaphore.withPermit {
-                                    val avatar = runCatching { channelAvatar(sub.channelId) }.getOrDefault("")
-                                    onProgress?.invoke(label, completed.incrementAndGet(), rows.size)
-                                    ChannelSubscription(
-                                        channelId = sub.channelId,
-                                        channelName = sub.channelName,
-                                        channelThumbnail = avatar,
-                                        subscribedAt = System.currentTimeMillis(),
-                                    )
-                                }
-                            }
-                        }.awaitAll()
+        val now = System.currentTimeMillis()
+        val imported =
+            rows.map { sub ->
+                onProgress?.invoke(label, completed.incrementAndGet(), rows.size)
+                ChannelSubscription(
+                    channelId = sub.channelId,
+                    channelName = sub.channelName,
+                    channelThumbnail = "",
+                    subscribedAt = now,
+                )
             }
-        }
         subscriptions.subscribeAll(imported)
         val names = rows.map { it.channelName }.filter { it.isNotEmpty() }
         if (names.isNotEmpty()) runCatching { ChorplayNeuroEngine.bootstrapFromSubscriptions(context, names) }

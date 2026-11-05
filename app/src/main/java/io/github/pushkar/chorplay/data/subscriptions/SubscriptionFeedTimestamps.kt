@@ -78,7 +78,8 @@ private data class SortableVideo(
 fun List<Video>.withStableUploadSortKeys(now: Long): List<Video> =
     map { video -> SortableVideo(video, SubscriptionFeedTimestamps.effectiveUploadTimestamp(video, now)) }
         .sortedWith(
-            compareByDescending<SortableVideo> { it.uploadTimestamp }
+            compareByDescending<SortableVideo> { it.video.isLive }
+                .thenByDescending { it.uploadTimestamp }
                 .thenByDescending { it.video.viewCount }
                 .thenBy { it.video.id },
         ).map { it.video }

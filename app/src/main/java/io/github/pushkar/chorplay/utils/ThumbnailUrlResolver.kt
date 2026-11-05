@@ -240,7 +240,7 @@ object ThumbnailUrlResolver {
      */
     fun isUnusableChannelAvatar(rawUrl: String?): Boolean {
         val raw = rawUrl?.trim().orEmpty()
-        return isYoutubeVideoThumbnail(raw) || youtubePagePattern.containsMatchIn(raw)
+        return raw.isBlank() || isYoutubeVideoThumbnail(raw) || youtubePagePattern.containsMatchIn(raw)
     }
 
     fun isYoutubeVideoThumbnail(rawUrl: String?): Boolean {

@@ -228,6 +228,21 @@ class SubscriptionRepository private constructor(
         return repairs.size
     }
 
+    suspend fun updateChannelAvatars(avatarByChannelId: Map<String, String>) {
+        if (avatarByChannelId.isEmpty()) return
+        context.subscriptionsDataStore.edit { preferences ->
+            avatarByChannelId.forEach { (channelId, avatarUrl) ->
+                val channelData = preferences[channelKey(channelId)]
+                if (channelData != null && avatarUrl.isNotBlank() && !ThumbnailUrlResolver.isUnusableChannelAvatar(avatarUrl)) {
+                    val subscription = deserializeChannel(channelData)
+                    if (subscription != null && ThumbnailUrlResolver.isUnusableChannelAvatar(subscription.channelThumbnail)) {
+                        preferences[channelKey(channelId)] = serializeChannel(subscription.copy(channelThumbnail = avatarUrl.trim()))
+                    }
+                }
+            }
+        }
+    }
+
     private fun serializeChannel(channel: ChannelSubscription): String = SubscriptionRecordCodec.encode(channel)
 
     private fun ChannelSubscription.withPreservedThumbnail(preferences: Preferences): ChannelSubscription {

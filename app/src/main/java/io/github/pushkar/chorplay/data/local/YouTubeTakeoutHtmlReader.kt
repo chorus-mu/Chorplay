@@ -70,23 +70,35 @@ internal suspend fun readTakeoutHtmlActivity(
             if (match.range.last < tail.length) continue
             while (channelIndex < channels.size && channels[channelIndex].range.first <= match.range.first) channelIndex++
             val channel = channels.getOrNull(channelIndex)?.takeIf { it.range.first - match.range.last < CHANNEL_LINK_REACH }
+
+            val reachEnd = minOf(window.length, match.range.last + CHANNEL_LINK_REACH)
+            val followingSnippet = window.substring(match.range.last, reachEnd)
+            val nextCellIndex = followingSnippet.indexOf(TAKEOUT_ACTIVITY_MARKUP)
+            val cellSnippet = if (nextCellIndex != -1) followingSnippet.substring(0, nextCellIndex) else followingSnippet
+
+            val title = match.groupValues[3].trim().unescapedHtml()
+            val channelName =
+                channel
+                    ?.groupValues
+                    ?.get(2)
+                    ?.trim()
+                    ?.unescapedHtml()
+                    .orEmpty()
+            val channelId =
+                channel
+                    ?.groupValues
+                    ?.get(1)
+                    ?.trim()
+                    .orEmpty()
+
+            if (isTakeoutHtmlAd(cellSnippet, channelName, title)) continue
+
             batch +=
                 TakeoutWatch(
                     videoId = match.groupValues[2].trim(),
-                    title = match.groupValues[3].trim().unescapedHtml(),
-                    channelName =
-                        channel
-                            ?.groupValues
-                            ?.get(2)
-                            ?.trim()
-                            ?.unescapedHtml()
-                            .orEmpty(),
-                    channelId =
-                        channel
-                            ?.groupValues
-                            ?.get(1)
-                            ?.trim()
-                            .orEmpty(),
+                    title = title,
+                    channelName = channelName,
+                    channelId = channelId,
                     watchedAt = now - (watched + batch.size),
                     isMusic = match.groupValues[1].equals("music", ignoreCase = true),
                 )
@@ -119,3 +131,18 @@ internal fun String.unescapedHtml(): String =
         .replace("&apos;", "'")
         .replace("&#x27;", "'")
         .replace("&amp;", "&")
+
+internal fun isTakeoutHtmlAd(snippet: String, channelName: String, title: String): Boolean {
+    val lowerSnippet = snippet.lowercase()
+    val lowerChannel = channelName.lowercase()
+    val lowerTitle = title.lowercase()
+    return lowerSnippet.contains("googleads") ||
+        lowerSnippet.contains("adservice.google") ||
+        lowerSnippet.contains("google.com/ads") ||
+        lowerSnippet.contains("from google ads") ||
+        lowerSnippet.contains("google ads") ||
+        lowerChannel.contains("google ads") ||
+        lowerTitle.contains("google ads") ||
+        lowerTitle == "watched an ad" ||
+        lowerTitle == "an ad"
+}

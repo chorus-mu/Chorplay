@@ -75,7 +75,7 @@ internal fun rememberShortsReelSettings(playerPreferences: PlayerPreferences): S
     val playbackMode by playerPreferences.shortsPlaybackMode.collectAsState(initial = SHORTS_PLAYBACK_LOOP)
     val autoScrollSeconds by playerPreferences.shortsAutoScrollSeconds.collectAsState(initial = 10)
     val uiMode by playerPreferences.shortsPlayerUiMode.collectAsState(initial = ShortsPlayerUiMode.DEFAULT)
-    val ambientModeEnabled by playerPreferences.videoAmbientModeEnabled.collectAsState(initial = false)
+    val ambientModeEnabled by playerPreferences.videoAmbientModeEnabled.collectAsState(initial = true)
     val playbackSpeed by playerPreferences.shortsPlaybackSpeed.collectAsState(initial = 1f)
     val groupedQualitySelectorEnabled by playerPreferences.groupedQualitySelectorEnabled.collectAsState(initial = false)
     val customSpeedsEnabled by playerPreferences.customSpeedsEnabled.collectAsState(initial = false)

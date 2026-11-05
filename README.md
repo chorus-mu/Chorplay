@@ -136,13 +136,13 @@ git clone https://github.com/chorus-mu/Chorplay.git
 cd Chorplay
 
 # Build the GitHub Debug variant (with updater)
-./gradlew :app:assembleGithubDebug
+./gradlew :app:assembleNormalDebug
 
 # Or build the pure FOSS Debug variant (without updater)
 ./gradlew :app:assembleFossDebug
 
 # Run unit tests
-./gradlew :app:testGithubDebugUnitTest
+./gradlew :app:testNormalDebugUnitTest
 ```
 
 The compiled APKs will be located in:

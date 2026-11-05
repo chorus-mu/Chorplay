@@ -34,5 +34,20 @@ internal fun sortSubscriptions(
         }
     }
 
-internal fun quickAccessOrder(channels: List<Channel>): List<Channel> =
-    channels.distinctBy(Channel::id)
+internal fun quickAccessOrder(
+    channels: List<Channel>,
+    recentVideos: List<Video> = emptyList(),
+): List<Channel> {
+    if (recentVideos.isEmpty()) return channels.distinctBy(Channel::id)
+    val liveChannelIds = recentVideos.filter { it.isLive }.mapTo(HashSet()) { it.channelId }
+    val latestUploadByChannel =
+        recentVideos
+            .groupBy { it.channelId }
+            .mapValues { (_, videos) -> videos.maxOfOrNull { it.timestamp } ?: 0L }
+    return channels
+        .distinctBy(Channel::id)
+        .sortedWith(
+            compareByDescending<Channel> { it.id in liveChannelIds }
+                .thenByDescending { latestUploadByChannel[it.id] ?: 0L }
+        )
+}

@@ -270,7 +270,6 @@ fun NavGraphBuilder.chorplayAppGraph(
         SettingsHost(
             start = SettingsTarget.decode(backStackEntry.arguments?.getString("target")),
             onExit = { navController.popBackStack() },
-            onOpenDonations = { navController.navigate("donations") },
             onOpenRecap = { navController.navigate(RecapRoutes.stats()) },
             onOpenUpdate = { navController.navigate(UPDATE_ROUTE) },
         )
@@ -320,12 +319,6 @@ fun NavGraphBuilder.chorplayAppGraph(
         }
     }
 
-    composable("donations") {
-        currentRoute.value = "donations"
-        io.github.pushkar.chorplay.ui.screens.settings.about.DonationsScreen(
-            onNavigateBack = { navController.popBackStack() },
-        )
-    }
 
     composable(
         route = "channel?url={channelUrl}",

@@ -1626,7 +1626,7 @@ class EnhancedPlayerManager private constructor() {
         return true
     }
 
-    fun hasPrevious(): Boolean = queue.hasPrevious || (player?.currentPosition ?: 0) > 3000
+    fun hasPrevious(): Boolean = queue.hasPrevious || getCurrentPosition() > 3000
 
     /** True when the queue advanced to [videoId]; such items start from the beginning instead of resuming. */
     fun isReachedByQueueAdvance(videoId: String): Boolean = queue.isReachedByAdvance(videoId)
@@ -2385,11 +2385,15 @@ class EnhancedPlayerManager private constructor() {
     // ===== Playback Controls =====
 
     fun play() {
+        val p = player ?: return
+        if (Looper.myLooper() != p.applicationLooper) {
+            mainHandler.post { play() }
+            return
+        }
         startPausedVideoId = null
         if (audioOnlyMode.needsVideoRestore) {
             restoreVideoOutput()
         }
-        val p = player ?: return
         if (p.playbackState == Player.STATE_IDLE) {
             if (reloadClearedMediaIfNeeded(playWhenReadyOverride = true)) return
             if (p.mediaItemCount > 0) {
@@ -2427,7 +2431,14 @@ class EnhancedPlayerManager private constructor() {
         return loaded
     }
 
-    fun pause() = player?.pause()
+    fun pause() {
+        val p = player ?: return
+        if (Looper.myLooper() != p.applicationLooper) {
+            mainHandler.post { pause() }
+            return
+        }
+        p.pause()
+    }
 
     /**
      * Nudges the playhead one frame.
@@ -2454,6 +2465,10 @@ class EnhancedPlayerManager private constructor() {
 
     fun seekTo(position: Long) {
         val p = player ?: return
+        if (Looper.myLooper() != p.applicationLooper) {
+            mainHandler.post { seekTo(position) }
+            return
+        }
         val isLive = currentIsLiveStream || p.isCurrentMediaItemLive
         val target = resolveSeekTarget(p, position)
         val isEndBoundary = !isLive && isEndBoundarySeek(position, p.duration)
@@ -2600,6 +2615,11 @@ class EnhancedPlayerManager private constructor() {
     }
 
     fun stop() {
+        val p = player
+        if (p != null && Looper.myLooper() != p.applicationLooper) {
+            mainHandler.post { stop() }
+            return
+        }
         autoplayJob?.cancel()
         autoplayJob = null
         releaseAdvanceWakeLock()
@@ -2632,20 +2652,54 @@ class EnhancedPlayerManager private constructor() {
 
     fun getCastAudioStreams(): List<AudioStream> = StreamProcessor.streamsOfTrack(castAudioStreams, currentAudioStream)
 
-    fun getCurrentPosition(): Long = player?.currentPosition ?: 0L
-
-    fun getDuration(): Long = player?.duration ?: 0L
-
-    fun isPlaying(): Boolean = player?.isPlaying ?: false
-
-    fun isPreparedForPlayback(videoId: String): Boolean {
-        val p = player ?: return false
-        val state = _playerState.value
-        return state.currentVideoId == videoId &&
-            state.isPrepared &&
-            p.currentMediaItem != null &&
-            p.playbackState != Player.STATE_IDLE
+    private inline fun <T> runOnPlayerThread(crossinline block: (ExoPlayer) -> T, default: T): T {
+        val p = player ?: return default
+        val looper = p.applicationLooper
+        if (Looper.myLooper() == looper) {
+            return try {
+                block(p)
+            } catch (e: Throwable) {
+                default
+            }
+        }
+        return try {
+            val future = java.util.concurrent.CompletableFuture<T>()
+            mainHandler.post {
+                try {
+                    val activePlayer = player
+                    if (activePlayer != null) {
+                        future.complete(block(activePlayer))
+                    } else {
+                        future.complete(default)
+                    }
+                } catch (t: Throwable) {
+                    future.complete(default)
+                }
+            }
+            future.get(100, java.util.concurrent.TimeUnit.MILLISECONDS)
+        } catch (t: Throwable) {
+            Log.w(TAG, "Player accessed on non-application thread (${Thread.currentThread().name}), fallback to default", t)
+            default
+        }
     }
+
+    fun getCurrentPosition(): Long = runOnPlayerThread({ it.currentPosition }, 0L)
+
+    fun getDuration(): Long = runOnPlayerThread({ it.duration }, 0L)
+
+    fun isPlaying(): Boolean = runOnPlayerThread({ it.isPlaying }, false)
+
+    fun isPreparedForPlayback(videoId: String): Boolean =
+        runOnPlayerThread(
+            { p ->
+                val state = _playerState.value
+                state.currentVideoId == videoId &&
+                    state.isPrepared &&
+                    p.currentMediaItem != null &&
+                    p.playbackState != Player.STATE_IDLE
+            },
+            false,
+        )
 
     fun hasAbandonedPlayback(): Boolean = errorHandler?.hasGivenUp() == true || denialReloads.hasGivenUpOn(currentVideoId)
 

@@ -249,6 +249,7 @@ class PlayerPreferences(
         val SUBSCRIPTION_SHOW_VIDEOS = booleanPreferencesKey("subscription_show_videos")
         val SUBSCRIPTION_SHOW_SHORTS = booleanPreferencesKey("subscription_show_shorts")
         val SUBSCRIPTION_SHOW_LIVE = booleanPreferencesKey("subscription_show_live")
+        val SUBSCRIPTION_CHANNELS_VISITED = stringPreferencesKey("subscription_channels_visited")
         val SUBSCRIPTION_SHORTS_EXCLUDED_CHANNELS = stringSetPreferencesKey("subscription_shorts_excluded_channels")
         val UPCOMING_VIDEO_REMINDER_IDS = stringSetPreferencesKey("upcoming_video_reminder_ids")
         val UPCOMING_VIDEO_REMINDERS = stringPreferencesKey("upcoming_video_reminders")
@@ -370,9 +371,6 @@ class PlayerPreferences(
 
         val PLAY_DURING_CALLS = device(booleanPreferencesKey("play_during_calls"))
 
-        val DONATION_FIRST_LAUNCH_TIME = device(longPreferencesKey("donation_first_launch_time"))
-        val DONATION_PROMPT_LAST_SHOWN = device(longPreferencesKey("donation_prompt_last_shown"))
-        val DONATION_PROMPT_DISABLED = device(booleanPreferencesKey("donation_prompt_disabled"))
         val ANIMATED_ARTWORK_WIFI_ONLY = device(booleanPreferencesKey("animated_artwork_wifi_only"))
         val AUTO_DOWNLOAD_LIKED_VIDEOS = device(booleanPreferencesKey("auto_download_liked_videos"))
 
@@ -1465,7 +1463,7 @@ class PlayerPreferences(
     val videoAmbientModeEnabled: Flow<Boolean> =
         context.playerPreferencesDataStore.data
             .map { preferences ->
-                preferences[Keys.VIDEO_AMBIENT_MODE_ENABLED] ?: false
+                preferences[Keys.VIDEO_AMBIENT_MODE_ENABLED] ?: true
             }
 
     suspend fun setVideoAmbientModeEnabled(enabled: Boolean) {
@@ -2111,7 +2109,7 @@ class PlayerPreferences(
     val subsFullWidthView: Flow<Boolean> =
         context.playerPreferencesDataStore.data
             .map { preferences ->
-                preferences[Keys.SUBS_FULL_WIDTH_VIEW] ?: false
+                preferences[Keys.SUBS_FULL_WIDTH_VIEW] ?: true
             }
 
     suspend fun setSubsFullWidthView(enabled: Boolean) {
@@ -2189,36 +2187,6 @@ class PlayerPreferences(
         context.playerPreferencesDataStore.edit { preferences ->
             preferences[Keys.SUBS_LAST_REFRESH_TIME] = timeMillis
             preferences[Keys.SUBS_LAST_REFRESHED_COUNT] = count
-        }
-    }
-
-    val donationFirstLaunchTime: Flow<Long> =
-        context.devicePreferencesDataStore.data
-            .map { preferences -> preferences[DeviceKeys.DONATION_FIRST_LAUNCH_TIME] ?: 0L }
-
-    val donationPromptLastShownTime: Flow<Long> =
-        context.devicePreferencesDataStore.data
-            .map { preferences -> preferences[DeviceKeys.DONATION_PROMPT_LAST_SHOWN] ?: 0L }
-
-    val donationPromptDisabled: Flow<Boolean> =
-        context.devicePreferencesDataStore.data
-            .map { preferences -> preferences[DeviceKeys.DONATION_PROMPT_DISABLED] ?: false }
-
-    suspend fun setDonationFirstLaunchTime(timeMillis: Long) {
-        context.devicePreferencesDataStore.edit { preferences ->
-            preferences[DeviceKeys.DONATION_FIRST_LAUNCH_TIME] = timeMillis
-        }
-    }
-
-    suspend fun setDonationPromptShown(timeMillis: Long) {
-        context.devicePreferencesDataStore.edit { preferences ->
-            preferences[DeviceKeys.DONATION_PROMPT_LAST_SHOWN] = timeMillis
-        }
-    }
-
-    suspend fun setDonationPromptDisabled(disabled: Boolean) {
-        context.devicePreferencesDataStore.edit { preferences ->
-            preferences[DeviceKeys.DONATION_PROMPT_DISABLED] = disabled
         }
     }
 
@@ -2310,6 +2278,38 @@ class PlayerPreferences(
     suspend fun setSubscriptionShowLive(enabled: Boolean) {
         context.playerPreferencesDataStore.edit { preferences ->
             preferences[Keys.SUBSCRIPTION_SHOW_LIVE] = enabled
+        }
+    }
+
+    val subscriptionChannelsVisited: Flow<Map<String, Long>> =
+        context.playerPreferencesDataStore.data
+            .map { preferences ->
+                preferences[Keys.SUBSCRIPTION_CHANNELS_VISITED]
+                    ?.split(",")
+                    ?.mapNotNull { item ->
+                        val parts = item.split(":")
+                        if (parts.size == 2) {
+                            parts[0] to (parts[1].toLongOrNull() ?: 0L)
+                        } else null
+                    }?.toMap() ?: emptyMap()
+            }.distinctUntilChanged()
+
+    suspend fun recordChannelVisited(channelId: String, timestamp: Long) {
+        context.playerPreferencesDataStore.edit { preferences ->
+            val current =
+                preferences[Keys.SUBSCRIPTION_CHANNELS_VISITED]
+                    ?.split(",")
+                    ?.mapNotNull { item ->
+                        val parts = item.split(":")
+                        if (parts.size == 2) parts[0] to (parts[1].toLongOrNull() ?: 0L) else null
+                    }?.toMap().orEmpty().toMutableMap()
+            current[channelId] = timestamp
+            val encoded =
+                current.entries
+                    .sortedByDescending { it.value }
+                    .take(200)
+                    .joinToString(",") { "${it.key}:${it.value}" }
+            preferences[Keys.SUBSCRIPTION_CHANNELS_VISITED] = encoded
         }
     }
 

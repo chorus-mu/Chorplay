@@ -95,7 +95,7 @@ internal fun readTakeoutActivity(
     myActivityJson
         .decodeToSequence(input, MyActivityRecord.serializer(), DecodeSequenceMode.ARRAY_WRAPPED)
         .forEach { record ->
-            if (record.details != null) return@forEach
+            if (record.isAd() || record.details != null) return@forEach
             val title = record.title ?: return@forEach
             val at = record.time?.let { runCatching { Instant.parse(it).toEpochMilli() }.getOrNull() } ?: return@forEach
             val isLike = title.startsWith(LIKED_PREFIX)
@@ -136,6 +136,19 @@ internal fun takeoutSearchOf(url: String?): Pair<String, Boolean>? {
             ?.trim()
             ?.takeIf(String::isNotEmpty) ?: return null
     return query to isMusic
+}
+
+private fun MyActivityRecord.isAd(): Boolean {
+    if (header?.contains("Google Ads", ignoreCase = true) == true) return true
+    if (titleUrl.orEmpty().contains("googleads", ignoreCase = true)) return true
+    if (title.orEmpty().contains("Google Ads", ignoreCase = true)) return true
+    if (subtitles?.any {
+        it.name.orEmpty().contains("Google Ads", ignoreCase = true) ||
+            it.url.orEmpty().contains("googleads", ignoreCase = true) ||
+            it.url.orEmpty().contains("adservice", ignoreCase = true)
+    } == true) return true
+    if (details?.any { it.toString().contains("Google Ads", ignoreCase = true) } == true) return true
+    return false
 }
 
 private fun MyActivityRecord.videoId(): String? =

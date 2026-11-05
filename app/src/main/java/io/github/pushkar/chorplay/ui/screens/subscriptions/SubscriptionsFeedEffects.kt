@@ -16,10 +16,9 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.filter
 
-private const val QUICK_ACCESS_CHANNEL_LIMIT = 15
 private const val STALE_REFRESH_INTERVAL_MS = 3 * 60 * 1000L
 
-/** The channels in the user's sort order, and the first of them for the quick access row. */
+/** The channels in the user's sort order, and the quick access row preserving all channels by recency. */
 internal class SubscriptionChannels(
     val sorted: List<Channel>,
     val quickAccess: List<Channel>,
@@ -31,7 +30,9 @@ internal fun rememberSubscriptionChannels(uiState: SubscriptionsUiState): Subscr
         remember(uiState.subscribedChannels, uiState.sortMode, uiState.recentVideos) {
             sortSubscriptions(uiState.subscribedChannels, uiState.sortMode, uiState.recentVideos)
         }
-    return remember(sorted) { SubscriptionChannels(sorted, quickAccessOrder(sorted).take(QUICK_ACCESS_CHANNEL_LIMIT)) }
+    return remember(sorted, uiState.recentVideos) {
+        SubscriptionChannels(sorted, quickAccessOrder(sorted, uiState.recentVideos))
+    }
 }
 
 /**

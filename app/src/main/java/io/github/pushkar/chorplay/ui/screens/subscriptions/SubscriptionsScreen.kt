@@ -223,6 +223,7 @@ fun SubscriptionsScreen(
                         onVideoClick = onVideoClick,
                         onShortClick = onShortClick,
                         onChannelClick = onChannelClick,
+                        onChannelSelect = viewModel::selectChannel,
                         onViewAllClick = {
                             isManagingSubs = true
                         },

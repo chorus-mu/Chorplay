@@ -10,6 +10,7 @@ import io.github.pushkar.chorplay.data.local.ViewHistory
 import io.github.pushkar.chorplay.data.local.dao.SubscriptionGroupDao
 import io.github.pushkar.chorplay.data.local.entity.SubscriptionGroupEntity
 import io.github.pushkar.chorplay.data.model.Video
+import io.github.pushkar.chorplay.data.repository.ChannelAvatarRepository
 import io.github.pushkar.chorplay.data.recommendation.FeedExclusions
 import io.github.pushkar.chorplay.data.recommendation.ChorplayNeuroEngine
 import io.github.pushkar.chorplay.data.subscriptions.SubscriptionFeedRefreshProgress
@@ -65,7 +66,7 @@ class SubscriptionsViewModelTest {
         coEvery { playerPreferences.subscriptionShowShorts } returns flowOf(true)
         coEvery { playerPreferences.subscriptionShowLive } returns flowOf(true)
         coEvery { playerPreferences.subscriptionShortsExcludedChannels } returns flowOf(emptySet())
-        coEvery { playerPreferences.subsFullWidthView } returns flowOf(false)
+        coEvery { playerPreferences.subsFullWidthView } returns flowOf(true)
         coEvery { playerPreferences.subsSortMode } returns flowOf("DEFAULT")
         coEvery { playerPreferences.selectedSubscriptionGroup } returns flowOf(null)
         coEvery { playerPreferences.subscriptionLastRefreshTime } returns flowOf(0L)
@@ -82,6 +83,7 @@ class SubscriptionsViewModelTest {
         coEvery { subscriptionFeedRepository.observeFeed(any()) } returns flowOf(emptyList())
         coEvery { subscriptionFeedRepository.planRefresh(any(), any()) } returns SubscriptionRefreshPlan.NOTHING_TO_DO
         coEvery { neuroEngine.feedExclusions(any()) } returns FeedExclusions.NONE
+        coEvery { playerPreferences.subscriptionChannelsVisited } returns flowOf(emptyMap())
 
         viewModel =
             SubscriptionsViewModel(
@@ -92,6 +94,7 @@ class SubscriptionsViewModelTest {
                 subscriptionWatchedVideos = SubscriptionWatchedVideos(viewHistory, playerPreferences, database),
                 neuroEngine = neuroEngine,
                 backupCoordinator = mockk(relaxed = true),
+                channelAvatarRepository = mockk(relaxed = true),
             )
         viewModelStore.put("subscriptions", viewModel)
     }
@@ -148,6 +151,7 @@ class SubscriptionsViewModelTest {
             assertThat(state.isLoading).isFalse()
             assertThat(state.selectedGroupName).isNull()
             assertThat(state.sortMode).isEqualTo(SubscriptionSortMode.DEFAULT)
+            assertThat(state.isFullWidthView).isTrue()
         }
 
     @Test

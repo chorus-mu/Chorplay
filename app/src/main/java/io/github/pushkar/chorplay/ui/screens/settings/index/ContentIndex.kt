@@ -64,6 +64,14 @@ internal object ContentIndex {
             section = R.string.settings_section_subscriptions,
             destination = page,
         )
+    val subsFullWidth =
+        SettingEntry(
+            key = "content.subs.full_width",
+            title = R.string.content_settings_subs_full_width_title,
+            summary = R.string.content_settings_subs_full_width_subtitle,
+            section = R.string.settings_section_subscriptions,
+            destination = page,
+        )
     val subsShorts =
         SettingEntry(
             key = "content.subs.shorts",
@@ -229,6 +237,7 @@ internal object ContentIndex {
             homeSubscriptions,
             hideWatchedHome,
             subsVideos,
+            subsFullWidth,
             subsShorts,
             subsShortsShelf,
             subsLive,

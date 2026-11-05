@@ -69,7 +69,7 @@ data class SubscriptionsUiState(
     val shorts: List<Video> = emptyList(),
     val selectedChannelId: String? = null,
     val isLoading: Boolean = false,
-    val isFullWidthView: Boolean = false,
+    val isFullWidthView: Boolean = true,
     val sortMode: SubscriptionSortMode = SubscriptionSortMode.DEFAULT,
     val isShortsShelfEnabled: Boolean = true,
     val notificationStates: Map<String, Boolean> = emptyMap(),
@@ -89,9 +89,27 @@ data class SubscriptionsUiState(
     /** Channels the last refresh could not reach at all; surfaced instead of silently showing less. */
     val failedChannelIds: Set<String> = emptySet(),
     val failedChannelReasons: Map<String, String> = emptyMap(),
+    val channelLastVisited: Map<String, Long> = emptyMap(),
+    val watchedVideoIds: Set<String> = emptySet(),
 ) {
     /** The selected group's channels, which scope its refreshes and reads; null for every subscription. */
     fun selectedGroupScope(): Set<String>? = selectedGroupName?.let { name -> groups.find { it.name == name }?.channelIds?.toSet() }
+
+    /** Channels with new uploads that have not been visited or watched yet. */
+    fun unreadChannelIds(watchedIds: Set<String> = watchedVideoIds): Set<String> {
+        val unread = mutableSetOf<String>()
+        val latestByChannel = recentVideos.groupBy { it.channelId }
+        for ((channelId, videos) in latestByChannel) {
+            val lastVisited = channelLastVisited[channelId] ?: 0L
+            val hasUnreadUpload = videos.any { video ->
+                video.timestamp > lastVisited && video.id !in watchedIds
+            }
+            if (hasUnreadUpload) {
+                unread.add(channelId)
+            }
+        }
+        return unread
+    }
 
     /** Display names for [failedChannelIds], falling back to the raw id for an unknown channel. */
     val failedChannelNames: List<String>

@@ -19,6 +19,8 @@ import io.github.pushkar.chorplay.data.local.PlayerRelatedCardStyle
 import io.github.pushkar.chorplay.data.model.Comment
 import io.github.pushkar.chorplay.data.model.Video
 import io.github.pushkar.chorplay.player.EnhancedPlayerState
+import io.github.pushkar.chorplay.ui.components.shared.card.VideoCardLayout
+import io.github.pushkar.chorplay.ui.components.shared.card.VideoCardSkeleton
 import io.github.pushkar.chorplay.ui.components.videoplayer.sheet.LiveChatPreview
 import io.github.pushkar.chorplay.ui.screens.player.VideoPlayerViewModel
 import io.github.pushkar.chorplay.ui.screens.player.dialogs.PlayerChaptersSheetHost
@@ -244,11 +246,21 @@ internal fun PlayerDetailSideColumn(
                                             LiveChatPreview(onClick = { screenState.showLiveChatPanel = true })
                                         }
                                     }
-                                    relatedVideosContent(
-                                        relatedVideos = uiState.relatedVideos,
-                                        onVideoClick = onVideoClick,
-                                        cardStyle = relatedCardStyle,
-                                    )
+                                    if (uiState.isLoading && uiState.relatedVideos.isEmpty()) {
+                                        items(count = 4, key = { "side_related_skeleton_$it" }) {
+                                            VideoCardSkeleton(
+                                                layout = if (relatedCardStyle == PlayerRelatedCardStyle.COMPACT) VideoCardLayout.Row else VideoCardLayout.Stacked,
+                                                useInternalPadding = true,
+                                                modifier = Modifier.padding(bottom = 12.dp),
+                                            )
+                                        }
+                                    } else {
+                                        relatedVideosContent(
+                                            relatedVideos = uiState.relatedVideos,
+                                            onVideoClick = onVideoClick,
+                                            cardStyle = relatedCardStyle,
+                                        )
+                                    }
                                 }
                             }
                         }

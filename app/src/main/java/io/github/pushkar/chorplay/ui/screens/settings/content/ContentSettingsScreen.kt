@@ -69,6 +69,7 @@ internal fun ContentSettingsScreen(
         }
         group(key = "content.subscriptions", header = R.string.settings_section_subscriptions) {
             switch(ContentIndex.subsVideos, viewModel.subsVideos, viewModel::setSubsVideos)
+            switch(ContentIndex.subsFullWidth, viewModel.subsFullWidth, viewModel::setSubsFullWidth)
             switch(ContentIndex.subsShorts, viewModel.subsShorts, viewModel::setSubsShorts, enabled = shortsContent)
             switch(
                 ContentIndex.subsShortsShelf,

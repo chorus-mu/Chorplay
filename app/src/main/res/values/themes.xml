@@ -24,6 +24,7 @@
 
     <style name="Theme.Chorplay.Starting.Light">
         <item name="windowSplashScreenBackground">@color/splash_background_light</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_splash_logo</item>
     </style>
     <style name="Theme.Chorplay.Starting.Light.Play">
         <item name="windowSplashScreenAnimatedIcon">@drawable/ic_fg_chorplay_play</item>
@@ -43,6 +44,7 @@
 
     <style name="Theme.Chorplay.Starting.Dark">
         <item name="windowSplashScreenBackground">@color/splash_background_dark</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_splash_logo</item>
     </style>
     <style name="Theme.Chorplay.Starting.Dark.Play">
         <item name="windowSplashScreenAnimatedIcon">@drawable/ic_fg_chorplay_play</item>
@@ -65,6 +67,7 @@
 
     <style name="Theme.Chorplay.Starting.Black">
         <item name="windowSplashScreenBackground">@color/splash_background_black</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_splash_logo</item>
     </style>
     <style name="Theme.Chorplay.Starting.Black.Play">
         <item name="windowSplashScreenAnimatedIcon">@drawable/ic_fg_chorplay_play</item>

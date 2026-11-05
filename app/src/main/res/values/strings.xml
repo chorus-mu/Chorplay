@@ -238,6 +238,8 @@
     <string name="i_like_this">I want more like this</string>
     <string name="i_like_this_toast">Got it! You\'ll see more content like this.</string>
     <string name="go_to_channel">Go to channel</string>
+    <string name="view_channel">View channel</string>
+    <string name="no_recent_videos_for_channel">No recent videos from this channel in your feed</string>
     <!-- Media Info Dialog -->
     <string name="track_info">Track Information</string>
     <string name="track_info_subtitle">Detailed technical and social metrics</string>
@@ -1125,6 +1127,8 @@
     <string name="content_settings_subs_show_checked_count_subtitle">Show how many videos were checked on refresh</string>
     <string name="content_settings_subs_show_videos_title">Subscription videos</string>
     <string name="content_settings_subs_show_videos_subtitle">Show regular videos in the subscription feed</string>
+    <string name="content_settings_subs_full_width_title">Full-width video cards</string>
+    <string name="content_settings_subs_full_width_subtitle">Display large 16:9 thumbnails matching YouTube instead of compact rows</string>
     <string name="content_settings_subs_show_shorts_title">Subscription shorts</string>
     <string name="content_settings_subs_show_shorts_subtitle">Show Shorts in the subscription feed</string>
     <string name="content_settings_subs_show_live_title">Subscription live streams</string>
@@ -1135,6 +1139,11 @@
     <string name="content_settings_nav_order_subtitle">Drag to reorder. Choose the tab Chorplay opens on.</string>
     <string name="settings_subs_shorts_shelf_title">Subscriptions shorts shelf</string>
     <string name="settings_subs_shorts_shelf_subtitle">Show a Shorts shelf in the subscription feed</string>
+    <string name="player_filter_all">All</string>
+    <string name="player_filter_from_channel">From %1$s</string>
+    <string name="player_filter_related">Related</string>
+    <string name="player_filter_recently_uploaded">Recently uploaded</string>
+    <string name="player_filter_watched">Watched</string>
     <string name="settings_home_shorts_shelf_title">Home screen shorts shelf</string>
     <string name="settings_home_shorts_shelf_subtitle">Show the horizontal shorts shelf on the home screen.</string>
     <string name="settings_shorts_nav_tab_title">Shorts tab in navigation</string>
@@ -1750,32 +1759,9 @@
         <item quantity="one">%1$d thread</item>
         <item quantity="other">%1$d threads</item>
     </plurals>
-    <!-- Donations Screen -->
-    <string name="support_donations_title">Support &amp; Donations</string>
-    <string name="support_chorplay_dev_title">Support Chorplay Development</string>
-    <string name="support_chorplay_dev_desc">If Chorplay is useful to you, you can support it on Open Collective, Patreon or with crypto below. Thank you!</string>
-    <string name="support_chorplay_open_collective">Support Chorplay on Open Collective</string>
-    <string name="support_chorplay_patreon">Support Chorplay on Patreon</string>
-    <string name="thank_you_support_message">Thank you for your support! ❤️</string>
-    <string name="address_copied_toast">Address copied to clipboard</string>
-    <string name="donation_address_clip_label">Donation Address</string>
-    <!-- One-time support prompt -->
-    <string name="donation_prompt_title">Enjoying Chorplay?</string>
-    <string name="donation_prompt_message">Chorplay is free, open source and ad-free. If it earned a spot on your phone, a little support keeps it going.</string>
-    <string name="donation_method_open_collective" translatable="false">Open Collective</string>
-    <string name="donation_method_patreon" translatable="false">Patreon</string>
-    <string name="donation_prompt_methods">Open Collective · Patreon · Bitcoin · Ethereum · Solana · USDT · Monero</string>
-    <string name="donation_prompt_support">Support development</string>
-    <string name="donation_prompt_later">Maybe later</string>
-    <string name="donation_prompt_never">Don\'t show again</string>
     <!-- About Screen -->
     <string name="about_creator">Creator</string>
     <string name="about_creator_name">Pushkar</string>
-    <string name="about_website">Website</string>
-    <string name="about_website_address">github.com/chorus-mu/Chorplay</string>
-    <string name="about_reddit">Reddit</string>
-    <string name="about_reddit_subtitle">r/Chorplay_Official</string>
-    <string name="github_subtitle">Source code &amp; Issues</string>
     <string name="newpipe_extractor_title">NewPipe Extractor</string>
     <string name="newpipe_extractor_subtitle">Core extraction library</string>
     <string name="about_license">License</string>
@@ -3330,7 +3316,7 @@
     <string name="crash_continue">Continue</string>
     <string name="crash_report_copied">Full report copied. Paste it into the Logs field.</string>
     <string name="ui_crashed_last_session">Chorplay crashed last session</string>
-    <string name="ui_copy_log_description">Copy the log below and paste it into a GitHub issue so it can be fixed.</string>
+    <string name="ui_copy_log_description">Copy the log below and report the issue so it can be fixed.</string>
     <string name="ui_search_settings">Search settings…</string>
     <string name="ui_custom_interest_title">Add Custom Interest</string>
     <string name="ui_custom_interest_subtitle">Type any topic you want to follow</string>
@@ -3435,7 +3421,7 @@
     <string name="update_version_change">%1$s → %2$s</string>
     <string name="update_not_now">Not now</string>
     <string name="update_skip_version">Skip this version</string>
-    <string name="update_open_github">Open on GitHub</string>
+    <string name="update_open_github">Open in browser</string>
     <string name="update_action_download">Download</string>
     <string name="update_action_downloading">Downloading</string>
     <string name="update_action_downloading_percent">Downloading %1$d%%</string>
@@ -3646,7 +3632,6 @@
     <string name="empty_saved_shorts">No saved shorts yet</string>
     <string name="settings_search_no_results">No settings found for "%1$s"</string>
     <string name="import_running_background">You can leave this screen. The import keeps running.</string>
-    <string name="donations_cryptocurrency">CRYPTOCURRENCY</string>
     <string name="import_no_history_entries">No watch-history entries found in file</string>
     <string name="import_no_videos">No videos found in playlist file</string>
     <string name="import_no_likes">No likes found. Export My Activity for YouTube as JSON, with your Google account in English.</string>
@@ -3919,16 +3904,11 @@
     <string name="diagnostics_snapshot_exported">Snapshot exported</string>
     <string name="diagnostics_snapshot_export_failed">Couldn\'t export the snapshot</string>
     <string name="settings_keywords_diagnostics">logs, crash, bug report, debug, support, logcat</string>
-    <string name="donation_currency_bitcoin" translatable="false">Bitcoin</string>
-    <string name="donation_currency_ethereum" translatable="false">Ethereum</string>
-    <string name="donation_currency_solana" translatable="false">Solana</string>
-    <string name="donation_currency_usdt" translatable="false">USDT (TRC-20)</string>
-    <string name="donation_currency_monero" translatable="false">Monero</string>
-    <string name="settings_keywords_about">version, license, open source, github, reddit, contact, changelog</string>
+    <string name="settings_keywords_about">version, license, open source, changelog</string>
     <string name="settings_changelog_version">Version %1$s</string>
     <string name="settings_changelog_installed">Installed</string>
     <string name="settings_changelog_prerelease">Pre-release</string>
-    <string name="settings_changelog_all_releases">All releases on GitHub</string>
+    <string name="settings_changelog_all_releases">All releases</string>
     <string name="settings_changelog_expand">Show changes</string>
     <string name="settings_changelog_collapse">Hide changes</string>
     <string name="settings_creator_role">Creator and developer of Chorplay</string>

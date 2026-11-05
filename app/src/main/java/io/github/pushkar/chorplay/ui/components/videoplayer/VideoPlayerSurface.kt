@@ -41,6 +41,7 @@ import io.github.pushkar.chorplay.player.PictureInPictureHelper
 import io.github.pushkar.chorplay.player.toDisplayAspectRatioOrNull
 import io.github.pushkar.chorplay.ui.components.shared.clipToCornerRadius
 import io.github.pushkar.chorplay.ui.components.shared.chorPlayerViewLayout
+import io.github.pushkar.chorplay.ui.components.videoplayer.ambient.AmbientFrameHolder
 import io.github.pushkar.chorplay.ui.components.videoplayer.ambient.VideoAmbientBackground
 import io.github.pushkar.chorplay.ui.components.videoplayer.ambient.rememberAmbientFrame
 
@@ -181,6 +182,20 @@ fun VideoPlayerSurface(
     val currentSurfaceRestoreTrigger = surfaceRestoreTrigger
 
     val ambientFrame = rememberAmbientFrame(playerView, ambientActive)
+
+    LaunchedEffect(ambientFrame.frame, ambientActive) {
+        if (ambientActive) {
+            AmbientFrameHolder.updateFrame(ambientFrame.frame)
+        } else {
+            AmbientFrameHolder.clear()
+        }
+    }
+
+    DisposableEffect(Unit) {
+        onDispose {
+            AmbientFrameHolder.clear()
+        }
+    }
 
     Box(modifier = modifier.fillMaxSize()) {
         if (ambientActive) {

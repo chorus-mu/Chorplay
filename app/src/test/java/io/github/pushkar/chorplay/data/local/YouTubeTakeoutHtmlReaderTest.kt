@@ -64,4 +64,25 @@ class YouTubeTakeoutHtmlReaderTest {
             assertThat(watches.single().isMusic).isTrue()
             assertThat(result.searches.map { it.query to it.isMusic }).containsExactly("lofi & rain" to false, "jazz" to true).inOrder()
         }
+
+    @Test
+    fun `ads from google ads are filtered out and not counted as watches`() =
+        runTest {
+            val adCell =
+                """<div class="content-cell mdl-cell">Watched <a href="https://www.youtube.com/watch?v=adVideoId12">Ad Title</a><br>""" +
+                    """<a href="https://googleads.g.doubleclick.net/pagead/aclk?test">From Google Ads</a><br>Oct 1, 2026</div>"""
+            val plainAdCell =
+                """<div class="content-cell mdl-cell">Watched <a href="https://www.youtube.com/watch?v=adVideoId34">Commercial</a><br>""" +
+                    """From Google Ads<br>Oct 1, 2026</div>"""
+
+            val (result, watches) =
+                read(
+                    cell("dQw4w9WgXcQ", "Real Video", "UCuAXFkgsw1L7xaCfnd5JJOw", "Rick") +
+                        adCell +
+                        plainAdCell,
+                )
+
+            assertThat(result.watches).isEqualTo(1)
+            assertThat(watches.map { it.videoId }).containsExactly("dQw4w9WgXcQ")
+        }
 }

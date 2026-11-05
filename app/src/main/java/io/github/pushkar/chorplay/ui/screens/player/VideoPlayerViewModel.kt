@@ -221,6 +221,12 @@ constructor(
             .map { list -> list.map { it.video.id }.toSet() }
             .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptySet())
 
+    val watchedVideoIds: StateFlow<Set<String>> =
+        viewHistory.getAllWatchProgress()
+            .map { list -> list.map { it.videoId }.toSet() }
+            .flowOn(ioDispatcher)
+            .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptySet())
+
     fun isVideoSavedToAnyPlaylist(videoId: String): Flow<Boolean> =
         playlistRepository.isVideoSavedToAnyPlaylistFlow(videoId)
 

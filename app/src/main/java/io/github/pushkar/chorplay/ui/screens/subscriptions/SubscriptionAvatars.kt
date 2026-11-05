@@ -1,6 +1,7 @@
 package io.github.pushkar.chorplay.ui.screens.subscriptions
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
@@ -36,6 +37,8 @@ import io.github.pushkar.chorplay.ui.components.shared.ChannelAvatarImage
 import io.github.pushkar.chorplay.ui.components.shared.ChannelGroupBadge
 import io.github.pushkar.chorplay.ui.components.shared.focusLift
 import io.github.pushkar.chorplay.ui.components.shared.titleMarquee
+import io.github.pushkar.chorplay.ui.theme.YouTubeRed
+import io.github.pushkar.chorplay.ui.theme.YouTubeUnreadBlue
 
 private val AvatarItemWidth = 64.dp
 private val AvatarSize = 56.dp
@@ -50,6 +53,9 @@ internal fun subscriptionAvatarShape(): Shape = CircleShape
 @Composable
 internal fun ChannelAvatarItem(
     channel: Channel,
+    isSelected: Boolean = false,
+    hasUnread: Boolean = false,
+    isLive: Boolean = false,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -70,24 +76,71 @@ internal fun ChannelAvatarItem(
             modifier = Modifier.size(AvatarSize),
             contentAlignment = Alignment.Center,
         ) {
+            val imageModifier =
+                when {
+                    isLive ->
+                        Modifier
+                            .size(AvatarSize)
+                            .border(
+                                width = 2.dp,
+                                color = YouTubeRed,
+                                shape = CircleShape,
+                            )
+                            .padding(3.dp)
+                            .clip(CircleShape)
+                            .background(MaterialTheme.colorScheme.surfaceVariant)
+                    isSelected ->
+                        Modifier
+                            .size(AvatarSize)
+                            .border(
+                                width = 2.dp,
+                                color = MaterialTheme.colorScheme.primary,
+                                shape = CircleShape,
+                            )
+                            .padding(3.dp)
+                            .clip(CircleShape)
+                            .background(MaterialTheme.colorScheme.surfaceVariant)
+                    else ->
+                        Modifier
+                            .size(AvatarSize)
+                            .clip(CircleShape)
+                            .background(MaterialTheme.colorScheme.surfaceVariant)
+                }
+
             ChannelAvatarImage(
                 url = channel.thumbnailUrl,
                 contentDescription = channel.name,
-                modifier =
-                    Modifier
-                        .size(AvatarSize)
-                        .clip(CircleShape)
-                        .background(MaterialTheme.colorScheme.surfaceVariant),
+                modifier = imageModifier,
             )
             ChannelGroupBadge(channelId = channel.id)
+
+            val dotColor =
+                when {
+                    isLive -> YouTubeRed
+                    hasUnread && !isSelected -> YouTubeUnreadBlue
+                    else -> null
+                }
+
+            if (dotColor != null) {
+                Box(
+                    modifier =
+                        Modifier
+                            .align(Alignment.BottomEnd)
+                            .offset(x = (-2).dp, y = (-2).dp)
+                            .size(10.dp)
+                            .background(dotColor, CircleShape)
+                            .border(1.5.dp, MaterialTheme.colorScheme.surface, CircleShape),
+                )
+            }
         }
         Spacer(modifier = Modifier.height(LabelSpacing))
         Text(
             text = channel.name,
             style = MaterialTheme.typography.labelSmall,
+            fontWeight = if (isSelected) androidx.compose.ui.text.font.FontWeight.SemiBold else androidx.compose.ui.text.font.FontWeight.Normal,
             maxLines = 1,
             overflow = TextOverflow.Clip,
-            color = MaterialTheme.colorScheme.onSurface,
+            color = if (isSelected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface,
             textAlign = TextAlign.Center,
             modifier = Modifier.titleMarquee(),
         )

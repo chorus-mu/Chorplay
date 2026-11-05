@@ -216,8 +216,6 @@
     <string name="settings_item_import_data_subtitle">استعادة من نسخة احتياطية أو استيراد من تطبيقات أخرى</string>
     <string name="settings_item_about_chorplay">عن Chorplay</string>
     <string name="settings_item_about_chorplay_subtitle">الإصدار، الترخيص، المساهمون</string>
-    <string name="settings_item_support">الدعم و التبرعات</string>
-    <string name="settings_item_support_subtitle">ساهم في دعم تطوير Chorplay</string>
     <string name="settings_region_dialog_title">إختر البلد</string>
     <string name="settings_export_success">تم تصدير البيانات بنجاح</string>
     <string name="settings_export_failed">فشل التصدير: %1$s</string>
@@ -637,15 +635,7 @@
     <string name="location_badge_recommended">مستحسن</string>
     <string name="location_badge_active">نشط</string>
     <string name="select_threads_count_desc">حدد عدد التقسيمات (١-٨):</string>
-    <string name="support_donations_title">الدعم والتبرعات</string>
-    <string name="support_chorplay_dev_title">إدعم تطوير Chorplay</string>
-    <string name="support_chorplay_dev_desc">إذا كان Chorplay مفيدًا لك، يمكنك دعمه عبر Open Collective, Patreon أو بالعملات الرقمية أدناه. شكرًا لك!</string>
-    <string name="thank_you_support_message">شكراً لدعمكم! ❤️</string>
-    <string name="address_copied_toast">تم نسخ العنوان إلى الحافظة</string>
-    <string name="donation_address_clip_label">عنوان التبرع</string>
     <string name="about_creator">المنشئ</string>
-    <string name="about_website">الموقع الإلكتروني</string>
-    <string name="github_subtitle">شفرة المصدر و المشاكل</string>
     <string name="newpipe_extractor_title">NewPipe مستخرج</string>
     <string name="newpipe_extractor_subtitle">مكتبة الاستخراج الأساسية</string>
     <string name="about_license">رخصة</string>
@@ -1258,7 +1248,6 @@
     <string name="settings_item_app_language_subtitle">استخدم لغة جهازك أو اختر لغة يدويًا</string>
     <string name="settings_language_dialog_title">إختر لغة التطبيق</string>
     <string name="settings_language_system_default">‌الإفتراضي للنظام</string>
-    <string name="support_chorplay_patreon">إدعم Chorplay على Patreon</string>
     <string name="select_text">حدد النص</string>
     <string name="resume">إستأنف</string>
     <string name="import_playlists_section_title">قوائم التشغيل</string>
@@ -1556,12 +1545,6 @@
     <string name="live_chat_show">إظهار الدردشة</string>
     <string name="live_chat_hide">إخفاء الدردشة</string>
     <string name="live_chat_jump_to_latest">إنتقل إلى أحدث رسالة دردشة</string>
-    <string name="donation_prompt_title">هل تستمتع بChorplay؟</string>
-    <string name="donation_prompt_message">Chorplay مجاني ومفتوح المصدر وخالٍ من الإعلانات. إذا كان Chorplay يستحق مكانًا على هاتفك، فإن القليل من الدعم يساعد على استمراره.</string>
-    <string name="donation_prompt_methods">Open Collective · Patreon · Bitcoin · Ethereum · Solana · USDT · Monero</string>
-    <string name="donation_prompt_support">إدعم التطوير</string>
-    <string name="donation_prompt_later">رُبما لاحقاً</string>
-    <string name="donation_prompt_never">لا تظهر مجدداً</string>
     <string name="library_local_media_label">الوسائط المحلية</string>
     <string name="library_local_media_subtitle">شَغٍل مقاطع الفيديو و الموسيقى على هذا الجهاز</string>
     <string name="local_media_title">الوسائط المحلية</string>
@@ -2052,9 +2035,6 @@
 
 
     <string name="about_creator_name">Pushkar</string>
-    <string name="about_website_address">github.com/chorus-mu/Chorplay</string>
-    <string name="about_reddit">Reddit</string>
-    <string name="about_reddit_subtitle">r/Chorplay_Official</string>
     <string name="about_license_name">GNU GPL v3</string>
 
 
@@ -2127,7 +2107,6 @@
     <string name="empty_saved_shorts">لم يتم حفظ أي مقاطع قصيرة حتى الآن</string>
     <string name="settings_search_no_results">لم يتم العثور على إعدادات لـ %1$s</string>
     <string name="import_running_background">يمكنك مغادرة هذه الشاشة. سيستمر الاستيراد في الخلفية.</string>
-    <string name="donations_cryptocurrency">العملات المشفرة</string>
     <string name="import_no_history_entries">لم يتم العثور على أي مدخلات لسجل المشاهدة في الملف</string>
     <string name="import_no_videos">لم يتم العثور على أي فيديوهات في ملف قائمة التشغيل</string>
     <string name="import_no_content">لم يتم العثور على أي محتوى قابل للاستيراد في هذه النسخة الاحتياطية</string>
@@ -4273,7 +4252,6 @@
     <string name="search_filter_watched">تمت مشاهدته</string>
     <string name="deep_chor_on_search_title">إظهار في البحث</string>
     <string name="deep_chor_on_search_subtitle">مفتاح تبديل Deep Chorplay فوق عمليات البحث الأخيرة</string>
-    <string name="support_chorplay_open_collective">ادعم Chorplay على Open Collective</string>
     <string name="auto_tab_for_you">مقترح لك</string>
     <string name="auto_tab_queue">قائمة التشغيل</string>
     <string name="taste_unknown_channel">قناة غير معروفة</string>

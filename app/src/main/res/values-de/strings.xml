@@ -354,8 +354,6 @@
     <string name="settings_item_import_data_subtitle">Aus einem Backup wiederherstellen oder Import aus anderen Apps</string>
     <string name="settings_item_about_chorplay">Über Chorplay</string>
     <string name="settings_item_about_chorplay_subtitle">Version, Lizenz, Mitwirkende</string>
-    <string name="settings_item_support">Unterstützung &amp; Spenden</string>
-    <string name="settings_item_support_subtitle">Unterstützung bei der Entwicklung von Chorplay</string>
     <string name="settings_region_dialog_title">Region auswählen</string>
     <string name="settings_language_dialog_title">App-Sprache auswählen</string>
     <string name="settings_language_system_default">System-Standard</string>
@@ -1052,12 +1050,6 @@
     <string name="location_manual_confirm">Speichern</string>
     <string name="location_badge_recommended">Vorgeschlagen</string>
     <string name="location_badge_active">Aktiv</string>
-    <string name="address_copied_toast">Adresse in die Zwischenablage kopiert</string>
-    <string name="donation_prompt_methods">Patreon · Bitcoin · Ethereum · Solana · USDT · Monero</string>
-    <string name="donation_prompt_support">Unterstütze die Entwicklung</string>
-    <string name="donation_prompt_later">Vielleicht später</string>
-    <string name="donation_prompt_never">Nicht nochmal zeigen</string>
-    <string name="about_website">Webseite</string>
     <string name="about_license">Lizenz</string>
     <string name="about_device_info">Geräteinfo</string>
     <string name="gnu_license_full_title">GNU General Public License</string>
@@ -1389,16 +1381,8 @@
     <string name="import_yt_playlist_desc">Importiere eine Playlist aus einer YouTube Auszug-CSV-Datei (Playlist-&lt;Name&gt;.csv).</string>
     <string name="import_yt_history_failed_template">Der Import des Wiedergabesverlaufs ist fehlgeschlagen: %1$s</string>
     <string name="channel_error_log_clip_label">Chorplay Kanal-Fehlerprotokoll</string>
-    <string name="thank_you_support_message">Vielen Dank für eure Unterstützung! ❤️</string>
-    <string name="donation_address_clip_label">Adresse für Spenden</string>
-    <string name="donation_prompt_title">Gefällt dir „Chorplay“?</string>
-    <string name="donation_prompt_message">Chorplay ist kostenlos, Open Source und ohne Werbung oder Tracker entwickelt. Wenn die App sich einen Platz auf Ihrem Gerät verdient hat, denken Sie bitte darüber nach, die Entwicklung zu unterstützen – das trägt wirklich dazu bei, das Projekt am Leben zu erhalten.</string>
     <string name="about_creator">Entwickler</string>
     <string name="about_creator_name">Pushkar</string>
-    <string name="about_website_address">github.com/chorus-mu/Chorplay</string>
-    <string name="about_reddit">Reddit</string>
-    <string name="about_reddit_subtitle">r/Chorplay_Official</string>
-    <string name="github_subtitle">Quellcode &amp; Probleme</string>
     <string name="newpipe_extractor_title">NewPipe Extractor</string>
     <string name="about_license_name">GNU GPL v3</string>
     <string name="about_changelog">Änderungsprotokoll</string>
@@ -1472,8 +1456,6 @@
     <string name="persona_scholar_title">Der Gelehrte</string>
     <string name="persona_scholar_description">Inhalte mit hohem Komplexitätsgrad. Wir sind hier, um uns weiterzuentwickeln – nicht nur, um uns unterhalten zu lassen.</string>
     <string name="persona_deep_diver_title">Der Tieftaucher</string>
-    <string name="support_chorplay_dev_desc">Wenn Sie Chorplay nützlich finden und die Entwicklung des Projekts unterstützen möchten, können Sie dies auf Patreon tun oder über die unten angegebenen Krypto-Adressen spenden. Ihre Unterstützung hilft dabei, das Projekt am Leben zu erhalten!</string>
-    <string name="support_chorplay_patreon">Unterstütze Chorplay auf Patreon</string>
     <string name="persona_specialist_description">Ganz gezielt auf einige wenige Nischen ausgerichtet. Du weißt, was dir gefällt.</string>
     <string name="persona_explorer_description">Chaotisch und wunderschön. Von allem etwas.</string>
     <string name="channel_memory_empty">Es sind keine Kanäle im Speicher vorhanden.</string>
@@ -1565,7 +1547,6 @@
     <string name="cast_connecting">Verbindung zum Cast-Gerät wird hergestellt…</string>
     <string name="cast_connected">Casting</string>
     <string name="dlna_cast_to_device">Auf Gerät übertragen</string>
-    <string name="support_donations_title">Unterstützung &amp; Spenden</string>
     <string name="subtitle_bold_text">Fettgedruckter Text</string>
     <string name="subtitle_reset_default">Auf Standard zurücksetzen</string>
     <string name="check_for_updates_subtitle">Tippen Sie hier, um nach der neuesten Version zu suchen</string>
@@ -1593,7 +1574,6 @@
     <string name="notif_background_restricted_subtitle">Android hindert Chorplay im Hintergrund nach neuen Videos zu suchen. Klicke hier um uneingeschränkte Hintergrundaktivitäten zuzulassen.</string>
     <string name="player_appearance_long_press_speed_title">Wiedergabetempo beim gedrückthalten</string>
     <string name="select_threads_count_desc">Wähle die Anzahl der Threads (1-8):</string>
-    <string name="support_chorplay_dev_title">Unterstützte die Chorplay Entwicklung</string>
     <string name="topic_weights_subtitle">Volle Transparenz wodurch dein Feed beeinflusst wird</string>
     <string name="persona_deep_diver_description">Lamge Videobeiträge und Dokumentationen sind deine Welt</string>
     <string name="status_playing">Spielt</string>

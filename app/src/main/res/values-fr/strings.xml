@@ -285,8 +285,6 @@
     <string name="settings_item_import_data_subtitle">Restaurer depuis une sauvegarde ou importer depuis d\'autres applications</string>
     <string name="settings_item_about_chorplay">À propos de Chorplay</string>
     <string name="settings_item_about_chorplay_subtitle">Version, Licence, Contributeurs</string>
-    <string name="settings_item_support">Soutien et dons</string>
-    <string name="settings_item_support_subtitle">Aidez à soutenir le développement de Chorplay</string>
     <string name="settings_region_dialog_title">Sélectionner la région</string>
     <string name="settings_export_success">Données exportées avec succès</string>
     <string name="settings_export_failed">Échec de l\'exportation : %1$s</string>
@@ -557,16 +555,8 @@
     <string name="location_badge_active">Actif</string>
     <string name="select_threads_count_desc">Sélectionnez le nombre de threads (1-8) :</string>
     <!-- Écran des Dons -->
-    <string name="support_donations_title">Soutien et dons</string>
-    <string name="support_chorplay_dev_title">Soutenir le développement de Chorplay</string>
-    <string name="support_chorplay_dev_desc">Si vous trouvez Chorplay utile et souhaitez soutenir son développement, vous pouvez le faire sur Patreon ou faire un don via les adresses de cryptomonnaie ci-dessous. Votre soutien contribue à la pérennité du projet !</string>
-    <string name="thank_you_support_message">Merci pour votre soutien ! ❤️</string>
-    <string name="address_copied_toast">Adresse copiée dans le presse-papiers</string>
-    <string name="donation_address_clip_label">Adresse de Don</string>
     <!-- Écran À Propos -->
     <string name="about_creator">Créateur</string>
-    <string name="about_website">Site Web</string>
-    <string name="github_subtitle">Code source &amp; Problèmes</string>
     <string name="newpipe_extractor_title">NewPipe Extractor</string>
     <string name="newpipe_extractor_subtitle">Bibliothèque d\'extraction principale</string>
     <string name="about_license">Licence</string>
@@ -1104,7 +1094,6 @@
     <string name="audio_access_title">Accès à la musique &amp; à l\'audio</string>
     <string name="audio_access_granted_subtitle">Autorisé</string>
     <string name="audio_access_denied_subtitle">Non autorisé — appuyez pour activer</string>
-    <string name="support_chorplay_patreon">Soutenez Chorplay sur Patreon</string>
     <string name="section_app">Application</string>
     <string name="section_contact">Contact</string>
     <string name="section_legal">Légal</string>
@@ -1595,12 +1584,6 @@
     <string name="live_chat_jump_to_latest">Aller au dernier message du chat</string>
     <string name="content_settings_subs_show_checked_count_title">Nombre de vidéos vérifiées</string>
     <string name="content_settings_subs_show_checked_count_subtitle">Indiquer le nombre de vidéos visionnées à côté de la date de la dernière mise à jour</string>
-    <string name="donation_prompt_title">Vous appréciez Chorplay ?</string>
-    <string name="donation_prompt_message">Chorplay est une application gratuite et open source, conçue sans publicité ni traqueurs. Si elle a trouvé sa place sur votre appareil, pensez à soutenir son développement : cela contribue réellement à assurer la pérennité du projet.</string>
-    <string name="donation_prompt_methods">Patreon · Bitcoin · Ethereum · Solana · USDT · Monero</string>
-    <string name="donation_prompt_support">Soutenir le développement</string>
-    <string name="donation_prompt_later">Peut-être plus tard</string>
-    <string name="donation_prompt_never">Ne plus afficher</string>
     <string name="library_local_media_label">Médias locaux</string>
     <string name="library_local_media_subtitle">Lire des vidéos et de la musique sur cet appareil</string>
     <string name="local_media_title">Médias locaux</string>
@@ -2121,9 +2104,6 @@
     <string name="fallback_your_saved_shorts">Vos shorts enregistrés</string>
 
     <string name="about_creator_name">Pushkar</string>
-    <string name="about_website_address">github.com/chorus-mu/Chorplay</string>
-    <string name="about_reddit">Reddit</string>
-    <string name="about_reddit_subtitle">r/Chorplay_Official</string>
     <string name="about_license_name">GNU GPL v3</string>
     <string name="tv_player_queue">File d\'attente</string>
     <string name="tv_remote_guide_title">Guide d\'utilisation de la télécommande et du clavier</string>
@@ -2176,7 +2156,6 @@
     <string name="empty_saved_shorts">Aucun court métrage enregistré pour l\'instant</string>
     <string name="settings_search_no_results">Aucun paramètre trouvé pour %1$s</string>
     <string name="import_running_background">Vous pouvez quitter cette page : l\'importation se poursuit en arrière-plan.</string>
-    <string name="donations_cryptocurrency">CRYPTOMONNAIE</string>
     <string name="import_no_history_entries">Aucune entrée d\'historique de surveillance n\'a été trouvée dans le fichier</string>
     <string name="import_no_videos">Aucune vidéo n\'a été trouvée dans le fichier de la playlist</string>
     <string name="import_no_content">Aucun contenu importable n\'a été détecté dans cette sauvegarde</string>

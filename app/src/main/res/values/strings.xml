@@ -743,8 +743,6 @@
     <string name="settings_item_import_data_subtitle">Restore from backup or import from other apps</string>
     <string name="settings_item_about_chorplay">About Chorplay</string>
     <string name="settings_item_about_chorplay_subtitle">Version, License, Contributors</string>
-    <string name="settings_item_support">Support &amp; Donations</string>
-    <string name="settings_item_support_subtitle">Help support the development of Chorplay</string>
     <string name="settings_region_dialog_title">Select Region</string>
     <string name="settings_language_dialog_title">Select App Language</string>
     <string name="settings_language_system_default">System default</string>

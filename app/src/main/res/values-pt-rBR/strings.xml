@@ -361,8 +361,6 @@
     <string name="settings_item_time_management">Gerenciamento de Tempo</string>
     <string name="settings_item_about_chorplay">Sobre o Chorplay</string>
     <string name="settings_item_about_chorplay_subtitle">Versão, Licença, Colaboradores</string>
-    <string name="settings_item_support">Apoio &amp; Doações</string>
-    <string name="settings_item_support_subtitle">Apoie o desenvolvimento do Chorplay</string>
     <string name="settings_region_dialog_title">Selecione a Região</string>
     <string name="settings_language_dialog_title">Selecione o Idioma do Aplicativo</string>
     <string name="settings_language_system_default">Padrão do sistema</string>
@@ -1180,26 +1178,8 @@
     <string name="location_badge_recommended">Recomendado</string>
     <string name="location_badge_active">Ativo</string>
     <string name="select_threads_count_desc">Selecione a quantidade de núcleos (1-8):</string>
-    <string name="support_donations_title">Apoio &amp; Doações</string>
-    <string name="support_chorplay_dev_title">Apoie o Desenvolvimento do Chorplay</string>
-    <string name="support_chorplay_dev_desc">Se o Chorplay é útil para ti, você pode apoiar seu desenvolvimento no Open Collective, Patreon ou criptomoedas abaixo. Obrigado!</string>
-    <string name="support_chorplay_patreon">Apoie o Chorplay no Patreon</string>
-    <string name="thank_you_support_message">Obrigada pelo seu apoio! ❤️</string>
-    <string name="address_copied_toast">Endereço copiado para a área de transferência</string>
-    <string name="donation_address_clip_label">Endereço para doações</string>
-    <string name="donation_prompt_title">Está Curtindo o Chorplay?</string>
-    <string name="donation_prompt_message">O Chorplay é gratuito, de código aberto e sem anúncios. Se ele conquistou um lugar no seu celular, um pequeno suporte ajuda o a continuar.</string>
-    <string name="donation_prompt_methods">Open Collective · Patreon · Bitcoin · Ethereum · Solana · USDT · Monero</string>
-    <string name="donation_prompt_support">Apoiar o desenvolvimento</string>
-    <string name="donation_prompt_later">Talvez mais tarde</string>
-    <string name="donation_prompt_never">Não mostrar novamente</string>
     <string name="about_creator">Criador</string>
     <string name="about_creator_name">Pushkar</string>
-    <string name="about_website">Site</string>
-    <string name="about_website_address">github.com/chorus-mu/Chorplay</string>
-    <string name="about_reddit">Reddit</string>
-    <string name="about_reddit_subtitle">r/Chorplay_Official</string>
-    <string name="github_subtitle">Código-fonte &amp; problemas</string>
     <string name="newpipe_extractor_title">NewPipe Extractor</string>
     <string name="newpipe_extractor_subtitle">Biblioteca de extração principal</string>
     <string name="about_license">Licença</string>
@@ -2106,7 +2086,6 @@
     <string name="empty_saved_shorts">Nenhum Shorts salvo ainda</string>
     <string name="settings_search_no_results">Nenhuma configuração para %1$s foi encontrada</string>
     <string name="import_running_background">Você pode deixar esta tela. A importação continua funcionando.</string>
-    <string name="donations_cryptocurrency">CRIPTOMOEDAS</string>
     <string name="import_no_history_entries">Nenhuma entrada de histórico de visualização encontrada no arquivo</string>
     <string name="import_no_videos">Nenhum vídeo encontrado no arquivo da playlist</string>
     <string name="import_no_content">Nenhum conteúdo importável foi encontrado neste backup</string>
@@ -3541,7 +3520,6 @@
     <string name="deep_chor_on_search_title">Mostrar na pesquisa</string>
     <string name="notif_check_interval_off_new_videos">Desligado enquanto Novos Vídeos estiver desligado</string>
     <string name="queue_move_to_end">Ir para o final</string>
-    <string name="support_chorplay_open_collective">Apoie o Chorplay no Open Collective</string>
 
 
     <string name="auto_tab_for_you">Para você</string>

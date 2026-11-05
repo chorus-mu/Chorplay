@@ -327,8 +327,6 @@
     <string name="settings_item_import_data_subtitle">從備份還原或從其他應用程式匯入</string>
     <string name="settings_item_about_chorplay">關於 Chorplay</string>
     <string name="settings_item_about_chorplay_subtitle">版本、授權、貢獻者</string>
-    <string name="settings_item_support">支援與捐款</string>
-    <string name="settings_item_support_subtitle">協助支持 Chorplay 的開發</string>
     <string name="settings_region_dialog_title">選擇地區</string>
     <string name="settings_language_dialog_title">選擇應用程式語言</string>
     <string name="settings_language_system_default">系統預設</string>
@@ -1852,26 +1850,8 @@
     <plurals name="threads_count_label">
         <item quantity="other">%1$d 個執行緒</item>
     </plurals>
-    <string name="support_donations_title">支持與贊助</string>
-    <string name="support_chorplay_dev_title">支持 Chorplay 開發</string>
-    <string name="support_chorplay_dev_desc">如果 Chorplay 對你有幫助，歡迎透過 Open Collective、Patreon 或下方的加密貨幣支持。謝謝你！</string>
-    <string name="support_chorplay_patreon">在 Patreon 上支持 Chorplay</string>
-    <string name="thank_you_support_message">感謝你的支持！❤️</string>
-    <string name="address_copied_toast">位址已複製到剪貼簿</string>
-    <string name="donation_address_clip_label">贊助位址</string>
-    <string name="donation_prompt_title">喜歡 Chorplay 嗎？</string>
-    <string name="donation_prompt_message">Chorplay 免費、開放原始碼，而且沒有廣告。如果它在你的手機裡佔有一席之地，一點小小的支持就能讓它持續走下去。</string>
-    <string name="donation_prompt_methods">Open Collective · Patreon · Bitcoin · Ethereum · Solana · USDT · Monero</string>
-    <string name="donation_prompt_support">支持開發</string>
-    <string name="donation_prompt_later">以後再說</string>
-    <string name="donation_prompt_never">不再顯示</string>
     <string name="about_creator">開發者</string>
     <string name="about_creator_name">Pushkar</string>
-    <string name="about_website">網站</string>
-    <string name="about_website_address">github.com/chorus-mu/Chorplay</string>
-    <string name="about_reddit">Reddit</string>
-    <string name="about_reddit_subtitle">r/Chorplay_Official</string>
-    <string name="github_subtitle">原始碼與問題回報</string>
     <string name="newpipe_extractor_title">NewPipe Extractor</string>
     <string name="newpipe_extractor_subtitle">核心擷取函式庫</string>
     <string name="about_license">授權條款</string>
@@ -3217,7 +3197,6 @@
     <string name="fallback_playing">播放中…</string>
     <string name="empty_saved_shorts">還沒有儲存的 Shorts</string>
     <string name="settings_search_no_results">找不到符合「%1$s」的設定</string>
-    <string name="donations_cryptocurrency">加密貨幣</string>
     <string name="import_no_history_entries">檔案中找不到任何觀看記錄</string>
     <string name="import_no_videos">播放清單檔案中找不到任何影片</string>
     <string name="import_no_likes">找不到任何按讚記錄。請將你的 Google 帳戶語言設為英文，並以 JSON 格式匯出「YouTube 我的活動」。</string>
@@ -3828,7 +3807,6 @@
     <string name="search_filter_watched">已觀看</string>
     <string name="deep_chor_on_search_title">在搜尋中顯示</string>
     <string name="deep_chor_on_search_subtitle">在最近搜尋上方顯示 Deep Chorplay 開關</string>
-    <string name="support_chorplay_open_collective">在 Open Collective 上支持 Chorplay</string>
     <string name="auto_tab_for_you">為你推薦</string>
     <string name="auto_tab_queue">佇列</string>
     <string name="taste_unknown_channel">未知頻道</string>

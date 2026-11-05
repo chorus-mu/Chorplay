@@ -158,8 +158,6 @@
     <string name="settings_item_import_data_subtitle">Restaura desde tu respaldo o importa de otras apps</string>
     <string name="settings_item_about_chorplay">Sobre Chorplay</string>
     <string name="settings_item_about_chorplay_subtitle">Versión, licencia y contribuyentes</string>
-    <string name="settings_item_support">Apoyo y donaciones</string>
-    <string name="settings_item_support_subtitle">Ayuda a apoyar el desarrollo de Chorplay</string>
     <string name="settings_region_dialog_title">Seleccionar región</string>
     <string name="settings_export_success">Datos exportados con éxito</string>
     <string name="settings_export_failed">Exportación fallida:%1$s</string>
@@ -408,7 +406,6 @@
     <string name="storage_header">Almacenamiento</string>
     <string name="reduce_data_usage_subtitle">Reducir el uso de datos</string>
     <string name="location_custom_saf_label">Navegar…</string>
-    <string name="support_chorplay_dev_title">Apoya el desarrollo de Chorplay</string>
     <string name="about_changelog">Registro de cambios</string>
     <string name="android_sdk_label">SDK de Android: %1$s</string>
     <string name="btn_copy">Copiar</string>
@@ -887,16 +884,9 @@
     <string name="location_badge_active">Activo</string>
     <string name="location_manual_confirm">Ahorrar</string>
     <string name="select_threads_count_desc">Seleccionar número de hilos (1-8):</string>
-    <string name="support_donations_title">Apoyo y donaciones</string>
-    <string name="address_copied_toast">Dirección copiada al portapapeles</string>
-    <string name="support_chorplay_dev_desc">Si Chorplay te resulta útil, puedes apoyarlo en Open Collective, Patreon o con criptomonedas mas abajo. ¡Gracias!</string>
-    <string name="thank_you_support_message">¡Gracias por su apoyo! ❤️</string>
-    <string name="donation_address_clip_label">Dirección de donación</string>
     <string name="about_creator">Creador</string>
-    <string name="github_subtitle">Código fuente y problemas</string>
     <string name="newpipe_extractor_title">Extractor de NewPipe</string>
     <string name="newpipe_extractor_subtitle">Biblioteca de extracción central</string>
-    <string name="about_website">Sitio web</string>
     <string name="whats_new_in_chorplay">Novedades en Chorplay</string>
     <string name="about_device_info">Información del dispositivo</string>
     <string name="about_license">Licencia</string>
@@ -1304,7 +1294,6 @@
     <string name="proxy_settings_invalid_port">Ingrese un puerto proxy válido entre 1 y 65535.</string>
     <string name="settings_item_app_language">Idioma de la aplicación</string>
     <string name="proxy_settings_saved">Configuración de proxy guardada</string>
-    <string name="support_chorplay_patreon">Apoya a Chorplay en Patreon</string>
     <string name="settings_item_app_language_subtitle">Utilice el idioma de su dispositivo o elija uno manualmente</string>
     <string name="settings_language_dialog_title">Seleccionar idioma de la aplicación</string>
     <string name="select_text">Seleccionar texto</string>
@@ -1547,12 +1536,6 @@
     <string name="player_settings_video_codec_dialog_title">Códec de vídeo por defecto</string>
     <string name="player_settings_video_codec_dialog_body">El códec que Chorplay elige prioritariamente. Aún puedes elegir cualquier códec desde el menú de calidad. H.264 es el que se reproduce con más fluidez en la mayoría de los dispositivos. AV1 y VP9 consumen menos datos, pero requieren más potencia.</string>
     <string name="player_settings_video_codec_auto_desc">Deja que la app decida (prioriza H.264)</string>
-    <string name="donation_prompt_title">Disfrutando Chorplay?</string>
-    <string name="donation_prompt_message">Chorplay es gratis, libre y sin anuncios. Si se ha ganado su lugar en tu teléfono, un pequeño aporte ayuda a seguir manteniéndolo vivo.</string>
-    <string name="donation_prompt_methods">Open Collective · Patreon · Bitcoin · Ethereum · Solana · USDT · Monero</string>
-    <string name="donation_prompt_support">Apoyar el desarrollo</string>
-    <string name="donation_prompt_later">Quizás más tarde</string>
-    <string name="donation_prompt_never">No mostrar de nuevo</string>
     <string name="subscriptions_last_refreshed_time_only_template">Última actualización %1$s</string>
     <string name="player_appearance_long_press_speed_title">Velocidad de reproducción con pulsación larga</string>
     <string name="player_appearance_long_press_speed_subtitle">Elige la velocidad temporal que se utiliza mientras mantienes pulsado</string>
@@ -1997,9 +1980,6 @@
     <string name="download_sabr_failed">Error en la descarga SABR</string>
     <string name="download_sabr_failed_try_again">Error en la descarga SABR. Inténtalo de nuevo.</string>
     <string name="about_creator_name">Pushkar</string>
-    <string name="about_website_address">github.com/chorus-mu/Chorplay</string>
-    <string name="about_reddit">Reddit</string>
-    <string name="about_reddit_subtitle">r/Chorplay_Official</string>
     <string name="about_license_name">GNU GPL v3</string>
 
 
@@ -2127,7 +2107,6 @@
     <string name="empty_saved_shorts">Aún no tienes Shorts guardados</string>
     <string name="settings_search_no_results">No se encontraron ajustes para %1$s</string>
     <string name="import_running_background">Puedes salir de esta pantalla. La importación continuará en segundo plano.</string>
-    <string name="donations_cryptocurrency">Criptomonedas</string>
     <string name="import_no_history_entries">No se encontraron entradas de historial de reproducción en el archivo</string>
     <string name="import_no_videos">El archivo de la lista de reproducción no contiene videos</string>
     <string name="import_no_content">No se encontró contenido importable en este respaldo</string>
@@ -2908,7 +2887,6 @@
     <string name="concurrent_downloads_title">Descargas a la vez</string>
     <string name="concurrent_downloads_summary">Cuántos archivos se descargan a la vez</string>
     <string name="download_location_not_writable">No se puede guardar ahí. Se usará %1$s</string>
-    <string name="support_chorplay_open_collective">Apoya a Chorplay en Open Collective</string>
     <string name="about_notices">Avisos sobre código abierto</string>
     <string name="about_notices_summary">Listas de palabras y código de otros proyectos</string>
     <string name="onboarding_channels_results_header">Canales</string>

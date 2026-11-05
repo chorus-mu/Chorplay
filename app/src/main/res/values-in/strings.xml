@@ -101,8 +101,6 @@
     <string name="settings_item_import_data">Impor Data</string>
     <string name="settings_item_about_chorplay">Tentang Chorplay</string>
     <string name="settings_item_about_chorplay_subtitle">Versi, Lisensi, Kontributor</string>
-    <string name="settings_item_support">Dukungan &amp; Donasi</string>
-    <string name="settings_item_support_subtitle">Bantu dukung pengembangan Chorplay</string>
     <string name="settings_export_success">Data berhasil diekspor</string>
     <string name="settings_export_failed">Ekspor gagal: %1$s</string>
     <string name="appearance_title">Tampilan</string>
@@ -910,16 +908,7 @@
     <string name="location_badge_recommended">Direkomendasikan</string>
     <string name="location_badge_active">Aktif</string>
     <string name="select_threads_count_desc">Pilih jumlah thread (1-8):</string>
-    <string name="support_donations_title">Dukungan &amp; Donasi</string>
-    <string name="support_chorplay_dev_title">Dukung Pengembangan Chorplay</string>
-    <string name="support_chorplay_dev_desc">Jika Chorplay bermanfaat bagi Anda, Anda dapat mendukungnya melalui Patreon atau kripto di bawah ini. Terima kasih!</string>
-    <string name="support_chorplay_patreon">Dukung Chorplay di Patreon</string>
-    <string name="thank_you_support_message">Terima kasih atas dukungan Anda! ❤️</string>
-    <string name="address_copied_toast">Alamat disalin ke papan klip</string>
-    <string name="donation_address_clip_label">Alamat Donasi</string>
     <string name="about_creator">Pembuat</string>
-    <string name="about_website">Situs Web</string>
-    <string name="github_subtitle">Kode sumber &amp; Masalah</string>
     <string name="newpipe_extractor_title">NewPipe Extractor</string>
     <string name="newpipe_extractor_subtitle">Pustaka ekstraksi inti</string>
     <string name="about_license">Lisensi</string>
@@ -1551,12 +1540,6 @@
     <string name="player_settings_video_codec_dialog_title">Codec Video Default</string>
     <string name="player_settings_video_codec_dialog_body">Codec yang dipilih Chorplay terlebih dahulu. Anda tetap dapat memilih codec apa pun dari menu kualitas. H.264 paling lancar di sebagian besar perangkat. AV1 dan VP9 menggunakan data lebih sedikit, tetapi memerlukan daya lebih besar.</string>
     <string name="player_settings_video_codec_auto_desc">Biarkan aplikasi memilih (mengutamakan H.264)</string>
-    <string name="donation_prompt_title">Menikmati Chorplay?</string>
-    <string name="donation_prompt_message">Chorplay gratis, open source, dan tanpa iklan. Jika Chorplay layak mendapat tempat di ponsel Anda, sedikit dukungan akan membantunya tetap berjalan.</string>
-    <string name="donation_prompt_methods">Patreon · Bitcoin · Ethereum · Solana · USDT · Monero</string>
-    <string name="donation_prompt_support">Dukung pengembangan</string>
-    <string name="donation_prompt_later">Mungkin nanti</string>
-    <string name="donation_prompt_never">Jangan tampilkan lagi</string>
     <string name="library_local_media_label">Media bawaan</string>
     <string name="library_local_media_subtitle">Putar video dan musik di perangkat ini</string>
     <string name="local_media_title">Media bawaan</string>
@@ -1810,9 +1793,6 @@
     <string name="playback_speed_multiplier_precise">%1$.2f×</string>
     <string name="channel_metadata_unavailable">Informasi kanal tidak tersedia</string>
     <string name="about_creator_name">Pushkar</string>
-    <string name="about_website_address">github.com/chorus-mu/Chorplay</string>
-    <string name="about_reddit">Reddit</string>
-    <string name="about_reddit_subtitle">r/Chorplay_Official</string>
     <string name="about_license_name">GNU GPL v3</string>
     <string name="equalizer">Ekualiser</string>
     <string name="action_save_preset">Simpan prasetel</string>
@@ -2179,7 +2159,6 @@
     <string name="empty_saved_shorts">Belum ada shorts yang disimpan</string>
     <string name="settings_search_no_results">Tidak ada pengaturan yang ditemukan untuk %1$s</string>
     <string name="import_running_background">Anda dapat meninggalkan layar ini. Proses impor tetap berjalan.</string>
-    <string name="donations_cryptocurrency">MATA UANG KRIPTO</string>
     <string name="import_no_history_entries">Tidak ada entri riwayat tontonan yang ditemukan di file</string>
     <string name="import_no_videos">Tidak ada video yang ditemukan di file daftar putar</string>
     <string name="import_no_content">Tidak ada konten yang dapat diimpor yang ditemukan di cadangan ini</string>

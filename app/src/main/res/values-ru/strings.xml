@@ -321,8 +321,6 @@
     <string name="settings_item_import_data_subtitle">Восстановление из копии или импорт из других приложений</string>
     <string name="settings_item_about_chorplay">О Chorplay</string>
     <string name="settings_item_about_chorplay_subtitle">Версия, лицензия, авторы</string>
-    <string name="settings_item_support">Поддержка и донаты</string>
-    <string name="settings_item_support_subtitle">Поддержите разработку Chorplay</string>
     <string name="settings_region_dialog_title">Выберите регион</string>
     <string name="settings_export_success">Данные успешно экспортированы</string>
     <string name="settings_export_failed">Ошибка экспорта: %1$s</string>
@@ -1045,11 +1043,6 @@
     <string name="location_dialog_subtitle">Выбор места для сохранения скачанных файлов.</string>
     <string name="location_preset_header">Предустановленные папки</string>
     <string name="location_custom_header">Другая папка</string>
-    <string name="donation_prompt_support">Поддержать разработку</string>
-    <string name="donation_prompt_later">Возможно, позже</string>
-    <string name="donation_prompt_never">Больше не показывать</string>
-    <string name="about_website">Веб-сайт</string>
-    <string name="github_subtitle">Исходный код и проблемы</string>
     <string name="gnu_license_full_title">GNU General Public License</string>
     <string name="error_license_load">Не удалось загрузить файл лицензии.</string>
     <string name="no_changelog_found_message">Список изменений не найден.</string>
@@ -1230,7 +1223,6 @@
 
     <string name="no_match_found">Совпадений не найдено</string>
     <string name="try_again">Попробуйте снова</string>
-    <string name="donation_prompt_message">Chorplay бесплатен, имеет открытый исходный код и не содержит рекламы. Если оно заслужило место на вашем телефоне, небольшая поддержка сохранит его.</string>
     <string name="sync_consent_note">Сначала создается резервная копия. При объединении данные никогда не перезаписываются и не дублируются.</string>
     <string name="import_yt_history_empty_error">В этом файле не найдена история просмотра. Убедитесь, что это файл watch-history.html из YouTube Архиватора.</string>
     <string name="import_yt_playlist_empty_error">Файл CSV не содержит данных о видео. Убедитесь, что это CSV-файл плейлиста из YouTube Архиватора.</string>
@@ -1268,11 +1260,6 @@
     <string name="player_settings_overlay_comments_subtitle">Открыть комментарии в боковой панели в полноэкранном режиме</string>
     <string name="play_next_video_desc">Воспроизводить после текущего видео</string>
     <string name="add_video_to_queue_desc">Добавить в конец очереди</string>
-    <string name="support_donations_title">Поддержка и донаты</string>
-    <string name="support_chorplay_dev_title">Поддержка разработки Chorplay</string>
-    <string name="support_chorplay_dev_desc">Если Chorplay вам полезен, вы можете поддержать его на Open Collective, Patreon или с помощью криптовалюты ниже. Спасибо!</string>
-    <string name="support_chorplay_patreon">Поддержать Chorplay на Patreon</string>
-    <string name="thank_you_support_message">Спасибо за вашу поддержку! ❤️</string>
     <string name="deep_chor_save_history_subtitle">Сохранять историю просмотров, не используя её для формирования рекомендаций</string>
     <string name="deep_chor_save_history_title">Записывать историю просмотра</string>
     <string name="player_background_style_default">Поверхность по умолчанию</string>
@@ -1387,8 +1374,6 @@
     <string name="location_badge_recommended">Рекомендовано</string>
     <string name="location_badge_active">Активный</string>
     <string name="select_threads_count_desc">Выберите количество потоков (1-8):</string>
-    <string name="address_copied_toast">Адрес скопирован в буфер обмена</string>
-    <string name="donation_address_clip_label">Адрес для пожертвований</string>
     <string name="similar_to">Похоже на</string>
     <string name="section_similar_to">Похоже на %1$s</string>
     <string name="subtitle_similar_to">На основе вашей истории прослушивания</string>
@@ -1577,8 +1562,6 @@
     <string name="sleep_window">Период сна:</string>
     <string name="frequency_description">Как часто напоминать</string>
     <string name="tools_subtitle">Установите напоминания, чтобы сбалансировать свои зрительские привычки</string>
-    <string name="donation_prompt_title">Нравится Chorplay?</string>
-    <string name="donation_prompt_methods">Открытый коллектив · Patreon · Биткойн · Эфириум · Солана · USDT · Monero</string>
     <string name="about_creator">Автор</string>
     <string name="newpipe_extractor_title">NewPipe Extractor</string>
     <string name="newpipe_extractor_subtitle">Основная библиотека парсинга</string>
@@ -1853,9 +1836,6 @@
     <string name="content_settings_hide_unplayable_subscriptions_title">Скрывать неподдерживаемые видео из подписок</string>
     <string name="content_settings_hide_unplayable_subscriptions_subtitle">Скрыть частные, удаленные и ограниченные видео, которые не воспроизводятся</string>
     <string name="about_creator_name">Pushkar</string>
-    <string name="about_website_address">github.com/chorus-mu/Chorplay</string>
-    <string name="about_reddit">Reddit</string>
-    <string name="about_reddit_subtitle">r/Chorplay_Official</string>
     <string name="about_license_name">GNU GPL v3</string>
     <string name="equalizer">Эквалайзер</string>
     <string name="action_save_preset">Сохранить пресет</string>
@@ -2132,7 +2112,6 @@
     <string name="empty_saved_shorts">Нет сохраненных Shorts</string>
     <string name="settings_search_no_results">Ничего не найдено по запросу: %1$s</string>
     <string name="import_running_background">Вы можете покинуть этот экран. Импорт продолжится.</string>
-    <string name="donations_cryptocurrency">КРИПТОВАЛЮТА</string>
     <string name="import_no_history_entries">В файле не найдена история просмотра</string>
     <string name="import_no_videos">В файле плейлиста не найдены видео</string>
     <string name="import_no_content">В резервной копии не найдены данные для импорта</string>
@@ -2761,7 +2740,6 @@
     <string name="concurrent_downloads_title">Загрузок за один раз</string>
     <string name="concurrent_downloads_summary">Сколько файлов загрузить одновременно</string>
     <string name="download_location_not_writable">Сохранить там невозможно. Использовать %1$s</string>
-    <string name="support_chorplay_open_collective">Поддержка Chorplay на Open Collective</string>
     <string name="about_notices">Уведомления об открытом исходном коде</string>
     <string name="about_notices_summary">Списки слов и код из других проектов.</string>
     <string name="playlist_downloading_template">Загрузка: %1$s</string>

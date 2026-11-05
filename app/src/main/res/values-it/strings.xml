@@ -321,8 +321,6 @@
     <string name="settings_item_import_data_subtitle">Reimposta da un backup o importa da un\'altra app</string>
     <string name="settings_item_about_chorplay">Informazioni su Chorplay</string>
     <string name="settings_item_about_chorplay_subtitle">Versione, licenza, collaboratori</string>
-    <string name="settings_item_support">Supporto e donazioni</string>
-    <string name="settings_item_support_subtitle">Contribuisci allo sviluppo di Chorplay</string>
     <string name="settings_region_dialog_title">Seleziona regione</string>
     <string name="settings_export_success">Dati esportati correttamente</string>
     <string name="settings_export_failed">Esportazione non riuscita: %1$s</string>
@@ -830,15 +828,7 @@
     <string name="location_badge_recommended">Consigliato</string>
     <string name="location_badge_active">Attivo</string>
     <string name="select_threads_count_desc">Seleziona numero dei thread (1-8):</string>
-    <string name="support_donations_title">Supporto e donazioni</string>
-    <string name="support_chorplay_dev_title">Supporta lo sviluppo di Chorplay</string>
-    <string name="support_chorplay_dev_desc">Se trovi Chorplay utile e desideri supportarne lo sviluppo, puoi sostenerlo su Patreon o donare tramite gli indirizzi crypto qui sotto. Il tuo supporto aiuta a mantenere vivo il progetto!</string>
-    <string name="thank_you_support_message">Grazie per il tuo supporto! ❤️</string>
-    <string name="address_copied_toast">Indirizzo copiato negli appunti</string>
-    <string name="donation_address_clip_label">Indirizzo di donazione</string>
     <string name="about_creator">Creatore</string>
-    <string name="about_website">Sito web</string>
-    <string name="github_subtitle">Codice sorgente e segnalazioni</string>
     <string name="newpipe_extractor_title">Estrattore di NewPipe</string>
     <string name="newpipe_extractor_subtitle">Libreria di estrazione principale</string>
     <string name="about_license">Licenza</string>
@@ -1254,7 +1244,6 @@
     <string name="settings_item_app_language_subtitle">Utilizza la lingua del dispositivo o scegline una manualmente</string>
     <string name="settings_language_dialog_title">Seleziona lingua dell\'app</string>
     <string name="settings_language_system_default">Predefinita di sistema</string>
-    <string name="support_chorplay_patreon">Supporta Chorplay su Patreon</string>
     <string name="settings_item_app_language">Lingua dell\'app</string>
     <string name="select_text">Seleziona testo</string>
     <string name="resume">Riprendi</string>
@@ -1552,12 +1541,6 @@
     <string name="content_settings_subs_show_checked_count_title">Conteggio dei video verificati</string>
     <string name="content_settings_subs_show_checked_count_subtitle">Mostra il numero di video verificati all\'aggiornamento</string>
     <string name="subscriptions_last_refreshed_time_only_template">Ultimo aggiornamento %1$s</string>
-    <string name="donation_prompt_title">Ti piace Chorplay?</string>
-    <string name="donation_prompt_message">Chorplay è gratuito, open-source e creato senza pubblicità o tracciamenti. Se ha trovato spazio sul tuo dispositivo, considera di sostenerne lo svilupp e aiuta concretamente a mantenere in vita il progetto.</string>
-    <string name="donation_prompt_methods">Patreon · Bitcoin · Ethereum · Solana · USDT · Monero</string>
-    <string name="donation_prompt_support">Supporta lo sviluppo</string>
-    <string name="donation_prompt_later">Forse più tardi</string>
-    <string name="donation_prompt_never">Non mostrare più</string>
     <string name="library_local_media_label">Media locali</string>
     <string name="library_local_media_subtitle">Riproduci video e musica su questo dispositivo</string>
     <string name="local_media_title">Media locali</string>
@@ -1832,9 +1815,6 @@
     <string name="content_settings_hide_unplayable_subscriptions_title">Nascondi i video non riproducibili dalle Iscrizioni</string>
     <string name="content_settings_hide_unplayable_subscriptions_subtitle">Nascondi i video privati, rimossi e limitati che non riescono ad essere riprodotti</string>
     <string name="about_creator_name">Pushkar</string>
-    <string name="about_website_address">github.com/chorus-mu/Chorplay</string>
-    <string name="about_reddit">Reddit</string>
-    <string name="about_reddit_subtitle">r/Chorplay_Official</string>
     <string name="about_license_name">GNU GPL v3</string>
     <string name="equalizer">Equalizzatore</string>
     <string name="action_save_preset">Salva preset</string>
